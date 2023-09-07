@@ -21,15 +21,14 @@ resource webAppService 'Microsoft.Web/sites@2021-01-01' = {
       minTlsVersion: '1.2'
       netFrameworkVersion: 'V5.0'    
       ipSecurityRestrictions: [
-        {
-            ipAddress: allowIPParam,
-            action: 'Allow',            
-            priority: 101,
+      {
+            ipAddress: allowIPParam
+            action: 'Allow'            
+            priority: 101
             name: 'Proxy'
             description: 'Only allow traffic from HVIKT proxy (for onpremise access)'
-        }
-   
-    ],
+      }   
+      ],
        appSettings: [       
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
