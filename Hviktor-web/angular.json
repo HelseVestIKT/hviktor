@@ -32,6 +32,7 @@
               "src/web.config"
             ],
             "styles": [
+              "node_modules/prismjs/themes/prism-dark.css",
               "node_modules/primeicons/primeicons.css",
               "src/styles/prime-theme.scss",
               "node_modules/primeng/resources/primeng.min.css",
