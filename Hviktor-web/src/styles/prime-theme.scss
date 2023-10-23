@@ -4219,7 +4219,7 @@
     padding: 0 1rem;
   }
   .p-divider.p-divider-horizontal:before {
-    border-top: 1px #e5e7eb;
+    border-top: 1px solid #e5e7eb;
   }
   .p-divider.p-divider-horizontal .p-divider-content {
     padding: 0 0.5rem;
@@ -5134,7 +5134,7 @@
   .p-menubar .p-menuitem-link {
     padding: 0.75rem 1rem;
     color: #3f3f46;
-    border-radius: 0;
+    border-radius: var(--radius-400);
     transition: none;
     -webkit-user-select: none;
     user-select: none;
