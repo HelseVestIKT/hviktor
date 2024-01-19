@@ -20,3 +20,28 @@ body {
         font-family: var(--ff-regular);
 }
 
+
+/* START - Styleclasses for chip component*/
+
+//Green chip:
+.chip-green {
+        background-color: var(--clr-success-300);
+}
+.chip-green.p-chip .p-chip-text {
+        color: var(--clr-green-800);
+}
+
+//Thinner font-weight for chip label:
+.fw-regular.p-chip .p-chip-text {
+        font-weight: var(--fw-regular);
+}
+
+/*Chip component in different sizes:*/
+
+//medium chip:
+.chip-md.p-chip .p-chip-text {
+        font-size: 16px;
+}
+
+/* END - Styleclasses for chip component*/
+

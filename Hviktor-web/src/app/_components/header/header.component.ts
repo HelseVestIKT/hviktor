@@ -51,6 +51,12 @@ export class HeaderComponent {
             command:  () => this.newRefresh()
           },
           {
+            label: 'Chip',
+            routerLink: 'components/chip',
+            icon: 'pi pi-question-circle',
+            command:  () => this.newRefresh()
+          },
+          {
             label: 'Dialog',
             routerLink: 'components/dialog',
             icon: 'pi pi-check-circle',

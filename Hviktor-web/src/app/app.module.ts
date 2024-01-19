@@ -23,6 +23,7 @@ import { AccordionComponent } from './_components/prime-components/accordion/acc
 import { VariablesComponent } from './_components/variables/variables.component';
 import { CheckboxComponent } from './_components/prime-components/checkbox/checkbox.component';
 import { RadiobuttonComponent } from './_components/prime-components/radiobutton/radiobutton.component';
+import { ChipComponent } from './_components/prime-components/chip/chip.component';
 
 
 //PRIME
@@ -38,6 +39,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { TableModule } from 'primeng/table';
     VariablesComponent,
     CheckboxComponent,
     RadiobuttonComponent,
+    ChipComponent,
     // PrismComponent,
   ],
   imports: [
@@ -77,7 +80,8 @@ import { TableModule } from 'primeng/table';
     AccordionModule,
     CardModule,
     CheckboxModule,
-    RadioButtonModule
+    RadioButtonModule,
+    ChipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
