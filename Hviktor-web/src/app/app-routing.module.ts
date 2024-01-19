@@ -15,6 +15,7 @@ import { IconsComponent } from './_components/icons/icons.component';
 import { VariablesComponent } from './_components/variables/variables.component';
 import { CheckboxComponent } from './_components/prime-components/checkbox/checkbox.component';
 import { RadiobuttonComponent } from './_components/prime-components/radiobutton/radiobutton.component';
+import { ChipComponent } from './_components/prime-components/chip/chip.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'components/accordion', pathMatch: 'full', component: AccordionComponent },
   { path: 'components/buttons', component: ButtonsComponent },
   { path: 'components/checkbox', component: CheckboxComponent },
+  { path: 'components/chip', component: ChipComponent},
   { path: 'components/dialog', component: DialogComponent },
   { path: 'components/dropdown', component: DropdownComponent },
   { path: 'components/menubar', component: MenubarComponent },

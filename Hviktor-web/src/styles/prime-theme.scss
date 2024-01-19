@@ -6236,27 +6236,26 @@
   }
   
   .p-chip {
-    background-color: #e5e7eb;
-    color: #3f3f46;
+    background-color: var(--clr-primary-300);
     border-radius: 16px;
-    padding: 0 0.75rem;
+    padding: 6px 16px;
   }
   .p-chip .p-chip-text {
+    font-size: 14px;
+    color: var(--clr-bluegray-700);
+    font-weight: 700;
     line-height: 1.5;
-    margin-top: 0.375rem;
-    margin-bottom: 0.375rem;
   }
   .p-chip .p-chip-icon {
-    margin-right: 0.5rem;
+    margin-right: 4px;
   }
   .p-chip .pi-chip-remove-icon {
-    margin-left: 0.5rem;
+    margin-left: 4px;
   }
   .p-chip img {
-    width: 2.25rem;
-    height: 2.25rem;
-    margin-left: -0.75rem;
-    margin-right: 0.5rem;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
   }
   .p-chip .pi-chip-remove-icon {
     border-radius: 0.375rem;
