@@ -24,6 +24,7 @@ import { VariablesComponent } from './_components/variables/variables.component'
 import { CheckboxComponent } from './_components/prime-components/checkbox/checkbox.component';
 import { RadiobuttonComponent } from './_components/prime-components/radiobutton/radiobutton.component';
 import { ChipComponent } from './_components/prime-components/chip/chip.component';
+import { NewsFeedComponent } from './_components/news-feed/news-feed.component';
 
 
 //PRIME
@@ -61,6 +62,7 @@ import { ChipModule } from 'primeng/chip';
     CheckboxComponent,
     RadiobuttonComponent,
     ChipComponent,
+    NewsFeedComponent,
     // PrismComponent,
   ],
   imports: [
