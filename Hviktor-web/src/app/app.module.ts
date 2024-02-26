@@ -41,6 +41,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TableModule } from 'primeng/table';
 import { ChipModule } from 'primeng/chip';
+import { ComingSoonComponent } from './_components/hviktor-components/coming-soon/coming-soon.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ChipModule } from 'primeng/chip';
     RadiobuttonComponent,
     ChipComponent,
     NewsFeedComponent,
+    ComingSoonComponent,
     // PrismComponent,
   ],
   imports: [

@@ -16,6 +16,7 @@ import { VariablesComponent } from './_components/variables/variables.component'
 import { CheckboxComponent } from './_components/prime-components/checkbox/checkbox.component';
 import { RadiobuttonComponent } from './_components/prime-components/radiobutton/radiobutton.component';
 import { ChipComponent } from './_components/prime-components/chip/chip.component';
+import { ComingSoonComponent } from './_components/hviktor-components/coming-soon/coming-soon.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'icons', component: IconsComponent },
   { path: 'variables', component: VariablesComponent },
 
+  // PRIME components
   { path: 'components/accordion', pathMatch: 'full', component: AccordionComponent },
   { path: 'components/buttons', component: ButtonsComponent },
   { path: 'components/checkbox', component: CheckboxComponent },
@@ -35,6 +37,9 @@ const routes: Routes = [
   { path: 'components/radiobutton', component: RadiobuttonComponent },
   { path: 'components/table', component: TableComponent },  
   { path: 'components/tabs', component: TabsComponent },
+
+  // HVIKTOR components
+  { path: 'components/coming-soon', component: ComingSoonComponent},
   
  
 ];

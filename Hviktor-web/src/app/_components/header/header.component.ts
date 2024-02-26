@@ -30,7 +30,8 @@ export class HeaderComponent {
         command:  () => this.newRefresh()
       },
       {
-        label: 'Komponenter',
+        label: 'Prime komponenter',
+        icon: 'pi pi-prime',
         items: [
           {
             label: 'Accordion',
@@ -99,8 +100,19 @@ export class HeaderComponent {
             icon: 'pi pi-question-circle',
             command:  () => this.newRefresh()
           },
-        ]
+        ],
       },
+        {
+          label: '💎 Andre komponenter',
+          items: [
+            {
+              label: 'Kommer snart banner',
+              routerLink: 'components/coming-soon',
+              icon: 'pi pi-question-circle',
+              command:  () => this.newRefresh()
+            },
+          ]
+        },
       // {
       //   label: 'Backend',
       // },
