@@ -38,7 +38,7 @@ jobs:
 
     - name: Get current date and time
       id: date
-      run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+      run: echo "::set-output name=date::$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
