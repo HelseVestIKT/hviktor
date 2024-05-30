@@ -55,7 +55,7 @@ jobs:
     
     # zip hviktor-web and attach date to the name
     - name: Zip hviktor-web
-      run: zip -r Hviktor-web-$(echo ${{ steps.date.outputs.date }}).zip ./Hviktor-web
+      run: Compress-Archive -Path ./Hviktor-web -DestinationPath "Hviktor-web-$(Get-Date -Format 'yyyy-MM-dd HHmmss').zip"
 
 
 
