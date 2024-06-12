@@ -78,11 +78,10 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - uses: azure/arm-deploy@v1
       with:
-        resourceGroupName: 'Hviktor'
         template: 'AzurePipelineTools/azuredeploy.bicep'
         parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
         deploymentMode: 'Incremental'
-        scope: 'resourcegroup'
+        scope: 'subscription'
   # deploy:
   #   permissions:
   #     contents: none
