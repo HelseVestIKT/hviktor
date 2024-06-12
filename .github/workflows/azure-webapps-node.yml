@@ -82,6 +82,7 @@ jobs:
         parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
         deploymentMode: 'Incremental'
         scope: 'subscription'
+        region: 'Norway East'
   # deploy:
   #   permissions:
   #     contents: none
