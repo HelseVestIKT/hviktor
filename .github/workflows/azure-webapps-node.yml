@@ -82,7 +82,7 @@ jobs:
         template: 'AzurePipelineTools/azuredeploy.bicep'
         parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
         deploymentMode: 'Incremental'
-        scope: 'resource-group'
+        scope: 'resourcegroup'
   # deploy:
   #   permissions:
   #     contents: none
