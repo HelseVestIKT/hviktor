@@ -63,19 +63,12 @@ jobs:
 # # denne hører egentlig til i scriptet, altså
 # # npm run test --if-present
 
-#     - name: Upload artifact for deployment job
-#       uses: actions/upload-artifact@v4
-#       with:
-#         name: node-app
-#         path: ./Hviktor-web/Hviktor-web-$(echo ${{ steps.date.outputs.date }}).zip
-#         compression-level: 0
-
     - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v4 #må bruke v3 for v4 ender i en "too many open files"-feil
+      uses: actions/upload-artifact@v4 #v4 virker på ubuntu-latest og self-hosted Linux, IKKE windows
       with:
         name: node-app
         path: ./Hviktor-web
-        compression-level: 0        
+        compression-level: 9        
 
   deploy:
     runs-on: ubuntu-latest
