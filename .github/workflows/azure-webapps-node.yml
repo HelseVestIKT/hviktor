@@ -71,7 +71,7 @@ jobs:
 #         compression-level: 0
 
     - name: Upload artifact for deployment job
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3 #må bruke v3 for v4 ender i en "too many open files"-feil
       with:
         name: node-app
         path: ./Hviktor-web
