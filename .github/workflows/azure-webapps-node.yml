@@ -68,10 +68,10 @@ jobs:
       with:
         name: node-app
         path: ./Hviktor-web
-        compression-level: 9        
+        compression-level: 0            # 9 er maks, 1 er min og 0 er ingen. Er satt til 0 for den er kjappest
 
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows]
     steps:
     - uses: actions/checkout@master
     - uses: azure/login@v1
