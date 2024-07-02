@@ -54,21 +54,28 @@ jobs:
         npm install
         npm run build --if-present
     
-    # zip hviktor-web and attach date to the name
-    - name: Zip hviktor-web
-      run: Compress-Archive -Path ./Hviktor-web -DestinationPath "Hviktor-web-$(Get-Date -Format 'yyyy-MM-dd HHmmss').zip"
+#     # zip hviktor-web and attach date to the name
+#     - name: Zip hviktor-web
+#       run: Compress-Archive -Path ./Hviktor-web -DestinationPath "Hviktor-web-$(Get-Date -Format 'yyyy-MM-dd HHmmss').zip"
 
 
 
-# denne hører egentlig til i scriptet, altså
-# npm run test --if-present
+# # denne hører egentlig til i scriptet, altså
+# # npm run test --if-present
+
+#     - name: Upload artifact for deployment job
+#       uses: actions/upload-artifact@v4
+#       with:
+#         name: node-app
+#         path: ./Hviktor-web/Hviktor-web-$(echo ${{ steps.date.outputs.date }}).zip
+#         compression-level: 0
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v4
       with:
         name: node-app
-        path: ./Hviktor-web/Hviktor-web-$(echo ${{ steps.date.outputs.date }}).zip
-        compression-level: 0
+        path: ./Hviktor-web
+        compression-level: 0        
 
   deploy:
     runs-on: ubuntu-latest
