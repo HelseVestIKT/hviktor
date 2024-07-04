@@ -1,6 +1,4 @@
-# .github/workflows/nodejs-setup-build.yml
-name: Node.js Setup and Build
-
+name: Node.js Setup and Build Workflow
 on:
   workflow_call:
     inputs:
@@ -10,12 +8,11 @@ on:
       working-directory:
         required: true
         type: string
-
 jobs:
-  setup-and-build:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node.js
