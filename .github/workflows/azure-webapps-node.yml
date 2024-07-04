@@ -34,7 +34,7 @@ permissions:
 
 jobs:
   call-reusable-workflow:
-    uses: ./.github/workflows/node-js-setup-build.yml@main
+    uses: ./.github/workflows/node-js-setup-build.yml
   build:
     needs: call-reusable-workflow
     runs-on: [self-hosted, Linux]
