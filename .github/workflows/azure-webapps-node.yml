@@ -35,6 +35,9 @@ permissions:
 jobs:
   call-reusable-workflow:
     uses: ./.github/workflows/node-js-setup-build.yml
+    with:
+      working-directory: './Hviktor-web'
+      # node-version: ${{ env.NODE_VERSION }}
   build:
     needs: call-reusable-workflow
     runs-on: [self-hosted, Linux]
