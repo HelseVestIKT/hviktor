@@ -38,7 +38,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: ./.github/workflows/build-angular.yml
+    # use build-angular.yml
+    uses: ./.github/workflows/build-angular.yml
+    
     # - name: Set up Node.js
     #   uses: actions/setup-node@v4
     #   with:
