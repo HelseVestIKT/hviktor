@@ -33,6 +33,13 @@ permissions:
   id-token: write
 
 jobs:
+  call-reusable-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/workflows/node-js-setup-build.yml@main
+        with:
+          node-version: '14'
+          working-directory: 'path/to/your/project'
   build:
     runs-on: [self-hosted, Linux]
     steps:
@@ -73,12 +80,6 @@ jobs:
           name: node-app
           path: ./Hviktor-web
           compression-level: 0            # 9 er maks, 1 er min og 0 er ingen. Er satt til 0 for den er kjappest
-  build-angular:
-    runs-on: [self-hosted, Linux]
-    steps:
-      - name: build it
-        uses: ./.github/workflows/node-js-setup-build.yml
-
 
   deploy:
     needs: build
