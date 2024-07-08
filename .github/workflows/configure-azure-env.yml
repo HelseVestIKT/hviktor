@@ -1,0 +1,28 @@
+# Slik denne fungerer nå forventer den at det er en mappe som heter dist i working-directory hvor output av npm run build blir lagret
+# Denne mappen blir så zippet og lastet opp som artifact som heter angular-app og kan hentes i neste jobb
+
+name: Azure Environment Configuration Workflow
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+jobs:
+  configure-azure:
+    runs-on: self-hosted-windows      
+    steps:
+    - uses: actions/checkout@v4
+    - uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID_DEV }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID_DEV }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }}
+      
+    - uses: azure/arm-deploy@v1
+      with:
+        template: 'AzurePipelineTools/azuredeploy.bicep'
+        #parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
+        deploymentMode: 'Incremental'
+        scope: 'subscription'
+        region: 'Norway East'

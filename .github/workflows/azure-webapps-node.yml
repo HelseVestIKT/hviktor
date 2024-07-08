@@ -93,22 +93,26 @@ jobs:
 
   deploy:
     needs: call-reusable-workflow
-    runs-on: [self-hosted, Windows]    
-    steps:
-    - uses: actions/checkout@master
-    - uses: azure/login@v1
-      with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID_DEV }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID_DEV }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }}
-        #creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - uses: azure/arm-deploy@v1
-      with:
-        template: 'AzurePipelineTools/azuredeploy.bicep'
-        #parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
-        deploymentMode: 'Incremental'
-        scope: 'subscription'
-        region: 'Norway East'
+    uses: ./.github/workflows/configure-azure-env.yml
+    with:
+      environment: 'DEV'
+
+    # runs-on: [self-hosted, Windows]    
+    # steps:
+    # - uses: actions/checkout@v4
+    # - uses: azure/login@v1
+    #   with:
+    #     client-id: ${{ secrets.AZURE_CLIENT_ID_DEV }}
+    #     tenant-id: ${{ secrets.AZURE_TENANT_ID_DEV }}
+    #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }}
+    #     #creds: ${{ secrets.AZURE_CREDENTIALS }}
+    # - uses: azure/arm-deploy@v1
+    #   with:
+    #     template: 'AzurePipelineTools/azuredeploy.bicep'
+    #     #parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
+    #     deploymentMode: 'Incremental'
+    #     scope: 'subscription'
+    #     region: 'Norway East'
   # deploy:
   #   permissions:
   #     contents: none
