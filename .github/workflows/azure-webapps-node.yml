@@ -39,9 +39,15 @@ jobs:
     steps: [run: echo]
     outputs: 
       node-version: ${{ env.NODE_VERSION }}
+
+  azure-variables:
+    runs-on: self-hosted-windows
+    steps: [run: echo]
+    outputs: 
       client_id: ${{ secrets.AZURE_CLIENT_ID_DEV }} 
       tenant_id: ${{ secrets.AZURE_TENANT_ID_DEV }} 
       subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }} 
+    
 
   call-reusable-workflow:
     needs: variables
@@ -94,7 +100,7 @@ jobs:
       #     compression-level: 0            # 9 er maks, 1 er min og 0 er ingen. Er satt til 0 for den er kjappest
 
   deploy:  
-    needs: call-reusable-workflow
+    needs: [azure-variables, call-reusable-workflow]
     uses: ./.github/workflows/configure-azure-env.yml
     with:
       client_id: ${{ needs.variables.outputs.client_id }}
