@@ -42,7 +42,7 @@ jobs:
 
   azure-variables:
     runs-on: self-hosted-windows
-    steps: [run: echo]
+    steps: [run: Write-Host]
     outputs: 
       client_id: ${{ secrets.AZURE_CLIENT_ID_DEV }} 
       tenant_id: ${{ secrets.AZURE_TENANT_ID_DEV }} 
