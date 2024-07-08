@@ -39,7 +39,9 @@ jobs:
     steps: [run: echo]
     outputs: 
       node-version: ${{ env.NODE_VERSION }}
-      #working-directory: './Hviktor-web'
+      client_id: ${{ secrets.AZURE_CLIENT_ID_DEV }} 
+      tenant_id: ${{ secrets.AZURE_TENANT_ID_DEV }} 
+      subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }} 
 
   call-reusable-workflow:
     needs: variables
@@ -91,13 +93,13 @@ jobs:
       #     path: ./Hviktor-web
       #     compression-level: 0            # 9 er maks, 1 er min og 0 er ingen. Er satt til 0 for den er kjappest
 
-  deploy:
+  deploy:  
     needs: call-reusable-workflow
     uses: ./.github/workflows/configure-azure-env.yml
     with:
-      client_id: ${{ secrets.AZURE_CLIENT_ID_DEV }}
-      tenant_id: ${{ secrets.AZURE_TENANT_ID_DEV }}
-      subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }}
+      client_id: ${{ needs.variables.outputs.client_id }}
+      tenant_id: ${{ needs.variables.outputs.tenant_id }}
+      subscription_id: ${{ needs.variables.outputs.subscription_id }}
 
     # runs-on: [self-hosted, Windows]    
     # steps:
