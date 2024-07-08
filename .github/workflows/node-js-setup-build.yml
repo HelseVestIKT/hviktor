@@ -27,6 +27,8 @@ jobs:
         run: |
           npm install
           npm run build:prod --if-present
+      - name: List files
+        run: ls -R
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4 #v4 virker på ubuntu-latest og self-hosted Linux, IKKE windows
