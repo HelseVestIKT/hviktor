@@ -13,6 +13,9 @@ on:
       subscription_id:
         required: true
         type: string
+      node-version:
+        required: true
+        type: string
 jobs:
   print-variables:
     runs-on: ubuntu-latest
@@ -22,6 +25,7 @@ jobs:
         echo "Client ID: ${{ inputs.client_id }}"
         echo "Tenant ID: ${{ inputs.tenant_id }}"
         echo "Subscription ID: ${{ inputs.subscription_id }}"
+        echo "Node Version: ${{ inputs.node-version }}"
   configure-azure:
     runs-on: self-hosted-windows      
     steps:
