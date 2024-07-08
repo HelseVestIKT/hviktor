@@ -38,6 +38,6 @@ jobs:
         uses: actions/upload-artifact@v4 #v4 virker på ubuntu-latest og self-hosted Linux, IKKE windows
         with:
           name: angular-app
-          path: '${{ inputs.working-directory }}/dist'
+          path: '${{ inputs.working-directory }}/${{ inputs.output-path }}'
           compression-level: 0            # 9 er maks, 1 er min og 0 er ingen. Er satt til 0 for den er kjappest
   
