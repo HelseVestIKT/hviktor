@@ -55,7 +55,7 @@
           },
           "configurations": {
             "production": {
-              "outputPath" : "dist/Hviktor-web",
+              "outputPath" : "resultat",
               "budgets": [
                 {
                   "type": "initial",
