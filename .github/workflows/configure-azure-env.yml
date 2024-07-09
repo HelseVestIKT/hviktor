@@ -3,16 +3,6 @@
 name: Azure Environment Configuration Workflow
 on:
   workflow_call:
-    # inputs:
-    #   client_id:
-    #     required: true
-    #     type: string
-    #   tenant_id:
-    #     required: true
-    #     type: string
-    #   subscription_id:
-    #     required: true
-    #     type: string
 
 jobs:
   configure-azure:

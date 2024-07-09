@@ -40,79 +40,27 @@ jobs:
     outputs: 
       node-version: ${{ env.NODE_VERSION }}
 
-  call-reusable-workflow:
+  build-angular-app:
     needs: variables
-    uses: ./.github/workflows/node-js-setup-build.yml
+    uses: ./.github/workflows/build-angular-app.yml
     with:
       working-directory: './Hviktor-web'
       node-version: ${{needs.variables.outputs.node-version}}
       # må stemme overens med output-path i angular.json
       output-path: 'dist'
-  # build:
-  #   needs: call-reusable-workflow
-  #   runs-on: [self-hosted, Linux]
-  #   steps:
-  #     - uses: actions/checkout@v4
-    
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     cache-dependency-path: ./Hviktor-web/package-lock.json
-      #     node-version: ${{ env.NODE_VERSION }}
-      #     cache: 'npm'
-
-      # - name: npm install, build, and test
-      #   working-directory: ./Hviktor-web
-      #   run: |
-      #     npm install
-      #     npm run build --if-present
-  
-# azure-webapps-node.yml
-
-      # - uses: ./.github/workflows/node-js-setup-build.yml
-      #   with:
-      #     node-version: ${{ env.NODE_VERSION }}
-      #     working-directory: './Hviktor-web'      
-    
-#     # zip hviktor-web and attach date to the name
-#     - name: Zip hviktor-web
-#       run: Compress-Archive -Path ./Hviktor-web -DestinationPath "Hviktor-web-$(Get-Date -Format 'yyyy-MM-dd HHmmss').zip"
-
-
 
 # # denne hører egentlig til i scriptet, altså
 # # npm run test --if-present
 
-      # - name: Upload artifact for deployment job
-      #   uses: actions/upload-artifact@v4 #v4 virker på ubuntu-latest og self-hosted Linux, IKKE windows
-      #   with:
-      #     name: node-app
-      #     path: ./Hviktor-web
-      #     compression-level: 0            # 9 er maks, 1 er min og 0 er ingen. Er satt til 0 for den er kjappest
-
-  deploy:  
-    needs: [call-reusable-workflow]
+  configure-azure-env:  
+    needs: [build-angular-app]
     uses: ./.github/workflows/configure-azure-env.yml
     secrets: inherit
     
-
-    # runs-on: [self-hosted, Windows]    
-    # steps:
-    # - uses: actions/checkout@v4
-    # - uses: azure/login@v1
-    #   with:
-    #     client-id: ${{ secrets.AZURE_CLIENT_ID_DEV }}
-    #     tenant-id: ${{ secrets.AZURE_TENANT_ID_DEV }}
-    #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }}
-    #     #creds: ${{ secrets.AZURE_CREDENTIALS }}
-    # - uses: azure/arm-deploy@v1
-    #   with:
-    #     template: 'AzurePipelineTools/azuredeploy.bicep'
-    #     #parameters: 'AzurePipelineTools/azuredeploy.parameters.json'
-    #     deploymentMode: 'Incremental'
-    #     scope: 'subscription'
-    #     region: 'Norway East'
-  # deploy:
+  deploy:
+    needs: [build-angular-app, configure-azure-env]
+    uses: ./.github/workflows/deploy-app-to-azure.yml
+    secrets: inherit
   #   permissions:
   #     contents: none
   #   runs-on: ubuntu-latest
