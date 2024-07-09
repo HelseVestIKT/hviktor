@@ -31,4 +31,4 @@ jobs:
         scope: 'subscription'
         resourceGroupName: 'HVI-UTV-Hviktor-GH-rg' #kun for subscription
         region: 'norwayeast'
-        additionalArguments: '--verbose --rollback-on-error'
+        additionalArguments: '--verbose'
