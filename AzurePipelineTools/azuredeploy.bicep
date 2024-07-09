@@ -12,19 +12,18 @@ param allowIPParam string = ''
 
 param resourceTags object = {
   'Application': 'Hviktor'
-  'DeploymentDate': utcNow('dd-MMM-yyyy')
-  'createdBy': 'Hviktor azure pipeline'
+  'createdBy': 'Morten'
 }
 
 //variables
-//var appInsightsName = '${applicationName}${environment}-appinsights'
+var appInsightsName = 'hviktor-test-gh-appinsights'
 
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: resourceGroupName
   location: location  
 }
-/*
-module appInsightsModule 'modules/appInsights.bicep' = {
+
+module appInsightsModule '../AzurePipelineTools/bicep/modules/appInsights.bicep' = {
   name: 'appInsightsDeploy'
   scope: resourceGroup(rg.name)
   params: {
@@ -33,21 +32,21 @@ module appInsightsModule 'modules/appInsights.bicep' = {
     location: location
   }
 }
-*/
+
 
 // web app - WEB
-module webAppServiceModule 'modules/webAppService.bicep' = {
+module webAppServiceModule '../AzurePipelineTools/bicep/modules/webAppService.bicep' = {
     name: '${applicationName}${environment} Deploy'  
     scope: resourceGroup(rg.name)  
     params: {
       applicationName: '${applicationName}${environment}'  
       tags: resourceTags
-      //appInsightsInstrumentationKey: appInsightsModule.outputs.appInsightsInstrumentationKey
+      appInsightsInstrumentationKey: appInsightsModule.outputs.appInsightsInstrumentationKey
       appServicePlanId: appServicePlanId  
       location: location 
       allowIPParam: allowIPParam       
     }
     
 }
-output webAppName string = webAppServiceModule.outputs.webAppName
-output webURL string = webAppServiceModule.outputs.webURL
+ output webAppName string = webAppServiceModule.outputs.webAppName
+ output webURL string = webAppServiceModule.outputs.webURL
