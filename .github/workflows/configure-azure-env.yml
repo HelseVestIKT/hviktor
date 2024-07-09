@@ -18,9 +18,7 @@ jobs:
       with:
         inlineScript:        
           #!/bin/bash
-          az group create --name 'HVI-UTV-Hviktor-GH-rg' --location norwayeast
-          |
-          echo "Azure resource group created"
+          az group create --name 'HVI-UTV-Hviktor-GH-rg' --location norwayeast          
         
       
     - uses: azure/arm-deploy@v2
@@ -30,5 +28,6 @@ jobs:
         deploymentMode: 'Complete'
         scope: 'subscription'
         resourceGroupName: 'HVI-UTV-Hviktor-GH-rg' #kun for subscription
+        failOnStdErr: false
         region: 'norwayeast'
         additionalArguments: '--verbose'

@@ -48,5 +48,5 @@ module webAppServiceModule '../AzurePipelineTools/bicep/modules/webAppService.bi
     }
     
 }
- output webAppName string = webAppServiceModule.outputs.webAppName
- output webURL string = webAppServiceModule.outputs.webURL
+ //output webAppName string = webAppServiceModule.outputs.webAppName
+ //output webURL string = webAppServiceModule.outputs.webURL

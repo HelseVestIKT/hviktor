@@ -63,5 +63,5 @@ resource webAppService 'Microsoft.Web/sites@2021-01-01' = {
   }  
 }
 
-output webAppName string = webAppService.name
-output webURL string = webAppService.properties.defaultHostName
+// output webAppName string = webAppService.name
+// output webURL string = webAppService.properties.defaultHostName
