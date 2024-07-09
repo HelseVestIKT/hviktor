@@ -58,6 +58,7 @@ jobs:
     secrets: inherit
 
   download-artifact:
+      needs: [build-angular-app]
       runs-on: ubuntu-latest
       steps:
           - name: Download artifact from build job
