@@ -19,6 +19,7 @@ jobs:
         inlineScript:        
           #!/bin/bash
           az group create --name 'HVI-UTV-Hviktor-GH-rg' --location norwayeast
+          |
           echo "Azure resource group created"
         
       
