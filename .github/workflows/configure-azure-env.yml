@@ -24,7 +24,7 @@ jobs:
     - uses: azure/arm-deploy@v2
       with:
         template: 'AzurePipelineTools/azure-config.bicep'
-        #parameters: 'AzurePipelineTools/azure-config.parameters.json'
+        parameters: 'AzurePipelineTools/azure-config.parameters.json'
         deploymentMode: 'Complete'
         scope: 'subscription'
         resourceGroupName: 'HVI-UTV-Hviktor-GH-rg' #kun for subscription
