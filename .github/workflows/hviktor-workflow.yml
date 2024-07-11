@@ -42,9 +42,9 @@ jobs:
     secrets: inherit
 
   deploy:
-    needs: [build-angular-app, configure-azure-env]
+    needs: [build-angular-app, configure-azure-env,variables]
     uses: ./.github/workflows/deploy-app-to-azure.yml
     secrets: inherit
     with:
-      artifact-name: angular-app
-      webapp-name: webapp-name
+      artifact-name: ${{needs.variables.outputs.angular-app }}
+      webapp-name: ${{needs.variables.outputs.webapp-name}}
