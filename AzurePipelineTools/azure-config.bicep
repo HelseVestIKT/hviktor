@@ -1,14 +1,12 @@
 targetScope = 'subscription'
 
 //parameters
-param appServicePlanId string = '/subscriptions/470ca611-e54c-49b1-b5e5-07fcfb8c3c08/resourceGroups/HVI-UTVIKLING-DEV-FELLES-rg/providers/Microsoft.Web/serverfarms/HVI-UTVIKLING-DEV-dotnet5-AppServicePlan'
-param environment string = 'Dev'
-param applicationName string = 'Hviktor'
-param resourceGroupName string = 'HVI-UTV-Hviktor-GH-rg'
-//param location string = deployment().location
-param location string = 'norwayeast'
-//param hviLogAnalyticsIdParam string = ''
-param allowIPParam string = ''
+param appServicePlanId string
+param environment string
+param applicationName string
+param resourceGroupName string
+param location string
+param allowIPParam string
 
 param resourceTags object = {
   Application: 'Hviktor'
@@ -33,7 +31,6 @@ module appInsightsModule '../AzurePipelineTools/bicep/modules/appInsights.bicep'
   }
 }
 
-
 // web app - WEB
 module webAppServiceModule '../AzurePipelineTools/bicep/modules/webAppService.bicep' = {
     name: '${applicationName}${environment}Deploy'  
@@ -48,5 +45,3 @@ module webAppServiceModule '../AzurePipelineTools/bicep/modules/webAppService.bi
     }
     
 }
- //output webAppName string = webAppServiceModule.outputs.webAppName
- //output webURL string = webAppServiceModule.outputs.webURL

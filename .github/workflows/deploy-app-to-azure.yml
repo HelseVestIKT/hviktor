@@ -1,6 +1,13 @@
 # download artifact from build job and deploy to Azure WebApp
 on:
     workflow_call:
+      inputs:
+        artifact-name:
+          required: true
+          type: string
+        webapp-name:
+          required: true
+          type: string  
 
 jobs:
     deploy-to-azure:
@@ -19,11 +26,11 @@ jobs:
             - name: Download artifact from build job
               uses: actions/download-artifact@v4
               with:
-                name: angular-app
+                name: ${{ inputs.artifact-name }}
 
             - name: Deploy webapp
               uses: azure/webapps-deploy@v3
               with:
-                app-name: HviktorDev
+                app-name: ${{ inputs.webapp-name }}
                 package: './'
           

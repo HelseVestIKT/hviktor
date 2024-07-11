@@ -4,6 +4,22 @@
     "parameters": {
       "allowIPParam": {
         "value": "10.84.228.27/28"
+      }, 
+      "environment": {
+        "value": "Dev"
+      },
+      "applicationName": {
+        "value": "Hviktor"
+      },
+      "resourceGroupName": {
+        "value": "HVI-UTV-Hviktor-GH-rg"
+      },
+      "location": {
+        "value": "norwayeast"
+      },
+      "appServicePlanId": {
+        "value": "/subscriptions/470ca611-e54c-49b1-b5e5-07fcfb8c3c08/resourceGroups/HVI-UTVIKLING-DEV-FELLES-rg/providers/Microsoft.Web/serverfarms/HVI-UTVIKLING-DEV-dotnet5-AppServicePlan"
       }
     }
   }
+
