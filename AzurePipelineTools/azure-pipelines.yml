@@ -22,7 +22,7 @@ variables:
   #Dev environment variables - service connectin mangler
   AZURE_CREDENTIALS_DEV: 'HVI-UTVIKLING-DEV-ServiceConnection-Hviktor' #her endrer du navn til den som ligger i ditt prosjekt
   AZURE_SUBSCRIPTION_ID_DEV: '470ca611-e54c-49b1-b5e5-07fcfb8c3c08' #skal ikke være nødvendig å endre
-  AZURE_RESOURCE_GROUP_DEV: 'HVI-UTVIKLING-DEV-Hviktor-rg' #her endrer du til aktuell resource group 
+  AZURE_RESOURCE_GROUP_DEV: 'HVI-UTVIKLING-DEV-Hviktor-rg-GH' #her endrer du til aktuell resource group 
 
 
 #Build stage

@@ -9,7 +9,7 @@
             "value": "Dev"
         },   
         "resourceGroupName": {
-            "value": "HVI-UTVIKLING-DEV-Hviktor-rg"
+            "value": "HVI-UTVIKLING-DEV-Hviktor-rg-GH"
         },   
         "hviLogAnalyticsIdParam" : {
             "value": "/subscriptions/58e0188f-72c9-470f-afc1-16338c215f7e/resourcegroups/hvi-management-la/providers/microsoft.operationalinsights/workspaces/hvi-loganalyticsworkspace"

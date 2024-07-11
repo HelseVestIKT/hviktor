@@ -36,7 +36,7 @@ module webAppServiceModule '../AzurePipelineTools/bicep/modules/webAppService.bi
     name: '${applicationName}${environment}Deploy'  
     scope: resourceGroup(rg.name)  
     params: {
-      applicationName: '${applicationName}${environment}'  
+      applicationName: applicationName
       tags: resourceTags
       appInsightsInstrumentationKey: appInsightsModule.outputs.appInsightsInstrumentationKey
       appServicePlanId: appServicePlanId  
