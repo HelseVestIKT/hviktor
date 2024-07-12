@@ -14,7 +14,7 @@ param resourceTags object = {
 }
 
 //variables
-var appInsightsName = 'hviktor-test-gh-appinsights'
+var appInsightsName = 'hviktor-test-gh-appinsights-${environment}'
 
 // resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
 //   name: resourceGroupName
