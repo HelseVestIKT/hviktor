@@ -1,3 +1,4 @@
+#hovedfil for applikasjonen. Gjør bruk av workflows/actions for å bygge, konfigurere og deploye applikasjonen til Azure
 on:
   push:
     branches: [ "main", "develop"] # Kjører ved push til main eller develop branch

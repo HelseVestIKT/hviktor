@@ -1,4 +1,4 @@
-# download artifact from build job and deploy to Azure WebApp
+# workflow som kan kalles og gjør download artifact og deploy til azure
 on:
     workflow_call:
       inputs:

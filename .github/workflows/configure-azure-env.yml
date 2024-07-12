@@ -1,4 +1,4 @@
-# Logger på azure med oidc og kjører en bicep-fil som konfigurerer azure-ressurser
+# Workflow som kogger på azure med oidc og kjører en bicep-fil som konfigurerer azure-ressurser
 
 name: Azure Environment Configuration Workflow
 on:
