@@ -7,7 +7,10 @@ on:
           type: string
         webapp-name:
           required: true
-          type: string  
+          type: string
+        environment: 
+          required: true
+          type: string
 
 jobs:
     deploy-to-azure:
