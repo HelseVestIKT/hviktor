@@ -19,7 +19,7 @@ permissions:
 jobs:
   # fancy måte å sende env variables til neste reusable workflow: https://www.sethduke.io/github-reusable-workflows-environment-variables-workaround/
   variables:
-    runs-on: ubuntu-latest
+    runs-on: HVI-SKY-TJENESTER-RUNNER
     steps: [run: echo]
     outputs: 
       node-version: ${{ env.NODE_VERSION }}
