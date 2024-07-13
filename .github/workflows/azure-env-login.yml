@@ -10,6 +10,8 @@ jobs:
     login:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v4
+            
             - name: DEV environment login    
               if: ${{inputs.environment == 'DEV'}}      
               uses: azure/login@v1
