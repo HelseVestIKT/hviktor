@@ -29,7 +29,7 @@ jobs:
 
   build-angular-app:
     needs: variables
-    uses: ./.github/workflows/wf-modules/build-angular-app.yml
+    uses: ./.github/workflows/build-angular-app.yml
     with:
       working-directory: './Hviktor-web'
       node-version: ${{needs.variables.outputs.node-version}}
@@ -42,14 +42,14 @@ jobs:
 
   configure-azure-env:  
     needs: variables
-    uses: ./.github/workflows/wf-modules/configure-azure-env.yml
+    uses: ./.github/workflows/configure-azure-env.yml
     with:
       environment: ${{needs.variables.outputs.environment}}
     secrets: inherit
 
   deploy:
     needs: [build-angular-app, configure-azure-env,variables]
-    uses: ./.github/workflows/wf-modules/deploy-app-to-azure.yml
+    uses: ./.github/workflows/deploy-app-to-azure.yml
     secrets: inherit
     with:
       artifact-name: ${{needs.variables.outputs.angular-app }}
