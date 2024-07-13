@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v4
     - uses: azure/login@v1
       with:
-        client-id: ${{ needs.variables.outputs.clientid-secret-name}}
+        client-id: ${{ secrets.AZURE_CLIENT_ID_inputs.environment}}
         tenant-id: ${{ secrets.AZURE_TENANT_ID_DEV }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID_DEV }}
     # Dette gjøres for å sikre at vi har en resource group å jobbe med        
