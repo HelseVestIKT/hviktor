@@ -1,6 +1,9 @@
 Figur
 ![GitHub Actions Hviktor](github-actions-hviktor.png)
 
+hviktor-workflow.yml er hovedfilen og de andre er workflows som kan gjenbrukes. En typisk kjøring ser slik ut:
+![Action](actions-kjoring.png)
+
 Hva annet må være på plass?
 - app reg for subscription må være opprettet. Hos oss heter de hvi-utvikling-github-[dev|qa|prod]-serviceconnection. De er opprettet etter beskrivelsen: [GitHub Actions authentication methods for Azure](https://dev.to/pwd9000/bk-1iij) som igjen er basert på  [Microsoft sin dokumentasjon](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-portal%2Cwindows).
 
