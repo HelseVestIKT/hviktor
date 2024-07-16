@@ -55,15 +55,18 @@ jobs:
       artifact-name: ${{needs.variables.outputs.angular-app }}
       webapp-name: ${{needs.variables.outputs.webapp-name}}
       environment: ${{needs.variables.outputs.environment}}
-  
-  deploy-qa:    
-    needs: deploy-dev
-    uses: ./.github/workflows/deploy-app-to-azure.yml
-    secrets: inherit
-    with:
-        artifact-name: ${{needs.variables.outputs.angular-app }}
-        webapp-name: ${{needs.variables.outputs.webapp-name}}
-        environment: 'QA'
+
+  deploy-qa:
+    needs: [deploy-dev, variables]
+    environment: 'QA'
+    runs-on: HVI-SKY-TJENESTER-RUNNER
+    steps:
+      - name: Deploy to QA
+        uses: ./.github/workflows/deploy-app-to-azure.yml
+        with:
+          artifact-name: ${{needs.variables.outputs.angular-app }}
+          webapp-name: ${{needs.variables.outputs.webapp-name}}
+          environment: ${{needs.variables.outputs.environment}}    
   
   deploy-prod:
     needs: deploy-qa
