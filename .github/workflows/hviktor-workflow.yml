@@ -72,14 +72,14 @@ jobs:
       environment: 'QA'
 
   configure-azure-prod:
-      needs: [build-angular-app]
+      needs: [deploy-to-qa]
       uses: ./.github/workflows/configure-azure-env.yml
       secrets: inherit
       with:
-        environment: 'QA'
+        environment: 'PROD'
       
   deploy-to-prod:
-    needs: [configure-azure-qa, variables]    
+    needs: [configure-azure-prod, variables]    
     uses: ./.github/workflows/deploy-app-to-azure.yml
     secrets: inherit
     with:
