@@ -37,9 +37,15 @@ jobs:
       # må stemme overens med output-path i angular.json
       output-path: 'dist'
 
-# denne hører egentlig til i scriptet, altså. bør inn i build-angular-app.yml
-# npm run test --if-present
 
+  deploy-to-dev:
+    needs: [build-angular-app, variables]
+    uses: ./.github/workflows/deploy-app-to-azure.yml
+    secrets: inherit
+    with:
+      artifact-name: ${{needs.variables.outputs.angular-app }}
+      webapp-name: 'Hviktor'
+      environment: 'DEV'
   # configure-azure-env:  
   #   needs: variables
   #   uses: ./.github/workflows/configure-azure-env.yml

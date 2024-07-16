@@ -13,8 +13,19 @@ on:
           type: string
 
 jobs:
+    configure-azure:
+        runs-on: HVI-SKY-TJENESTER-RUNNER               
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+              # Må bruke if-statement for å kunne logge på riktig subscription basert på input-parameter. Eneste måten jeg har funnet så langt.
+              # Prøvde med legge ting i en egen workflow som slo sammen navn med miljø og prøvd å hente
+            - name: configure
+              uses: ./.github/workflows/configure-azure-env.yml
+              with:
+                environment: ${{inputs.environment}}
     deploy-to-azure:
-        runs-on: HVI-SKY-TJENESTER-RUNNER
+        runs-on: HVI-SKY-TJENESTER-RUNNER               
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
