@@ -51,7 +51,7 @@ jobs:
     secrets: inherit
     with:
       artifact-name: ${{needs.variables.outputs.angular-app }}
-      webapp-name: 'Hviktor'
+      webapp-name: 'Hviktor-gh-DEV'
       environment: 'DEV'
 
   configure-azure-qa:
@@ -68,7 +68,7 @@ jobs:
     secrets: inherit
     with:
       artifact-name: ${{needs.variables.outputs.angular-app }}
-      webapp-name: 'Hviktor'
+      webapp-name: 'Hviktor-gh-QA'
       environment: 'QA'
     
 

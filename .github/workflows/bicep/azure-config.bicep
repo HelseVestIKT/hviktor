@@ -10,7 +10,7 @@ param allowIPParam string
 
 param resourceTags object = {
   Application: 'Hviktor'
-  createdBy: 'Morten'
+  createdBy: 'Githb Actions'
 }
 
 //variables
