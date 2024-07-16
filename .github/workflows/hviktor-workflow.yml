@@ -54,6 +54,24 @@ jobs:
       webapp-name: 'Hviktor'
       environment: 'DEV'
 
+  configure-azure-qa:
+    needs: [deploy-to-dev]
+    uses: ./.github/workflows/configure-azure-env.yml
+    secrets: inherit
+    with:
+      environment: 'QA'
+    
+
+  deploy-to-qa:    
+    needs: [configure-azure-qa]    
+    uses: ./.github/workflows/deploy-app-to-azure.yml
+    secrets: inherit
+    with:
+      artifact-name: ${{needs.variables.outputs.angular-app }}
+      webapp-name: 'Hviktor'
+      environment: 'QA'
+    
+
   # configure-azure-env:  
   #   needs: variables
   #   uses: ./.github/workflows/configure-azure-env.yml
