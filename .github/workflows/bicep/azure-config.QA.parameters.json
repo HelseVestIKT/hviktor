@@ -18,7 +18,7 @@
         "value": "norwayeast"
       },
       "appServicePlanId": {
-        "value": "/subscriptions/470ca611-e54c-49b1-b5e5-07fcfb8c3c08/resourceGroups/HVI-UTVIKLING-QA-FELLES-rg/providers/Microsoft.Web/serverfarms/HVI-UTVIKLING-DEV-dotnet5-AppServicePlan"
+        "value": "/subscriptions/387bb2d3-0a0b-47ba-84a6-225535b77763/resourceGroups/HVI-UTVIKLING-QA-FELLES-rg/providers/Microsoft.Web/serverfarms/HVI-UTVIKLING-QA-Shared_1-AppServicePlan"
       }
     }
   }
