@@ -37,15 +37,21 @@ jobs:
       # må stemme overens med output-path i angular.json
       output-path: 'dist'
 
+  configure-azure-dev:
+    needs: [variables, build-angular-app]
+    uses: ./.github/workflows/configure-azure-env.yml
+    with:
+      environment: 'DEV'
 
-  deploy-to-dev:
-    needs: [build-angular-app, variables]
+  deploy-to-dev:    
+    needs: [configure-azure-dev, variables]    
     uses: ./.github/workflows/deploy-app-to-azure.yml
     secrets: inherit
     with:
       artifact-name: ${{needs.variables.outputs.angular-app }}
       webapp-name: 'Hviktor'
       environment: 'DEV'
+
   # configure-azure-env:  
   #   needs: variables
   #   uses: ./.github/workflows/configure-azure-env.yml
