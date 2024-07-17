@@ -75,10 +75,11 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.artifact-name }}
+        path: './artifact'
 
     - name: Deploy webapp
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ inputs.webapp-name }}
-        package: './'
+        package: './artifact/${{ inputs.artifact-name }}.zip'
 
