@@ -6,13 +6,10 @@ on:
     
 # Dette er egentlig konstanter som gjelder for alle workflowene, men jeg vet ikke hvordan jeg kan sette det globalt
 env:
-  # AZURE_WEBAPP_NAME: Hviktor    # set this to your application's name
-  # AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '20.x'  # set this to the node version to use
   ANGULAR_APP: 'hviktor-angular' # set this to the name of the angular app
-  # ENVIRONMENT: 'DEV' # set this to the environment you are deploying to
 
-# Tillater bruk av secrets i workflowene
+  # Tillater bruk av secrets i workflowene
 permissions:
   contents: read
   id-token: write
@@ -25,9 +22,7 @@ jobs:
     steps: [run: echo]
     outputs: 
       node-version: ${{ env.NODE_VERSION }}
-      # webapp-name: ${{ env.AZURE_WEBAPP_NAME }}
       angular-app: ${{ env.ANGULAR_APP }}
-      # environment: ${{ env.ENVIRONMENT }}
 
   build-angular-app:
     needs: variables
@@ -35,13 +30,13 @@ jobs:
     with:
       working-directory: './Hviktor-web'
       node-version: ${{needs.variables.outputs.node-version}}
-      app-name: ${{env.ANGULAR_APP}} # må stemme overens med navn til f.eks. deploy
+      app-name: ${{needs.variables.outputs.angular-app}} # må stemme overens med navn til f.eks. deploy
       # må stemme overens med output-path i angular.json
       output-path: 'dist'
 
   deploy-dev:
     needs: [build-angular-app, variables]    
-    uses: ./.github/workflows/configure-azure-env.yml
+    uses: ./.github/workflows/deploy.yml
     secrets: inherit
     with:
       environment: 'DEV'
@@ -50,7 +45,7 @@ jobs:
 
   deploy-qa:
     needs: [deploy-dev, variables]    
-    uses: ./.github/workflows/configure-azure-env.yml
+    uses: ./.github/workflows/deploy.yml
     secrets: inherit
     with:
       environment: 'QA'
@@ -59,7 +54,7 @@ jobs:
 
   deplopy-prod:
     needs: [deploy-qa, variables]    
-    uses: ./.github/workflows/configure-azure-env.yml
+    uses: ./.github/workflows/deploy.yml
     secrets: inherit
     with:
       environment: 'QA'

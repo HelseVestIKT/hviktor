@@ -16,7 +16,7 @@ on:
 
 
 jobs:
-  configure-azure:
+  configure-and-deploy-app:
     runs-on: HVI-SKY-TJENESTER-RUNNER  
     environment: ${{inputs.environment}}
     steps:
