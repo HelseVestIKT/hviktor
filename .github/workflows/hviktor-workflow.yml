@@ -57,7 +57,7 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     secrets: inherit
     with:
-      environment: 'QA'
+      environment: 'PROD'
       webapp-name: 'Hviktor-gh-PROD'
       artifact-name: ${{needs.variables.outputs.angular-app }}    
         
