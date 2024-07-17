@@ -85,5 +85,6 @@ jobs:
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ inputs.webapp-name }}
+        type: 'zip'
         package: './${{ inputs.artifact-name }}.zip'
 
