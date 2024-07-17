@@ -75,15 +75,15 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.artifact-name }}
-        path: './artifact/${{ inputs.artifact-name }}'
+        # path: './artifact/${{ inputs.artifact-name }}'
     
     # List content of current directory
     - name: List files in artifact directory
-      run: ls -R ./artifact
+      run: ls -R .
 
     - name: Deploy webapp
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ inputs.webapp-name }}
-        package: './artifact/${{ inputs.artifact-name }}'
+        package: './${{ inputs.artifact-name }}'
 
