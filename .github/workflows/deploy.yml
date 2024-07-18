@@ -80,14 +80,10 @@ jobs:
     # List content of current directory
     - name: List files in artifact directory
       run: ls -R ./${{ inputs.artifact-name }}
-
-    # - name: Unzip
-    #   run: unzip ./artifact/${{ inputs.artifact-name }}
-
-
+    
     - name: Deploy webapp
       uses: azure/webapps-deploy@v3
       with:
         app-name: ${{ inputs.webapp-name }}
-        package: './hviktor-angular'
+        package: './${{ inputs.artifact-name }}'
 
