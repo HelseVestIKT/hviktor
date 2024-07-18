@@ -59,15 +59,15 @@ jobs:
           az group create --name 'HVI-UTV-${{inputs.environment}}-Hviktor-GH-rg' --location norwayeast          
         
       
-    - uses: azure/arm-deploy@v2
-      with:
-        template: '.github/workflows/bicep/azure-config.bicep'
-        parameters: '.github/workflows/bicep/azure-config.${{inputs.environment}}.parameters.json'
-        deploymentMode: 'Complete' # Complete fungerer bare med scope resourcegroup og ikke subscription. Incremental fungerer med subscription og resourcegroup
-        scope: 'resourcegroup'
-        resourceGroupName: 'HVI-UTV-${{inputs.environment}}-Hviktor-GH-rg' #kun for subscription
-        failOnStdErr: true
-        #region: 'norwayeast'
+    # - uses: azure/arm-deploy@v2
+    #   with:
+    #     template: '.github/workflows/bicep/azure-config.bicep'
+    #     parameters: '.github/workflows/bicep/azure-config.${{inputs.environment}}.parameters.json'
+    #     deploymentMode: 'Complete' # Complete fungerer bare med scope resourcegroup og ikke subscription. Incremental fungerer med subscription og resourcegroup
+    #     scope: 'resourcegroup'
+    #     resourceGroupName: 'HVI-UTV-${{inputs.environment}}-Hviktor-GH-rg' #kun for subscription
+    #     failOnStdErr: true
+    #     #region: 'norwayeast'
         
 
 
@@ -75,12 +75,15 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: ${{ inputs.artifact-name }}
-        path: './artifact/${{ inputs.artifact-name }}.zip'
-    - name: Unzip
-      run: unzip ./artifact/${{ inputs.artifact-name }}.zip
+        path: './artifact/${{ inputs.artifact-name }}'
+        
     # List content of current directory
     - name: List files in artifact directory
-      run: ls -R ./artifact
+      run: ls -R ./artifact/${{ inputs.artifact-name }}
+
+    - name: Unzip
+      run: unzip ./artifact/${{ inputs.artifact-name }}
+
 
     - name: Deploy webapp
       uses: azure/webapps-deploy@v3
