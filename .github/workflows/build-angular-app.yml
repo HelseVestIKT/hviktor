@@ -28,8 +28,11 @@ jobs:
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v3.0.0
-        # args: >
-        #   -Dsonar.qualitygate.wait=true
+        with:
+          args: >
+            -Dsonar.qualitygate.wait=true
+            -Dsonar.organization='Helse Vest IKT'
+            -Dsonar.projectKey='Hviktor'
         env: 
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
