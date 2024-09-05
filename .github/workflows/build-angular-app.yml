@@ -32,12 +32,11 @@ jobs:
           args: >
             -Dsonar.qualitygate.wait=true
             -Dsonar.organization='Helse%20Vest%20IKT'
-            # -Dsonar.projectKey='Hviktor'
-            # -Dsonar.branch.name=${{ github.ref }}
         env: 
             SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         
   build:
+    depends-on: sonarcloud
     runs-on: HVI-SKY-TJENESTER-RUNNER
     steps:
       - name: Checkout
