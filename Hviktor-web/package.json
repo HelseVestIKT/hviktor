@@ -21,8 +21,9 @@
     "@angular/router": "^18.2.9",
     "npm": "^10.2.1",
     "primeicons": "^6.0.1",
-    "primeng": "^17.8.0",
+    "primeng": "^18.0.0-beta.3",
     "rxjs": "~7.8.0",
+    "tailwindcss-primeui": "^0.3.4",
     "tslib": "^2.3.0",
     "zone.js": "^0.14.10"
   },

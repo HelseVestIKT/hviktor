@@ -316,3 +316,16 @@ div.code-toolbar > .toolbar > .toolbar-item > span {
              padding-right: 0.8em;
              text-align: right;
          }
+
+
+
+@layer tailwind-base, primeng, tailwind-utilities;
+
+@layer tailwind-base {
+@tailwind base;
+}
+
+@layer tailwind-utilities {
+@tailwind components;
+@tailwind utilities;
+}

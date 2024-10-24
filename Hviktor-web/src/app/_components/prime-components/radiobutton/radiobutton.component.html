@@ -29,12 +29,14 @@
                     <h2 class="as-light fs-500">Standard radiobutton</h2>
                     <p>Radiobutton fra primeng stylet etter Hviktor. Sett inn label for å få tilhørende label til radiobutton, og sett inn ariaLabel slik at radiobutton er tilgjengelig for skjermleser.</p>
                         <div class="flex gap-400 f-column p-600">
-                            <p-radioButton label="Standard radiobutton" ariaLabel="standard radiobutton" [(ngModel)]="category"></p-radioButton>
+                            <p-radioButton inputId="category" value="radiobutton" [(ngModel)]="category"></p-radioButton>
+                            <label for="category">Standard radiobutton</label>
                         </div>
 
                     <pre class="language-html line-numbers">
                         <code class="language-html">
-                        &lt;p-radioButton value=&quot;radiobutton&quot; label=&quot;Standard radiobutton&quot; ariaLabel=&quot;Standard radiobutton&quot; [(ngModel)]=&quot;category&quot;&gt;&lt;/p-radioButton&gt;
+                        &lt;p-radioButton inputId=&quot;category&quot; value=&quot;radiobutton&quot; [(ngModel)]=&quot;category&quot;&gt;&lt;/p-radioButton&gt;
+                        &lt;label for=&quot;category&quot;&gt;Standard radiobutton&lt;/label&gt;
                         </code>
                     </pre>
                 </p-card>
@@ -44,12 +46,14 @@
                     <h2 class="as-light fs-500">Disabled radiobutton</h2>
                     <p>Sett inn [disabled] for å definere når en checkbox er deaktivert.</p>
                     <div class="flex gap-400 f-column p-600">
-                        <p-radioButton value="radiobutton" label="Disabled radiobutton" ariaLabel="disabled radiobutton" [(ngModel)]="category" [disabled]="true"></p-radioButton>
+                        <p-radioButton inputId="category" value="radiobutton" [(ngModel)]="category" [disabled]="true"></p-radioButton>
+                        <label for="category">Disabled radiobutton</label>
                     </div>
 
                     <pre class="language-html line-numbers">
                         <code class="language-html">
-                        &lt;p-radioButton value=&quot;radiobutton&quot; label=&quot;Disabled radiobutton&quot; ariaLabel=&quot;Disabled radiobutton&quot; [(ngModel)]=&quot;category&quot; [disabled]=&quot;true&quot;&gt;&lt;/p-radioButton&gt;
+                        &lt;p-radioButton inputId=&quot;category&quot; value=&quot;radiobutton&quot; [(ngModel)]=&quot;category&quot; [disabled]=&quot;true&quot;&gt;&lt;/p-radioButton&gt;
+                        &lt;label for=&quot;category&quot;&gt;Standard radiobutton&lt;/label&gt;
                         </code>
                     </pre>
                 </p-card> 
@@ -63,7 +67,8 @@
                         <fieldset class="flex f-column p-400 gap-500">
                             <legend>Velg kategori</legend>
                             <div *ngFor="let category of categories">
-                                <p-radioButton [value]="category" formControlName="selectedCategory" [label]="category.name"></p-radioButton>
+                                <p-radioButton [value]="category" formControlName="selectedCategory"></p-radioButton>
+                                <label for="category">{{category.name}}</label>
                             </div>
                         </fieldset>
                     </form>
@@ -74,7 +79,8 @@
                         &lt;fieldset class=&quot;flex f-column p-400 gap-500&quot;&gt;
                             &lt;legend&gt;Velg kategori&lt;/legend&gt;
                             &lt;div *ngFor=&quot;let category of categories&quot;&gt;
-                                &lt;p-radioButton [value]=&quot;category&quot; formControlName=&quot;selectedCategory&quot; [label]=&quot;category.name&quot;&gt;&lt;/p-radioButton&gt;
+                                &lt;p-radioButton inputId=&quot;category&quot; [value]=&quot;category&quot; formControlName=&quot;selectedCategory&quot;&gt;&lt;/p-radioButton&gt;
+                                &lt;label for=&quot;category&quot;&gt; &#123; &#123; category.name &#125; &#125; &lt;/label&gt;
                             &lt;/div&gt;
                         &lt;/fieldset&gt;
                     &lt;/form&gt;
