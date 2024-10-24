@@ -8,6 +8,18 @@
  * Added by Souvik Mandal [@SimpleIndian]
  */
 
+ 
+@layer tailwind-base, primeng, tailwind-utilities;
+
+@layer tailwind-base {
+@tailwind base;
+}
+
+@layer tailwind-utilities {
+@tailwind components;
+@tailwind utilities;
+}
+
  ::ng-deep .token.punctuation{
     color: hsl(65deg 82% 75%);
   }
@@ -319,13 +331,3 @@ div.code-toolbar > .toolbar > .toolbar-item > span {
 
 
 
-@layer tailwind-base, primeng, tailwind-utilities;
-
-@layer tailwind-base {
-@tailwind base;
-}
-
-@layer tailwind-utilities {
-@tailwind components;
-@tailwind utilities;
-}
