@@ -1,0 +1,13 @@
+@layer hviktor-base {
+    h1 { @apply font-as text-4xl; }
+    h2 { @apply font-as text-3xl; }
+    h3 { @apply font-as font-medium text-2xl; }
+    h4 { @apply font-as text-xl; }
+    h5 { @apply font-as text-lg; }
+    h6 { @apply font-as text-base; }
+
+    label { @apply font-sans; }
+
+    p-button { @apply font-as font-light; }
+  }
+  
