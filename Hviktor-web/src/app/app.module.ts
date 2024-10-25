@@ -52,7 +52,6 @@ import { ComingSoonComponent } from './_components/hviktor-components/coming-soo
     HeaderComponent,
     HomeComponent,
     TabsComponent,
-    ButtonsComponent,
     DropdownComponent,
     DialogComponent,
     TableComponent,
