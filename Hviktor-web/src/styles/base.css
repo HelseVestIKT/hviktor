@@ -13,4 +13,5 @@
     label { @apply font-sans; }
 
     .p-button-label { @apply font-as font-light; }
+    .p-button-outlined.p-button-danger:not(:disabled):hover { @apply text-white; }
   }

@@ -1,7 +1,8 @@
 export const button = {
     root: {
         borderRadius: '0.5rem',
-        paddingX: '1.5rem',
+        paddingX: '2rem',
+        paddingY: '.5rem',
         focusRing: {
             width: '2px',
         },
@@ -64,7 +65,7 @@ export const button = {
                 color: '{primary.400}',
             },
             danger: {
-                hoverBackground: '{red.200}',
+                hoverBackground: '{red.400}',
                 activeBackground: '{red.200}',
                 borderColor: '{red.400}',
                 color: '{red.400}',
