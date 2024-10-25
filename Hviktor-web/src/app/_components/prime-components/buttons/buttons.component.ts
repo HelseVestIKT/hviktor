@@ -5,8 +5,8 @@ import { DividerModule } from 'primeng/divider';
 import { TabViewModule } from 'primeng/tabview';
 
 @Component({
-  standalone: true,
   selector: 'app-buttons',
+  standalone: true,
   imports: [TabViewModule, DividerModule, ButtonModule, CardModule],
   templateUrl: './buttons.component.html',
   styleUrls: ['./buttons.component.scss']
