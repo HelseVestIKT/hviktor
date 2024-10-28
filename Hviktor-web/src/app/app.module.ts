@@ -47,16 +47,12 @@ import { ComingSoonComponent } from './_components/hviktor-components/coming-soo
 @NgModule({
   declarations: [
     AppComponent,
-    ColoursComponent,
-    TypographyComponent,
     HeaderComponent,
     DropdownComponent,
     DialogComponent,
     TableComponent,
     MultiselectComponent,
     AccordionComponent,
-    IconsComponent,
-    VariablesComponent,
     CheckboxComponent,
     RadiobuttonComponent,
     ChipComponent,
