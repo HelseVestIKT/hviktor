@@ -1,6 +1,6 @@
 # HVIKTor er Helse Vest IKT sitt komponentbibliotek
 
-## GitHub Axctions
+## GitHub Actions
 [Github actions beskrivelse](./.github/workflows/doc/worflows.md)
 
 ## Formattering og linting
