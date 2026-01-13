@@ -3,4 +3,8 @@
 @import "tailwindcss";
 @import '@helsevestikt/hviktor/styles.css';
 
+body {
+   padding: 2rem;
+}
+
 
