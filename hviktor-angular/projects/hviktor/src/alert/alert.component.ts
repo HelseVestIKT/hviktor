@@ -6,12 +6,11 @@ import { Component, HostBinding, Input } from "@angular/core";
   template: `<ng-content />`,
   host: {
     class: 'ds-alert',
+    '[attr.data-color]': 'color'
+
   },
 })
 export class HviAlert {
+  /** The color theme of the alert */
     @Input() color: 'info' | 'success' | 'warning' | 'danger' = 'info';
-
-    @HostBinding('attr.data-color') get dataColor() {
-        return this.color;
-    }
 }
