@@ -2,16 +2,15 @@ import { Component, HostBinding, Input } from "@angular/core";
 
 @Component({
   selector: 'hvi-alert',
+  standalone: true,
   template: `<ng-content />`,
   host: {
     class: 'ds-alert',
-  },
-  standalone: true,
-})
-export class HviAlertComponent {
-    @Input() color: 'info' | 'success' | 'warning' | 'danger' = 'info';
+    '[attr.data-color]': 'color'
 
-    @HostBinding('attr.data-color') get dataColor() {
-        return this.color;
-    }
+  },
+})
+export class HviAlert {
+  /** The color theme of the alert */
+    @Input() color: 'info' | 'success' | 'warning' | 'danger' = 'info';
 }
