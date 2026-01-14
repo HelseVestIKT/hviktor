@@ -6,12 +6,11 @@
 
     <section class="space-y-4">
         <h2 class="text-3xl">Button</h2>
-        <p>Button er laget som et Angular directive. Det vil si at en bruker et vanlig button html-element, og gir det en del egenskaper ved å slenge på hviButton</p>
-
+       
         <section class="space-y-2">
             <h3 class="text-2xl">Variant</h3>
             <div class="flex gap-2 flex-wrap">
-                <button hviButton variant="secondary" color="brand2">Plain hviButton</button>
+                <button hviButton>Plain hviButton</button>
                 <button hviButton variant="secondary">Secondary</button>
                 <button hviButton variant="tertiary">Tertiary</button>
             </div>
@@ -47,8 +46,23 @@
         </section>
     </section>
 
-    <hvi-alert color="success">
-    </hvi-alert>
+    <section class="space-y-2">
+        <h2 class="text-3xl">Alert</h2>
+        <div class="flex gap-2 flex-wrap">
+            <hvi-alert>
+                Dette er en info alert
+            </hvi-alert>
+            <hvi-alert color="success">
+                Dette er en success alert
+            </hvi-alert>
+            <hvi-alert color="warning">
+                Dette er en warning alert
+            </hvi-alert>
+            <hvi-alert color="danger">
+                Dette er en danger alert
+            </hvi-alert>
+        </div>
+    </section>
 
     <footer>
         <router-outlet />
