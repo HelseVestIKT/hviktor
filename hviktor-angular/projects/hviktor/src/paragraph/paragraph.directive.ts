@@ -13,6 +13,6 @@ export class HviParagraph {
     /** Adjusts styling for paragraph length */
     @Input() variant?: 'long' | 'default' | 'short';
 
-    /** The size of the paragraph, from xs to 2xl */
-    @Input() size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+    /** The size of the paragraph, from xs to xl */
+    @Input() size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
