@@ -5,7 +5,7 @@ import { booleanAttribute, Directive, HostBinding, Input } from "@angular/core";
     standalone: true,
 })
 
-export class HviButtonDirective {
+export class HviButton {
     @Input() size: 'sm' | 'md' | 'lg' = 'md';
     @Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
     @Input() type: 'button' | 'submit' | 'reset' = 'button';
