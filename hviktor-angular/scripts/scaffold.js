@@ -55,20 +55,22 @@ const indexFilePath = path.join(targetDir, 'index.ts');
 
 const selector = type === 'component' ? `hvi-${baseName}` : `[hvi${pascalName}]`;
 
-/**
+const docComment = `/**
  * Info
  *
  * Eksempel på bruk:
- * ```html
+ * \`\`\`html
  * <${selector}></${selector}>
- * ```
+ * \`\`\`
  *
  * Dokumentasjon: https://designsystemet.no/no/components/docs/input/overview
  */
+`;
 const mainFileTemplate =
   type === 'component'
     ? `import { Component } from '@angular/core';
 
+${docComment}
 @Component({
   selector: '${selector}',
   standalone: true,
@@ -79,6 +81,7 @@ export class ${className} {}
 `
     : `import { Directive } from '@angular/core';
 
+${docComment}
 @Directive({
   selector: '${selector}',
   standalone: true,
