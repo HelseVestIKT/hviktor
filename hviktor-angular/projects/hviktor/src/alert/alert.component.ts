@@ -12,6 +12,7 @@ import { Component, Input } from "@angular/core";
  * </hvi-alert>
  * ```
  * 
+ * Dokumentasjon: https://designsystemet.no/no/components/docs/alert/overview
  */
 @Component({
   selector: 'hvi-alert',

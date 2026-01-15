@@ -15,6 +15,7 @@ import { Component } from "@angular/core";
  * </hvi-field-affixes>
  * ```
  * 
+ * Dokumentasjon: https://designsystemet.no/no/components/docs/field/overview#prefixsuffix
  */
 @Component({
     selector: "hvi-field-affix",

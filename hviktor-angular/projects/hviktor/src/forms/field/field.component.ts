@@ -1,6 +1,21 @@
 import { AfterViewInit, Component, DestroyRef, ElementRef, inject, Input } from '@angular/core';
 import { fieldObserver } from './helpers/field-observer';
 
+/**
+ * Field er et hjelpemiddel for å automatisk koble et felt sammen med hviLabel, hviFieldDescription og hviFieldValidation.
+ * 
+ * Eksempel på bruk:
+ * ```html
+ * <hvi-field>
+ *  <label hviLabel>Namn</label>
+ *  <span hviFieldDescription>Fyll inn ditt fulle namn.</span>
+ *  <input type="text" />
+ *  <span hviFieldValidation>Dette feltet er påkrevd.</span>
+ * </hvi-field>
+ * ```
+ * 
+ * Dokumentasjon: https://designsystemet.no/no/components/docs/field/overview
+*/
 @Component({
   selector: 'hvi-field',
   standalone: true,
