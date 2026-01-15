@@ -7,4 +7,4 @@ import { Directive } from '@angular/core';
     class: 'ds-fieldset',
   },
 })
-export class HviFieldsetDirective {}
+export class HviFieldset {}

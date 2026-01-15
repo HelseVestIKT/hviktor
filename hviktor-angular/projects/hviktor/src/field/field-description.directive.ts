@@ -8,4 +8,4 @@ import { Directive } from "@angular/core";
         id: 'field-description',
     },
 })
-export class HviFieldDescriptionDirective {}
+export class HviFieldDescription {}

@@ -10,7 +10,7 @@ import { fieldObserver } from './helpers/field-observer';
     '[attr.data-position]': 'position ?? null',
   },
 })
-export class HviFieldComponent implements AfterViewInit {
+export class HviField implements AfterViewInit {
   @Input() position?: 'start' | 'end';
 
     private readonly el = inject(ElementRef<HTMLElement>);
