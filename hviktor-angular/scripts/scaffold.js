@@ -62,7 +62,7 @@ const mainFileTemplate =
 @Component({
   selector: '${selector}',
   standalone: true,
-  template: '',
+  template: '<ng-content />',
   host: {},
 })
 export class ${className} {}
