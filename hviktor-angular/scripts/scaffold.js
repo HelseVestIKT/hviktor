@@ -55,6 +55,16 @@ const indexFilePath = path.join(targetDir, 'index.ts');
 
 const selector = type === 'component' ? `hvi-${baseName}` : `[hvi${pascalName}]`;
 
+/**
+ * Info
+ *
+ * Eksempel på bruk:
+ * ```html
+ * <${selector}></${selector}>
+ * ```
+ *
+ * Dokumentasjon: https://designsystemet.no/no/components/docs/input/overview
+ */
 const mainFileTemplate =
   type === 'component'
     ? `import { Component } from '@angular/core';
