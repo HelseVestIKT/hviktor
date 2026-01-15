@@ -4,7 +4,7 @@ import { Directive } from "@angular/core";
     selector: '[hviFieldDescription]',
     standalone: true,
     host: {
-        '[attr.data-field]': 'description',
+        '[attr.data-field]': '"description"',
         id: 'field-description',
     },
 })
