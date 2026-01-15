@@ -131,13 +131,18 @@
         <h2 hviHeading size="lg">Fieldset, Field, Field Description</h2>
         <fieldset hviFieldset>
             <legend hviLabel>Hvilken fjordarm bor du ved?</legend>
-            <p hviParagraph variant="default">Valget vil hjelpe oss å forbedre innholdet vi viser deg.</p>
+            <p hviParagraph variant="default">
+                Valget vil hjelpe oss å forbedre innholdet vi viser deg.
+            </p>
             <hvi-field>
-                <label hviLabel weight="medium">
-                    Etternavn
-                </label>
+                <label hviLabel weight="medium">Fjordarm</label>
+                <input class="ds-input" type="text" placeholder="Skriv fjordarmen din" />
+                <span hviFieldOptional>Valgfritt</span>
+                <p hviFieldValidation>Dette feltet er obligatorisk.</p>
+                <p hviFieldCounter>0 / 100</p>
             </hvi-field>
         </fieldset>
+        
     </section>
 
     <footer>
