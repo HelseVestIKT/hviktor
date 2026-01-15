@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[hviFieldset]',
+  selector: 'fieldset[hviFieldset]',
   standalone: true,
 })
 export class HviFieldsetDirective {}

@@ -63,6 +63,7 @@ const mainFileTemplate =
   selector: '${selector}',
   standalone: true,
   template: '',
+  host: {},
 })
 export class ${className} {}
 `
@@ -71,6 +72,7 @@ export class ${className} {}
 @Directive({
   selector: '${selector}',
   standalone: true,
+  host: {},
 })
 export class ${className} {}
 `;
