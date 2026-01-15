@@ -9,3 +9,5 @@ export * from './breadcrumbs';
 export * from './heading';
 export * from './paragraph';
 export * from './card';
+export * from './label';
+export * from './fieldset';
