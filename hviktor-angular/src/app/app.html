@@ -177,11 +177,28 @@
                 <p hviFieldDescription>Hvor mye bruker du på mat hver måned?</p>
                 <hvi-field-affixes>
                     <hvi-field-affix>NOK</hvi-field-affix>
-                    <input class="ds-input" type="text" placeholder="Beløp" />
+                    <input hviInput type="number" placeholder="Beløp" />
                     <hvi-field-affix>pr. mnd.</hvi-field-affix>
                 </hvi-field-affixes>
                 <span hviFieldOptional>Valgfritt</span>
-                <p hviFieldValidation>Dette feltet er obligatorisk.</p>
+            </hvi-field>
+        </fieldset>
+
+        <fieldset hviFieldset>
+            <legend hviLabel>Kjønn</legend>
+            <p hviParagraph>Hva er du, egentlig?</p>
+
+            <hvi-field>
+                <input hviInput type="checkbox" value="male" name="gender" />
+                <label hviLabel weight="medium">Mann</label>
+            </hvi-field>
+            <hvi-field>
+                <input hviInput type="checkbox" value="female" name="gender" />
+                <label hviLabel weight="medium">Kvinne</label>
+            </hvi-field>
+            <hvi-field>
+                <input hviInput type="checkbox" value="other" name="gender" />
+                <label hviLabel weight="medium">Annet</label>
             </hvi-field>
         </fieldset>
         
