@@ -2,11 +2,14 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
 
 /**
  * Dialog allows you to create both modal and non-modal dialogs based on the HTML dialog element.
- *
+ * You have to connect the <dialog> element to a trigger yourself, and handle opening and closing the dialog with JavaScript.
+ * 
  * @example
  * ```html
- * <dialog hviDialog>
- * 
+ * <dialog hviDialog [id]="exampleDialog" [open]="dialogOpen()" (openChange)="handleDialogChange($event)">
+ *  <h3 hviHeading size="md">Example dialog</h3>
+ *  <p hviParagraph>This is an example of a dialog component.</p>
+ *  <button hviButton variant="primary" (click)="closeDialog()">Close dialog</button>
  * </dialog>
  * ```
  *
