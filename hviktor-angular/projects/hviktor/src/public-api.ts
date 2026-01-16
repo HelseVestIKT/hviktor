@@ -17,4 +17,5 @@ export * from './forms/fieldset';
 export * from './forms/field';
 export * from './forms/input';
 export * from './chip';
+export * from './divider';
 export * from './dialog';
