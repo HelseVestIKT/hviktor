@@ -24,6 +24,7 @@ import { booleanAttribute, Directive, Input } from "@angular/core";
         '[attr.data-fullwidth]': 'fullWidth ? "" : null',
         '[attr.data-icon]': 'icon ? "" : null',
         '[attr.aria-busy]': 'loading ? "true" : null',
+        '[attr.popover-target]': 'popovertarget',
     },
 })
 export class HviButton {
@@ -51,4 +52,7 @@ export class HviButton {
 
     /** Gjør knappen full bredde */
     @Input({ transform: booleanAttribute }) fullWidth = false;
+
+    /**Target of popover */
+    @Input() popovertarget?: string;
 }

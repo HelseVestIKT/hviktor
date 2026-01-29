@@ -248,6 +248,28 @@
         </div>
     </section>
 
+    <section class="space-y-4">
+        <h2 hviHeading size="lg">Dropdown</h2>
+    
+        <section class="space-y-2">
+            <h3 hviHeading size="md">dropdown</h3>
+            <div class="flex gap-2 flex-wrap">
+                <button hviButton popovertarget="dropdown1">
+                    Dropdown
+                </button>
+                <div hviDropdown id="dropdown1" popover anchor="auto" variant="default" placement="bottom"
+                [items]="[
+                { label: 'Nivå 1', href: '#' },
+                { label: 'Nivå 2', href: '#' },
+                { label: 'Nivå 3', href: '#' },
+                { label: 'Nivå 4', href: '#' }
+            ]"
+                >
+            </div>
+            </div>
+        </section>
+    </section>
+
     <section class="space-y-2">
         <h2 hviHeading size="lg">Forms</h2>
         <fieldset hviFieldset>
