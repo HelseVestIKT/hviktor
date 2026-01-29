@@ -14,6 +14,7 @@ cd "$(git rev-parse --show-toplevel)" || exit 1
 # -----------------------------
 # Logging helpers
 # -----------------------------
+start() { echo "🐶 $*" >&2; }
 info() { echo "ℹ️  $*" >&2; }
 success() { echo "✅ $*" >&2; }
 error() { echo "❌ $*" >&2; }
@@ -60,7 +61,7 @@ ensure_prettier() {
 # -----------------------------
 # Main
 # -----------------------------
-info "Running pre-commit checks with Husky🐶 (voff, voff)"
+start "Running pre-commit checks with Husky (voff, voff)"
 start=$(date +%s)
 
 ensure_prettier
