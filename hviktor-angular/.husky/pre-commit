@@ -1,28 +1,22 @@
 set -u
 
-DEBUG=${DEBUG:-0}
 DEMO_APP_DIR="hviktor-angular"
 PRETTIER="$DEMO_APP_DIR/node_modules/.bin/prettier"
 
 info() { echo "ℹ️  $*" >&2; }
 success() { echo "✅ $*" >&2; }
 error() { echo "❌ $*" >&2; }
-debug() { [ "$DEBUG" = "1" ] && echo "🔍 $*" >&2 || true; }
 
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
 info "Running pre-commit checks (Prettier) 🐶"
 
-# Ensure prettier exists (fail hard if deps not installed)
 if [ ! -x "$PRETTIER" ]; then
   error "Prettier not found at $PRETTIER"
-  info "Run: (cd $DEMO_APP_DIR && npm ci)  # or npm install"
+  info "Run: (cd $DEMO_APP_DIR && npm ci)"
   exit 1
 fi
 
-start_ts=$(date +%s)
-
-# Collect staged files under hviktor-angular/ with relevant extensions
 staged_files=$(
   git diff --cached --name-only --diff-filter=ACMR \
     | grep "^$DEMO_APP_DIR/" \
@@ -31,60 +25,22 @@ staged_files=$(
 )
 
 if [ -z "$staged_files" ]; then
-  debug "No matching staged files under $DEMO_APP_DIR/"
-  end_ts=$(date +%s)
-  info "Pre-commit checks completed in $((end_ts - start_ts))s"
-  success "Pre-commit checks passed"
+  success "No matching staged files"
   exit 0
 fi
 
 file_count=$(printf "%s\n" "$staged_files" | wc -l | tr -d ' ')
-info "Checking $file_count file(s)..."
+info "Formatting $file_count file(s) with Prettier (auto-fix)..."
 
-failed_count=0
-failed_files=""
-
-# First: quick check on all files
-if ! printf "%s\n" "$staged_files" | tr '\n' '\0' | xargs -0 "$PRETTIER" --check >/dev/null 2>&1; then
-  # Then: per-file output with diff
-  printf "%s\n" "$staged_files" | while IFS= read -r file; do
-    [ -z "$file" ] && continue
-    if ! "$PRETTIER" --check "$file" >/dev/null 2>&1; then
-      echo ""
-      echo "❌ Formatting issues in: $file"
-      echo "────────────────────────────────────────"
-      "$PRETTIER" "$file" | diff --color=always -u "$file" - | head -50
-
-      if [ -z "$failed_files" ]; then
-        failed_files="$file"
-      else
-        failed_files="$failed_files $file"
-      fi
-      failed_count=$((failed_count + 1))
-    fi
-  done
-fi
-
-end_ts=$(date +%s)
-info "Pre-commit checks completed in $((end_ts - start_ts))s"
-
-if [ "$failed_count" -gt 0 ]; then
-  echo ""
-  echo "════════════════════════════════════════════════════════════"
-  echo "💡 Fix formatting issues:"
-  echo ""
-  echo "  # Fix all in $DEMO_APP_DIR:"
-  echo "  npx prettier --write $DEMO_APP_DIR/"
-  echo ""
-  echo "  # Fix only failed files:"
-  echo "  npx prettier --write $failed_files"
-  echo ""
-  echo "  git add $failed_files"
-  echo "  git commit"
-  echo "════════════════════════════════════════════════════════════"
-  error "Pre-commit checks failed"
+printf "%s\n" "$staged_files" | tr '\n' '\0' | xargs -0 "$PRETTIER" --write >/dev/null 2>&1 || {
+  error "Prettier failed while formatting."
   exit 1
-fi
+}
 
-success "Pre-commit checks passed"
+printf "%s\n" "$staged_files" | tr '\n' '\0' | xargs -0 git add || {
+  error "Failed to re-stage files after formatting."
+  exit 1
+}
+
+success "Pre-commit checks passed (files formatted if needed)"
 exit 0

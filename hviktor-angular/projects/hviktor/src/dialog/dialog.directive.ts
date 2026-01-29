@@ -4,7 +4,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
  * @summary
  * Dialog allows you to create both modal and non-modal dialogs based on the HTML dialog element.
  * You have to connect the <dialog> element to a trigger yourself, and handle opening and closing the dialog with JavaScript.
- * 
+ *
  * @example
  * HTML:
  * ```html
@@ -14,7 +14,7 @@ import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from
  *  <button hviButton variant="primary" (click)="closeDialog()">Close dialog</button>
  * </dialog>
  * ```
- * 
+ *
  * TypeScript:
  * ```ts
  * export class DialogExampleComponent {
