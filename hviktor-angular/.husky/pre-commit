@@ -1,7 +1,7 @@
 set -u
 
 ANGULAR_DIR="hviktor-angular"
-PRETTIER="$ANGULAR_DIR/node_modules/.bin/prettier"
+PROJECTS_DIR="$ANGULAR_DIR/projects"
 
 info() { echo "ℹ️  $*" >&2; }
 success() { echo "✅ $*" >&2; }
@@ -9,38 +9,98 @@ error() { echo "❌ $*" >&2; }
 
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
-info "Running pre-commit checks (Prettier) 🐶"
+info "Running pre-commit checks (Prettier + ESLint) for projects/ 🐶"
 
-if [ ! -x "$PRETTIER" ]; then
-  error "Prettier not found at $PRETTIER"
-  info "Run: (cd $ANGULAR_DIR && npm ci)"
-  exit 1
-fi
-
-staged_files=$(
+# Collect staged files only under hviktor-angular/projects
+staged_projects=$(
   git diff --cached --name-only --diff-filter=ACMR \
-    | grep "^$ANGULAR_DIR/" \
-    | grep -E "\.(ts|js|json|html|css|scss|md)$" \
+    | grep "^$PROJECTS_DIR/" \
     || true
 )
 
-if [ -z "$staged_files" ]; then
-  success "No matching staged files"
+if [ -z "$staged_projects" ]; then
+  success "No staged files under $PROJECTS_DIR/"
   exit 0
 fi
 
-file_count=$(printf "%s\n" "$staged_files" | wc -l | tr -d ' ')
-info "Formatting $file_count file(s) with Prettier (auto-fix)..."
+# ---- Prettier (auto-fix) ----
+staged_prettier=$(
+  printf "%s\n" "$staged_projects" \
+    | grep -E "\.(ts|js|json|html|css|scss|md)$" \
+    | grep -v "^$ANGULAR_DIR/projects/.*/package-lock\.json$" \
+    || true
+)
 
-printf "%s\n" "$staged_files" | tr '\n' '\0' | xargs -0 "$PRETTIER" --write >/dev/null 2>&1 || {
-  error "Prettier failed while formatting."
-  exit 1
-}
+if [ -n "$staged_prettier" ]; then
+  count=$(printf "%s\n" "$staged_prettier" | wc -l | tr -d ' ')
+  info "Prettier: formatting $count file(s) (auto-fix)..."
 
-printf "%s\n" "$staged_files" | tr '\n' '\0' | xargs -0 git add || {
-  error "Failed to re-stage files after formatting."
-  exit 1
-}
+  tmp="$(mktemp)"
+  printf "%s\n" "$staged_prettier" > "$tmp"
 
-success "Pre-commit checks passed (files formatted if needed)"
+  while IFS= read -r file; do
+    [ -z "$file" ] && continue
+    npx --prefix "$ANGULAR_DIR" prettier --write "$file" || {
+      rm -f "$tmp"
+      error "Prettier failed on: $file"
+      exit 1
+    }
+  done < "$tmp"
+  rm -f "$tmp"
+
+  printf "%s\n" "$staged_prettier" | tr '\n' '\0' | xargs -0 git add || {
+    error "Failed to re-stage files after Prettier."
+    exit 1
+  }
+else
+  info "Prettier: no matching staged files in projects/."
+fi
+
+# ---- ESLint (auto-fix, then verify) ----
+staged_lint=$(
+  printf "%s\n" "$staged_projects" \
+    | grep -E "\.(ts|html)$" \
+    || true
+)
+
+if [ -n "$staged_lint" ]; then
+  count=$(printf "%s\n" "$staged_lint" | wc -l | tr -d ' ')
+  info "ESLint: fixing $count file(s) (auto-fix where possible)..."
+
+  tmp="$(mktemp)"
+  printf "%s\n" "$staged_lint" > "$tmp"
+
+  # 1) Fix
+  while IFS= read -r file; do
+    [ -z "$file" ] && continue
+    npx --prefix "$ANGULAR_DIR" eslint --fix "$file" || {
+      rm -f "$tmp"
+      error "ESLint failed on: $file"
+      exit 1
+    }
+  done < "$tmp"
+
+  printf "%s\n" "$staged_lint" | tr '\n' '\0' | xargs -0 git add || {
+    rm -f "$tmp"
+    error "Failed to re-stage files after ESLint."
+    exit 1
+  }
+
+  # 2) Verify (fail commit if errors remain)
+  info "ESLint: final check..."
+  while IFS= read -r file; do
+    [ -z "$file" ] && continue
+    npx --prefix "$ANGULAR_DIR" eslint "$file" || {
+      rm -f "$tmp"
+      error "ESLint errors remain (see output above)."
+      exit 1
+    }
+  done < "$tmp"
+
+  rm -f "$tmp"
+else
+  info "ESLint: no staged TS/HTML files in projects/."
+fi
+
+success "Pre-commit checks passed (projects/ only)"
 exit 0
