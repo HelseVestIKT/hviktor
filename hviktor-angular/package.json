@@ -12,8 +12,11 @@
     "lint": "ng lint hviktor-angular && ng lint hviktor",
     "lint:eslint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:projects": "eslint \"projects/**/*.{ts,html}\"",
+    "lint:projects:fix": "eslint \"projects/**/*.{ts,html}\" --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "format:projects": "prettier --write \"projects/**/*.{ts,js,json,html,css,scss,md}\"",
     "prepare": "husky"
   },
   "private": true,

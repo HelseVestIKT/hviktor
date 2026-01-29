@@ -7,7 +7,14 @@ const angular = require('angular-eslint');
 module.exports = tseslint.config(
   // 0) Globale ignores (gjelder alt)
   {
-    ignores: ['**/node_modules/**', '**/dist/**', '**/.angular/**', '**/coverage/**', '**/*.d.ts'],
+    ignores: [
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/.angular/**',
+      '**/coverage/**',
+      '**/*.d.ts',
+      'src/**',
+    ],
   },
 
   // 1) TypeScript (app + library) + inline templates i komponenter
