@@ -9,19 +9,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "scaffold": "node ./scripts/scaffold.js",
-    "lint": "ng lint"
-  },
-  "prettier": {
-    "printWidth": 100,
-    "singleQuote": true,
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "parser": "angular"
-        }
-      }
-    ]
+    "lint": "ng lint",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {

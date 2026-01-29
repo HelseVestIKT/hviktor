@@ -1,0 +1,107 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+set -u
+
+# Configuration
+DEBUG=${DEBUG:-0}
+USE_NPX=${USE_NPX:-0}
+DEMO_APP_DIR="hviktor-angular"
+PROJECT_DIR="$DEMO_APP_DIR/projects/hviktor"
+
+# Always run from repo root
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+# Logging functions
+info() { echo "ℹ️  $*" >&2; }
+success() { echo "✅ $*" >&2; }
+error() { echo "❌ $*" >&2; }
+debug() { [ "$DEBUG" = "1" ] && echo "🔍 $*" >&2 || true; }
+
+# Choose prettier execution method (use array for safety)
+if [ "$USE_NPX" = "1" ]; then
+  PRETTIER=(npx prettier)
+  debug "Using npx prettier"
+else
+  PRETTIER=(./node_modules/.bin/prettier)
+  debug "Using direct path to prettier"
+fi
+
+info "Running pre-commit checks with Husky🐶 (voff, voff)"
+start=$(date +%s)
+
+failed_count=0
+failed_files=""  # space-separated list for the help text (best-effort)
+# (Hvis dere vil være 100% safe på spaces: bruk en tempfil eller en array i bash.)
+
+# Get staged files (ACMR) and filter extensions
+staged_files=$(git diff --cached --name-only --diff-filter=ACMR | grep -E "\.(ts|js|json|html|css|scss|md)$" || true)
+
+project_files=$(printf "%s\n" "$staged_files" | grep "^$PROJECT_DIR/" || true)
+demo_app_files=$(printf "%s\n" "$staged_files" | grep "^$DEMO_APP_DIR/" | grep -v "^$PROJECT_DIR/" || true)
+
+check_files() {
+  label="$1"
+  files="$2"
+
+  if [ -z "$files" ]; then
+    debug "No $label files staged"
+    return 0
+  fi
+
+  file_count=$(printf "%s\n" "$files" | wc -l | tr -d ' ')
+  info "Checking $file_count $label file(s)..."
+
+  # Fast path: one prettier --check over all files
+  if ! printf "%s\n" "$files" | tr '\n' '\0' | xargs -0 "${PRETTIER[@]}" --check > /dev/null 2>&1; then
+    # Slow path: find and print diffs per file
+    printf "%s\n" "$files" | while IFS= read -r file; do
+      [ -z "$file" ] && continue
+      if ! "${PRETTIER[@]}" --check "$file" > /dev/null 2>&1; then
+        echo ""
+        echo "❌ Formatting issues in: $file"
+        echo "────────────────────────────────────────"
+        "${PRETTIER[@]}" "$file" | diff --color=always -u "$file" - | head -50
+
+        if [ -z "$failed_files" ]; then
+          failed_files="$file"
+        else
+          failed_files="$failed_files $file"
+        fi
+        failed_count=$((failed_count + 1))
+      fi
+    done
+  fi
+}
+
+check_files "$PROJECT_DIR" "$project_files"
+check_files "$DEMO_APP_DIR" "$demo_app_files"
+
+end=$(date +%s)
+duration=$((end - start))
+info "Pre-commit checks completed in ${duration}s"
+
+if [ "$failed_count" -gt 0 ]; then
+  echo ""
+  echo "════════════════════════════════════════════════════════════"
+  echo "💡 To fix formatting issues, run one of these commands:"
+  echo ""
+  echo "  # Fix all files in $DEMO_APP_DIR:"
+  echo "  npx prettier --write $DEMO_APP_DIR/"
+  echo "  # Fix all files in $PROJECT_DIR:"
+  echo "  npx prettier --write $PROJECT_DIR/"
+  echo ""
+  echo "  # Fix only the failed files:"
+  echo "  npx prettier --write $failed_files"
+  echo ""
+  echo "  # Then stage and commit again:"
+  echo "  git add $failed_files"
+  echo "  git commit"
+  echo "════════════════════════════════════════════════════════════"
+  echo ""
+  error "Pre-commit checks failed"
+  exit 1
+else
+  success "Pre-commit checks passed"
+  exit 0
+fi
