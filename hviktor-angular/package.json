@@ -9,7 +9,9 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "scaffold": "node ./scripts/scaffold.js",
-    "lint": "ng lint",
+    "lint": "ng lint hviktor-angular && ng lint hviktor",
+    "lint:eslint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "husky"

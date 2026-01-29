@@ -1,4 +1,12 @@
-import { Directive, ElementRef, EventEmitter, HostListener, Input, Output } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
 
 /**
  * @summary
@@ -53,11 +61,7 @@ export class HviDialog {
 
   @Output() readonly openChange = new EventEmitter<boolean>();
 
-  private readonly element: HTMLDialogElement;
-
-  constructor(elementRef: ElementRef<HTMLDialogElement>) {
-    this.element = elementRef.nativeElement;
-  }
+  private readonly element = inject(ElementRef<HTMLDialogElement>).nativeElement;
 
   openModal(): void {
     this.setOpen(true);

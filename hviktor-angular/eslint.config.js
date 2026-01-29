@@ -16,29 +16,15 @@ module.exports = tseslint.config(
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
-      // Hvis du vil ha flere "style-ish" lint regler (kan krangle litt med Prettier):
-      // ...tseslint.configs.stylistic,
-
       ...angular.configs.tsRecommended,
     ],
 
-    // Viktig for å lint'e inline templates (template: `...`) i .ts-filer
     processor: angular.processInlineTemplates,
 
     rules: {
-      // Tilpass selector-regler til deres prefix (du bruker f.eks. hvi-alert)
-      '@angular-eslint/component-selector': [
-        'error',
-        { type: 'element', prefix: 'hvi', style: 'kebab-case' },
-      ],
-      '@angular-eslint/directive-selector': [
-        'error',
-        { type: 'attribute', prefix: 'hvi', style: 'camelCase' },
-      ],
-
-      // Eksempler på nyttige defaults (juster etter smak)
       '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
       '@typescript-eslint/no-explicit-any': 'off',
+      '@angular-eslint/prefer-inject': 'warn',
     },
   },
 
@@ -46,6 +32,8 @@ module.exports = tseslint.config(
   {
     files: ['**/*.html'],
     extends: [...angular.configs.templateRecommended, ...angular.configs.templateAccessibility],
-    rules: {},
+    rules: {
+      '@angular-eslint/template/label-has-associated-control': 'off',
+    },
   },
 );

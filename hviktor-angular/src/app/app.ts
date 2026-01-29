@@ -31,7 +31,7 @@ import {
 import '@u-elements/u-details';
 
 @Component({
-  selector: 'app-root',
+  selector: 'hvi-root',
   imports: [
     RouterOutlet,
     HviButton,
