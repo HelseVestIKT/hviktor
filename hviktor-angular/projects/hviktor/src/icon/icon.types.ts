@@ -3,8 +3,9 @@ export type IconName =
   | 'ArrowLeft'
   | 'ArrowUp'
   | 'ArrowDown'
-  | 'ExclamationmarkTriangleFill'
-  | 'TriangleFill';
+  | 'ExclamationmarkTriangle'
+  | 'Triangle'
+  | 'Person';
 
 export type IconSize = 'sm' | 'md' | 'lg' | 'xl';
 
