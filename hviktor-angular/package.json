@@ -17,7 +17,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "format:projects": "prettier --write \"projects/**/*.{ts,js,json,html,css,scss,md}\"",
-    "prepare": "husky"
+    "prepare": "cd .. && husky hviktor-angular/.husky"
   },
   "private": true,
   "dependencies": {
