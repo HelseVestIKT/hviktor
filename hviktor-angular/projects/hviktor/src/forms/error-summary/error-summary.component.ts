@@ -5,47 +5,27 @@ import type { HviValidationMessages } from '../validation/validation-message';
 
 /**
  * @summary
- * ErrorSummary is a summary of errors. It gives the user an overview of errors or missing information
- * that must be corrected on a page or step in order to proceed.
+ * ErrorSummary lists validation errors so users can quickly navigate to fields that need attention.
  *
  * @remarks
- * This component supports two modes:
- * 1) Manual mode: provide `[errors]` as an array of `{ message, href }`.
- * 2) Auto mode (recommended): provide `[form]` + `[messages]` and it will build the list from invalid controls.
+ * Use one of these approaches:
+ * - Manual: pass `[errors]` as `{ message, href }[]`.
+ * - Auto (recommended): pass `[form]` + `[messages]` to derive errors from invalid controls.
  *
- * Each ErrorSummary link must have an `href` pointing to the unique id of a form field (e.g. `#firstName`)
- * so the user can navigate to the relevant field.
+ * Each item link must point to a field id (e.g. `href="#firstName"`).
  *
  * @example
- * Manual mode:
+ * Manual:
  * ```html
- * <hvi-error-summary
- *   heading="For å gå videre må du rette opp følgende feil:"
- *   [errors]="[
- *     { message: 'Fornavn må være minst 2 tegn', href: '#firstName' },
- *     { message: 'Telefonnummer kan kun inneholde siffer', href: '#phone' }
- *   ]"
- * />
+ * <hvi-error-summary [errors]="[{ message: 'Fornavn er påkrevd', href: '#firstName' }]" />
  * ```
  *
  * @example
- * Auto mode with Angular Reactive Forms:
+ * Auto + focus on submit:
  * ```html
- * <hvi-error-summary
- *   #summary
- *   headingId="form-errors"
- *   [form]="form"
- *   [messages]="messages"
- * />
- *
  * <form hviForm [formGroup]="form" [focusOnInvalid]="summary">
- *   <hvi-field>
- *     <label hviLabel for="firstName" weight="medium">Fornavn</label>
- *     <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
- *     <p hviFieldValidation hviValidationMessage="firstName" [messages]="messages.firstName"></p>
- *   </hvi-field>
- *
- *   <button hviButton type="submit" variant="primary">Send inn</button>
+ *   <hvi-error-summary #summary [form]="form" [messages]="messages" />
+ *   <!-- fields -->
  * </form>
  * ```
  *
