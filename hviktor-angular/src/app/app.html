@@ -331,6 +331,17 @@
   </section>
 
   <section class="space-y-2">
+    <h2 hviHeading size="lg">Error Summary</h2>
+    <hvi-error-summary
+      heading="For å gå videre må du rette opp følgende feil:"
+      [errors]="[
+    { message: 'Fornavn må være minst 2 tegn', href: '#fornavn' },
+    { message: 'Telefonnummer kan kun inneholde siffer', href: '#telefon' }
+  ]"
+    />
+  </section>
+
+  <section class="space-y-2">
     <h2 hviHeading size="lg">Dialog</h2>
     <button hviButton type="button" aria-haspopup="dialog" (click)="toggleDialog(true)">
       Open dialog
@@ -358,10 +369,6 @@
         <button hviButton type="button" (click)="toggleDialog(false)">Fortsett</button>
       </div>
     </dialog>
-  </section>
-
-  <section class="space-y-2">
-    <h2 hviHeading size="lg">Error Summary</h2>
   </section>
 
   <footer>
