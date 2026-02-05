@@ -1,4 +1,4 @@
-import { Directive, Input } from '@angular/core';
+import { booleanAttribute, Directive, Input } from '@angular/core';
 
 /**
  * Input is a form element used to collect user data.
@@ -17,7 +17,17 @@ import { Directive, Input } from '@angular/core';
   standalone: true,
   host: {
     class: 'ds-input',
-    '[attr.type]': 'type',
+    '[attr.type]': 'type ?? null',
+
+    // DS: "size" = width in count of characters
+    '[attr.size]': 'size ?? null',
+
+    // DS: disabled/readOnly toggle
+    '[attr.disabled]': 'disabled ? "" : null',
+    '[attr.readonly]': 'readOnly ? "" : null',
+
+    // DS: role (e.g. switch for checkbox/radio)
+    '[attr.role]': 'role ?? null',
   },
 })
 export class HviInput {
@@ -40,4 +50,19 @@ export class HviInput {
     | 'time'
     | 'url'
     | 'week';
+
+  /**
+   * Defines the width of Input in count of characters.
+   * Maps to the native `size` attribute.
+   */
+  @Input() size?: number;
+
+  /** Disables element (avoid using if possible for a11y purposes) */
+  @Input({ transform: booleanAttribute }) disabled = false;
+
+  /** Toggle readOnly */
+  @Input({ transform: booleanAttribute }) readOnly = false;
+
+  /** Set role, e.g. `switch` when `checkbox` or `radio` */
+  @Input() role?: string;
 }
