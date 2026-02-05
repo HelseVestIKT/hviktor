@@ -22,3 +22,4 @@ export * from './heading';
 export * from './label';
 export * from './paragraph';
 export * from './tag';
+export * from './validation-message';
