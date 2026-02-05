@@ -16,8 +16,6 @@
     "lint-staged": "lint-staged",
     "format": "prettier --write .",
     "format:staged": "prettier --write --log-level warn",
-    "format:check": "prettier --check .",
-    "format:projects": "prettier --write \"projects/**/*.{ts,js,json,html,css,scss,md}\"",
     "prepare": "cd .. && husky hviktor-angular/.husky"
   },
   "private": true,
