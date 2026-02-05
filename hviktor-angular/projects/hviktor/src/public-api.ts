@@ -14,6 +14,8 @@ export * from './dialog';
 export * from './divider';
 export * from './forms';
 export * from './heading';
+export * from './icon';
 export * from './label';
+export * from './link';
 export * from './paragraph';
 export * from './tag';
