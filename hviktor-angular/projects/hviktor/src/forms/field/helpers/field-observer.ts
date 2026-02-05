@@ -75,7 +75,10 @@ export function fieldObserver(fieldElement: HTMLElement | null) {
     const prunedDescribedbyIds = describedbyIds.filter((id) => {
       if (!id) return false;
       if (id === inputId) return true;
-      return !!fieldElement.querySelector(`#${CSS.escape(id)}`);
+
+      // Keep if it still exists anywhere in the document.
+      // This preserves "original aria-describedby" entries that live outside the field subtree.
+      return !!fieldElement.ownerDocument?.getElementById(id);
     });
 
     setAttr(input, 'id', inputId);
