@@ -5,12 +5,6 @@ name: PR Quality Gate
 on:
     pull_request:
         branches: [main]
-        paths:
-            - "hviktor-angular/projects/hviktor/**"
-            - "hviktor-angular/package.json"
-            - "hviktor-angular/package-lock.json"
-            - "hviktor-angular/tsconfig.json"
-            - "hviktor-angular/eslint.config.js"
 
 defaults:
     run:
