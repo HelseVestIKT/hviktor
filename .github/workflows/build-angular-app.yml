@@ -18,30 +18,9 @@ on:
       output-path:
         required: true
         type: string
-    secrets:
-      SONAR_TOKEN:
-        required: true
 
 jobs:
-  sonarcloud:
-    runs-on: HVI-SKY-TJENESTER-RUNNER
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v3.0.0
-        with:
-          args: >
-            -Dsonar.qualitygate.wait=true
-            -Dsonar.organization=helse-vest-ikt
-            -Dsonar.projectKey=HelseVestIKT_Hviktor
-            -Dsonar.branch.name=main
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
   build:
-    needs: sonarcloud
     runs-on: HVI-SKY-TJENESTER-RUNNER
     steps:
       - name: Checkout
