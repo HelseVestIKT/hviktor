@@ -117,6 +117,7 @@ Kun kode som er merget til main kan publiseres. Workflowen verifiserer dette aut
    ```
 
 2. **Opprett versjon-tag:**
+   Tips: for å sjekke siste versjon på npm, kjør `npm run version:check`.
 
    ```bash
    git tag v0.1.0    # Bruk semantic versioning
