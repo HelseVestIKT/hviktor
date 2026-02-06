@@ -1,64 +1,58 @@
-# Hviktor
+# @helsevestikt/hviktor-angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.0.
+Angular-komponenter basert på [Digdir Designsystemet](https://designsystemet.no/) for Helse Vest IKT.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Installasjon
 
 ```bash
-ng generate component component-name
+npm install @helsevestikt/hviktor-angular
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Oppsett
 
-```bash
-ng generate --help
+Importer stylesheet i `src/styles.css`:
+
+```css
+@import '@helsevestikt/hviktor-angular/styles.css';
 ```
 
-## Building
+## Bruk
 
-To build the library, run:
+Importer komponentene du trenger direkte i standalone-komponenter:
 
-```bash
-ng build hviktor
+```typescript
+import { HviButton } from '@helsevestikt/hviktor-angular';
+
+@Component({
+  imports: [HviButton],
+  template: `<button hviButton>Klikk meg</button>`,
+})
+export class MyComponent {}
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+## Tilgjengelige komponenter
 
-### Publishing the Library
+| Komponent   | Beskrivelse                                          |
+| ----------- | ---------------------------------------------------- |
+| Alert       | Varselmeldinger                                      |
+| Avatar      | Brukeravatar                                         |
+| Badge       | Merkelapper og tellere                               |
+| Breadcrumbs | Navigasjonsstifinne                                  |
+| Button      | Knapper                                              |
+| Card        | Kort-layout                                          |
+| Chip        | Filterbrikker                                        |
+| Details     | Sammenleggbart innhold                               |
+| Dialog      | Modaldialog                                          |
+| Divider     | Skillelinje                                          |
+| Forms       | Skjemaelementer (field, fieldset, input, validering) |
+| Heading     | Overskrifter                                         |
+| Icon        | Ikoner                                               |
+| Label       | Etiketter                                            |
+| Link        | Lenker                                               |
+| Paragraph   | Avsnitt                                              |
+| Tag         | Kategorimerker                                       |
 
-Once the project is built, you can publish your library by following these steps:
+## Krav
 
-1. Navigate to the `dist` directory:
-
-   ```bash
-   cd dist/hviktor
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the Vitest runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Angular 17–21
+- Node.js 20+

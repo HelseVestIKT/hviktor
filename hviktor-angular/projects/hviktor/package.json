@@ -1,6 +1,7 @@
 {
-  "name": "@helsevestikt/hviktor",
+  "name": "@helsevestikt/hviktor-angular",
   "version": "0.0.1",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": ">=17.0.0 <22.0.0",
     "@angular/core": ">=17.0.0 <22.0.0"
@@ -18,6 +19,7 @@
     "index.d.ts",
     "styles.css",
     "README.md",
+    "LICENSE",
     "package.json"
   ],
   "sideEffects": [
