@@ -1,5 +1,7 @@
 # @helsevestikt/hviktor-angular
 
+> ⚠️ **Denne pakken er under aktiv utvikling.** API-et kan endres uten forvarsel. Bruk på egen risiko i produksjon.
+
 Angular-komponenter basert på [Digdir Designsystemet](https://designsystemet.no/) for Helse Vest IKT.
 
 ## Installasjon
