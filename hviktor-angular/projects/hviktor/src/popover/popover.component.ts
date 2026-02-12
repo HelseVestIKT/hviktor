@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
  *
  * @example
  * ```html
- * <hvi-popover></hvi-popover>
+ * <hvi-popover id="popoverId">Popovercontent</hvi-popover>
+ * <button hviButton popovertarget="popoverId">Open popover</button>
  * ```
  *
  * Documentation: https://designsystemet.no/en/components/docs/popover/code
@@ -16,6 +17,8 @@ import { Component } from '@angular/core';
   selector: 'hvi-popover',
   standalone: true,
   template: '<ng-content />',
-  host: {},
+  host: {
+    class: 'ds-popover',
+  },
 })
 export class HviPopover {}
