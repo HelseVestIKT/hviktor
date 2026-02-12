@@ -1,14 +1,15 @@
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Component, effect, inject, PLATFORM_ID, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { HviButton } from '@helsevestikt/hviktor';
 import { DEMO_COMPONENTS } from '../demo-components';
 
-type ColorScheme = 'light' | 'dark' | 'auto';
+type ColorScheme = 'light' | 'dark';
 
 @Component({
   selector: 'app-demo-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, HviButton],
   templateUrl: 'demo-layout.html',
   host: {
     '[attr.data-color-scheme]': 'colorScheme()',
@@ -36,7 +37,7 @@ export class DemoLayoutComponent {
   private getInitialScheme(): ColorScheme {
     if (isPlatformBrowser(this.platformId)) {
       const stored = localStorage.getItem('color-scheme') as ColorScheme;
-      if (stored && ['light', 'dark', 'auto'].includes(stored)) {
+      if (stored && ['light', 'dark'].includes(stored)) {
         return stored;
       }
     }
@@ -44,20 +45,19 @@ export class DemoLayoutComponent {
   }
 
   toggleColorScheme(): void {
-    const schemes: ColorScheme[] = ['light', 'dark', 'auto'];
+    const schemes: ColorScheme[] = ['light', 'dark'];
     const currentIndex = schemes.indexOf(this.colorScheme());
     const nextIndex = (currentIndex + 1) % schemes.length;
     this.colorScheme.set(schemes[nextIndex]);
   }
-
   getSchemeIcon(): string {
     switch (this.colorScheme()) {
       case 'light':
         return '☀️';
       case 'dark':
         return '🌙';
-      case 'auto':
-        return '💻';
+      default:
+        return '☀️';
     }
   }
 }
