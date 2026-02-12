@@ -1,11 +1,17 @@
-<header class="sticky top-0 z-10 border-b border-neutral-300 bg-white p-4">
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-neutral-300 p-4">
   <a routerLink="/" class="font-medium"> Hviktor Angular </a>
+  <button
+    (click)="toggleColorScheme()"
+    class="flex items-center gap-2 rounded border border-neutral-300 px-3 py-1"
+    [title]="'Fargemodus: ' + colorScheme()"
+  >
+    <span>{{ getSchemeIcon() }}</span>
+    <span class="capitalize">{{ colorScheme() }}</span>
+  </button>
 </header>
 
 <div class="flex min-h-screen">
-  <aside
-    class="fixed top-16 h-[calc(100vh-57px)] w-50 overflow-y-auto border-r border-neutral-300 bg-white"
-  >
+  <aside class="fixed top-16 h-[calc(100vh-57px)] w-50 overflow-y-auto border-r border-neutral-300">
     <nav>
       <ul class="m-0 list-none p-4">
         <p class="font-medium">Komponenter</p>
@@ -14,7 +20,7 @@
           <a
             [routerLink]="['/komponenter', component.id]"
             routerLinkActive="active"
-            class="block rounded px-1 py-0.5 hover:bg-neutral-50 hover:underline"
+            class="block rounded px-1 py-0.5 hover:underline"
           >
             {{ component.name }}
           </a>
