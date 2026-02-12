@@ -122,6 +122,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/select/select-demo').then((m) => m.SelectDemoComponent),
       },
+      {
+        path: 'komponenter/skeleton',
+        loadComponent: () =>
+          import('./demo/pages/components/skeleton/skeleton-demo').then(
+            (m) => m.SkeletonDemoComponent,
+          ),
+      },
     ],
   },
 ];
