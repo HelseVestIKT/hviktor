@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 /**
  * @summary
@@ -19,6 +19,9 @@ import { Component } from '@angular/core';
   template: '<ng-content />',
   host: {
     class: 'ds-popover',
+    '[attr.popover]': 'popoverType',
   },
 })
-export class HviPopover {}
+export class HviPopover {
+  @Input() popoverType: 'auto' | 'manual' | 'hint' = 'manual';
+}
