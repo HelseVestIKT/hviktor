@@ -1,13 +1,20 @@
-<header class="sticky top-0 z-10 flex items-center justify-between border-b border-neutral-300 p-4">
+<header
+  class="sticky top-0 z-10 flex items-center justify-between border-b border-neutral-300 bg-(--ds-color-neutral-background-default) p-4"
+>
   <a routerLink="/" class="font-medium"> Hviktor Angular </a>
-  <button hviButton (click)="toggleColorScheme()" [title]="'Fargemodus: ' + colorScheme()">
-    <span>{{ getSchemeIcon() }}</span>
-    <span class="capitalize">{{ colorScheme() }}</span>
+  <button
+    hviButton
+    variant="secondary"
+    (click)="themeService.toggleColorScheme()"
+    [title]="'Bytt til ' + themeService.getNextSchemeLabel() + ' modus'"
+  >
+    <span>{{ themeService.getNextSchemeIcon() }}</span>
+    <span>{{ themeService.getNextSchemeLabel() }}</span>
   </button>
 </header>
 
 <div class="flex min-h-screen">
-  <aside class="fixed top-16 h-[calc(100vh-57px)] w-50 overflow-y-auto border-r border-neutral-300">
+  <aside class="fixed h-[calc(100vh-57px)] w-50 overflow-y-auto border-r border-neutral-300">
     <nav>
       <ul class="m-0 list-none p-4">
         <p class="font-medium">Komponenter</p>
