@@ -1,27 +1,24 @@
 import { Component } from '@angular/core';
-import { HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviHeading } from '@helsevestikt/hviktor';
+import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 @Component({
   selector: 'app-heading-demo',
   standalone: true,
-  imports: [HviHeading, HviParagraph],
+  imports: [HviHeading, DemoPageComponent, DemoSectionComponent],
   template: `
-    <header class="mb-8">
-      <h1 hviHeading size="xl">Heading</h1>
-      <p hviParagraph>Overskrifter i forskjellige størrelser.</p>
-    </header>
-
-    <section class="mb-8">
-      <h2 hviHeading size="md">Størrelser</h2>
-      <div class="mt-4 flex flex-col gap-4">
-        <h1 hviHeading size="2xl">2XL Overskrift</h1>
-        <h1 hviHeading size="xl">XL Overskrift</h1>
-        <h2 hviHeading size="lg">LG Overskrift</h2>
-        <h3 hviHeading size="md">MD Overskrift</h3>
-        <h4 hviHeading size="sm">SM Overskrift</h4>
-        <h5 hviHeading size="xs">XS Overskrift</h5>
-      </div>
-    </section>
+    <app-demo-page title="Heading" description="Overskrifter i forskjellige størrelser.">
+      <app-demo-section title="Størrelser">
+        <div class="flex flex-col gap-4">
+          <h1 hviHeading size="2xl">2XL Overskrift</h1>
+          <h1 hviHeading size="xl">XL Overskrift</h1>
+          <h2 hviHeading size="lg">LG Overskrift</h2>
+          <h3 hviHeading size="md">MD Overskrift</h3>
+          <h4 hviHeading size="sm">SM Overskrift</h4>
+          <h5 hviHeading size="xs">XS Overskrift</h5>
+        </div>
+      </app-demo-section>
+    </app-demo-page>
   `,
 })
 export class HeadingDemoComponent {}

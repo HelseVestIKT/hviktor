@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
-import { HviDivider, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviDivider, HviParagraph } from '@helsevestikt/hviktor';
+import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
-  imports: [HviDivider, HviHeading, HviParagraph],
+  imports: [HviDivider, HviParagraph, DemoPageComponent, DemoSectionComponent],
   template: `
-    <header class="mb-8">
-      <h1 hviHeading size="xl">Divider</h1>
-      <p hviParagraph>Skillelinjer for å separere innhold visuelt.</p>
-    </header>
-
-    <section class="mb-8">
-      <h2 hviHeading size="md">Standard</h2>
-      <div class="mt-4 flex flex-col gap-4">
-        <p hviParagraph>Innhold over skillelinjen</p>
-        <hr hviDivider />
-        <p hviParagraph>Innhold under skillelinjen</p>
-      </div>
-    </section>
+    <app-demo-page title="Divider" description="Skillelinjer for å separere innhold visuelt.">
+      <app-demo-section title="Standard">
+        <div class="flex flex-col gap-4">
+          <p hviParagraph>Innhold over skillelinjen</p>
+          <hr hviDivider />
+          <p hviParagraph>Innhold under skillelinjen</p>
+        </div>
+      </app-demo-section>
+    </app-demo-page>
   `,
 })
 export class DividerDemoComponent {}

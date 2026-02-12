@@ -1,9 +1,11 @@
-<header class="border-b border-neutral-300 p-4">
+<header class="sticky top-0 z-10 border-b border-neutral-300 bg-white p-4">
   <a routerLink="/" class="font-medium"> Hviktor Angular </a>
 </header>
 
 <div class="flex min-h-screen">
-  <aside class="fixed h-screen w-50 overflow-y-auto border-r border-neutral-300">
+  <aside
+    class="fixed top-16 h-[calc(100vh-57px)] w-50 overflow-y-auto border-r border-neutral-300 bg-white"
+  >
     <nav>
       <ul class="m-0 list-none p-4">
         <p class="font-medium">Komponenter</p>
@@ -21,7 +23,7 @@
       </ul>
     </nav>
   </aside>
-  <main class="ml-50 max-w-[calc(100%-240px)] flex-1 p-10">
+  <main class="ml-50 flex-1 p-10">
     <router-outlet />
   </main>
 </div>
