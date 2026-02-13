@@ -46,6 +46,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   { id: 'radio', name: 'Radio', description: 'Radio komponent' },
   { id: 'search', name: 'Search', description: 'Search komponent' },
   { id: 'switch', name: 'Switch', description: 'Switch komponent' },
+  { id: 'tabs', name: 'Tabs', description: 'Navigasjon mellom relaterte innholdsseksjoner' },
   { id: 'textarea', name: 'Textarea', description: 'Textarea komponent' },
   { id: 'toggle-group', name: 'ToggleGroup', description: 'ToggleGroup komponent' },
   { id: 'tooltip', name: 'Tooltip', description: 'Tooltip komponent' },

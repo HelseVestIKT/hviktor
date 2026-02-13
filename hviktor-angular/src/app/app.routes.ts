@@ -210,6 +210,11 @@ export const routes: Routes = [
             (m) => m.SpinnerDemoComponent,
           ),
       },
+      {
+        path: 'komponenter/tabs',
+        loadComponent: () =>
+          import('./demo/pages/components/tabs/tabs-demo').then((m) => m.TabsDemoComponent),
+      },
     ],
   },
 ];
