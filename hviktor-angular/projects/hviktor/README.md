@@ -64,6 +64,7 @@ export class MyComponent {}
 | Select       | Nedtrekksliste for valg fra en liste                 |
 | Skeleton     | Placeholder mens innhold lastes                      |
 | SkipLink     | SkipLink komponent                                   |
+| Spinner      | Spinner komponent                                    |
 | Switch       | Switch komponent                                     |
 | Tag          | Merkelapper for kategorisering                       |
 | Textarea     | Textarea komponent                                   |

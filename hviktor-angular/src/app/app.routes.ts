@@ -203,6 +203,13 @@ export const routes: Routes = [
             (m) => m.SkipLinkDemoComponent,
           ),
       },
+      {
+        path: 'komponenter/spinner',
+        loadComponent: () =>
+          import('./demo/pages/components/spinner/spinner-demo').then(
+            (m) => m.SpinnerDemoComponent,
+          ),
+      },
     ],
   },
 ];
