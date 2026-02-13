@@ -8,16 +8,13 @@ import { Component } from '@angular/core';
  * @example
  * ```html
  * <hvi-search>
- *   <input hviInput type="search" placeholder="" aria-label="Søk" />
- *   <button hviSearchClear aria-label="Tøm"></button>
- *   <button hviButton type="submit">Søk</button>
  * </hvi-search>
  * ```
  *
  * @see {@link https://designsystemet.no/no/components/search}
  */
 @Component({
-  selector: '[hviSearch]',
+  selector: 'hvi-search',
   standalone: true,
   template: '<ng-content />',
   host: {
