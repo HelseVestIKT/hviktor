@@ -30,4 +30,9 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   { id: 'tag', name: 'Tag', description: 'Merkelapper for kategorisering' },
   { id: 'select', name: 'Select', description: 'lar brukeren velge ett alternativ fra en liste.' },
   { id: 'skeleton', name: 'Skeleton', description: 'Viser at innhold er i ferd med å lastes' },
+  {
+    id: 'checkbox',
+    name: 'Checkbox',
+    description: 'Checkbox gir brukerne mulighet til å velge ett eller flere alternativer.',
+  },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));

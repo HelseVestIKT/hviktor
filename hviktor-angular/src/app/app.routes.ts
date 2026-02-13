@@ -129,6 +129,13 @@ export const routes: Routes = [
             (m) => m.SkeletonDemoComponent,
           ),
       },
+      {
+        path: 'komponenter/checkbox',
+        loadComponent: () =>
+          import('./demo/pages/components/checkbox/checkbox-demo').then(
+            (m) => m.CheckboxDemoComponent,
+          ),
+      },
     ],
   },
 ];
