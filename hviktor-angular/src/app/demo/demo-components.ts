@@ -38,8 +38,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   {
     id: 'error-summary',
     name: 'ErrorSummary',
-    description:
-      'ErrorSummary er en oppsummering av feil. Den gir brukeren oversikt over feil eller mangler som må rettes på en side eller trinn, for å komme videre.',
+    description: 'ErrorSummary er en oppsummering av feil i skjema',
   },
   { id: 'field', name: 'Field', description: 'Field komponent' },
   { id: 'fieldset', name: 'Fieldset', description: 'Fieldset komponent' },
