@@ -165,6 +165,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/radio/radio-demo').then((m) => m.RadioDemoComponent),
       },
+      {
+        path: 'komponenter/search',
+        loadComponent: () =>
+          import('./demo/pages/components/search/search-demo').then((m) => m.SearchDemoComponent),
+      },
     ],
   },
 ];

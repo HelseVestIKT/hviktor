@@ -1,1 +1,1 @@
-export * from './search.component';
+export { HviSearch, HviSearchButton, HviSearchClear, HviSearchInput } from './search.component';
