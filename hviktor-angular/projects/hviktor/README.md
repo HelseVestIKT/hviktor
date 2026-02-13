@@ -65,6 +65,7 @@ export class MyComponent {}
 | Skeleton     | Placeholder mens innhold lastes                      |
 | Switch       | Switch komponent                                     |
 | Tag          | Merkelapper for kategorisering                       |
+| Textarea     | Textarea komponent                                   |
 
 ## Krav
 

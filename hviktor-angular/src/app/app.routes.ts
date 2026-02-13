@@ -175,6 +175,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/switch/switch-demo').then((m) => m.SwitchDemoComponent),
       },
+      {
+        path: 'komponenter/textarea',
+        loadComponent: () =>
+          import('./demo/pages/components/textarea/textarea-demo').then(
+            (m) => m.TextareaDemoComponent,
+          ),
+      },
     ],
   },
 ];
