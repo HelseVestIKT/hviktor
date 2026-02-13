@@ -143,6 +143,11 @@ export const routes: Routes = [
             (m) => m.ErrorSummaryDemoComponent,
           ),
       },
+      {
+        path: 'komponenter/field',
+        loadComponent: () =>
+          import('./demo/pages/components/field/field-demo').then((m) => m.FieldDemoComponent),
+      },
     ],
   },
 ];

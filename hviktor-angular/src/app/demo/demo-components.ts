@@ -41,4 +41,5 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'ErrorSummary er en oppsummering av feil. Den gir brukeren oversikt over feil eller mangler som må rettes på en side eller trinn, for å komme videre.',
   },
+  { id: 'field', name: 'Field', description: 'Field komponent' },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));
