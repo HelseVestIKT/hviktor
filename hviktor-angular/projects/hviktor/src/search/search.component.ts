@@ -17,7 +17,7 @@ import { Component } from '@angular/core';
  * @see {@link https://designsystemet.no/no/components/search}
  */
 @Component({
-  selector: 'hvi-search',
+  selector: '[hviSearch]',
   standalone: true,
   template: '<ng-content />',
   host: {
