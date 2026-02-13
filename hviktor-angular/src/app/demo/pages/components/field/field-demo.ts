@@ -3,6 +3,7 @@ import {
   HviField,
   HviFieldAffix,
   HviFieldAffixes,
+  HviFieldCounter,
   HviFieldDescription,
   HviFieldValidation,
   HviInput,
@@ -19,6 +20,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     HviField,
     HviFieldAffix,
     HviFieldAffixes,
+    HviFieldCounter,
     HviFieldDescription,
     HviFieldValidation,
     HviInput,
@@ -54,6 +56,18 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
             <input hviInput id="pris" type="text" />
             <hvi-field-affix>pr. mnd.</hvi-field-affix>
           </hvi-field-affixes>
+        </hvi-field>
+      </app-demo-section>
+
+      <!-- Antall tegn -->
+      <app-demo-section
+        title="Antall tegn"
+        description="Bruk hvi-field-counter til å informere om antall tegn brukerne kan skrive i feltet. Komponenten finner automatisk input/textarea i samme field."
+      >
+        <hvi-field>
+          <label hviLabel for="beskrivelse" weight="medium">Legg til en beskrivelse</label>
+          <input hviInput id="beskrivelse" type="text" [maxLength]="10" />
+          <hvi-field-counter [limit]="10" />
         </hvi-field>
       </app-demo-section>
 
