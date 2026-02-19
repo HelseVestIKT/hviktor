@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { HviButton, HviInput, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviInput,
+  HviPagination,
+  HviSortableColumn,
+  HviTable,
+} from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 interface Person {
@@ -18,6 +24,7 @@ interface Person {
     HviSortableColumn,
     HviInput,
     HviButton,
+    HviPagination,
   ],
   template: `
     <app-demo-page
@@ -163,14 +170,14 @@ interface Person {
         title="Søk og sortering"
         description="Kombiner søk og sortering for full funksjonalitet. Bruk filterGlobal() for å søke på tvers av kolonner."
       >
-        <div style="margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;">
+        <div class="mb-4 flex items-center gap-4">
           <input
             hviInput
             type="search"
             placeholder="Søk i navn, epost eller telefon..."
             #searchInput
             (input)="searchTable.filterGlobal(searchInput.value)"
-            style="flex: 1; max-width: 300px;"
+            class="max-w-xs flex-1"
           />
           <button hviButton (click)="searchTable.clear(); searchInput.value = ''">Nullstill</button>
         </div>
@@ -201,16 +208,63 @@ interface Person {
               </tr>
             } @empty {
               <tr>
-                <td colspan="3" style="text-align: center;">Ingen treff</td>
+                <td colspan="3" class="text-center">Ingen treff</td>
               </tr>
             }
           </tbody>
         </table>
-        <p
-          style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--ds-color-neutral-text-subtle);"
-        >
+        <p class="mt-2 text-sm text-neutral-500">
           Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
         </p>
+      </app-demo-section>
+
+      <!-- Paginering -->
+      <app-demo-section
+        title="Paginering"
+        description="Bruk paginator og rows for å dele opp data i sider. Tabellen håndterer pagineringen automatisk."
+      >
+        <table
+          hviTable
+          hover
+          zebra
+          [value]="manyPersons"
+          paginator
+          [rows]="10"
+          #paginatedTable="hviTable"
+        >
+          <thead>
+            <tr>
+              <th>Navn</th>
+              <th>Epost</th>
+              <th>Telefon</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (person of paginatedTable.paginatedValue(); track person.epost) {
+              <tr>
+                <td>{{ person.navn }}</td>
+                <td>{{ person.epost }}</td>
+                <td>{{ person.telefon }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+        <div class="mt-4 flex items-center justify-between">
+          <span class="text-sm text-neutral-500">
+            Viser {{ (paginatedTable.currentPage() - 1) * 5 + 1 }}-{{
+              paginatedTable.currentPage() * 5 > paginatedTable.totalRecords()
+                ? paginatedTable.totalRecords()
+                : paginatedTable.currentPage() * 5
+            }}
+            av {{ paginatedTable.totalRecords() }}
+          </span>
+          <hvi-pagination
+            [totalItems]="paginatedTable.totalFilteredRecords()"
+            [pageSize]="5"
+            [currentPage]="paginatedTable.currentPage()"
+            (currentPageChange)="paginatedTable.goToPage($event)"
+          />
+        </div>
       </app-demo-section>
 
       <!-- Tall i tabell -->
@@ -218,32 +272,32 @@ interface Person {
         title="Tall i tabell"
         description="Når det er tall som skal sammenlignes, plasser tallene til høyre i tabellfeltet."
       >
-        <table hviTable style="table-layout: fixed; font-variant-numeric: tabular-nums;">
+        <table hviTable class="table-fixed tabular-nums">
           <caption>
             Antall søknader per måned
           </caption>
           <thead>
             <tr>
               <th scope="col">Måned</th>
-              <th scope="col" style="text-align: right;">2023</th>
-              <th scope="col" style="text-align: right;">2024</th>
+              <th scope="col" class="text-right">2023</th>
+              <th scope="col" class="text-right">2024</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <th scope="row">Januar</th>
-              <td style="text-align: right;">1 230</td>
-              <td style="text-align: right;">1 450</td>
+              <td class="text-right">1 230</td>
+              <td class="text-right">1 450</td>
             </tr>
             <tr>
               <th scope="row">Februar</th>
-              <td style="text-align: right;">980</td>
-              <td style="text-align: right;">1 120</td>
+              <td class="text-right">980</td>
+              <td class="text-right">1 120</td>
             </tr>
             <tr>
               <th scope="row">Mars</th>
-              <td style="text-align: right;">1 150</td>
-              <td style="text-align: right;">1 300</td>
+              <td class="text-right">1 150</td>
+              <td class="text-right">1 300</td>
             </tr>
           </tbody>
         </table>
@@ -288,11 +342,33 @@ interface Person {
   `,
 })
 export class TableDemoComponent {
-  // Data for sorteringseksempel - det er alt som trengs!
+  // Data for sorteringseksempel
   persons: Person[] = [
     { navn: 'Lise Nordmann', epost: 'lise@nordmann.no', telefon: '22345678' },
     { navn: 'Kari Nordmann', epost: 'kari@nordmann.no', telefon: '87654321' },
     { navn: 'Ola Nordmann', epost: 'ola@nordmann.no', telefon: '32345678' },
     { navn: 'Per Nordmann', epost: 'per@nordmann.no', telefon: '12345678' },
+  ];
+
+  // Større datasett for pagineringseksempel
+  manyPersons: Person[] = [
+    { navn: 'Lise Nordmann', epost: 'lise@nordmann.no', telefon: '22345678' },
+    { navn: 'Kari Nordmann', epost: 'kari@nordmann.no', telefon: '87654321' },
+    { navn: 'Ola Nordmann', epost: 'ola@nordmann.no', telefon: '32345678' },
+    { navn: 'Per Nordmann', epost: 'per@nordmann.no', telefon: '12345678' },
+    { navn: 'Anne Hansen', epost: 'anne@hansen.no', telefon: '11223344' },
+    { navn: 'Erik Larsen', epost: 'erik@larsen.no', telefon: '55667788' },
+    { navn: 'Ingrid Berg', epost: 'ingrid@berg.no', telefon: '99887766' },
+    { navn: 'Bjørn Olsen', epost: 'bjorn@olsen.no', telefon: '44332211' },
+    { navn: 'Marte Vik', epost: 'marte@vik.no', telefon: '66778899' },
+    { navn: 'Jonas Dahl', epost: 'jonas@dahl.no', telefon: '33445566' },
+    { navn: 'Hilde Mo', epost: 'hilde@mo.no', telefon: '77889900' },
+    { navn: 'Geir Strand', epost: 'geir@strand.no', telefon: '11002233' },
+    { navn: 'Silje Haugen', epost: 'silje@haugen.no', telefon: '44556677' },
+    { navn: 'Thomas Lie', epost: 'thomas@lie.no', telefon: '88990011' },
+    { navn: 'Nina Bakke', epost: 'nina@bakke.no', telefon: '22334455' },
+    { navn: 'Anders Holm', epost: 'anders@holm.no', telefon: '55443322' },
+    { navn: 'Maria Kvam', epost: 'maria@kvam.no', telefon: '99001122' },
+    { navn: 'Lars Bø', epost: 'lars@bo.no', telefon: '33221100' },
   ];
 }

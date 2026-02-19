@@ -4,6 +4,7 @@ import {
   Directive,
   EventEmitter,
   Input,
+  numberAttribute,
   Output,
   signal,
 } from '@angular/core';
@@ -15,6 +16,14 @@ export type SortDirection = 'none' | 'ascending' | 'descending';
 export interface TableSortEvent {
   field: string;
   direction: SortDirection;
+}
+
+/** Event som emitteres ved sideendring */
+export interface TablePageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
 }
 
 /**
@@ -98,14 +107,37 @@ export class HviTable<T = unknown> {
   /** Felt som global søk skal søke i */
   @Input() globalFilterFields: string[] = [];
 
+  /** Aktiver paginering */
+  @Input({ transform: booleanAttribute }) paginator = false;
+
+  /** Antall rader per side (når paginator er aktivert) */
+  @Input({ transform: numberAttribute })
+  set rows(value: number) {
+    this._rows.set(value);
+  }
+
+  /** Indeks for første rad som vises (0-basert) */
+  @Input({ transform: numberAttribute })
+  set first(value: number) {
+    this._first.set(value);
+  }
+
   /** Event som emitteres når sortering endres */
   @Output() sortChange = new EventEmitter<TableSortEvent>();
+
+  /** Event som emitteres når side endres */
+  @Output() pageChange = new EventEmitter<TablePageEvent>();
+
+  /** Event som emitteres med nåværende side (1-basert, for two-way binding) */
+  @Output() currentPageChange = new EventEmitter<number>();
 
   // Internal signals
   private _value = signal<T[]>([]);
   private _sortField = signal<string | null>(null);
   private _sortOrder = signal<number>(0); // 0 = none, 1 = asc, -1 = desc
   private _globalFilter = signal<string | null>(null);
+  private _rows = signal(10);
+  private _first = signal(0);
 
   /** Kun sortert data (uten søk) - for bakoverkompatibilitet */
   readonly sortedValue = computed(() => {
@@ -119,11 +151,40 @@ export class HviTable<T = unknown> {
     return this.applySorting(filtered);
   });
 
+  /** Paginert, filtrert og sortert data - bruk denne når paginator er aktivert */
+  readonly paginatedValue = computed(() => {
+    const data = this.filteredValue();
+    if (!this.paginator) return data;
+
+    const first = this._first();
+    const rows = this._rows();
+    return data.slice(first, first + rows);
+  });
+
   /** Antall rader etter søk */
   readonly totalFilteredRecords = computed(() => this.filteredValue().length);
 
   /** Antall rader totalt (før søk) */
   readonly totalRecords = computed(() => this._value().length);
+
+  /** Totalt antall sider */
+  readonly pageCount = computed(() => {
+    if (!this.paginator) return 1;
+    return Math.max(1, Math.ceil(this.totalFilteredRecords() / this._rows()));
+  });
+
+  /** Nåværende side (1-basert) */
+  readonly currentPage = computed(() => {
+    return Math.floor(this._first() / this._rows()) + 1;
+  });
+
+  /** Er vi på første side? */
+  readonly isFirstPage = computed(() => this._first() === 0);
+
+  /** Er vi på siste side? */
+  readonly isLastPage = computed(() => {
+    return this._first() + this._rows() >= this.totalFilteredRecords();
+  });
 
   /** Nåværende sorteringsfelt */
   readonly currentSortField = computed(() => this._sortField());
@@ -161,6 +222,74 @@ export class HviTable<T = unknown> {
     this._sortField.set(null);
     this._sortOrder.set(0);
     this._globalFilter.set(null);
+    this._first.set(0);
+  }
+
+  // ========== Paginering ==========
+
+  /**
+   * Gå til en spesifikk side (1-basert).
+   */
+  goToPage(page: number): void {
+    const totalPages = this.pageCount();
+    const validPage = Math.max(1, Math.min(page, totalPages));
+    const newFirst = (validPage - 1) * this._rows();
+
+    if (newFirst !== this._first()) {
+      this._first.set(newFirst);
+      this.emitPageEvent();
+    }
+  }
+
+  /**
+   * Gå til første side.
+   */
+  goToFirstPage(): void {
+    this.goToPage(1);
+  }
+
+  /**
+   * Gå til siste side.
+   */
+  goToLastPage(): void {
+    this.goToPage(this.pageCount());
+  }
+
+  /**
+   * Gå til forrige side.
+   */
+  goToPreviousPage(): void {
+    if (!this.isFirstPage()) {
+      this.goToPage(this.currentPage() - 1);
+    }
+  }
+
+  /**
+   * Gå til neste side.
+   */
+  goToNextPage(): void {
+    if (!this.isLastPage()) {
+      this.goToPage(this.currentPage() + 1);
+    }
+  }
+
+  /**
+   * Endre antall rader per side.
+   */
+  setRows(rows: number): void {
+    this._rows.set(rows);
+    this._first.set(0); // Reset til første side
+    this.emitPageEvent();
+  }
+
+  private emitPageEvent(): void {
+    this.pageChange.emit({
+      first: this._first(),
+      rows: this._rows(),
+      page: this.currentPage(),
+      pageCount: this.pageCount(),
+    });
+    this.currentPageChange.emit(this.currentPage());
   }
 
   /**
