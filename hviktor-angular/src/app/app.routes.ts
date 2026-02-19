@@ -220,6 +220,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/table/table-demo').then((m) => m.TableDemoComponent),
       },
+      {
+        path: 'komponenter/pagination',
+        loadComponent: () =>
+          import('./demo/pages/components/pagination/pagination-demo').then(
+            (m) => m.PaginationDemoComponent,
+          ),
+      },
     ],
   },
 ];

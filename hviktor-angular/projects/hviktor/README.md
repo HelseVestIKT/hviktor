@@ -57,6 +57,7 @@ export class MyComponent {}
 | Label        | Etiketter                                            |
 | Link         | Lenker                                               |
 | List         | Lister                                               |
+| Pagination   | Pagination komponent                                 |
 | Paragraph    | Avsnitt                                              |
 | Popover      | Popup-innhold                                        |
 | Radio        | Radio komponent                                      |

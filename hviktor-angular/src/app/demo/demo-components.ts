@@ -53,4 +53,5 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   { id: 'skip-link', name: 'SkipLink', description: 'SkipLink komponent' },
   { id: 'spinner', name: 'Spinner', description: 'Spinner komponent' },
   { id: 'table', name: 'Table', description: 'Table komponent' },
+  { id: 'pagination', name: 'Pagination', description: 'Pagination komponent' },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));
