@@ -33,7 +33,7 @@ jobs:
         run: npm ci --ignore-scripts
 
       - name: Build
-        run: npm run build:lib:prod
+        run: ng build --configuration production
       
       - name: Copy web.config to build folder
         run: cp web.config dist/hviktor
@@ -42,7 +42,7 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: 'web-${{ inputs.environment }}'
-          path: 'hviktor-angular/dist/hviktor-angular/'
+          path: 'hviktor-angular/dist/hviktor'
           compression-level: 0
 
   provision-app-service-angular:
