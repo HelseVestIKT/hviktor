@@ -6,7 +6,7 @@ on:
 
 jobs:     
   deploy-develop:
-    if: github.ref == 'refs/heads/develop'    
+    if: github.ref == 'refs/heads/main'    
     name: "Print miljø for DEV"      
     uses: ./.github/workflows/deploy.yaml 
     with:
