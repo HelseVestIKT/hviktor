@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'hvi-icons',
+  selector: 'hvi-icon-base',
   imports: [],
+  standalone: true,
   template: `
     <svg
-      [attr.width]="computedSize"
-      [attr.height]="computedSize"
+      [attr.width]="sizePx"
+      [attr.height]="sizePx"
       viewBox="0 0 24 24"
       fill="currentColor"
       aria-hidden="true"
@@ -17,15 +18,12 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   styles: ``,
 })
-export class Icons {
+export class HviIconBase {
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
-  get computedSize() {
-    switch (this.size) {
-      case 'sm': return 16;
-      case 'lg': return 32;
-      default: return 24;
-    }
+    get sizePx() {
+    return this.size === 'sm' ? 16 :
+           this.size === 'lg' ? 32 : 24;
   }
 
 }

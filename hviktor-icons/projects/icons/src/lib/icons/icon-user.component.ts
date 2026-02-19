@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { Icons } from '../icons';
+import { HviIconBase } from '../base-icon.component';
 
 
 @Component({
   selector: 'hvi-icon-user',
   standalone: true,
-  imports: [Icons],
+  imports: [HviIconBase],
   template: `
-    <hvi-icons>
+    <hvi-icon-base>
       <path d="M12 3l9 9h-3v9h-12v-9h-3z"></path>
-    </hvi-icons>
+    </hvi-icon-base>
   `
 })
 
-export class UserComponent {}
+export class HviIconUser {}
