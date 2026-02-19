@@ -1,5 +1,5 @@
 {
-  "name": "@helsevestikt/icons",
+  "name": "@helsevestikt/hviktor-icons",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^21.1.0",
