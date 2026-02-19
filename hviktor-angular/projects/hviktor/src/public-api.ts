@@ -25,6 +25,7 @@ export * from './select';
 export * from './skeleton';
 export * from './skip-link';
 export * from './spinner';
+export * from './table';
 export * from './tabs';
 export * from './tag';
 export * from './toggle-group';

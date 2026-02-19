@@ -215,6 +215,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/tabs/tabs-demo').then((m) => m.TabsDemoComponent),
       },
+      {
+        path: 'komponenter/table',
+        loadComponent: () =>
+          import('./demo/pages/components/table/table-demo').then((m) => m.TableDemoComponent),
+      },
     ],
   },
 ];
