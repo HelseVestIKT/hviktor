@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: 'web'
+          name: 'web-${{ inputs.environment }}'
           path: 'hviktor-angular/dist/hviktor/'
           compression-level: 0
 
