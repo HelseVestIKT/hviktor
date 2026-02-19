@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviTable, HviTableSort, SortDirection } from '@helsevestikt/hviktor';
+import { HviButton, HviInput, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 interface Person {
@@ -11,7 +11,14 @@ interface Person {
 @Component({
   selector: 'app-table-demo',
   standalone: true,
-  imports: [DemoPageComponent, DemoSectionComponent, HviTable, HviTableSort],
+  imports: [
+    DemoPageComponent,
+    DemoSectionComponent,
+    HviTable,
+    HviSortableColumn,
+    HviInput,
+    HviButton,
+  ],
   template: `
     <app-demo-page
       title="Table"
@@ -151,33 +158,59 @@ interface Person {
         </table>
       </app-demo-section>
 
-      <!-- Sortering -->
+      <!-- Søk og sortering -->
       <app-demo-section
-        title="Sortering"
-        description="Bruk hviTableSort directive på kolonner som skal kunne sorteres. Sorteringslogikken styres av komponenten."
+        title="Søk og sortering"
+        description="Kombiner søk og sortering for full funksjonalitet. Bruk filterGlobal() for å søke på tvers av kolonner."
       >
-        <table hviTable>
+        <div style="margin-bottom: 1rem; display: flex; gap: 1rem; align-items: center;">
+          <input
+            hviInput
+            type="search"
+            placeholder="Søk i navn, epost eller telefon..."
+            #searchInput
+            (input)="searchTable.filterGlobal(searchInput.value)"
+            style="flex: 1; max-width: 300px;"
+          />
+          <button hviButton (click)="searchTable.clear(); searchInput.value = ''">Nullstill</button>
+        </div>
+        <table
+          hviTable
+          hover
+          [value]="persons"
+          [globalFilterFields]="['navn', 'epost', 'telefon']"
+          #searchTable="hviTable"
+        >
           <thead>
             <tr>
-              <th hviTableSort [sort]="sortState.navn" (sortChange)="onSort('navn', $event)">
+              <th hviSortableColumn="navn">
                 <button>Navn</button>
               </th>
               <th>Epost</th>
-              <th hviTableSort [sort]="sortState.telefon" (sortChange)="onSort('telefon', $event)">
+              <th hviSortableColumn="telefon">
                 <button>Telefon</button>
               </th>
             </tr>
           </thead>
           <tbody>
-            @for (person of sortedPersons; track person.epost) {
+            @for (person of searchTable.filteredValue(); track person.epost) {
               <tr>
                 <td>{{ person.navn }}</td>
                 <td>{{ person.epost }}</td>
                 <td>{{ person.telefon }}</td>
               </tr>
+            } @empty {
+              <tr>
+                <td colspan="3" style="text-align: center;">Ingen treff</td>
+              </tr>
             }
           </tbody>
         </table>
+        <p
+          style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--ds-color-neutral-text-subtle);"
+        >
+          Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
+        </p>
       </app-demo-section>
 
       <!-- Tall i tabell -->
@@ -255,42 +288,11 @@ interface Person {
   `,
 })
 export class TableDemoComponent {
-  // Data for sorteringseksempel
+  // Data for sorteringseksempel - det er alt som trengs!
   persons: Person[] = [
     { navn: 'Lise Nordmann', epost: 'lise@nordmann.no', telefon: '22345678' },
     { navn: 'Kari Nordmann', epost: 'kari@nordmann.no', telefon: '87654321' },
     { navn: 'Ola Nordmann', epost: 'ola@nordmann.no', telefon: '32345678' },
     { navn: 'Per Nordmann', epost: 'per@nordmann.no', telefon: '12345678' },
   ];
-
-  sortedPersons = [...this.persons];
-
-  sortState = {
-    navn: 'none' as SortDirection,
-    telefon: 'none' as SortDirection,
-  };
-
-  onSort(column: 'navn' | 'telefon', direction: SortDirection): void {
-    // Reset alle andre kolonner
-    (Object.keys(this.sortState) as Array<'navn' | 'telefon'>).forEach((key) => {
-      if (key !== column) {
-        this.sortState[key] = 'none';
-      }
-    });
-
-    // Sett ny retning for valgt kolonne
-    this.sortState[column] = direction;
-
-    // Sorter data
-    if (direction === 'none') {
-      this.sortedPersons = [...this.persons];
-    } else {
-      this.sortedPersons = [...this.persons].sort((a, b) => {
-        const valueA = a[column];
-        const valueB = b[column];
-        const comparison = valueA.localeCompare(valueB, 'nb');
-        return direction === 'ascending' ? comparison : -comparison;
-      });
-    }
-  }
 }

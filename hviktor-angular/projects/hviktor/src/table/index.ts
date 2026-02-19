@@ -1,2 +1,2 @@
-export * from './table-sort.directive';
+export { HviSortableColumn } from './table-sort.directive';
 export * from './table.directive';
