@@ -1,6 +1,6 @@
 {
-  "name": "@helsevestikt/hviktor-icons",
-  "version": "0.0.2",
+   "name": "@helsevestikt/icons",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
