@@ -1,5 +1,6 @@
 name: ➕ Ny komponent
 description: Føreslå ein ny komponent til Hviktor
+type: Feature
 projects: ["HelseVestIKT/37"]
 body:
   - type: textarea
