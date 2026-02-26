@@ -7,7 +7,11 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "publish:lib": "npm run build && cd dist/icons && npm publish"
+    "publish:lib": "npm run build && cd dist/icons && npm publish",
+    "build:icons": "ng build icons",
+    "publish:icons:patch": "cd projects/icons && npm version patch && cd ../.. && npm run build:icons && cd dist/icons && npm publish --access public",
+    "publish:icons:minor": "cd projects/icons && npm version minor && cd ../.. && npm run build:icons && cd dist/icons && npm publish --access public",
+    "publish:icons:major": "cd projects/icons && npm version major && cd ../.. && npm run build:icons && cd dist/icons && npm publish --access public"
   },
   "files": [
     "dist/icons"
