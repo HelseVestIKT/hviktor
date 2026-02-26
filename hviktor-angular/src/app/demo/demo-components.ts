@@ -52,4 +52,5 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   { id: 'tooltip', name: 'Tooltip', description: 'Tooltip komponent' },
   { id: 'skip-link', name: 'SkipLink', description: 'SkipLink komponent' },
   { id: 'spinner', name: 'Spinner', description: 'Spinner komponent' },
+  { id: 'dropdown', name: 'Dropdown', description: 'Dropdown' },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));

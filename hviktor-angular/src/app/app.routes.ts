@@ -215,6 +215,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/tabs/tabs-demo').then((m) => m.TabsDemoComponent),
       },
+      {
+        path: 'komponenter/dropdown',
+        loadComponent: () =>
+          import('./demo/pages/components/dropdown/dropdown-demo').then(
+            (m) => m.DropdownDemoComponent,
+          ),
+      },
     ],
   },
 ];
