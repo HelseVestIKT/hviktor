@@ -38,7 +38,7 @@ jobs:
               run: npx ng build hviktor --configuration production
 
             - name: Build Angular app
-              run: npx ng build --configuration production --base-href /Hviktor/
+              run: npx ng build --configuration production --base-href ./
 
             - name: Copy index.html to 404.html (SPA routing)
               run: cp dist/hviktor-angular/browser/index.html dist/hviktor-angular/browser/404.html
