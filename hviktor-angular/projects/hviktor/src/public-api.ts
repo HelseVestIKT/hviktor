@@ -12,6 +12,7 @@ export * from './chip';
 export * from './details';
 export * from './dialog';
 export * from './divider';
+export * from './dropdown';
 export * from './forms';
 export * from './heading';
 export * from './icon';
