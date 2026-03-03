@@ -12,6 +12,10 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { RadioEnkelRadioExampleSource } from './code-examples/radio.enkel-radio.example.source';
+import { RadioGrupperingExampleSource } from './code-examples/radio.gruppering.example.source';
+import { RadioHorisontalPlasseringExampleSource } from './code-examples/radio.horisontal-plassering.example.source';
+import { RadioMedFeilExampleSource } from './code-examples/radio.med-feil.example.source';
 @Component({
   selector: 'app-radio-demo',
   standalone: true,
@@ -34,7 +38,11 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       description="Radio er et alternativ brukeren kan velge. Bruk flere Radio for å vise en liste med alternativer. Brukerne kan bytte mellom alternativene, men kan kun velge ett."
     >
       <!-- Enkel radio -->
-      <app-demo-section title="Enkel radio" description="En enkel radio med label.">
+      <app-demo-section
+        title="Enkel radio"
+        [code]="enkelRadioCode"
+        description="En enkel radio med label."
+      >
         <hvi-field>
           <input hviInput type="radio" id="single-radio" name="single" value="value" />
           <label hviLabel for="single-radio">Radio</label>
@@ -44,6 +52,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Gruppering -->
       <app-demo-section
         title="Gruppering"
+        [code]="grupperingCode"
         description="Bruk ledetekst til å stille spørsmålet og legg eventuelt ved beskrivelse der det er nødvendig."
       >
         <fieldset hviFieldset>
@@ -79,6 +88,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Med feil -->
       <app-demo-section
         title="Med feil"
+        [code]="medFeilCode"
         description="Hvis brukeren prøver å gå videre uten å svare på et obligatorisk spørsmål, skal feilmeldingen gjelde for hele gruppen med alternativer."
       >
         <fieldset hviFieldset>
@@ -137,6 +147,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Horisontal plassering -->
       <app-demo-section
         title="Horisontal plassering"
+        [code]="horisontalPlasseringCode"
         description="Du kan bruke horisontal visning når det bare er to alternativer med korte tekster som 'Ja' og 'Nei'."
       >
         <fieldset hviFieldset>
@@ -158,5 +169,10 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
   `,
 })
 export class RadioDemoComponent {
+  readonly enkelRadioCode = RadioEnkelRadioExampleSource;
+  readonly grupperingCode = RadioGrupperingExampleSource;
+  readonly medFeilCode = RadioMedFeilExampleSource;
+  readonly horisontalPlasseringCode = RadioHorisontalPlasseringExampleSource;
+
   bydelControl = new FormControl('', Validators.required);
 }

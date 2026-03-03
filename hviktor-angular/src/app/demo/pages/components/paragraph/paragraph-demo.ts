@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { HviParagraph } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { ParagraphStorrelserExampleSource } from './code-examples/paragraph.storrelser.example.source';
 @Component({
   selector: 'app-paragraph-demo',
   standalone: true,
   imports: [HviParagraph, DemoPageComponent, DemoSectionComponent],
   template: `
     <app-demo-page title="Paragraph" description="Avsnitt for løpende tekst.">
-      <app-demo-section title="Størrelser">
+      <app-demo-section title="Størrelser" [code]="storrelserCode">
         <div class="flex flex-col gap-4">
           <p hviParagraph size="lg">
             Large paragraph - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -24,4 +25,6 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class ParagraphDemoComponent {}
+export class ParagraphDemoComponent {
+  readonly storrelserCode = ParagraphStorrelserExampleSource;
+}

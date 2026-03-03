@@ -2,20 +2,23 @@ import { Component } from '@angular/core';
 import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { PopoverMedFargeDangerExampleSource } from './code-examples/popover.med-farge-danger.example.source';
+import { PopoverMedPlasseringExampleSource } from './code-examples/popover.med-plassering.example.source';
+import { PopoverStandardExampleSource } from './code-examples/popover.standard.example.source';
 @Component({
   selector: 'app-popover-demo',
   standalone: true,
   imports: [HviPopover, HviButton, HviParagraph, DemoPageComponent, DemoSectionComponent],
   template: `
     <app-demo-page title="Popover" description="Popup-innhold som vises ved interaksjon.">
-      <app-demo-section title="Standard">
+      <app-demo-section title="Standard" [code]="standardCode">
         <div class="flex flex-wrap gap-4">
           <button hviButton popovertarget="popover1">Åpne popover</button>
           <hvi-popover id="popover1">Popoverinnhold</hvi-popover>
         </div>
       </app-demo-section>
 
-      <app-demo-section title="Med plassering">
+      <app-demo-section title="Med plassering" [code]="medPlasseringCode">
         <div class="flex flex-wrap gap-4">
           <button hviButton variant="secondary" popovertarget="popoverTop">Top</button>
           <hvi-popover id="popoverTop" placement="top">Plassert på toppen</hvi-popover>
@@ -31,7 +34,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         </div>
       </app-demo-section>
 
-      <app-demo-section title="Med farge (danger)">
+      <app-demo-section title="Med farge (danger)" [code]="medFargeDangerCode">
         <div class="flex flex-wrap gap-4">
           <button hviButton color="danger" popovertarget="popoverDanger">Slett</button>
           <hvi-popover id="popoverDanger" color="danger">
@@ -46,4 +49,8 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class PopoverDemoComponent {}
+export class PopoverDemoComponent {
+  readonly standardCode = PopoverStandardExampleSource;
+  readonly medPlasseringCode = PopoverMedPlasseringExampleSource;
+  readonly medFargeDangerCode = PopoverMedFargeDangerExampleSource;
+}
