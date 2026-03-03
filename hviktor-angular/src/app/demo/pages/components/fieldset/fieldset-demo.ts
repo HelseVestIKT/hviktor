@@ -9,6 +9,10 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { FieldsetCheckboxGruppeExampleSource } from './code-examples/fieldset.checkbox-gruppe.example.source';
+import { FieldsetCheckboxExampleSource } from './code-examples/fieldset.checkbox.example.source';
+import { FieldsetLegendSomHeadingExampleSource } from './code-examples/fieldset.legend-som-heading.example.source';
+import { FieldsetRadioGruppeExampleSource } from './code-examples/fieldset.radio-gruppe.example.source';
 @Component({
   selector: 'app-fieldset-demo',
   standalone: true,
@@ -30,6 +34,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Radio-gruppe -->
       <app-demo-section
         title="Radio-gruppe"
+        [code]="radioGruppeCode"
         description="Fieldset brukes ofte til å gruppere radioknapper som hører sammen."
       >
         <fieldset hviFieldset>
@@ -53,6 +58,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Checkbox -->
       <app-demo-section
         title="Checkbox"
+        [code]="checkboxCode"
         description="Det kan være scenarioer hvor et Fieldset kun har en Checkbox, basert på konteksten."
       >
         <fieldset hviFieldset>
@@ -67,6 +73,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Legend som heading -->
       <app-demo-section
         title="Legend som heading"
+        [code]="legendSomHeadingCode"
         description="Å bruke selve spørsmålet som overskrift er god praksis. Dette gjør det lettere for brukere med skjermleser å forstå at feltene hører til samme gruppe."
       >
         <fieldset hviFieldset>
@@ -91,6 +98,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Checkbox-gruppe -->
       <app-demo-section
         title="Checkbox-gruppe"
+        [code]="checkboxGruppeCode"
         description="Fieldset kan også brukes til å gruppere flere checkboxer."
       >
         <fieldset hviFieldset>
@@ -113,4 +121,9 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class FieldsetDemoComponent {}
+export class FieldsetDemoComponent {
+  readonly radioGruppeCode = FieldsetRadioGruppeExampleSource;
+  readonly checkboxCode = FieldsetCheckboxExampleSource;
+  readonly legendSomHeadingCode = FieldsetLegendSomHeadingExampleSource;
+  readonly checkboxGruppeCode = FieldsetCheckboxGruppeExampleSource;
+}

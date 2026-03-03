@@ -11,6 +11,11 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { FieldAntallTegnExampleSource } from './code-examples/field.antall-tegn.example.source';
+import { FieldCheckboxOgRadioExampleSource } from './code-examples/field.checkbox-og-radio.example.source';
+import { FieldGrunnleggendeExampleSource } from './code-examples/field.grunnleggende.example.source';
+import { FieldPlasseringExampleSource } from './code-examples/field.plassering.example.source';
+import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suffix.example.source';
 @Component({
   selector: 'app-field-demo',
   standalone: true,
@@ -34,6 +39,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Grunnleggende eksempel -->
       <app-demo-section
         title="Grunnleggende"
+        [code]="grunnleggendeCode"
         description="Field kobler automatisk sammen label, description og validation med feltet via riktige ARIA-attributter."
       >
         <hvi-field>
@@ -47,6 +53,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Prefix/Suffix -->
       <app-demo-section
         title="Prefix/Suffix"
+        [code]="prefixSuffixCode"
         description="Prefixer og suffixer er nyttige for å vise enheter, valuta eller andre typer informasjon som er relevant for feltet. Du skal ikke bruke disse alene, siden skjermlesere ikke leser dem opp."
       >
         <hvi-field>
@@ -62,6 +69,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Antall tegn -->
       <app-demo-section
         title="Antall tegn"
+        [code]="antallTegnCode"
         description="Bruk hvi-field-counter til å informere om antall tegn brukerne kan skrive i feltet. Komponenten finner automatisk input/textarea i samme field."
       >
         <hvi-field>
@@ -74,6 +82,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Plassering med Switch -->
       <app-demo-section
         title="Plassering"
+        [code]="plasseringCode"
         description="Når du bruker Field sammen med valgkomponenter som Switch, kan du plassere etiketten enten før eller etter kontrollen med position-attributtet."
       >
         <div class="flex flex-col gap-4">
@@ -92,6 +101,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Checkbox og Radio plassering -->
       <app-demo-section
         title="Checkbox og Radio"
+        [code]="checkboxOgRadioCode"
         description="Position-attributtet kan også brukes med checkbox og radio for å plassere label før eller etter kontrollen."
       >
         <div class="flex flex-col gap-4">
@@ -109,4 +119,10 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class FieldDemoComponent {}
+export class FieldDemoComponent {
+  readonly grunnleggendeCode = FieldGrunnleggendeExampleSource;
+  readonly prefixSuffixCode = FieldPrefixSuffixExampleSource;
+  readonly antallTegnCode = FieldAntallTegnExampleSource;
+  readonly plasseringCode = FieldPlasseringExampleSource;
+  readonly checkboxOgRadioCode = FieldCheckboxOgRadioExampleSource;
+}
