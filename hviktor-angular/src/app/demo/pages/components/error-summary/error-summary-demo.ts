@@ -14,6 +14,8 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { ErrorSummaryBrukISkjemaExampleSource } from './code-examples/error-summary.bruk-i-skjema.example.source';
+import { ErrorSummaryManuellModusExampleSource } from './code-examples/error-summary.manuell-modus.example.source';
 @Component({
   selector: 'app-error-summary-demo',
   standalone: true,
@@ -38,6 +40,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Manuell modus -->
       <app-demo-section
         title="Manuell modus"
+        [code]="manuellModusCode"
         description="ErrorSummary kan brukes manuelt ved å sende inn en liste med feil. Hver feil har en melding og en href som peker til feltet."
       >
         <hvi-error-summary
@@ -53,6 +56,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       <!-- Bruk i skjema -->
       <app-demo-section
         title="Bruk i skjema"
+        [code]="brukISkjemaCode"
         description="I eksempelet under kan du trykke på hver lenke i ErrorSummary for å navigere til det aktuelle feltet med feil."
       >
         <form hviForm [formGroup]="form" [focusOnInvalid]="summary" class="grid gap-4">
@@ -105,6 +109,9 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
   `,
 })
 export class ErrorSummaryDemoComponent {
+  readonly manuellModusCode = ErrorSummaryManuellModusExampleSource;
+  readonly brukISkjemaCode = ErrorSummaryBrukISkjemaExampleSource;
+
   form = new FormGroup({
     fornavn: new FormControl('', [Validators.required, Validators.minLength(2)]),
     telefon: new FormControl('', [Validators.required, Validators.pattern(/^\d+$/)]),
