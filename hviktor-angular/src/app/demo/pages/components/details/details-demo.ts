@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HviCard, HviDetails, HviDetailsContent, HviDetailsSummary } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { DetailsIKortExampleSource } from './code-examples/details.i-kort.example.source';
+import { DetailsVarianterExampleSource } from './code-examples/details.varianter.example.source';
 @Component({
   selector: 'app-details-demo',
   standalone: true,
@@ -15,7 +17,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
   ],
   template: `
     <app-demo-page title="Details" description="Utvidbart innhold som kan vises eller skjules.">
-      <app-demo-section title="Varianter">
+      <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-col gap-2">
           <hvi-details variant="tinted">
             <hvi-details-summary>
@@ -37,7 +39,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         </div>
       </app-demo-section>
 
-      <app-demo-section title="I kort">
+      <app-demo-section title="I kort" [code]="iKortCode">
         <hvi-card color="brand2">
           <hvi-details variant="tinted">
             <hvi-details-summary>
@@ -60,4 +62,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class DetailsDemoComponent {}
+export class DetailsDemoComponent {
+  readonly varianterCode = DetailsVarianterExampleSource;
+  readonly iKortCode = DetailsIKortExampleSource;
+}
