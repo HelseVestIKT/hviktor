@@ -17,7 +17,13 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-// Custom validator for minimum number of checked checkboxes
+import { CheckboxBekreftingMedCheckboxExampleSource } from './code-examples/checkbox.bekrefting-med-checkbox.example.source';
+import { CheckboxDisabledExampleSource } from './code-examples/checkbox.disabled.example.source';
+import { CheckboxEnkelCheckboxExampleSource } from './code-examples/checkbox.enkel-checkbox.example.source';
+import { CheckboxGrupperingExampleSource } from './code-examples/checkbox.gruppering.example.source';
+import { CheckboxMedFeilExampleSource } from './code-examples/checkbox.med-feil.example.source';
+import { CheckboxSkrivebeskyttetReadonlyExampleSource } from './code-examples/checkbox.skrivebeskyttet-readonly.example.source';
+
 function minCheckedValidator(min: number) {
   return (control: AbstractControl): ValidationErrors | null => {
     const group = control as FormGroup;
@@ -49,6 +55,7 @@ function minCheckedValidator(min: number) {
       <!-- Enkel checkbox -->
       <app-demo-section
         title="Enkel checkbox"
+        [code]="enkelCheckboxCode"
         description="En enkel checkbox med label og beskrivelse."
       >
         <hvi-field>
@@ -60,6 +67,7 @@ function minCheckedValidator(min: number) {
       <!-- Bekrefting med checkbox -->
       <app-demo-section
         title="Bekrefting med checkbox"
+        [code]="bekreftingMedCheckboxCode"
         description="Hvis brukerne skal bekrefte noe, men ikke velge noe, kan en Checkbox stå alene. For eksempel når brukerne skal bekrefte at noe er riktig, eller samtykke til vilkår. En Checkbox for samtykke skal alltid kreve en aktiv handling, du skal aldri forhåndsvelge boksen."
       >
         <fieldset hviFieldset>
@@ -77,6 +85,7 @@ function minCheckedValidator(min: number) {
       <!-- Gruppering -->
       <app-demo-section
         title="Gruppering"
+        [code]="grupperingCode"
         description="De aller fleste ganger brukes Checkbox i grupper, der brukerne kan velge flere alternativer. Fieldset som er rundt gruppen bør ha en tittel som forklarer hva valgene handler om."
       >
         <fieldset hviFieldset>
@@ -100,6 +109,7 @@ function minCheckedValidator(min: number) {
       <!-- Med feil -->
       <app-demo-section
         title="Med feil"
+        [code]="medFeilCode"
         description="Når Checkbox brukes i grupper, skal feilmeldingen vises på Fieldset, så den blir samlet for hele gruppen."
       >
         <fieldset hviFieldset [formGroup]="contactForm">
@@ -144,6 +154,7 @@ function minCheckedValidator(min: number) {
       <!-- Skrivebeskyttet -->
       <app-demo-section
         title="Skrivebeskyttet (readonly)"
+        [code]="skrivebeskyttetReadonlyCode"
         description="Checkbox støtter readonly-attributtet for å gjøre feltet skrivebeskyttet. Selv om de ikke kan redigeres, er felter med readonly-attributtet med i tabrekkefølgen, og informasjon blir med når skjemaet sendes inn."
       >
         <fieldset hviFieldset>
@@ -189,6 +200,7 @@ function minCheckedValidator(min: number) {
       <!-- Disabled -->
       <app-demo-section
         title="Disabled"
+        [code]="disabledCode"
         description="Vi bør unngå at Checkbox er deaktivert (disabled) fordi det kan være vanskelig å oppfatte. Noen brukere vil ikke forstå hva valget sier eller hvorfor det ikke er klikkbart. Hvis en Checkbox eller gruppe med Checkbox ikke er relevant, bør du helst fjerne valgene fremfor å deaktivere dem."
       >
         <fieldset hviFieldset>
@@ -234,6 +246,13 @@ function minCheckedValidator(min: number) {
   `,
 })
 export class CheckboxDemoComponent {
+  readonly enkelCheckboxCode = CheckboxEnkelCheckboxExampleSource;
+  readonly bekreftingMedCheckboxCode = CheckboxBekreftingMedCheckboxExampleSource;
+  readonly grupperingCode = CheckboxGrupperingExampleSource;
+  readonly medFeilCode = CheckboxMedFeilExampleSource;
+  readonly skrivebeskyttetReadonlyCode = CheckboxSkrivebeskyttetReadonlyExampleSource;
+  readonly disabledCode = CheckboxDisabledExampleSource;
+
   contactForm = new FormGroup(
     {
       epost: new FormControl(true),
