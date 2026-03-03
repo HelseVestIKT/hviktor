@@ -9,6 +9,10 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { CardFargerOgVarianterExampleSource } from './code-examples/card.farger-og-varianter.example.source';
+import { CardLenkekortExampleSource } from './code-examples/card.lenkekort.example.source';
+import { CardMedInndelingExampleSource } from './code-examples/card.med-inndeling.example.source';
+import { CardStandardExampleSource } from './code-examples/card.standard.example.source';
 @Component({
   selector: 'app-card-demo',
   standalone: true,
@@ -24,7 +28,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
   ],
   template: `
     <app-demo-page title="Card" description="Kort for gruppering av relatert innhold.">
-      <app-demo-section title="Standard">
+      <app-demo-section title="Standard" [code]="standardCode">
         <div class="flex flex-wrap gap-4">
           <hvi-card maxWidth="320px">
             <h2 hviHeading>Lykkeland Barneskole</h2>
@@ -37,7 +41,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         </div>
       </app-demo-section>
 
-      <app-demo-section title="Farger og varianter">
+      <app-demo-section title="Farger og varianter" [code]="fargerOgVarianterCode">
         <div class="flex flex-wrap gap-4">
           <hvi-card color="accent" variant="default" maxWidth="220px">
             <div hviCardBlock>
@@ -65,7 +69,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         </div>
       </app-demo-section>
 
-      <app-demo-section title="Med inndeling">
+      <app-demo-section title="Med inndeling" [code]="medInndelingCode">
         <div class="flex flex-wrap gap-4">
           <hvi-card color="accent" variant="tinted" maxWidth="380px">
             <div hviCardBlock>
@@ -85,7 +89,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         </div>
       </app-demo-section>
 
-      <app-demo-section title="Lenkekort">
+      <app-demo-section title="Lenkekort" [code]="lenkekortCode">
         <div class="flex flex-wrap gap-4">
           <hvi-card color="neutral" maxWidth="420px">
             <div hviCardBlock>
@@ -110,4 +114,9 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class CardDemoComponent {}
+export class CardDemoComponent {
+  readonly standardCode = CardStandardExampleSource;
+  readonly fargerOgVarianterCode = CardFargerOgVarianterExampleSource;
+  readonly medInndelingCode = CardMedInndelingExampleSource;
+  readonly lenkekortCode = CardLenkekortExampleSource;
+}
