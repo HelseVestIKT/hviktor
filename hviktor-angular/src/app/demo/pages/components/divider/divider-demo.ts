@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { HviDivider, HviParagraph } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { DividerStandardExampleSource } from './code-examples/divider.standard.example.source';
 @Component({
   selector: 'app-divider-demo',
   standalone: true,
   imports: [HviDivider, HviParagraph, DemoPageComponent, DemoSectionComponent],
   template: `
     <app-demo-page title="Divider" description="Skillelinjer for å separere innhold visuelt.">
-      <app-demo-section title="Standard">
+      <app-demo-section title="Standard" [code]="standardCode">
         <div class="flex flex-col gap-4">
           <p hviParagraph>Innhold over skillelinjen</p>
           <hr hviDivider />
@@ -18,4 +19,6 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class DividerDemoComponent {}
+export class DividerDemoComponent {
+  readonly standardCode = DividerStandardExampleSource;
+}
