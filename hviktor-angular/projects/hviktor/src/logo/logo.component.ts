@@ -48,20 +48,20 @@ import { LogoCompany, LogoDefinition, LOGOS, LogoSize } from './logo-paths';
 
       svg {
         display: block;
-        width: 100%;
-        height: auto;
+        height: 100%;
+        width: auto;
       }
 
       :host([data-size='sm']) {
-        width: 160px;
+        height: 40px;
       }
 
       :host([data-size='md']) {
-        width: 240px;
+        height: 65px;
       }
 
       :host([data-size='lg']) {
-        width: 320px;
+        height: 82px;
       }
     `,
   ],
@@ -70,7 +70,7 @@ export class HviLogo {
   /** Which company logo to display */
   readonly company = input.required<LogoCompany>();
 
-  /** Logo size — sm (160px), md (240px, default), lg (320px) */
+  /** Logo size — sm (40px), md (65px, default), lg (82px) height */
   readonly size = input<LogoSize>('md');
 
   /** Override the default accessible label */
