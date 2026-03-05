@@ -1,5 +1,6 @@
 import { Component, computed, input } from '@angular/core';
-import { LogoCompany, LogoDefinition, LOGOS, LogoSize } from './logo-paths';
+import { LogoCompany, LOGOS } from './logo-paths';
+import { LogoDefinition, LogoSize } from './logo-types';
 
 /**
  * Logo displays a Helse Vest company logo with automatic light/dark mode support.
