@@ -4,6 +4,7 @@
 
 export * from './alert';
 export * from './avatar';
+export * from './avatar-stack';
 export * from './badge';
 export * from './breadcrumbs';
 export * from './button';

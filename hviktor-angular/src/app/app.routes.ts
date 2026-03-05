@@ -234,6 +234,13 @@ export const routes: Routes = [
             (m) => m.DropdownDemoComponent,
           ),
       },
+      {
+        path: 'komponenter/avatar-stack',
+        loadComponent: () =>
+          import('./demo/pages/components/avatar-stack/avatar-stack-demo').then(
+            (m) => m.AvatarStackDemoComponent,
+          ),
+      },
     ],
   },
 ];

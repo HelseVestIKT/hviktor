@@ -38,6 +38,7 @@ export class MyComponent {}
 | ------------ | ---------------------------------------------------- |
 | Alert        | Varselmeldinger for å informere brukeren             |
 | Avatar       | Profilbilde eller initialer                          |
+| AvatarStack  | AvatarStack                                          |
 | Badge        | Små indikatorer og tellere                           |
 | Breadcrumbs  | Navigasjonssti                                       |
 | Button       | Knapper for handlinger                               |
