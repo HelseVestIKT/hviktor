@@ -9,6 +9,7 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { LogoVarianterExampleSource } from './code-examples/logo.varianter.example.source';
 @Component({
   selector: 'app-logo-demo',
   standalone: true,
@@ -26,15 +27,14 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
       title="Logo"
       description="Logo viser foretakslogoer for Helse Vest. Logoen responderer automatisk på applikasjonens light/dark mode."
     >
-      <app-demo-section title="Størrelse">
-        <hvi-toggle-group [(value)]="selectedSize" variant="primary">
-          <button hviToggleGroupItem value="sm">sm</button>
-          <button hviToggleGroupItem value="md">md</button>
-          <button hviToggleGroupItem value="lg">lg</button>
-        </hvi-toggle-group>
-      </app-demo-section>
+      Endre størrelse på logoen med <code>size</code>-attributtet.
 
-      <app-demo-section title="Varianter">
+      <hvi-toggle-group [(value)]="selectedSize" variant="primary">
+        <button hviToggleGroupItem value="sm">sm</button>
+        <button hviToggleGroupItem value="md">md</button>
+        <button hviToggleGroupItem value="lg">lg</button>
+      </hvi-toggle-group>
+      <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-col gap-8">
           <p hviParagraph>Variant endres med <code>company</code>-attributtet.</p>
           <div class="grid gap-2">
@@ -83,5 +83,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
   `,
 })
 export class LogoDemoComponent {
+  readonly varianterCode = LogoVarianterExampleSource;
+
   selectedSize = signal<LogoSize>('md');
 }
