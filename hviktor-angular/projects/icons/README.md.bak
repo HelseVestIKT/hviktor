@@ -25,14 +25,14 @@ Import individual icon components directly in your Angular application:
 
 ```typescript
 import { Component } from '@angular/core';
-import { HviIconPerson, HviIconHouse, HviIconCheckmark } from '@helsevestikt/hviktor-icons';
+import { HviIconUser, HviIconHome, HviIconCheckmark } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-example',
-  imports: [HviIconPerson, HviIconHouse, HviIconCheckmark],
+  imports: [HviIconUser, HviIconHome, HviIconCheckmark],
   template: `
-    <hvi-icon-person size="sm" />
-    <hvi-icon-house size="md" />
+    <hvi-icon-user size="sm" />
+    <hvi-icon-home size="md" />
     <hvi-icon-checkmark size="lg" />
   `,
 })
@@ -56,14 +56,13 @@ registerIconsAsCustomElements();
 // Then use in any component template
 @Component({
   template: `
-    <hvi-icon-person size="md"></hvi-icon-person>
-    <hvi-icon-house size="lg"></hvi-icon-house>
+    <hvi-icon-user size="md"></hvi-icon-user>
+    <hvi-icon-home size="lg"></hvi-icon-home>
   `
 })
 ```
 
 #### Blazor / ASP.NET Core
-
 See the complete [Blazor Integration Guide](https://github.com/helsevestikt/hviktor-angular/blob/main/projects/icons/BLAZOR_GUIDE.md) for detailed instructions.
 
 **Quick Start:**
@@ -97,7 +96,7 @@ Copy-Item "node_modules/@helsevestikt/hviktor-icons/bundles/hviktor-icons.js" -D
 @page "/dashboard"
 
 <div class="header">
-  <hvi-icon-house size="lg"></hvi-icon-house>
+  <hvi-icon-home size="lg"></hvi-icon-home>
   <h1>Dashboard</h1>
 </div>
 
@@ -105,16 +104,17 @@ Copy-Item "node_modules/@helsevestikt/hviktor-icons/bundles/hviktor-icons.js" -D
 <hvi-icon-exclamationmark-triangle size="md"></hvi-icon-exclamationmark-triangle>
 
 <style>
-  hvi-icon-house {
+  hvi-icon-home {
     color: #0078d4;
   }
-
+  
   hvi-icon-checkmark-circle {
     color: #107c10;
   }
-
+  
   hvi-icon-exclamationmark-triangle {
-    color: #d83b01;
+    color: #d83b01
+    color: #00aa00;
   }
 </style>
 ```
@@ -128,10 +128,11 @@ Copy-Item "node_modules/@helsevestikt/hviktor-icons/bundles/hviktor-icons.js" -D
     <script src="path/to/hviktor-icons.js"></script>
   </head>
   <body>
-    <hvi-icon-person size="md"></hvi-icon-person>
-    <hvi-icon-house size="lg"></hvi-icon-house>
+    <hvi-icon-user size="md"></hvi-icon-user>
+    <hvi-icon-home size="lg"></hvi-icon-home>
 
     <script>
+      // Register the custom elements
       HvictorIcons.register();
     </script>
   </body>
@@ -232,7 +233,6 @@ To create the standalone Web Components bundle for Blazor and other frameworks:
 ```bash
 npm run build:icons:bundle
 ```
-
 use `currentColor` for the fill, so they inherit the text color. You can style them using CSS:
 
 ```css
@@ -263,12 +263,13 @@ Three predefined sizes are available via the `size` attribute:
 - `size="md"` - 24px (medium, default)
 - `size="lg"` - 32px (large)
 
-````html
+```html
 <hvi-icon-checkmark size="sm"></hvi-icon-checkmark>
 <hvi-icon-checkmark size="md"></hvi-icon-checkmark>
 <hvi-icon-checkmark size="lg"></hvi-icon-checkmark>
-```bash npm run publish:icons
-````
+```bash
+npm run publish:icons
+```
 
 This will:
 
