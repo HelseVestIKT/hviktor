@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { HviLogo } from '@helsevestikt/hviktor';
+import { HviHeading, HviLogo } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 @Component({
   selector: 'app-logo-demo',
   standalone: true,
-  imports: [DemoPageComponent, DemoSectionComponent, HviLogo],
+  imports: [DemoPageComponent, DemoSectionComponent, HviLogo, HviHeading],
   template: `
     <app-demo-page
       title="Logo"
@@ -27,6 +27,11 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
           </div>
         </div>
         <p class="mt-4 text-sm">Bytt fargetema i headeren for å se logoen i dark mode.</p>
+      </app-demo-section>
+
+      <app-demo-section title="Varianter">
+        <h3 hviHeading>hvikt</h3>
+        <hvi-logo company="helse-vest-ikt" size="md" />
       </app-demo-section>
     </app-demo-page>
   `,
