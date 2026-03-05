@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { LogoCompany, LogoDefinition, LOGOS } from './logo-paths';
+import { LogoCompany, LogoDefinition, LOGOS, LogoSize } from './logo-paths';
 
 /**
  * Logo displays a Helse Vest company logo with automatic light/dark mode support.
@@ -13,6 +13,7 @@ import { LogoCompany, LogoDefinition, LOGOS } from './logo-paths';
  * @example
  * ```html
  * <hvi-logo company="helse-vest" />
+ * <hvi-logo company="helse-vest" size="lg" />
  * ```
  */
 @Component({
@@ -21,8 +22,6 @@ import { LogoCompany, LogoDefinition, LOGOS } from './logo-paths';
   template: `
     <svg
       [attr.viewBox]="logo().viewBox"
-      [attr.width]="logo().width"
-      [attr.height]="logo().height"
       [attr.aria-label]="ariaLabel() ?? logo().label"
       role="img"
       xmlns="http://www.w3.org/2000/svg"
@@ -34,6 +33,7 @@ import { LogoCompany, LogoDefinition, LOGOS } from './logo-paths';
   `,
   host: {
     class: 'hvi-logo',
+    '[attr.data-size]': 'size()',
   },
   styles: [
     `
@@ -45,12 +45,33 @@ import { LogoCompany, LogoDefinition, LOGOS } from './logo-paths';
       :host-context([data-color-scheme='dark']) {
         color: white;
       }
+
+      svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      :host([data-size='sm']) {
+        width: 160px;
+      }
+
+      :host([data-size='md']) {
+        width: 240px;
+      }
+
+      :host([data-size='lg']) {
+        width: 320px;
+      }
     `,
   ],
 })
 export class HviLogo {
   /** Which company logo to display */
   readonly company = input.required<LogoCompany>();
+
+  /** Logo size — sm (160px), md (240px, default), lg (320px) */
+  readonly size = input<LogoSize>('md');
 
   /** Override the default accessible label */
   readonly ariaLabel = input<string | undefined>(undefined);
