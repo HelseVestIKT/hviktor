@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import {
   HviHeading,
   HviLogo,
+  HviParagraph,
   HviToggleGroup,
   HviToggleGroupItem,
   LogoSize,
@@ -18,6 +19,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     HviHeading,
     HviToggleGroup,
     HviToggleGroupItem,
+    HviParagraph,
   ],
   template: `
     <app-demo-page
@@ -34,28 +36,32 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
       <app-demo-section title="Varianter">
         <div class="flex flex-col gap-8">
-          <div>
+          <p hviParagraph>Variant endres med <code>company</code>-attributtet.</p>
+          <div class="grid gap-2">
             <h3 hviHeading>hve</h3>
             <hvi-logo company="hve" [size]="selectedSize()" />
           </div>
-          <div>
+          <div class="grid gap-2">
             <h3 hviHeading>hvikt</h3>
             <hvi-logo company="hvikt" [size]="selectedSize()" />
           </div>
-          <div>
+          <div class="grid gap-2">
             <h3 hviHeading>hbe</h3>
             <hvi-logo company="hbe" [size]="selectedSize()" />
           </div>
-          <div>
+          <div class="grid gap-2">
             <h3 hviHeading>hbe-hus</h3>
             <hvi-logo company="hbe-hus" [size]="selectedSize()" />
           </div>
-          <div>
+          <div class="grid gap-2">
             <h3 hviHeading>hst</h3>
             <hvi-logo company="hst" [size]="selectedSize()" />
           </div>
+          <div class="grid gap-2">
+            <h3 hviHeading>hst-sus</h3>
+            <hvi-logo company="hst-sus" [size]="selectedSize()" />
+          </div>
         </div>
-        <p class="mt-4 text-sm">Bytt fargetema i headeren for å se logoen i dark mode.</p>
       </app-demo-section>
     </app-demo-page>
   `,
