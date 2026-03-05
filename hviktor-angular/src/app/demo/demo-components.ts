@@ -55,6 +55,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   { id: 'dropdown', name: 'Dropdown', description: 'Dropdown' },
   { id: 'table', name: 'Table', description: 'Table komponent' },
   { id: 'pagination', name: 'Pagination', description: 'Pagination komponent' },
+  { id: 'avatar-stack', name: 'AvatarStack', description: 'AvatarStack' },
   { id: 'logo', name: 'Logo', description: 'Logo komponent' },
   { id: 'textfield', name: 'Textfield', description: 'Textfield komponent' },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));

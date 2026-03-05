@@ -235,6 +235,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'komponenter/avatar-stack',
+        loadComponent: () =>
+          import('./demo/pages/components/avatar-stack/avatar-stack-demo').then(
+            (m) => m.AvatarStackDemoComponent,
+          ),
+      },
+      {
         path: 'komponenter/logo',
         loadComponent: () =>
           import('./demo/pages/components/logo/logo-demo').then((m) => m.LogoDemoComponent),
