@@ -1,7 +1,7 @@
-import { createApplication } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
-import { HviIconUser } from './icons/icon-user.component';
+import { createApplication } from '@angular/platform-browser';
 import { HviIconHome } from './icons/icon-home.component';
+import { HviIconUser } from './icons/icon-user.component';
 
 let registered = false;
 
@@ -13,7 +13,7 @@ export async function registerIconsAsCustomElements() {
 
   const elements = [
     { tag: 'hvi-icon-user', component: HviIconUser },
-    { tag: 'hvi-icon-home', component: HviIconHome }
+    { tag: 'hvi-icon-home', component: HviIconHome },
   ];
 
   for (const { tag, component } of elements) {

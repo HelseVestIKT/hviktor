@@ -1,4 +1,4 @@
-import { input, computed, Directive } from '@angular/core';
+import { computed, Directive, input } from '@angular/core';
 
 export const ICON_TEMPLATE = `
    <svg
