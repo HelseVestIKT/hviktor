@@ -13,8 +13,8 @@ import { LogoDefinition, LogoSize } from './logo-types';
  *
  * @example
  * ```html
- * <hvi-logo company="helse-vest" />
- * <hvi-logo company="helse-vest" size="lg" />
+ * <hvi-logo company="hve" />
+ * <hvi-logo company="hve" size="lg" />
  * ```
  */
 @Component({
