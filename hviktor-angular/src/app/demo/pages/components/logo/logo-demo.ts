@@ -69,6 +69,10 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
             <h3 hviHeading>hst-sus</h3>
             <hvi-logo company="hst-sus" [size]="selectedSize()" />
           </div>
+          <div class="grid gap-2">
+            <h3 hviHeading>sav</h3>
+            <hvi-logo company="sav" [size]="selectedSize()" />
+          </div>
         </div>
       </app-demo-section>
     </app-demo-page>

@@ -7,6 +7,7 @@ import { LOGO_HST } from './logos/logo-hst';
 import { LOGO_HST_SUS } from './logos/logo-hst-sus';
 import { LOGO_HVE } from './logos/logo-hve';
 import { LOGO_HVIKT } from './logos/logo-hvikt';
+import { LOGO_SAV } from './logos/logo-sav';
 
 /** Available company identifiers for the logo component */
 export type LogoCompany = keyof typeof LOGOS;
@@ -26,4 +27,5 @@ export const LOGOS = {
   hfo: LOGO_HFO,
   hst: LOGO_HST,
   'hst-sus': LOGO_HST_SUS,
+  sav: LOGO_SAV,
 } satisfies Record<string, LogoDefinition>;
