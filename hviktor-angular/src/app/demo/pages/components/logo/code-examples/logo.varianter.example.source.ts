@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const LogoVarianterExampleSource = `import { Component, signal } from '@angular/core';
+export const LogoVarianterExampleSource = `import { Component } from '@angular/core';
 import { HviHeading, HviLogo, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
