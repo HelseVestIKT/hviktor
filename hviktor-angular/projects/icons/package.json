@@ -1,14 +1,61 @@
 {
   "name": "@helsevestikt/hviktor-icons",
-  "version": "0.0.31",
-  "peerDependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0",
-    "@angular/elements": "^21.1.0",
-    "@angular/platform-browser": "^21.1.0"
+  "version": "0.0.39",
+  "description": "Pure Web Components icon library with 900+ icons, works in any framework",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/lib/icons.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/icons.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./all": {
+      "import": "./dist/all.js",
+      "default": "./dist/all.js"
+    },
+    "./dist/lib/webcomponents/*": "./dist/lib/webcomponents/*"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "WEBCOMPONENTS_GUIDE.md"
+  ],
+  "scripts": {
+    "extract-data": "node scripts/extract-icon-data.js",
+    "convert": "node scripts/convert-to-webcomponents.js",
+    "kebab-case": "node scripts/convert-selectors-to-kebab-case.js",
+    "cleanup": "node scripts/cleanup-duplicates.js",
+    "lowercase": "node scripts/lowercase-filenames.js",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "icons",
+    "web-components",
+    "custom-elements",
+    "svg",
+    "angular",
+    "react",
+    "vue",
+    "blazor"
+  ],
+  "author": "Helse Vest IKT",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/helsevestikt/hviktor-angular.git",
+    "directory": "projects/icons"
   },
   "dependencies": {
+    "@helsevestikt/hviktor-icons": "0.0.37",
     "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.0"
   },
   "sideEffects": false
 }
