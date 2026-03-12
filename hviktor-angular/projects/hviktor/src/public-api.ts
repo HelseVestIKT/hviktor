@@ -24,6 +24,7 @@ export * from './logo';
 export * from './pagination';
 export * from './paragraph';
 export * from './popover';
+export * from './required-tag';
 export * from './search';
 export * from './select';
 export * from './skeleton';

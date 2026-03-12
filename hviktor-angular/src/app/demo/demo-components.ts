@@ -295,4 +295,11 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Textfield gir brukere muligheten til å skrive fritekst eller tall.',
     ds: true,
   },
+  {
+    id: 'required-tag',
+    name: 'RequiredTag',
+    description:
+      'RequiredTag kan brukes sammen med labels i et skjema for å indikere om et felt er påkrevd, valgfritt eller om alle felt må fylles ut.',
+    hvi: true,
+  },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));
