@@ -6,8 +6,9 @@ import {
   HostListener,
   inject,
   Input,
+  OnInit,
   Output,
-  signal, OnInit,
+  signal,
 } from '@angular/core';
 import { FormGroup, FormGroupDirective } from '@angular/forms';
 
@@ -17,24 +18,21 @@ export type FormRequiredMode = 'all-required' | 'mixed' | 'none';
 /**
  * Analyserer en FormGroup og returnerer required-modus.
  *
- * Controls uten noen validators (typisk radio, checkbox, switch) ignoreres
- * i analysen – de regnes verken som "required" eller "optional".
+ * Alle controls telles – også de uten validators (de regnes som optional).
  *
- * - `'all-required'` – alle controls med validators har required/requiredTrue
- * - `'mixed'` – noen controls med validators er required, noen ikke
- * - `'none'` – ingen controls med validators har required
+ * - `'all-required'` – alle controls har required/requiredTrue
+ * - `'mixed'` – noen controls er required, noen ikke
+ * - `'none'` – ingen controls har required
  */
 export function analyzeFormRequired(formGroup: FormGroup): FormRequiredMode {
   const controls = Object.values(formGroup.controls);
+  if (controls.length === 0) return 'none';
+
   let requiredCount = 0;
-  let validatedCount = 0;
 
   for (const control of controls) {
-    // Sjekk om control har noen validators i det hele tatt
     const validator = control.validator;
     if (!validator) continue;
-
-    validatedCount++;
 
     // Sjekk om required/requiredTrue er blant validators
     const testResult = validator({ value: '' } as any);
@@ -44,10 +42,9 @@ export function analyzeFormRequired(formGroup: FormGroup): FormRequiredMode {
     }
   }
 
-  if (validatedCount === 0) return 'none';
-  if (requiredCount === validatedCount) return 'all-required';
-  if (requiredCount > 0) return 'mixed';
-  return 'none';
+  if (requiredCount === 0) return 'none';
+  if (requiredCount === controls.length) return 'all-required';
+  return 'mixed';
 }
 
 /**

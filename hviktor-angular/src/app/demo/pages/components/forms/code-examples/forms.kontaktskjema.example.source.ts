@@ -26,7 +26,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
     
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <hvi-field>
-            <label hviLabel for="firstName" weight="medium">Fornavn</label>
+            <label hviLabel for="firstName" weight="medium">
+              Fornavn <hvi-required-tag mode="required" />
+            </label>
             <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
             <p
               hviFieldValidation
@@ -36,7 +38,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
           </hvi-field>
     
           <hvi-field>
-            <label hviLabel for="lastName" weight="medium">Etternavn</label>
+            <label hviLabel for="lastName" weight="medium">
+              Etternavn <hvi-required-tag mode="required" />
+            </label>
             <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
             <p
               hviFieldValidation
@@ -52,14 +56,18 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
         <legend hviLabel weight="medium">Kontaktinformasjon</legend>
     
         <hvi-field>
-          <label hviLabel for="email" weight="medium">E-post</label>
+          <label hviLabel for="email" weight="medium">
+            E-post <hvi-required-tag mode="required" />
+          </label>
           <span hviFieldDescription>Vi bruker e-posten til å svare deg</span>
           <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
           <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
         </hvi-field>
     
         <hvi-field>
-          <label hviLabel for="phone" weight="medium"> Telefon </label>
+          <label hviLabel for="phone" weight="medium">
+            Telefon <hvi-required-tag mode="optional" />
+          </label>
           <input
             hviInput
             id="phone"
@@ -77,7 +85,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
         <legend hviLabel weight="medium">Din henvendelse</legend>
     
         <hvi-field>
-          <label hviLabel for="subject" weight="medium">Emne</label>
+          <label hviLabel for="subject" weight="medium">
+            Emne <hvi-required-tag mode="required" />
+          </label>
           <select hviSelect id="subject" formControlName="subject" hviControlInvalid>
             <option value="" disabled>Velg emne</option>
             <option value="general">Generell henvendelse</option>
@@ -94,7 +104,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
         </hvi-field>
     
         <hvi-field>
-          <label hviLabel for="message" weight="medium">Melding</label>
+          <label hviLabel for="message" weight="medium">
+            Melding <hvi-required-tag mode="required" />
+          </label>
           <span hviFieldDescription>Beskriv henvendelsen din så detaljert som mulig</span>
           <textarea
             hviInput
@@ -201,7 +213,7 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
     </form>
   \`,
 })
-export class FormsKontaktskjemaExampleComponent {
+export class FormsKontaktskjemaExampleComponent {  
   contactForm = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
@@ -214,7 +226,7 @@ export class FormsKontaktskjemaExampleComponent {
       Validators.maxLength(500),
     ]),
     contactPreference: new FormControl('email'),
-    newsletter: new FormControl(false),
+    newsletter: new FormControl(false, [Validators.required]),
     consent: new FormControl(false, [Validators.requiredTrue]),
   });
   
