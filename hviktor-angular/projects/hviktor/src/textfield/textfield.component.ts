@@ -39,6 +39,7 @@ let nextId = 0;
 @Component({
   selector: 'hvi-textfield',
   standalone: true,
+  styles: [':host { display: block; }'],
   imports: [
     HviField,
     HviLabel,
