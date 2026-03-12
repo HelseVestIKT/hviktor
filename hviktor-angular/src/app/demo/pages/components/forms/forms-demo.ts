@@ -86,7 +86,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
           <!-- Error summary -->
           <hvi-error-summary
             #summary
-            [form]="allRequiredForm"
+            [form]="mixedRequiredForm"
             [messages]="messages"
             showWhen="submitted"
           />
