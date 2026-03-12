@@ -295,4 +295,5 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Textfield gir brukere muligheten til å skrive fritekst eller tall.',
     ds: true,
   },
+  { id: 'required-tag', name: 'RequiredTag', description: 'RequiredTag komponent' },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));

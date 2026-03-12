@@ -253,6 +253,13 @@ export const routes: Routes = [
             (m) => m.TextfieldDemoComponent,
           ),
       },
+      {
+        path: 'komponenter/required-tag',
+        loadComponent: () =>
+          import('./demo/pages/components/required-tag/required-tag-demo').then(
+            (m) => m.RequiredTagDemoComponent,
+          ),
+      },
     ],
   },
 ];

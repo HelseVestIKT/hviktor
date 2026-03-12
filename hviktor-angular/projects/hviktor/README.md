@@ -63,6 +63,7 @@ export class MyComponent {}
 | Paragraph    | Avsnitt                                              |
 | Popover      | Popup-innhold                                        |
 | Radio        | Radio komponent                                      |
+| RequiredTag  | RequiredTag komponent                                |
 | Search       | Search komponent                                     |
 | Select       | Nedtrekksliste for valg fra en liste                 |
 | Skeleton     | Placeholder mens innhold lastes                      |
