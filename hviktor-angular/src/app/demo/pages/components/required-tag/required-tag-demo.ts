@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HviLabel, HviParagraph, HviRequiredTag } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { RequiredTagEksempelExampleSource } from './code-examples/required-tag.eksempel.example.source';
 @Component({
   selector: 'app-required-tag-demo',
   standalone: true,
@@ -10,6 +11,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     <app-demo-page componentId="required-tag">
       <app-demo-section
         title="Eksempel"
+        [code]="eksempelCode"
         description="I seg selv er RequiredTag en HviTag, men den har et sett med labels utifra hvilken mode som velges; required (default), optional eller all-required."
       >
         <div class="space-y-4">
@@ -37,4 +39,6 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     </app-demo-page>
   `,
 })
-export class RequiredTagDemoComponent {}
+export class RequiredTagDemoComponent {
+  readonly eksempelCode = RequiredTagEksempelExampleSource;
+}
