@@ -1,6 +1,6 @@
 {
   "name": "@helsevestikt/hviktor-icons",
-  "version": "0.0.39",
+  "version": "0.0.41",
   "description": "Pure Web Components icon library with 900+ icons, works in any framework",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -11,9 +11,9 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./all": {
-      "import": "./dist/all.js",
-      "default": "./dist/all.js"
+    "./*.webcomponent": {
+      "import": "./dist/lib/webcomponents/*.webcomponent.js",
+      "default": "./dist/lib/webcomponents/*.webcomponent.js"
     },
     "./dist/lib/webcomponents/*": "./dist/lib/webcomponents/*"
   },
