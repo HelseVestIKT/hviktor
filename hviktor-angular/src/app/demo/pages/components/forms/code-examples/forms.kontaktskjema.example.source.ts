@@ -226,7 +226,7 @@ export class FormsKontaktskjemaExampleComponent {
       Validators.maxLength(500),
     ]),
     contactPreference: new FormControl('email'),
-    newsletter: new FormControl(false, [Validators.required]),
+    newsletter: new FormControl(false),
     consent: new FormControl(false, [Validators.requiredTrue]),
   });
   
