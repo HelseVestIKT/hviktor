@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const FormsKontaktskjemaExampleSource = `import { Component, signal } from '@angular/core';
+export const FormsKontaktskjemaExampleSource = `import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSelect, HviValidationKit, HviValidationMessages } from '@helsevestikt/hviktor';
 
