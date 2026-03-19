@@ -1,5 +1,5 @@
 import { Component, computed, input } from '@angular/core';
-import { HviHeading, HviLink, HviLogo, HviParagraph } from '@helsevestikt/hviktor';
+import { HviHeading, HviLink, HviLogo, HviParagraph, HviTag } from '@helsevestikt/hviktor';
 import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
 
 /**
@@ -9,7 +9,7 @@ import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
 @Component({
   selector: 'app-demo-page',
   standalone: true,
-  imports: [HviHeading, HviParagraph, HviLink, HviLogo],
+  imports: [HviHeading, HviParagraph, HviLink, HviLogo, HviTag],
   template: `
     <article>
       <header class="mb-8">
@@ -29,6 +29,12 @@ import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
             >
               <img src="assets/ds.svg" alt="Åpne i Designsystemet" class="size-6" />
             </a>
+          }
+          @if (unitTested()) {
+            <hvi-tag size="sm" color="success">Unit ✓</hvi-tag>
+          }
+          @if (e2eTested()) {
+            <hvi-tag size="sm" color="success">E2E ✓</hvi-tag>
           }
         </div>
         <p hviParagraph class="max-w-lg">{{ description() }}</p>
@@ -57,4 +63,10 @@ export class DemoPageComponent {
     const comp = this.component();
     return comp?.ds ? designSystemUrl(comp.id) : null;
   });
+
+  /** Om komponenten har beståtte enhetstester. */
+  unitTested = computed(() => this.component()?.unitTested ?? false);
+
+  /** Om komponenten har beståtte E2E-tester. */
+  e2eTested = computed(() => this.component()?.e2eTested ?? false);
 }

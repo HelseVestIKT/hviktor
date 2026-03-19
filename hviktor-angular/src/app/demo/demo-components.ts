@@ -13,6 +13,10 @@ export interface DemoComponent {
   ds?: boolean;
   /** Markerer at komponenten er en Hviktor-egen komponent. */
   hvi?: boolean;
+  /** Markerer at komponenten har beståtte enhetstester. */
+  unitTested?: boolean;
+  /** Markerer at komponenten har beståtte E2E-tester. */
+  e2eTested?: boolean;
 }
 
 /** Bygger full URL til designsystemet.no for en gitt slug. */
@@ -27,6 +31,8 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Alert gir brukeren informasjon som det er ekstra viktig at de ser og forstår. Komponenten er designet for å fange brukernes oppmerksomhet. Teksten i varselet skal være kort og tydelig.',
     ds: true,
+    unitTested: true,
+    e2eTested: true,
   },
   {
     id: 'avatar',
