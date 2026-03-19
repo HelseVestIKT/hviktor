@@ -35,6 +35,9 @@
       "path": "./tsconfig.spec.json"
     },
     {
+      "path": "./tsconfig.e2e.json"
+    },
+    {
       "path": "./projects/hviktor/tsconfig.lib.json"
     },
     {
