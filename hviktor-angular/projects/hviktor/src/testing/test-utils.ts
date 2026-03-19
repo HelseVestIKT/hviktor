@@ -1,5 +1,4 @@
 import { provideZonelessChangeDetection, Type } from '@angular/core';
-import { TestBed } from '@angular/core/testing';
 
 /**
  * Configures TestBed for zoneless component testing.
@@ -9,6 +8,7 @@ export async function setupTestBed(config: {
   imports: Type<unknown>[];
   declarations?: Type<unknown>[];
 }) {
+  const { TestBed } = await import('@angular/core/testing');
   await TestBed.configureTestingModule({
     imports: config.imports,
     declarations: config.declarations,
