@@ -24,8 +24,8 @@
     class="border-b border-neutral-300 bg-(--ds-color-neutral-background-default) lg:sticky lg:top-20 lg:h-[calc(100vh-80px)] lg:w-60 lg:shrink-0 lg:overflow-y-auto lg:border-r lg:border-b-0"
   >
     <nav>
-      <ul class="m-0 flex list-none gap-1 overflow-x-auto p-3 pb-4 lg:block lg:p-4 lg:pb-8">
-        <p class="hidden font-medium lg:block">Komponenter</p>
+      <p class="hidden font-medium lg:block lg:px-4 lg:pt-4">Komponenter</p>
+      <ul class="m-0 flex list-none gap-1 overflow-x-auto p-3 pb-4 lg:block lg:px-4 lg:pb-8">
         @for (component of components; track component.id) {
         <li class="shrink-0 lg:mb-1">
           <a

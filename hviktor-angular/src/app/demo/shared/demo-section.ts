@@ -37,7 +37,7 @@ hljs.registerLanguage('typescript', typescript);
             </hvi-details-summary>
             <hvi-details-content>
               <pre>
-                <code #codeBlock class="language-typescript rounded">{{ code() }}</code>
+                <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
               </pre>
             </hvi-details-content>
           </hvi-details>

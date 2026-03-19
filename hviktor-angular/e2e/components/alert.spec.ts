@@ -41,7 +41,6 @@ test.describe('Alert', () => {
   });
 
   test('accessibility check', async ({ page }) => {
-    // Exclude known demo-app layout issues (list structure in sidebar, scrollable code blocks)
-    await checkAccessibility(page, ['list', 'scrollable-region-focusable']);
+    await checkAccessibility(page);
   });
 });
