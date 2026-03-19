@@ -21,7 +21,7 @@ test.describe('Alert', () => {
     expect(count).toBeGreaterThanOrEqual(4);
   });
 
-  test('variants section shows info, success, warning and danger', async ({ page }) => {
+  test('variants section shows info, success, warning and danger', async () => {
     const section = componentPage.getSection('Varianter');
     await expect(section).toBeVisible();
 
@@ -31,7 +31,7 @@ test.describe('Alert', () => {
     await expect(section.locator('hvi-alert').nth(3)).toContainText('danger');
   });
 
-  test('heading and paragraph section renders rich content', async ({ page }) => {
+  test('heading and paragraph section renders rich content', async () => {
     const section = componentPage.getSection('Heading og paragraph');
     await expect(section).toBeVisible();
 
