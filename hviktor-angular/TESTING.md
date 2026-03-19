@@ -4,13 +4,13 @@ Hviktor Angular bruker to testrammeverk: **Vitest** for enhetstester og **Playwr
 
 ## Kommandoer
 
-| Kommando                                      | Beskrivelse                                |
-| --------------------------------------------- | ------------------------------------------ |
-| `npm test`                                    | Kjør alle enhetstester (Vitest)            |
-| `npm test -- --project hviktor --watch=false` | Kjør kun bibliotekets enhetstester         |
-| `npm run test:e2e`                            | Kjør E2E-tester (Playwright)               |
-| `npm run test:e2e:ui`                         | Kjør E2E-tester i interaktivt UI-modus     |
-| `npm run test:all`                            | Kjør enhetstester + E2E-tester sekvensielt |
+| Kommando                                      | Beskrivelse                                                |
+| --------------------------------------------- | ---------------------------------------------------------- |
+| `npm test`                                    | Kjør enhetstester for standard Angular-prosjektet (Vitest) |
+| `npm test -- --project hviktor --watch=false` | Kjør enhetstester for hviktor-biblioteket (Vitest)         |
+| `npm run test:e2e`                            | Kjør E2E-tester (Playwright)                               |
+| `npm run test:e2e:ui`                         | Kjør E2E-tester i interaktivt UI-modus                     |
+| `npm run test:all`                            | Kjør enhetstester (standardprosjekt + hviktor) og E2E      |
 
 ## Enhetstester (Vitest)
 
