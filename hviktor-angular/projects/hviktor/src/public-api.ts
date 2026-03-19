@@ -15,7 +15,6 @@ export * from './divider';
 export * from './dropdown';
 export * from './forms';
 export * from './heading';
-export * from './icon';
 export * from './label';
 export * from './link';
 export * from './list';

@@ -1,16 +1,18 @@
 {
   "name": "@helsevestikt/hviktor-icons",
-  "version": "0.0.41",
+  "version": "0.0.46",
   "description": "Pure Web Components icon library with 900+ icons, works in any framework",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/lib/icons.d.ts",
+  "customElements": "dist/custom-elements.json",
   "exports": {
     ".": {
       "types": "./dist/lib/icons.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
+    "./custom-elements.json": "./dist/custom-elements.json",
     "./*.webcomponent": {
       "import": "./dist/lib/webcomponents/*.webcomponent.js",
       "default": "./dist/lib/webcomponents/*.webcomponent.js"
@@ -29,7 +31,9 @@
     "cleanup": "node scripts/cleanup-duplicates.js",
     "lowercase": "node scripts/lowercase-filenames.js",
     "clean": "rimraf dist",
-    "build": "npm run clean && tsc",
+    "build": "npm run clean && tsc && npm run copy:types",
+    "copy:types": "node -e \"const fs=require('fs');fs.mkdirSync('dist/lib',{recursive:true});fs.copyFileSync('src/lib/icons.d.ts','dist/lib/icons.d.ts');\"",
+    "postbuild": "node scripts/generate-custom-elements-manifest.js",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -50,12 +54,15 @@
     "directory": "projects/icons"
   },
   "dependencies": {
-    "@helsevestikt/hviktor-icons": "0.0.37",
     "tslib": "^2.3.0"
   },
   "devDependencies": {
     "rimraf": "^5.0.0",
     "typescript": "^5.0.0"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "dist/index.js",
+    "dist/lib/webcomponents/*.js",
+    "dist/lib/webcomponents/*.webcomponent.js"
+  ]
 }

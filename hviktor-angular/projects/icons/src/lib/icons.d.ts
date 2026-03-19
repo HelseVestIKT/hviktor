@@ -1904,15 +1904,6 @@ declare global {
     'hvi-icon-zoom-plus-fill': HviIconZoomPlusFill;
   }
 }
-
-export interface HviIconAttributes {
-  size?: 'sm' | 'md' | 'lg';
-}
-
-export interface HviIconElement extends HTMLElement {
-  size: 'sm' | 'md' | 'lg';
-}
-
 export interface HviIconAirplane extends HviIconElement {}
 export interface HviIconAirplaneFill extends HviIconElement {}
 export interface HviIconAlignBottom extends HviIconElement {}

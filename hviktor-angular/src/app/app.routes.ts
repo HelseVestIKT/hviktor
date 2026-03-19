@@ -79,11 +79,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'komponenter/icon',
-        loadComponent: () =>
-          import('./demo/pages/components/icon/icon-demo').then((m) => m.IconDemoComponent),
-      },
-      {
         path: 'komponenter/label',
         loadComponent: () =>
           import('./demo/pages/components/label/label-demo').then((m) => m.LabelDemoComponent),

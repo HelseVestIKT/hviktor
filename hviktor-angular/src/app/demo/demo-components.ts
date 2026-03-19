@@ -21,7 +21,6 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
   { id: 'divider', name: 'Divider', description: 'Skillelinjer mellom innhold' },
   { id: 'forms', name: 'Forms', description: 'Skjemakomponenter og validering' },
   { id: 'heading', name: 'Heading', description: 'Overskrifter' },
-  { id: 'icon', name: 'Icon', description: 'Ikoner' },
   { id: 'label', name: 'Label', description: 'Etiketter' },
   { id: 'link', name: 'Link', description: 'Lenker' },
   { id: 'list', name: 'List', description: 'Lister' },

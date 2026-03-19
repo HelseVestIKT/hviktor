@@ -18,6 +18,29 @@ npm install @helsevestikt/hviktor-icons
 - ✅ **Full TypeScript support** with IntelliSense
 - ✅ **Tiny bundle** - no framework overhead
 
+## TypeScript typings and metadata
+
+The package publishes both:
+
+- `dist/lib/icons.d.ts` (configured via the `types` field in `package.json`)
+- `dist/custom-elements.json`
+
+This gives strong IntelliSense across editors and frameworks for:
+
+- custom element tags (`hvi-icon-*`)
+- attributes/properties (`size`)
+- typed custom event `hvi-size-change`
+
+TypeScript example:
+
+```ts
+const icon = document.createElement('hvi-icon-airplane');
+icon.size = 'lg';
+icon.addEventListener('hvi-size-change', (event) => {
+  console.log(event.detail.previousSize, event.detail.size);
+});
+```
+
 ## Quick Start
 
 ### Angular

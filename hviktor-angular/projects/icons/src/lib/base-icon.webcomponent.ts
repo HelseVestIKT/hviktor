@@ -1,3 +1,62 @@
+export interface HviIconSizeChangeDetail {
+  previousSize: 'sm' | 'md' | 'lg';
+  size: 'sm' | 'md' | 'lg';
+}
+
+export interface HviIconElement extends HTMLElement {
+  size: 'sm' | 'md' | 'lg';
+
+  addEventListener<K extends keyof HTMLElementEventMap>(
+    type: K,
+    listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: 'hvi-size-change',
+    listener: (event: CustomEvent<HviIconSizeChangeDetail>) => void,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+  addEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    options?: boolean | AddEventListenerOptions,
+  ): void;
+
+  removeEventListener<K extends keyof HTMLElementEventMap>(
+    type: K,
+    listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => unknown,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: 'hvi-size-change',
+    listener: (event: CustomEvent<HviIconSizeChangeDetail>) => void,
+    options?: boolean | EventListenerOptions,
+  ): void;
+  removeEventListener(
+    type: string,
+    listener: EventListenerOrEventListenerObject,
+    options?: boolean | EventListenerOptions,
+  ): void;
+}
+
+export interface HviIconAttributes {
+  size?: 'sm' | 'md' | 'lg';
+  onhvisizechange?: (event: CustomEvent<HviIconSizeChangeDetail>) => void;
+}
+
+declare global {
+  interface HTMLElementTagNameMap {
+    [tagName: `hvi-icon-${string}`]: HviIconElement;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace JSX {
+    interface IntrinsicElements {
+      [tagName: `hvi-icon-${string}`]: HviIconAttributes;
+    }
+  }
+}
+
 export abstract class HviIconBase extends HTMLElement {
   private _size: 'sm' | 'md' | 'lg' = 'md';
   private _shadow: ShadowRoot;
@@ -16,14 +75,18 @@ export abstract class HviIconBase extends HTMLElement {
   }
 
   set size(value: 'sm' | 'md' | 'lg') {
+    const previousSize = this._size;
     this._size = value;
     this.render();
+    this.emitSizeChange(previousSize, this._size);
   }
 
   attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (name === 'size' && oldValue !== newValue) {
+      const previousSize = this._size;
       this._size = (newValue as 'sm' | 'md' | 'lg') || 'md';
       this.render();
+      this.emitSizeChange(previousSize, this._size);
     }
   }
 
@@ -36,6 +99,23 @@ export abstract class HviIconBase extends HTMLElement {
   protected get sizePx(): number {
     const sizeMap = { sm: 16, md: 24, lg: 32 };
     return sizeMap[this._size];
+  }
+
+  private emitSizeChange(previousSize: 'sm' | 'md' | 'lg', size: 'sm' | 'md' | 'lg') {
+    if (previousSize === size) {
+      return;
+    }
+
+    this.dispatchEvent(
+      new CustomEvent<HviIconSizeChangeDetail>('hvi-size-change', {
+        detail: {
+          previousSize,
+          size,
+        },
+        bubbles: true,
+        composed: true,
+      }),
+    );
   }
 
   private render() {
