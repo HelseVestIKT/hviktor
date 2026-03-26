@@ -13,6 +13,10 @@ export interface DemoComponent {
   ds?: boolean;
   /** Markerer at komponenten er en Hviktor-egen komponent. */
   hvi?: boolean;
+  /** Markerer at komponenten har beståtte enhetstester. */
+  unitTested?: boolean;
+  /** Markerer at komponenten har beståtte E2E-tester. */
+  e2eTested?: boolean;
 }
 
 /** Bygger full URL til designsystemet.no for en gitt slug. */
@@ -27,6 +31,8 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Alert gir brukeren informasjon som det er ekstra viktig at de ser og forstår. Komponenten er designet for å fange brukernes oppmerksomhet. Teksten i varselet skal være kort og tydelig.',
     ds: true,
+    unitTested: true,
+    e2eTested: true,
   },
   {
     id: 'avatar',
@@ -102,7 +108,6 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Heading brukes til å strukturere innhold og skape hierarki på siden.',
     ds: true,
   },
-  { id: 'icon', name: 'Icon', description: 'Ikoner', hvi: true },
   {
     id: 'label',
     name: 'Label',
@@ -295,5 +300,16 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Textfield gir brukere muligheten til å skrive fritekst eller tall.',
     ds: true,
   },
-  { id: 'suggestion', name: 'Suggestion', description: 'Søkbar select med mulighet for å velge flere alternativer' },
+  {
+    id: 'suggestion',
+    name: 'Suggestion',
+    description: 'Søkbar select med mulighet for å velge flere alternativer',
+  },
+  {
+    id: 'required-tag',
+    name: 'RequiredTag',
+    description:
+      'RequiredTag kan brukes sammen med labels i et skjema for å indikere om et felt er påkrevd, valgfritt eller om alle felt må fylles ut.',
+    hvi: true,
+  },
 ].sort((a, b) => a.name.localeCompare(b.name, 'nb'));

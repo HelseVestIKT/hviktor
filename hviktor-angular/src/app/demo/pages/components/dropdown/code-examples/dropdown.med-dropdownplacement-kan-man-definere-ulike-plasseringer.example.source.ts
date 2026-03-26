@@ -8,8 +8,8 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor';
   imports: [HviButton, HviDropdown],
   template: \`
     <div class="flex flex-wrap gap-2">
-      <button hviButton popovertarget="dropdown2">top-start</button>
-      <hvi-dropdown id="dropdown2" popover dropdownPlacement="top-start">
+      <button hviButton popovertarget="dropdown2">top</button>
+      <hvi-dropdown id="dropdown2" dropdownPlacement="top">
         <ul>
           <li>
             <button hviButton variant="tertiary">Menylenke</button>
@@ -20,8 +20,8 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor';
         </ul>
       </hvi-dropdown>
     
-      <button hviButton popovertarget="left">left-start</button>
-      <hvi-dropdown id="left" popover dropdownPlacement="left-start">
+      <button hviButton popovertarget="left">left</button>
+      <hvi-dropdown id="left" dropdownPlacement="left">
         <ul>
           <li>
             <button hviButton variant="tertiary">Menylenke</button>
@@ -32,8 +32,8 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor';
         </ul>
       </hvi-dropdown>
     
-      <button hviButton popovertarget="right">right-end</button>
-      <hvi-dropdown id="right" popover dropdownPlacement="right-end">
+      <button hviButton popovertarget="right">right</button>
+      <hvi-dropdown id="right" dropdownPlacement="right">
         <ul>
           <li>
             <button hviButton variant="tertiary">Menylenke</button>
@@ -47,6 +47,5 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor';
   \`,
 })
 export class DropdownMedDropdownplacementKanManDefinereUlikePlasseringerExampleComponent {
-  
 }
 `;

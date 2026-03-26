@@ -79,11 +79,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'komponenter/icon',
-        loadComponent: () =>
-          import('./demo/pages/components/icon/icon-demo').then((m) => m.IconDemoComponent),
-      },
-      {
         path: 'komponenter/label',
         loadComponent: () =>
           import('./demo/pages/components/label/label-demo').then((m) => m.LabelDemoComponent),
@@ -258,6 +253,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./demo/pages/components/suggestion/suggestion-demo').then(
             (m) => m.SuggestionDemoComponent,
+          ),
+      },
+      {
+        path: 'komponenter/required-tag',
+        loadComponent: () =>
+          import('./demo/pages/components/required-tag/required-tag-demo').then(
+            (m) => m.RequiredTagDemoComponent,
           ),
       },
     ],

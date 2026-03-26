@@ -5,10 +5,8 @@ import '@u-elements/u-datalist';
   selector: 'hvi-suggestion-datalist',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <u-datalist class="ds-suggestion">
-      <u-option>
-        <ng-content />
-      </u-option>
+    <u-datalist>
+      <ng-content />
     </u-datalist>
   `,
   host: {

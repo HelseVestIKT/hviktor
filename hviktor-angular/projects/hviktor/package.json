@@ -7,8 +7,9 @@
     "@angular/core": ">=17.0.0 <22.0.0"
   },
   "dependencies": {
-    "@digdir/designsystemet-css": "^1.12.1",
-    "@floating-ui/dom": "^1.7.5",
+    "@digdir/designsystemet-css": "^1.13.1",
+    "@digdir/designsystemet-web": "^1.13.1",
+    "@u-elements/u-combobox": "^1.0.7",
     "@u-elements/u-details": "^0.1.5",
     "@u-elements/u-tabs": "^0.1.2",
     "tslib": "^2.3.0"

@@ -1,6 +1,6 @@
 # Hviktor Icons
 
-A collection of **947 icons** from [NAV Aksel](https://aksel.nav.no/komponenter/ikoner) that can be used in both **Angular** and **Blazor** (or any other framework) projects. The icons are built as Angular components but can also be used as Web Components for cross-framework compatibility.
+A collection of **900+ icons** as pure **Web Components** that work in any framework - Angular, React, Vue, Blazor, or vanilla JavaScript.
 
 ## Installation
 
@@ -10,94 +10,105 @@ npm install @helsevestikt/hviktor-icons
 
 ## Features
 
-- ✅ **947 icons** from NAV Aksel design system
-- ✅ **Angular components** with full TypeScript support
-- ✅ **Web Components** for use in any framework (Blazor, React, Vue, etc.)
+- ✅ **900+ icons** based on NAV Aksel design system
+- ✅ **Pure Web Components** - no framework dependencies
+- ✅ **Works everywhere** - Angular, React, Vue, Blazor, vanilla JS
 - ✅ **Three sizes**: `sm` (16px), `md` (24px), `lg` (32px)
 - ✅ **Customizable** via CSS `color` property
-- ✅ **Tree-shakeable** - only import what you need
+- ✅ **Full TypeScript support** with IntelliSense
+- ✅ **Tiny bundle** - no framework overhead
 
-## Usage
+## TypeScript typings and metadata
 
-### Option 1: Angular Components (Angular Projects Only)
+The package publishes both:
 
-Import individual icon components directly in your Angular application:
+- `dist/lib/icons.d.ts` (configured via the `types` field in `package.json`)
+- `dist/custom-elements.json`
+
+This gives strong IntelliSense across editors and frameworks for:
+
+- custom element tags (`hvi-icon-*`)
+- attributes/properties (`size`)
+- typed custom event `hvi-size-change`
+
+TypeScript example:
+
+```ts
+const icon = document.createElement('hvi-icon-airplane');
+icon.size = 'lg';
+icon.addEventListener('hvi-size-change', (event) => {
+  console.log(event.detail.previousSize, event.detail.size);
+});
+```
+
+## Quick Start
+
+### Angular
 
 ```typescript
-import { Component } from '@angular/core';
-import { HviIconPerson, HviIconHouse, HviIconCheckmark } from '@helsevestikt/hviktor-icons';
+// app.config.ts or main.ts
+import '@helsevestikt/hviktor-icons';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+export const appConfig = {
+  // Add schema to allow custom elements
+};
+
+// In component
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
-  selector: 'app-example',
-  imports: [HviIconPerson, HviIconHouse, HviIconCheckmark],
+  selector: 'app-root',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <hvi-icon-person size="sm" />
-    <hvi-icon-house size="md" />
-    <hvi-icon-checkmark size="lg" />
+    <hvi-icon-airplane size="lg"></hvi-icon-airplane>
+    <hvi-icon-person size="md"></hvi-icon-person>
+    <hvi-icon-house size="sm"></hvi-icon-house>
   `,
 })
-export class ExampleComponent {}
+export class AppComponent {}
 ```
 
-**Available sizes:** `'sm'` (16px), `'md'` (24px), `'lg'` (32px)
+### React
 
-### Option 2: Web Components (Angular, Blazor, React, Vue, etc.)
+```jsx
+import '@helsevestikt/hviktor-icons';
 
-#### Angular with Web Components
-
-Register the icons as custom elements in your application:
-
-```typescript
-// In main.ts or app initialization
-import { registerIconsAsCustomElements } from '@helsevestikt/hviktor-icons';
-
-registerIconsAsCustomElements();
-
-// Then use in any component template
-@Component({
-  template: `
-    <hvi-icon-person size="md"></hvi-icon-person>
-    <hvi-icon-house size="lg"></hvi-icon-house>
-  `
-})
+function App() {
+  return (
+    <>
+      <hvi-icon-airplane size="lg"></hvi-icon-airplane>
+      <hvi-icon-person size="md"></hvi-icon-person>
+    </>
+  );
+}
 ```
 
-#### Blazor / ASP.NET Core
+### Vue
 
-See the complete [Blazor Integration Guide](https://github.com/helsevestikt/hviktor-angular/blob/main/projects/icons/BLAZOR_GUIDE.md) for detailed instructions.
+```vue
+<template>
+  <hvi-icon-airplane size="lg"></hvi-icon-airplane>
+  <hvi-icon-person size="md"></hvi-icon-person>
+</template>
 
-**Quick Start:**
-
-**1. Install the package:**
-
-```bash
-npm install @helsevestikt/hviktor-icons
-```
-
-**2. Copy the bundle to wwwroot:**
-
-```powershell
-Copy-Item "node_modules/@helsevestikt/hviktor-icons/bundles/hviktor-icons.js" -Destination "wwwroot/js/" -Force
-```
-
-**3. Add to your layout file (`_Host.cshtml`, `_Layout.cshtml`, or `index.html`):**
-
-```html
-<script src="~/js/hviktor-icons.js"></script>
 <script>
-  if (window.HvictorIcons) {
-    HvictorIcons.register();
-  }
+import '@helsevestikt/hviktor-icons';
 </script>
 ```
 
-**4. Use in Razor components:**
+### Blazor
 
-```razor
-@page "/dashboard"
+```html
+<!-- In _Host.cshtml, _Layout.cshtml, or index.html -->
+<script type="module">
+  import '@helsevestikt/hviktor-icons';
+</script>
 
-<div class="header">
-  <hvi-icon-house size="lg"></hvi-icon-house>
+<!-- Then in your Razor components -->
+<hvi-icon-airplane size="lg"></hvi-icon-airplane>
+```
+
   <h1>Dashboard</h1>
 </div>
 
@@ -117,7 +128,8 @@ Copy-Item "node_modules/@helsevestikt/hviktor-icons/bundles/hviktor-icons.js" -D
     color: #d83b01;
   }
 </style>
-```
+
+````
 
 #### Vanilla JavaScript / HTML
 
@@ -136,7 +148,7 @@ Copy-Item "node_modules/@helsevestikt/hviktor-icons/bundles/hviktor-icons.js" -D
     </script>
   </body>
 </html>
-```
+````
 
 ## Available Icons
 

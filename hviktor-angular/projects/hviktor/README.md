@@ -34,48 +34,49 @@ export class MyComponent {}
 
 ## Tilgjengelige komponenter
 
-| Komponent    | Beskrivelse                                          |
-| ------------ | ---------------------------------------------------- |
-| Alert        | Varselmeldinger for å informere brukeren             |
-| Avatar       | Profilbilde eller initialer                          |
-| AvatarStack  | AvatarStack                                          |
-| Badge        | Små indikatorer og tellere                           |
-| Breadcrumbs  | Navigasjonssti                                       |
-| Button       | Knapper for handlinger                               |
-| Card         | Kort for gruppering av innhold                       |
-| Checkbox     | Avkrysningsbokser for ett eller flere valg           |
-| Chip         | Kompakte elementer for valg og filtrering            |
-| Details      | Utvidbart innhold                                    |
-| Dialog       | Modale dialogbokser                                  |
-| Divider      | Skillelinjer mellom innhold                          |
-| ErrorSummary | ErrorSummary er en oppsummering av feil i et skjema. |
-| Field        | Field komponent                                      |
-| Fieldset     | Fieldset komponent                                   |
-| Forms        | Skjemakomponenter og validering                      |
-| Heading      | Overskrifter                                         |
-| Icon         | Ikoner                                               |
-| Input        | Input komponent                                      |
-| Label        | Etiketter                                            |
-| Link         | Lenker                                               |
-| List         | Lister                                               |
-| Logo         | Logo komponent                                       |
-| Pagination   | Pagination komponent                                 |
-| Paragraph    | Avsnitt                                              |
-| Popover      | Popup-innhold                                        |
-| Radio        | Radio komponent                                      |
-| Search       | Search komponent                                     |
-| Select       | Nedtrekksliste for valg fra en liste                 |
-| Skeleton     | Placeholder mens innhold lastes                      |
-| SkipLink     | SkipLink komponent                                   |
-| Spinner      | Spinner komponent                                    |
-| Suggestion  | Søkbar select med mulighet for å velge flere alternativer |
-| Switch       | Switch komponent                                     |
-| Table        | Table komponent                                      |
-| Tag          | Merkelapper for kategorisering                       |
-| Textarea     | Textarea komponent                                   |
-| Textfield    | Textfield komponent                                  |
-| ToggleGroup  | ToggleGroup komponent                                |
-| Tooltip      | Tooltip komponent                                    |
+| Komponent    | Beskrivelse                                               |
+| ------------ | --------------------------------------------------------- |
+| Alert        | Varselmeldinger for å informere brukeren                  |
+| Avatar       | Profilbilde eller initialer                               |
+| AvatarStack  | AvatarStack                                               |
+| Badge        | Små indikatorer og tellere                                |
+| Breadcrumbs  | Navigasjonssti                                            |
+| Button       | Knapper for handlinger                                    |
+| Card         | Kort for gruppering av innhold                            |
+| Checkbox     | Avkrysningsbokser for ett eller flere valg                |
+| Chip         | Kompakte elementer for valg og filtrering                 |
+| Details      | Utvidbart innhold                                         |
+| Dialog       | Modale dialogbokser                                       |
+| Divider      | Skillelinjer mellom innhold                               |
+| ErrorSummary | ErrorSummary er en oppsummering av feil i et skjema.      |
+| Field        | Field komponent                                           |
+| Fieldset     | Fieldset komponent                                        |
+| Forms        | Skjemakomponenter og validering                           |
+| Heading      | Overskrifter                                              |
+| Icon         | Ikoner                                                    |
+| Input        | Input komponent                                           |
+| Label        | Etiketter                                                 |
+| Link         | Lenker                                                    |
+| List         | Lister                                                    |
+| Logo         | Logo komponent                                            |
+| Pagination   | Pagination komponent                                      |
+| Paragraph    | Avsnitt                                                   |
+| Popover      | Popup-innhold                                             |
+| Radio        | Radio komponent                                           |
+| RequiredTag  | RequiredTag komponent                                     |
+| Search       | Search komponent                                          |
+| Select       | Nedtrekksliste for valg fra en liste                      |
+| Skeleton     | Placeholder mens innhold lastes                           |
+| SkipLink     | SkipLink komponent                                        |
+| Spinner      | Spinner komponent                                         |
+| Suggestion   | Søkbar select med mulighet for å velge flere alternativer |
+| Switch       | Switch komponent                                          |
+| Table        | Table komponent                                           |
+| Tag          | Merkelapper for kategorisering                            |
+| Textarea     | Textarea komponent                                        |
+| Textfield    | Textfield komponent                                       |
+| ToggleGroup  | ToggleGroup komponent                                     |
+| Tooltip      | Tooltip komponent                                         |
 
 ## Krav
 

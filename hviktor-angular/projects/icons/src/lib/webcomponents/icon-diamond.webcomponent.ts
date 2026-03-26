@@ -1,0 +1,12 @@
+import { HviIconBase } from '../base-icon.webcomponent';
+
+export class HviIconDiamond extends HviIconBase {
+  protected get path(): string {
+    return 'M11.4698 1.57026C11.7626 1.27736 12.2375 1.27736 12.5304 1.57026L22.4299 11.4698C22.7228 11.7626 22.7228 12.2375 22.4299 12.5304L12.5304 22.4299C12.2375 22.7228 11.7626 22.7228 11.4698 22.4299L1.57026 12.5304C1.27736 12.2375 1.27736 11.7626 1.57026 11.4698L11.4698 1.57026ZM3.16125 12.0001L12.0001 20.8389L20.8389 12.0001L12.0001 3.16125L3.16125 12.0001Z';
+  }
+}
+
+// Register the custom element (only in browser environment)
+if (typeof customElements !== 'undefined' && !customElements.get('hvi-icon-diamond')) {
+  customElements.define('hvi-icon-diamond', HviIconDiamond);
+}

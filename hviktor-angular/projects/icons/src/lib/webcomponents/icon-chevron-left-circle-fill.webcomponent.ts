@@ -1,0 +1,15 @@
+import { HviIconBase } from '../base-icon.webcomponent';
+
+export class HviIconChevronLeftCircleFill extends HviIconBase {
+  protected get path(): string {
+    return 'M12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25ZM13.5303 9.03033C13.8232 8.73744 13.8232 8.26256 13.5303 7.96967C13.2374 7.67678 12.7626 7.67678 12.4697 7.96967L8.96967 11.4697C8.67678 11.7626 8.67678 12.2374 8.96967 12.5303L12.4697 16.0303C12.7626 16.3232 13.2374 16.3232 13.5303 16.0303C13.8232 15.7374 13.8232 15.2626 13.5303 14.9697L10.5607 12L13.5303 9.03033Z';
+  }
+}
+
+// Register the custom element (only in browser environment)
+if (
+  typeof customElements !== 'undefined' &&
+  !customElements.get('hvi-icon-chevron-left-circle-fill')
+) {
+  customElements.define('hvi-icon-chevron-left-circle-fill', HviIconChevronLeftCircleFill);
+}
