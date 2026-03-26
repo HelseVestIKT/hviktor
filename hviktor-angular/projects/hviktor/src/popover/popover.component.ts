@@ -28,8 +28,8 @@ import '@digdir/designsystemet-web';
   },
 })
 export class HviPopover {
-  /** Popover type - 'manual' krever manuell lukking, 'auto' lukkes ved klikk utenfor */
-  @Input() type: 'auto' | 'manual' | 'hint' = 'manual';
+  /** Popover type - 'auto' lukkes ved klikk utenfor eller Escape, 'manual' krever manuell lukking */
+  @Input() type: 'auto' | 'manual' | 'hint' = 'auto';
 
   /** Visuell variant */
   @Input() variant: 'default' | 'tinted' = 'default';
