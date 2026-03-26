@@ -3,6 +3,7 @@ import { Directive, effect, ElementRef, input } from '@angular/core';
 // This directive provides Angular-style property bindings for the web component
 @Directive({
   selector: 'hvi-icon-airplane',
+  standalone: true,
 })
 export class HviIconAirplaneDirective {
   size = input<'sm' | 'md' | 'lg'>('md');
