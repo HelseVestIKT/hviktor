@@ -9,19 +9,19 @@ import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor
   template: \`
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Skru av/på lys</legend>
-      <ds-field>
+      <hvi-field>
         <input hviInput type="checkbox" role="switch" id="switch-stue" checked />
         <label hviLabel for="switch-stue">Stue</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input hviInput type="checkbox" role="switch" id="switch-kjokken" />
         <label hviLabel for="switch-kjokken">Kjøkken</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input hviInput type="checkbox" role="switch" id="switch-bad" />
         <label hviLabel for="switch-bad">Bad</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input
           hviInput
           type="checkbox"
@@ -34,7 +34,7 @@ import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor
         <div data-field="description" id="switch-soverom-desc">
           Får ikke kontakt med lyspærene
         </div>
-      </ds-field>
+      </hvi-field>
     </fieldset>
   \`,
 })

@@ -6,10 +6,10 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: `
-    <ds-field>
+    <hvi-field>
       <label hviLabel for="fnr-readonly" weight="medium">Fødselsnummer</label>
       <input hviInput type="text" id="fnr-readonly" value="12345678901" readOnly />
-    </ds-field>
+    </hvi-field>
   `,
 })
 export class InputReadonlyExampleComponent {}

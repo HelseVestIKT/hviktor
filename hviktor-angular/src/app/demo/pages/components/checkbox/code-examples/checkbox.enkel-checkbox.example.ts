@@ -6,10 +6,10 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: `
-    <ds-field>
+    <hvi-field>
       <input hviInput type="checkbox" id="simple-checkbox" />
       <label hviLabel for="simple-checkbox">Checkbox label</label>
-    </ds-field>
+    </hvi-field>
   `,
 })
 export class CheckboxEnkelCheckboxExampleComponent {}

@@ -7,30 +7,30 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   imports: [HviField, HviInput, HviLabel],
   template: `
     <div class="grid gap-4">
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="email-input" weight="medium">E-post</label>
         <input hviInput type="email" id="email-input" placeholder="navn@eksempel.no" />
-      </ds-field>
+      </hvi-field>
 
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="password-input" weight="medium">Passord</label>
         <input hviInput type="password" id="password-input" placeholder="••••••••" />
-      </ds-field>
+      </hvi-field>
 
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="number-input" weight="medium">Tall</label>
         <input hviInput type="number" id="number-input" placeholder="0" />
-      </ds-field>
+      </hvi-field>
 
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="date-input" weight="medium">Dato</label>
         <input hviInput type="date" id="date-input" />
-      </ds-field>
+      </hvi-field>
 
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="tel-input" weight="medium">Telefon</label>
         <input hviInput type="tel" id="tel-input" placeholder="+47 123 45 678" />
-      </ds-field>
+      </hvi-field>
     </div>
   `,
 })

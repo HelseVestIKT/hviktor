@@ -30,7 +30,7 @@ import {
   ],
   template: `
     <form hviForm [formGroup]="form" [focusOnInvalid]="summary" class="grid gap-4">
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="fornavn" weight="medium">Fornavn</label>
         <input
           hviInput
@@ -45,9 +45,9 @@ import {
           hviValidationMessage="fornavn"
           [messages]="messages['fornavn']"
         ></p>
-      </ds-field>
+      </hvi-field>
 
-      <ds-field>
+      <hvi-field>
         <label hviLabel for="telefon" weight="medium">Telefon</label>
         <input
           hviInput
@@ -63,7 +63,7 @@ import {
           hviValidationMessage="telefon"
           [messages]="messages['telefon']"
         ></p>
-      </ds-field>
+      </hvi-field>
 
       <hvi-error-summary #summary [form]="form" [messages]="messages" showWhen="always" />
 

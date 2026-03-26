@@ -10,7 +10,7 @@ import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput,
     <fieldset hviFieldset [formGroup]="contactForm">
       <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
       <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-      <ds-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -19,8 +19,8 @@ import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput,
           formControlName="epost"
         />
         <label hviLabel for="error-epost">E-post</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -29,8 +29,8 @@ import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput,
           formControlName="telefon"
         />
         <label hviLabel for="error-telefon">Telefon</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -39,7 +39,7 @@ import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput,
           formControlName="sms"
         />
         <label hviLabel for="error-sms">SMS</label>
-      </ds-field>
+      </hvi-field>
       @if (contactForm.invalid) {
         <span hviFieldValidation>Du må velge minst to alternativ</span>
       }

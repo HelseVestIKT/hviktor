@@ -7,14 +7,14 @@ import { HviButton, HviField, HviInput, HviLabel, HviSearch, HviSearchClear } fr
   standalone: true,
   imports: [HviButton, HviField, HviInput, HviLabel, HviSearch, HviSearchClear],
   template: \`
-    <ds-field>
+    <hvi-field>
       <label hviLabel weight="medium">Søk etter katter</label>
       <hvi-search>
         <input hviInput type="search" placeholder="" name="cat-search" />
         <button hviSearchClear aria-label="Tøm"></button>
         <button hviButton variant="primary" type="submit">Søk</button>
       </hvi-search>
-    </ds-field>
+    </hvi-field>
   \`,
 })
 export class SearchMedLabelExampleComponent {

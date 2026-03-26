@@ -9,10 +9,10 @@ import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor
   template: \`
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Godtar du vilkårene?</legend>
-      <ds-field>
+      <hvi-field>
         <input hviInput type="checkbox" id="agree" value="agree" />
         <label hviLabel for="agree">Ja, jeg godtar</label>
-      </ds-field>
+      </hvi-field>
     </fieldset>
   \`,
 })

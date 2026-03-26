@@ -12,12 +12,12 @@ import {
   standalone: true,
   imports: [HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel],
   template: `
-    <ds-field>
+    <hvi-field>
       <label hviLabel for="etternavn" weight="medium">Etternavn</label>
       <span hviFieldDescription>Etternavn kan ikke inneholde mellomrom</span>
       <input hviInput id="etternavn" type="text" value="Nordmann Svenske" aria-invalid="true" />
       <span hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</span>
-    </ds-field>
+    </hvi-field>
   `,
 })
 export class FieldGrunnleggendeExampleComponent {}

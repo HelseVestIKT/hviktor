@@ -8,15 +8,15 @@ import { HviDivider, HviField, HviInput, HviLabel } from '@helsevestikt/hviktor'
   template: `
     <div style="flex-direction: column; width: 100%; max-width: 380px;">
       <hr hviDivider aria-hidden="true" />
-      <ds-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
+      <hvi-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
         <label hviLabel weight="medium" for="switch-flymodus">Flymodus</label>
         <input hviInput type="checkbox" role="switch" id="switch-flymodus" />
-      </ds-field>
+      </hvi-field>
       <hr hviDivider aria-hidden="true" />
-      <ds-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
+      <hvi-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
         <label hviLabel weight="medium" for="switch-lydlos">Lydløs</label>
         <input hviInput type="checkbox" role="switch" id="switch-lydlos" />
-      </ds-field>
+      </hvi-field>
       <hr hviDivider aria-hidden="true" />
     </div>
   `,

@@ -7,10 +7,10 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: \`
-    <ds-field>
+    <hvi-field>
       <label hviLabel for="basic-textarea" weight="medium">Beskrivelse</label>
       <textarea hviInput id="basic-textarea" rows="4"></textarea>
-    </ds-field>
+    </hvi-field>
   \`,
 })
 export class TextareaGrunnleggendeExampleComponent {

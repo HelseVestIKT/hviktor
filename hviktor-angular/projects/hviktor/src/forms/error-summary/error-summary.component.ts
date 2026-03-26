@@ -62,17 +62,17 @@ const nextErrorSummaryHeadingId = () => `hvi-error-summary-heading-${++errorSumm
  * <form hviForm [formGroup]="form" [focusOnInvalid]="summary">
  *   <hvi-error-summary #summary [form]="form" [messages]="messages" showWhen="submitted" />
  *
- *   <ds-field>
+ *   <hvi-field>
  *     <label hviLabel for="firstName" weight="medium">Fornavn</label>
  *     <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
  *     <p hviFieldValidation hviValidationMessage="firstName" [messages]="messages.firstName"></p>
- *   </ds-field>
+ *   </hvi-field>
  *
- *   <ds-field>
+ *   <hvi-field>
  *     <label hviLabel for="phone" weight="medium">Telefon</label>
  *     <input hviInput id="phone" type="tel" formControlName="phone" hviControlInvalid />
  *     <p hviFieldValidation hviValidationMessage="phone" [messages]="messages.phone"></p>
- *   </ds-field>
+ *   </hvi-field>
  *
  *   <button hviButton type="submit" variant="primary">Send inn</button>
  * </form>

@@ -12,10 +12,10 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
       <p hviParagraph>
         For at vi skal kunne sende deg opplysningen du ber om, må du bekrefte at du er myndig.
       </p>
-      <ds-field>
+      <hvi-field>
         <input hviInput type="checkbox" id="age-confirm" value="samtykke" />
         <label hviLabel for="age-confirm">Jeg bekrefter at jeg er over 18 år</label>
-      </ds-field>
+      </hvi-field>
     </fieldset>
   \`,
 })

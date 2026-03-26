@@ -7,11 +7,11 @@ import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hvi
   standalone: true,
   imports: [HviField, HviFieldCounter, HviInput, HviLabel],
   template: \`
-    <ds-field>
+    <hvi-field>
       <label hviLabel for="beskrivelse" weight="medium">Legg til en beskrivelse</label>
       <input hviInput id="beskrivelse" type="text" [maxLength]="10" />
       <hvi-field-counter [limit]="10" />
-    </ds-field>
+    </hvi-field>
   \`,
 })
 export class FieldAntallTegnExampleComponent {

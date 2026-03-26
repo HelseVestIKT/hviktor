@@ -6,10 +6,10 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: `
-    <ds-field>
+    <hvi-field>
       <input hviInput type="radio" id="single-radio" name="single" value="value" />
       <label hviLabel for="single-radio">Radio</label>
-    </ds-field>
+    </hvi-field>
   `,
 })
 export class RadioEnkelRadioExampleComponent {}

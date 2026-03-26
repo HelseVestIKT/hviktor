@@ -7,12 +7,12 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: \`
-    <ds-field>
+    <hvi-field>
               <label hviLabel for="readonly-textarea" weight="medium">Vilkår</label>
               <textarea hviInput id="readonly-textarea" rows="3" readOnly>
     Dette er skrivebeskyttet innhold som brukeren kan lese men ikke endre.</textarea
               >
-            </ds-field>
+            </hvi-field>
   \`,
 })
 export class TextareaReadonlyExampleComponent {

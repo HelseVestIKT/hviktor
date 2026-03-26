@@ -11,14 +11,14 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
       <legend hviLabel weight="medium">Kontaktes på e-post?</legend>
       <p hviParagraph>Bekreft om du ønsker å bli kontaktet per e-post.</p>
       <div class="flex gap-4">
-        <ds-field>
+        <hvi-field>
           <input hviInput type="radio" id="epost-ja" name="epost-kontakt" value="ja" />
           <label hviLabel for="epost-ja">Ja</label>
-        </ds-field>
-        <ds-field>
+        </hvi-field>
+        <hvi-field>
           <input hviInput type="radio" id="epost-nei" name="epost-kontakt" value="nei" />
           <label hviLabel for="epost-nei">Nei</label>
-        </ds-field>
+        </hvi-field>
       </div>
     </fieldset>
   \`,

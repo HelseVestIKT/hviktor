@@ -7,12 +7,12 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: \`
-    <ds-field>
+    <hvi-field>
               <label hviLabel for="disabled-textarea" weight="medium">Kommentar</label>
               <textarea hviInput id="disabled-textarea" rows="3" disabled>
     Dette feltet er deaktivert</textarea
               >
-            </ds-field>
+            </hvi-field>
   \`,
 })
 export class TextareaDisabledExampleComponent {

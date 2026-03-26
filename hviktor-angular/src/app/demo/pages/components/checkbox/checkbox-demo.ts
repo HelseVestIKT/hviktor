@@ -55,10 +55,10 @@ function minCheckedValidator(min: number) {
         [code]="enkelCheckboxCode"
         description="En enkel checkbox med label og beskrivelse."
       >
-        <ds-field>
+        <hvi-field>
           <input hviInput type="checkbox" id="simple-checkbox" />
           <label hviLabel for="simple-checkbox">Checkbox label</label>
-        </ds-field>
+        </hvi-field>
       </app-demo-section>
 
       <!-- Bekrefting med checkbox -->
@@ -72,10 +72,10 @@ function minCheckedValidator(min: number) {
           <p hviParagraph>
             For at vi skal kunne sende deg opplysningen du ber om, må du bekrefte at du er myndig.
           </p>
-          <ds-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="age-confirm" value="samtykke" />
             <label hviLabel for="age-confirm">Jeg bekrefter at jeg er over 18 år</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
 
@@ -88,18 +88,18 @@ function minCheckedValidator(min: number) {
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
           <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-          <ds-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="group-epost" value="epost" name="kontakt" />
             <label hviLabel for="group-epost">E-post</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="group-telefon" value="telefon" name="kontakt" />
             <label hviLabel for="group-telefon">Telefon</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="group-sms" value="sms" name="kontakt" />
             <label hviLabel for="group-sms">SMS</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
 
@@ -112,7 +112,7 @@ function minCheckedValidator(min: number) {
         <fieldset hviFieldset [formGroup]="contactForm">
           <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
           <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-          <ds-field>
+          <hvi-field>
             <input
               hviInput
               hviControlInvalid
@@ -121,8 +121,8 @@ function minCheckedValidator(min: number) {
               formControlName="epost"
             />
             <label hviLabel for="error-epost">E-post</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input
               hviInput
               hviControlInvalid
@@ -131,8 +131,8 @@ function minCheckedValidator(min: number) {
               formControlName="telefon"
             />
             <label hviLabel for="error-telefon">Telefon</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input
               hviInput
               hviControlInvalid
@@ -141,7 +141,7 @@ function minCheckedValidator(min: number) {
               formControlName="sms"
             />
             <label hviLabel for="error-sms">SMS</label>
-          </ds-field>
+          </hvi-field>
           @if (contactForm.invalid) {
             <span hviFieldValidation>Du må velge minst to alternativ</span>
           }
@@ -157,7 +157,7 @@ function minCheckedValidator(min: number) {
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
           <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-          <ds-field>
+          <hvi-field>
             <input
               hviInput
               type="checkbox"
@@ -168,8 +168,8 @@ function minCheckedValidator(min: number) {
               readonly
             />
             <label hviLabel for="readonly-epost">E-post</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input
               hviInput
               type="checkbox"
@@ -179,8 +179,8 @@ function minCheckedValidator(min: number) {
               readonly
             />
             <label hviLabel for="readonly-telefon">Telefon</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input
               hviInput
               type="checkbox"
@@ -190,7 +190,7 @@ function minCheckedValidator(min: number) {
               readonly
             />
             <label hviLabel for="readonly-sms">SMS</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
 
@@ -203,7 +203,7 @@ function minCheckedValidator(min: number) {
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
           <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-          <ds-field>
+          <hvi-field>
             <input
               hviInput
               type="checkbox"
@@ -214,8 +214,8 @@ function minCheckedValidator(min: number) {
               disabled
             />
             <label hviLabel for="disabled-epost">E-post</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input
               hviInput
               type="checkbox"
@@ -225,8 +225,8 @@ function minCheckedValidator(min: number) {
               disabled
             />
             <label hviLabel for="disabled-telefon">Telefon</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input
               hviInput
               type="checkbox"
@@ -236,7 +236,7 @@ function minCheckedValidator(min: number) {
               disabled
             />
             <label hviLabel for="disabled-sms">SMS</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
     </app-demo-page>

@@ -7,25 +7,22 @@ import '@digdir/designsystemet-web';
  *
  * @example
  * ```html
- * <ds-field>
+ * <hvi-field>
  *  <label hviLabel>Name</label>
  *  <span hviFieldDescription>Fill in your full name.</span>
  *  <input type="text" />
  *  <span hviFieldValidation>This field is required.</span>
- * </ds-field>
+ * </hvi-field>
  * ```
  *
  * @see {@link https://designsystemet.no/en/components/docs/field/overview}
  */
 @Component({
-  selector: 'ds-field',
+  selector: 'hvi-field',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
-  template: '<ng-content />',
-  host: {
-    class: 'ds-field',
-    '[attr.data-position]': 'position ?? null',
-  },
+  styles: [':host { display: contents; }'],
+  template: '<ds-field [attr.data-position]="position ?? null"><ng-content /></ds-field>',
 })
 export class HviField {
   /** Position of toggle inputs (radio, checkbox, switch) in field */

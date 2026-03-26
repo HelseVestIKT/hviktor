@@ -37,18 +37,18 @@ import { FieldsetRadioGruppeExampleSource } from './code-examples/fieldset.radio
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Hvilken fjordarm bor du ved?</legend>
           <p hviParagraph>Valget vil hjelpe oss å forbedre innholdet vi viser deg.</p>
-          <ds-field>
+          <hvi-field>
             <input hviInput type="radio" id="barsnesfjorden" name="fjord" value="barsnesfjorden" />
             <label hviLabel for="barsnesfjorden">Barsnesfjorden</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="radio" id="eidsfjorden" name="fjord" value="eidsfjorden" />
             <label hviLabel for="eidsfjorden">Eidsfjorden</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="radio" id="ingen" name="fjord" value="ingen" />
             <label hviLabel for="ingen">Ingen av de</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
 
@@ -60,10 +60,10 @@ import { FieldsetRadioGruppeExampleSource } from './code-examples/fieldset.radio
       >
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Godtar du vilkårene?</legend>
-          <ds-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="agree" value="agree" />
             <label hviLabel for="agree">Ja, jeg godtar</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
 
@@ -77,18 +77,18 @@ import { FieldsetRadioGruppeExampleSource } from './code-examples/fieldset.radio
           <legend hviLabel weight="medium">
             <h2 hviHeading>Hvor skal du reise?</h2>
           </legend>
-          <ds-field>
+          <hvi-field>
             <input hviInput type="radio" id="oslo" name="reise" value="oslo" />
             <label hviLabel for="oslo">Oslo</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="radio" id="bergen" name="reise" value="bergen" />
             <label hviLabel for="bergen">Bergen</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="radio" id="trondheim" name="reise" value="trondheim" />
             <label hviLabel for="trondheim">Trondheim</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
 
@@ -101,18 +101,18 @@ import { FieldsetRadioGruppeExampleSource } from './code-examples/fieldset.radio
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Hvilke interesser har du?</legend>
           <p hviParagraph>Velg alle som passer.</p>
-          <ds-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="sport" value="sport" />
             <label hviLabel for="sport">Sport og trening</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="musikk" value="musikk" />
             <label hviLabel for="musikk">Musikk og konserter</label>
-          </ds-field>
-          <ds-field>
+          </hvi-field>
+          <hvi-field>
             <input hviInput type="checkbox" id="teknologi" value="teknologi" checked />
             <label hviLabel for="teknologi">Teknologi og programmering</label>
-          </ds-field>
+          </hvi-field>
         </fieldset>
       </app-demo-section>
     </app-demo-page>

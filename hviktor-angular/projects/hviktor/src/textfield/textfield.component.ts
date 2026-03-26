@@ -59,7 +59,7 @@ let nextId = 0;
     },
   ],
   template: `
-    <ds-field>
+    <hvi-field>
       <label hviLabel [attr.for]="inputId" weight="medium">
         {{ label }}
         @if (effectiveRequiredMode; as mode) {
@@ -119,7 +119,7 @@ let nextId = 0;
       @if (error) {
         <span hviFieldValidation>{{ error }}</span>
       }
-    </ds-field>
+    </hvi-field>
   `,
 })
 export class HviTextfield implements ControlValueAccessor {

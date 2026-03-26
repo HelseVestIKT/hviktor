@@ -9,18 +9,18 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Hvilke interesser har du?</legend>
       <p hviParagraph>Velg alle som passer.</p>
-      <ds-field>
+      <hvi-field>
         <input hviInput type="checkbox" id="sport" value="sport" />
         <label hviLabel for="sport">Sport og trening</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input hviInput type="checkbox" id="musikk" value="musikk" />
         <label hviLabel for="musikk">Musikk og konserter</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input hviInput type="checkbox" id="teknologi" value="teknologi" checked />
         <label hviLabel for="teknologi">Teknologi og programmering</label>
-      </ds-field>
+      </hvi-field>
     </fieldset>
   `,
 })

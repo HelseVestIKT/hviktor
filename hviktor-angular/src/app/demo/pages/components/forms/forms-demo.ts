@@ -99,7 +99,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
             <legend hviLabel>Personalia</legend>
 
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <ds-field>
+              <hvi-field>
                 <label hviLabel for="firstName">
                   Fornavn <hvi-required-tag mode="required" />
                 </label>
@@ -109,9 +109,9 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                   hviValidationMessage="firstName"
                   [messages]="messages['firstName']"
                 ></p>
-              </ds-field>
+              </hvi-field>
 
-              <ds-field>
+              <hvi-field>
                 <label hviLabel for="lastName">
                   Etternavn <hvi-required-tag mode="required" />
                 </label>
@@ -121,7 +121,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                   hviValidationMessage="lastName"
                   [messages]="messages['lastName']"
                 ></p>
-              </ds-field>
+              </hvi-field>
             </div>
           </fieldset>
 
@@ -129,14 +129,14 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
           <fieldset hviFieldset>
             <legend hviLabel>Kontaktinformasjon</legend>
 
-            <ds-field>
+            <hvi-field>
               <label hviLabel for="email"> E-post <hvi-required-tag mode="required" /> </label>
               <span hviFieldDescription>Vi bruker e-posten til å svare deg</span>
               <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
               <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
-            </ds-field>
+            </hvi-field>
 
-            <ds-field>
+            <hvi-field>
               <label hviLabel for="phone"> Telefon <hvi-required-tag mode="optional" /> </label>
               <input
                 hviInput
@@ -147,14 +147,14 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 placeholder="+47 000 00 000"
               />
               <p hviFieldValidation hviValidationMessage="phone" [messages]="messages['phone']"></p>
-            </ds-field>
+            </hvi-field>
           </fieldset>
 
           <!-- Henvendelse -->
           <fieldset hviFieldset>
             <legend hviLabel>Din henvendelse</legend>
 
-            <ds-field>
+            <hvi-field>
               <label hviLabel for="subject"> Emne <hvi-required-tag mode="required" /> </label>
               <select hviSelect id="subject" formControlName="subject" hviControlInvalid>
                 <option value="" disabled>Velg emne</option>
@@ -169,9 +169,9 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 hviValidationMessage="subject"
                 [messages]="messages['subject']"
               ></p>
-            </ds-field>
+            </hvi-field>
 
-            <ds-field>
+            <hvi-field>
               <label hviLabel for="message"> Melding <hvi-required-tag mode="required" /> </label>
               <span hviFieldDescription>Beskriv henvendelsen din så detaljert som mulig</span>
               <textarea
@@ -188,7 +188,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 hviValidationMessage="message"
                 [messages]="messages['message']"
               ></p>
-            </ds-field>
+            </hvi-field>
           </fieldset>
 
           <!-- Preferanser -->
@@ -196,7 +196,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
             <legend hviLabel>Preferanser</legend>
             <p hviParagraph>Hvordan vil du helst at vi skal kontakte deg?</p>
 
-            <ds-field>
+            <hvi-field>
               <input
                 hviInput
                 id="pref-email"
@@ -206,9 +206,9 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 formControlName="contactPreference"
               />
               <label hviLabel for="pref-email">E-post</label>
-            </ds-field>
+            </hvi-field>
 
-            <ds-field>
+            <hvi-field>
               <input
                 hviInput
                 id="pref-phone"
@@ -218,9 +218,9 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 formControlName="contactPreference"
               />
               <label hviLabel for="pref-phone">Telefon</label>
-            </ds-field>
+            </hvi-field>
 
-            <ds-field>
+            <hvi-field>
               <input
                 hviInput
                 id="newsletter"
@@ -229,14 +229,14 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 formControlName="newsletter"
               />
               <label hviLabel for="newsletter"> Meld meg på nyhetsbrev </label>
-            </ds-field>
+            </hvi-field>
           </fieldset>
 
           <!-- Samtykke -->
           <fieldset hviFieldset>
             <legend hviLabel>Samtykke <hvi-required-tag /></legend>
 
-            <ds-field>
+            <hvi-field>
               <input
                 hviInput
                 id="consent"
@@ -253,7 +253,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 hviValidationMessage="consent"
                 [messages]="messages['consent']"
               ></p>
-            </ds-field>
+            </hvi-field>
           </fieldset>
 
           <!-- Knapper -->

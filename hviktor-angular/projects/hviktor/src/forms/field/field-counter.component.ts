@@ -22,21 +22,21 @@ import {
  * @example
  * Simple usage (auto-tracking):
  * ```html
- * <ds-field>
+ * <hvi-field>
  *   <label hviLabel for="description" weight="medium">Beskrivelse</label>
  *   <textarea hviInput id="description" rows="3" maxlength="100"></textarea>
  *   <hvi-field-counter [limit]="100" />
- * </ds-field>
+ * </hvi-field>
  * ```
  *
  * @example
  * Manual tracking (for custom scenarios):
  * ```html
- * <ds-field>
+ * <hvi-field>
  *   <label hviLabel for="description" weight="medium">Beskrivelse</label>
  *   <textarea hviInput id="description" rows="3" #textarea></textarea>
  *   <hvi-field-counter [limit]="100" [count]="textarea.value.length" />
- * </ds-field>
+ * </hvi-field>
  * ```
  *
  * Documentation: https://designsystemet.no/en/components/docs/field/code

@@ -10,7 +10,7 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Hvilken bydel bor du i?</legend>
       <p hviParagraph>Trondheim er delt inn i fire bydeler</p>
-      <ds-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -20,8 +20,8 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-ostbyen">Østbyen</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -31,8 +31,8 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-lerkendal">Lerkendal</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -42,8 +42,8 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-heimdal">Heimdal</label>
-      </ds-field>
-      <ds-field>
+      </hvi-field>
+      <hvi-field>
         <input
           hviInput
           hviControlInvalid
@@ -53,7 +53,7 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-midtbyen">Midtbyen</label>
-      </ds-field>
+      </hvi-field>
       @if (bydelControl.invalid) {
         <span hviFieldValidation>Du må velge en bydel før du kan fortsette.</span>
       }
