@@ -9,7 +9,7 @@ import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor';
     <p hviParagraph>Standard dropdown har plassering bottom-end</p>
     <div class="flex flex-wrap gap-2">
       <button hviButton popovertarget="dropdown1">Åpne dropdown</button>
-      <hvi-dropdown id="dropdown1" popover>
+      <hvi-dropdown id="dropdown1">
         <ul>
           <li>
             <button hviButton variant="tertiary">Menylenke</button>
