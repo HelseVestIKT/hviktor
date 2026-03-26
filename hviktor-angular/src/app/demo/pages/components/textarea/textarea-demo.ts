@@ -19,10 +19,10 @@ import { TextareaReadonlyExampleSource } from './code-examples/textarea.readonly
         [code]="grunnleggendeCode"
         description="En enkel textarea med label."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="basic-textarea" weight="medium">Beskrivelse</label>
           <textarea hviInput id="basic-textarea" rows="4"></textarea>
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Med hjelpetekst -->
@@ -31,11 +31,11 @@ import { TextareaReadonlyExampleSource } from './code-examples/textarea.readonly
         [code]="medHjelpetekstCode"
         description="Textarea med beskrivelse som gir brukeren kontekst."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="description-textarea" weight="medium">Tilbakemelding</label>
           <span data-field="description">Fortell oss hva du synes om tjenesten</span>
           <textarea hviInput id="description-textarea" rows="4"></textarea>
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Med tegnteller -->
@@ -44,12 +44,12 @@ import { TextareaReadonlyExampleSource } from './code-examples/textarea.readonly
         [code]="medTegntellerCode"
         description="Textarea med tegnteller som viser hvor mange tegn som gjenstår."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="counter-textarea" weight="medium">Kort beskrivelse</label>
           <span data-field="description">Maks 200 tegn</span>
           <textarea hviInput id="counter-textarea" rows="4" maxlength="200"></textarea>
           <hvi-field-counter [limit]="200" />
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Disabled -->
@@ -58,12 +58,12 @@ import { TextareaReadonlyExampleSource } from './code-examples/textarea.readonly
         [code]="disabledCode"
         description="Deaktivert textarea som ikke kan redigeres."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="disabled-textarea" weight="medium">Kommentar</label>
           <textarea hviInput id="disabled-textarea" rows="3" disabled>
 Dette feltet er deaktivert</textarea
           >
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Readonly -->
@@ -72,12 +72,12 @@ Dette feltet er deaktivert</textarea
         [code]="readonlyCode"
         description="Skrivebeskyttet textarea som fortsatt er i tabrekkefølgen."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="readonly-textarea" weight="medium">Vilkår</label>
           <textarea hviInput id="readonly-textarea" rows="3" readOnly>
 Dette er skrivebeskyttet innhold som brukeren kan lese men ikke endre.</textarea
           >
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
     </app-demo-page>
   `,

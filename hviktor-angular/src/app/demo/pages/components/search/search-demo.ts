@@ -81,14 +81,14 @@ import { SearchVarianterExampleSource } from './code-examples/search.varianter.e
         [code]="medLabelCode"
         description="Bruk en label over søkefeltet når det ikke er åpenbart hva brukeren skal søke etter."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel weight="medium">Søk etter katter</label>
           <hvi-search>
             <input hviInput type="search" placeholder="" name="cat-search" />
             <button hviSearchClear aria-label="Tøm"></button>
             <button hviButton variant="primary" type="submit">Søk</button>
           </hvi-search>
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
     </app-demo-page>
   `,

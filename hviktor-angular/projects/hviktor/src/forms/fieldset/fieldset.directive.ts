@@ -9,18 +9,18 @@ import { Directive } from '@angular/core';
  *  <fieldset hviFieldset>
  *    <legend hviLabel>Which framework do you like best?</legend>
  *    <p hviParagraph>Your choice will help us improve the service.</p>
- *    <hvi-field>
+ *    <ds-field>
  *      <input type="radio" id="angular" name="framework" value="angular" />
  *      <label hviLabel for="angular">Angular</label>
- *    </hvi-field>
- *    <hvi-field>
+ *    </ds-field>
+ *    <ds-field>
  *      <input type="radio" id="react" name="framework" value="react" />
  *      <label hviLabel for="react">React</label>
- *    </hvi-field>
- *    <hvi-field>
+ *    </ds-field>
+ *    <ds-field>
  *      <input type="radio" id="vue" name="framework" value="vue" />
  *      <label hviLabel for="vue">Vue</label>
- *    </hvi-field>
+ *    </ds-field>
  *  </fieldset>
  * ```
  *

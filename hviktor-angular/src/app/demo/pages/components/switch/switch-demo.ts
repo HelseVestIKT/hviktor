@@ -25,10 +25,10 @@ import { SwitchHoyrejustertExampleSource } from './code-examples/switch.hoyrejus
         [code]="grunnleggendeCode"
         description="En enkel switch med label."
       >
-        <hvi-field>
+        <ds-field>
           <input hviInput type="checkbox" role="switch" id="basic-switch" />
           <label hviLabel for="basic-switch">Switch</label>
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Gruppering -->
@@ -39,19 +39,19 @@ import { SwitchHoyrejustertExampleSource } from './code-examples/switch.hoyrejus
       >
         <fieldset hviFieldset>
           <legend hviLabel weight="medium">Skru av/på lys</legend>
-          <hvi-field>
+          <ds-field>
             <input hviInput type="checkbox" role="switch" id="switch-stue" checked />
             <label hviLabel for="switch-stue">Stue</label>
-          </hvi-field>
-          <hvi-field>
+          </ds-field>
+          <ds-field>
             <input hviInput type="checkbox" role="switch" id="switch-kjokken" />
             <label hviLabel for="switch-kjokken">Kjøkken</label>
-          </hvi-field>
-          <hvi-field>
+          </ds-field>
+          <ds-field>
             <input hviInput type="checkbox" role="switch" id="switch-bad" />
             <label hviLabel for="switch-bad">Bad</label>
-          </hvi-field>
-          <hvi-field>
+          </ds-field>
+          <ds-field>
             <input
               hviInput
               type="checkbox"
@@ -64,7 +64,7 @@ import { SwitchHoyrejustertExampleSource } from './code-examples/switch.hoyrejus
             <div data-field="description" id="switch-soverom-desc">
               Får ikke kontakt med lyspærene
             </div>
-          </hvi-field>
+          </ds-field>
         </fieldset>
       </app-demo-section>
 
@@ -76,15 +76,15 @@ import { SwitchHoyrejustertExampleSource } from './code-examples/switch.hoyrejus
       >
         <div style="flex-direction: column; width: 100%; max-width: 380px;">
           <hr hviDivider aria-hidden="true" />
-          <hvi-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
+          <ds-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
             <label hviLabel weight="medium" for="switch-flymodus">Flymodus</label>
             <input hviInput type="checkbox" role="switch" id="switch-flymodus" />
-          </hvi-field>
+          </ds-field>
           <hr hviDivider aria-hidden="true" />
-          <hvi-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
+          <ds-field position="end" style="align-items: center; padding: var(--ds-size-2) 0;">
             <label hviLabel weight="medium" for="switch-lydlos">Lydløs</label>
             <input hviInput type="checkbox" role="switch" id="switch-lydlos" />
-          </hvi-field>
+          </ds-field>
           <hr hviDivider aria-hidden="true" />
         </div>
       </app-demo-section>

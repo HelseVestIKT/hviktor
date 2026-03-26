@@ -85,14 +85,14 @@ import { TextfieldTypeExampleSource } from './code-examples/textfield.type.examp
         description="Siden Textfield er basert på native input, kan du bruke de fleste type-verdiene input støtter. Velg en type i nedtrekksmenyen for å se resultatet."
       >
         <div class="flex gap-2">
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="type-select" weight="medium">Velg type</label>
             <select hviSelect id="type-select" [(ngModel)]="selectedType">
               @for (type of types; track type) {
                 <option [value]="type" [selected]="type === selectedType">{{ type }}</option>
               }
             </select>
-          </hvi-field>
+          </ds-field>
 
           <hvi-textfield
             [label]="'type=&quot;' + selectedType + '&quot;'"

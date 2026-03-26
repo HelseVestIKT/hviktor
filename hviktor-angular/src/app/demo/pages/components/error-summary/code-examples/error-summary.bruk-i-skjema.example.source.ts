@@ -8,7 +8,7 @@ import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValida
   imports: [HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValidation, HviInput, HviLabel, HviValidationMessage],
   template: \`
     <form hviForm [formGroup]="form" [focusOnInvalid]="summary" class="grid gap-4">
-      <hvi-field>
+      <ds-field>
         <label hviLabel for="fornavn" weight="medium">Fornavn</label>
         <input
           hviInput
@@ -23,9 +23,9 @@ import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValida
           hviValidationMessage="fornavn"
           [messages]="messages['fornavn']"
         ></p>
-      </hvi-field>
+      </ds-field>
     
-      <hvi-field>
+      <ds-field>
         <label hviLabel for="telefon" weight="medium">Telefon</label>
         <input
           hviInput
@@ -41,7 +41,7 @@ import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValida
           hviValidationMessage="telefon"
           [messages]="messages['telefon']"
         ></p>
-      </hvi-field>
+      </ds-field>
     
       <hvi-error-summary #summary [form]="form" [messages]="messages" showWhen="always" />
     

@@ -39,12 +39,12 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="grunnleggendeCode"
         description="Field kobler automatisk sammen label, description og validation med feltet via riktige ARIA-attributter."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="etternavn" weight="medium">Etternavn</label>
           <span hviFieldDescription>Etternavn kan ikke inneholde mellomrom</span>
           <input hviInput id="etternavn" type="text" value="Nordmann Svenske" aria-invalid="true" />
           <span hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</span>
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Prefix/Suffix -->
@@ -53,14 +53,14 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="prefixSuffixCode"
         description="Prefixer og suffixer er nyttige for å vise enheter, valuta eller andre typer informasjon som er relevant for feltet. Du skal ikke bruke disse alene, siden skjermlesere ikke leser dem opp."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="pris" weight="medium">Hvor mange kroner koster det per måned?</label>
           <hvi-field-affixes>
             <hvi-field-affix>NOK</hvi-field-affix>
             <input hviInput id="pris" type="text" />
             <hvi-field-affix>pr. mnd.</hvi-field-affix>
           </hvi-field-affixes>
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Antall tegn -->
@@ -69,11 +69,11 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="antallTegnCode"
         description="Bruk hvi-field-counter til å informere om antall tegn brukerne kan skrive i feltet. Komponenten finner automatisk input/textarea i samme field."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="beskrivelse" weight="medium">Legg til en beskrivelse</label>
           <input hviInput id="beskrivelse" type="text" [maxLength]="10" />
           <hvi-field-counter [limit]="10" />
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Plassering med Switch -->
@@ -83,15 +83,15 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         description="Når du bruker Field sammen med valgkomponenter som Switch, kan du plassere etiketten enten før eller etter kontrollen med position-attributtet."
       >
         <div class="flex flex-col gap-4">
-          <hvi-field position="end">
+          <ds-field position="end">
             <label hviLabel for="flymodus" weight="medium">Flymodus</label>
             <input hviInput id="flymodus" type="checkbox" role="switch" />
-          </hvi-field>
+          </ds-field>
 
-          <hvi-field position="start">
+          <ds-field position="start">
             <input hviInput id="bluetooth" type="checkbox" role="switch" checked />
             <label hviLabel for="bluetooth" weight="medium">Bluetooth</label>
-          </hvi-field>
+          </ds-field>
         </div>
       </app-demo-section>
 
@@ -102,15 +102,15 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         description="Position-attributtet kan også brukes med checkbox og radio for å plassere label før eller etter kontrollen."
       >
         <div class="flex flex-col gap-4">
-          <hvi-field>
+          <ds-field>
             <input hviInput id="aksept" type="checkbox" />
             <label hviLabel for="aksept">Jeg godtar vilkårene</label>
-          </hvi-field>
+          </ds-field>
 
-          <hvi-field>
+          <ds-field>
             <input hviInput id="nyhetsbrev" type="checkbox" checked />
             <label hviLabel for="nyhetsbrev">Meld meg på nyhetsbrev</label>
-          </hvi-field>
+          </ds-field>
         </div>
       </app-demo-section>
     </app-demo-page>

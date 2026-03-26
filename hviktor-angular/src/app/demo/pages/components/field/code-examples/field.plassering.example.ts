@@ -7,15 +7,15 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   imports: [HviField, HviInput, HviLabel],
   template: `
     <div class="flex flex-col gap-4">
-      <hvi-field position="end">
+      <ds-field position="end">
         <label hviLabel for="flymodus" weight="medium">Flymodus</label>
         <input hviInput id="flymodus" type="checkbox" role="switch" />
-      </hvi-field>
+      </ds-field>
 
-      <hvi-field position="start">
+      <ds-field position="start">
         <input hviInput id="bluetooth" type="checkbox" role="switch" checked />
         <label hviLabel for="bluetooth" weight="medium">Bluetooth</label>
-      </hvi-field>
+      </ds-field>
     </div>
   `,
 })

@@ -7,15 +7,15 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   imports: [HviField, HviInput, HviLabel],
   template: `
     <div class="flex flex-col gap-4">
-      <hvi-field>
+      <ds-field>
         <input hviInput id="aksept" type="checkbox" />
         <label hviLabel for="aksept">Jeg godtar vilkårene</label>
-      </hvi-field>
+      </ds-field>
 
-      <hvi-field>
+      <ds-field>
         <input hviInput id="nyhetsbrev" type="checkbox" checked />
         <label hviLabel for="nyhetsbrev">Meld meg på nyhetsbrev</label>
-      </hvi-field>
+      </ds-field>
     </div>
   `,
 })

@@ -41,7 +41,7 @@ function minCheckedValidator(min: number) {
     <fieldset hviFieldset [formGroup]="contactForm">
       <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
       <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-      <hvi-field>
+      <ds-field>
         <input
           hviInput
           hviControlInvalid
@@ -50,8 +50,8 @@ function minCheckedValidator(min: number) {
           formControlName="epost"
         />
         <label hviLabel for="error-epost">E-post</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input
           hviInput
           hviControlInvalid
@@ -60,11 +60,11 @@ function minCheckedValidator(min: number) {
           formControlName="telefon"
         />
         <label hviLabel for="error-telefon">Telefon</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input hviInput hviControlInvalid type="checkbox" id="error-sms" formControlName="sms" />
         <label hviLabel for="error-sms">SMS</label>
-      </hvi-field>
+      </ds-field>
       @if (contactForm.invalid) {
         <span hviFieldValidation>Du må velge minst to alternativ</span>
       }

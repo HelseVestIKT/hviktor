@@ -29,10 +29,10 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
         [code]="medLabelCode"
         description="Input brukt sammen med hvi-field og label for å koble dem sammen."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="fnr" weight="medium">Fødselsnummer</label>
           <input hviInput type="text" id="fnr" />
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Med feil -->
@@ -41,10 +41,10 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
         [code]="medFeilCode"
         description="Bruk aria-invalid for å indikere at feltet har en feil."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="fnr-error" weight="medium">Fødselsnummer</label>
           <input hviInput type="text" id="fnr-error" aria-invalid="true" />
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Disabled -->
@@ -53,10 +53,10 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
         [code]="disabledCode"
         description="Unngå bruk av disabled der det er mulig. Vurder heller å bruke readOnly."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="fnr-disabled" weight="medium">Fødselsnummer</label>
           <input hviInput type="text" id="fnr-disabled" value="12345678901" disabled />
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- ReadOnly -->
@@ -65,10 +65,10 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
         [code]="readonlyCode"
         description="Skrivebeskyttet felt som fortsatt er i tabrekkefølgen og sendes med skjemaet."
       >
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="fnr-readonly" weight="medium">Fødselsnummer</label>
           <input hviInput type="text" id="fnr-readonly" value="12345678901" readOnly />
-        </hvi-field>
+        </ds-field>
       </app-demo-section>
 
       <!-- Ulike typer -->
@@ -78,30 +78,30 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
         description="Input støtter mange HTML5 input-typer som text, email, password, number, date, osv."
       >
         <div class="grid gap-4">
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="email-input" weight="medium">E-post</label>
             <input hviInput type="email" id="email-input" placeholder="navn@eksempel.no" />
-          </hvi-field>
+          </ds-field>
 
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="password-input" weight="medium">Passord</label>
             <input hviInput type="password" id="password-input" placeholder="••••••••" />
-          </hvi-field>
+          </ds-field>
 
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="number-input" weight="medium">Tall</label>
             <input hviInput type="number" id="number-input" placeholder="0" />
-          </hvi-field>
+          </ds-field>
 
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="date-input" weight="medium">Dato</label>
             <input hviInput type="date" id="date-input" />
-          </hvi-field>
+          </ds-field>
 
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="tel-input" weight="medium">Telefon</label>
             <input hviInput type="tel" id="tel-input" placeholder="+47 123 45 678" />
-          </hvi-field>
+          </ds-field>
         </div>
       </app-demo-section>
     </app-demo-page>

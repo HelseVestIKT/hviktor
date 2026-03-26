@@ -8,14 +8,14 @@ import { HviField, HviLabel, HviSelect, HviTextfield } from '@helsevestikt/hvikt
   imports: [HviField, HviLabel, HviSelect, HviTextfield, FormsModule],
   template: `
     <div class="flex gap-2">
-      <hvi-field>
+      <ds-field>
         <label hviLabel for="type-select" weight="medium">Velg type</label>
         <select hviSelect id="type-select" [(ngModel)]="selectedType">
           @for (type of types; track type) {
             <option [value]="type" [selected]="type === selectedType">{{ type }}</option>
           }
         </select>
-      </hvi-field>
+      </ds-field>
 
       <hvi-textfield
         [label]="'type=&quot;' + selectedType + '&quot;'"

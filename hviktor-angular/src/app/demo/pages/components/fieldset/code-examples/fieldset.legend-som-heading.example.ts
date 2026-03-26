@@ -10,18 +10,18 @@ import { HviField, HviFieldset, HviHeading, HviInput, HviLabel } from '@helseves
       <legend hviLabel weight="medium">
         <h2 hviHeading>Hvor skal du reise?</h2>
       </legend>
-      <hvi-field>
+      <ds-field>
         <input hviInput type="radio" id="oslo" name="reise" value="oslo" />
         <label hviLabel for="oslo">Oslo</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input hviInput type="radio" id="bergen" name="reise" value="bergen" />
         <label hviLabel for="bergen">Bergen</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input hviInput type="radio" id="trondheim" name="reise" value="trondheim" />
         <label hviLabel for="trondheim">Trondheim</label>
-      </hvi-field>
+      </ds-field>
     </fieldset>
   `,
 })

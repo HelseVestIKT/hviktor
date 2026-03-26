@@ -25,7 +25,7 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
         <legend hviLabel weight="medium">Personalia</legend>
     
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="firstName" weight="medium">
               Fornavn <hvi-required-tag mode="required" />
             </label>
@@ -35,9 +35,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
               hviValidationMessage="firstName"
               [messages]="messages['firstName']"
             ></p>
-          </hvi-field>
+          </ds-field>
     
-          <hvi-field>
+          <ds-field>
             <label hviLabel for="lastName" weight="medium">
               Etternavn <hvi-required-tag mode="required" />
             </label>
@@ -47,7 +47,7 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
               hviValidationMessage="lastName"
               [messages]="messages['lastName']"
             ></p>
-          </hvi-field>
+          </ds-field>
         </div>
       </fieldset>
     
@@ -55,16 +55,16 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
       <fieldset hviFieldset>
         <legend hviLabel weight="medium">Kontaktinformasjon</legend>
     
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="email" weight="medium">
             E-post <hvi-required-tag mode="required" />
           </label>
           <span hviFieldDescription>Vi bruker e-posten til å svare deg</span>
           <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
           <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
-        </hvi-field>
+        </ds-field>
     
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="phone" weight="medium">
             Telefon <hvi-required-tag mode="optional" />
           </label>
@@ -77,14 +77,14 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             placeholder="+47 000 00 000"
           />
           <p hviFieldValidation hviValidationMessage="phone" [messages]="messages['phone']"></p>
-        </hvi-field>
+        </ds-field>
       </fieldset>
     
       <!-- Henvendelse -->
       <fieldset hviFieldset>
         <legend hviLabel weight="medium">Din henvendelse</legend>
     
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="subject" weight="medium">
             Emne <hvi-required-tag mode="required" />
           </label>
@@ -101,9 +101,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             hviValidationMessage="subject"
             [messages]="messages['subject']"
           ></p>
-        </hvi-field>
+        </ds-field>
     
-        <hvi-field>
+        <ds-field>
           <label hviLabel for="message" weight="medium">
             Melding <hvi-required-tag mode="required" />
           </label>
@@ -122,7 +122,7 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             hviValidationMessage="message"
             [messages]="messages['message']"
           ></p>
-        </hvi-field>
+        </ds-field>
       </fieldset>
     
       <!-- Preferanser -->
@@ -130,7 +130,7 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
         <legend hviLabel weight="medium">Preferanser</legend>
         <p hviParagraph>Hvordan vil du helst at vi skal kontakte deg?</p>
     
-        <hvi-field>
+        <ds-field>
           <input
             hviInput
             id="pref-email"
@@ -140,9 +140,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             formControlName="contactPreference"
           />
           <label hviLabel for="pref-email">E-post</label>
-        </hvi-field>
+        </ds-field>
     
-        <hvi-field>
+        <ds-field>
           <input
             hviInput
             id="pref-phone"
@@ -152,9 +152,9 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             formControlName="contactPreference"
           />
           <label hviLabel for="pref-phone">Telefon</label>
-        </hvi-field>
+        </ds-field>
     
-        <hvi-field>
+        <ds-field>
           <input
             hviInput
             id="newsletter"
@@ -163,14 +163,14 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             formControlName="newsletter"
           />
           <label hviLabel for="newsletter" weight="medium"> Meld meg på nyhetsbrev </label>
-        </hvi-field>
+        </ds-field>
       </fieldset>
     
       <!-- Samtykke -->
       <fieldset hviFieldset>
         <legend hviLabel weight="medium">Samtykke</legend>
     
-        <hvi-field>
+        <ds-field>
           <input
             hviInput
             id="consent"
@@ -187,7 +187,7 @@ import { HviButton, HviFieldKit, HviForms, HviParagraph, HviRequiredTag, HviSele
             hviValidationMessage="consent"
             [messages]="messages['consent']"
           ></p>
-        </hvi-field>
+        </ds-field>
       </fieldset>
     
       <!-- Knapper -->

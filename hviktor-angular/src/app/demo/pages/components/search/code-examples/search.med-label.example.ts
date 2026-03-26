@@ -13,14 +13,14 @@ import {
   standalone: true,
   imports: [HviButton, HviField, HviInput, HviLabel, HviSearch, HviSearchClear],
   template: `
-    <hvi-field>
+    <ds-field>
       <label hviLabel weight="medium">Søk etter katter</label>
       <hvi-search>
         <input hviInput type="search" placeholder="" name="cat-search" />
         <button hviSearchClear aria-label="Tøm"></button>
         <button hviButton variant="primary" type="submit">Søk</button>
       </hvi-search>
-    </hvi-field>
+    </ds-field>
   `,
 })
 export class SearchMedLabelExampleComponent {}

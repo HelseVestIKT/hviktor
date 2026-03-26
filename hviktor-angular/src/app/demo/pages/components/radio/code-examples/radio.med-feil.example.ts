@@ -27,7 +27,7 @@ import {
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Hvilken bydel bor du i?</legend>
       <p hviParagraph>Trondheim er delt inn i fire bydeler</p>
-      <hvi-field>
+      <ds-field>
         <input
           hviInput
           hviControlInvalid
@@ -37,8 +37,8 @@ import {
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-ostbyen">Østbyen</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input
           hviInput
           hviControlInvalid
@@ -48,8 +48,8 @@ import {
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-lerkendal">Lerkendal</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input
           hviInput
           hviControlInvalid
@@ -59,8 +59,8 @@ import {
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-heimdal">Heimdal</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input
           hviInput
           hviControlInvalid
@@ -70,7 +70,7 @@ import {
           [formControl]="bydelControl"
         />
         <label hviLabel for="bydel-midtbyen">Midtbyen</label>
-      </hvi-field>
+      </ds-field>
       @if (bydelControl.invalid) {
         <span hviFieldValidation>Du må velge en bydel før du kan fortsette.</span>
       }

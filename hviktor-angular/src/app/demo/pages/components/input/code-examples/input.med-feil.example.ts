@@ -6,10 +6,10 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: `
-    <hvi-field>
+    <ds-field>
       <label hviLabel for="fnr-error" weight="medium">Fødselsnummer</label>
       <input hviInput type="text" id="fnr-error" aria-invalid="true" />
-    </hvi-field>
+    </ds-field>
   `,
 })
 export class InputMedFeilExampleComponent {}

@@ -33,14 +33,14 @@ import { Component } from '@angular/core';
  * @example
  * Search with label using hvi-field:
  * ```html
- * <hvi-field>
+ * <ds-field>
  *   <label hviLabel>Søk etter katter</label>
  *   <hvi-search>
  *     <input hviInput type="search" placeholder="" name="cat-search" />
  *     <button hviSearchClear type="reset" aria-label="Tøm"></button>
  *     <button hviButton variant="primary" type="submit">Søk</button>
  *   </hvi-search>
- * </hvi-field>
+ * </ds-field>
  * ```
  *
  * @see {@link https://designsystemet.no/no/components/search}

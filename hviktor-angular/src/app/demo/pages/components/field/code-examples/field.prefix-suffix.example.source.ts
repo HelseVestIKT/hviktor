@@ -7,14 +7,14 @@ import { HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel } from '@h
   standalone: true,
   imports: [HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel],
   template: \`
-    <hvi-field>
+    <ds-field>
       <label hviLabel for="pris" weight="medium">Hvor mange kroner koster det per måned?</label>
       <hvi-field-affixes>
         <hvi-field-affix>NOK</hvi-field-affix>
         <input hviInput id="pris" type="text" />
         <hvi-field-affix>pr. mnd.</hvi-field-affix>
       </hvi-field-affixes>
-    </hvi-field>
+    </ds-field>
   \`,
 })
 export class FieldPrefixSuffixExampleComponent {

@@ -9,7 +9,7 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
       <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
-      <hvi-field>
+      <ds-field>
         <input
           hviInput
           type="checkbox"
@@ -20,8 +20,8 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
           disabled
         />
         <label hviLabel for="disabled-epost">E-post</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input
           hviInput
           type="checkbox"
@@ -31,8 +31,8 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
           disabled
         />
         <label hviLabel for="disabled-telefon">Telefon</label>
-      </hvi-field>
-      <hvi-field>
+      </ds-field>
+      <ds-field>
         <input
           hviInput
           type="checkbox"
@@ -42,7 +42,7 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
           disabled
         />
         <label hviLabel for="disabled-sms">SMS</label>
-      </hvi-field>
+      </ds-field>
     </fieldset>
   `,
 })
