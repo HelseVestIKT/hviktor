@@ -11,7 +11,7 @@ import { DropdownStandardExampleSource } from './code-examples/dropdown.standard
   template: `
     <app-demo-page componentId="dropdown">
       <app-demo-section title="Standard" [code]="standardCode">
-        <p hviParagraph>Standard dropdown har plassering bottom-end</p>
+        <p hviParagraph>Standard dropdown har plassering bottom</p>
         <div class="flex flex-wrap gap-2">
           <button hviButton popovertarget="dropdown1">Åpne dropdown</button>
           <hvi-dropdown id="dropdown1">
