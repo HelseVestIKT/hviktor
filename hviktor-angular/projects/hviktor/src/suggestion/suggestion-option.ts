@@ -1,15 +1,15 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, input, TemplateRef, viewChild } from '@angular/core';
 
 @Component({
   selector: 'hvi-suggestion-option',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  template: ` <u-option [attr.data-label]="label" [attr.data-value]="value">
-    <ng-content />
-  </u-option>`,
+  template: ` <ng-template #tpl><ng-content /></ng-template> `,
+
   host: {},
 })
 export class HviSuggestionOption {
-  @Input() label!: string;
+  templateRef = viewChild<TemplateRef<unknown>>('tpl');
 
-  @Input() value!: string;
+  value = input.required<string>();
+  label = input.required<string>();
 }
