@@ -7,10 +7,10 @@ import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviButton, HviDropdown, HviParagraph],
   template: \`
-    <p hviParagraph>Standard dropdown har plassering bottom-end</p>
+    <p hviParagraph>Standard dropdown har plassering bottom</p>
     <div class="flex flex-wrap gap-2">
       <button hviButton popovertarget="dropdown1">Åpne dropdown</button>
-      <hvi-dropdown id="dropdown1" popover>
+      <hvi-dropdown id="dropdown1">
         <ul>
           <li>
             <button hviButton variant="tertiary">Menylenke</button>
@@ -24,6 +24,5 @@ import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor';
   \`,
 })
 export class DropdownStandardExampleComponent {
-  
 }
 `;
