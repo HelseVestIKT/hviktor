@@ -108,7 +108,6 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Heading brukes til å strukturere innhold og skape hierarki på siden.',
     ds: true,
   },
-  { id: 'icon', name: 'Icon', description: 'Ikoner', hvi: true },
   {
     id: 'label',
     name: 'Label',

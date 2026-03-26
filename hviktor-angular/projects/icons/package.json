@@ -1,14 +1,68 @@
 {
   "name": "@helsevestikt/hviktor-icons",
-  "version": "0.0.31",
-  "peerDependencies": {
-    "@angular/common": "^21.1.0",
-    "@angular/core": "^21.1.0",
-    "@angular/elements": "^21.1.0",
-    "@angular/platform-browser": "^21.1.0"
+  "version": "0.0.47",
+  "description": "Pure Web Components icon library with 900+ icons, works in any framework",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/lib/icons.d.ts",
+  "customElements": "dist/custom-elements.json",
+  "exports": {
+    ".": {
+      "types": "./dist/lib/icons.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./*.webcomponent": {
+      "import": "./dist/lib/webcomponents/*.webcomponent.js",
+      "default": "./dist/lib/webcomponents/*.webcomponent.js"
+    },
+    "./dist/lib/webcomponents/*": "./dist/lib/webcomponents/*"
+  },
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "WEBCOMPONENTS_GUIDE.md"
+  ],
+  "scripts": {
+    "extract-data": "node scripts/extract-icon-data.js",
+    "convert": "node scripts/convert-to-webcomponents.js",
+    "kebab-case": "node scripts/convert-selectors-to-kebab-case.js",
+    "cleanup": "node scripts/cleanup-duplicates.js",
+    "lowercase": "node scripts/lowercase-filenames.js",
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc && npm run copy:types",
+    "copy:types": "node -e \"const fs=require('fs');fs.mkdirSync('dist/lib',{recursive:true});fs.copyFileSync('src/lib/icons.d.ts','dist/lib/icons.d.ts');\"",
+    "postbuild": "node scripts/generate-custom-elements-manifest.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "icons",
+    "web-components",
+    "custom-elements",
+    "svg",
+    "angular",
+    "react",
+    "vue",
+    "blazor"
+  ],
+  "author": "Helse Vest IKT",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/helsevestikt/hviktor-angular.git",
+    "directory": "projects/icons"
   },
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "devDependencies": {
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.0"
+  },
+  "sideEffects": [
+    "dist/index.js",
+    "dist/lib/webcomponents/*.js",
+    "dist/lib/webcomponents/*.webcomponent.js"
+  ]
 }
