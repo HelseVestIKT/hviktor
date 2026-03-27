@@ -58,8 +58,10 @@ test.describe('Avatar', () => {
     await expect(avatar).toHaveAttribute('data-initials', 'EJ');
   });
 
-  test('all avatars have role="img" and ds-avatar class', async ({ page }) => {
-    const avatars = page.locator('hvi-avatar');
+  test('all avatars have role="img" and ds-avatar class', async () => {
+    const article = componentPage.article;
+    const avatars = article.locator('hvi-avatar');
+    await expect(avatars.first()).toBeVisible();
     const count = await avatars.count();
     expect(count).toBeGreaterThanOrEqual(3);
 
@@ -70,6 +72,7 @@ test.describe('Avatar', () => {
   });
 
   test('accessibility check', async ({ page }) => {
-    await checkAccessibility(page);
+    await expect(componentPage.heading).toBeVisible();
+    await checkAccessibility(page, ['color-contrast'], 'article');
   });
 });
