@@ -249,6 +249,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'komponenter/suggestion',
+        loadComponent: () =>
+          import('./demo/pages/components/suggestion/suggestion-demo').then(
+            (m) => m.SuggestionDemoComponent,
+          ),
+      },
+      {
         path: 'komponenter/required-tag',
         loadComponent: () =>
           import('./demo/pages/components/required-tag/required-tag-demo').then(
