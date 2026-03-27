@@ -15,9 +15,6 @@ import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
       <header class="mb-8">
         <div class="flex items-center gap-3">
           <h1 hviHeading size="xl">{{ name() }}</h1>
-          @if (isHvi()) {
-            <hvi-logo company="dots" size="sm" aria-hidden="true" class="size-6 shrink-0" />
-          }
           @if (codeTested()) {
             <hvi-tag size="sm" color="info">Kode testet ✓</hvi-tag>
           }
@@ -25,6 +22,12 @@ import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
             <hvi-tag size="sm" color="brand2">A11y testet ✓</hvi-tag>
           }
         </div>
+        @if (isHvi()) {
+          <div class="mb-2 flex items-center gap-2">
+            <hvi-logo company="dots" size="sm" aria-hidden="true" />
+            <p hviParagraph>Denne komponenten er laget av oss.</p>
+          </div>
+        }
         @if (dsHref()) {
           <a
             hviLink
