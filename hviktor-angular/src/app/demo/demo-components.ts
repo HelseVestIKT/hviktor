@@ -13,10 +13,10 @@ export interface DemoComponent {
   ds?: boolean;
   /** Markerer at komponenten er en Hviktor-egen komponent. */
   hvi?: boolean;
-  /** Markerer at komponenten har beståtte enhetstester. */
-  unitTested?: boolean;
-  /** Markerer at komponenten har beståtte E2E-tester. */
-  e2eTested?: boolean;
+  /** Markerer at komponenten har beståtte enhetstester og e2e tester. */
+  codeTested?: boolean;
+  /** Markerer at komponenten har beståtte A11y-tester. */
+  a11yTested?: boolean;
 }
 
 /** Bygger full URL til designsystemet.no for en gitt slug. */
@@ -31,14 +31,14 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Alert gir brukeren informasjon som det er ekstra viktig at de ser og forstår. Komponenten er designet for å fange brukernes oppmerksomhet. Teksten i varselet skal være kort og tydelig.',
     ds: true,
-    unitTested: true,
-    e2eTested: true,
+    codeTested: true,
   },
   {
     id: 'avatar',
     name: 'Avatar',
     description: 'Avatar viser et bilde, initialer eller ikon for en person, enhet eller profil.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'badge',
@@ -46,6 +46,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Badge er ein ikkje-interaktiv komponent som viser status med eller utan tal. Bruk Tag dersom du skal ha tekst i staden for tal.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'breadcrumbs',
@@ -287,6 +288,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     name: 'AvatarStack',
     description: 'AvatarStack stabler en samling Avatar elementer',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'logo',

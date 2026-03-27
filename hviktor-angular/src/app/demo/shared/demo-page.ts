@@ -15,28 +15,31 @@ import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
       <header class="mb-8">
         <div class="flex items-center gap-3">
           <h1 hviHeading size="xl">{{ name() }}</h1>
-          @if (isHvi()) {
-            <hvi-logo company="dots" size="sm" aria-hidden="true" class="size-6 shrink-0" />
+          @if (codeTested()) {
+            <hvi-tag size="sm" color="info">Kode testet ✓</hvi-tag>
           }
-          @if (dsHref()) {
-            <a
-              hviLink
-              [href]="dsHref()"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Se {{ name() }} i Designsystemet"
-              class="inline-flex shrink-0"
-            >
-              <img src="assets/ds.svg" alt="Åpne i Designsystemet" class="size-6" />
-            </a>
-          }
-          @if (unitTested()) {
-            <hvi-tag size="sm" color="success">Unit ✓</hvi-tag>
-          }
-          @if (e2eTested()) {
-            <hvi-tag size="sm" color="success">E2E ✓</hvi-tag>
+          @if (a11yTested()) {
+            <hvi-tag size="sm" color="brand2">A11y testet ✓</hvi-tag>
           }
         </div>
+        @if (isHvi()) {
+          <div class="mb-2 flex items-center gap-2">
+            <hvi-logo company="dots" size="sm" aria-hidden="true" />
+            <p hviParagraph>Denne komponenten er laget av oss.</p>
+          </div>
+        }
+        @if (dsHref()) {
+          <a
+            hviLink
+            [href]="dsHref()"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-2 inline-flex items-center gap-1.5"
+          >
+            <img src="assets/ds.svg" alt="" class="size-5" />
+            Se {{ name() }} i Designsystemet
+          </a>
+        }
         <p hviParagraph class="max-w-lg">{{ description() }}</p>
       </header>
       <ng-content />
@@ -65,8 +68,8 @@ export class DemoPageComponent {
   });
 
   /** Om komponenten har beståtte enhetstester. */
-  unitTested = computed(() => this.component()?.unitTested ?? false);
+  codeTested = computed(() => this.component()?.codeTested ?? false);
 
-  /** Om komponenten har beståtte E2E-tester. */
-  e2eTested = computed(() => this.component()?.e2eTested ?? false);
+  /** Om komponenten har beståtte A11y-tester. */
+  a11yTested = computed(() => this.component()?.a11yTested ?? false);
 }

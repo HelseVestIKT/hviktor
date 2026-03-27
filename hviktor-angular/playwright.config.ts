@@ -1,5 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Ensure browsers bypass corporate proxy for localhost
+process.env['NO_PROXY'] = [process.env['NO_PROXY'], 'localhost,127.0.0.1']
+  .filter(Boolean)
+  .join(',');
+
 export default defineConfig({
   testDir: './e2e',
   fullyParallel: true,
@@ -16,6 +21,14 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'firefox',
+      use: { ...devices['Desktop Firefox'] },
+    },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
     },
   ],
   webServer: {
