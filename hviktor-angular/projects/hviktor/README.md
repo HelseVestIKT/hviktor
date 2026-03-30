@@ -1,5 +1,8 @@
 # @helsevestikt/hviktor-angular
 
+[![npm version](https://img.shields.io/npm/v/@helsevestikt/hviktor-angular)](https://www.npmjs.com/package/@helsevestikt/hviktor-angular)
+[![license](https://img.shields.io/npm/l/@helsevestikt/hviktor-angular)](https://github.com/HelseVestIKT/Hviktor/blob/main/hviktor-angular/projects/hviktor/LICENSE)
+
 > ⚠️ **Denne pakken er under aktiv utvikling.** API-et kan endres uten forvarsel. Bruk på egen risiko i produksjon.
 
 Angular-komponenter basert på [Digdir Designsystemet](https://designsystemet.no/) for Helse Vest IKT.
@@ -52,3 +55,15 @@ Se [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) for
 
 - Angular 17–21
 - Node.js 20+
+
+## Endringslogg
+
+Se [CHANGELOG.md](https://github.com/HelseVestIKT/Hviktor/blob/main/hviktor-angular/CHANGELOG.md) for alle versjonsendringer.
+
+## Bidra
+
+Se [CONTRIBUTING.md](https://github.com/HelseVestIKT/Hviktor/blob/main/hviktor-angular/CONTRIBUTING.md) for utviklingsprosess og retningslinjer.
+
+## Lisens
+
+[MIT](./LICENSE)
