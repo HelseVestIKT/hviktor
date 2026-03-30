@@ -110,6 +110,11 @@ export function ngAdd(options: Schema): Rule {
       styleImports.push(TAILWIND_IMPORT);
     }
 
+    // Conditionally: install hviktor-icons
+    if (options.icons !== false) {
+      addPackageJsonDependency(tree, '@helsevestikt/hviktor-icons', 'latest', false);
+    }
+
     // Hviktor import always comes after tailwind
     styleImports.push(HVIKTOR_IMPORT);
     const stylesPath = getStylesPath(tree, options.project);

@@ -14,8 +14,14 @@
     "tailwind": {
       "type": "boolean",
       "description": "Installer og konfigurer Tailwind CSS.",
-      "default": false,
+      "default": true,
       "x-prompt": "Vil du installere Tailwind CSS?"
+    },
+    "icons": {
+      "type": "boolean",
+      "description": "Installer @helsevestikt/hviktor-icons.",
+      "default": true,
+      "x-prompt": "Vil du installere hviktor-icons?"
     }
   },
   "required": []
