@@ -2,6 +2,11 @@
   "name": "@helsevestikt/hviktor-angular",
   "version": "0.0.25",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HelseVestIKT/hviktor",
+    "directory": "hviktor-angular/projects/hviktor"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
     "postbuild": "npx copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json schematics/package.json ../../dist/hviktor && node -e \"require('fs').writeFileSync('../../dist/hviktor/.npmignore','')\""
