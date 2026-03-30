@@ -59,6 +59,11 @@ jobs:
             - name: Build library
               run: npm run build:lib
 
+            - name: Build schematics
+              run: |
+                  cd projects/hviktor
+                  npm run build
+
             - name: Publish to npm
               run: |
                   cd dist/hviktor
