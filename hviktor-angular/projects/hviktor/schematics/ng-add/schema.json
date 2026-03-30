@@ -1,0 +1,9 @@
+{
+  "project": {
+    "$default.$source": "projectName",
+    "tailwind": {
+      "type": "boolean",
+      "x-prompt": "Vil du innstallere Tailwind CSS?"
+    }
+  }
+}
