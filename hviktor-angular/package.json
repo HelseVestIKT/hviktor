@@ -36,6 +36,9 @@
     "prepare": "cd .. && husky hviktor-angular/.husky"
   },
   "private": true,
+  "workspaces": [
+    "projects/hviktor"
+  ],
   "dependencies": {
     "@angular/common": "^21.2.6",
     "@angular/compiler": "^21.2.6",
