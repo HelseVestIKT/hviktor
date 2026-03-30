@@ -73,7 +73,19 @@ npm run test:e2e
 npm run test:all
 ```
 
-### 5. Kvalitetskontroll
+### 5. Legg til changeset
+
+Hvis endringen påvirker brukere av pakken, legg til en changeset:
+
+```bash
+npx changeset
+```
+
+Velg bump-type (`patch`/`minor`/`major`) og skriv en kort beskrivelse. Commit `.changeset/`-filen sammen med koden.
+
+> Se [RELEASE.md](RELEASE.md) for full oversikt over publiseringsflyten.
+
+### 6. Kvalitetskontroll
 
 Prosjektet bruker pre-commit hooks (Husky + lint-staged) som kjører ESLint og Prettier automatisk. Du kan også kjøre manuelt:
 
@@ -82,7 +94,7 @@ npm run lint
 npm run format
 ```
 
-### 6. Opprett Pull Request
+### 7. Opprett Pull Request
 
 Push branchen din og opprett en PR mot `main`:
 

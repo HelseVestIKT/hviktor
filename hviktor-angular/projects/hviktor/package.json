@@ -36,6 +36,7 @@
     "index.d.ts",
     "styles.css",
     "README.md",
+    "CHANGELOG.md",
     "LICENSE",
     "package.json"
   ],

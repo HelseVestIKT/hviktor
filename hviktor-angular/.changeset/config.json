@@ -1,0 +1,14 @@
+{
+  "changelog": ["@changesets/changelog-github", { "repo": "HelseVestIKT/hviktor" }],
+  "commit": false,
+  "fixed": [],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [],
+  "privatePackages": {
+    "version": false,
+    "tag": false
+  }
+}

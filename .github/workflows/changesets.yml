@@ -1,0 +1,52 @@
+# Oppretter en "Version Packages" PR når det finnes changesets på main.
+# Når PR-en merges, kjøres release-scriptet som tagger og trigger publisering.
+
+name: Changesets
+
+on:
+    push:
+        branches: [main]
+
+defaults:
+    run:
+        working-directory: hviktor-angular
+
+permissions:
+    contents: write
+    pull-requests: write
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    changesets:
+        name: Version Packages
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+                  cache: "npm"
+                  cache-dependency-path: "hviktor-angular/package-lock.json"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Create Release PR or Tag Release
+              uses: changesets/action@v1
+              with:
+                  title: "chore: version packages"
+                  commit: "chore: version packages"
+                  version: npm run changeset:version
+                  publish: npm run changeset:tag
+                  cwd: hviktor-angular
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

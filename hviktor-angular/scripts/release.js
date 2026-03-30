@@ -4,11 +4,17 @@
  * Release-script for @helsevestikt/hviktor-angular
  *
  * Synkroniserer versjon i package.json med git tag, slik at begge alltid er oppdatert.
+ * Dette scriptet er et alternativ til changesets-flyten for raske releaser.
  *
- * Bruk:
- *   npm run release patch    # 0.0.23 → 0.0.24
- *   npm run release minor    # 0.0.23 → 0.1.0
- *   npm run release major    # 0.0.23 → 1.0.0
+ * Anbefalt flyt:
+ *   1. Bruk `npx changeset` på feature-branch for å dokumentere endringer
+ *   2. Merge til main → changesets/action oppretter "Version Packages" PR
+ *   3. Merge "Version Packages" PR → tag opprettes automatisk → npm publish
+ *
+ * Alternativ (direkte release):
+ *   npm run release patch    # 0.0.26 → 0.0.27
+ *   npm run release minor    # 0.0.26 → 0.1.0
+ *   npm run release major    # 0.0.26 → 1.0.0
  *   npm run release 1.2.3    # Eksplisitt versjon
  *
  * Scriptet gjør følgende:
