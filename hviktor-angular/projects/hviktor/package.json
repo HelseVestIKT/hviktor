@@ -1,6 +1,6 @@
 {
   "name": "@helsevestikt/hviktor-angular",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "description": "Angular-komponenter basert på Digdir Designsystemet for Helse Vest IKT",
   "keywords": [
     "angular",
