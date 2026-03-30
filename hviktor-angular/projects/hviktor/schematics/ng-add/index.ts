@@ -6,14 +6,16 @@ const HVIKTOR_PACKAGE = '@helsevestikt/hviktor-angular';
 const HVIKTOR_IMPORT = `@import '${HVIKTOR_PACKAGE}/styles.css';`;
 const TAILWIND_IMPORT = `@import 'tailwindcss';`;
 
-function getStylesPath(tree: Tree, project: string): string {
+function getStylesPath(tree: Tree, project?: string): string {
   const angularJsonContent = tree.read('/angular.json');
   if (!angularJsonContent) {
     return 'src/styles.css';
   }
 
   const angularJson = JSON.parse(angularJsonContent.toString('utf-8'));
-  const projectConfig = angularJson.projects?.[project];
+  const projectName =
+    project ?? angularJson.defaultProject ?? Object.keys(angularJson.projects ?? {})[0];
+  const projectConfig = angularJson.projects?.[projectName];
   if (!projectConfig) {
     return 'src/styles.css';
   }
