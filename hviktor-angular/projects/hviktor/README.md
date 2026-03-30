@@ -16,7 +16,7 @@ Dette installerer pakken og setter opp prosjektet automatisk:
 
 - Legger til `@import '@helsevestikt/hviktor-angular/styles.css'` i stylesheet
 - Spør om du vil installere og konfigurere **Tailwind CSS**. (default: Yes). Anbefales for best mulig utvikleropplevelse. Alle demoene på [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) bruker Tailwind, så det kan være lurt å ha det installert for å følge eksemplene.
-- Spør om du vil installere **@helsevestikt/hviktor-icons** (default: Yes). Pakke med ikoner som
+- Spør om du vil installere **@helsevestikt/hviktor-icons** (default: Yes). Installerer ikonpakken og legger til global import i `main.ts`.
 
 ### Manuelt oppsett
 
