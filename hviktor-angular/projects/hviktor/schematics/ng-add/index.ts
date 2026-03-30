@@ -25,7 +25,10 @@ function getStylesPath(tree: Tree, project?: string): string {
 
   for (const style of styles) {
     const stylePath = typeof style === 'string' ? style : style.input;
-    if (stylePath.endsWith('.css') || stylePath.endsWith('.scss')) {
+    if (
+      (stylePath.endsWith('.css') || stylePath.endsWith('.scss')) &&
+      !stylePath.startsWith('node_modules/')
+    ) {
       return stylePath;
     }
   }
