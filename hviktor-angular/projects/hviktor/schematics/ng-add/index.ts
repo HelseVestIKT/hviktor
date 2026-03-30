@@ -1,11 +1,93 @@
-import { Rule } from '@angular-devkit/schematics';
-import { addRootImport } from '@schematics/angular/utility';
+import { Rule, SchematicContext, Tree, chain } from '@angular-devkit/schematics';
+import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { Schema } from './schema';
 
+const HVIKTOR_PACKAGE = '@helsevestikt/hviktor-angular';
+const HVIKTOR_IMPORT = `@import '${HVIKTOR_PACKAGE}/styles.css';`;
+const TAILWIND_IMPORT = `@import 'tailwindcss';`;
+const STYLES_PATH = 'src/styles.css';
+
+function addPackageJsonDependency(
+  tree: Tree,
+  name: string,
+  version: string,
+  devDependency: boolean,
+): void {
+  const packageJsonPath = '/package.json';
+  const content = tree.read(packageJsonPath);
+  if (!content) {
+    throw new Error('Fant ikke package.json i prosjektet.');
+  }
+
+  const json = JSON.parse(content.toString('utf-8'));
+  const key = devDependency ? 'devDependencies' : 'dependencies';
+
+  if (!json[key]) {
+    json[key] = {};
+  }
+
+  json[key][name] = version;
+  tree.overwrite(packageJsonPath, JSON.stringify(json, null, 2) + '\n');
+}
+
+function updateStylesCss(tree: Tree, imports: string[]): void {
+  const existing = tree.read(STYLES_PATH);
+  const content = existing ? existing.toString('utf-8') : '';
+
+  const newImports = imports.filter((imp) => !content.includes(imp));
+  if (newImports.length === 0) {
+    return;
+  }
+
+  const updatedContent = newImports.join('\n') + '\n' + content;
+  if (existing) {
+    tree.overwrite(STYLES_PATH, updatedContent);
+  } else {
+    tree.create(STYLES_PATH, updatedContent);
+  }
+}
+
+function createPostcssConfig(tree: Tree): void {
+  const configPath = '/.postcssrc.json';
+  if (tree.exists(configPath)) {
+    return;
+  }
+
+  const config = {
+    plugins: {
+      '@tailwindcss/postcss': {},
+    },
+  };
+  tree.create(configPath, JSON.stringify(config, null, 2) + '\n');
+}
+
 export function ngAdd(options: Schema): Rule {
-  // Add an import '@helsevestikt/hviktor-angular' from 'hviktor' to the root of the user's project'
-  return addRootImport(
-    options.project,
-    ({ code, external }) => code`${external('MyLibModule', 'my-lib')}`,
-  );
+  return (tree: Tree, context: SchematicContext) => {
+    const rules: Rule[] = [];
+
+    // Always: add hviktor dependency and styles import
+    addPackageJsonDependency(tree, HVIKTOR_PACKAGE, 'latest', false);
+
+    const styleImports: string[] = [];
+
+    // Conditionally: set up Tailwind CSS
+    if (options.tailwind) {
+      addPackageJsonDependency(tree, 'tailwindcss', '^4.0.0', true);
+      addPackageJsonDependency(tree, '@tailwindcss/postcss', '^4.0.0', true);
+      addPackageJsonDependency(tree, 'postcss', '^8.5.0', true);
+
+      createPostcssConfig(tree);
+
+      styleImports.push(TAILWIND_IMPORT);
+    }
+
+    // Hviktor import always comes after tailwind
+    styleImports.push(HVIKTOR_IMPORT);
+    updateStylesCss(tree, styleImports);
+
+    // Schedule npm install
+    context.addTask(new NodePackageInstallTask());
+
+    return chain(rules)(tree, context);
+  };
 }
