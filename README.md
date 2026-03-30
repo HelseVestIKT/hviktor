@@ -3,6 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/@helsevestikt/hviktor-angular)](https://www.npmjs.com/package/@helsevestikt/hviktor-angular)
 [![PR Checks](https://github.com/HelseVestIKT/Hviktor/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/HelseVestIKT/Hviktor/actions/workflows/pr-checks.yml)
 [![Publish to npm](https://github.com/HelseVestIKT/Hviktor/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/HelseVestIKT/Hviktor/actions/workflows/publish-npm.yml)
+[![Demo](https://img.shields.io/badge/Demo-GitHub%20Pages-blue)](https://helsevestikt.github.io/hviktor/)
 [![Angular](https://img.shields.io/badge/Angular-17--21-dd0031)](https://angular.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -201,26 +202,29 @@ Hver gang du gjør en commit formatteres koden automatisk, og hvis det er lint-f
 
 ### Publisere ny versjon til npm
 
-Kun kode som er merget til main kan publiseres. Workflowen verifiserer dette automatisk.
+Vi bruker [Changesets](https://github.com/changesets/changesets) for versjonering og changelog.
 
-1. **Sørg for at main er oppdatert:**
-
-   ```bash
-   git checkout main
-   git pull
-   ```
-
-2. **Opprett versjon-tag:**
-   Tips: for å sjekke siste versjon på npm, kjør `npm run version:check`.
+1. **Legg til changeset på feature-branch:**
 
    ```bash
-   git tag v0.1.0    # Bruk semantic versioning
-   git push origin v0.1.0
+   npx changeset
    ```
 
-3. **Godkjenn publisering:**
-   - En reviewer i `npm-publish` environment må godkjenne
-   - Workflowen bygger og publiserer automatisk til npm
+   Velg bump-type (patch/minor/major) og skriv en kort beskrivelse. Commit filen.
+
+2. **Merge PR til main** — Changesets-workflowen oppretter automatisk en "Version Packages" PR som bumper versjon og oppdaterer CHANGELOG.
+
+3. **Merge "Version Packages" PR** — Pakken bygges, tagges og publiseres til npm.
+
+4. **Godkjenn publisering** — En reviewer i `npm-publish` environment må godkjenne.
+
+**Alternativ (direkte release):**
+
+```bash
+npm run release patch    # Bump + tag + push i ett steg
+```
+
+Se [RELEASE.md](hviktor-angular/RELEASE.md) for fullstendig publiseringsprosedyre.
 
 ### Semantic Versioning
 
