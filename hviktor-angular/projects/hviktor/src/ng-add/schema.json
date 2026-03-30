@@ -1,0 +1,11 @@
+{
+  "$schema": "...",
+  "properties": {
+    "addTailwind": {
+      "type": "boolean",
+      "description": "Legg til Tailwind CSS?",
+      "x-prompt": "Vil du legge til Tailwind CSS i prosjektet?",
+      "default": true
+    }
+  }
+}
