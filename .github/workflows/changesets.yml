@@ -40,13 +40,38 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
-            - name: Create Release PR or Tag Release
-              uses: changesets/action@v1
+            - name: Setup git user
+              run: |
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              working-directory: .
+
+            - name: Check for changesets
+              id: check
+              run: |
+                  # Sjekk om det finnes changeset-filer (ikke config.json/README.md)
+                  CHANGESETS=$(find .changeset -name '*.md' ! -name 'README.md' 2>/dev/null | head -1)
+                  if [ -n "$CHANGESETS" ]; then
+                    echo "has_changesets=true" >> $GITHUB_OUTPUT
+                  else
+                    echo "has_changesets=false" >> $GITHUB_OUTPUT
+                  fi
+
+            - name: Version packages
+              if: steps.check.outputs.has_changesets == 'true'
+              run: npm run changeset:version
+
+            - name: Create Release PR
+              if: steps.check.outputs.has_changesets == 'true'
+              uses: peter-evans/create-pull-request@v7
               with:
                   title: "chore: version packages"
-                  commit: "chore: version packages"
-                  version: cd hviktor-angular && npm run changeset:version
-                  publish: cd hviktor-angular && npm run changeset:tag
-                  cwd: ./hviktor-angular
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  commit-message: "chore: version packages"
+                  branch: changeset-release/main
+                  body: |
+                      This PR was opened by the Changesets workflow.
+                      When merged, a git tag will be created and the package will be published to npm.
+
+            - name: Tag and trigger publish
+              if: steps.check.outputs.has_changesets == 'false'
+              run: npm run changeset:tag
