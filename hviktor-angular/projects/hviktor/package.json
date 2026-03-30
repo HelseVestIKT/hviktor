@@ -1,6 +1,6 @@
 {
   "name": "@helsevestikt/hviktor-angular",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "license": "MIT",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
