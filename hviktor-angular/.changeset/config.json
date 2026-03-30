@@ -1,5 +1,5 @@
 {
-  "changelog": ["@changesets/changelog-github", { "repo": "HelseVestIKT/hviktor" }],
+  "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
   "linked": [],

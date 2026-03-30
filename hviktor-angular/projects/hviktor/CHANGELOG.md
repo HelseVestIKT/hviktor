@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.0.27
+
+### Patch Changes
+
+- 72b707e: Add changesets for automated versioning and changelog generation
+
 Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
