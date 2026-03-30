@@ -12,6 +12,7 @@
     "version:check": "npm view @helsevestikt/hviktor-angular version",
     "version:patch": "cd projects/hviktor && npm version patch --no-git-tag-version",
     "version:icons:patch": "cd projects/icons && npm version patch --no-git-tag-version",
+    "release": "node ./scripts/release.js",
     "publish:lib": "npm run version:patch && npm run build:lib && cd projects/hviktor && npm run build && cd ../.. && cd dist/hviktor && npm publish --access public",
     "publish:icons": "npm run version:icons:patch && npm run build:icons:bundle && cd dist/icons && npm publish --access public",
     "watch": "ng build --watch --configuration development",
