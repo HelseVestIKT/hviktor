@@ -1,5 +1,5 @@
 # Oppretter en "Version Packages" PR når det finnes changesets på main.
-# Når PR-en merges, kjøres release-scriptet som tagger og trigger publisering.
+# Når PR-en merges, bygges og publiseres pakken til npm.
 
 name: Changesets
 
@@ -14,6 +14,7 @@ defaults:
 permissions:
     contents: write
     pull-requests: write
+    id-token: write
 
 concurrency:
     group: ${{ github.workflow }}-${{ github.ref }}
@@ -23,6 +24,7 @@ jobs:
     changesets:
         name: Version Packages
         runs-on: ubuntu-latest
+        environment: npm-publish
 
         steps:
             - name: Checkout
@@ -36,6 +38,7 @@ jobs:
                   node-version: "20"
                   cache: "npm"
                   cache-dependency-path: "hviktor-angular/package-lock.json"
+                  registry-url: "https://registry.npmjs.org"
 
             - name: Install dependencies
               run: npm ci
@@ -57,6 +60,7 @@ jobs:
                     echo "has_changesets=false" >> $GITHUB_OUTPUT
                   fi
 
+            # --- Når det finnes changesets: opprett "Version Packages" PR ---
             - name: Version packages
               if: steps.check.outputs.has_changesets == 'true'
               run: npm run changeset:version
@@ -70,8 +74,27 @@ jobs:
                   branch: changeset-release/main
                   body: |
                       This PR was opened by the Changesets workflow.
-                      When merged, a git tag will be created and the package will be published to npm.
+                      When merged, the package will be tagged and published to npm.
 
-            - name: Tag and trigger publish
+            # --- Når version-PR er merget (ingen changesets igjen): tag + bygg + publiser ---
+            - name: Create git tag
               if: steps.check.outputs.has_changesets == 'false'
               run: npm run changeset:tag
+
+            - name: Build library
+              if: steps.check.outputs.has_changesets == 'false'
+              run: npm run build:lib
+
+            - name: Build schematics
+              if: steps.check.outputs.has_changesets == 'false'
+              run: |
+                  cd projects/hviktor
+                  npm run build
+
+            - name: Publish to npm
+              if: steps.check.outputs.has_changesets == 'false'
+              run: |
+                  cd dist/hviktor
+                  npm publish --access public --provenance
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
