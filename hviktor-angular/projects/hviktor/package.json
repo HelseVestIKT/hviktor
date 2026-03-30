@@ -2,6 +2,7 @@
   "name": "@helsevestikt/hviktor-angular",
   "version": "0.0.6",
   "license": "MIT",
+  "schematics": "./schematics/collection.json",
   "peerDependencies": {
     "@angular/common": ">=17.0.0 <22.0.0",
     "@angular/core": ">=17.0.0 <22.0.0"
