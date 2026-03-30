@@ -1,6 +1,17 @@
 {
   "name": "@helsevestikt/hviktor-angular",
   "version": "0.0.27",
+  "description": "Angular-komponenter basert på Digdir Designsystemet for Helse Vest IKT",
+  "keywords": [
+    "angular",
+    "components",
+    "designsystemet",
+    "digdir",
+    "helse-vest",
+    "a11y",
+    "wcag",
+    "ui"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",

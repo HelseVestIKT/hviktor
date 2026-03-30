@@ -4,6 +4,36 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.0.27] – 2026-03-30
+
+### Changed
+
+- Demo-badge lagt til i repo-README
+- CHANGELOG flytta til `projects/hviktor/` (publiseres med npm-pakken)
+- Oppdatert publiseringsrutine i README til å bruke `npm run release`
+
+## [0.0.26] – 2026-03-30
+
+### Fixed
+
+- Lagt til `repository`-felt i package.json for npm provenance
+
+## [0.0.25] – 2026-03-30
+
+### Fixed
+
+- Publish-workflow bruker nå `--allow-same-version` for å unngå feil ved re-publisering
+
+## [0.0.24] – 2026-03-30
+
+### Added
+
+- Release-script (`npm run release`) for automatisk versjonering og tagging
+- `--provenance`-flagg i publish-workflow for pakkeintegritet
+- CHANGELOG, CONTRIBUTING, RELEASE og USAGE_EXAMPLE dokumentasjon
+- E2E-tester (Playwright) i PR-sjekk workflow
+- Badges i README (npm, CI, Angular, lisens, demo)
+
 ## [0.0.23] – 2026-03-30
 
 ### Added
