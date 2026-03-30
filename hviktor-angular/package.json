@@ -13,8 +13,8 @@
     "version:patch": "cd projects/hviktor && npm version patch --no-git-tag-version",
     "version:icons:patch": "cd projects/icons && npm version patch --no-git-tag-version",
     "release": "node ./scripts/release.js",
-    "changeset": "changeset",
-    "changeset:version": "changeset version && npm install --package-lock-only",
+    "changeset": "node ./scripts/with-workspaces.js changeset",
+    "changeset:version": "node ./scripts/with-workspaces.js changeset version && npm install --package-lock-only",
     "changeset:tag": "node ./scripts/changeset-tag.js",
     "publish:lib": "npm run version:patch && npm run build:lib && cd projects/hviktor && npm run build && cd ../.. && cd dist/hviktor && npm publish --access public",
     "publish:icons": "npm run version:icons:patch && npm run build:icons:bundle && cd dist/icons && npm publish --access public",
@@ -36,9 +36,6 @@
     "prepare": "cd .. && husky hviktor-angular/.husky"
   },
   "private": true,
-  "workspaces": [
-    "projects/hviktor"
-  ],
   "dependencies": {
     "@angular/common": "^21.2.6",
     "@angular/compiler": "^21.2.6",
