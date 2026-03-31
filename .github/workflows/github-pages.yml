@@ -34,6 +34,9 @@ jobs:
       - name: Build library
         run: npx ng build hviktor-lib --configuration production
 
+      - name: Link library
+        run: npm install --ignore-scripts
+
       - name: Build Angular app
         run: npx ng build --configuration production --base-href ./
 
