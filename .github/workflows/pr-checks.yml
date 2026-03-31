@@ -34,7 +34,7 @@ jobs:
         run: npx eslint projects/hviktor --ext .ts,.html
 
       - name: Run tests
-        run: npm run test -- --project hviktor --watch=false
+        run: npm run test -- --project hviktor-lib
 
       - name: Build library
         run: npm run build:lib
