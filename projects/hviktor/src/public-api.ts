@@ -29,6 +29,7 @@ export * from './select';
 export * from './skeleton';
 export * from './skip-link';
 export * from './spinner';
+export * from './suggestion';
 export * from './table';
 export * from './tabs';
 export * from './tag';

@@ -303,6 +303,11 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     ds: true,
   },
   {
+    id: 'suggestion',
+    name: 'Suggestion',
+    description: 'Søkbar select med mulighet for å velge flere alternativer',
+  },
+  {
     id: 'required-tag',
     name: 'RequiredTag',
     description:
