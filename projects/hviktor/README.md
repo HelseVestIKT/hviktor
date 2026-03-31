@@ -104,11 +104,11 @@ Se [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) for
 
 ## Endringslogg
 
-Se [CHANGELOG.md](https://github.com/HelseVestIKT/hviktor/blob/main/hviktor/projects/hviktor/CHANGELOG.md) for alle versjonsendringer.
+Se [CHANGELOG.md](https://github.com/HelseVestIKT/hviktor/blob/main/projects/hviktor/CHANGELOG.md) for alle versjonsendringer.
 
 ## Bidra
 
-Se [CONTRIBUTING.md](https://github.com/HelseVestIKT/hviktor/blob/main/hviktor/CONTRIBUTING.md) for utviklingsprosess og retningslinjer.
+Se [CONTRIBUTING.md](https://github.com/HelseVestIKT/hviktor/blob/main/CONTRIBUTING.md) for utviklingsprosess og retningslinjer.
 
 ## Lisens
 
