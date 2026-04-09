@@ -61,6 +61,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     name: 'Button',
     description: 'Button lèt brukarane utføre handlingar.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'card',

@@ -1,10 +1,5 @@
 <div align="center">
-<h1>
-  <a href="https://github.com/HelseVestIKT/hviktor">
-    <img src="hviktor/public/dots.svg" width="24" alt="Helse Vest prikker"/>
-  </a>
-  <strong>HVIKTOR</strong>
-</h1>
+<h1>HVIKTOR</h1>
 
 <p><strong>Angular-komponenter basert på Digdir Designsystemet for Helse Vest IKT</strong></p>
 
