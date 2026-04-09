@@ -1,0 +1,22 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/hviktor-lib",
+  "lib": {
+    "entryFile": "src/public-api.ts"
+  },
+
+  "assets": [
+    { "glob": "styles.css", "input": "src", "output": "." },
+    { "glob": "README.md", "input": ".", "output": "." },
+    { "glob": "LICENSE", "input": ".", "output": "." },
+    { "glob": "CHANGELOG.md", "input": ".", "output": "." }
+  ],
+
+  "allowedNonPeerDependencies": [
+    "@digdir/designsystemet-css",
+    "@digdir/designsystemet-web",
+    "@u-elements/u-details",
+    "@u-elements/u-tabs",
+    "@u-elements/u-combobox"
+  ]
+}

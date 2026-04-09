@@ -1,0 +1,45 @@
+@import '@digdir/designsystemet-css';
+@import '@digdir/designsystemet-css/theme';
+
+@layer ds.theme.typography.primary {
+  :root,
+  [data-typography='primary'] {
+    --ds-font-family:
+      'Albert Sans', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial,
+      'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  }
+}
+
+:root,
+:host,
+html,
+body {
+  font-family:
+    var(--ds-font-family, 'Albert Sans'),
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    'Helvetica Neue',
+    Arial,
+    'Noto Sans',
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji';
+  font-feature-settings: 'cv05' 1;
+}
+
+/* Automatic vertical spacing between direct children in hviForm, matching ds-fieldset */
+form[hviForm] > * + * {
+  margin-block-start: var(--ds-size-4);
+}
+
+/* adding styling to lists that tailwind has removed */
+ol.ds-list {
+  list-style-type: decimal;
+}
+
+ul.ds-list {
+  list-style-type: disc;
+}

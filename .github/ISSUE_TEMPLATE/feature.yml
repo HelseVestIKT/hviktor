@@ -1,0 +1,25 @@
+name: ✨ Ny funksjon
+description: Foreslå ein ny funksjon til Hviktor
+type: Feature
+projects: ["HelseVestIKT/37"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Skildring
+      description: Forklar kva den nye funksjonen er, og kva han skal brukast til. Du kan også lime inn bilete i tekstfeltet.
+      placeholder: Kort forklaring av formål og bruksområde for funksjonen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Skjermbilete og lenkje til Figma
+      description: Lim inn skjermbilete eller lenkje til Figma-design for funksjonen.
+
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Tilgjenge (UU)
+      description: Er det spesielle krav til universell utforming, til dømes ARIA-attributt, tastaturnavigasjon eller skjermlesarstøtte?

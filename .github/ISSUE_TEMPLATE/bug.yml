@@ -1,0 +1,20 @@
+name: 🐛 Bug
+description: Rapporter ein feil i Hviktor
+type: Bug
+projects: ["HelseVestIKT/37"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Skildring
+      description: Forklar kva som er feil, og kva du forventar skulle skje. Legg gjerne ved skjermbilete eller lenkje til Figma-design.
+      placeholder: Kort skildring av feilen og kva du forventar skulle skje.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steg for å gjenskape feilen
+      description: Beskriv steg for steg korleis feilen kan gjenskapes. Dette hjelper utviklarane å forstå og fikse problemet.
+      placeholder: 1. Gå til ... 2. Klikk på ... 3. Se feilen ...

@@ -1,0 +1,67 @@
+{
+  "name": "@helsevestikt/hviktor-angular",
+  "version": "0.1.2",
+  "description": "Angular-komponenter basert på Digdir Designsystemet for Helse Vest IKT",
+  "keywords": [
+    "angular",
+    "components",
+    "designsystemet",
+    "digdir",
+    "helse-vest",
+    "a11y",
+    "wcag",
+    "ui"
+  ],
+  "author": {
+    "name": "Helse Vest IKT"
+  },
+  "bugs": {
+    "url": "https://github.com/HelseVestIKT/hviktor/issues"
+  },
+  "homepage": "https://helsevestikt.github.io/hviktor",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HelseVestIKT/hviktor",
+    "directory": "projects/hviktor"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.schematics.json",
+    "postbuild": "npx copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json schematics/package.json ../../dist/hviktor-lib && node -e \"require('fs').writeFileSync('../../dist/hviktor-lib/.npmignore','')\""
+  },
+  "peerDependencies": {
+    "@angular/common": ">=17.0.0 <22.0.0",
+    "@angular/core": ">=17.0.0 <22.0.0"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "dependencies": {
+    "@digdir/designsystemet-css": "^1.13.1",
+    "@digdir/designsystemet-web": "^1.13.1",
+    "@u-elements/u-combobox": "^1.0.7",
+    "@u-elements/u-details": "^0.1.5",
+    "@u-elements/u-tabs": "^0.1.2",
+    "tslib": "^2.3.0"
+  },
+  "exports": {
+    "./styles.css": "./styles.css"
+  },
+  "files": [
+    "fesm2022/",
+    "schematics/",
+    "types/",
+    "index.d.ts",
+    "styles.css",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ]
+}

@@ -1,0 +1,12 @@
+import { HviIconBase } from '../base-icon.webcomponent';
+
+export class HviIconFork extends HviIconBase {
+  protected get path(): string {
+    return 'M10 3.25C10.4142 3.25 10.75 3.58579 10.75 4V9C10.75 9.69036 11.3096 10.25 12 10.25C12.6904 10.25 13.25 9.69036 13.25 9V4C13.25 3.58579 13.5858 3.25 14 3.25C14.4142 3.25 14.75 3.58579 14.75 4V9C14.75 10.2588 13.9043 11.32 12.75 11.6465V20C12.75 20.4142 12.4142 20.75 12 20.75C11.5858 20.75 11.25 20.4142 11.25 20V11.6465C10.0957 11.32 9.25 10.2588 9.25 9V4C9.25 3.58579 9.58579 3.25 10 3.25ZM12.75 4C12.75 3.58579 12.4142 3.25 12 3.25C11.5858 3.25 11.25 3.58579 11.25 4V7.5C11.25 7.91421 11.5858 8.25 12 8.25C12.4142 8.25 12.75 7.91421 12.75 7.5V4Z';
+  }
+}
+
+// Register the custom element (only in browser environment)
+if (typeof customElements !== 'undefined' && !customElements.get('hvi-icon-fork')) {
+  customElements.define('hvi-icon-fork', HviIconFork);
+}

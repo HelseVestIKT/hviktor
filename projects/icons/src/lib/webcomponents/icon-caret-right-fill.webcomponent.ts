@@ -1,0 +1,12 @@
+import { HviIconBase } from '../base-icon.webcomponent';
+
+export class HviIconCaretRightFill extends HviIconBase {
+  protected get path(): string {
+    return 'M9.71299 18.1929C9.43273 18.0768 9.25 17.8033 9.25 17.5L9.25 6.49998C9.25 6.19663 9.43273 5.92315 9.71299 5.80707C9.99324 5.69098 10.3158 5.75515 10.5303 5.96965L16.0303 11.4696C16.3232 11.7625 16.3232 12.2374 16.0303 12.5303L10.5303 18.0303C10.3158 18.2448 9.99324 18.309 9.71299 18.1929Z';
+  }
+}
+
+// Register the custom element (only in browser environment)
+if (typeof customElements !== 'undefined' && !customElements.get('hvi-icon-caret-right-fill')) {
+  customElements.define('hvi-icon-caret-right-fill', HviIconCaretRightFill);
+}

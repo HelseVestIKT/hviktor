@@ -1,0 +1,32 @@
+name: ➕ Ny komponent
+description: Foreslå ein ny komponent til Hviktor
+type: Feature
+projects: ["HelseVestIKT/37"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Skildring
+      description: Forklar kva den nye komponenten er, og kva han skal brukast til. Du kan også lime inn bilete i tekstfeltet.
+      placeholder: Kort forklaring av formål og bruksområde for komponenten.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Skjermbilete og lenkje til Figma
+      description: Lim inn skjermbilete eller lenkje til Figma-design for komponenten.
+
+  - type: input
+    id: designsystemet-link
+    attributes:
+      label: Lenkje til designsystemet.no (om relevant)
+      description: Lenkje til tilsvarande komponent på designsystemet.no.
+      placeholder: https://designsystemet.no/en/components/docs/.../code/
+
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Tilgjenge (UU)
+      description: Er det spesielle krav til universell utforming, til dømes ARIA-attributt, tastaturnavigasjon eller skjermlesarstøtte?

@@ -1,0 +1,15 @@
+import { HviIconBase } from '../base-icon.webcomponent';
+
+export class HviIconCaretDownCircleFill extends HviIconBase {
+  protected get path(): string {
+    return 'M12 2.25C6.61522 2.25 2.25 6.61522 2.25 12C2.25 17.3848 6.61522 21.75 12 21.75C17.3848 21.75 21.75 17.3848 21.75 12C21.75 6.61522 17.3848 2.25 12 2.25ZM12.5304 15.0303C12.2375 15.3232 11.7626 15.3232 11.4697 15.0303L7.96969 11.5303C7.75519 11.3158 7.69103 10.9932 7.80711 10.713C7.9232 10.4327 8.19668 10.25 8.50002 10.25H15.5C15.8034 10.25 16.0768 10.4327 16.1929 10.713C16.309 10.9932 16.2449 11.3158 16.0304 11.5303L12.5304 15.0303Z';
+  }
+}
+
+// Register the custom element (only in browser environment)
+if (
+  typeof customElements !== 'undefined' &&
+  !customElements.get('hvi-icon-caret-down-circle-fill')
+) {
+  customElements.define('hvi-icon-caret-down-circle-fill', HviIconCaretDownCircleFill);
+}
