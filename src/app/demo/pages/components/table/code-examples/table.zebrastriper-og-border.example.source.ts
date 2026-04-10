@@ -1,40 +1,41 @@
-import { Component, signal } from '@angular/core';
-import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+// Auto-generated - do not edit manually
+export const TableZebrastriperOgBorderExampleSource = `import { Component, signal } from '@angular/core';
+import { HviTable } from '@helsevestikt/hviktor';
 
 @Component({
-  selector: 'app-table-paginering-example',
+  selector: 'app-table-zebrastriper-og-border-example',
   standalone: true,
-  imports: [HviPagination, HviSortableColumn, HviTable],
-  template: `
-    <table hviTable [value]="data" paginator [rows]="5" zebra hover #pageTable="hviTable">
+  imports: [HviTable],
+  template: \`
+    <table hviTable zebra border hover>
       <thead>
         <tr>
-          <th hviSortableColumn="navn">
-            <button type="button">Navn</button>
-          </th>
-          <th>Epost</th>
-          <th>Avdeling</th>
+          <th>Måned</th>
+          <th>2024</th>
+          <th>2025</th>
         </tr>
       </thead>
       <tbody>
-        @for (person of pageTable.paginatedValue(); track person.id) {
-          <tr>
-            <td>{{ person.navn }}</td>
-            <td>{{ person.epost }}</td>
-            <td>{{ person.avdeling }}</td>
-          </tr>
-        }
+        <tr>
+          <th scope="row">Januar</th>
+          <td>1 230</td>
+          <td>1 450</td>
+        </tr>
+        <tr>
+          <th scope="row">Februar</th>
+          <td>980</td>
+          <td>1 120</td>
+        </tr>
+        <tr>
+          <th scope="row">Mars</th>
+          <td>1 150</td>
+          <td>1 300</td>
+        </tr>
       </tbody>
     </table>
-    <hvi-pagination
-      [totalItems]="pageTable.totalFilteredRecords()"
-      [pageSize]="5"
-      [currentPage]="pageTable.currentPage()"
-      (currentPageChange)="pageTable.goToPage($event)"
-    />
-  `,
+  \`,
 })
-export class TablePagineringExampleComponent {
+export class TableZebrastriperOgBorderExampleComponent {
   data = [
     {
       id: 1,
@@ -150,3 +151,4 @@ export class TablePagineringExampleComponent {
   ];
   rowsPerPage = signal(5);
 }
+`;

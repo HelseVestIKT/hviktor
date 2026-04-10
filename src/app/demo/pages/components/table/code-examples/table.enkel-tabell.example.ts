@@ -1,40 +1,43 @@
 import { Component, signal } from '@angular/core';
-import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import { HviTable } from '@helsevestikt/hviktor';
 
 @Component({
-  selector: 'app-table-paginering-example',
+  selector: 'app-table-enkel-tabell-example',
   standalone: true,
-  imports: [HviPagination, HviSortableColumn, HviTable],
+  imports: [HviTable],
   template: `
-    <table hviTable [value]="data" paginator [rows]="5" zebra hover #pageTable="hviTable">
+    <table hviTable>
+      <caption>
+        Prosjektstatus
+      </caption>
       <thead>
         <tr>
-          <th hviSortableColumn="navn">
-            <button type="button">Navn</button>
-          </th>
-          <th>Epost</th>
-          <th>Avdeling</th>
+          <th>Prosjekt</th>
+          <th>Status</th>
+          <th>Frist</th>
         </tr>
       </thead>
       <tbody>
-        @for (person of pageTable.paginatedValue(); track person.id) {
-          <tr>
-            <td>{{ person.navn }}</td>
-            <td>{{ person.epost }}</td>
-            <td>{{ person.avdeling }}</td>
-          </tr>
-        }
+        <tr>
+          <td>Designsystem</td>
+          <td>Aktiv</td>
+          <td>2026-06-01</td>
+        </tr>
+        <tr>
+          <td>Migrering</td>
+          <td>Planlagt</td>
+          <td>2026-09-15</td>
+        </tr>
+        <tr>
+          <td>Dokumentasjon</td>
+          <td>Aktiv</td>
+          <td>2026-05-01</td>
+        </tr>
       </tbody>
     </table>
-    <hvi-pagination
-      [totalItems]="pageTable.totalFilteredRecords()"
-      [pageSize]="5"
-      [currentPage]="pageTable.currentPage()"
-      (currentPageChange)="pageTable.goToPage($event)"
-    />
   `,
 })
-export class TablePagineringExampleComponent {
+export class TableEnkelTabellExampleComponent {
   data = [
     {
       id: 1,
