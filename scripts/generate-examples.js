@@ -452,9 +452,7 @@ function generateExampleComponent(
   const schemasLine = needsSchema ? `\n  schemas: [CUSTOM_ELEMENTS_SCHEMA],` : '';
 
   // Build side-effect import lines
-  const sideEffectLines = sectionSideEffects.length > 0
-    ? '\n' + sectionSideEffects.join('\n')
-    : '';
+  const sideEffectLines = sectionSideEffects.length > 0 ? '\n' + sectionSideEffects.join('\n') : '';
 
   // Generate the component
   const code = `${importLines.join('\n')}${sideEffectLines}
