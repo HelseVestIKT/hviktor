@@ -1,10 +1,15 @@
-import { Component, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { HviButton, HviTable } from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-envelope-closed.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
 
 @Component({
   selector: 'app-table-utvidbare-rader-example',
   standalone: true,
   imports: [HviButton, HviTable],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <table hviTable [value]="data" zebra hover #expandTable="hviTable">
       <thead>
@@ -27,7 +32,11 @@ import { HviButton, HviTable } from '@helsevestikt/hviktor';
                 [attr.aria-expanded]="expandTable.isExpanded(person)"
                 aria-label="Vis detaljer"
               >
-                {{ expandTable.isExpanded(person) ? '▼' : '▶' }}
+                @if (expandTable.isExpanded(person)) {
+                  <hvi-icon-chevron-down size="sm"></hvi-icon-chevron-down>
+                } @else {
+                  <hvi-icon-chevron-right size="sm"></hvi-icon-chevron-right>
+                }
               </button>
             </td>
             <td>{{ person.navn }}</td>
@@ -38,12 +47,14 @@ import { HviButton, HviTable } from '@helsevestikt/hviktor';
             <tr>
               <td colspan="4">
                 <div class="flex gap-8 py-2 pl-12">
-                  <dl>
-                    <dt class="ds-label">Epost</dt>
+                  <dl class="flex items-center gap-2">
+                    <dt>
+                      <hvi-icon-envelope-closed size="sm"></hvi-icon-envelope-closed>
+                    </dt>
                     <dd>{{ person.epost }}</dd>
                   </dl>
-                  <dl>
-                    <dt class="ds-label">Telefon</dt>
+                  <dl class="flex items-center gap-2">
+                    <dt><hvi-icon-phone size="sm"></hvi-icon-phone></dt>
                     <dd>{{ person.telefon }}</dd>
                   </dl>
                 </div>
@@ -153,6 +164,21 @@ export class TableUtvidbareRaderExampleComponent {
       telefon: '992 22 222',
       stilling: 'Rekrutterer',
     },
+  ];
+  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
+  stillinger = [
+    'Utvikler',
+    'Rådgiver',
+    'Teamleder',
+    'Controller',
+    'Arkitekt',
+    'Leder',
+    'Analytiker',
+    'Tester',
+    'Direktør',
+    'Designer',
+    'Revisor',
+    'Rekrutterer',
   ];
   rowsPerPage = signal(5);
 }

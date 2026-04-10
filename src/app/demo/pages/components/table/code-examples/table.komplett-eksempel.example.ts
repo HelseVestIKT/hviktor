@@ -1,20 +1,110 @@
-import { Component, signal } from '@angular/core';
-import { HviButton, HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import {
+  HviButton,
+  HviInput,
+  HviLabel,
+  HviPagination,
+  HviSearch,
+  HviSearchClear,
+  HviSortableColumn,
+  HviSuggestion,
+  HviSuggestionDatalist,
+  HviSuggestionOption,
+  HviTable,
+} from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-envelope-closed.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
 
 @Component({
   selector: 'app-table-komplett-eksempel-example',
   standalone: true,
-  imports: [HviButton, HviPagination, HviSortableColumn, HviTable],
+  imports: [
+    HviButton,
+    HviInput,
+    HviLabel,
+    HviPagination,
+    HviSearch,
+    HviSearchClear,
+    HviSortableColumn,
+    HviSuggestion,
+    HviSuggestionDatalist,
+    HviSuggestionOption,
+    HviTable,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="mb-4">
-      <label class="ds-label" for="full-search">Søk</label>
-      <input
-        id="full-search"
-        class="ds-input"
-        type="search"
-        placeholder="Søk i alle kolonner..."
-        (input)="fullTable.filterGlobal($any($event.target).value)"
-      />
+      <label hviLabel>Søk</label>
+      <hvi-search>
+        <input
+          hviInput
+          type="search"
+          placeholder="Søk i alle kolonner..."
+          (input)="fullTable.filterGlobal($any($event.target).value)"
+        />
+        <button hviSearchClear type="reset" aria-label="Tøm"></button>
+      </hvi-search>
+    </div>
+    <div class="mb-4 flex flex-wrap gap-4">
+      <div>
+        <label hviLabel>Navn</label>
+        <hvi-suggestion>
+          <input
+            hviInput
+            type="text"
+            placeholder="Filtrer..."
+            (change)="fullTable.setColumnFilter('navn', $any($event.target).value)"
+          />
+          <del aria-label="Tøm" hidden=""></del>
+          <hvi-suggestion-datalist>
+            @for (person of data; track person.id) {
+              <hvi-suggestion-option [label]="person.navn" [value]="person.navn">
+                {{ person.navn }}
+              </hvi-suggestion-option>
+            }
+          </hvi-suggestion-datalist>
+        </hvi-suggestion>
+      </div>
+      <div>
+        <label hviLabel>Avdeling</label>
+        <hvi-suggestion [multiple]="true">
+          <input
+            hviInput
+            type="text"
+            placeholder="Filtrer..."
+            (change)="fullTable.setColumnFilter('avdeling', $any($event.target).value)"
+          />
+          <del aria-label="Tøm" hidden=""></del>
+          <hvi-suggestion-datalist>
+            @for (avdeling of avdelinger; track avdeling) {
+              <hvi-suggestion-option [label]="avdeling" [value]="avdeling">
+                {{ avdeling }}
+              </hvi-suggestion-option>
+            }
+          </hvi-suggestion-datalist>
+        </hvi-suggestion>
+      </div>
+      <div>
+        <label hviLabel>Stilling</label>
+        <hvi-suggestion>
+          <input
+            hviInput
+            type="text"
+            placeholder="Filtrer..."
+            (change)="fullTable.setColumnFilter('stilling', $any($event.target).value)"
+          />
+          <del aria-label="Tøm" hidden=""></del>
+          <hvi-suggestion-datalist>
+            @for (stilling of stillinger; track stilling) {
+              <hvi-suggestion-option [label]="stilling" [value]="stilling">
+                {{ stilling }}
+              </hvi-suggestion-option>
+            }
+          </hvi-suggestion-datalist>
+        </hvi-suggestion>
+      </div>
     </div>
     <table
       hviTable
@@ -42,39 +132,6 @@ import { HviButton, HviPagination, HviSortableColumn, HviTable } from '@helseves
             <button type="button">Stilling</button>
           </th>
         </tr>
-        <tr>
-          <th></th>
-          <th>
-            <input
-              class="ds-input"
-              type="text"
-              placeholder="Filtrer..."
-              (input)="fullTable.setColumnFilter('navn', $any($event.target).value)"
-            />
-          </th>
-          <th>
-            <select
-              class="ds-select"
-              (change)="
-                fullTable.setColumnFilter('avdeling', $any($event.target).value || undefined)
-              "
-            >
-              <option value="">Alle</option>
-              <option>IT</option>
-              <option>HR</option>
-              <option>Økonomi</option>
-              <option>Ledelse</option>
-            </select>
-          </th>
-          <th>
-            <input
-              class="ds-input"
-              type="text"
-              placeholder="Filtrer..."
-              (input)="fullTable.setColumnFilter('stilling', $any($event.target).value)"
-            />
-          </th>
-        </tr>
       </thead>
       <tbody>
         @for (person of fullTable.paginatedValue(); track person.id) {
@@ -88,7 +145,11 @@ import { HviButton, HviPagination, HviSortableColumn, HviTable } from '@helseves
                 [attr.aria-expanded]="fullTable.isExpanded(person)"
                 aria-label="Vis detaljer"
               >
-                {{ fullTable.isExpanded(person) ? '▼' : '▶' }}
+                @if (fullTable.isExpanded(person)) {
+                  <hvi-icon-chevron-down size="sm"></hvi-icon-chevron-down>
+                } @else {
+                  <hvi-icon-chevron-right size="sm"></hvi-icon-chevron-right>
+                }
               </button>
             </td>
             <td>{{ person.navn }}</td>
@@ -99,12 +160,14 @@ import { HviButton, HviPagination, HviSortableColumn, HviTable } from '@helseves
             <tr>
               <td colspan="4">
                 <div class="flex gap-8 py-2 pl-12">
-                  <dl>
-                    <dt class="ds-label">Epost</dt>
+                  <dl class="flex items-center gap-2">
+                    <dt>
+                      <hvi-icon-envelope-closed size="sm"></hvi-icon-envelope-closed>
+                    </dt>
                     <dd>{{ person.epost }}</dd>
                   </dl>
-                  <dl>
-                    <dt class="ds-label">Telefon</dt>
+                  <dl class="flex items-center gap-2">
+                    <dt><hvi-icon-phone size="sm"></hvi-icon-phone></dt>
                     <dd>{{ person.telefon }}</dd>
                   </dl>
                 </div>
@@ -229,6 +292,21 @@ export class TableKomplettEksempelExampleComponent {
       telefon: '992 22 222',
       stilling: 'Rekrutterer',
     },
+  ];
+  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
+  stillinger = [
+    'Utvikler',
+    'Rådgiver',
+    'Teamleder',
+    'Controller',
+    'Arkitekt',
+    'Leder',
+    'Analytiker',
+    'Tester',
+    'Direktør',
+    'Designer',
+    'Revisor',
+    'Rekrutterer',
   ];
   rowsPerPage = signal(5);
 }

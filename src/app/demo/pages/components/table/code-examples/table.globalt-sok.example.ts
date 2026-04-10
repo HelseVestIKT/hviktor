@@ -1,20 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { HviTable } from '@helsevestikt/hviktor';
+import { HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-table-globalt-sok-example',
   standalone: true,
-  imports: [HviTable],
+  imports: [HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
   template: `
     <div class="mb-4">
-      <label class="ds-label" for="global-search">Søk i tabell</label>
-      <input
-        id="global-search"
-        class="ds-input"
-        type="search"
-        placeholder="Søk etter navn, epost eller avdeling..."
-        (input)="searchTable.filterGlobal($any($event.target).value)"
-      />
+      <label hviLabel>Søk i tabell</label>
+      <hvi-search>
+        <input
+          hviInput
+          type="search"
+          placeholder="Søk etter navn, epost eller avdeling..."
+          (input)="searchTable.filterGlobal($any($event.target).value)"
+        />
+        <button hviSearchClear type="reset" aria-label="Tøm"></button>
+      </hvi-search>
     </div>
     <table
       hviTable
@@ -149,6 +151,21 @@ export class TableGlobaltSokExampleComponent {
       telefon: '992 22 222',
       stilling: 'Rekrutterer',
     },
+  ];
+  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
+  stillinger = [
+    'Utvikler',
+    'Rådgiver',
+    'Teamleder',
+    'Controller',
+    'Arkitekt',
+    'Leder',
+    'Analytiker',
+    'Tester',
+    'Direktør',
+    'Designer',
+    'Revisor',
+    'Rekrutterer',
   ];
   rowsPerPage = signal(5);
 }

@@ -131,5 +131,20 @@ export class TableSorteringExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
+  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
+  stillinger = [
+    'Utvikler',
+    'Rådgiver',
+    'Teamleder',
+    'Controller',
+    'Arkitekt',
+    'Leder',
+    'Analytiker',
+    'Tester',
+    'Direktør',
+    'Designer',
+    'Revisor',
+    'Rekrutterer',
+  ];
   rowsPerPage = signal(5);
 }

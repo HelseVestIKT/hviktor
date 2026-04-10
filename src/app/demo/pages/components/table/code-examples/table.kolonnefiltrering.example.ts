@@ -1,11 +1,86 @@
 import { Component, signal } from '@angular/core';
-import { HviButton, HviTable } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviInput,
+  HviLabel,
+  HviSuggestion,
+  HviSuggestionDatalist,
+  HviSuggestionOption,
+  HviTable,
+} from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-table-kolonnefiltrering-example',
   standalone: true,
-  imports: [HviButton, HviTable],
+  imports: [
+    HviButton,
+    HviInput,
+    HviLabel,
+    HviSuggestion,
+    HviSuggestionDatalist,
+    HviSuggestionOption,
+    HviTable,
+  ],
   template: `
+    <div class="mb-4 flex flex-wrap gap-4">
+      <div>
+        <label hviLabel>Filtrer på navn</label>
+        <hvi-suggestion>
+          <input
+            hviInput
+            type="text"
+            placeholder="Velg navn..."
+            (change)="colFilterTable.setColumnFilter('navn', $any($event.target).value)"
+          />
+          <del aria-label="Tøm" hidden=""></del>
+          <hvi-suggestion-datalist>
+            @for (person of data; track person.id) {
+              <hvi-suggestion-option [label]="person.navn" [value]="person.navn">
+                {{ person.navn }}
+              </hvi-suggestion-option>
+            }
+          </hvi-suggestion-datalist>
+        </hvi-suggestion>
+      </div>
+      <div>
+        <label hviLabel>Filtrer på avdeling</label>
+        <hvi-suggestion [multiple]="true">
+          <input
+            hviInput
+            type="text"
+            placeholder="Velg avdelinger..."
+            (change)="colFilterTable.setColumnFilter('avdeling', $any($event.target).value)"
+          />
+          <del aria-label="Tøm" hidden=""></del>
+          <hvi-suggestion-datalist>
+            @for (avdeling of avdelinger; track avdeling) {
+              <hvi-suggestion-option [label]="avdeling" [value]="avdeling">
+                {{ avdeling }}
+              </hvi-suggestion-option>
+            }
+          </hvi-suggestion-datalist>
+        </hvi-suggestion>
+      </div>
+      <div>
+        <label hviLabel>Filtrer på stilling</label>
+        <hvi-suggestion>
+          <input
+            hviInput
+            type="text"
+            placeholder="Velg stilling..."
+            (change)="colFilterTable.setColumnFilter('stilling', $any($event.target).value)"
+          />
+          <del aria-label="Tøm" hidden=""></del>
+          <hvi-suggestion-datalist>
+            @for (stilling of stillinger; track stilling) {
+              <hvi-suggestion-option [label]="stilling" [value]="stilling">
+                {{ stilling }}
+              </hvi-suggestion-option>
+            }
+          </hvi-suggestion-datalist>
+        </hvi-suggestion>
+      </div>
+    </div>
     <table
       hviTable
       [value]="data"
@@ -18,38 +93,6 @@ import { HviButton, HviTable } from '@helsevestikt/hviktor';
           <th>Navn</th>
           <th>Avdeling</th>
           <th>Stilling</th>
-        </tr>
-        <tr>
-          <th>
-            <input
-              class="ds-input"
-              type="text"
-              placeholder="Filtrer navn..."
-              (input)="colFilterTable.setColumnFilter('navn', $any($event.target).value)"
-            />
-          </th>
-          <th>
-            <select
-              class="ds-select"
-              (change)="
-                colFilterTable.setColumnFilter('avdeling', $any($event.target).value || undefined)
-              "
-            >
-              <option value="">Alle avdelinger</option>
-              <option>IT</option>
-              <option>HR</option>
-              <option>Økonomi</option>
-              <option>Ledelse</option>
-            </select>
-          </th>
-          <th>
-            <input
-              class="ds-input"
-              type="text"
-              placeholder="Filtrer stilling..."
-              (input)="colFilterTable.setColumnFilter('stilling', $any($event.target).value)"
-            />
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -174,6 +217,21 @@ export class TableKolonnefiltreringExampleComponent {
       telefon: '992 22 222',
       stilling: 'Rekrutterer',
     },
+  ];
+  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
+  stillinger = [
+    'Utvikler',
+    'Rådgiver',
+    'Teamleder',
+    'Controller',
+    'Arkitekt',
+    'Leder',
+    'Analytiker',
+    'Tester',
+    'Direktør',
+    'Designer',
+    'Revisor',
+    'Rekrutterer',
   ];
   rowsPerPage = signal(5);
 }
