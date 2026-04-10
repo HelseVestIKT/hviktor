@@ -77,6 +77,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Chip er små, interaktive komponenter som lar brukerne styre hvordan de vil se innhold. For eksempel kan de brukes til å filtrere kategorier i et søkeresultat og vise hvilke filter som er aktive.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'details',
