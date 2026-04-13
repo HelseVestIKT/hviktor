@@ -59,6 +59,7 @@ import { DemoSectionComponent } from './demo-section';
                     color="neutral"
                     [href]="'#' + section.sectionId()"
                     class="block py-1 pl-3"
+                    (click)="scrollTo($event, section.sectionId())"
                   >
                     {{ section.title() }}
                   </a>
@@ -75,6 +76,11 @@ export class DemoPageComponent {
   componentId = input.required<string>();
 
   sections = contentChildren(DemoSectionComponent);
+
+  scrollTo(event: Event, id: string) {
+    event.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  }
 
   /** Slår opp komponent-konfigurasjon fra DEMO_COMPONENTS basert på componentId. */
   private component = computed(() => DEMO_COMPONENTS.find((c) => c.id === this.componentId()));
