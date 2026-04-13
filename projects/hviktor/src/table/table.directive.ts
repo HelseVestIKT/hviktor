@@ -119,8 +119,8 @@ export class HviTable<T = unknown> {
    * Om ikke satt, søkes det i alle auto-detekterte felter.
    */
   @Input()
-  set globalFilterFields(fields: string[]) {
-    this._globalFilterFields.set(fields);
+  set globalFilterFields(fields: string[] | null | undefined) {
+    this._globalFilterFields.set(fields ?? []);
   }
 
   /**
