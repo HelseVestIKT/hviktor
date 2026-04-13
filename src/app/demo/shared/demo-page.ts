@@ -143,10 +143,21 @@ export class DemoPageComponent {
       }
     }
 
-    navigator.clipboard.writeText(lines.join('\n')).then(() => {
-      this.copied.set(true);
-      setTimeout(() => this.copied.set(false), 2000);
-    });
+    const markdown = lines.join('\n');
+    const writeText = navigator.clipboard?.writeText;
+
+    if (!writeText) {
+      return;
+    }
+
+    writeText.call(navigator.clipboard, markdown)
+      .then(() => {
+        this.copied.set(true);
+        setTimeout(() => this.copied.set(false), 2000);
+      })
+      .catch((error) => {
+        console.error('Kunne ikke kopiere markdown til utklippstavlen.', error);
+      });
   }
 
   /** Slår opp komponent-konfigurasjon fra DEMO_COMPONENTS basert på componentId. */
