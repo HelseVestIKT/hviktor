@@ -24,6 +24,7 @@ import { HviButton, HviSelect, HviTable } from '@helsevestikt/hviktor';
           <th>
             <select
               hviSelect
+              aria-label="Filtrer på navn"
               (change)="colFilterTable.setColumnFilter('navn', $any($event.target).value)"
             >
               <option value="">Alle</option>
@@ -35,6 +36,7 @@ import { HviButton, HviSelect, HviTable } from '@helsevestikt/hviktor';
           <th>
             <select
               hviSelect
+              aria-label="Filtrer på avdeling"
               (change)="colFilterTable.setColumnFilter('avdeling', $any($event.target).value)"
             >
               <option value="">Alle</option>
@@ -46,6 +48,7 @@ import { HviButton, HviSelect, HviTable } from '@helsevestikt/hviktor';
           <th>
             <select
               hviSelect
+              aria-label="Filtrer på stilling"
               (change)="colFilterTable.setColumnFilter('stilling', $any($event.target).value)"
             >
               <option value="">Alle</option>

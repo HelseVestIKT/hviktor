@@ -224,6 +224,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               <th>
                 <select
                   hviSelect
+                  aria-label="Filtrer på navn"
                   (change)="colFilterTable.setColumnFilter('navn', $any($event.target).value)"
                 >
                   <option value="">Alle</option>
@@ -235,6 +236,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               <th>
                 <select
                   hviSelect
+                  aria-label="Filtrer på avdeling"
                   (change)="colFilterTable.setColumnFilter('avdeling', $any($event.target).value)"
                 >
                   <option value="">Alle</option>
@@ -246,6 +248,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               <th>
                 <select
                   hviSelect
+                  aria-label="Filtrer på stilling"
                   (change)="colFilterTable.setColumnFilter('stilling', $any($event.target).value)"
                 >
                   <option value="">Alle</option>
@@ -323,7 +326,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         <table hviTable [value]="data" hover #expandTable="hviTable">
           <thead>
             <tr>
-              <th style="width: 3rem"></th>
+              <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
               <th>Navn</th>
               <th>Avdeling</th>
               <th>Stilling</th>
@@ -407,7 +410,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         >
           <thead>
             <tr>
-              <th style="width: 3rem"></th>
+              <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
               <th hviSortableColumn="navn">
                 <button type="button">Navn</button>
               </th>
@@ -419,10 +422,11 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               </th>
             </tr>
             <tr>
-              <th></th>
+              <th><span class="sr-only">Filter</span></th>
               <th>
                 <select
                   hviSelect
+                  aria-label="Filtrer på navn"
                   (change)="fullTable.setColumnFilter('navn', $any($event.target).value)"
                 >
                   <option value="">Alle</option>
@@ -434,6 +438,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               <th>
                 <select
                   hviSelect
+                  aria-label="Filtrer på avdeling"
                   (change)="fullTable.setColumnFilter('avdeling', $any($event.target).value)"
                 >
                   <option value="">Alle</option>
@@ -445,6 +450,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               <th>
                 <select
                   hviSelect
+                  aria-label="Filtrer på stilling"
                   (change)="fullTable.setColumnFilter('stilling', $any($event.target).value)"
                 >
                   <option value="">Alle</option>

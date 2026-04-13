@@ -14,7 +14,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
     <table hviTable [value]="data" hover #expandTable="hviTable">
       <thead>
         <tr>
-          <th style="width: 3rem"></th>
+          <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
           <th>Navn</th>
           <th>Avdeling</th>
           <th>Stilling</th>

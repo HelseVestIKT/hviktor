@@ -39,7 +39,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
     >
       <thead>
         <tr>
-          <th style="width: 3rem"></th>
+          <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
           <th hviSortableColumn="navn">
             <button type="button">Navn</button>
           </th>
@@ -51,10 +51,11 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
           </th>
         </tr>
         <tr>
-          <th></th>
+          <th><span class="sr-only">Filter</span></th>
           <th>
             <select
               hviSelect
+              aria-label="Filtrer på navn"
               (change)="fullTable.setColumnFilter('navn', $any($event.target).value)"
             >
               <option value="">Alle</option>
@@ -66,6 +67,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
           <th>
             <select
               hviSelect
+              aria-label="Filtrer på avdeling"
               (change)="fullTable.setColumnFilter('avdeling', $any($event.target).value)"
             >
               <option value="">Alle</option>
@@ -77,6 +79,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
           <th>
             <select
               hviSelect
+              aria-label="Filtrer på stilling"
               (change)="fullTable.setColumnFilter('stilling', $any($event.target).value)"
             >
               <option value="">Alle</option>
