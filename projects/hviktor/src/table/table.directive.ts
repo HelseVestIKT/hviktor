@@ -324,6 +324,15 @@ export class HviTable<T = unknown> {
   /** Nåværende søkeverdi */
   readonly currentGlobalFilter = computed(() => this._globalFilter());
 
+  private resetToFirstPage(): void {
+    if (this._pageIndex() === 0) {
+      return;
+    }
+
+    this._pageIndex.set(0);
+    this.emitPageEvent();
+  }
+
   // ========== Global søk ==========
 
   /**
@@ -332,13 +341,13 @@ export class HviTable<T = unknown> {
    */
   filterGlobal(value: string | null): void {
     this._globalFilter.set(value?.trim() ?? '');
-    this._pageIndex.set(0);
+    this.resetToFirstPage();
   }
 
   /** Nullstiller global søk */
   clearFilter(): void {
     this._globalFilter.set('');
-    this._pageIndex.set(0);
+    this.resetToFirstPage();
   }
 
   // ========== Column filtering ==========
@@ -352,7 +361,7 @@ export class HviTable<T = unknown> {
       }
       return next;
     });
-    this._pageIndex.set(0);
+    this.resetToFirstPage();
   }
 
   /** Fjern filter for en spesifikk kolonne */
