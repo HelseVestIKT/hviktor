@@ -49,7 +49,7 @@ import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
                 Kopiert!
               } @else {
                 <hvi-icon-clipboard />
-                Kopier denne siden som Markdown
+                Kopiér Markdown
               }
             </button>
           </div>
@@ -150,7 +150,8 @@ export class DemoPageComponent {
       return;
     }
 
-    writeText.call(navigator.clipboard, markdown)
+    writeText
+      .call(navigator.clipboard, markdown)
       .then(() => {
         this.copied.set(true);
         setTimeout(() => this.copied.set(false), 2000);
