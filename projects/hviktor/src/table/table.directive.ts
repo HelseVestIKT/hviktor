@@ -11,12 +11,14 @@ import {
 import {
   type ColumnDef,
   type ColumnFiltersState,
+  type ExpandedState,
   type Row,
   type SortingFn,
   type SortingState,
   type Updater,
   createAngularTable,
   getCoreRowModel,
+  getExpandedRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
@@ -152,9 +154,7 @@ export class HviTable<T = unknown> {
     if (field) {
       const current = this._sorting();
       const pendingDesc = this._pendingSortDesc();
-      this._sorting.set([
-        { id: field, desc: pendingDesc ?? current[0]?.desc ?? false },
-      ]);
+      this._sorting.set([{ id: field, desc: pendingDesc ?? current[0]?.desc ?? false }]);
     }
   }
 
@@ -189,7 +189,7 @@ export class HviTable<T = unknown> {
   private _globalFilter = signal('');
   private _pageSize = signal(10);
   private _pageIndex = signal(0);
-  private _expandedRows = signal(new Set<unknown>());
+  private _expanded = signal<ExpandedState>({});
 
   /** Norsk sorteringsfunksjon med localeCompare('nb') */
   private norwegianSortFn: SortingFn<T> = (
@@ -236,10 +236,15 @@ export class HviTable<T = unknown> {
   private _table = createAngularTable<T>(() => ({
     data: this._data(),
     columns: this._columnDefs(),
+    getRowId: (row: T, index: number) => {
+      const id = this.getRowId(row);
+      return id != null ? String(id) : String(index);
+    },
     state: {
       sorting: this._sorting(),
       columnFilters: this._columnFilters(),
       globalFilter: this._globalFilter(),
+      expanded: this._expanded(),
       pagination: {
         pageIndex: this._pageIndex(),
         pageSize: this._pageSize(),
@@ -267,10 +272,16 @@ export class HviTable<T = unknown> {
       this._pageIndex.set(next.pageIndex);
       this._pageSize.set(next.pageSize);
     },
+    onExpandedChange: (updater: Updater<ExpandedState>) => {
+      this._expanded.update((prev) => (typeof updater === 'function' ? updater(prev) : updater));
+    },
+    getRowCanExpand: () => true,
+    paginateExpandedRows: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
     globalFilterFn: 'includesString',
   }));
 
@@ -425,24 +436,28 @@ export class HviTable<T = unknown> {
 
   /** Åpne eller lukk utvidet innhold for en rad */
   toggleExpanded(item: T): void {
-    const id = this.getRowId(item);
-    const next = new Set(this._expandedRows());
-    if (next.has(id)) {
-      next.delete(id);
-    } else {
-      next.add(id);
-    }
-    this._expandedRows.set(next);
+    const id = String(this.getRowId(item));
+    this._expanded.update((prev) => {
+      const record = prev === true ? {} : { ...prev };
+      if (record[id]) {
+        delete record[id];
+      } else {
+        record[id] = true;
+      }
+      return record;
+    });
   }
 
   /** Sjekk om en rad har utvidet innhold åpent */
   isExpanded(item: T): boolean {
-    return this._expandedRows().has(this.getRowId(item));
+    const expanded = this._expanded();
+    if (expanded === true) return true;
+    return !!expanded[String(this.getRowId(item))];
   }
 
   /** Lukk alle utviddede rader */
   collapseAll(): void {
-    this._expandedRows.set(new Set());
+    this._expanded.set({});
   }
 
   // ========== Paginering ==========
@@ -496,7 +511,7 @@ export class HviTable<T = unknown> {
     this._columnFilters.set([]);
     this._globalFilter.set('');
     this._pageIndex.set(0);
-    this._expandedRows.set(new Set());
+    this._expanded.set({});
     this.emitPageEvent();
   }
 
