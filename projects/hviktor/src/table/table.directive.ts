@@ -497,6 +497,7 @@ export class HviTable<T = unknown> {
     this._globalFilter.set('');
     this._pageIndex.set(0);
     this._expandedRows.set(new Set());
+    this.emitPageEvent();
   }
 
   // ========== Private ==========
