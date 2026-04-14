@@ -121,11 +121,13 @@ function inferInputType(inputOptions, explicitType, defaultValue) {
 
 function extractInputs(source) {
   const inputs = [];
-  const inputRegex = /@Input(?:\(([^)]*)\))?\s*(?:readonly\s+)?(\w+)\s*([!?])?\s*(?::\s*([^=;\n]+))?\s*(?:=\s*([^;\n]+))?\s*;/g;
+  const inputRegex =
+    /@Input(?:\(([^)]*)\))?\s*(?:readonly\s+)?(\w+)\s*([!?])?\s*(?::\s*([^=;\n]+))?\s*(?:=\s*([^;\n]+))?\s*;/g;
   let match;
 
   while ((match = inputRegex.exec(source)) !== null) {
-    const [, inputOptions = '', name, requiredMarker = '', explicitType = '', defaultValue = ''] = match;
+    const [, inputOptions = '', name, requiredMarker = '', explicitType = '', defaultValue = ''] =
+      match;
 
     inputs.push({
       name,
