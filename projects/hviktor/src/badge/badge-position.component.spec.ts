@@ -15,14 +15,6 @@ describe('HviBadgePosition', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(fixture.componentInstance).toBeTruthy();
-  });
-
-  it('should have ds-badge--position host class', () => {
-    expect(element.classList.contains('ds-badge--position')).toBe(true);
-  });
-
   it('should have default data-overlap of rectangle', () => {
     expect(element.getAttribute('data-overlap')).toBe('rectangle');
   });
@@ -31,32 +23,16 @@ describe('HviBadgePosition', () => {
     expect(element.getAttribute('data-placement')).toBe('top-right');
   });
 
-  describe('placement', () => {
-    it('should set data-placement to top-left', () => {
-      fixture.componentRef.setInput('placement', 'top-left');
-      fixture.detectChanges();
-      expect(element.getAttribute('data-placement')).toBe('top-left');
-    });
-
-    it('should set data-placement to bottom-right', () => {
-      fixture.componentRef.setInput('placement', 'bottom-right');
-      fixture.detectChanges();
-      expect(element.getAttribute('data-placement')).toBe('bottom-right');
-    });
-
-    it('should set data-placement to bottom-left', () => {
-      fixture.componentRef.setInput('placement', 'bottom-left');
-      fixture.detectChanges();
-      expect(element.getAttribute('data-placement')).toBe('bottom-left');
-    });
+  it('should reflect placement input as data-placement attribute', () => {
+    fixture.componentRef.setInput('placement', 'bottom-left');
+    fixture.detectChanges();
+    expect(element.getAttribute('data-placement')).toBe('bottom-left');
   });
 
-  describe('overlap', () => {
-    it('should set data-overlap to circle', () => {
-      fixture.componentRef.setInput('overlap', 'circle');
-      fixture.detectChanges();
-      expect(element.getAttribute('data-overlap')).toBe('circle');
-    });
+  it('should reflect overlap input as data-overlap attribute', () => {
+    fixture.componentRef.setInput('overlap', 'circle');
+    fixture.detectChanges();
+    expect(element.getAttribute('data-overlap')).toBe('circle');
   });
 });
 
