@@ -52,6 +52,11 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": {
+            "poll": 1000,
+            "hmr": false,
+            "prebundle": false
+          },
           "configurations": {
             "production": {
               "buildTarget": "hviktor-demoapp:build:production"
