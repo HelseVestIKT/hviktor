@@ -85,6 +85,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Details er en sammenleggbar komponent som lar brukeren vise eller skjule innhold.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'dialog',
