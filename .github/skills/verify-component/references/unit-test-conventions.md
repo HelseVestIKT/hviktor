@@ -50,6 +50,29 @@ fixture.componentInstance.removable = false; // ExpressionChangedAfterItHasBeenC
 fixture.detectChanges();
 ```
 
+### Pattern: Multiple host components in one describe block
+
+When testing a directive with multiple configurations, register **all** host components in a single `beforeEach` `setupTestBed` call. Calling `setupTestBed` inside an `it()` block after the TestBed has been instantiated will throw `Cannot configure the test module when the test module has already been instantiated`.
+
+```typescript
+// ✅ Correct — all host components registered up front
+beforeEach(async () => {
+  await setupTestBed({ imports: [BasicHost, VariantHost, SuffixHost] });
+});
+
+it('should reflect variant', () => {
+  const f = TestBed.createComponent(VariantHost);
+  f.detectChanges();
+  expect(f.nativeElement.querySelector('figure').getAttribute('data-variant')).toBe('square');
+});
+
+// ❌ WRONG — setupTestBed inside it() throws after first test has run
+it('should reflect variant', async () => {
+  await setupTestBed({ imports: [VariantHost] }); // Error!
+  ...
+});
+```
+
 ### Pattern: Components (not directives)
 
 For components that can be created directly:
