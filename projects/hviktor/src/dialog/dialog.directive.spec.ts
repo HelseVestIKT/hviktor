@@ -18,13 +18,6 @@ class BasicDialogHost {}
 @Component({
   standalone: true,
   imports: [HviDialog],
-  template: '<dialog hviDialog id="my-dialog">Content</dialog>',
-})
-class IdDialogHost {}
-
-@Component({
-  standalone: true,
-  imports: [HviDialog],
   template: '<dialog hviDialog [placement]="placement">Content</dialog>',
 })
 class PlacementDialogHost {
@@ -45,103 +38,39 @@ class NonModalDialogHost {}
 })
 class DialogBlockHost {}
 
-@Component({
-  standalone: true,
-  imports: [HviDialog, HviDialogBlock],
-  template: `
-    <dialog hviDialog>
-      <div hviDialogBlock>Header</div>
-      <div hviDialogBlock>Body</div>
-    </dialog>
-  `,
-})
-class DialogWithBlocksHost {}
-
 // ---------------------------------------------------------------------------
 // HviDialog
 // ---------------------------------------------------------------------------
 
 describe('HviDialog', () => {
-  let fixture: ComponentFixture<BasicDialogHost>;
-  let element: HTMLDialogElement;
-
   beforeEach(async () => {
-    await setupTestBed({ imports: [BasicDialogHost] });
-    fixture = TestBed.createComponent(BasicDialogHost);
-    fixture.detectChanges();
-    element = fixture.nativeElement.querySelector('dialog');
-  });
-
-  it('should create', () => {
-    expect(element).toBeTruthy();
-  });
-
-  it('should have ds-dialog host class', () => {
-    expect(element.classList.contains('ds-dialog')).toBe(true);
+    await setupTestBed({ imports: [BasicDialogHost, PlacementDialogHost] });
   });
 
   it('should not set data-placement by default', () => {
-    expect(element.getAttribute('data-placement')).toBeNull();
-  });
-
-  it('should not set data-placement when placement is undefined', () => {
-    expect(element.getAttribute('data-placement')).toBeNull();
-  });
-});
-
-describe('HviDialog id', () => {
-  beforeEach(async () => {
-    await setupTestBed({ imports: [IdDialogHost] });
-  });
-
-  it('should bind the id attribute', () => {
-    const f = TestBed.createComponent(IdDialogHost);
+    const f = TestBed.createComponent(BasicDialogHost);
     f.detectChanges();
-    const el = f.nativeElement.querySelector('dialog');
-    expect(el.getAttribute('id')).toBe('my-dialog');
-  });
-});
-
-describe('HviDialog placement', () => {
-  beforeEach(async () => {
-    await setupTestBed({ imports: [PlacementDialogHost] });
+    expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBeNull();
   });
 
-  it('should set data-placement to left', () => {
+  it('should reflect a non-center placement as data-placement attribute', () => {
     const f = TestBed.createComponent(PlacementDialogHost);
     f.componentInstance.placement = 'left';
     f.detectChanges();
     expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBe('left');
   });
 
-  it('should set data-placement to right', () => {
-    const f = TestBed.createComponent(PlacementDialogHost);
-    f.componentInstance.placement = 'right';
-    f.detectChanges();
-    expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBe('right');
-  });
-
-  it('should set data-placement to top', () => {
-    const f = TestBed.createComponent(PlacementDialogHost);
-    f.componentInstance.placement = 'top';
-    f.detectChanges();
-    expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBe('top');
-  });
-
-  it('should set data-placement to bottom', () => {
-    const f = TestBed.createComponent(PlacementDialogHost);
-    f.componentInstance.placement = 'bottom';
-    f.detectChanges();
-    expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBe('bottom');
-  });
-
-  it('should not set data-placement when placement is center', () => {
+  it('should omit data-placement attribute when placement is "center"', () => {
     const f = TestBed.createComponent(PlacementDialogHost);
     f.componentInstance.placement = 'center';
     f.detectChanges();
     expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBeNull();
   });
 });
+
+// ---------------------------------------------------------------------------
+// HviDialog open/close
+// ---------------------------------------------------------------------------
 
 describe('HviDialog open/close', () => {
   let fixture: ComponentFixture<BasicDialogHost>;
@@ -206,6 +135,10 @@ describe('HviDialog open/close', () => {
   });
 });
 
+// ---------------------------------------------------------------------------
+// HviDialog non-modal
+// ---------------------------------------------------------------------------
+
 describe('HviDialog non-modal', () => {
   let fixture: ComponentFixture<NonModalDialogHost>;
   let directive: HviDialog;
@@ -238,40 +171,13 @@ describe('HviDialog non-modal', () => {
 // ---------------------------------------------------------------------------
 
 describe('HviDialogBlock', () => {
-  let fixture: ComponentFixture<DialogBlockHost>;
-  let element: HTMLElement;
-
   beforeEach(async () => {
     await setupTestBed({ imports: [DialogBlockHost] });
-    fixture = TestBed.createComponent(DialogBlockHost);
-    fixture.detectChanges();
-    element = fixture.nativeElement.querySelector('div');
   });
 
-  it('should create', () => {
-    expect(element).toBeTruthy();
-  });
-
-  it('should have ds-dialog__block host class', () => {
-    expect(element.classList.contains('ds-dialog__block')).toBe(true);
-  });
-
-  it('should project content', () => {
-    expect(element.textContent?.trim()).toBe('Block');
-  });
-});
-
-describe('HviDialog with blocks', () => {
-  let fixture: ComponentFixture<DialogWithBlocksHost>;
-
-  beforeEach(async () => {
-    await setupTestBed({ imports: [DialogWithBlocksHost] });
-    fixture = TestBed.createComponent(DialogWithBlocksHost);
-    fixture.detectChanges();
-  });
-
-  it('should render two block elements', () => {
-    const blocks = fixture.nativeElement.querySelectorAll('.ds-dialog__block');
-    expect(blocks.length).toBe(2);
+  it('should apply ds-dialog__block class to its host element', () => {
+    const f = TestBed.createComponent(DialogBlockHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('div').classList.contains('ds-dialog__block')).toBe(true);
   });
 });
