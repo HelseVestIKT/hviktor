@@ -3,6 +3,7 @@ import {
   HviButton,
   HviInput,
   HviLabel,
+  HviMultiSelect,
   HviPagination,
   HviSearch,
   HviSearchClear,
@@ -39,6 +40,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
     HviInput,
     HviLabel,
     HviSelect,
+    HviMultiSelect,
     DemoPageComponent,
     DemoSectionComponent,
   ],
@@ -205,7 +207,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
       <app-demo-section
         title="Kolonnefiltrering"
         [code]="kolonnefiltreringCode"
-        description="Filtrer på enkeltkolonner med setColumnFilter(). Bruk select-bokser i tabellhodet for enkel filtrering."
+        description="Filtrer på enkeltkolonner med setColumnFilter(). Bruk multi-select i tabellhodet for flervalgsfiltrering."
       >
         <table
           hviTable
@@ -222,40 +224,31 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             </tr>
             <tr>
               <th>
-                <select
-                  hviSelect
-                  aria-label="Filtrer på navn"
-                  (change)="colFilterTable.setColumnFilter('navn', $any($event.target).value)"
-                >
-                  <option value="">Alle</option>
-                  @for (person of data; track person.id) {
-                    <option [value]="person.navn">{{ person.navn }}</option>
-                  }
-                </select>
+                <hvi-multi-select
+                  [options]="navnOptions"
+                  size="sm"
+                  placeholder="Alle"
+                  searchPlaceholder="Søk navn..."
+                  (selectionChange)="colFilterTable.setColumnFilter('navn', $event)"
+                />
               </th>
               <th>
-                <select
-                  hviSelect
-                  aria-label="Filtrer på avdeling"
-                  (change)="colFilterTable.setColumnFilter('avdeling', $any($event.target).value)"
-                >
-                  <option value="">Alle</option>
-                  @for (avdeling of avdelinger; track avdeling) {
-                    <option [value]="avdeling">{{ avdeling }}</option>
-                  }
-                </select>
+                <hvi-multi-select
+                  [options]="avdelingOptions"
+                  size="sm"
+                  placeholder="Alle"
+                  searchPlaceholder="Søk avdeling..."
+                  (selectionChange)="colFilterTable.setColumnFilter('avdeling', $event)"
+                />
               </th>
               <th>
-                <select
-                  hviSelect
-                  aria-label="Filtrer på stilling"
-                  (change)="colFilterTable.setColumnFilter('stilling', $any($event.target).value)"
-                >
-                  <option value="">Alle</option>
-                  @for (stilling of stillinger; track stilling) {
-                    <option [value]="stilling">{{ stilling }}</option>
-                  }
-                </select>
+                <hvi-multi-select
+                  [options]="stillingOptions"
+                  size="sm"
+                  placeholder="Alle"
+                  searchPlaceholder="Søk stilling..."
+                  (selectionChange)="colFilterTable.setColumnFilter('stilling', $event)"
+                />
               </th>
             </tr>
           </thead>
@@ -646,5 +639,10 @@ export class TableDemoComponent {
     'Revisor',
     'Rekrutterer',
   ];
+
+  navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
+  avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
+  stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
+
   rowsPerPage = signal(5);
 }
