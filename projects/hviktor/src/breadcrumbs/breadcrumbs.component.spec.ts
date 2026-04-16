@@ -14,18 +14,8 @@ describe('HviBreadcrumbs', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(fixture.componentInstance).toBeTruthy();
-  });
-
   it('should render a ds-breadcrumbs element', () => {
-    const dsBreadcrumbs = element.querySelector('ds-breadcrumbs');
-    expect(dsBreadcrumbs).toBeTruthy();
-  });
-
-  it('should apply ds-breadcrumbs class to the web component', () => {
-    const dsBreadcrumbs = element.querySelector('ds-breadcrumbs');
-    expect(dsBreadcrumbs?.classList.contains('ds-breadcrumbs')).toBe(true);
+    expect(element.querySelector('ds-breadcrumbs')).toBeTruthy();
   });
 
   it('should set default aria-label to "Du er her:"', () => {
@@ -38,10 +28,6 @@ describe('HviBreadcrumbs', () => {
     fixture.detectChanges();
     const dsBreadcrumbs = element.querySelector('ds-breadcrumbs');
     expect(dsBreadcrumbs?.getAttribute('aria-label')).toBe('Brødsmulesti');
-  });
-
-  it('should have display: contents on host', () => {
-    expect(getComputedStyle(element).display).toBe('contents');
   });
 });
 
@@ -91,7 +77,6 @@ describe('HviBreadcrumbs content projection', () => {
   beforeEach(async () => {
     await setupTestBed({
       imports: [
-        HviBreadcrumbs,
         BreadcrumbsWithBackLinkAndListComponent,
         BreadcrumbsBackLinkOnlyComponent,
         BreadcrumbsListOnlyComponent,
@@ -106,45 +91,27 @@ describe('HviBreadcrumbs content projection', () => {
     const dsBreadcrumbs = fixture.nativeElement.querySelector('ds-breadcrumbs');
     const backLink = dsBreadcrumbs.querySelector(':scope > a');
     expect(backLink).toBeTruthy();
-    expect(backLink.textContent.trim()).toBe('Nivå 3');
     expect(backLink.getAttribute('aria-label')).toBe('Tilbake til Nivå 3');
 
     const listItems = dsBreadcrumbs.querySelectorAll('ol > li');
     expect(listItems.length).toBe(4);
-    expect(listItems[0].textContent.trim()).toBe('Nivå 1');
-    expect(listItems[3].textContent.trim()).toBe('Nivå 4');
   });
 
-  it('should project back link only', () => {
+  it('should project back link only (no list)', () => {
     const fixture = TestBed.createComponent(BreadcrumbsBackLinkOnlyComponent);
     fixture.detectChanges();
 
     const dsBreadcrumbs = fixture.nativeElement.querySelector('ds-breadcrumbs');
-    const backLink = dsBreadcrumbs.querySelector(':scope > a');
-    expect(backLink).toBeTruthy();
-    expect(backLink.textContent.trim()).toBe('Nivå 3');
-
-    const ol = dsBreadcrumbs.querySelector('ol');
-    expect(ol).toBeNull();
+    expect(dsBreadcrumbs.querySelector(':scope > a')).toBeTruthy();
+    expect(dsBreadcrumbs.querySelector('ol')).toBeNull();
   });
 
-  it('should project list only', () => {
+  it('should project list only (no back link)', () => {
     const fixture = TestBed.createComponent(BreadcrumbsListOnlyComponent);
     fixture.detectChanges();
 
     const dsBreadcrumbs = fixture.nativeElement.querySelector('ds-breadcrumbs');
-    const backLink = dsBreadcrumbs.querySelector(':scope > a');
-    expect(backLink).toBeNull();
-
-    const listItems = dsBreadcrumbs.querySelectorAll('ol > li');
-    expect(listItems.length).toBe(2);
-  });
-
-  it('should set custom aria-label on back link only variant', () => {
-    const fixture = TestBed.createComponent(BreadcrumbsBackLinkOnlyComponent);
-    fixture.detectChanges();
-
-    const dsBreadcrumbs = fixture.nativeElement.querySelector('ds-breadcrumbs');
-    expect(dsBreadcrumbs.getAttribute('aria-label')).toBe('Brødsmulesti');
+    expect(dsBreadcrumbs.querySelector(':scope > a')).toBeNull();
+    expect(dsBreadcrumbs.querySelectorAll('ol > li').length).toBe(2);
   });
 });

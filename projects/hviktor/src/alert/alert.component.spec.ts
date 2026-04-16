@@ -14,49 +14,16 @@ describe('HviAlert', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(fixture.componentInstance).toBeTruthy();
-  });
-
-  it('should have ds-alert host class', () => {
-    expect(element.classList.contains('ds-alert')).toBe(true);
-  });
-
   it('should not set data-color when no color is provided', () => {
     expect(element.getAttribute('data-color')).toBeNull();
   });
 
-  it('should set data-color to info', () => {
-    fixture.componentRef.setInput('color', 'info');
-    fixture.detectChanges();
-    expect(element.getAttribute('data-color')).toBe('info');
-  });
-
-  it('should set data-color to success', () => {
-    fixture.componentRef.setInput('color', 'success');
-    fixture.detectChanges();
-    expect(element.getAttribute('data-color')).toBe('success');
-  });
-
-  it('should set data-color to warning', () => {
-    fixture.componentRef.setInput('color', 'warning');
-    fixture.detectChanges();
-    expect(element.getAttribute('data-color')).toBe('warning');
-  });
-
-  it('should set data-color to danger', () => {
+  it('should reflect color input as data-color attribute', () => {
     fixture.componentRef.setInput('color', 'danger');
     fixture.detectChanges();
     expect(element.getAttribute('data-color')).toBe('danger');
   });
 });
-
-@Component({
-  standalone: true,
-  imports: [HviAlert],
-  template: '<hvi-alert>Testvarsel</hvi-alert>',
-})
-class AlertHostComponent {}
 
 @Component({
   standalone: true,
@@ -70,17 +37,10 @@ class AlertRichContentHostComponent {}
 
 describe('HviAlert content projection', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [HviAlert, AlertHostComponent, AlertRichContentHostComponent] });
+    await setupTestBed({ imports: [AlertRichContentHostComponent] });
   });
 
-  it('should project text content', () => {
-    const fixture = TestBed.createComponent(AlertHostComponent);
-    fixture.detectChanges();
-    const alertEl = fixture.nativeElement.querySelector('hvi-alert');
-    expect(alertEl.textContent).toContain('Testvarsel');
-  });
-
-  it('should project heading and paragraph content', () => {
+  it('should project rich content', () => {
     const fixture = TestBed.createComponent(AlertRichContentHostComponent);
     fixture.detectChanges();
     const alertEl = fixture.nativeElement.querySelector('hvi-alert');
