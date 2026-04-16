@@ -9,13 +9,13 @@ import { Component, Input } from '@angular/core';
  *
  * @example With initials
  * ```html
- * <hvi-avatar ariaLabel="Ola Nordmann" variant="circle" initials="ON" size="md" color="brand1">
+ * <hvi-avatar aria-label="Ola Nordmann" variant="circle" initials="ON" size="md" color="brand1">
  * </hvi-avatar>
  * ```
  *
  * @example With image
  * ```html
- * <hvi-avatar ariaLabel="Ola Nordmann">
+ * <hvi-avatar aria-label="Ola Nordmann">
  *   <img src="avatar.jpg" alt="" />
  * </hvi-avatar>
  * ```
