@@ -205,7 +205,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
       <app-demo-section
         title="Kolonnefiltrering"
         [code]="kolonnefiltreringCode"
-        description="Filtrer på enkeltkolonner med setColumnFilter(). Bruk multi-select i tabellhodet for flervalgsfiltrering."
+        description="Filtrer på enkeltkolonner med setColumnFilter(). Bruk multi-select i tablehead for flervalgsfiltrering. Hver th bør ha en fast bredde for å unngå at multiselecten vokser horisontalt."
       >
         <table
           hviTable
@@ -411,7 +411,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             </tr>
             <tr>
               <th><span class="sr-only">Filter</span></th>
-              <th>
+              <th width="30%">
                 <hvi-multi-select
                   [options]="navnOptions"
                   placeholder="Alle"
@@ -419,7 +419,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   (selectionChange)="fullTable.setColumnFilter('navn', $event)"
                 />
               </th>
-              <th>
+              <th width="30%">
                 <hvi-multi-select
                   [options]="avdelingOptions"
                   placeholder="Alle"
@@ -427,7 +427,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
                 />
               </th>
-              <th>
+              <th width="30%">
                 <hvi-multi-select
                   [options]="stillingOptions"
                   placeholder="Alle"
