@@ -61,10 +61,11 @@ let nextId = 0;
       #trigger
       (click)="onTriggerClick($event)"
       (keydown)="onTriggerKeydown($event)"
-      tabindex="0"
+      [attr.tabindex]="_disabled ? -1 : 0"
       role="combobox"
       [attr.aria-expanded]="isOpen()"
-      [attr.aria-controls]="listboxId"
+      [attr.aria-controls]="isOpen() ? listboxId : null"
+      [attr.aria-disabled]="_disabled ? 'true' : null"
       aria-haspopup="listbox"
     >
       <div class="hvi-multi-select__display">
@@ -95,12 +96,7 @@ let nextId = 0;
       </span>
     </div>
     @if (isOpen()) {
-      <div
-        class="ds-combobox__options-wrapper"
-        role="listbox"
-        [id]="listboxId"
-        aria-multiselectable="true"
-      >
+      <div class="ds-combobox__options-wrapper">
         <div class="hvi-multi-select__search">
           <input
             #searchInput
@@ -112,42 +108,49 @@ let nextId = 0;
             (keydown)="onSearchKeydown($event)"
           />
         </div>
-        @for (option of filteredOptions(); track option.value) {
-          <button
-            type="button"
-            class="ds-combobox__option ds-combobox__option--multiple"
-            role="option"
-            [attr.aria-selected]="isSelected(option.value)"
-            (click)="toggleOption(option.value)"
-          >
-            <div
-              class="ds-combobox__option__icon-wrapper"
-              [class.ds-combobox__option__icon-wrapper--selected]="isSelected(option.value)"
+        <div
+          role="listbox"
+          [id]="listboxId"
+          aria-multiselectable="true"
+          class="hvi-multi-select__listbox"
+        >
+          @for (option of filteredOptions(); track option.value) {
+            <button
+              type="button"
+              class="ds-combobox__option ds-combobox__option--multiple"
+              role="option"
+              [attr.aria-selected]="isSelected(option.value)"
+              (click)="toggleOption(option.value)"
             >
-              @if (isSelected(option.value)) {
-                <svg
-                  class="ds-combobox__option__icon-wrapper__icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    fill-rule="evenodd"
-                    d="M20.03 5.97a.75.75 0 0 1 0 1.06l-11 11a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06L8.5 16.44 18.97 5.97a.75.75 0 0 1 1.06 0"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              }
-            </div>
-            <div class="ds-combobox__option__label">{{ option.label }}</div>
-          </button>
-        }
-        @if (filteredOptions().length === 0) {
-          <div class="ds-combobox__empty">Ingen treff</div>
-        }
+              <div
+                class="ds-combobox__option__icon-wrapper"
+                [class.ds-combobox__option__icon-wrapper--selected]="isSelected(option.value)"
+              >
+                @if (isSelected(option.value)) {
+                  <svg
+                    class="ds-combobox__option__icon-wrapper__icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      d="M20.03 5.97a.75.75 0 0 1 0 1.06l-11 11a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06L8.5 16.44 18.97 5.97a.75.75 0 0 1 1.06 0"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                }
+              </div>
+              <div class="ds-combobox__option__label">{{ option.label }}</div>
+            </button>
+          }
+          @if (filteredOptions().length === 0) {
+            <div class="ds-combobox__empty">Ingen treff</div>
+          }
+        </div>
       </div>
     }
   `,
@@ -174,7 +177,7 @@ let nextId = 0;
     }
 
     @media (hover: hover) and (pointer: fine) {
-      .ds-combobox__input__wrapper:not(:focus, :disabled):hover {
+      :host:not(.ds-combobox__disabled) .ds-combobox__input__wrapper:not(:focus):hover {
         outline-color: var(--ds-color-neutral-border-default);
         outline-style: solid;
         outline-width: var(--ds-border-width-default);
@@ -209,9 +212,14 @@ let nextId = 0;
       left: 0;
       right: 0;
       max-height: 300px;
+    }
+
+    .hvi-multi-select__listbox {
       display: flex;
       flex-direction: column;
       gap: 2px;
+      overflow-y: auto;
+      max-height: calc(300px - 3em);
     }
 
     .ds-combobox__placeholder {
@@ -421,7 +429,7 @@ export class HviMultiSelect implements ControlValueAccessor {
       return next;
     });
     this.emitChange();
-    this.triggerRef()?.nativeElement.focus();
+    this.focusSearch();
   }
 
   isSelected(value: string): boolean {
@@ -432,6 +440,7 @@ export class HviMultiSelect implements ControlValueAccessor {
   private close(): void {
     this.isOpen.set(false);
     this.searchText.set('');
+    this.onTouched();
     this.triggerRef()?.nativeElement.focus();
   }
 

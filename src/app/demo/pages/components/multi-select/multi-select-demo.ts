@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import {
   HviField,
@@ -19,7 +18,6 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
     HviMultiSelect,
     HviField,
     HviLabel,
-    ReactiveFormsModule,
     RouterLink,
     HviLink,
   ],
@@ -64,35 +62,4 @@ export class MultiSelectDemoComponent {
     { label: 'Sandnes', value: 'sandnes' },
     { label: 'Bodø', value: 'bodo' },
   ];
-
-  readonly fjell: HviMultiSelectOption[] = [
-    { label: 'Mount Everest', value: 'everest' },
-    { label: 'Aconcagua', value: 'aconcagua' },
-    { label: 'Denali', value: 'denali' },
-    { label: 'Kilimanjaro', value: 'kilimanjaro' },
-    { label: 'Elbrus', value: 'elbrus' },
-    { label: 'Mount Vinson', value: 'vinson' },
-    { label: 'Puncak Jaya', value: 'puncakjaya' },
-    { label: 'Galdhøpiggen', value: 'galdhopiggen' },
-  ];
-
-  readonly kolonner: HviMultiSelectOption[] = [
-    { label: 'Navn', value: 'name' },
-    { label: 'E-post', value: 'email' },
-    { label: 'Telefon', value: 'phone' },
-    { label: 'Adresse', value: 'address' },
-    { label: 'Postnummer', value: 'zip' },
-    { label: 'Sted', value: 'city' },
-    { label: 'Fylke', value: 'county' },
-    { label: 'Status', value: 'status' },
-  ];
-
-  readonly fjellControl = new FormControl<string[]>(['everest', 'kilimanjaro']);
-  readonly kolonnerControl = new FormControl<string[]>([
-    'name',
-    'email',
-    'phone',
-    'address',
-    'zip',
-  ]);
 }

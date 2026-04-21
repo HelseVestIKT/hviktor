@@ -52,7 +52,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
         </tr>
         <tr>
           <th><span class="sr-only">Filter</span></th>
-          <th>
+          <th width="30%">
             <hvi-multi-select
               [options]="navnOptions"
               placeholder="Alle"
@@ -60,7 +60,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
               (selectionChange)="fullTable.setColumnFilter('navn', $event)"
             />
           </th>
-          <th>
+          <th width="30%">
             <hvi-multi-select
               [options]="avdelingOptions"
               placeholder="Alle"
@@ -68,7 +68,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
               (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
             />
           </th>
-          <th>
+          <th width="30%">
             <hvi-multi-select
               [options]="stillingOptions"
               placeholder="Alle"
