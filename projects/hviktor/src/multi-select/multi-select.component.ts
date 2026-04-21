@@ -208,6 +208,9 @@ let nextId = 0;
       left: 0;
       right: 0;
       max-height: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .ds-combobox__placeholder {
@@ -440,7 +443,8 @@ export class HviMultiSelect implements ControlValueAccessor {
     const values = [...this.selectedValues()];
     this.selectionChange.emit(values);
     this.onChange(values);
-    queueMicrotask(() => this.checkOverflow());
+    // Use setTimeout to run after Angular's change detection has updated the DOM
+    setTimeout(() => this.checkOverflow());
   }
 
   private checkOverflow(): void {
