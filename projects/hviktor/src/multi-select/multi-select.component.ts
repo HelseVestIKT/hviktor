@@ -7,6 +7,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostAttributeToken,
   inject,
   Input,
   Output,
@@ -66,6 +67,7 @@ let nextId = 0;
       [attr.aria-expanded]="isOpen()"
       [attr.aria-controls]="isOpen() ? listboxId : null"
       [attr.aria-disabled]="_disabled ? 'true' : null"
+      [attr.aria-label]="hostAriaLabel"
       aria-haspopup="listbox"
     >
       <div class="hvi-multi-select__display">
@@ -264,6 +266,7 @@ let nextId = 0;
     '[class.ds-combobox--md]': 'size === "md"',
     '[class.ds-combobox--lg]': 'size === "lg"',
     '[class.ds-combobox__disabled]': '_disabled',
+    '[attr.aria-label]': 'null',
   },
   providers: [
     {
@@ -276,6 +279,9 @@ let nextId = 0;
 export class HviMultiSelect implements ControlValueAccessor {
   private readonly destroyRef = inject(DestroyRef);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  protected readonly hostAriaLabel = inject(new HostAttributeToken('aria-label'), {
+    optional: true,
+  });
 
   private readonly searchInputRef = viewChild<ElementRef<HTMLInputElement>>('searchInput');
   private readonly triggerRef = viewChild<ElementRef<HTMLElement>>('trigger');

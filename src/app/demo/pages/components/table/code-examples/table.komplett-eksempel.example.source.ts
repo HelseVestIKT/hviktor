@@ -53,26 +53,32 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
         <tr>
           <th><span class="sr-only">Filter</span></th>
           <th width="30%">
+            <span class="sr-only">Filtrer på navn</span>
             <hvi-multi-select
               [options]="navnOptions"
               placeholder="Alle"
               searchPlaceholder="Søk navn..."
+              aria-label="Filtrer på navn"
               (selectionChange)="fullTable.setColumnFilter('navn', $event)"
             />
           </th>
           <th width="30%">
+            <span class="sr-only">Filtrer på avdeling</span>
             <hvi-multi-select
               [options]="avdelingOptions"
               placeholder="Alle"
               searchPlaceholder="Søk avdeling..."
+              aria-label="Filtrer på avdeling"
               (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
             />
           </th>
           <th width="30%">
+            <span class="sr-only">Filtrer på stilling</span>
             <hvi-multi-select
               [options]="stillingOptions"
               placeholder="Alle"
               searchPlaceholder="Søk stilling..."
+              aria-label="Filtrer på stilling"
               (selectionChange)="fullTable.setColumnFilter('stilling', $event)"
             />
           </th>
