@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 type HviAlertColor = 'info' | 'success' | 'warning' | 'danger';
-type HviAlertRole = 'status' | 'alert';
+type HviAlertRole = 'status' | 'alert' | string;
 type HviAlertAriaLive = 'off' | 'polite' | 'assertive';
 
 /**
