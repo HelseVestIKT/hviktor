@@ -7,10 +7,11 @@ import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helse
   imports: [HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph],
   template: `
     <div class="flex flex-wrap gap-4">
-      <hvi-card color="neutral" maxWidth="420px">
+      <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target">
         <div hviCardBlock>
           <h2 hviHeading>
             <a
+              id="target"
               hviLink
               href="https://designsystemet.no/no/components/docs/card/overview#lenkekort"
               target="_blank"
