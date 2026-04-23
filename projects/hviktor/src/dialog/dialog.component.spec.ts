@@ -5,6 +5,34 @@ import { HviDialogBlock } from './dialog-block.directive';
 import { HviDialog } from './dialog.component';
 
 // ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/**
+ * JSDOM has native readonly getters for `open` on HTMLDialogElement.
+ * This mock properly overrides it so we can test the component's internal checks.
+ */
+function mockDialogState(nativeDialog: HTMLDialogElement) {
+  let isOpen = false;
+  Object.defineProperty(nativeDialog, 'open', {
+    get: () => isOpen,
+    set: (v: boolean) => {
+      isOpen = v;
+    },
+    configurable: true,
+  });
+  nativeDialog.showModal = vi.fn(() => {
+    isOpen = true;
+  });
+  nativeDialog.show = vi.fn(() => {
+    isOpen = true;
+  });
+  nativeDialog.close = vi.fn(() => {
+    isOpen = false;
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Host components
 // ---------------------------------------------------------------------------
 
@@ -87,7 +115,7 @@ class DialogBlockHost {}
 
 describe('HviDialog — Host bindings', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [BasicDialogHost, DialogWithIdHost] });
+    await setupTestBed({ imports: [BasicDialogHost, DialogWithIdHost, ClosedByHost] });
   });
 
   it('should apply ds-dialog class', () => {
@@ -151,7 +179,7 @@ describe('HviDialog — Placement', () => {
 
 describe('HviDialog — Close button', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [CustomCloseButtonHost, NoCloseButtonHost] });
+    await setupTestBed({ imports: [BasicDialogHost, CustomCloseButtonHost, NoCloseButtonHost] });
   });
 
   it('should render close button with default label by default', () => {
@@ -189,12 +217,7 @@ describe('HviDialog — Close button', () => {
     f.detectChanges();
 
     const nativeDialog = f.nativeElement.querySelector('dialog') as HTMLDialogElement;
-    nativeDialog.showModal = vi.fn(() => {
-      (nativeDialog as any).open = true;
-    });
-    nativeDialog.close = vi.fn(() => {
-      (nativeDialog as any).open = false;
-    });
+    mockDialogState(nativeDialog);
 
     const directive = f.debugElement
       .query((de) => de.nativeElement.tagName === 'DIALOG')
@@ -226,16 +249,7 @@ describe('HviDialog — Open/Close behavior', () => {
     fixture.detectChanges();
     nativeDialog = fixture.nativeElement.querySelector('dialog');
 
-    // Mock jsdom dialog methods
-    nativeDialog.showModal = vi.fn(() => {
-      (nativeDialog as any).open = true;
-    });
-    nativeDialog.show = vi.fn(() => {
-      (nativeDialog as any).open = true;
-    });
-    nativeDialog.close = vi.fn(() => {
-      (nativeDialog as any).open = false;
-    });
+    mockDialogState(nativeDialog);
 
     directive = fixture.debugElement
       .query((de) => de.nativeElement.tagName === 'DIALOG')
@@ -326,12 +340,8 @@ describe('HviDialog — Modal vs Non-modal', () => {
     modalFixture = TestBed.createComponent(ModalDialogHost);
     modalFixture.detectChanges();
     modalDialog = modalFixture.nativeElement.querySelector('dialog');
-    modalDialog.showModal = vi.fn(() => {
-      (modalDialog as any).open = true;
-    });
-    modalDialog.close = vi.fn(() => {
-      (modalDialog as any).open = false;
-    });
+    mockDialogState(modalDialog);
+
     modalDirective = modalFixture.debugElement
       .query((de) => de.nativeElement.tagName === 'DIALOG')
       .injector.get(HviDialog);
@@ -340,12 +350,8 @@ describe('HviDialog — Modal vs Non-modal', () => {
     nonModalFixture = TestBed.createComponent(NonModalDialogHost);
     nonModalFixture.detectChanges();
     nonModalDialog = nonModalFixture.nativeElement.querySelector('dialog');
-    nonModalDialog.show = vi.fn(() => {
-      (nonModalDialog as any).open = true;
-    });
-    nonModalDialog.close = vi.fn(() => {
-      (nonModalDialog as any).open = false;
-    });
+    mockDialogState(nonModalDialog);
+
     nonModalDirective = nonModalFixture.debugElement
       .query((de) => de.nativeElement.tagName === 'DIALOG')
       .injector.get(HviDialog);
@@ -386,12 +392,7 @@ describe('HviDialog — open input binding', () => {
     fixture.detectChanges();
     nativeDialog = fixture.nativeElement.querySelector('dialog');
 
-    nativeDialog.showModal = vi.fn(() => {
-      (nativeDialog as any).open = true;
-    });
-    nativeDialog.close = vi.fn(() => {
-      (nativeDialog as any).open = false;
-    });
+    mockDialogState(nativeDialog);
 
     directive = fixture.debugElement
       .query((de) => de.nativeElement.tagName === 'DIALOG')
@@ -440,14 +441,14 @@ describe('HviDialog — Closedby variations', () => {
   it('should support closedby="any"', () => {
     const f = TestBed.createComponent(ClosedByHost);
     f.componentInstance.closedby = 'any';
-    f.detectChanges();
+    f.detectChanges(); // Changed before first detectChanges, no NG0100
     expect(f.nativeElement.querySelector('dialog').getAttribute('closedby')).toBe('any');
   });
 
   it('should support closedby="none"', () => {
     const f = TestBed.createComponent(ClosedByHost);
     f.componentInstance.closedby = 'none';
-    f.detectChanges();
+    f.detectChanges(); // Changed before first detectChanges, no NG0100
     expect(f.nativeElement.querySelector('dialog').getAttribute('closedby')).toBe('none');
   });
 });
@@ -464,15 +465,9 @@ describe('HviDialog — Backdrop click behavior', () => {
   beforeEach(async () => {
     await setupTestBed({ imports: [ClosedByHost] });
     fixture = TestBed.createComponent(ClosedByHost);
-    fixture.detectChanges();
+    // Vi kaller IKKE fixture.detectChanges() her for å unngå NG0100.
     nativeDialog = fixture.nativeElement.querySelector('dialog');
-
-    nativeDialog.showModal = vi.fn(() => {
-      (nativeDialog as any).open = true;
-    });
-    nativeDialog.close = vi.fn(() => {
-      (nativeDialog as any).open = false;
-    });
+    mockDialogState(nativeDialog);
 
     directive = fixture.debugElement
       .query((de) => de.nativeElement.tagName === 'DIALOG')
@@ -481,14 +476,14 @@ describe('HviDialog — Backdrop click behavior', () => {
 
   it('should close dialog on backdrop click when closedby is "any"', () => {
     fixture.componentInstance.closedby = 'any';
-    fixture.detectChanges();
+    fixture.detectChanges(); // Første endringsdeteksjon skjer her!
 
     directive.openModal();
     const closeSpy = vi.spyOn(directive, 'close');
 
     const rect = nativeDialog.getBoundingClientRect();
     const clickEvent = new MouseEvent('click', {
-      clientX: rect.left - 10, // Outside dialog
+      clientX: rect.left - 10, // Utenfor dialogen
       clientY: rect.top - 10,
     });
 
@@ -522,7 +517,7 @@ describe('HviDialog — Backdrop click behavior', () => {
 
     const rect = nativeDialog.getBoundingClientRect();
     const clickEvent = new MouseEvent('click', {
-      clientX: rect.left + 50, // Inside dialog
+      clientX: rect.left + 50, // Inne i dialogen
       clientY: rect.top + 50,
     });
 
