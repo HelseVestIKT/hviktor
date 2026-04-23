@@ -7,6 +7,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
+import { HviButton } from '../button';
 
 /**
  * @summary
@@ -29,10 +30,10 @@ import {
   template: `
     @if (closeButton !== false) {
       <button
-        class="ds-button"
-        data-icon="true"
-        data-variant="tertiary"
-        data-color="neutral"
+        hviButton
+        color="neutral"
+        variant="tertiary"
+        icon
         data-command="close"
         type="button"
         [attr.aria-label]="closeButtonAriaLabel"
@@ -41,11 +42,13 @@ import {
     }
     <ng-content></ng-content>
   `,
+  imports: [HviButton],
 })
 export class HviDialog {
   /** Optional id for the dialog element */
   @Input() id?: string;
 
+  /** Whether the dialog is open. */
   @Input()
   set open(value: boolean) {
     this.setOpen(Boolean(value));

@@ -1,12 +1,34 @@
 import { Component, signal } from '@angular/core';
 
-import { HviButton, HviDialog, HviDialogBlock } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviDialog,
+  HviDialogBlock,
+  HviField,
+  HviFieldAffixes,
+  HviHeading,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 @Component({
   selector: 'app-dialog-demo',
   standalone: true,
-  imports: [DemoPageComponent, DemoSectionComponent, HviButton, HviDialog, HviDialogBlock],
+  imports: [
+    DemoPageComponent,
+    DemoSectionComponent,
+    HviButton,
+    HviDialog,
+    HviDialogBlock,
+    HviParagraph,
+    HviHeading,
+    HviLabel,
+    HviInput,
+    HviField,
+    HviFieldAffixes,
+  ],
   template: `
     <app-demo-page componentId="dialog">
       <app-demo-section title="Modal Dialog">
@@ -14,24 +36,19 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
         <dialog hviDialog [open]="modalOpen()" (openChange)="modalOpen.set($event)">
           <div hviDialogBlock>
-            <p class="ds-paragraph" data-variant="default" data-size="sm">Bekreft endring</p>
-            <h2 class="ds-heading">Er du sikker på at du vil endre søknaden?</h2>
+            <p hviParagraph size="sm">Bekreft endring</p>
+            <h2 hviHeading>Er du sikker på at du vil endre søknaden?</h2>
           </div>
           <div hviDialogBlock>
-            <p class="ds-paragraph" data-variant="default">
+            <p hviParagraph>
               OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden
               nå, er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00
               00 hvis du trenger veiledning.
             </p>
           </div>
           <div hviDialogBlock>
-            <div style="display:flex;gap:var(--ds-size-4);margin-top:var(--ds-size-4)">
-              <button
-                hviButton
-                variant="primary"
-                data-color="danger"
-                (click)="modalOpen.set(false)"
-              >
+            <div class="flex gap-2">
+              <button hviButton variant="primary" color="danger" (click)="modalOpen.set(false)">
                 Ja, endre
               </button>
               <button hviButton variant="secondary" (click)="modalOpen.set(false)">Avbryt</button>
@@ -48,18 +65,14 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
           [modal]="false"
           [open]="nonModalOpen()"
           (openChange)="nonModalOpen.set($event)"
-          style="z-index:10;top:calc(100vh - 290px);left:calc(100vw - 385px);margin:0;max-width:350px"
+          style="z-index:10;top:calc(100vh - 400px);left:calc(100vw - 385px);margin:0;max-width:350px"
         >
-          <h2 class="ds-heading" style="margin-bottom:var(--ds-size-4)">Vi ønsker din mening</h2>
-          <label class="ds-label" data-weight="medium" for="my-textarea"
-            >Hvordan var din opplevelse?</label
-          >
-          <textarea
-            class="ds-input"
-            id="my-textarea"
-            style="margin-bottom:var(--ds-size-6)"
-          ></textarea>
-          <button hviButton variant="primary" (click)="nonModalOpen.set(false)">Send inn</button>
+          <h2 hviHeading>Vi ønsker din mening</h2>
+          <label hviLabel for="my-textarea">Hvordan var din opplevelse?</label>
+          <textarea hviInput id="my-textarea"></textarea>
+          <button hviButton variant="primary" (click)="nonModalOpen.set(false)" class="mt-2">
+            Send inn
+          </button>
         </dialog>
       </app-demo-section>
 
@@ -72,12 +85,9 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
           closedby="any"
           [open]="drawerOpen()"
           (openChange)="drawerOpen.set($event)"
-          style="z-index:10"
         >
           <div hviDialogBlock>
-            <p class="ds-paragraph" data-variant="default">
-              This is a modal Dialog with <code>placement="bottom"</code>
-            </p>
+            <p hviParagraph>This is a modal Dialog with <code>placement="bottom"</code></p>
           </div>
         </dialog>
       </app-demo-section>
@@ -86,18 +96,16 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
 
         <dialog hviDialog closedby="any" [open]="formOpen()" (openChange)="formOpen.set($event)">
-          <h2 class="ds-heading" style="margin-bottom:var(--ds-size-2)">Dialog med skjema</h2>
-          <div class="ds-field">
-            <label class="ds-label" data-weight="medium">Navn</label>
-            <div class="ds-field-affixes">
+          <h2 hviHeading>Dialog med skjema</h2>
+          <hvi-field>
+            <label hviLabel>Navn</label>
+            <hvi-field-affixes>
               <input class="ds-input" type="text" autofocus />
-            </div>
-          </div>
-          <div style="display:flex;gap:var(--ds-size-4);margin-top:var(--ds-size-4)">
-            <button hviButton variant="primary" (click)="formOpen.set(false)">
-              Send inn skjema
-            </button>
-            <button hviButton variant="secondary" data-color="danger" (click)="formOpen.set(false)">
+            </hvi-field-affixes>
+          </hvi-field>
+          <div class="mt-4 flex gap-2">
+            <button hviButton (click)="formOpen.set(false)">Send inn skjema</button>
+            <button hviButton variant="secondary" color="danger" (click)="formOpen.set(false)">
               Avbryt
             </button>
           </div>
@@ -109,11 +117,11 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
         <dialog hviDialog [open]="blocksOpen()" (openChange)="blocksOpen.set($event)">
           <div hviDialogBlock>
-            <p class="ds-paragraph" data-variant="default" data-size="sm">Dialog subtitle</p>
-            <h2 class="ds-heading">Dialog with dividers</h2>
+            <p hviParagraph size="sm">Dialog subtitle</p>
+            <h2 hviHeading>Dialog with dividers</h2>
           </div>
           <div hviDialogBlock>
-            <p class="ds-paragraph" data-variant="default">
+            <p hviParagraph>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales eros justo.
             </p>
           </div>
@@ -132,7 +140,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
           [open]="backdropOpen()"
           (openChange)="backdropOpen.set($event)"
         >
-          <h2 class="ds-heading">Click outside to close</h2>
+          <h2 hviHeading>Klikk utenfor dialogen for å lukke</h2>
         </dialog>
       </app-demo-section>
     </app-demo-page>
