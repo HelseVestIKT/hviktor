@@ -8,9 +8,9 @@ import { Directive } from '@angular/core';
  * @example Dialog with blocks
  * ```html
  * <dialog hviDialog>
- *   <div hviDialogBlock>Header</div>
- *   <div hviDialogBlock>Body content</div>
- *   <div hviDialogBlock>Footer</div>
+ * <div hviDialogBlock>Header</div>
+ * <div hviDialogBlock>Body content</div>
+ * <div hviDialogBlock>Footer</div>
  * </dialog>
  * ```
  *

@@ -1,114 +1,148 @@
 import { Component, signal } from '@angular/core';
-import {
-  HviButton,
-  HviDialog,
-  HviDialogBlock,
-  HviHeading,
-  HviParagraph,
-} from '@helsevestikt/hviktor';
+
+import { HviButton, HviDialog, HviDialogBlock } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
-import { DialogStandardExampleSource } from './code-examples/dialog.standard.example.source';
 
 @Component({
   selector: 'app-dialog-demo',
   standalone: true,
-  imports: [
-    HviDialog,
-    HviDialogBlock,
-    HviButton,
-    HviHeading,
-    HviParagraph,
-    DemoPageComponent,
-    DemoSectionComponent,
-  ],
+  imports: [DemoPageComponent, DemoSectionComponent, HviButton, HviDialog, HviDialogBlock],
   template: `
     <app-demo-page componentId="dialog">
-      <app-demo-section title="Standard" [code]="standardExampleCode">
-        <div class="flex gap-2">
-          <button hviButton type="button" aria-haspopup="dialog" (click)="toggleDialog(true)">
-            Åpne dialog
-          </button>
-        </div>
+      <app-demo-section title="Modal Dialog">
+        <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
 
-        <dialog
-          hviDialog
-          id="demoDialog"
-          aria-labelledby="demoDialogTitle"
-          [open]="dialogOpen()"
-          (openChange)="toggleDialog($event)"
-        >
+        <dialog hviDialog [open]="modalOpen()" (openChange)="modalOpen.set($event)">
           <div hviDialogBlock>
-            <h3 hviHeading size="md" id="demoDialogTitle">En enkel dialog</h3>
+            <p class="ds-paragraph" data-variant="default" data-size="sm">Bekreft endring</p>
+            <h2 class="ds-heading">Er du sikker på at du vil endre søknaden?</h2>
           </div>
           <div hviDialogBlock>
-            <p hviParagraph size="md">
-              Her kan innholdet ditt ligge. Dialogen er modal og styrt med hviDialog-direktivet.
+            <p class="ds-paragraph" data-variant="default">
+              OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden
+              nå, er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00
+              00 hvis du trenger veiledning.
             </p>
           </div>
-          <div hviDialogBlock class="flex justify-end gap-2">
-            <button hviButton variant="secondary" type="button" (click)="toggleDialog(false)">
-              Lukk
-            </button>
-            <button hviButton type="button" (click)="toggleDialog(false)">Fortsett</button>
+          <div hviDialogBlock>
+            <div style="display:flex;gap:var(--ds-size-4);margin-top:var(--ds-size-4)">
+              <button
+                hviButton
+                variant="primary"
+                data-color="danger"
+                (click)="modalOpen.set(false)"
+              >
+                Ja, endre
+              </button>
+              <button hviButton variant="secondary" (click)="modalOpen.set(false)">Avbryt</button>
+            </div>
           </div>
         </dialog>
       </app-demo-section>
 
-      <app-demo-section title="Skuff (placement)">
-        <div class="flex gap-2">
-          @for (p of placements; track p) {
-            <button
-              hviButton
-              variant="secondary"
-              type="button"
-              aria-haspopup="dialog"
-              (click)="openDrawer(p)"
-            >
-              {{ p }}
-            </button>
-          }
-        </div>
+      <app-demo-section title="Ikke-modal Dialog">
+        <button hviButton (click)="nonModalOpen.set(true)">Åpne ikke-modal Dialog</button>
 
         <dialog
           hviDialog
-          id="drawerDialog"
-          [placement]="drawerPlacement()"
+          [modal]="false"
+          [open]="nonModalOpen()"
+          (openChange)="nonModalOpen.set($event)"
+          style="z-index:10;top:calc(100vh - 290px);left:calc(100vw - 385px);margin:0;max-width:350px"
+        >
+          <h2 class="ds-heading" style="margin-bottom:var(--ds-size-4)">Vi ønsker din mening</h2>
+          <label class="ds-label" data-weight="medium" for="my-textarea"
+            >Hvordan var din opplevelse?</label
+          >
+          <textarea
+            class="ds-input"
+            id="my-textarea"
+            style="margin-bottom:var(--ds-size-6)"
+          ></textarea>
+          <button hviButton variant="primary" (click)="nonModalOpen.set(false)">Send inn</button>
+        </dialog>
+      </app-demo-section>
+
+      <app-demo-section title="Dialog som drawer">
+        <button hviButton (click)="drawerOpen.set(true)">Åpne Dialog (Bottom)</button>
+
+        <dialog
+          hviDialog
+          placement="bottom"
+          closedby="any"
           [open]="drawerOpen()"
           (openChange)="drawerOpen.set($event)"
+          style="z-index:10"
         >
           <div hviDialogBlock>
-            <h3 hviHeading size="md">Skuff – {{ drawerPlacement() }}</h3>
+            <p class="ds-paragraph" data-variant="default">
+              This is a modal Dialog with <code>placement="bottom"</code>
+            </p>
           </div>
-          <div hviDialogBlock>
-            <p hviParagraph size="md">Dialogen åpner som en skuff fra {{ drawerPlacement() }}.</p>
+        </dialog>
+      </app-demo-section>
+
+      <app-demo-section title="Med skjema og fokus">
+        <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
+
+        <dialog hviDialog closedby="any" [open]="formOpen()" (openChange)="formOpen.set($event)">
+          <h2 class="ds-heading" style="margin-bottom:var(--ds-size-2)">Dialog med skjema</h2>
+          <div class="ds-field">
+            <label class="ds-label" data-weight="medium">Navn</label>
+            <div class="ds-field-affixes">
+              <input class="ds-input" type="text" autofocus />
+            </div>
           </div>
-          <div hviDialogBlock class="flex justify-end">
-            <button hviButton variant="secondary" type="button" (click)="drawerOpen.set(false)">
-              Lukk
+          <div style="display:flex;gap:var(--ds-size-4);margin-top:var(--ds-size-4)">
+            <button hviButton variant="primary" (click)="formOpen.set(false)">
+              Send inn skjema
+            </button>
+            <button hviButton variant="secondary" data-color="danger" (click)="formOpen.set(false)">
+              Avbryt
             </button>
           </div>
+        </dialog>
+      </app-demo-section>
+
+      <app-demo-section title="Med blokker">
+        <button hviButton (click)="blocksOpen.set(true)">Åpne Dialog</button>
+
+        <dialog hviDialog [open]="blocksOpen()" (openChange)="blocksOpen.set($event)">
+          <div hviDialogBlock>
+            <p class="ds-paragraph" data-variant="default" data-size="sm">Dialog subtitle</p>
+            <h2 class="ds-heading">Dialog with dividers</h2>
+          </div>
+          <div hviDialogBlock>
+            <p class="ds-paragraph" data-variant="default">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales eros justo.
+            </p>
+          </div>
+          <div hviDialogBlock>
+            <button hviButton variant="secondary" (click)="blocksOpen.set(false)">Lukk</button>
+          </div>
+        </dialog>
+      </app-demo-section>
+
+      <app-demo-section title="Lukk ved klikk utenfor">
+        <button hviButton (click)="backdropOpen.set(true)">Åpne Dialog</button>
+
+        <dialog
+          hviDialog
+          closedby="any"
+          [open]="backdropOpen()"
+          (openChange)="backdropOpen.set($event)"
+        >
+          <h2 class="ds-heading">Click outside to close</h2>
         </dialog>
       </app-demo-section>
     </app-demo-page>
   `,
 })
 export class DialogDemoComponent {
-  readonly dialogOpen = signal(false);
+  readonly modalOpen = signal(false);
+  readonly nonModalOpen = signal(false);
   readonly drawerOpen = signal(false);
-  readonly drawerPlacement = signal<'left' | 'right' | 'top' | 'bottom'>('right');
-  readonly standardExampleCode = DialogStandardExampleSource;
-  readonly placements = ['left', 'right', 'top', 'bottom'] as const;
-
-  toggleDialog(nextState?: boolean): void {
-    if (typeof nextState === 'boolean') {
-      this.dialogOpen.set(nextState);
-      return;
-    }
-    this.dialogOpen.update((current) => !current);
-  }
-
-  openDrawer(placement: 'left' | 'right' | 'top' | 'bottom'): void {
-    this.drawerPlacement.set(placement);
-    this.drawerOpen.set(true);
-  }
+  readonly formOpen = signal(false);
+  readonly blocksOpen = signal(false);
+  readonly backdropOpen = signal(false);
 }

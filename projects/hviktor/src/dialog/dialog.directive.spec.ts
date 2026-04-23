@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { setupTestBed } from '../testing/test-utils';
 import { HviDialogBlock } from './dialog-block.directive';
-import { HviDialog } from './dialog.directive';
+import { HviDialog } from './dialog.component';
 
 // ---------------------------------------------------------------------------
 // Host components
