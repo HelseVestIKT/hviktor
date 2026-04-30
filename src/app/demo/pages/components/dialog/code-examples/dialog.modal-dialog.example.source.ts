@@ -34,10 +34,5 @@ import { HviButton, HviDialog, HviDialogBlock, HviHeading, HviParagraph } from '
 })
 export class DialogModalDialogExampleComponent {
   readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
-  readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

@@ -26,11 +26,6 @@ import { HviButton, HviDialog, HviHeading, HviInput, HviLabel } from '@helsevest
   \`,
 })
 export class DialogIkkeModalDialogExampleComponent {
-  readonly modalOpen = signal(false);
   readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
-  readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

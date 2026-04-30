@@ -27,11 +27,6 @@ import { HviButton, HviDialog, HviField, HviFieldAffixes, HviHeading, HviInput, 
   \`,
 })
 export class DialogMedSkjemaOgFokusExampleComponent {
-  readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
   readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

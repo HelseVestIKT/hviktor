@@ -93,7 +93,11 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
           (openChange)="drawerOpen.set($event)"
         >
           <div hviDialogBlock>
-            <p hviParagraph>This is a modal Dialog with <code>placement="bottom"</code></p>
+            <p hviParagraph>
+              Dette er en modal dialog med <code>placement="bottom"</code>. Tilgjengelige
+              plasseringer er <code>top</code>, <code>bottom</code>, <code>left</code>,
+              <code>right</code> og <code>center</code>.
+            </p>
           </div>
         </dialog>
       </app-demo-section>
