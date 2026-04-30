@@ -14,10 +14,15 @@ import {
   template: `
     <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
 
-    <dialog hviDialog [open]="modalOpen()" (openChange)="modalOpen.set($event)">
+    <dialog
+      hviDialog
+      aria-labelledby="modal-title"
+      [open]="modalOpen()"
+      (openChange)="modalOpen.set($event)"
+    >
       <div hviDialogBlock>
         <p hviParagraph size="sm">Bekreft endring</p>
-        <h2 hviHeading>Er du sikker på at du vil endre søknaden?</h2>
+        <h2 hviHeading id="modal-title">Er du sikker på at du vil endre søknaden?</h2>
       </div>
       <div hviDialogBlock>
         <p hviParagraph>
@@ -39,4 +44,9 @@ import {
 })
 export class DialogModalDialogExampleComponent {
   readonly modalOpen = signal(false);
+  readonly nonModalOpen = signal(false);
+  readonly drawerOpen = signal(false);
+  readonly formOpen = signal(false);
+  readonly blocksOpen = signal(false);
+  readonly backdropOpen = signal(false);
 }

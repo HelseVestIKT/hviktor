@@ -40,10 +40,15 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Modal Dialog" [code]="modalDialogCode">
         <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
 
-        <dialog hviDialog [open]="modalOpen()" (openChange)="modalOpen.set($event)">
+        <dialog
+          hviDialog
+          aria-labelledby="modal-title"
+          [open]="modalOpen()"
+          (openChange)="modalOpen.set($event)"
+        >
           <div hviDialogBlock>
             <p hviParagraph size="sm">Bekreft endring</p>
-            <h2 hviHeading>Er du sikker på at du vil endre søknaden?</h2>
+            <h2 hviHeading id="modal-title">Er du sikker på at du vil endre søknaden?</h2>
           </div>
           <div hviDialogBlock>
             <p hviParagraph>
@@ -69,11 +74,12 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
         <dialog
           hviDialog
           [modal]="false"
+          aria-labelledby="non-modal-title"
           [open]="nonModalOpen()"
           (openChange)="nonModalOpen.set($event)"
           style="z-index:10;top:calc(100vh - 400px);left:calc(100vw - 385px);margin:0;max-width:350px"
         >
-          <h2 hviHeading>Vi ønsker din mening</h2>
+          <h2 hviHeading id="non-modal-title">Vi ønsker din mening</h2>
           <label hviLabel for="my-textarea">Hvordan var din opplevelse?</label>
           <textarea hviInput id="my-textarea"></textarea>
           <button hviButton variant="primary" (click)="nonModalOpen.set(false)" class="mt-2">

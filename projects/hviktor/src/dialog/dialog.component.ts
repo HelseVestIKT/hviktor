@@ -14,12 +14,12 @@ import { HviButton } from '../button';
  * Use `placement` to display the dialog as a drawer from any side (left, right, top, bottom) instead of centered.
  * Use `closedby="any"` to allow closing by clicking outside the dialog.
  *
- * @example Modal dialog
+ * @example Modal dialog with accessible name
  * ```html
  * <button hviButton (click)="openDialog()">Open Dialog</button>
- * <dialog hviDialog [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
+ * <dialog hviDialog aria-labelledby="confirm-title" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
  *   <div hviDialogBlock>
- *     <h2 hviHeading>Confirm Action</h2>
+ *     <h2 hviHeading id="confirm-title">Confirm Action</h2>
  *   </div>
  *   <div hviDialogBlock>
  *     <p hviParagraph>Are you sure?</p>
@@ -31,22 +31,22 @@ import { HviButton } from '../button';
  * </dialog>
  * ```
  *
- * @example Non-modal dialog
+ * @example Non-modal dialog with accessible name
  * ```html
  * <button hviButton (click)="openDialog()">Open Dialog</button>
- * <dialog hviDialog [modal]="false" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
- *   <h2 hviHeading>Feedback</h2>
+ * <dialog hviDialog [modal]="false" aria-labelledby="feedback-title" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
+ *   <h2 hviHeading id="feedback-title">Feedback</h2>
  *   <textarea hviInput></textarea>
  *   <button hviButton (click)="dialogOpen.set(false)">Send</button>
  * </dialog>
  * ```
  *
- * @example Drawer placement
+ * @example Drawer placement (has built-in aria-label)
  * ```html
  * <button hviButton (click)="drawerOpen.set(true)">Open Drawer</button>
  * <dialog hviDialog placement="bottom" [open]="drawerOpen()" (openChange)="drawerOpen.set($event)">
  *   <div hviDialogBlock>
- *     <h2 hviHeading>Select an Option</h2>
+ *     <p>Select an option from this information panel.</p>
  *   </div>
  * </dialog>
  * ```
@@ -59,6 +59,7 @@ import { HviButton } from '../button';
   host: {
     class: 'ds-dialog',
     '[attr.id]': 'id',
+    '[attr.aria-label]': 'placement !== "center" ? "Informasjonspanel" : null',
     '[attr.data-placement]': 'placement === "center" ? null : placement',
     '[attr.data-modal]': 'modal',
     '[attr.closedby]': 'closedby',
