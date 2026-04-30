@@ -4,6 +4,26 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.1.7] – 2026-04-30
+
+### Added
+
+- Dialog: skrevet om som komponent for å få på plass all funksjonalitet. Lagt til støtte for alle varianter i Designsystemet.
+
+### Changed
+
+- Tvinger normal font-weight på MultiSelect
+- Selected items i MultiSelect vises i kommaseparert liste så lenge det er plass, og ellers som X elementer valgt
+- A11y forbedringer på MultiSelect
+- Table demo oppdatert til å bruke MultiSelect for kolonnefiltrering
+- A11y forbedringer på table
+- Default role på Alert utifra color (error får role="alert", info/success/warning får role="status"). Kan overstyres ved å sette `role`-attributt direkte på Alert-komponenten.
+
+### Fixed
+
+- Dobbel scrollbar i MultiSelect
+- Card: Lenkekort er fikset og vises korekt
+
 ## [0.1.6] – 2026-04-21
 
 ### Changed
