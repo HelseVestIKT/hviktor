@@ -40,6 +40,11 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Modal Dialog" [code]="modalDialogCode">
         <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
 
+        <p hviParagraph>
+          For modal dialog anbefaler vi <code>aria-labelledby</code> på <code>dialog</code> som
+          peker til <code>id</code> på headingen.
+        </p>
+
         <dialog
           hviDialog
           aria-labelledby="modal-title"
@@ -71,6 +76,11 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Ikke-modal Dialog" [code]="ikkeModalDialogCode">
         <button hviButton (click)="nonModalOpen.set(true)">Åpne ikke-modal Dialog</button>
 
+        <p hviParagraph>
+          Ikke-modale dialoger bør også ha et tilgjengelig navn via
+          <code>aria-labelledby</code> + heading med <code>id</code>.
+        </p>
+
         <dialog
           hviDialog
           [modal]="false"
@@ -90,6 +100,12 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
 
       <app-demo-section title="Dialog som drawer" [code]="dialogSomDrawerCode">
         <button hviButton (click)="drawerOpen.set(true)">Åpne Dialog (Bottom)</button>
+
+        <p hviParagraph>
+          Drawer får automatisk <code>aria-label="Informasjonspanel"</code> når du bruker
+          <code>placement</code> ulik <code>center</code>, men du kan fortsatt overstyre med egne
+          aria-attributter ved behov.
+        </p>
 
         <dialog
           hviDialog
@@ -111,7 +127,13 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Med skjema og fokus" [code]="medSkjemaOgFokusCode">
         <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
 
-        <dialog hviDialog closedby="any" [open]="formOpen()" (openChange)="formOpen.set($event)">
+        <dialog
+          hviDialog
+          closedby="any"
+          title="Dialog med skjema"
+          [open]="formOpen()"
+          (openChange)="formOpen.set($event)"
+        >
           <h2 hviHeading>Dialog med skjema</h2>
           <hvi-field>
             <label hviLabel>Navn</label>

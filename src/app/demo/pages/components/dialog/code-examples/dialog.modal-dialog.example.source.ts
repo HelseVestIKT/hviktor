@@ -7,6 +7,10 @@ import { HviButton, HviDialog, HviDialogBlock, HviHeading, HviParagraph } from '
   standalone: true,
   imports: [HviButton, HviDialog, HviDialogBlock, HviHeading, HviParagraph],
   template: \`
+    <p hviParagraph size="sm">
+      For modal dialog anbefaler vi <code>aria-labelledby</code> på <code>dialog</code> som
+      peker til <code>id</code> på headingen.
+    </p>
     <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
     
     <dialog

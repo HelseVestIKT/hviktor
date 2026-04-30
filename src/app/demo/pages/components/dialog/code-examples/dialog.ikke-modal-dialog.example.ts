@@ -1,11 +1,22 @@
 import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviHeading, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviDialog,
+  HviHeading,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-dialog-ikke-modal-dialog-example',
   standalone: true,
-  imports: [HviButton, HviDialog, HviHeading, HviInput, HviLabel],
+  imports: [HviButton, HviDialog, HviHeading, HviInput, HviLabel, HviParagraph],
   template: `
+    <p hviParagraph size="sm">
+      Ikke-modale dialoger bør også ha et tilgjengelig navn via
+      <code>aria-labelledby</code> + heading med <code>id</code>.
+    </p>
     <button hviButton (click)="nonModalOpen.set(true)">Åpne ikke-modal Dialog</button>
 
     <dialog
