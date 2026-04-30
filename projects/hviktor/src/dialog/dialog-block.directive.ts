@@ -6,9 +6,10 @@ import { Directive } from '@angular/core';
  * Use multiple blocks to structure dialog content into header, body, and footer areas.
  *
  * @description
- * When using `HviDialogBlock`, place all dialog content inside block elements — do not place
- * content directly inside the dialog element. The first block typically contains the title/heading,
- * the middle block(s) contain the main content, and the last block usually contains action buttons.
+ * Blocks are optional — simple dialogs can place content directly in `<dialog hviDialog>`.
+ * Use blocks when you want divider lines between sections (e.g. header, body, footer).
+ * When mixing blocks and direct content, note that `HviDialog` always renders its own close
+ * button as a direct child regardless.
  *
  * The component applies the `ds-dialog__block` CSS class, which handles spacing and the divider line.
  *

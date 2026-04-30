@@ -5,13 +5,14 @@ import {
   HviField,
   HviFieldAffixes,
   HviHeading,
+  HviInput,
   HviLabel,
 } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-dialog-med-skjema-og-fokus-example',
   standalone: true,
-  imports: [HviButton, HviDialog, HviField, HviFieldAffixes, HviHeading, HviLabel],
+  imports: [HviButton, HviDialog, HviField, HviFieldAffixes, HviHeading, HviInput, HviLabel],
   template: `
     <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
 
@@ -20,7 +21,7 @@ import {
       <hvi-field>
         <label hviLabel>Navn</label>
         <hvi-field-affixes>
-          <input class="ds-input" type="text" autofocus />
+          <input hviInput type="text" autofocus />
         </hvi-field-affixes>
       </hvi-field>
       <div class="mt-4 flex gap-2">
@@ -33,10 +34,5 @@ import {
   `,
 })
 export class DialogMedSkjemaOgFokusExampleComponent {
-  readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
   readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }

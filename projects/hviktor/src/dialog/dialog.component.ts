@@ -1,12 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-  inject,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 import { HviButton } from '../button';
 
 /**
@@ -72,6 +64,7 @@ import { HviButton } from '../button';
     '[attr.closedby]': 'closedby',
     '(close)': 'handleClose()',
     '(cancel)': 'handleCancel($event)',
+    '(click)': 'onBackdropClick($event)',
   },
   template: `
     @if (closeButton !== false) {
@@ -204,7 +197,6 @@ export class HviDialog {
     this.setOpen(false);
   }
 
-  @HostListener('click', ['$event'])
   onBackdropClick(event: MouseEvent): void {
     if (this.closedby === 'any' && this.element.open) {
       if (event.target === this.element) {

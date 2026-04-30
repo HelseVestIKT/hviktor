@@ -106,7 +106,7 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
           <hvi-field>
             <label hviLabel>Navn</label>
             <hvi-field-affixes>
-              <input class="ds-input" type="text" autofocus />
+              <input hviInput type="text" autofocus />
             </hvi-field-affixes>
           </hvi-field>
           <div class="mt-4 flex gap-2">

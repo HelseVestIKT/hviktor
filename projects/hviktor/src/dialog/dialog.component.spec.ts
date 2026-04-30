@@ -29,6 +29,7 @@ function mockDialogState(nativeDialog: HTMLDialogElement) {
   });
   nativeDialog.close = vi.fn(() => {
     isOpen = false;
+    nativeDialog.dispatchEvent(new Event('close'));
   });
 }
 
@@ -155,20 +156,15 @@ describe('HviDialog — Placement', () => {
   });
 
   it('should set data-placement attribute for non-center placements', () => {
-    const f = TestBed.createComponent(PlacementDialogHost);
-    const placements: Array<'left' | 'right' | 'top' | 'bottom'> = [
-      'left',
-      'right',
-      'top',
-      'bottom',
-    ];
-
-    placements.forEach((placement) => {
+    // Each iteration uses a fresh fixture to avoid NG0100 from re-using the same fixture
+    (['left', 'right', 'top', 'bottom'] as const).forEach((placement) => {
+      const f = TestBed.createComponent(PlacementDialogHost);
       f.componentInstance.placement = placement;
       f.detectChanges();
       expect(f.nativeElement.querySelector('dialog').getAttribute('data-placement')).toBe(
         placement,
       );
+      f.destroy();
     });
   });
 });
@@ -312,12 +308,12 @@ describe('HviDialog — Open/Close behavior', () => {
     directive.openModal();
     const event = new Event('cancel', { cancelable: true });
     const preventDefaultSpy = vi.spyOn(event, 'preventDefault');
-    const closeSpy = vi.spyOn(directive, 'close');
 
     directive.handleCancel(event);
 
     expect(preventDefaultSpy).toHaveBeenCalled();
-    expect(closeSpy).toHaveBeenCalled();
+    // handleCancel calls setOpen(false) → nativeDialog.close(), not directive.close()
+    expect(nativeDialog.close).toHaveBeenCalled();
   });
 });
 
@@ -476,68 +472,100 @@ describe('HviDialog — Backdrop click behavior', () => {
 
   it('should close dialog on backdrop click when closedby is "any"', () => {
     fixture.componentInstance.closedby = 'any';
-    fixture.detectChanges(); // Første endringsdeteksjon skjer her!
-
+    fixture.detectChanges();
     directive.openModal();
+
+    // Mock getBoundingClientRect so coordinates are meaningful in jsdom
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue({
+      left: 100,
+      right: 300,
+      top: 100,
+      bottom: 300,
+      width: 200,
+      height: 200,
+      x: 100,
+      y: 100,
+      toJSON: () => ({}),
+    } as DOMRect);
+
     const closeSpy = vi.spyOn(directive, 'close');
-
-    const rect = nativeDialog.getBoundingClientRect();
-    const clickEvent = new MouseEvent('click', {
-      clientX: rect.left - 10, // Utenfor dialogen
-      clientY: rect.top - 10,
-    });
-
-    directive.onBackdropClick(clickEvent);
+    // Dispatch on nativeDialog so event.target === this.element; coords outside the mocked rect
+    nativeDialog.dispatchEvent(
+      new MouseEvent('click', { bubbles: false, clientX: 50, clientY: 50 }),
+    );
     expect(closeSpy).toHaveBeenCalled();
   });
 
   it('should not close dialog on backdrop click when closedby is "closerequest"', () => {
     fixture.componentInstance.closedby = 'closerequest';
     fixture.detectChanges();
-
     directive.openModal();
+
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue({
+      left: 100,
+      right: 300,
+      top: 100,
+      bottom: 300,
+      width: 200,
+      height: 200,
+      x: 100,
+      y: 100,
+      toJSON: () => ({}),
+    } as DOMRect);
+
     const closeSpy = vi.spyOn(directive, 'close');
-
-    const rect = nativeDialog.getBoundingClientRect();
-    const clickEvent = new MouseEvent('click', {
-      clientX: rect.left - 10,
-      clientY: rect.top - 10,
-    });
-
-    directive.onBackdropClick(clickEvent);
+    nativeDialog.dispatchEvent(
+      new MouseEvent('click', { bubbles: false, clientX: 50, clientY: 50 }),
+    );
     expect(closeSpy).not.toHaveBeenCalled();
   });
 
   it('should not close dialog when clicking inside the dialog', () => {
     fixture.componentInstance.closedby = 'any';
     fixture.detectChanges();
-
     directive.openModal();
+
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue({
+      left: 100,
+      right: 300,
+      top: 100,
+      bottom: 300,
+      width: 200,
+      height: 200,
+      x: 100,
+      y: 100,
+      toJSON: () => ({}),
+    } as DOMRect);
+
     const closeSpy = vi.spyOn(directive, 'close');
-
-    const rect = nativeDialog.getBoundingClientRect();
-    const clickEvent = new MouseEvent('click', {
-      clientX: rect.left + 50, // Inne i dialogen
-      clientY: rect.top + 50,
-    });
-
-    directive.onBackdropClick(clickEvent);
+    // Coords inside the mocked rect (100-300)
+    nativeDialog.dispatchEvent(
+      new MouseEvent('click', { bubbles: false, clientX: 150, clientY: 150 }),
+    );
     expect(closeSpy).not.toHaveBeenCalled();
   });
 
   it('should not respond to backdrop clicks when dialog is closed', () => {
     fixture.componentInstance.closedby = 'any';
     fixture.detectChanges();
+    // Dialog is never opened
+
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue({
+      left: 100,
+      right: 300,
+      top: 100,
+      bottom: 300,
+      width: 200,
+      height: 200,
+      x: 100,
+      y: 100,
+      toJSON: () => ({}),
+    } as DOMRect);
 
     const closeSpy = vi.spyOn(directive, 'close');
-
-    const rect = nativeDialog.getBoundingClientRect();
-    const clickEvent = new MouseEvent('click', {
-      clientX: rect.left - 10,
-      clientY: rect.top - 10,
-    });
-
-    directive.onBackdropClick(clickEvent);
+    nativeDialog.dispatchEvent(
+      new MouseEvent('click', { bubbles: false, clientX: 50, clientY: 50 }),
+    );
     expect(closeSpy).not.toHaveBeenCalled();
   });
 });
