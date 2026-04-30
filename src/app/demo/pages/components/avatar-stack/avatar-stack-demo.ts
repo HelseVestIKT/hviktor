@@ -24,7 +24,7 @@ import { AvatarStackStandardAvatarStackExampleSource } from './code-examples/ava
       >
       <app-demo-section title="Standard Avatar Stack" [code]="standardAvatarStackCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-avatar-stack>
+          <hvi-avatar-stack aria-label="Topp 3 ansatte i bedriften">
             <hvi-avatar
               aria-label="Ola Nordmann"
               variant="circle"
@@ -51,7 +51,7 @@ import { AvatarStackStandardAvatarStackExampleSource } from './code-examples/ava
 
       <app-demo-section title="Med suffix" [code]="medSuffixCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-avatar-stack suffix="+4">
+          <hvi-avatar-stack suffix="+4" aria-label="Ansatte i bedriften">
             <hvi-avatar
               aria-label="Ola Nordmann"
               variant="circle"
@@ -78,7 +78,7 @@ import { AvatarStackStandardAvatarStackExampleSource } from './code-examples/ava
 
       <app-demo-section title="Expandable" [code]="expandableCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-avatar-stack expandable="true">
+          <hvi-avatar-stack expandable="true" aria-label="Dine kolleger">
             <hvi-avatar aria-label="Ola Nordmann" variant="circle" color="brand1"></hvi-avatar>
             <hvi-avatar
               aria-label="Kari Nordmann"

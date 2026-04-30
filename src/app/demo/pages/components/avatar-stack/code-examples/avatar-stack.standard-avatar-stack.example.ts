@@ -7,7 +7,7 @@ import { HviAvatar, HviAvatarStack } from '@helsevestikt/hviktor';
   imports: [HviAvatar, HviAvatarStack],
   template: `
     <div class="flex flex-wrap gap-2">
-      <hvi-avatar-stack>
+      <hvi-avatar-stack aria-label="Topp 3 ansatte i bedriften">
         <hvi-avatar
           aria-label="Ola Nordmann"
           variant="circle"
