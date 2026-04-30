@@ -6,7 +6,6 @@ import {
   HviDialogBlock,
   HviField,
   HviFieldAffixes,
-  HviHeading,
   HviInput,
   HviLabel,
   HviParagraph,
@@ -29,7 +28,6 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
     HviDialog,
     HviDialogBlock,
     HviParagraph,
-    HviHeading,
     HviLabel,
     HviInput,
     HviField,
@@ -40,10 +38,14 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Modal Dialog" [code]="modalDialogCode">
         <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
 
-        <dialog hviDialog [open]="modalOpen()" (openChange)="modalOpen.set($event)">
+        <dialog
+          hviDialog
+          title="Er du sikker på at du vil endre søknaden?"
+          [open]="modalOpen()"
+          (openChange)="modalOpen.set($event)"
+        >
           <div hviDialogBlock>
             <p hviParagraph size="sm">Bekreft endring</p>
-            <h2 hviHeading>Er du sikker på at du vil endre søknaden?</h2>
           </div>
           <div hviDialogBlock>
             <p hviParagraph>
@@ -68,12 +70,12 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
 
         <dialog
           hviDialog
+          title="Vi ønsker din mening"
           [modal]="false"
           [open]="nonModalOpen()"
           (openChange)="nonModalOpen.set($event)"
           style="z-index:10;top:calc(100vh - 400px);left:calc(100vw - 385px);margin:0;max-width:350px"
         >
-          <h2 hviHeading>Vi ønsker din mening</h2>
           <label hviLabel for="my-textarea">Hvordan var din opplevelse?</label>
           <textarea hviInput id="my-textarea"></textarea>
           <button hviButton variant="primary" (click)="nonModalOpen.set(false)" class="mt-2">
@@ -88,6 +90,7 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
         <dialog
           hviDialog
           placement="bottom"
+          title="Informasjonspanel"
           closedby="any"
           [open]="drawerOpen()"
           (openChange)="drawerOpen.set($event)"
@@ -105,8 +108,13 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Med skjema og fokus" [code]="medSkjemaOgFokusCode">
         <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
 
-        <dialog hviDialog closedby="any" [open]="formOpen()" (openChange)="formOpen.set($event)">
-          <h2 hviHeading>Dialog med skjema</h2>
+        <dialog
+          hviDialog
+          title="Dialog med skjema"
+          closedby="any"
+          [open]="formOpen()"
+          (openChange)="formOpen.set($event)"
+        >
           <hvi-field>
             <label hviLabel>Navn</label>
             <hvi-field-affixes>
@@ -125,10 +133,14 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
       <app-demo-section title="Med blokker" [code]="medBlokkerCode">
         <button hviButton (click)="blocksOpen.set(true)">Åpne Dialog</button>
 
-        <dialog hviDialog [open]="blocksOpen()" (openChange)="blocksOpen.set($event)">
+        <dialog
+          hviDialog
+          title="Dialog med blokker"
+          [open]="blocksOpen()"
+          (openChange)="blocksOpen.set($event)"
+        >
           <div hviDialogBlock>
             <p hviParagraph size="sm">Dialog subtitle</p>
-            <h2 hviHeading>Dialog with dividers</h2>
           </div>
           <div hviDialogBlock>
             <p hviParagraph>
@@ -146,11 +158,12 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
 
         <dialog
           hviDialog
+          title="Klikk utenfor dialogen for å lukke"
           closedby="any"
           [open]="backdropOpen()"
           (openChange)="backdropOpen.set($event)"
         >
-          <h2 hviHeading>Klikk utenfor dialogen for å lukke</h2>
+          <p hviParagraph>Klikk utenfor denne dialogen for å lukke den.</p>
         </dialog>
       </app-demo-section>
     </app-demo-page>

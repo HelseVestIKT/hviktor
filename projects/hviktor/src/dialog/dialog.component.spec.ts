@@ -62,6 +62,27 @@ class PlacementDialogHost {
 
 @Component({
   standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog placement="bottom">Content</dialog>',
+})
+class DrawerDefaultA11yNameHost {}
+
+@Component({
+  standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog title="Bekreft sletting">Content</dialog>',
+})
+class TitleDialogHost {}
+
+@Component({
+  standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog>Content</dialog>',
+})
+class NoTitleDialogHost {}
+
+@Component({
+  standalone: true,
   selector: 'test-non-modal-dialog-host',
   imports: [HviDialog],
   template: '<dialog hviDialog [modal]="false">Content</dialog>',
@@ -145,7 +166,9 @@ describe('HviDialog — Host bindings', () => {
 
 describe('HviDialog — Placement', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [PlacementDialogHost] });
+    await setupTestBed({
+      imports: [PlacementDialogHost, DrawerDefaultA11yNameHost],
+    });
   });
 
   it('should not set data-placement when placement is "center"', () => {
@@ -166,6 +189,44 @@ describe('HviDialog — Placement', () => {
       );
       f.destroy();
     });
+  });
+});
+
+// ---------------------------------------------------------------------------
+// HviDialog — Title and accessible name
+// ---------------------------------------------------------------------------
+
+describe('HviDialog — Title and accessible name', () => {
+  beforeEach(async () => {
+    await setupTestBed({ imports: [TitleDialogHost, NoTitleDialogHost] });
+  });
+
+  it('should render an h2 with the title when title is set', () => {
+    const f = TestBed.createComponent(TitleDialogHost);
+    f.detectChanges();
+    const h2 = f.nativeElement.querySelector('dialog h2');
+    expect(h2).toBeTruthy();
+    expect(h2.textContent.trim()).toBe('Bekreft sletting');
+  });
+
+  it('should set aria-label to the title value when title is set', () => {
+    const f = TestBed.createComponent(TitleDialogHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe(
+      'Bekreft sletting',
+    );
+  });
+
+  it('should not render an h2 when no title is set', () => {
+    const f = TestBed.createComponent(NoTitleDialogHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog h2')).toBeFalsy();
+  });
+
+  it('should set aria-label to "Dialogboks" when no title is set', () => {
+    const f = TestBed.createComponent(NoTitleDialogHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe('Dialogboks');
   });
 });
 

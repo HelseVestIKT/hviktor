@@ -11,6 +11,7 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
     <dialog
       hviDialog
       placement="bottom"
+      title="Informasjonspanel"
       closedby="any"
       [open]="drawerOpen()"
       (openChange)="drawerOpen.set($event)"
@@ -26,5 +27,10 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
   `,
 })
 export class DialogDialogSomDrawerExampleComponent {
+  readonly modalOpen = signal(false);
+  readonly nonModalOpen = signal(false);
   readonly drawerOpen = signal(false);
+  readonly formOpen = signal(false);
+  readonly blocksOpen = signal(false);
+  readonly backdropOpen = signal(false);
 }
