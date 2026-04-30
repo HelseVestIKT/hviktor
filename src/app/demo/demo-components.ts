@@ -276,6 +276,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Dropdown er en generisk nedtrekksliste. Den legger grunnmuren for å bygge menyer og lister.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'table',
