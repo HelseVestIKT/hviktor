@@ -101,6 +101,8 @@ test.describe('Table', () => {
     const filteredCount = await section.locator('tbody tr').count();
 
     await section.locator('button', { hasText: 'Nullstill filtre' }).click({ force: true });
+    // Wait for row count to increase before asserting
+    await expect(section.locator('tbody tr')).not.toHaveCount(filteredCount);
     const resetCount = await section.locator('tbody tr').count();
     expect(resetCount).toBeGreaterThan(filteredCount);
   });
