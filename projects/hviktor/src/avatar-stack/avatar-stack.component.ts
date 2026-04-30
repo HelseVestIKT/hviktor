@@ -31,6 +31,8 @@ import { Component, Input } from '@angular/core';
   template: '<ng-content />',
   host: {
     class: 'ds-avatar-stack',
+    role: 'group',
+    '[attr.aria-label]': 'ariaLabel',
     '[attr.data-variant]': 'variant',
     '[attr.data-expandable]': 'expandable',
     '[attr.tabindex]': 'expandable ? "0" : null',
@@ -39,6 +41,9 @@ import { Component, Input } from '@angular/core';
   },
 })
 export class HviAvatarStack {
+  /** Accessible label for the avatar group. Defaults to `'Gruppe med avatarer'`. */
+  @Input('aria-label') ariaLabel: string = 'Gruppe med avatarer';
+
   /** The shape of the stacked avatars (`'square'` or `'circle'`). */
   @Input() variant?: 'square' | 'circle';
 

@@ -8,7 +8,7 @@ import { HviAvatar, HviAvatarStack } from '@helsevestikt/hviktor';
   imports: [HviAvatar, HviAvatarStack],
   template: \`
     <div class="flex flex-wrap gap-2">
-      <hvi-avatar-stack expandable="true">
+      <hvi-avatar-stack expandable="true" aria-label="Dine kolleger">
         <hvi-avatar aria-label="Ola Nordmann" variant="circle" color="brand1"></hvi-avatar>
         <hvi-avatar
           aria-label="Kari Nordmann"
