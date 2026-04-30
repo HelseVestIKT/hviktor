@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviChipButton, HviChipLabel, HviFieldKit } from '@helsevestikt/hviktor';
+import { HviChipButton, HviChipLabel, HviFieldKit, HviInput } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ChipButtonRemovableExampleSource } from './code-examples/chip.button-removable.example.source';
@@ -9,7 +9,14 @@ import { ChipRadioExampleSource } from './code-examples/chip.radio.example.sourc
 @Component({
   selector: 'app-chip-demo',
   standalone: true,
-  imports: [HviChipButton, HviChipLabel, HviFieldKit, DemoPageComponent, DemoSectionComponent],
+  imports: [
+    HviChipButton,
+    HviChipLabel,
+    HviFieldKit,
+    DemoPageComponent,
+    DemoSectionComponent,
+    HviInput,
+  ],
   template: `
     <app-demo-page componentId="chip">
       <app-demo-section title="Radio" [code]="radioCode">
