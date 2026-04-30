@@ -15,6 +15,7 @@ import { HviDropdown } from './dropdown.component';
       overscroll="contain"
       [autoPlacement]="false"
     ></hvi-dropdown>
+    <hvi-dropdown id="string-false-dropdown" autoPlacement="false"></hvi-dropdown>
   `,
 })
 class DropdownAttributesHostComponent {}
@@ -66,6 +67,14 @@ describe('HviDropdown', () => {
     expect(el.getAttribute('data-placement')).toBe('left');
     expect(el.getAttribute('data-floating')).toBe('top');
     expect(el.getAttribute('data-overscroll')).toBe('contain');
+    expect(el.getAttribute('data-autoplacement')).toBeNull();
+  });
+
+  it('coerces autoPlacement="false" attribute string to false', () => {
+    const fixture = TestBed.createComponent(DropdownAttributesHostComponent);
+    fixture.detectChanges();
+
+    const el = fixture.nativeElement.querySelector('#string-false-dropdown');
     expect(el.getAttribute('data-autoplacement')).toBeNull();
   });
 

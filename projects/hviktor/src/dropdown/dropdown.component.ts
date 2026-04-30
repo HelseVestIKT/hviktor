@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, booleanAttribute } from '@angular/core';
 import '@digdir/designsystemet-web';
 
 /**
@@ -72,7 +72,7 @@ export class HviDropdown {
   @Input() overscroll?: 'contain';
 
   /** Enables automatic repositioning when there is not enough space. */
-  @Input() autoPlacement = true;
+  @Input({ transform: booleanAttribute }) autoPlacement = true;
 
   /** Emits when the dropdown is opened. */
   @Output() opened = new EventEmitter<void>();

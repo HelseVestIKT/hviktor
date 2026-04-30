@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+} from '@angular/core';
 import { HviButton } from '../button';
 
 /**
@@ -41,7 +49,7 @@ import { HviButton } from '../button';
  * </dialog>
  * ```
  *
- * @example Drawer placement (has built-in aria-label)
+ * @example Drawer placement (uses default accessible name)
  * ```html
  * <button hviButton (click)="drawerOpen.set(true)">Open Drawer</button>
  * <dialog hviDialog placement="bottom" [open]="drawerOpen()" (openChange)="drawerOpen.set($event)">
@@ -51,6 +59,10 @@ import { HviButton } from '../button';
  * </dialog>
  * ```
  *
+ * The dialog sets `aria-label="Informasjonspanel"` by default for drawer placements
+ * (`left`, `right`, `top`, `bottom`) only when no `aria-label`/`aria-labelledby`
+ * has been provided by the consumer.
+ *
  * @see {@link https://designsystemet.no/no/components/docs/dialog/overview}
  */
 @Component({
@@ -59,7 +71,6 @@ import { HviButton } from '../button';
   host: {
     class: 'ds-dialog',
     '[attr.id]': 'id',
-    '[attr.aria-label]': 'placement !== "center" ? "Informasjonspanel" : null',
     '[attr.data-placement]': 'placement === "center" ? null : placement',
     '[attr.data-modal]': 'modal',
     '[attr.closedby]': 'closedby',
@@ -84,7 +95,7 @@ import { HviButton } from '../button';
   `,
   imports: [HviButton],
 })
-export class HviDialog {
+export class HviDialog implements AfterViewInit {
   /**
    * Optional `id` attribute for the dialog element.
    * Use this when triggering the dialog from external controls or for accessibility.
@@ -127,7 +138,15 @@ export class HviDialog {
    * @type {'center' | 'left' | 'right' | 'top' | 'bottom'}
    * @default 'center'
    */
-  @Input() placement: 'center' | 'left' | 'right' | 'top' | 'bottom' = 'center';
+  @Input()
+  set placement(value: 'center' | 'left' | 'right' | 'top' | 'bottom') {
+    this._placement = value;
+    this.syncDefaultDrawerAriaLabel();
+  }
+
+  get placement(): 'center' | 'left' | 'right' | 'top' | 'bottom' {
+    return this._placement;
+  }
 
   /**
    * Light dismiss behavior — controls how the dialog can be closed.
@@ -159,9 +178,15 @@ export class HviDialog {
   @Output() readonly openChange = new EventEmitter<boolean>();
 
   private readonly element = inject(ElementRef<HTMLDialogElement>).nativeElement;
+  private _placement: 'center' | 'left' | 'right' | 'top' | 'bottom' = 'center';
+  private hasAppliedDefaultDrawerAriaLabel = false;
 
   get closeButtonAriaLabel(): string {
     return typeof this.closeButton === 'string' ? this.closeButton : 'Lukk dialogvindu';
+  }
+
+  ngAfterViewInit(): void {
+    this.syncDefaultDrawerAriaLabel();
   }
 
   /**
@@ -213,6 +238,33 @@ export class HviDialog {
         }
       }
     }
+  }
+
+  private syncDefaultDrawerAriaLabel(): void {
+    const hasAriaLabelledby = this.element.hasAttribute('aria-labelledby');
+    const currentAriaLabel = this.element.getAttribute('aria-label');
+    const hasAuthorAriaLabel =
+      currentAriaLabel !== null &&
+      (!this.hasAppliedDefaultDrawerAriaLabel || currentAriaLabel !== 'Informasjonspanel');
+
+    if (hasAriaLabelledby || hasAuthorAriaLabel) {
+      if (this.hasAppliedDefaultDrawerAriaLabel) {
+        this.element.removeAttribute('aria-label');
+        this.hasAppliedDefaultDrawerAriaLabel = false;
+      }
+      return;
+    }
+
+    if (this.placement === 'center') {
+      if (this.hasAppliedDefaultDrawerAriaLabel) {
+        this.element.removeAttribute('aria-label');
+        this.hasAppliedDefaultDrawerAriaLabel = false;
+      }
+      return;
+    }
+
+    this.element.setAttribute('aria-label', 'Informasjonspanel');
+    this.hasAppliedDefaultDrawerAriaLabel = true;
   }
 
   private setOpen(shouldOpen: boolean): void {

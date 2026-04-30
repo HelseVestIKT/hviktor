@@ -62,6 +62,27 @@ class PlacementDialogHost {
 
 @Component({
   standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog placement="bottom">Content</dialog>',
+})
+class DrawerDefaultA11yNameHost {}
+
+@Component({
+  standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog placement="bottom" aria-label="Tilpasset panel">Content</dialog>',
+})
+class DrawerCustomA11yNameHost {}
+
+@Component({
+  standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog placement="bottom" aria-labelledby="drawer-title">Content</dialog>',
+})
+class DrawerLabelledbyHost {}
+
+@Component({
+  standalone: true,
   selector: 'test-non-modal-dialog-host',
   imports: [HviDialog],
   template: '<dialog hviDialog [modal]="false">Content</dialog>',
@@ -145,7 +166,14 @@ describe('HviDialog — Host bindings', () => {
 
 describe('HviDialog — Placement', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [PlacementDialogHost] });
+    await setupTestBed({
+      imports: [
+        PlacementDialogHost,
+        DrawerDefaultA11yNameHost,
+        DrawerCustomA11yNameHost,
+        DrawerLabelledbyHost,
+      ],
+    });
   });
 
   it('should not set data-placement when placement is "center"', () => {
@@ -166,6 +194,30 @@ describe('HviDialog — Placement', () => {
       );
       f.destroy();
     });
+  });
+
+  it('should set default aria-label for drawer placements', () => {
+    const f = TestBed.createComponent(DrawerDefaultA11yNameHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe(
+      'Informasjonspanel',
+    );
+  });
+
+  it('should preserve consumer-provided aria-label on drawer', () => {
+    const f = TestBed.createComponent(DrawerCustomA11yNameHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe(
+      'Tilpasset panel',
+    );
+  });
+
+  it('should not set default aria-label when aria-labelledby is provided', () => {
+    const f = TestBed.createComponent(DrawerLabelledbyHost);
+    f.detectChanges();
+    const dialog = f.nativeElement.querySelector('dialog');
+    expect(dialog.getAttribute('aria-labelledby')).toBe('drawer-title');
+    expect(dialog.getAttribute('aria-label')).toBeNull();
   });
 });
 
