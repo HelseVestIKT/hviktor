@@ -4,7 +4,7 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
  * @summary
  * Button lets users trigger actions. Applied as a directive on `<button>` or `<a>` elements.
  * Supports three visual variants (primary, secondary, tertiary), six color themes, icon-only
- * mode, full-width layout, and a loading state that sets `aria-busy`.
+ * mode, and a loading state that sets `aria-busy`.
  *
  * When used on an `<a>` tag the button is rendered as a link with button styling.
  *
@@ -27,7 +27,7 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
  *
  * @example Icon-only button
  * ```html
- * <button hviButton variant="primary" icon aria-label="Edit">
+ * <button hviButton variant="primary" icon>
  *   <svg>...</svg>
  * </button>
  * ```
@@ -66,8 +66,8 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
     '[attr.data-size]': 'size',
     '[attr.data-variant]': 'variant',
     '[attr.data-color]': 'color',
-    '[attr.data-fullwidth]': 'fullWidth ? "" : null',
     '[attr.data-icon]': 'icon ? "" : null',
+    '[attr.aria-label]': 'icon ? "Kun ikon" : null',
     '[attr.aria-busy]': 'loading ? "true" : null',
   },
 })
@@ -85,7 +85,7 @@ export class HviButton {
   @Input() color?: 'accent' | 'brand1' | 'brand2' | 'brand3' | 'neutral' | 'danger';
 
   /** If you have only an icon in the button, you can set icon="true" to make it square.
-   * If you have other content, such as text, the button will automatically have space around the icon.
+   * Sets aria-label to "Kun ikon" automatically.
    */
   @Input({ transform: booleanAttribute }) icon = false;
 
@@ -93,7 +93,4 @@ export class HviButton {
    * Loading indicators such as spinners must be added manually, e.g., with hvi-spinner
    */
   @Input({ transform: booleanAttribute }) loading = false;
-
-  /** Makes the button full width */
-  @Input({ transform: booleanAttribute }) fullWidth = false;
 }

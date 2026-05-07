@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HviButton } from '@helsevestikt/hviktor';
+
+import '@helsevestikt/hviktor-icons/icon-cog.webcomponent';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ButtonColorExampleSource } from './code-examples/button.color.example.source';
@@ -8,6 +10,7 @@ import { ButtonVariantExampleSource } from './code-examples/button.variant.examp
 import { ButtonVarianterExampleSource } from './code-examples/button.varianter.example.source';
 @Component({
   selector: 'app-button-demo',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
   imports: [HviButton, DemoPageComponent, DemoSectionComponent],
   template: `
@@ -40,9 +43,8 @@ import { ButtonVarianterExampleSource } from './code-examples/button.varianter.e
 
       <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-wrap gap-2">
-          <button hviButton icon>⚙️</button>
+          <button hviButton icon><hvi-icon-cog /></button>
           <button hviButton loading>Loading...</button>
-          <button hviButton fullWidth>Full Width</button>
         </div>
       </app-demo-section>
     </app-demo-page>
