@@ -1,28 +1,36 @@
 import { Component, Input } from '@angular/core';
+import { HviHeading } from '../heading';
 
 type HviAlertColor = 'info' | 'success' | 'warning' | 'danger';
 type HviAlertRole = 'status' | 'alert' | string;
-type HviAlertAriaLive = 'off' | 'polite' | 'assertive';
 
 /**
  * @summary
  * Alert displays important information that users need to see and understand.
  * Designed to capture attention, it supports color variants for different severity levels.
  * Supports projecting plain text or rich content (headings, paragraphs).
- * The component also provides accessibility defaults:
- * `status` + `polite` for non-critical variants, and `alert` for danger.
  *
- * @example Warning alert with default accessibility
+ * Use `title` to render a visible heading and provide an accessible name at the same time.
+ * When no `title` is set, a default `aria-label` is derived from `color`.
+ *
+ * @example Info alert with title
  * ```html
- * <hvi-alert color="warning">
- *   This is a warning alert!
+ * <hvi-alert title="Har du husket å bestille passtime?">
+ *   Det er lange køer for å bestille pass om dagen.
  * </hvi-alert>
  * ```
  *
- * @example Danger alert with automatic critical announcement
+ * @example Danger alert
  * ```html
- * <hvi-alert color="danger">
- *   Something went wrong. Please try again.
+ * <hvi-alert color="danger" title="Det har skjedd en feil">
+ *   Vi klarer ikke å hente informasjonen du ser etter akkurat nå.
+ * </hvi-alert>
+ * ```
+ *
+ * @example Alert without title (default aria-label applied)
+ * ```html
+ * <hvi-alert color="warning">
+ *   Vi har tekniske problemer. Vi jobber med å rette problemene.
  * </hvi-alert>
  * ```
  *
@@ -33,27 +41,24 @@ type HviAlertAriaLive = 'off' | 'polite' | 'assertive';
  * </hvi-alert>
  * ```
  *
- * @example Rich content
- * ```html
- * <hvi-alert color="warning">
- *   <h2>Error</h2>
- *   <p>Something went wrong. Please try again.</p>
- * </hvi-alert>
- * ```
- *
- * @see {@link https://designsystemet.no/en/components/docs/alert/code/}
+ * @see {@link https://designsystemet.no/no/components/docs/alert/overview}
  */
 @Component({
   selector: 'hvi-alert',
   standalone: true,
-  template: `<ng-content />`,
+  imports: [HviHeading],
+  template: `
+    @if (title) {
+      <h2 hviHeading>{{ title }}</h2>
+    }
+    <ng-content />
+  `,
   host: {
     class: 'ds-alert',
     style: 'display: block; height: fit-content; align-self: flex-start;',
     '[attr.data-color]': 'color',
     '[attr.role]': 'role ?? (color === "danger" ? "alert" : "status")',
-    '[attr.aria-live]':
-      'ariaLive ?? ((role ?? (color === "danger" ? "alert" : "status")) === "alert" ? null : "polite")',
+    '[attr.aria-label]': 'title || ariaLabelForColor',
   },
 })
 export class HviAlert {
@@ -61,14 +66,27 @@ export class HviAlert {
   @Input() color?: HviAlertColor;
 
   /**
+   * Renders a visible `<h2>` heading inside the alert and sets the accessible name (`aria-label`).
+   * When omitted, a default label is derived from `color`.
+   */
+  @Input() title?: string;
+
+  /**
    * Overrides the default semantic role.
    * Defaults to `status` for info/success/warning and `alert` for danger.
    */
   @Input() role?: HviAlertRole;
 
-  /**
-   * Overrides the default live region politeness.
-   * Defaults to `polite` for status alerts and is omitted for alert role.
-   */
-  @Input('aria-live') ariaLive?: HviAlertAriaLive;
+  get ariaLabelForColor(): string {
+    switch (this.color) {
+      case 'success':
+        return 'Suksessmelding';
+      case 'warning':
+        return 'Advarsel';
+      case 'danger':
+        return 'Feilmelding';
+      default:
+        return 'Informasjon';
+    }
+  }
 }

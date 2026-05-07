@@ -7,20 +7,17 @@ export const AlertExamplesManifest = [
     sourceExport: 'AlertVarianterExampleSource',
   },
   {
-    slug: 'heading-og-paragraph',
-    title: 'Heading og paragraph',
-    className: 'AlertHeadingOgParagraphExampleComponent',
-    sourceExport: 'AlertHeadingOgParagraphExampleSource',
+    slug: 'med-tittel',
+    title: 'Med tittel',
+    className: 'AlertMedTittelExampleComponent',
+    sourceExport: 'AlertMedTittelExampleSource',
   },
   {
-    slug: 'tilgjengelighet-standard-og-overstyring',
-    title: 'Tilgjengelighet (standard og overstyring)',
-    className: 'AlertTilgjengelighetStandardOgOverstyringExampleComponent',
-    sourceExport: 'AlertTilgjengelighetStandardOgOverstyringExampleSource',
+    slug: 'uten-tittel',
+    title: 'Uten tittel',
+    className: 'AlertUtenTittelExampleComponent',
+    sourceExport: 'AlertUtenTittelExampleSource',
   },
 ] as const;
 
-export type AlertExampleSlug =
-  | 'varianter'
-  | 'heading-og-paragraph'
-  | 'tilgjengelighet-standard-og-overstyring';
+export type AlertExampleSlug = 'varianter' | 'med-tittel' | 'uten-tittel';
