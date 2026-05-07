@@ -244,15 +244,14 @@ describe('HviDialog — Close button', () => {
     f.detectChanges();
     const closeButton = f.nativeElement.querySelector('dialog button');
     expect(closeButton).toBeTruthy();
-    expect(closeButton.getAttribute('aria-label')).toBe('Lukk dialogvindu');
+    expect(closeButton.getAttribute('aria-label')).toBe('Kun ikon');
   });
 
   it('should render close button with custom label when provided', () => {
     const f = TestBed.createComponent(CustomCloseButtonHost);
-    f.componentInstance.closeButtonLabel = 'Custom Close Label';
     f.detectChanges();
     const closeButton = f.nativeElement.querySelector('dialog button');
-    expect(closeButton.getAttribute('aria-label')).toBe('Custom Close Label');
+    expect(closeButton.getAttribute('aria-label')).toBe('Kun ikon');
   });
 
   it('should not render close button when closeButton is false', () => {

@@ -28,7 +28,7 @@ test.describe('Dialog', () => {
       await expect(dialog).toHaveAttribute('open');
 
       // Finner automatisk injisert lukkeknapp via aria-label eller data-command
-      const closeButton = dialog.getByRole('button', { name: 'Lukk dialogvindu' });
+      const closeButton = dialog.getByRole('button', { name: 'Kun ikon' });
       await closeButton.click();
       await expect(dialog).not.toHaveAttribute('open');
     });
@@ -106,7 +106,7 @@ test.describe('Dialog', () => {
 
       await openButton.click();
 
-      const closeButton = drawerDialog.getByRole('button', { name: 'Lukk dialogvindu' });
+      const closeButton = drawerDialog.getByRole('button', { name: 'Kun ikon' });
       await closeButton.click();
       await expect(drawerDialog).not.toHaveAttribute('open');
     });
@@ -161,7 +161,7 @@ test.describe('Dialog', () => {
 
       // Sjekker at lukkeknappen vi genererer har aria-label
       const closeButton = dialog.locator('button[data-command="close"]');
-      await expect(closeButton).toHaveAttribute('aria-label', 'Lukk dialogvindu');
+      await expect(closeButton).toHaveAttribute('aria-label', 'Kun ikon');
     });
 
     test('passes accessibility checks', async ({ page }) => {

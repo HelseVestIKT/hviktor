@@ -335,7 +335,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                     variant="tertiary"
                     (click)="expandTable.toggleExpanded(person)"
                     [attr.aria-expanded]="expandTable.isExpanded(person)"
-                    aria-label="Vis detaljer"
+                    [ariaLabel]="'Vis detaljer'"
                   >
                     @if (expandTable.isExpanded(person)) {
                       <hvi-icon-chevron-down />
@@ -458,7 +458,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                     variant="tertiary"
                     (click)="fullTable.toggleExpanded(person)"
                     [attr.aria-expanded]="fullTable.isExpanded(person)"
-                    aria-label="Vis detaljer"
+                    [ariaLabel]="'Vis detaljer'"
                   >
                     @if (fullTable.isExpanded(person)) {
                       <hvi-icon-chevron-down />

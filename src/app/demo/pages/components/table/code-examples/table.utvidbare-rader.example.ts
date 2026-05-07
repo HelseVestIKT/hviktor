@@ -29,7 +29,7 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
                 variant="tertiary"
                 (click)="expandTable.toggleExpanded(person)"
                 [attr.aria-expanded]="expandTable.isExpanded(person)"
-                aria-label="Vis detaljer"
+                [ariaLabel]="'Vis detaljer'"
               >
                 @if (expandTable.isExpanded(person)) {
                   <hvi-icon-chevron-down />

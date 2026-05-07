@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const CardCardSomErEnKnappExampleSource = `import { Component } from '@angular/core';
-import { HviCard, HviCardBlock, HviCardButton, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviCardBlock, HviCardButton, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-card-card-som-er-en-knapp-example',

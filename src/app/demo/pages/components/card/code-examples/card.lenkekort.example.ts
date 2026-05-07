@@ -7,23 +7,37 @@ import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helse
   imports: [HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph],
   template: `
     <div class="flex flex-wrap gap-4">
-      <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target">
+      <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target1">
         <div hviCardBlock>
           <h2 hviHeading>
             <a
-              id="target"
+              id="target1"
               hviLink
               href="https://designsystemet.no/no/components/docs/card/overview#lenkekort"
               target="_blank"
               rel="noopener noreferrer"
-              >Myrkheim Museum</a
+              >Card (åpnes i ny fane)</a
             >
           </h2>
           <p hviParagraph>
-            Myrkheim Museum ligg i dalen mellom dei gamle fjelltoppane og viser utstillingar frå
-            tida då dei fyrste reisefølgja kryssa landet.
+            Hvis du skal lenke til en ekstern side i en ny fane, så bør det informeres om til
+            brukeren.
           </p>
-          <p hviParagraph size="sm">Myrkheim Kulturvernråd</p>
+          <p hviParagraph size="sm">Designsystemet.no</p>
+        </div>
+      </hvi-card>
+      <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target2">
+        <div hviCardBlock>
+          <h2 hviHeading>
+            <a
+              id="target2"
+              hviLink
+              href="https://helsevestikt.github.io/hviktor/komponenter/button"
+              rel="noopener noreferrer"
+              >Button</a
+            >
+          </h2>
+          <p hviParagraph>Dette er et lenkekort som lenker til en intern side i samme fane.</p>
         </div>
       </hvi-card>
     </div>
