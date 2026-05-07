@@ -49,13 +49,13 @@ type HviAlertRole = 'status' | 'alert' | string;
   imports: [HviHeading],
   template: `
     @if (title) {
-      <h2 hviHeading>{{ title }}</h2>
+      <h2 hviHeading style="margin-bottom: var(--ds-size-2);">{{ title }}</h2>
     }
     <ng-content />
   `,
   host: {
     class: 'ds-alert',
-    style: 'display: block; height: fit-content; align-self: flex-start;',
+    style: 'display: block; height: fit-content; align-self: flex-start; max-width: 731px;',
     '[attr.data-color]': 'color',
     '[attr.role]': 'role ?? (color === "danger" ? "alert" : "status")',
     '[attr.aria-label]': 'title || ariaLabelForColor',
