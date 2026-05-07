@@ -7,7 +7,7 @@ import { HviLabel } from '@helsevestikt/hviktor';
   imports: [HviLabel],
   template: `
     <div class="flex flex-col gap-2">
-      <label hviLabel weight="regular">Regular weight</label>
+      <label hviLabel>Regular weight</label>
       <label hviLabel weight="medium">Medium weight</label>
       <label hviLabel weight="semibold">Semibold weight</label>
     </div>
