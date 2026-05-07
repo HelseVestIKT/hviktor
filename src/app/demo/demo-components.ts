@@ -101,6 +101,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Divider brukes for å skape et visuelt skille mellom innhold. Det er en enkel horisontal linje som strekker seg over tilgjengelig bredde.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'form',
@@ -184,6 +185,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'ErrorSummary er en oppsummering av feil. Den gir brukeren oversikt over feil eller mangler som må rettes på en side eller trinn, for å komme videre.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'field',
@@ -275,6 +277,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Dropdown er en generisk nedtrekksliste. Den legger grunnmuren for å bygge menyer og lister.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'table',

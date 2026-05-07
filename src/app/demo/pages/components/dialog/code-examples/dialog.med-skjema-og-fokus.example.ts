@@ -2,9 +2,9 @@ import { Component, signal } from '@angular/core';
 import {
   HviButton,
   HviDialog,
+  HviDialogBlock,
   HviField,
   HviFieldAffixes,
-  HviHeading,
   HviInput,
   HviLabel,
 } from '@helsevestikt/hviktor';
@@ -12,19 +12,26 @@ import {
 @Component({
   selector: 'app-dialog-med-skjema-og-fokus-example',
   standalone: true,
-  imports: [HviButton, HviDialog, HviField, HviFieldAffixes, HviHeading, HviInput, HviLabel],
+  imports: [HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel],
   template: `
     <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
 
-    <dialog hviDialog closedby="any" [open]="formOpen()" (openChange)="formOpen.set($event)">
-      <h2 hviHeading>Dialog med skjema</h2>
-      <hvi-field>
-        <label hviLabel>Navn</label>
-        <hvi-field-affixes>
-          <input hviInput type="text" autofocus />
-        </hvi-field-affixes>
-      </hvi-field>
-      <div class="mt-4 flex gap-2">
+    <dialog
+      hviDialog
+      title="Dialog med skjema"
+      closedby="any"
+      [open]="formOpen()"
+      (openChange)="formOpen.set($event)"
+    >
+      <div hviDialogBlock>
+        <hvi-field>
+          <label hviLabel>Navn</label>
+          <hvi-field-affixes>
+            <input hviInput type="text" autofocus />
+          </hvi-field-affixes>
+        </hvi-field>
+      </div>
+      <div hviDialogBlock class="mt-4 flex gap-2">
         <button hviButton (click)="formOpen.set(false)">Send inn skjema</button>
         <button hviButton variant="secondary" color="danger" (click)="formOpen.set(false)">
           Avbryt
@@ -34,5 +41,10 @@ import {
   `,
 })
 export class DialogMedSkjemaOgFokusExampleComponent {
+  readonly modalOpen = signal(false);
+  readonly nonModalOpen = signal(false);
+  readonly drawerOpen = signal(false);
   readonly formOpen = signal(false);
+  readonly blocksOpen = signal(false);
+  readonly backdropOpen = signal(false);
 }

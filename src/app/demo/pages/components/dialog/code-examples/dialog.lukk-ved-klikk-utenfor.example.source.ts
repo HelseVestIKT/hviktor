@@ -1,11 +1,11 @@
 // Auto-generated - do not edit manually
 export const DialogLukkVedKlikkUtenforExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviHeading } from '@helsevestikt/hviktor';
+import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-dialog-lukk-ved-klikk-utenfor-example',
   standalone: true,
-  imports: [HviButton, HviDialog, HviHeading],
+  imports: [HviButton, HviDialog, HviDialogBlock, HviParagraph],
   template: \`
     <button hviButton (click)="backdropOpen.set(true)">Åpne Dialog</button>
     
@@ -15,11 +15,16 @@ import { HviButton, HviDialog, HviHeading } from '@helsevestikt/hviktor';
       [open]="backdropOpen()"
       (openChange)="backdropOpen.set($event)"
     >
-      <h2 hviHeading>Klikk utenfor dialogen for å lukke</h2>
+      <p hviDialogBlock hviParagraph>Klikk utenfor denne dialogen for å lukke den.</p>
     </dialog>
   \`,
 })
 export class DialogLukkVedKlikkUtenforExampleComponent {
+  readonly modalOpen = signal(false);
+  readonly nonModalOpen = signal(false);
+  readonly drawerOpen = signal(false);
+  readonly formOpen = signal(false);
+  readonly blocksOpen = signal(false);
   readonly backdropOpen = signal(false);
 }
 `;

@@ -1,19 +1,20 @@
 // Auto-generated - do not edit manually
 export const DialogModalDialogExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-dialog-modal-dialog-example',
   standalone: true,
-  imports: [HviButton, HviDialog, HviDialogBlock, HviHeading, HviParagraph],
+  imports: [HviButton, HviDialog, HviDialogBlock, HviParagraph],
   template: \`
     <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
     
-    <dialog hviDialog [open]="modalOpen()" (openChange)="modalOpen.set($event)">
-      <div hviDialogBlock>
-        <p hviParagraph size="sm">Bekreft endring</p>
-        <h2 hviHeading>Er du sikker på at du vil endre søknaden?</h2>
-      </div>
+    <dialog
+      hviDialog
+      title="Er du sikker på at du vil endre søknaden?"
+      [open]="modalOpen()"
+      (openChange)="modalOpen.set($event)"
+    >
       <div hviDialogBlock>
         <p hviParagraph>
           OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden
@@ -34,5 +35,10 @@ import { HviButton, HviDialog, HviDialogBlock, HviHeading, HviParagraph } from '
 })
 export class DialogModalDialogExampleComponent {
   readonly modalOpen = signal(false);
+  readonly nonModalOpen = signal(false);
+  readonly drawerOpen = signal(false);
+  readonly formOpen = signal(false);
+  readonly blocksOpen = signal(false);
+  readonly backdropOpen = signal(false);
 }
 `;

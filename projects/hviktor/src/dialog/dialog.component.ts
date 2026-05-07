@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
 import { HviButton } from '../button';
+import { HviHeading } from '../heading';
 
 /**
  * @summary
@@ -11,16 +12,16 @@ import { HviButton } from '../button';
  * - **Modal**: Overlays the entire page with a backdrop and prevents interaction with the rest of the page
  * - **Non-modal**: Displays above content but allows interaction with the rest of the page
  *
+ * Use `title` to set a visible heading and accessible name at the same time.
+ * When no `title` is set, the dialog falls back to `aria-label="Dialogboks"`.
+ *
  * Use `placement` to display the dialog as a drawer from any side (left, right, top, bottom) instead of centered.
  * Use `closedby="any"` to allow closing by clicking outside the dialog.
  *
- * @example Modal dialog
+ * @example Modal dialog with title
  * ```html
  * <button hviButton (click)="openDialog()">Open Dialog</button>
- * <dialog hviDialog [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
- *   <div hviDialogBlock>
- *     <h2 hviHeading>Confirm Action</h2>
- *   </div>
+ * <dialog hviDialog title="Confirm Action" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
  *   <div hviDialogBlock>
  *     <p hviParagraph>Are you sure?</p>
  *   </div>
@@ -31,13 +32,19 @@ import { HviButton } from '../button';
  * </dialog>
  * ```
  *
- * @example Non-modal dialog
+ * **Note**: Since `title` is an input, the close button and title heading are automatically
+ * rendered with proper spacing. Keep content inside `hviDialogBlock` containers for consistent padding.
+ *
+ * @example Non-modal dialog with title
  * ```html
  * <button hviButton (click)="openDialog()">Open Dialog</button>
- * <dialog hviDialog [modal]="false" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
- *   <h2 hviHeading>Feedback</h2>
- *   <textarea hviInput></textarea>
- *   <button hviButton (click)="dialogOpen.set(false)">Send</button>
+ * <dialog hviDialog title="Feedback" [modal]="false" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
+ *   <div hviDialogBlock>
+ *     <textarea hviInput></textarea>
+ *   </div>
+ *   <div hviDialogBlock>
+ *     <button hviButton (click)="dialogOpen.set(false)">Send</button>
+ *   </div>
  * </dialog>
  * ```
  *
@@ -46,7 +53,7 @@ import { HviButton } from '../button';
  * <button hviButton (click)="drawerOpen.set(true)">Open Drawer</button>
  * <dialog hviDialog placement="bottom" [open]="drawerOpen()" (openChange)="drawerOpen.set($event)">
  *   <div hviDialogBlock>
- *     <h2 hviHeading>Select an Option</h2>
+ *     <p>Select an option from this information panel.</p>
  *   </div>
  * </dialog>
  * ```
@@ -59,6 +66,7 @@ import { HviButton } from '../button';
   host: {
     class: 'ds-dialog',
     '[attr.id]': 'id',
+    '[attr.aria-label]': 'title || "Dialogboks"',
     '[attr.data-placement]': 'placement === "center" ? null : placement',
     '[attr.data-modal]': 'modal',
     '[attr.closedby]': 'closedby',
@@ -79,9 +87,14 @@ import { HviButton } from '../button';
         (click)="close()"
       ></button>
     }
+    @if (title) {
+      <div class="ds-dialog__block">
+        <h2 hviHeading>{{ title }}</h2>
+      </div>
+    }
     <ng-content></ng-content>
   `,
-  imports: [HviButton],
+  imports: [HviButton, HviHeading],
 })
 export class HviDialog {
   /**
@@ -91,6 +104,15 @@ export class HviDialog {
    * @type {string | undefined}
    */
   @Input() id?: string;
+
+  /**
+   * Visible title rendered as an `<h2>` inside the dialog, and used as the accessible name
+   * (`aria-label`) for the dialog element. When omitted, `aria-label="Dialogboks"` is used
+   * as a fallback and no heading is rendered.
+   *
+   * @type {string | undefined}
+   */
+  @Input() title?: string;
 
   /**
    * Whether the dialog is open (`true`) or closed (`false`).
