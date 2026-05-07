@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { HviAlert, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviAlert, HviParagraph } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
+import { AlertMedTittelExampleSource } from './code-examples/alert.med-tittel.example.source';
+import { AlertUtenTittelExampleSource } from './code-examples/alert.uten-tittel.example.source';
 import { AlertVarianterExampleSource } from './code-examples/alert.varianter.example.source';
 
-import { AlertHeadingOgParagraphExampleSource } from './code-examples/alert.heading-og-paragraph.example.source';
-import { AlertTilgjengelighetStandardOgOverstyringExampleSource } from './code-examples/alert.tilgjengelighet-standard-og-overstyring.example.source';
 @Component({
   selector: 'app-alert-demo',
   standalone: true,
-  imports: [HviAlert, HviHeading, HviParagraph, DemoPageComponent, DemoSectionComponent],
+  imports: [HviAlert, HviParagraph, DemoPageComponent, DemoSectionComponent],
   template: `
     <app-demo-page componentId="alert">
       <app-demo-section title="Varianter" [code]="varianterCode">
@@ -19,30 +19,20 @@ import { AlertTilgjengelighetStandardOgOverstyringExampleSource } from './code-e
           <hvi-alert color="danger">Dette er en danger alert</hvi-alert>
         </div>
       </app-demo-section>
-      <app-demo-section title="Heading og paragraph" [code]="headingOgParagraphCode">
+      <app-demo-section title="Med tittel" [code]="medTittelCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-alert>
-            <h2 hviHeading>Dette er en heading</h2>
+          <hvi-alert title="Har du husket å bestille passtime?">
             <p hviParagraph>
-              Ved å sette en heading og paragraph inni en hvi-alert får du denne stylingen.
+              Det er lange køer for å bestille pass om dagen, det kan være lurt å bestille i god tid
+              før du skal reise.
             </p>
           </hvi-alert>
         </div>
       </app-demo-section>
-
-      <app-demo-section
-        title="Tilgjengelighet (standard og overstyring)"
-        [code]="tilgjengelighetStandardOgOverstyringCode"
-      >
+      <app-demo-section title="Uten tittel" [code]="utenTittelCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-alert>
-            Info/success/warning bruker role="status" og aria-live="polite" som standard.
-          </hvi-alert>
-          <hvi-alert color="danger">
-            Danger bruker role="alert" uten aria-live som standard.
-          </hvi-alert>
-          <hvi-alert color="warning" role="alert">
-            Ved behov kan du overstyre role og aria-live eksplisitt.
+          <hvi-alert color="warning">
+            Vi har tekniske problemer. Vi jobber med å rette problemene.
           </hvi-alert>
         </div>
       </app-demo-section>
@@ -50,10 +40,7 @@ import { AlertTilgjengelighetStandardOgOverstyringExampleSource } from './code-e
   `,
 })
 export class AlertDemoComponent {
-  readonly tilgjengelighetStandardOgOverstyringCode =
-    AlertTilgjengelighetStandardOgOverstyringExampleSource;
-
-  readonly headingOgParagraphCode = AlertHeadingOgParagraphExampleSource;
-
   readonly varianterCode = AlertVarianterExampleSource;
+  readonly medTittelCode = AlertMedTittelExampleSource;
+  readonly utenTittelCode = AlertUtenTittelExampleSource;
 }

@@ -60,7 +60,7 @@ let nextId = 0;
   ],
   template: `
     <hvi-field>
-      <label hviLabel [attr.for]="inputId" weight="medium">
+      <label hviLabel [attr.for]="inputId">
         {{ label }}
         @if (effectiveRequiredMode; as mode) {
           <hvi-required-tag [mode]="mode" />

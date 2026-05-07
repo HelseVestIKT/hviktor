@@ -1,5 +1,6 @@
 // Auto-generated - do not edit manually
 export const CheckboxSkrivebeskyttetReadonlyExampleSource = `import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
@@ -47,6 +48,5 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
     </fieldset>
   \`,
 })
-export class CheckboxSkrivebeskyttetReadonlyExampleComponent {
-}
+export class CheckboxSkrivebeskyttetReadonlyExampleComponent {}
 `;

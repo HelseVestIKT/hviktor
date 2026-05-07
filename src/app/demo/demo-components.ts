@@ -122,6 +122,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Label fungerer som ei tydeleg og tilgjengeleg etikett som fortel brukaren kva eit tilhøyrande skjemaelement handlar om.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'link',

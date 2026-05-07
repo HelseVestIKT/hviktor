@@ -1,14 +1,27 @@
 import { Directive, Input } from '@angular/core';
 
 /**
- * Label functions as a clear and accessible text label that tells the user what an associated form element is about.
+ * @summary Applies Designsystemet label styling to a `<label>` or `<legend>` element,
+ * providing a clear and accessible text label for an associated form control.
  *
- * @example
+ * @example Default label
  * ```html
- * <label hviLabel weight="semibold">Name</label>
+ * <label hviLabel for="my-input">Fødselsnummer (11 sifre)</label>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/label/overview
+ * @example Semibold weight for label hierarchy
+ * ```html
+ * <label hviLabel weight="semibold">Group label</label>
+ * ```
+ *
+ * @example Legend inside a fieldset
+ * ```html
+ * <fieldset>
+ *   <legend hviLabel>Velg alternativ</legend>
+ * </fieldset>
+ * ```
+ *
+ * @see {@link https://designsystemet.no/no/components/docs/label/overview}
  */
 @Directive({
   selector: 'label[hviLabel], legend[hviLabel]',
@@ -19,6 +32,6 @@ import { Directive, Input } from '@angular/core';
   },
 })
 export class HviLabel {
-  /** The font weight of the label */
+  /** Adjusts font weight. Default is medium. Use `'regular'` or `'semibold'` when establishing a label hierarchy, e.g. checkboxes or radios in a fieldset. */
   @Input() weight?: 'regular' | 'medium' | 'semibold';
 }

@@ -9,6 +9,7 @@ import {
 import {
   HviControlInvalid,
   HviField,
+  HviFieldDescription,
   HviFieldValidation,
   HviFieldset,
   HviInput,
@@ -46,6 +47,7 @@ function minCheckedValidator(min: number) {
     HviInput,
     HviControlInvalid,
     ReactiveFormsModule,
+    HviFieldDescription,
   ],
   template: `
     <app-demo-page componentId="checkbox">
@@ -58,6 +60,7 @@ function minCheckedValidator(min: number) {
         <hvi-field>
           <input hviInput type="checkbox" id="simple-checkbox" />
           <label hviLabel for="simple-checkbox">Checkbox label</label>
+          <div hviFieldDescription>Description</div>
         </hvi-field>
       </app-demo-section>
 
