@@ -5,7 +5,7 @@ import { HviCard, HviCardBlock, HviCardButton, HviHeading, HviParagraph } from '
 @Component({
   selector: 'app-card-card-som-er-en-knapp-example',
   standalone: true,
-  imports: [HviCardBlock, HviCardButton, HviHeading, HviParagraph],
+  imports: [HviCard, HviCardBlock, HviCardButton, HviHeading, HviParagraph],
   template: \`
     <div class="flex flex-wrap gap-4">
       <button hviCardButton maxWidth="420px">
