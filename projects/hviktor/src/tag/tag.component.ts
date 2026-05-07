@@ -15,12 +15,15 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'hvi-tag',
   standalone: true,
-  template: '<ng-content />',
+  template: `<span
+    class="ds-tag"
+    [attr.data-variant]="variant ?? null"
+    [attr.data-size]="size ?? null"
+    [attr.data-color]="color ?? null"
+    ><ng-content
+  /></span>`,
   host: {
-    class: 'ds-tag',
-    '[attr.data-variant]': 'variant ?? null',
-    '[attr.data-size]': 'size ?? null',
-    '[attr.data-color]': 'color ?? null',
+    style: 'display: contents',
   },
 })
 export class HviTag {
