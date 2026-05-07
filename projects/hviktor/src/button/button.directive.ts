@@ -67,11 +67,17 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
     '[attr.data-variant]': 'variant',
     '[attr.data-color]': 'color',
     '[attr.data-icon]': 'icon ? "" : null',
-    '[attr.aria-label]': 'icon ? "Kun ikon" : null',
+    '[attr.aria-label]': 'ariaLabel ?? (icon ? "Kun ikon" : null)',
     '[attr.aria-busy]': 'loading ? "true" : null',
   },
 })
 export class HviButton {
+  /**
+   * Accessible label for the button. Required when the button contains only an icon.
+   * When set, takes priority over the automatic "Kun ikon" label on icon-only buttons.
+   */
+  @Input() ariaLabel?: string;
+
   /** The size of the button */
   @Input() size?: 'sm' | 'md' | 'lg';
 
