@@ -37,10 +37,10 @@ import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
             <div class="flex items-center gap-3">
               <h1 hviHeading size="xl">{{ name() }}</h1>
               @if (codeTested()) {
-                <hvi-tag color="info">Kode testet ✓</hvi-tag>
+                <span hviTag color="info">Kode testet ✓</span>
               }
               @if (a11yTested()) {
-                <hvi-tag color="brand2">A11y testet ✓</hvi-tag>
+                <span hviTag color="brand2">A11y testet ✓</span>
               }
             </div>
             <button hviButton variant="secondary" size="sm" (click)="copyPageAsMarkdown()">

@@ -7,9 +7,9 @@ import { HviTag } from '@helsevestikt/hviktor';
   imports: [HviTag],
   template: `
     <div class="flex flex-wrap gap-2">
-      <hvi-tag size="sm">Small</hvi-tag>
-      <hvi-tag size="md">Medium (default)</hvi-tag>
-      <hvi-tag size="lg">Large</hvi-tag>
+      <span hviTag size="sm">Small</span>
+      <span hviTag size="md">Medium (default)</span>
+      <span hviTag size="lg">Large</span>
     </div>
   `,
 })

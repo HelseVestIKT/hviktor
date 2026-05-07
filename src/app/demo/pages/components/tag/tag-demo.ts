@@ -13,31 +13,31 @@ import { TagVarianterExampleSource } from './code-examples/tag.varianter.example
     <app-demo-page componentId="tag">
       <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-tag variant="default">Default</hvi-tag>
-          <hvi-tag variant="outline">Outline</hvi-tag>
+          <span hviTag variant="default">Default</span>
+          <span hviTag variant="outline">Outline</span>
         </div>
       </app-demo-section>
 
       <app-demo-section title="Størrelser" [code]="storrelserCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-tag size="sm">Small</hvi-tag>
-          <hvi-tag size="md">Medium (default)</hvi-tag>
-          <hvi-tag size="lg">Large</hvi-tag>
+          <span hviTag size="sm">Small</span>
+          <span hviTag size="md">Medium (default)</span>
+          <span hviTag size="lg">Large</span>
         </div>
       </app-demo-section>
 
       <app-demo-section title="Farger" [code]="fargerCode">
         <div class="flex flex-wrap gap-2">
-          <hvi-tag>Default</hvi-tag>
-          <hvi-tag color="neutral">Neutral</hvi-tag>
-          <hvi-tag color="danger">Danger</hvi-tag>
-          <hvi-tag color="warning">Warning</hvi-tag>
-          <hvi-tag color="info">Info</hvi-tag>
-          <hvi-tag color="success">Success</hvi-tag>
-          <hvi-tag color="accent">Accent</hvi-tag>
-          <hvi-tag color="brand1">Brand1</hvi-tag>
-          <hvi-tag color="brand2">Brand2</hvi-tag>
-          <hvi-tag color="brand3">Brand3</hvi-tag>
+          <span hviTag>Default</span>
+          <span hviTag color="neutral">Neutral</span>
+          <span hviTag color="danger">Danger</span>
+          <span hviTag color="warning">Warning</span>
+          <span hviTag color="info">Info</span>
+          <span hviTag color="success">Success</span>
+          <span hviTag color="accent">Accent</span>
+          <span hviTag color="brand1">Brand1</span>
+          <span hviTag color="brand2">Brand2</span>
+          <span hviTag color="brand3">Brand3</span>
         </div>
       </app-demo-section>
     </app-demo-page>

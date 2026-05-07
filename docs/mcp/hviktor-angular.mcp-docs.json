@@ -1,16 +1,16 @@
 {
-  "generatedAt": "2026-04-21T07:43:09.150Z",
+  "generatedAt": "2026-05-07T12:20:27.555Z",
   "package": {
     "name": "@helsevestikt/hviktor-angular",
-    "version": "0.1.4"
+    "version": "0.1.7"
   },
   "sources": {
     "npm": "projects/hviktor/src",
     "demo": "src/app/demo/pages/components"
   },
   "stats": {
-    "componentAndDirectiveCount": 58,
-    "demoExampleCount": 130
+    "componentAndDirectiveCount": 60,
+    "demoExampleCount": 139
   },
   "entries": [
     {
@@ -18,21 +18,35 @@
       "kind": "component",
       "symbol": "HviAlert",
       "selector": "hvi-alert",
-      "summary": "Alert displays important information that users need to see and understand.\nDesigned to capture attention, it supports color variants for different severity levels.\nSupports projecting plain text or rich content (headings, paragraphs).",
-      "see": "https://designsystemet.no/en/components/docs/alert/code/",
+      "summary": "Alert displays important information that users need to see and understand.\nDesigned to capture attention, it supports color variants for different severity levels.\nSupports projecting plain text or rich content (headings, paragraphs).\n\nUse `title` to render a visible heading and provide an accessible name at the same time.\nWhen no `title` is set, a default `aria-label` is derived from `color`.",
+      "see": "https://designsystemet.no/no/components/docs/alert/overview",
       "sourceFile": "projects/hviktor/src/alert/alert.component.ts",
       "sourceOfTruth": "npm",
       "inputs": [
         {
           "name": "color",
-          "type": "'info' | 'success' | 'warning' | 'danger'",
+          "type": "HviAlertColor",
+          "required": false,
+          "default": "",
+          "transform": ""
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "transform": ""
+        },
+        {
+          "name": "role",
+          "type": "HviAlertRole",
           "required": false,
           "default": "",
           "transform": ""
         }
       ],
       "outputs": [],
-      "hostBindings": ["class", "style", "[attr.data-color]"],
+      "hostBindings": ["class", "style", "[attr.data-color]", "[attr.role]", "[attr.aria-label]"],
       "examples": [
         {
           "id": "alert.heading-og-paragraph",
@@ -40,6 +54,27 @@
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/alert/code-examples/alert.heading-og-paragraph.example.ts",
           "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-alert>\n        <h2 hviHeading>Dette er en heading</h2>\n        <p hviParagraph>\n          Ved å sette en heading og paragraph inni en hvi-alert får du denne stylingen.\n        </p>\n      </hvi-alert>\n    </div>"
+        },
+        {
+          "id": "alert.med-tittel",
+          "title": "alert med-tittel",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/alert/code-examples/alert.med-tittel.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-alert title=\"Har du husket å bestille passtime?\">\n        <p hviParagraph>\n          Det er lange køer for å bestille pass om dagen, det kan være lurt å bestille i god tid før\n          du skal reise.\n        </p>\n      </hvi-alert>\n    </div>"
+        },
+        {
+          "id": "alert.tilgjengelighet-standard-og-overstyring",
+          "title": "alert tilgjengelighet-standard-og-overstyring",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/alert/code-examples/alert.tilgjengelighet-standard-og-overstyring.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-alert>\n        Info/success/warning bruker role=\"status\" og aria-live=\"polite\" som standard.\n      </hvi-alert>\n      <hvi-alert color=\"danger\">\n        Danger bruker role=\"alert\" uten aria-live som standard.\n      </hvi-alert>\n      <hvi-alert color=\"warning\" role=\"alert\">\n        Ved behov kan du overstyre role og aria-live eksplisitt.\n      </hvi-alert>\n    </div>"
+        },
+        {
+          "id": "alert.uten-tittel",
+          "title": "alert uten-tittel",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/alert/code-examples/alert.uten-tittel.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-alert color=\"warning\">\n        Vi har tekniske problemer. Vi jobber med å rette problemene.\n      </hvi-alert>\n    </div>"
         },
         {
           "id": "alert.varianter",
@@ -124,14 +159,21 @@
     },
     {
       "id": "avatar-stack",
-      "kind": "directive",
+      "kind": "component",
       "symbol": "HviAvatarStack",
-      "selector": "figure[hviAvatarStack]",
-      "summary": "AvatarStack groups a collection of Avatar elements into a visually stacked layout.\nApplied as a directive on a `<figure>` element. Supports an optional suffix\n(e.g. \"+4\") to indicate additional hidden avatars, and an expandable mode.",
+      "selector": "hvi-avatar-stack",
+      "summary": "AvatarStack groups a collection of Avatar elements into a visually stacked layout.\nSupports an optional suffix (e.g. \"+4\") to indicate additional hidden avatars,\nand an expandable mode that automatically sets `tabindex=\"0\"` for keyboard access.",
       "see": "https://designsystemet.no/en/components/docs/avatar-stack/code",
-      "sourceFile": "projects/hviktor/src/avatar-stack/avatar-stack.directive.ts",
+      "sourceFile": "projects/hviktor/src/avatar-stack/avatar-stack.component.ts",
       "sourceOfTruth": "npm",
       "inputs": [
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": false,
+          "default": "'Gruppe med avatarer'",
+          "transform": ""
+        },
         {
           "name": "variant",
           "type": "'square' | 'circle'",
@@ -164,8 +206,11 @@
       "outputs": [],
       "hostBindings": [
         "class",
+        "role",
+        "[attr.aria-label]",
         "[attr.data-variant]",
         "[attr.data-expandable]",
+        "[attr.tabindex]",
         "[attr.data-suffix]",
         "[attr.data-avatar-stack-gap]"
       ],
@@ -175,21 +220,21 @@
           "title": "avatar-stack expandable",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/avatar-stack/code-examples/avatar-stack.expandable.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <figure hviAvatarStack tabindex=\"-1\" expandable=\"true\">\n        <hvi-avatar aria-label=\"Ola Nordmann\" variant=\"circle\" color=\"brand1\"></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Kari Nordmann\"\n          variant=\"circle\"\n          initials=\"KN\"\n          color=\"brand2\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Per Hansen\"\n          variant=\"circle\"\n          initials=\"PH\"\n          color=\"brand3\"\n        ></hvi-avatar>\n      </figure>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-avatar-stack expandable=\"true\" aria-label=\"Dine kolleger\">\n        <hvi-avatar aria-label=\"Ola Nordmann\" variant=\"circle\" color=\"brand1\"></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Kari Nordmann\"\n          variant=\"circle\"\n          initials=\"KN\"\n          color=\"brand2\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Per Hansen\"\n          variant=\"circle\"\n          initials=\"PH\"\n          color=\"brand3\"\n        ></hvi-avatar>\n      </hvi-avatar-stack>\n    </div>"
         },
         {
           "id": "avatar-stack.med-suffix",
           "title": "avatar-stack med-suffix",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/avatar-stack/code-examples/avatar-stack.med-suffix.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <figure hviAvatarStack tabindex=\"-1\" suffix=\"+4\">\n        <hvi-avatar\n          aria-label=\"Ola Nordmann\"\n          variant=\"circle\"\n          size=\"md\"\n          color=\"brand1\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Kari Nordmann\"\n          variant=\"circle\"\n          initials=\"KN\"\n          size=\"md\"\n          color=\"brand2\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Per Hansen\"\n          variant=\"circle\"\n          initials=\"PH\"\n          size=\"md\"\n          color=\"brand3\"\n        ></hvi-avatar>\n      </figure>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-avatar-stack suffix=\"+4\" aria-label=\"Ansatte i bedriften\">\n        <hvi-avatar\n          aria-label=\"Ola Nordmann\"\n          variant=\"circle\"\n          size=\"md\"\n          color=\"brand1\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Kari Nordmann\"\n          variant=\"circle\"\n          initials=\"KN\"\n          size=\"md\"\n          color=\"brand2\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Per Hansen\"\n          variant=\"circle\"\n          initials=\"PH\"\n          size=\"md\"\n          color=\"brand3\"\n        ></hvi-avatar>\n      </hvi-avatar-stack>\n    </div>"
         },
         {
           "id": "avatar-stack.standard-avatar-stack",
           "title": "avatar-stack standard-avatar-stack",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/avatar-stack/code-examples/avatar-stack.standard-avatar-stack.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <figure hviAvatarStack tabindex=\"-1\">\n        <hvi-avatar\n          aria-label=\"Ola Nordmann\"\n          variant=\"circle\"\n          size=\"md\"\n          color=\"brand1\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Kari Nordmann\"\n          variant=\"circle\"\n          initials=\"KN\"\n          size=\"md\"\n          color=\"brand2\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Per Hansen\"\n          variant=\"circle\"\n          initials=\"PH\"\n          size=\"md\"\n          color=\"brand3\"\n        ></hvi-avatar>\n      </figure>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-avatar-stack aria-label=\"Topp 3 ansatte i bedriften\">\n        <hvi-avatar\n          aria-label=\"Ola Nordmann\"\n          variant=\"circle\"\n          size=\"md\"\n          color=\"brand1\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Kari Nordmann\"\n          variant=\"circle\"\n          initials=\"KN\"\n          size=\"md\"\n          color=\"brand2\"\n        ></hvi-avatar>\n        <hvi-avatar\n          aria-label=\"Per Hansen\"\n          variant=\"circle\"\n          initials=\"PH\"\n          size=\"md\"\n          color=\"brand3\"\n        ></hvi-avatar>\n      </hvi-avatar-stack>\n    </div>"
         }
       ]
     },
@@ -233,7 +278,7 @@
           "title": "badge med-posisjonering",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/badge/code-examples/badge.med-posisjonering.example.ts",
-          "template": "<div class=\"flex flex-wrap items-center gap-4\">\n      <hvi-badge-position placement=\"top-left\">\n        <hvi-badge color=\"danger\" count=\"3\"></hvi-badge>\n        <hvi-tag color=\"info\">Tag med badge</hvi-tag>\n      </hvi-badge-position>\n    </div>"
+          "template": "<div class=\"flex flex-wrap items-center gap-4\">\n      <hvi-badge-position placement=\"top-left\">\n        <hvi-badge color=\"danger\" count=\"3\"></hvi-badge>\n        <span hviTag color=\"info\">Tag med badge</span>\n      </hvi-badge-position>\n    </div>"
         },
         {
           "id": "badge.status-indikator",
@@ -291,7 +336,7 @@
           "title": "badge med-posisjonering",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/badge/code-examples/badge.med-posisjonering.example.ts",
-          "template": "<div class=\"flex flex-wrap items-center gap-4\">\n      <hvi-badge-position placement=\"top-left\">\n        <hvi-badge color=\"danger\" count=\"3\"></hvi-badge>\n        <hvi-tag color=\"info\">Tag med badge</hvi-tag>\n      </hvi-badge-position>\n    </div>"
+          "template": "<div class=\"flex flex-wrap items-center gap-4\">\n      <hvi-badge-position placement=\"top-left\">\n        <hvi-badge color=\"danger\" count=\"3\"></hvi-badge>\n        <span hviTag color=\"info\">Tag med badge</span>\n      </hvi-badge-position>\n    </div>"
         },
         {
           "id": "badge.status-indikator",
@@ -336,7 +381,7 @@
       "kind": "directive",
       "symbol": "HviButton",
       "selector": "button[hviButton], a[hviButton]",
-      "summary": "Button lets users trigger actions. Applied as a directive on `<button>` or `<a>` elements.\nSupports three visual variants (primary, secondary, tertiary), six color themes, icon-only\nmode, full-width layout, and a loading state that sets `aria-busy`.\n\nWhen used on an `<a>` tag the button is rendered as a link with button styling.\n\n**Note:** Neither `loading` nor `aria-disabled` automatically prevents click events —\nguard your handlers manually.",
+      "summary": "Button lets users trigger actions. Applied as a directive on `<button>` or `<a>` elements.\nSupports three visual variants (primary, secondary, tertiary), six color themes, icon-only\nmode, and a loading state that sets `aria-busy`.\n\nWhen used on an `<a>` tag the button is rendered as a link with button styling.\n\n**Note:** Neither `loading` nor `aria-disabled` automatically prevents click events —\nguard your handlers manually.",
       "see": "https://designsystemet.no/en/components/docs/button/code/",
       "sourceFile": "projects/hviktor/src/button/button.directive.ts",
       "sourceOfTruth": "npm",
@@ -382,13 +427,6 @@
           "required": false,
           "default": "false",
           "transform": "booleanAttribute"
-        },
-        {
-          "name": "fullWidth",
-          "type": "boolean",
-          "required": false,
-          "default": "false",
-          "transform": "booleanAttribute"
         }
       ],
       "outputs": [],
@@ -398,8 +436,8 @@
         "[attr.data-size]",
         "[attr.data-variant]",
         "[attr.data-color]",
-        "[attr.data-fullwidth]",
         "[attr.data-icon]",
+        "[attr.aria-label]",
         "[attr.aria-busy]"
       ],
       "examples": [
@@ -429,7 +467,7 @@
           "title": "button varianter",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/button/code-examples/button.varianter.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <button hviButton icon>⚙️</button>\n      <button hviButton loading>Loading...</button>\n      <button hviButton fullWidth>Full Width</button>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <button hviButton icon>⚙️</button>\n      <button hviButton loading>Loading...</button>\n    </div>"
         }
       ]
     },
@@ -482,6 +520,13 @@
       ],
       "examples": [
         {
+          "id": "card.card-som-er-en-knapp",
+          "title": "card card-som-er-en-knapp",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.card-som-er-en-knapp.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <button hviCardButton maxWidth=\"420px\">\n        <div hviCardBlock>\n          <h2 hviHeading>Innstillinger og personvern</h2>\n          <p hviParagraph>\n            Dette åpner en dialog der du kan oppdatere personvernvalg, justere innstillinger og\n            tilpasse hvordan tjenesten behandler informasjonen din. Du kan se gjennom endringene før\n            du lagrer.\n          </p>\n          <p hviParagraph size=\"sm\">Innstillinger og personvern</p>\n        </div>\n      </button>\n    </div>"
+        },
+        {
           "id": "card.farger-og-varianter",
           "title": "card farger-og-varianter",
           "source": "demo",
@@ -493,7 +538,7 @@
           "title": "card lenkekort",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/card/code-examples/card.lenkekort.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"neutral\" maxWidth=\"420px\">\n        <div hviCardBlock>\n          <h2 hviHeading>\n            <a\n              hviLink\n              href=\"https://designsystemet.no/no/components/docs/card/overview#lenkekort\"\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              >Myrkheim Museum</a\n            >\n          </h2>\n          <p hviParagraph>\n            Myrkheim Museum ligg i dalen mellom dei gamle fjelltoppane og viser utstillingar frå\n            tida då dei fyrste reisefølgja kryssa landet.\n          </p>\n          <p hviParagraph size=\"sm\">Myrkheim Kulturvernråd</p>\n        </div>\n      </hvi-card>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"neutral\" maxWidth=\"420px\" clickDelegateFor=\"target\">\n        <div hviCardBlock>\n          <h2 hviHeading>\n            <a\n              id=\"target\"\n              hviLink\n              href=\"https://designsystemet.no/no/components/docs/card/overview#lenkekort\"\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              >Myrkheim Museum</a\n            >\n          </h2>\n          <p hviParagraph>\n            Myrkheim Museum ligg i dalen mellom dei gamle fjelltoppane og viser utstillingar frå\n            tida då dei fyrste reisefølgja kryssa landet.\n          </p>\n          <p hviParagraph size=\"sm\">Myrkheim Kulturvernråd</p>\n        </div>\n      </hvi-card>\n    </div>"
         },
         {
           "id": "card.med-inndeling",
@@ -525,6 +570,13 @@
       "hostBindings": ["class"],
       "examples": [
         {
+          "id": "card.card-som-er-en-knapp",
+          "title": "card card-som-er-en-knapp",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.card-som-er-en-knapp.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <button hviCardButton maxWidth=\"420px\">\n        <div hviCardBlock>\n          <h2 hviHeading>Innstillinger og personvern</h2>\n          <p hviParagraph>\n            Dette åpner en dialog der du kan oppdatere personvernvalg, justere innstillinger og\n            tilpasse hvordan tjenesten behandler informasjonen din. Du kan se gjennom endringene før\n            du lagrer.\n          </p>\n          <p hviParagraph size=\"sm\">Innstillinger og personvern</p>\n        </div>\n      </button>\n    </div>"
+        },
+        {
           "id": "card.farger-og-varianter",
           "title": "card farger-og-varianter",
           "source": "demo",
@@ -536,7 +588,65 @@
           "title": "card lenkekort",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/card/code-examples/card.lenkekort.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"neutral\" maxWidth=\"420px\">\n        <div hviCardBlock>\n          <h2 hviHeading>\n            <a\n              hviLink\n              href=\"https://designsystemet.no/no/components/docs/card/overview#lenkekort\"\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              >Myrkheim Museum</a\n            >\n          </h2>\n          <p hviParagraph>\n            Myrkheim Museum ligg i dalen mellom dei gamle fjelltoppane og viser utstillingar frå\n            tida då dei fyrste reisefølgja kryssa landet.\n          </p>\n          <p hviParagraph size=\"sm\">Myrkheim Kulturvernråd</p>\n        </div>\n      </hvi-card>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"neutral\" maxWidth=\"420px\" clickDelegateFor=\"target\">\n        <div hviCardBlock>\n          <h2 hviHeading>\n            <a\n              id=\"target\"\n              hviLink\n              href=\"https://designsystemet.no/no/components/docs/card/overview#lenkekort\"\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              >Myrkheim Museum</a\n            >\n          </h2>\n          <p hviParagraph>\n            Myrkheim Museum ligg i dalen mellom dei gamle fjelltoppane og viser utstillingar frå\n            tida då dei fyrste reisefølgja kryssa landet.\n          </p>\n          <p hviParagraph size=\"sm\">Myrkheim Kulturvernråd</p>\n        </div>\n      </hvi-card>\n    </div>"
+        },
+        {
+          "id": "card.med-inndeling",
+          "title": "card med-inndeling",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.med-inndeling.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"accent\" variant=\"tinted\" maxWidth=\"380px\">\n        <div hviCardBlock>\n          <video controls width=\"100%\">\n            <source src=\"https://www.w3schools.com/html/mov_bbb.mp4\" type=\"video/mp4\" />\n          </video>\n        </div>\n        <div hviCardBlock>\n          <h3 hviHeading>Om Designsystemet</h3>\n          <p hviParagraph>\n            Videoen over gir en kort introduksjon til hva Designsystemet er, og hvordan det kan\n            brukes i utviklingen av digitale tjenester.\n          </p>\n          <button hviButton variant=\"secondary\">Vis mer</button>\n        </div>\n      </hvi-card>\n    </div>"
+        },
+        {
+          "id": "card.standard",
+          "title": "card standard",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.standard.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card maxWidth=\"320px\">\n        <h2 hviHeading>Lykkeland Barneskole</h2>\n        <p hviParagraph>\n          Lykkeland Barneskole er ein trygg og inkluderande nærskule der leik, læring og\n          nysgjerrigheit går hand i hand.\n        </p>\n        <p hviParagraph size=\"sm\">Solslett kommune</p>\n      </hvi-card>\n    </div>"
+        }
+      ]
+    },
+    {
+      "id": "card",
+      "kind": "directive",
+      "symbol": "HviCardButton",
+      "selector": "button[hviCardButton]",
+      "summary": "CardButton makes an entire card a clickable button. It applies the `ds-card`\nclass with hardcoded `default` variant and `neutral` color. Use it when the\ncard should trigger an action like opening a dialog rather than navigate via a link.",
+      "see": "https://designsystemet.no/en/components/docs/card/code/",
+      "sourceFile": "projects/hviktor/src/card/card-button.directive.ts",
+      "sourceOfTruth": "npm",
+      "inputs": [
+        {
+          "name": "maxWidth",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "transform": ""
+        }
+      ],
+      "outputs": [],
+      "hostBindings": ["class", "data-variant", "data-color", "[style.max-width]"],
+      "examples": [
+        {
+          "id": "card.card-som-er-en-knapp",
+          "title": "card card-som-er-en-knapp",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.card-som-er-en-knapp.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <button hviCardButton maxWidth=\"420px\">\n        <div hviCardBlock>\n          <h2 hviHeading>Innstillinger og personvern</h2>\n          <p hviParagraph>\n            Dette åpner en dialog der du kan oppdatere personvernvalg, justere innstillinger og\n            tilpasse hvordan tjenesten behandler informasjonen din. Du kan se gjennom endringene før\n            du lagrer.\n          </p>\n          <p hviParagraph size=\"sm\">Innstillinger og personvern</p>\n        </div>\n      </button>\n    </div>"
+        },
+        {
+          "id": "card.farger-og-varianter",
+          "title": "card farger-og-varianter",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.farger-og-varianter.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"accent\" variant=\"default\" maxWidth=\"220px\">\n        <div hviCardBlock>\n          <p hviParagraph>default: accent</p>\n        </div>\n      </hvi-card>\n\n      <hvi-card color=\"brand1\" variant=\"default\" maxWidth=\"220px\">\n        <div hviCardBlock>\n          <p hviParagraph>default: brand1</p>\n        </div>\n      </hvi-card>\n\n      <hvi-card color=\"brand2\" variant=\"tinted\" maxWidth=\"220px\">\n        <div hviCardBlock>\n          <p hviParagraph>tinted: brand2</p>\n        </div>\n      </hvi-card>\n\n      <hvi-card color=\"neutral\" variant=\"tinted\" maxWidth=\"220px\">\n        <div hviCardBlock>\n          <p hviParagraph>tinted: neutral</p>\n        </div>\n      </hvi-card>\n    </div>"
+        },
+        {
+          "id": "card.lenkekort",
+          "title": "card lenkekort",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/card/code-examples/card.lenkekort.example.ts",
+          "template": "<div class=\"flex flex-wrap gap-4\">\n      <hvi-card color=\"neutral\" maxWidth=\"420px\" clickDelegateFor=\"target\">\n        <div hviCardBlock>\n          <h2 hviHeading>\n            <a\n              id=\"target\"\n              hviLink\n              href=\"https://designsystemet.no/no/components/docs/card/overview#lenkekort\"\n              target=\"_blank\"\n              rel=\"noopener noreferrer\"\n              >Myrkheim Museum</a\n            >\n          </h2>\n          <p hviParagraph>\n            Myrkheim Museum ligg i dalen mellom dei gamle fjelltoppane og viser utstillingar frå\n            tida då dei fyrste reisefølgja kryssa landet.\n          </p>\n          <p hviParagraph size=\"sm\">Myrkheim Kulturvernråd</p>\n        </div>\n      </hvi-card>\n    </div>"
         },
         {
           "id": "card.med-inndeling",
@@ -765,16 +875,23 @@
     },
     {
       "id": "dialog",
-      "kind": "directive",
+      "kind": "component",
       "symbol": "HviDialog",
       "selector": "dialog[hviDialog]",
-      "summary": "Dialog wraps the native HTML `<dialog>` element with Angular bindings for opening, closing,\nand placement. Supports both modal and non-modal modes.",
-      "see": "https://designsystemet.no/no/components/docs/dialog/code",
-      "sourceFile": "projects/hviktor/src/dialog/dialog.directive.ts",
+      "summary": "Wraps the native HTML `<dialog>` element with Angular bindings for opening, closing, placement,\nand light dismiss. Supports both modal and non-modal display modes with automatic close button injection.",
+      "see": "https://designsystemet.no/no/components/docs/dialog/overview",
+      "sourceFile": "projects/hviktor/src/dialog/dialog.component.ts",
       "sourceOfTruth": "npm",
       "inputs": [
         {
           "name": "id",
+          "type": "string",
+          "required": false,
+          "default": "",
+          "transform": ""
+        },
+        {
+          "name": "title",
           "type": "string",
           "required": false,
           "default": "",
@@ -791,7 +908,21 @@
           "name": "placement",
           "type": "'center' | 'left' | 'right' | 'top' | 'bottom'",
           "required": false,
-          "default": "",
+          "default": "'center'",
+          "transform": ""
+        },
+        {
+          "name": "closedby",
+          "type": "'none' | 'closerequest' | 'any'",
+          "required": false,
+          "default": "'closerequest'",
+          "transform": ""
+        },
+        {
+          "name": "closeButton",
+          "type": "string | boolean",
+          "required": false,
+          "default": "'Lukk dialogvindu'",
           "transform": ""
         }
       ],
@@ -802,14 +933,59 @@
           "type": ""
         }
       ],
-      "hostBindings": ["class", "[attr.id]", "[attr.data-placement]", "(close)", "(cancel)"],
+      "hostBindings": [
+        "class",
+        "[attr.id]",
+        "[attr.aria-label]",
+        "[attr.data-placement]",
+        "[attr.data-modal]",
+        "[attr.closedby]",
+        "(close)",
+        "(cancel)",
+        "(click)"
+      ],
       "examples": [
         {
-          "id": "dialog.standard",
-          "title": "dialog standard",
+          "id": "dialog.dialog-som-drawer",
+          "title": "dialog dialog-som-drawer",
           "source": "demo",
-          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.standard.example.ts",
-          "template": "<div class=\"flex gap-2\">\n      <button hviButton type=\"button\" aria-haspopup=\"dialog\" (click)=\"toggleDialog(true)\">\n        Åpne dialog\n      </button>\n    </div>\n\n    <dialog\n      hviDialog\n      id=\"demoDialog\"\n      aria-labelledby=\"demoDialogTitle\"\n      [open]=\"dialogOpen()\"\n      (openChange)=\"toggleDialog($event)\"\n    >\n      <div hviDialogBlock>\n        <h3 hviHeading size=\"md\" id=\"demoDialogTitle\">En enkel dialog</h3>\n      </div>\n      <div hviDialogBlock>\n        <p hviParagraph size=\"md\">\n          Her kan innholdet ditt ligge. Dialogen er modal og styrt med hviDialog-direktivet.\n        </p>\n      </div>\n      <div hviDialogBlock class=\"flex justify-end gap-2\">\n        <button hviButton variant=\"secondary\" type=\"button\" (click)=\"toggleDialog(false)\">\n          Lukk\n        </button>\n        <button hviButton type=\"button\" (click)=\"toggleDialog(false)\">Fortsett</button>\n      </div>\n    </dialog>"
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.dialog-som-drawer.example.ts",
+          "template": "<button hviButton (click)=\"drawerOpen.set(true)\">Åpne Dialog (Bottom)</button>\n\n    <dialog\n      hviDialog\n      placement=\"bottom\"\n      title=\"Informasjonspanel\"\n      closedby=\"any\"\n      [open]=\"drawerOpen()\"\n      (openChange)=\"drawerOpen.set($event)\"\n    >\n      <div hviDialogBlock>\n        <p hviParagraph>\n          Dette er en modal dialog med <code>placement=\"bottom\"</code>. Tilgjengelige plasseringer\n          er <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> og\n          <code>center</code>.\n        </p>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.ikke-modal-dialog",
+          "title": "dialog ikke-modal-dialog",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.ikke-modal-dialog.example.ts",
+          "template": "<button hviButton (click)=\"nonModalOpen.set(true)\">Åpne ikke-modal Dialog</button>\n\n    <dialog\n      hviDialog\n      title=\"Vi ønsker din mening\"\n      [modal]=\"false\"\n      [open]=\"nonModalOpen()\"\n      (openChange)=\"nonModalOpen.set($event)\"\n      style=\"z-index:10;top:calc(100vh - 460px);left:calc(100vw - 385px);margin:0;max-width:350px\"\n    >\n      <div hviDialogBlock>\n        <label hviLabel for=\"my-textarea\">Hvordan var din opplevelse?</label>\n        <textarea hviInput id=\"my-textarea\"></textarea>\n        <button hviButton variant=\"primary\" (click)=\"nonModalOpen.set(false)\" class=\"mt-2\">\n          Send inn\n        </button>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.lukk-ved-klikk-utenfor",
+          "title": "dialog lukk-ved-klikk-utenfor",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.lukk-ved-klikk-utenfor.example.ts",
+          "template": "<button hviButton (click)=\"backdropOpen.set(true)\">Åpne Dialog</button>\n\n    <dialog\n      hviDialog\n      closedby=\"any\"\n      [open]=\"backdropOpen()\"\n      (openChange)=\"backdropOpen.set($event)\"\n    >\n      <p hviDialogBlock hviParagraph>Klikk utenfor denne dialogen for å lukke den.</p>\n    </dialog>"
+        },
+        {
+          "id": "dialog.med-blokker",
+          "title": "dialog med-blokker",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.med-blokker.example.ts",
+          "template": "<button hviButton (click)=\"blocksOpen.set(true)\">Åpne Dialog</button>\n\n    <dialog\n      title=\"Dialog med blokker\"\n      hviDialog\n      [open]=\"blocksOpen()\"\n      (openChange)=\"blocksOpen.set($event)\"\n    >\n      <p hviDialogBlock hviParagraph>\n        Sett innhold i dialogen ved å bruke <code>hviDialogBlock</code> for hver blokk med innhold.\n        Dette sikrer riktig avstand mellom innholdet og dialogens kanter.\n      </p>\n      <p hviDialogBlock hviParagraph size=\"sm\">\n        Bruk flere blokker for å dele opp dialogen med skillelinjer mellom seksjoner.\n      </p>\n      <div hviDialogBlock>\n        <button hviButton variant=\"secondary\" (click)=\"blocksOpen.set(false)\">Lukk</button>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.med-skjema-og-fokus",
+          "title": "dialog med-skjema-og-fokus",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.med-skjema-og-fokus.example.ts",
+          "template": "<button hviButton (click)=\"formOpen.set(true)\">Åpne Dialog</button>\n\n    <dialog\n      hviDialog\n      title=\"Dialog med skjema\"\n      closedby=\"any\"\n      [open]=\"formOpen()\"\n      (openChange)=\"formOpen.set($event)\"\n    >\n      <div hviDialogBlock>\n        <hvi-field>\n          <label hviLabel>Navn</label>\n          <hvi-field-affixes>\n            <input hviInput type=\"text\" autofocus />\n          </hvi-field-affixes>\n        </hvi-field>\n      </div>\n      <div hviDialogBlock class=\"mt-4 flex gap-2\">\n        <button hviButton (click)=\"formOpen.set(false)\">Send inn skjema</button>\n        <button hviButton variant=\"secondary\" color=\"danger\" (click)=\"formOpen.set(false)\">\n          Avbryt\n        </button>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.modal-dialog",
+          "title": "dialog modal-dialog",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.modal-dialog.example.ts",
+          "template": "<button hviButton (click)=\"modalOpen.set(true)\">Åpne modal Dialog</button>\n\n    <dialog\n      hviDialog\n      title=\"Er du sikker på at du vil endre søknaden?\"\n      [open]=\"modalOpen()\"\n      (openChange)=\"modalOpen.set($event)\"\n    >\n      <div hviDialogBlock>\n        <p hviParagraph>\n          OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden nå,\n          er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00 00 hvis\n          du trenger veiledning.\n        </p>\n      </div>\n      <div hviDialogBlock>\n        <div class=\"flex gap-2\">\n          <button hviButton variant=\"primary\" color=\"danger\" (click)=\"modalOpen.set(false)\">\n            Ja, endre\n          </button>\n          <button hviButton variant=\"secondary\" (click)=\"modalOpen.set(false)\">Avbryt</button>\n        </div>\n      </div>\n    </dialog>"
         }
       ]
     },
@@ -818,7 +994,7 @@
       "kind": "directive",
       "symbol": "HviDialogBlock",
       "selector": "[hviDialogBlock]",
-      "summary": "Wraps a section inside a `dialog[hviDialog]` with padding and a dividing border above it.\nUse multiple blocks to divide the dialog into header, body, and footer areas.",
+      "summary": "Creates a visually separated section within a dialog with padding and a top dividing border.\nUse multiple blocks to structure dialog content into header, body, and footer areas.",
       "see": "https://designsystemet.no/no/components/docs/dialog/code",
       "sourceFile": "projects/hviktor/src/dialog/dialog-block.directive.ts",
       "sourceOfTruth": "npm",
@@ -827,11 +1003,46 @@
       "hostBindings": ["class"],
       "examples": [
         {
-          "id": "dialog.standard",
-          "title": "dialog standard",
+          "id": "dialog.dialog-som-drawer",
+          "title": "dialog dialog-som-drawer",
           "source": "demo",
-          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.standard.example.ts",
-          "template": "<div class=\"flex gap-2\">\n      <button hviButton type=\"button\" aria-haspopup=\"dialog\" (click)=\"toggleDialog(true)\">\n        Åpne dialog\n      </button>\n    </div>\n\n    <dialog\n      hviDialog\n      id=\"demoDialog\"\n      aria-labelledby=\"demoDialogTitle\"\n      [open]=\"dialogOpen()\"\n      (openChange)=\"toggleDialog($event)\"\n    >\n      <div hviDialogBlock>\n        <h3 hviHeading size=\"md\" id=\"demoDialogTitle\">En enkel dialog</h3>\n      </div>\n      <div hviDialogBlock>\n        <p hviParagraph size=\"md\">\n          Her kan innholdet ditt ligge. Dialogen er modal og styrt med hviDialog-direktivet.\n        </p>\n      </div>\n      <div hviDialogBlock class=\"flex justify-end gap-2\">\n        <button hviButton variant=\"secondary\" type=\"button\" (click)=\"toggleDialog(false)\">\n          Lukk\n        </button>\n        <button hviButton type=\"button\" (click)=\"toggleDialog(false)\">Fortsett</button>\n      </div>\n    </dialog>"
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.dialog-som-drawer.example.ts",
+          "template": "<button hviButton (click)=\"drawerOpen.set(true)\">Åpne Dialog (Bottom)</button>\n\n    <dialog\n      hviDialog\n      placement=\"bottom\"\n      title=\"Informasjonspanel\"\n      closedby=\"any\"\n      [open]=\"drawerOpen()\"\n      (openChange)=\"drawerOpen.set($event)\"\n    >\n      <div hviDialogBlock>\n        <p hviParagraph>\n          Dette er en modal dialog med <code>placement=\"bottom\"</code>. Tilgjengelige plasseringer\n          er <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> og\n          <code>center</code>.\n        </p>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.ikke-modal-dialog",
+          "title": "dialog ikke-modal-dialog",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.ikke-modal-dialog.example.ts",
+          "template": "<button hviButton (click)=\"nonModalOpen.set(true)\">Åpne ikke-modal Dialog</button>\n\n    <dialog\n      hviDialog\n      title=\"Vi ønsker din mening\"\n      [modal]=\"false\"\n      [open]=\"nonModalOpen()\"\n      (openChange)=\"nonModalOpen.set($event)\"\n      style=\"z-index:10;top:calc(100vh - 460px);left:calc(100vw - 385px);margin:0;max-width:350px\"\n    >\n      <div hviDialogBlock>\n        <label hviLabel for=\"my-textarea\">Hvordan var din opplevelse?</label>\n        <textarea hviInput id=\"my-textarea\"></textarea>\n        <button hviButton variant=\"primary\" (click)=\"nonModalOpen.set(false)\" class=\"mt-2\">\n          Send inn\n        </button>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.lukk-ved-klikk-utenfor",
+          "title": "dialog lukk-ved-klikk-utenfor",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.lukk-ved-klikk-utenfor.example.ts",
+          "template": "<button hviButton (click)=\"backdropOpen.set(true)\">Åpne Dialog</button>\n\n    <dialog\n      hviDialog\n      closedby=\"any\"\n      [open]=\"backdropOpen()\"\n      (openChange)=\"backdropOpen.set($event)\"\n    >\n      <p hviDialogBlock hviParagraph>Klikk utenfor denne dialogen for å lukke den.</p>\n    </dialog>"
+        },
+        {
+          "id": "dialog.med-blokker",
+          "title": "dialog med-blokker",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.med-blokker.example.ts",
+          "template": "<button hviButton (click)=\"blocksOpen.set(true)\">Åpne Dialog</button>\n\n    <dialog\n      title=\"Dialog med blokker\"\n      hviDialog\n      [open]=\"blocksOpen()\"\n      (openChange)=\"blocksOpen.set($event)\"\n    >\n      <p hviDialogBlock hviParagraph>\n        Sett innhold i dialogen ved å bruke <code>hviDialogBlock</code> for hver blokk med innhold.\n        Dette sikrer riktig avstand mellom innholdet og dialogens kanter.\n      </p>\n      <p hviDialogBlock hviParagraph size=\"sm\">\n        Bruk flere blokker for å dele opp dialogen med skillelinjer mellom seksjoner.\n      </p>\n      <div hviDialogBlock>\n        <button hviButton variant=\"secondary\" (click)=\"blocksOpen.set(false)\">Lukk</button>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.med-skjema-og-fokus",
+          "title": "dialog med-skjema-og-fokus",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.med-skjema-og-fokus.example.ts",
+          "template": "<button hviButton (click)=\"formOpen.set(true)\">Åpne Dialog</button>\n\n    <dialog\n      hviDialog\n      title=\"Dialog med skjema\"\n      closedby=\"any\"\n      [open]=\"formOpen()\"\n      (openChange)=\"formOpen.set($event)\"\n    >\n      <div hviDialogBlock>\n        <hvi-field>\n          <label hviLabel>Navn</label>\n          <hvi-field-affixes>\n            <input hviInput type=\"text\" autofocus />\n          </hvi-field-affixes>\n        </hvi-field>\n      </div>\n      <div hviDialogBlock class=\"mt-4 flex gap-2\">\n        <button hviButton (click)=\"formOpen.set(false)\">Send inn skjema</button>\n        <button hviButton variant=\"secondary\" color=\"danger\" (click)=\"formOpen.set(false)\">\n          Avbryt\n        </button>\n      </div>\n    </dialog>"
+        },
+        {
+          "id": "dialog.modal-dialog",
+          "title": "dialog modal-dialog",
+          "source": "demo",
+          "sourceFile": "src/app/demo/pages/components/dialog/code-examples/dialog.modal-dialog.example.ts",
+          "template": "<button hviButton (click)=\"modalOpen.set(true)\">Åpne modal Dialog</button>\n\n    <dialog\n      hviDialog\n      title=\"Er du sikker på at du vil endre søknaden?\"\n      [open]=\"modalOpen()\"\n      (openChange)=\"modalOpen.set($event)\"\n    >\n      <div hviDialogBlock>\n        <p hviParagraph>\n          OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden nå,\n          er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00 00 hvis\n          du trenger veiledning.\n        </p>\n      </div>\n      <div hviDialogBlock>\n        <div class=\"flex gap-2\">\n          <button hviButton variant=\"primary\" color=\"danger\" (click)=\"modalOpen.set(false)\">\n            Ja, endre\n          </button>\n          <button hviButton variant=\"secondary\" (click)=\"modalOpen.set(false)\">Avbryt</button>\n        </div>\n      </div>\n    </dialog>"
         }
       ]
     },
@@ -840,8 +1051,8 @@
       "kind": "directive",
       "symbol": "HviDivider",
       "selector": "hr[hviDivider]",
-      "summary": "",
-      "see": "",
+      "summary": "Adds Designsystemet Divider styling to an `hr` element.",
+      "see": "https://designsystemet.no/komponenter/divider",
       "sourceFile": "projects/hviktor/src/divider/divider.directive.ts",
       "sourceOfTruth": "npm",
       "inputs": [],
@@ -862,8 +1073,8 @@
       "kind": "component",
       "symbol": "HviDropdown",
       "selector": "hvi-dropdown",
-      "summary": "Dropdown er en generisk nedtrekksliste. Den legger grunnmuren for å bygge menyer og lister.",
-      "see": "https://designsystemet.no/en/components/docs/dropdown/code",
+      "summary": "Renders a Designsystemet dropdown popover container for grouped actions or navigation links.",
+      "see": "https://designsystemet.no/komponenter/dropdown",
       "sourceFile": "projects/hviktor/src/dropdown/dropdown.component.ts",
       "sourceOfTruth": "npm",
       "inputs": [
@@ -896,11 +1107,25 @@
           "transform": ""
         },
         {
+          "name": "floating",
+          "type": "'top' | 'right' | 'bottom' | 'left'",
+          "required": false,
+          "default": "",
+          "transform": ""
+        },
+        {
+          "name": "overscroll",
+          "type": "'contain'",
+          "required": false,
+          "default": "",
+          "transform": ""
+        },
+        {
           "name": "autoPlacement",
           "type": "boolean",
           "required": false,
           "default": "true",
-          "transform": ""
+          "transform": "booleanAttribute"
         }
       ],
       "outputs": [
@@ -921,7 +1146,10 @@
         "[attr.popover]",
         "[attr.data-variant]",
         "[attr.data-placement]",
-        "[attr.data-autoplacement]"
+        "[attr.data-floating]",
+        "[attr.data-overscroll]",
+        "[attr.data-autoplacement]",
+        "(toggle)"
       ],
       "examples": [
         {
@@ -982,7 +1210,7 @@
       "symbol": "HviErrorSummary",
       "selector": "hvi-error-summary",
       "summary": "ErrorSummary lists blocking validation errors so users can quickly find and fix them.",
-      "see": "",
+      "see": "https://designsystemet.no/no/components/docs/error-summary/overview",
       "sourceFile": "projects/hviktor/src/forms/error-summary/error-summary.component.ts",
       "sourceOfTruth": "npm",
       "inputs": [
@@ -1573,8 +1801,8 @@
       "kind": "directive",
       "symbol": "HviLabel",
       "selector": "label[hviLabel], legend[hviLabel]",
-      "summary": "",
-      "see": "",
+      "summary": "Applies Designsystemet label styling to a `<label>` or `<legend>` element,\nproviding a clear and accessible text label for an associated form control.",
+      "see": "https://designsystemet.no/no/components/docs/label/overview",
       "sourceFile": "projects/hviktor/src/label/label.directive.ts",
       "sourceOfTruth": "npm",
       "inputs": [
@@ -1594,7 +1822,7 @@
           "title": "label varianter",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/label/code-examples/label.varianter.example.ts",
-          "template": "<div class=\"flex flex-col gap-2\">\n      <label hviLabel>Standard label</label>\n      <label hviLabel weight=\"medium\">Medium weight label</label>\n      <label hviLabel weight=\"semibold\">Semibold label</label>\n    </div>"
+          "template": "<div class=\"flex flex-col gap-2\">\n      <label hviLabel weight=\"regular\">Regular weight</label>\n      <label hviLabel weight=\"medium\">Medium weight</label>\n      <label hviLabel weight=\"semibold\">Semibold weight</label>\n    </div>"
         }
       ]
     },
@@ -1678,6 +1906,62 @@
           "template": "<div class=\"flex flex-col gap-8\">\n      <p hviParagraph>Variant endres med <code>company</code>-attributtet.</p>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>dots</h3>\n        <hvi-logo company=\"dots\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hve</h3>\n        <hvi-logo company=\"hve\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hvikt</h3>\n        <hvi-logo company=\"hvikt\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hviktor</h3>\n        <hvi-logo company=\"hviktor\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hbe</h3>\n        <hvi-logo company=\"hbe\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hbe-hus</h3>\n        <hvi-logo company=\"hbe-hus\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hfd</h3>\n        <hvi-logo company=\"hfd\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hfo</h3>\n        <hvi-logo company=\"hfo\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hst</h3>\n        <hvi-logo company=\"hst\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>hst-sus</h3>\n        <hvi-logo company=\"hst-sus\" [size]=\"selectedSize()\" />\n      </div>\n      <div class=\"grid gap-2\">\n        <h3 hviHeading>sav</h3>\n        <hvi-logo company=\"sav\" [size]=\"selectedSize()\" />\n      </div>\n    </div>"
         }
       ]
+    },
+    {
+      "id": "multi-select",
+      "kind": "component",
+      "symbol": "HviMultiSelect",
+      "selector": "hvi-multi-select",
+      "summary": "MultiSelect allows users to choose one or more options from a searchable dropdown list.\nSelected items are displayed as comma-separated text, collapsing to a count when space is limited.",
+      "see": "https://designsystemet.no/en/components/docs/combobox/code",
+      "sourceFile": "projects/hviktor/src/multi-select/multi-select.component.ts",
+      "sourceOfTruth": "npm",
+      "inputs": [
+        {
+          "name": "options",
+          "type": "HviMultiSelectOption[]",
+          "required": false,
+          "default": "[]",
+          "transform": ""
+        },
+        {
+          "name": "placeholder",
+          "type": "string",
+          "required": false,
+          "default": "'Velg...'",
+          "transform": ""
+        },
+        {
+          "name": "searchPlaceholder",
+          "type": "string",
+          "required": false,
+          "default": "'Søk...'",
+          "transform": ""
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg'",
+          "required": false,
+          "default": "'md'",
+          "transform": ""
+        }
+      ],
+      "outputs": [
+        {
+          "name": "selectionChange",
+          "alias": "",
+          "type": ""
+        }
+      ],
+      "hostBindings": [
+        "class",
+        "[class.ds-combobox--sm]",
+        "[class.ds-combobox--md]",
+        "[class.ds-combobox--lg]",
+        "[class.ds-combobox__disabled]",
+        "[attr.aria-label]"
+      ],
+      "examples": []
     },
     {
       "id": "pagination",
@@ -2341,14 +2625,14 @@
           "title": "table kolonnefiltrering",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/table/code-examples/table.kolonnefiltrering.example.ts",
-          "template": "<table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      zebra\n      #colFilterTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th>Navn</th>\n          <th>Avdeling</th>\n          <th>Stilling</th>\n        </tr>\n        <tr>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på navn\"\n              (change)=\"colFilterTable.setColumnFilter('navn', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (person of data; track person.id) {\n                <option [value]=\"person.navn\">{{ person.navn }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på avdeling\"\n              (change)=\"colFilterTable.setColumnFilter('avdeling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (avdeling of avdelinger; track avdeling) {\n                <option [value]=\"avdeling\">{{ avdeling }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på stilling\"\n              (change)=\"colFilterTable.setColumnFilter('stilling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (stilling of stillinger; track stilling) {\n                <option [value]=\"stilling\">{{ stilling }}</option>\n              }\n            </select>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of colFilterTable.filteredValue(); track person.id) {\n          <tr>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n        } @empty {\n          <tr>\n            <td colspan=\"3\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <button\n      hviButton\n      variant=\"tertiary\"\n      class=\"mt-2\"\n      (click)=\"colFilterTable.clearAllColumnFilters()\"\n    >\n      Nullstill filtre\n    </button>"
+          "template": "<table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      zebra\n      #colFilterTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th>Navn</th>\n          <th>Avdeling</th>\n          <th>Stilling</th>\n        </tr>\n        <tr>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på navn</span>\n            <hvi-multi-select\n              [options]=\"navnOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk navn...\"\n              aria-label=\"Filtrer på navn\"\n              (selectionChange)=\"colFilterTable.setColumnFilter('navn', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på avdeling</span>\n            <hvi-multi-select\n              [options]=\"avdelingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk avdeling...\"\n              aria-label=\"Filtrer på avdeling\"\n              (selectionChange)=\"colFilterTable.setColumnFilter('avdeling', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på stilling</span>\n            <hvi-multi-select\n              [options]=\"stillingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk stilling...\"\n              aria-label=\"Filtrer på stilling\"\n              (selectionChange)=\"colFilterTable.setColumnFilter('stilling', $event)\"\n            />\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of colFilterTable.filteredValue(); track person.id) {\n          <tr>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n        } @empty {\n          <tr>\n            <td colspan=\"3\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <button\n      hviButton\n      variant=\"tertiary\"\n      class=\"mt-2\"\n      (click)=\"colFilterTable.clearAllColumnFilters()\"\n    >\n      Nullstill filtre\n    </button>"
         },
         {
           "id": "table.komplett-eksempel",
           "title": "table komplett-eksempel",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/table/code-examples/table.komplett-eksempel.example.ts",
-          "template": "<div class=\"mb-4\">\n      <label hviLabel>Søk</label>\n      <hvi-search>\n        <input\n          hviInput\n          type=\"search\"\n          placeholder=\"Søk i alle kolonner...\"\n          (input)=\"fullTable.filterGlobal($any($event.target).value)\"\n        />\n        <button hviSearchClear type=\"reset\" aria-label=\"Tøm\"></button>\n      </hvi-search>\n    </div>\n    <table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      [globalFilterFields]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      paginator\n      [rows]=\"rowsPerPage()\"\n      zebra\n      hover\n      border\n      stickyHeader\n      #fullTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th style=\"width: 3rem\"><span class=\"sr-only\">Utvid</span></th>\n          <th hviSortableColumn=\"navn\">\n            <button type=\"button\">Navn</button>\n          </th>\n          <th hviSortableColumn=\"avdeling\">\n            <button type=\"button\">Avdeling</button>\n          </th>\n          <th hviSortableColumn=\"stilling\">\n            <button type=\"button\">Stilling</button>\n          </th>\n        </tr>\n        <tr>\n          <th><span class=\"sr-only\">Filter</span></th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på navn\"\n              (change)=\"fullTable.setColumnFilter('navn', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (person of data; track person.id) {\n                <option [value]=\"person.navn\">{{ person.navn }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på avdeling\"\n              (change)=\"fullTable.setColumnFilter('avdeling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (avdeling of avdelinger; track avdeling) {\n                <option [value]=\"avdeling\">{{ avdeling }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på stilling\"\n              (change)=\"fullTable.setColumnFilter('stilling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (stilling of stillinger; track stilling) {\n                <option [value]=\"stilling\">{{ stilling }}</option>\n              }\n            </select>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of fullTable.paginatedValue(); track person.id) {\n          <tr>\n            <td>\n              <button\n                hviButton\n                variant=\"tertiary\"\n                (click)=\"fullTable.toggleExpanded(person)\"\n                [attr.aria-expanded]=\"fullTable.isExpanded(person)\"\n                aria-label=\"Vis detaljer\"\n              >\n                @if (fullTable.isExpanded(person)) {\n                  <hvi-icon-chevron-down />\n                } @else {\n                  <hvi-icon-chevron-right />\n                }\n              </button>\n            </td>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n          @if (fullTable.isExpanded(person)) {\n            <tr>\n              <td colspan=\"4\">\n                <div class=\"flex gap-8 py-2 pl-12\">\n                  <dl class=\"flex items-center gap-2\">\n                    <dt>\n                      <hvi-icon-envelope-closed />\n                    </dt>\n                    <dd>{{ person.epost }}</dd>\n                  </dl>\n                  <dl class=\"flex items-center gap-2\">\n                    <dt><hvi-icon-phone /></dt>\n                    <dd>{{ person.telefon }}</dd>\n                  </dl>\n                </div>\n              </td>\n            </tr>\n          }\n        } @empty {\n          <tr>\n            <td colspan=\"4\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <div class=\"mt-4 flex items-center justify-between\">\n      <p class=\"ds-paragraph\">\n        Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader\n      </p>\n      <hvi-pagination\n        [totalItems]=\"fullTable.totalFilteredRecords()\"\n        [pageSize]=\"rowsPerPage()\"\n        [currentPage]=\"fullTable.currentPage()\"\n        (currentPageChange)=\"fullTable.goToPage($event)\"\n      />\n    </div>"
+          "template": "<div class=\"mb-4\">\n      <label hviLabel>Søk</label>\n      <hvi-search>\n        <input\n          hviInput\n          type=\"search\"\n          placeholder=\"Søk i alle kolonner...\"\n          (input)=\"fullTable.filterGlobal($any($event.target).value)\"\n        />\n        <button hviSearchClear type=\"reset\" aria-label=\"Tøm\"></button>\n      </hvi-search>\n    </div>\n    <table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      [globalFilterFields]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      paginator\n      [rows]=\"rowsPerPage()\"\n      zebra\n      hover\n      border\n      stickyHeader\n      #fullTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th style=\"width: 3rem\"><span class=\"sr-only\">Utvid</span></th>\n          <th hviSortableColumn=\"navn\">\n            <button type=\"button\">Navn</button>\n          </th>\n          <th hviSortableColumn=\"avdeling\">\n            <button type=\"button\">Avdeling</button>\n          </th>\n          <th hviSortableColumn=\"stilling\">\n            <button type=\"button\">Stilling</button>\n          </th>\n        </tr>\n        <tr>\n          <th><span class=\"sr-only\">Filter</span></th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på navn</span>\n            <hvi-multi-select\n              [options]=\"navnOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk navn...\"\n              aria-label=\"Filtrer på navn\"\n              (selectionChange)=\"fullTable.setColumnFilter('navn', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på avdeling</span>\n            <hvi-multi-select\n              [options]=\"avdelingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk avdeling...\"\n              aria-label=\"Filtrer på avdeling\"\n              (selectionChange)=\"fullTable.setColumnFilter('avdeling', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på stilling</span>\n            <hvi-multi-select\n              [options]=\"stillingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk stilling...\"\n              aria-label=\"Filtrer på stilling\"\n              (selectionChange)=\"fullTable.setColumnFilter('stilling', $event)\"\n            />\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of fullTable.paginatedValue(); track person.id) {\n          <tr>\n            <td>\n              <button\n                hviButton\n                variant=\"tertiary\"\n                (click)=\"fullTable.toggleExpanded(person)\"\n                [attr.aria-expanded]=\"fullTable.isExpanded(person)\"\n                aria-label=\"Vis detaljer\"\n              >\n                @if (fullTable.isExpanded(person)) {\n                  <hvi-icon-chevron-down />\n                } @else {\n                  <hvi-icon-chevron-right />\n                }\n              </button>\n            </td>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n          @if (fullTable.isExpanded(person)) {\n            <tr>\n              <td colspan=\"4\">\n                <div class=\"flex gap-8 py-2 pl-12\">\n                  <dl class=\"flex items-center gap-2\">\n                    <dt>\n                      <hvi-icon-envelope-closed />\n                    </dt>\n                    <dd>{{ person.epost }}</dd>\n                  </dl>\n                  <dl class=\"flex items-center gap-2\">\n                    <dt><hvi-icon-phone /></dt>\n                    <dd>{{ person.telefon }}</dd>\n                  </dl>\n                </div>\n              </td>\n            </tr>\n          }\n        } @empty {\n          <tr>\n            <td colspan=\"4\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <div class=\"mt-4 flex items-center justify-between\">\n      <p class=\"ds-paragraph\">\n        Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader\n      </p>\n      <hvi-pagination\n        [totalItems]=\"fullTable.totalFilteredRecords()\"\n        [pageSize]=\"rowsPerPage()\"\n        [currentPage]=\"fullTable.currentPage()\"\n        (currentPageChange)=\"fullTable.goToPage($event)\"\n      />\n    </div>"
         },
         {
           "id": "table.paginering",
@@ -2477,14 +2761,14 @@
           "title": "table kolonnefiltrering",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/table/code-examples/table.kolonnefiltrering.example.ts",
-          "template": "<table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      zebra\n      #colFilterTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th>Navn</th>\n          <th>Avdeling</th>\n          <th>Stilling</th>\n        </tr>\n        <tr>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på navn\"\n              (change)=\"colFilterTable.setColumnFilter('navn', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (person of data; track person.id) {\n                <option [value]=\"person.navn\">{{ person.navn }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på avdeling\"\n              (change)=\"colFilterTable.setColumnFilter('avdeling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (avdeling of avdelinger; track avdeling) {\n                <option [value]=\"avdeling\">{{ avdeling }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på stilling\"\n              (change)=\"colFilterTable.setColumnFilter('stilling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (stilling of stillinger; track stilling) {\n                <option [value]=\"stilling\">{{ stilling }}</option>\n              }\n            </select>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of colFilterTable.filteredValue(); track person.id) {\n          <tr>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n        } @empty {\n          <tr>\n            <td colspan=\"3\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <button\n      hviButton\n      variant=\"tertiary\"\n      class=\"mt-2\"\n      (click)=\"colFilterTable.clearAllColumnFilters()\"\n    >\n      Nullstill filtre\n    </button>"
+          "template": "<table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      zebra\n      #colFilterTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th>Navn</th>\n          <th>Avdeling</th>\n          <th>Stilling</th>\n        </tr>\n        <tr>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på navn</span>\n            <hvi-multi-select\n              [options]=\"navnOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk navn...\"\n              aria-label=\"Filtrer på navn\"\n              (selectionChange)=\"colFilterTable.setColumnFilter('navn', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på avdeling</span>\n            <hvi-multi-select\n              [options]=\"avdelingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk avdeling...\"\n              aria-label=\"Filtrer på avdeling\"\n              (selectionChange)=\"colFilterTable.setColumnFilter('avdeling', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på stilling</span>\n            <hvi-multi-select\n              [options]=\"stillingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk stilling...\"\n              aria-label=\"Filtrer på stilling\"\n              (selectionChange)=\"colFilterTable.setColumnFilter('stilling', $event)\"\n            />\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of colFilterTable.filteredValue(); track person.id) {\n          <tr>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n        } @empty {\n          <tr>\n            <td colspan=\"3\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <button\n      hviButton\n      variant=\"tertiary\"\n      class=\"mt-2\"\n      (click)=\"colFilterTable.clearAllColumnFilters()\"\n    >\n      Nullstill filtre\n    </button>"
         },
         {
           "id": "table.komplett-eksempel",
           "title": "table komplett-eksempel",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/table/code-examples/table.komplett-eksempel.example.ts",
-          "template": "<div class=\"mb-4\">\n      <label hviLabel>Søk</label>\n      <hvi-search>\n        <input\n          hviInput\n          type=\"search\"\n          placeholder=\"Søk i alle kolonner...\"\n          (input)=\"fullTable.filterGlobal($any($event.target).value)\"\n        />\n        <button hviSearchClear type=\"reset\" aria-label=\"Tøm\"></button>\n      </hvi-search>\n    </div>\n    <table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      [globalFilterFields]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      paginator\n      [rows]=\"rowsPerPage()\"\n      zebra\n      hover\n      border\n      stickyHeader\n      #fullTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th style=\"width: 3rem\"><span class=\"sr-only\">Utvid</span></th>\n          <th hviSortableColumn=\"navn\">\n            <button type=\"button\">Navn</button>\n          </th>\n          <th hviSortableColumn=\"avdeling\">\n            <button type=\"button\">Avdeling</button>\n          </th>\n          <th hviSortableColumn=\"stilling\">\n            <button type=\"button\">Stilling</button>\n          </th>\n        </tr>\n        <tr>\n          <th><span class=\"sr-only\">Filter</span></th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på navn\"\n              (change)=\"fullTable.setColumnFilter('navn', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (person of data; track person.id) {\n                <option [value]=\"person.navn\">{{ person.navn }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på avdeling\"\n              (change)=\"fullTable.setColumnFilter('avdeling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (avdeling of avdelinger; track avdeling) {\n                <option [value]=\"avdeling\">{{ avdeling }}</option>\n              }\n            </select>\n          </th>\n          <th>\n            <select\n              hviSelect\n              aria-label=\"Filtrer på stilling\"\n              (change)=\"fullTable.setColumnFilter('stilling', $any($event.target).value)\"\n            >\n              <option value=\"\">Alle</option>\n              @for (stilling of stillinger; track stilling) {\n                <option [value]=\"stilling\">{{ stilling }}</option>\n              }\n            </select>\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of fullTable.paginatedValue(); track person.id) {\n          <tr>\n            <td>\n              <button\n                hviButton\n                variant=\"tertiary\"\n                (click)=\"fullTable.toggleExpanded(person)\"\n                [attr.aria-expanded]=\"fullTable.isExpanded(person)\"\n                aria-label=\"Vis detaljer\"\n              >\n                @if (fullTable.isExpanded(person)) {\n                  <hvi-icon-chevron-down />\n                } @else {\n                  <hvi-icon-chevron-right />\n                }\n              </button>\n            </td>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n          @if (fullTable.isExpanded(person)) {\n            <tr>\n              <td colspan=\"4\">\n                <div class=\"flex gap-8 py-2 pl-12\">\n                  <dl class=\"flex items-center gap-2\">\n                    <dt>\n                      <hvi-icon-envelope-closed />\n                    </dt>\n                    <dd>{{ person.epost }}</dd>\n                  </dl>\n                  <dl class=\"flex items-center gap-2\">\n                    <dt><hvi-icon-phone /></dt>\n                    <dd>{{ person.telefon }}</dd>\n                  </dl>\n                </div>\n              </td>\n            </tr>\n          }\n        } @empty {\n          <tr>\n            <td colspan=\"4\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <div class=\"mt-4 flex items-center justify-between\">\n      <p class=\"ds-paragraph\">\n        Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader\n      </p>\n      <hvi-pagination\n        [totalItems]=\"fullTable.totalFilteredRecords()\"\n        [pageSize]=\"rowsPerPage()\"\n        [currentPage]=\"fullTable.currentPage()\"\n        (currentPageChange)=\"fullTable.goToPage($event)\"\n      />\n    </div>"
+          "template": "<div class=\"mb-4\">\n      <label hviLabel>Søk</label>\n      <hvi-search>\n        <input\n          hviInput\n          type=\"search\"\n          placeholder=\"Søk i alle kolonner...\"\n          (input)=\"fullTable.filterGlobal($any($event.target).value)\"\n        />\n        <button hviSearchClear type=\"reset\" aria-label=\"Tøm\"></button>\n      </hvi-search>\n    </div>\n    <table\n      hviTable\n      [value]=\"data\"\n      [columns]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      [globalFilterFields]=\"['navn', 'epost', 'avdeling', 'stilling']\"\n      paginator\n      [rows]=\"rowsPerPage()\"\n      zebra\n      hover\n      border\n      stickyHeader\n      #fullTable=\"hviTable\"\n    >\n      <thead>\n        <tr>\n          <th style=\"width: 3rem\"><span class=\"sr-only\">Utvid</span></th>\n          <th hviSortableColumn=\"navn\">\n            <button type=\"button\">Navn</button>\n          </th>\n          <th hviSortableColumn=\"avdeling\">\n            <button type=\"button\">Avdeling</button>\n          </th>\n          <th hviSortableColumn=\"stilling\">\n            <button type=\"button\">Stilling</button>\n          </th>\n        </tr>\n        <tr>\n          <th><span class=\"sr-only\">Filter</span></th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på navn</span>\n            <hvi-multi-select\n              [options]=\"navnOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk navn...\"\n              aria-label=\"Filtrer på navn\"\n              (selectionChange)=\"fullTable.setColumnFilter('navn', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på avdeling</span>\n            <hvi-multi-select\n              [options]=\"avdelingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk avdeling...\"\n              aria-label=\"Filtrer på avdeling\"\n              (selectionChange)=\"fullTable.setColumnFilter('avdeling', $event)\"\n            />\n          </th>\n          <th width=\"30%\">\n            <span class=\"sr-only\">Filtrer på stilling</span>\n            <hvi-multi-select\n              [options]=\"stillingOptions\"\n              placeholder=\"Alle\"\n              searchPlaceholder=\"Søk stilling...\"\n              aria-label=\"Filtrer på stilling\"\n              (selectionChange)=\"fullTable.setColumnFilter('stilling', $event)\"\n            />\n          </th>\n        </tr>\n      </thead>\n      <tbody>\n        @for (person of fullTable.paginatedValue(); track person.id) {\n          <tr>\n            <td>\n              <button\n                hviButton\n                variant=\"tertiary\"\n                (click)=\"fullTable.toggleExpanded(person)\"\n                [attr.aria-expanded]=\"fullTable.isExpanded(person)\"\n                aria-label=\"Vis detaljer\"\n              >\n                @if (fullTable.isExpanded(person)) {\n                  <hvi-icon-chevron-down />\n                } @else {\n                  <hvi-icon-chevron-right />\n                }\n              </button>\n            </td>\n            <td>{{ person.navn }}</td>\n            <td>{{ person.avdeling }}</td>\n            <td>{{ person.stilling }}</td>\n          </tr>\n          @if (fullTable.isExpanded(person)) {\n            <tr>\n              <td colspan=\"4\">\n                <div class=\"flex gap-8 py-2 pl-12\">\n                  <dl class=\"flex items-center gap-2\">\n                    <dt>\n                      <hvi-icon-envelope-closed />\n                    </dt>\n                    <dd>{{ person.epost }}</dd>\n                  </dl>\n                  <dl class=\"flex items-center gap-2\">\n                    <dt><hvi-icon-phone /></dt>\n                    <dd>{{ person.telefon }}</dd>\n                  </dl>\n                </div>\n              </td>\n            </tr>\n          }\n        } @empty {\n          <tr>\n            <td colspan=\"4\">Ingen treff</td>\n          </tr>\n        }\n      </tbody>\n    </table>\n    <div class=\"mt-4 flex items-center justify-between\">\n      <p class=\"ds-paragraph\">\n        Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader\n      </p>\n      <hvi-pagination\n        [totalItems]=\"fullTable.totalFilteredRecords()\"\n        [pageSize]=\"rowsPerPage()\"\n        [currentPage]=\"fullTable.currentPage()\"\n        (currentPageChange)=\"fullTable.goToPage($event)\"\n      />\n    </div>"
         },
         {
           "id": "table.paginering",
@@ -2663,12 +2947,12 @@
     },
     {
       "id": "tag",
-      "kind": "component",
+      "kind": "directive",
       "symbol": "HviTag",
-      "selector": "hvi-tag",
+      "selector": "span[hviTag]",
       "summary": "Tag is a label that can be used to categorize items or communicate progress, status, or process. Tags can provide users with a quicker overview of content.",
       "see": "",
-      "sourceFile": "projects/hviktor/src/tag/tag.component.ts",
+      "sourceFile": "projects/hviktor/src/tag/tag.directive.ts",
       "sourceOfTruth": "npm",
       "inputs": [
         {
@@ -2694,21 +2978,21 @@
           "title": "tag farger",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/tag/code-examples/tag.farger.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-tag>Default</hvi-tag>\n      <hvi-tag color=\"neutral\">Neutral</hvi-tag>\n      <hvi-tag color=\"danger\">Danger</hvi-tag>\n      <hvi-tag color=\"warning\">Warning</hvi-tag>\n      <hvi-tag color=\"info\">Info</hvi-tag>\n      <hvi-tag color=\"success\">Success</hvi-tag>\n      <hvi-tag color=\"accent\">Accent</hvi-tag>\n      <hvi-tag color=\"brand1\">Brand1</hvi-tag>\n      <hvi-tag color=\"brand2\">Brand2</hvi-tag>\n      <hvi-tag color=\"brand3\">Brand3</hvi-tag>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <span hviTag>Default</span>\n      <span hviTag color=\"neutral\">Neutral</span>\n      <span hviTag color=\"danger\">Danger</span>\n      <span hviTag color=\"warning\">Warning</span>\n      <span hviTag color=\"info\">Info</span>\n      <span hviTag color=\"success\">Success</span>\n      <span hviTag color=\"accent\">Accent</span>\n      <span hviTag color=\"brand1\">Brand1</span>\n      <span hviTag color=\"brand2\">Brand2</span>\n      <span hviTag color=\"brand3\">Brand3</span>\n    </div>"
         },
         {
           "id": "tag.storrelser",
           "title": "tag storrelser",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/tag/code-examples/tag.storrelser.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-tag size=\"sm\">Small</hvi-tag>\n      <hvi-tag size=\"md\">Medium (default)</hvi-tag>\n      <hvi-tag size=\"lg\">Large</hvi-tag>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <span hviTag size=\"sm\">Small</span>\n      <span hviTag size=\"md\">Medium (default)</span>\n      <span hviTag size=\"lg\">Large</span>\n    </div>"
         },
         {
           "id": "tag.varianter",
           "title": "tag varianter",
           "source": "demo",
           "sourceFile": "src/app/demo/pages/components/tag/code-examples/tag.varianter.example.ts",
-          "template": "<div class=\"flex flex-wrap gap-2\">\n      <hvi-tag variant=\"default\">Default</hvi-tag>\n      <hvi-tag variant=\"outline\">Outline</hvi-tag>\n    </div>"
+          "template": "<div class=\"flex flex-wrap gap-2\">\n      <span hviTag variant=\"default\">Default</span>\n      <span hviTag variant=\"outline\">Outline</span>\n    </div>"
         }
       ]
     },

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 
 /**
  * @summary
@@ -6,16 +6,15 @@ import { Component, Input } from '@angular/core';
  *
  * @example
  * ```html
- * <hvi-tag variant="outline" size="sm" color="info">Small info tag</hvi-tag>
+ * <span hviTag variant="outline" size="sm" color="info">Small info tag</span>
  * ```
  *
  * Documentation: https://designsystemet.no/en/components/docs/tag/code
  */
 
-@Component({
-  selector: 'hvi-tag',
+@Directive({
+  selector: 'span[hviTag]',
   standalone: true,
-  template: '<ng-content />',
   host: {
     class: 'ds-tag',
     '[attr.data-variant]': 'variant ?? null',

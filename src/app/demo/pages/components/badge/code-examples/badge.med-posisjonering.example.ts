@@ -9,7 +9,7 @@ import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor';
     <div class="flex flex-wrap items-center gap-4">
       <hvi-badge-position placement="top-left">
         <hvi-badge color="danger" count="3"></hvi-badge>
-        <hvi-tag color="info">Tag med badge</hvi-tag>
+        <span hviTag color="info">Tag med badge</span>
       </hvi-badge-position>
     </div>
   `,
