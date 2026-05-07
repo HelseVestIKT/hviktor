@@ -1,11 +1,35 @@
 // Auto-generated - do not edit manually
 export const CheckboxMedFeilExampleSource = `import { Component } from '@angular/core';
-import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import { Component } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
+import {
+  HviControlInvalid,
+  HviField,
+  HviFieldValidation,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor';
+ 
+function minCheckedValidator(min: number) {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const group = control as FormGroup;
+    const checked = Object.values(group.controls).filter((c) => c.value === true).length;
+    return checked >= min ? null : { minChecked: { required: min, actual: checked } };
+  };
+}
 
 @Component({
   selector: 'app-checkbox-med-feil-example',
   standalone: true,
-  imports: [HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph],
+  imports: [HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph, ReactiveFormsModule],
   template: \`
     <fieldset hviFieldset [formGroup]="contactForm">
       <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>

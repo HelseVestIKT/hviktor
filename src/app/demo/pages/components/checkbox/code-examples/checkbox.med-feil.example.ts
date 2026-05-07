@@ -28,7 +28,6 @@ function minCheckedValidator(min: number) {
   selector: 'app-checkbox-med-feil-example',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
     HviControlInvalid,
     HviField,
     HviFieldValidation,
@@ -36,6 +35,7 @@ function minCheckedValidator(min: number) {
     HviInput,
     HviLabel,
     HviParagraph,
+    ReactiveFormsModule,
   ],
   template: `
     <fieldset hviFieldset [formGroup]="contactForm">
