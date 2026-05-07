@@ -11,9 +11,9 @@ import { LabelVarianterExampleSource } from './code-examples/label.varianter.exa
     <app-demo-page componentId="label">
       <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-col gap-2">
-          <label hviLabel>Standard label</label>
-          <label hviLabel weight="medium">Medium weight label</label>
-          <label hviLabel weight="semibold">Semibold label</label>
+          <label hviLabel weight="regular">Regular weight</label>
+          <label hviLabel weight="medium">Medium weight</label>
+          <label hviLabel weight="semibold">Semibold weight</label>
         </div>
       </app-demo-section>
     </app-demo-page>

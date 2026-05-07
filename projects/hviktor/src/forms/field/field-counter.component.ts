@@ -10,7 +10,7 @@ import { Component, input } from '@angular/core';
  * @example
  * ```html
  * <hvi-field>
- *   <label hviLabel for="description" weight="medium">Beskrivelse</label>
+ *   <label hviLabel for="description">Beskrivelse</label>
  *   <textarea hviInput id="description" rows="3"></textarea>
  *   <hvi-field-counter [limit]="100" />
  * </hvi-field>

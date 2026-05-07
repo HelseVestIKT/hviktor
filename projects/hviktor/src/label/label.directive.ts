@@ -17,7 +17,7 @@ import { Directive, Input } from '@angular/core';
  * @example Legend inside a fieldset
  * ```html
  * <fieldset>
- *   <legend hviLabel weight="medium">Velg alternativ</legend>
+ *   <legend hviLabel>Velg alternativ</legend>
  * </fieldset>
  * ```
  *
@@ -32,6 +32,6 @@ import { Directive, Input } from '@angular/core';
   },
 })
 export class HviLabel {
-  /** Adjusts font weight. Use when establishing a label hierarchy, e.g. checkboxes or radios in a fieldset. */
+  /** Adjusts font weight. Default is medium. Use `'regular'` or `'semibold'` when establishing a label hierarchy, e.g. checkboxes or radios in a fieldset. */
   @Input() weight?: 'regular' | 'medium' | 'semibold';
 }
