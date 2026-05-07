@@ -15,9 +15,6 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
       (openChange)="modalOpen.set($event)"
     >
       <div hviDialogBlock>
-        <p hviParagraph size="sm">Bekreft endring</p>
-      </div>
-      <div hviDialogBlock>
         <p hviParagraph>
           OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden nå,
           er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00 00 hvis

@@ -10,19 +10,18 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
     <button hviButton (click)="blocksOpen.set(true)">Åpne Dialog</button>
     
     <dialog
-      hviDialog
       title="Dialog med blokker"
+      hviDialog
       [open]="blocksOpen()"
       (openChange)="blocksOpen.set($event)"
     >
-      <div hviDialogBlock>
-        <p hviParagraph size="sm">Dialog subtitle</p>
-      </div>
-      <div hviDialogBlock>
-        <p hviParagraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales eros justo.
-        </p>
-      </div>
+      <p hviDialogBlock hviParagraph>
+        Sett innhold i dialogen ved å bruke <code>hviDialogBlock</code> for hver blokk med
+        innhold. Dette sikrer riktig avstand mellom innholdet og dialogens kanter.
+      </p>
+      <p hviDialogBlock hviParagraph size="sm">
+        Bruk flere blokker for å dele opp dialogen med skillelinjer mellom seksjoner.
+      </p>
       <div hviDialogBlock>
         <button hviButton variant="secondary" (click)="blocksOpen.set(false)">Lukk</button>
       </div>

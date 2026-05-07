@@ -141,9 +141,11 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
           (openChange)="blocksOpen.set($event)"
         >
           <p hviDialogBlock hviParagraph>
-            Sett innhold i dialogen ved å bruke <code>&lt;hviDialogBlock&gt;</code> for hver blokk
-            med innhold. Dette sikrer at det er riktig avstand mellom innholdet og dialogens kanter,
-            og mellom ulike innholdsblokker.
+            Sett innhold i dialogen ved å bruke <code>hviDialogBlock</code> for hver blokk med
+            innhold. Dette sikrer riktig avstand mellom innholdet og dialogens kanter.
+          </p>
+          <p hviDialogBlock hviParagraph size="sm">
+            Bruk flere blokker for å dele opp dialogen med skillelinjer mellom seksjoner.
           </p>
           <div hviDialogBlock>
             <button hviButton variant="secondary" (click)="blocksOpen.set(false)">Lukk</button>

@@ -1,11 +1,11 @@
 // Auto-generated - do not edit manually
 export const DialogMedSkjemaOgFokusExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviField, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-dialog-med-skjema-og-fokus-example',
   standalone: true,
-  imports: [HviButton, HviDialog, HviField, HviFieldAffixes, HviInput, HviLabel],
+  imports: [HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel],
   template: \`
     <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
     
@@ -16,13 +16,15 @@ import { HviButton, HviDialog, HviField, HviFieldAffixes, HviInput, HviLabel } f
       [open]="formOpen()"
       (openChange)="formOpen.set($event)"
     >
-      <hvi-field>
-        <label hviLabel>Navn</label>
-        <hvi-field-affixes>
-          <input hviInput type="text" autofocus />
-        </hvi-field-affixes>
-      </hvi-field>
-      <div class="mt-4 flex gap-2">
+      <div hviDialogBlock>
+        <hvi-field>
+          <label hviLabel>Navn</label>
+          <hvi-field-affixes>
+            <input hviInput type="text" autofocus />
+          </hvi-field-affixes>
+        </hvi-field>
+      </div>
+      <div hviDialogBlock class="mt-4 flex gap-2">
         <button hviButton (click)="formOpen.set(false)">Send inn skjema</button>
         <button hviButton variant="secondary" color="danger" (click)="formOpen.set(false)">
           Avbryt
