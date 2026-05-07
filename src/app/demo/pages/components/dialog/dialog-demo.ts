@@ -45,9 +45,6 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
           (openChange)="modalOpen.set($event)"
         >
           <div hviDialogBlock>
-            <p hviParagraph size="sm">Bekreft endring</p>
-          </div>
-          <div hviDialogBlock>
             <p hviParagraph>
               OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden
               nå, er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00
@@ -74,13 +71,15 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
           [modal]="false"
           [open]="nonModalOpen()"
           (openChange)="nonModalOpen.set($event)"
-          style="z-index:10;top:calc(100vh - 400px);left:calc(100vw - 385px);margin:0;max-width:350px"
+          style="z-index:10;top:calc(100vh - 460px);left:calc(100vw - 385px);margin:0;max-width:350px"
         >
-          <label hviLabel for="my-textarea">Hvordan var din opplevelse?</label>
-          <textarea hviInput id="my-textarea"></textarea>
-          <button hviButton variant="primary" (click)="nonModalOpen.set(false)" class="mt-2">
-            Send inn
-          </button>
+          <div hviDialogBlock>
+            <label hviLabel for="my-textarea">Hvordan var din opplevelse?</label>
+            <textarea hviInput id="my-textarea"></textarea>
+            <button hviButton variant="primary" (click)="nonModalOpen.set(false)" class="mt-2">
+              Send inn
+            </button>
+          </div>
         </dialog>
       </app-demo-section>
 
@@ -115,13 +114,15 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
           [open]="formOpen()"
           (openChange)="formOpen.set($event)"
         >
-          <hvi-field>
-            <label hviLabel>Navn</label>
-            <hvi-field-affixes>
-              <input hviInput type="text" autofocus />
-            </hvi-field-affixes>
-          </hvi-field>
-          <div class="mt-4 flex gap-2">
+          <div hviDialogBlock>
+            <hvi-field>
+              <label hviLabel>Navn</label>
+              <hvi-field-affixes>
+                <input hviInput type="text" autofocus />
+              </hvi-field-affixes>
+            </hvi-field>
+          </div>
+          <div hviDialogBlock class="mt-4 flex gap-2">
             <button hviButton (click)="formOpen.set(false)">Send inn skjema</button>
             <button hviButton variant="secondary" color="danger" (click)="formOpen.set(false)">
               Avbryt
@@ -134,19 +135,16 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
         <button hviButton (click)="blocksOpen.set(true)">Åpne Dialog</button>
 
         <dialog
-          hviDialog
           title="Dialog med blokker"
+          hviDialog
           [open]="blocksOpen()"
           (openChange)="blocksOpen.set($event)"
         >
-          <div hviDialogBlock>
-            <p hviParagraph size="sm">Dialog subtitle</p>
-          </div>
-          <div hviDialogBlock>
-            <p hviParagraph>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales eros justo.
-            </p>
-          </div>
+          <p hviDialogBlock hviParagraph>
+            Sett innhold i dialogen ved å bruke <code>&lt;hviDialogBlock&gt;</code> for hver blokk
+            med innhold. Dette sikrer at det er riktig avstand mellom innholdet og dialogens kanter,
+            og mellom ulike innholdsblokker.
+          </p>
           <div hviDialogBlock>
             <button hviButton variant="secondary" (click)="blocksOpen.set(false)">Lukk</button>
           </div>
@@ -158,12 +156,11 @@ import { DialogModalDialogExampleSource } from './code-examples/dialog.modal-dia
 
         <dialog
           hviDialog
-          title="Klikk utenfor dialogen for å lukke"
           closedby="any"
           [open]="backdropOpen()"
           (openChange)="backdropOpen.set($event)"
         >
-          <p hviParagraph>Klikk utenfor denne dialogen for å lukke den.</p>
+          <p hviDialogBlock hviParagraph>Klikk utenfor denne dialogen for å lukke den.</p>
         </dialog>
       </app-demo-section>
     </app-demo-page>

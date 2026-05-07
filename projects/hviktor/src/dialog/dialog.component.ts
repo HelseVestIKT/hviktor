@@ -32,12 +32,19 @@ import { HviHeading } from '../heading';
  * </dialog>
  * ```
  *
+ * **Note**: Since `title` is an input, the close button and title heading are automatically
+ * rendered with proper spacing. Keep content inside `hviDialogBlock` containers for consistent padding.
+ *
  * @example Non-modal dialog with title
  * ```html
  * <button hviButton (click)="openDialog()">Open Dialog</button>
  * <dialog hviDialog title="Feedback" [modal]="false" [open]="dialogOpen()" (openChange)="dialogOpen.set($event)">
- *   <textarea hviInput></textarea>
- *   <button hviButton (click)="dialogOpen.set(false)">Send</button>
+ *   <div hviDialogBlock>
+ *     <textarea hviInput></textarea>
+ *   </div>
+ *   <div hviDialogBlock>
+ *     <button hviButton (click)="dialogOpen.set(false)">Send</button>
+ *   </div>
  * </dialog>
  * ```
  *
@@ -81,7 +88,9 @@ import { HviHeading } from '../heading';
       ></button>
     }
     @if (title) {
-      <h2 hviHeading>{{ title }}</h2>
+      <div class="ds-dialog__block">
+        <h2 hviHeading>{{ title }}</h2>
+      </div>
     }
     <ng-content></ng-content>
   `,
