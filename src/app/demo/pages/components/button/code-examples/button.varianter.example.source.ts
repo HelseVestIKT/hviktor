@@ -10,7 +10,6 @@ import { HviButton } from '@helsevestikt/hviktor';
     <div class="flex flex-wrap gap-2">
       <button hviButton icon>⚙️</button>
       <button hviButton loading>Loading...</button>
-      <button hviButton fullWidth>Full Width</button>
     </div>
   \`,
 })

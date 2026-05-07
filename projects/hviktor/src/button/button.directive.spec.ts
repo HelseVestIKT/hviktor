@@ -49,7 +49,7 @@ class ColorHostComponent {
 @Component({
   standalone: true,
   imports: [HviButton],
-  template: '<button hviButton icon aria-label="Edit"><svg></svg></button>',
+  template: '<button hviButton icon><svg></svg></button>',
 })
 class IconOnlyButtonComponent {}
 
@@ -59,13 +59,6 @@ class IconOnlyButtonComponent {}
   template: '<button hviButton loading>Loading…</button>',
 })
 class LoadingButtonComponent {}
-
-@Component({
-  standalone: true,
-  imports: [HviButton],
-  template: '<button hviButton fullWidth>Full width</button>',
-})
-class FullWidthButtonComponent {}
 
 @Component({
   standalone: true,
@@ -92,7 +85,6 @@ describe('HviButton', () => {
         ColorHostComponent,
         IconOnlyButtonComponent,
         LoadingButtonComponent,
-        FullWidthButtonComponent,
         LinkAsButtonComponent,
         IconWithTextButtonComponent,
       ],
@@ -113,9 +105,9 @@ describe('HviButton', () => {
     const f = TestBed.createComponent(BasicButtonComponent);
     f.detectChanges();
     const el = f.nativeElement.querySelector('button');
-    expect(el.getAttribute('data-fullwidth')).toBeNull();
     expect(el.getAttribute('data-icon')).toBeNull();
     expect(el.getAttribute('aria-busy')).toBeNull();
+    expect(el.getAttribute('aria-label')).toBeNull();
   });
 
   it('should reflect variant input as data-variant attribute', () => {
@@ -148,16 +140,16 @@ describe('HviButton', () => {
     expect(f.nativeElement.querySelector('button').getAttribute('data-icon')).toBe('');
   });
 
+  it('should set aria-label to "Kun ikon" for icon-only button', () => {
+    const f = TestBed.createComponent(IconOnlyButtonComponent);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('button').getAttribute('aria-label')).toBe('Kun ikon');
+  });
+
   it('should set aria-busy to true when loading', () => {
     const f = TestBed.createComponent(LoadingButtonComponent);
     f.detectChanges();
     expect(f.nativeElement.querySelector('button').getAttribute('aria-busy')).toBe('true');
-  });
-
-  it('should set data-fullwidth as empty string when fullWidth is true', () => {
-    const f = TestBed.createComponent(FullWidthButtonComponent);
-    f.detectChanges();
-    expect(f.nativeElement.querySelector('button').getAttribute('data-fullwidth')).toBe('');
   });
 
   it('should preserve href when used on anchor element', () => {

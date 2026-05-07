@@ -29,12 +29,12 @@ test.describe('Button', () => {
     await expect(section.locator('button[data-size="lg"]')).toBeVisible();
   });
 
-  test('renders icon, loading and fullWidth button variants', async ({ page }) => {
+  test('renders icon-only and loading button variants', async ({ page }) => {
     const section = page.locator('app-demo-section[title="Varianter"]');
     await expect(section).toBeVisible();
     await expect(section.locator('button[data-icon]')).toBeVisible();
+    await expect(section.locator('button[data-icon][aria-label="Kun ikon"]')).toBeVisible();
     await expect(section.locator('button[aria-busy="true"]')).toBeVisible();
-    await expect(section.locator('button[data-fullwidth]')).toBeVisible();
   });
 
   test('accessibility check', async ({ page }) => {
