@@ -4,6 +4,26 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.1.8] – 2026-05-08
+
+### Added
+
+- Unit- og e2e-tester samt forbedret jsdocs for divider, dropdown, error summary label
+- Card som knapp
+- Dialog: Lagt til title input som oppretter et h2-element og setter aria-label på dialogen for bedre tilgjengelighet. Kan overstyres ved å sette `aria-label` direkte på dialog-komponenten i HTML. Dialog uten title får aria-label "Dialogboks" som default.
+- Alert: På samme måte som dialog er det lagt til title-input som hvis den brukes oppretter en h2 i alerten og setter aria-label til det samme som title. En alert uten title får default-verdier på aria-label basert på color (error får "Feilmelding", info/success/warning får "Melding"). Aria-label kan overstyres ved å sette `aria-label` direkte på Alert-komponenten i HTML. Alert har også fått en max-width.
+
+### Changed
+
+- AvatarStack: UU forbedringer og oppdatering av tester
+- Button: Ikon-knapp får default aria-label "Knapp med ikon". fullWidth-inputen er fjernet.
+- Lenkekort: Forbedringer.
+- Oppdatert `@digdir/designsystemet-css` og `@digdir/designsystemet-web` til 1.14.0.
+
+### Fixed
+
+- Label har nå støtte for tre font-weights
+
 ## [0.1.7] – 2026-04-30
 
 ### Added
