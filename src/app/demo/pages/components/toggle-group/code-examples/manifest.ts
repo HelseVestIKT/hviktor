@@ -13,6 +13,12 @@ export const ToggleGroupExamplesManifest = [
     sourceExport: 'ToggleGroupSecondaryVariantExampleSource',
   },
   {
+    slug: 'storrelse',
+    title: 'Størrelse',
+    className: 'ToggleGroupStorrelseExampleComponent',
+    sourceExport: 'ToggleGroupStorrelseExampleSource',
+  },
+  {
     slug: 'kun-ikoner',
     title: 'Kun ikoner',
     className: 'ToggleGroupKunIkonerExampleComponent',
@@ -29,5 +35,6 @@ export const ToggleGroupExamplesManifest = [
 export type ToggleGroupExampleSlug =
   | 'grunnleggende'
   | 'secondary-variant'
+  | 'storrelse'
   | 'kun-ikoner'
   | 'visningsvalg';

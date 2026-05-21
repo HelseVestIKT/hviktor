@@ -46,6 +46,7 @@ let nextGroupId = 0;
     class: 'ds-toggle-group',
     role: 'radiogroup',
     '[attr.data-variant]': '_variant()',
+    '[attr.data-size]': '_size()',
     '[tabindex]': '0',
   },
   providers: [
@@ -64,6 +65,9 @@ export class HviToggleGroup implements ControlValueAccessor {
 
   /** The variant of the toggle group */
   readonly _variant = signal<'primary' | 'secondary'>('primary');
+
+  /** The size of the toggle group */
+  readonly _size = signal<'sm' | 'md' | 'lg'>('md');
 
   /** Form element name */
   readonly _name = signal(`togglegroup-name-${++nextGroupId}`);
@@ -87,6 +91,11 @@ export class HviToggleGroup implements ControlValueAccessor {
   @Input()
   set variant(val: 'primary' | 'secondary') {
     this._variant.set(val);
+  }
+
+  @Input()
+  set size(val: 'sm' | 'md' | 'lg') {
+    this._size.set(val);
   }
 
   @Input()

@@ -1,10 +1,16 @@
 import { Component, signal } from '@angular/core';
-import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import {
+  HviHeading,
+  HviParagraph,
+  HviToggleGroup,
+  HviToggleGroupItem,
+} from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ToggleGroupGrunnleggendeExampleSource } from './code-examples/toggle-group.grunnleggende.example.source';
 import { ToggleGroupKunIkonerExampleSource } from './code-examples/toggle-group.kun-ikoner.example.source';
 import { ToggleGroupSecondaryVariantExampleSource } from './code-examples/toggle-group.secondary-variant.example.source';
+import { ToggleGroupStorrelseExampleSource } from './code-examples/toggle-group.storrelse.example.source';
 import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-group.visningsvalg.example.source';
 @Component({
   selector: 'app-toggle-group-demo',
@@ -15,6 +21,7 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
     HviToggleGroup,
     HviToggleGroupItem,
     HviParagraph,
+    HviHeading,
   ],
   template: `
     <app-demo-page componentId="toggle-group">
@@ -47,6 +54,40 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
         </hvi-toggle-group>
       </app-demo-section>
 
+      <!-- Størrelse -->
+      <app-demo-section
+        title="Størrelse"
+        [code]="storrelseCode"
+        description="Eksempel på ulike størrelser av ToggleGroup. Standard er md. Bruk size-attributtet for å endre størrelsen."
+      >
+        <div class="flex flex-row flex-wrap gap-4">
+          <div class="flex flex-col gap-2">
+            <h3 hviHeading size="sm">sm</h3>
+            <hvi-toggle-group [(value)]="small" variant="primary" size="sm">
+              <button hviToggleGroupItem value="innboks">Innboks</button>
+              <button hviToggleGroupItem value="utkast">Utkast</button>
+              <button hviToggleGroupItem value="arkiv">Arkiv</button>
+            </hvi-toggle-group>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 hviHeading size="sm">md</h3>
+            <hvi-toggle-group [(value)]="medium" variant="primary" size="md">
+              <button hviToggleGroupItem value="innboks">Innboks</button>
+              <button hviToggleGroupItem value="utkast">Utkast</button>
+              <button hviToggleGroupItem value="arkiv">Arkiv</button>
+            </hvi-toggle-group>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 hviHeading size="sm">lg</h3>
+            <hvi-toggle-group [(value)]="large" variant="primary" size="lg">
+              <button hviToggleGroupItem value="innboks">Innboks</button>
+              <button hviToggleGroupItem value="utkast">Utkast</button>
+              <button hviToggleGroupItem value="arkiv">Arkiv</button>
+            </hvi-toggle-group>
+          </div>
+        </div>
+      </app-demo-section>
+
       <!-- Kun ikoner (med tekst som placeholder) -->
       <app-demo-section
         title="Kun ikoner"
@@ -77,6 +118,7 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
   `,
 })
 export class ToggleGroupDemoComponent {
+  readonly storrelseCode = ToggleGroupStorrelseExampleSource;
   readonly grunnleggendeCode = ToggleGroupGrunnleggendeExampleSource;
   readonly secondaryVariantCode = ToggleGroupSecondaryVariantExampleSource;
   readonly kunIkonerCode = ToggleGroupKunIkonerExampleSource;
@@ -86,4 +128,7 @@ export class ToggleGroupDemoComponent {
   selectedSecondary = signal('innboks');
   selectedIconOnly = signal('left');
   selectedView = signal('liste');
+  small = signal('innboks');
+  medium = signal('innboks');
+  large = signal('innboks');
 }

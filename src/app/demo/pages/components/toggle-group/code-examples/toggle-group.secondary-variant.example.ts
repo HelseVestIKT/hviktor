@@ -15,5 +15,11 @@ import { HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
   `,
 })
 export class ToggleGroupSecondaryVariantExampleComponent {
+  selectedBasic = signal('innboks');
   selectedSecondary = signal('innboks');
+  selectedIconOnly = signal('left');
+  selectedView = signal('liste');
+  small = signal('innboks');
+  medium = signal('innboks');
+  large = signal('innboks');
 }
