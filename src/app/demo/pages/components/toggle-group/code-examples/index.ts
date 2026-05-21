@@ -5,5 +5,7 @@ export * from './toggle-group.kun-ikoner.example';
 export * from './toggle-group.kun-ikoner.example.source';
 export * from './toggle-group.secondary-variant.example';
 export * from './toggle-group.secondary-variant.example.source';
+export * from './toggle-group.storrelse.example';
+export * from './toggle-group.storrelse.example.source';
 export * from './toggle-group.visningsvalg.example';
 export * from './toggle-group.visningsvalg.example.source';

@@ -16,6 +16,12 @@ import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/
   \`,
 })
 export class ToggleGroupVisningsvalgExampleComponent {
+  selectedBasic = signal('innboks');
+  selectedSecondary = signal('innboks');
+  selectedIconOnly = signal('left');
   selectedView = signal('liste');
+  small = signal('innboks');
+  medium = signal('innboks');
+  large = signal('innboks');
 }
 `;
