@@ -1,12 +1,6 @@
 // Auto-generated - do not edit manually
 export const RadioExamplesManifest = [
   {
-    slug: 'enkel-radio',
-    title: 'Enkel radio',
-    className: 'RadioEnkelRadioExampleComponent',
-    sourceExport: 'RadioEnkelRadioExampleSource',
-  },
-  {
     slug: 'gruppering',
     title: 'Gruppering',
     className: 'RadioGrupperingExampleComponent',
@@ -32,9 +26,4 @@ export const RadioExamplesManifest = [
   },
 ] as const;
 
-export type RadioExampleSlug =
-  | 'enkel-radio'
-  | 'gruppering'
-  | 'outline'
-  | 'med-feil'
-  | 'horisontal-plassering';
+export type RadioExampleSlug = 'gruppering' | 'outline' | 'med-feil' | 'horisontal-plassering';

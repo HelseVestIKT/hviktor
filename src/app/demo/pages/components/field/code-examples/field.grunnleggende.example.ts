@@ -21,6 +21,7 @@ import {
           id="etternavn"
           type="text"
           value="Nordmann Svenske"
+          [attr.aria-invalid]="hasError || null"
           (input)="hasError = $any($event.target).value.includes(' ')"
         />
         @if (hasError) {
