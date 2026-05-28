@@ -74,7 +74,7 @@ export interface PageChangeEvent {
               </button>
             </li>
           } @else if (item.type === 'ellipsis') {
-            <li></li>
+            <li aria-hidden="true">…</li>
           }
         }
 
@@ -127,10 +127,10 @@ export class HviPagination {
   @Input({ transform: booleanAttribute }) showPreviousNextLabels = true;
 
   /** Tekst for forrige-knappen */
-  @Input() previousLabel = 'Forrige';
+  @Input() previousLabel = 'Forrige side';
 
   /** Tekst for neste-knappen */
-  @Input() nextLabel = 'Neste';
+  @Input() nextLabel = 'Neste side';
 
   /** Event som emitteres når siden endres */
   @Output() currentPageChange = new EventEmitter<number>();
