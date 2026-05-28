@@ -24,6 +24,7 @@ test.describe('ErrorSummary', () => {
     const firstLink = section.locator('ds-error-summary a.ds-link').first();
     const fornavnInput = section.locator('#fornavn');
 
+    await section.locator('button[type="submit"]').click();
     await expect(firstLink).toBeVisible();
     await firstLink.click();
     await expect(fornavnInput).toBeFocused();

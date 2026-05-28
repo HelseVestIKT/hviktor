@@ -44,12 +44,23 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="grunnleggendeCode"
         description="Field kobler automatisk sammen label, description og validation med feltet via riktige ARIA-attributter."
       >
-        <hvi-field>
-          <label hviLabel for="etternavn" weight="medium">Etternavn</label>
-          <p hviFieldDescription>Etternavn kan ikke inneholde mellomrom</p>
-          <input hviInput id="etternavn" type="text" value="Nordmann Svenske" aria-invalid="true" />
-          <span hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</span>
-        </hvi-field>
+        <div style="width: 400px">
+          <hvi-field>
+            <label hviLabel for="etternavn" weight="medium">Etternavn</label>
+            <p hviFieldDescription>Etternavn kan ikke inneholde mellomrom</p>
+            <input
+              hviInput
+              id="etternavn"
+              type="text"
+              value="Nordmann Svenske"
+              [attr.aria-invalid]="hasEtternavnError || null"
+              (input)="hasEtternavnError = $any($event.target).value.includes(' ')"
+            />
+            @if (hasEtternavnError) {
+              <p hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</p>
+            }
+          </hvi-field>
+        </div>
       </app-demo-section>
 
       <!-- Prefix/Suffix -->
@@ -58,14 +69,18 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="prefixSuffixCode"
         description="Prefixer og suffixer er nyttige for å vise enheter, valuta eller andre typer informasjon som er relevant for feltet. Du skal ikke bruke disse alene, siden skjermlesere ikke leser dem opp."
       >
-        <hvi-field>
-          <label hviLabel for="pris" weight="medium">Hvor mange kroner koster det per måned?</label>
-          <hvi-field-affixes>
-            <hvi-field-affix>NOK</hvi-field-affix>
-            <input hviInput id="pris" type="text" />
-            <hvi-field-affix>pr. mnd.</hvi-field-affix>
-          </hvi-field-affixes>
-        </hvi-field>
+        <div style="width: 400px">
+          <hvi-field>
+            <label hviLabel for="pris" weight="medium"
+              >Hvor mange kroner koster det per måned?</label
+            >
+            <hvi-field-affixes>
+              <hvi-field-affix>NOK</hvi-field-affix>
+              <input hviInput id="pris" type="text" />
+              <hvi-field-affix>pr. mnd.</hvi-field-affix>
+            </hvi-field-affixes>
+          </hvi-field>
+        </div>
       </app-demo-section>
 
       <!-- Antall tegn -->
@@ -74,11 +89,13 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="antallTegnCode"
         description="Bruk hvi-field-counter til å informere om antall tegn brukerne kan skrive i feltet. ds-field kobler automatisk telleren til input/textarea i samme field."
       >
-        <hvi-field>
-          <label hviLabel for="beskrivelse" weight="medium">Legg til en beskrivelse</label>
-          <input hviInput id="beskrivelse" type="text" [maxLength]="10" />
-          <hvi-field-counter [limit]="10" />
-        </hvi-field>
+        <div style="width: 200px">
+          <hvi-field>
+            <label hviLabel for="beskrivelse" weight="medium">Legg til en beskrivelse</label>
+            <input hviInput id="beskrivelse" type="text" [maxLength]="10" />
+            <hvi-field-counter [limit]="10" />
+          </hvi-field>
+        </div>
       </app-demo-section>
 
       <!-- Plassering med Switch -->
@@ -87,7 +104,7 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="plasseringCode"
         description="Når du bruker Field sammen med valgkomponenter som Switch, kan du plassere etiketten enten før eller etter kontrollen med position-attributtet."
       >
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4" style="max-width: 300px">
           <hvi-field position="end">
             <label hviLabel for="flymodus" weight="medium">Flymodus</label>
             <input hviInput id="flymodus" type="checkbox" role="switch" />
@@ -149,6 +166,8 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
   `,
 })
 export class FieldDemoComponent {
+  hasEtternavnError = true;
+
   readonly grunnleggendeCode = FieldGrunnleggendeExampleSource;
   readonly prefixSuffixCode = FieldPrefixSuffixExampleSource;
   readonly antallTegnCode = FieldAntallTegnExampleSource;

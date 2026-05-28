@@ -4,7 +4,11 @@ export const LOGO_HVE: LogoDefinition = {
   viewBox: '0 0 240 61',
   width: 240,
   height: 61,
-  label: 'Helse Vest logo',
+  /**
+   * Public accessible label exposed by HviLogo for this definition.
+   * The generated aria-label is "Helse Vest" and does not append "logo".
+   */
+  label: 'Helse Vest',
   paths: [
     // Accent dots (center)
     {

@@ -2,7 +2,7 @@ import { buildLogo } from '../logo-shared';
 import { LogoDefinition } from '../logo-types';
 
 export const LOGO_HST: LogoDefinition = buildLogo(
-  'Helse Stavanger logo',
+  'Helse Stavanger',
   [
     // S
     {

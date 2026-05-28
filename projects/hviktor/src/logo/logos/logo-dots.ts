@@ -4,7 +4,7 @@ export const LOGO_DOTS: LogoDefinition = {
   viewBox: '0 0 65 65',
   width: 65,
   height: 65,
-  label: 'Helse Vest logo',
+  label: 'Helse Vest',
   paths: [
     // Accent dots
     // Top

@@ -104,7 +104,7 @@ Bruk dette nivået når du trenger standard tekstfelt. Det gir minst kode og aut
 | `<select hviSelect>`                        | `ds-select`             | Nedtrekksmeny                                                  |
 | `<fieldset hviFieldset>`                    | `ds-fieldset`           | Grupperer relaterte felt med legend                            |
 | `<span hviFieldDescription>`                | –                       | Hjelpetekst under label                                        |
-| `<span hviFieldValidation>`                 | `ds-validation-message` | Feilmelding                                                    |
+| `<p hviFieldValidation>`                    | `ds-validation-message` | Feilmelding                                                    |
 | `<hvi-field-counter>`                       | –                       | Tegnteller                                                     |
 | `<hvi-field-affixes>` + `<hvi-field-affix>` | `ds-field-affixes`      | Prefix/suffix-dekorasjon                                       |
 
@@ -231,7 +231,7 @@ Wrapper-komponent som assosierer label, input, description og validation automat
   <label hviLabel for="name" weight="medium">Navn</label>
   <span hviFieldDescription>Fullt navn</span>
   <input hviInput id="name" formControlName="name" />
-  <span hviFieldValidation>Navn er påkrevd</span>
+  <p hviFieldValidation>Navn er påkrevd</p>
 </hvi-field>
 ```
 

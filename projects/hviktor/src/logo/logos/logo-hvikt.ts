@@ -2,7 +2,7 @@ import { buildLogo } from '../logo-shared';
 import { LogoDefinition } from '../logo-types';
 
 export const LOGO_HVIKT: LogoDefinition = buildLogo(
-  'Helse Vest IKT logo',
+  'Helse Vest IKT',
   [
     // V
     {

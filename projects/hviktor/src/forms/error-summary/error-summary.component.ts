@@ -90,7 +90,10 @@ const DEFAULT_ERROR_PRIORITY = [
   selector: 'hvi-error-summary',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
-  styles: [':host { display: contents; }'],
+  host: {
+    role: 'alert',
+    style: 'display: block; max-width: 731px;',
+  },
   template: `
     <ds-error-summary class="ds-error-summary" [hidden]="!shouldShow">
       @switch (headingLevel) {
