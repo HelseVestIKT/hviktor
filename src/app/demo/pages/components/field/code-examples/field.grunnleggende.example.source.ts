@@ -11,13 +11,21 @@ import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel }
       <hvi-field>
         <label hviLabel for="etternavn" weight="medium">Etternavn</label>
         <p hviFieldDescription>Etternavn kan ikke inneholde mellomrom</p>
-        <input hviInput id="etternavn" type="text" value="Nordmann Svenske" aria-invalid="true" />
-        <p hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</p>
+        <input
+          hviInput
+          id="etternavn"
+          type="text"
+          value="Nordmann Svenske"
+          (input)="hasError = $any($event.target).value.includes(' ')"
+        />
+        @if (hasError) {
+          <p hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</p>
+        }
       </hvi-field>
     </div>
   \`,
 })
 export class FieldGrunnleggendeExampleComponent {
-  
+  hasError = true;
 }
 `;

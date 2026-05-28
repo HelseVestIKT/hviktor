@@ -53,9 +53,11 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
               id="etternavn"
               type="text"
               value="Nordmann Svenske"
-              aria-invalid="true"
+              (input)="hasEtternavnError = $any($event.target).value.includes(' ')"
             />
-            <p hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</p>
+            @if (hasEtternavnError) {
+              <p hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</p>
+            }
           </hvi-field>
         </div>
       </app-demo-section>
@@ -101,7 +103,7 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="plasseringCode"
         description="Når du bruker Field sammen med valgkomponenter som Switch, kan du plassere etiketten enten før eller etter kontrollen med position-attributtet."
       >
-        <div class="flex flex-col gap-4">
+        <div class="flex max-w-30 flex-col gap-4">
           <hvi-field position="end">
             <label hviLabel for="flymodus" weight="medium">Flymodus</label>
             <input hviInput id="flymodus" type="checkbox" role="switch" />
@@ -163,6 +165,8 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
   `,
 })
 export class FieldDemoComponent {
+  hasEtternavnError = true;
+
   readonly grunnleggendeCode = FieldGrunnleggendeExampleSource;
   readonly prefixSuffixCode = FieldPrefixSuffixExampleSource;
   readonly antallTegnCode = FieldAntallTegnExampleSource;

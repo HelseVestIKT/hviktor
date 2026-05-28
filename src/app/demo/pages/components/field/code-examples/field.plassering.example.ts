@@ -6,7 +6,7 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviField, HviInput, HviLabel],
   template: `
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4" style="max-width: 300px">
       <hvi-field position="end">
         <label hviLabel for="flymodus" weight="medium">Flymodus</label>
         <input hviInput id="flymodus" type="checkbox" role="switch" />
