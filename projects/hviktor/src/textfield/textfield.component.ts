@@ -117,7 +117,7 @@ let nextId = 0;
         <hvi-field-counter [limit]="counterLimit" />
       }
       @if (error) {
-        <span hviFieldValidation>{{ error }}</span>
+        <p hviFieldValidation>{{ error }}</p>
       }
     </hvi-field>
   `,

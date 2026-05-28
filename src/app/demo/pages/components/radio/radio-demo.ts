@@ -160,7 +160,7 @@ import { RadioOutlineExampleSource } from './code-examples/radio.outline.example
             <label hviLabel for="bydel-midtbyen">Midtbyen</label>
           </hvi-field>
           @if (bydelControl.invalid) {
-            <span hviFieldValidation>Du må velge en bydel før du kan fortsette.</span>
+            <p hviFieldValidation>Du må velge en bydel før du kan fortsette.</p>
           }
         </fieldset>
       </app-demo-section>
