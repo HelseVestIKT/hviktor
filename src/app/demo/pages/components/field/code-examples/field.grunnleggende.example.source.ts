@@ -9,7 +9,7 @@ import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel }
   template: \`
     <hvi-field>
       <label hviLabel for="etternavn" weight="medium">Etternavn</label>
-      <span hviFieldDescription>Etternavn kan ikke inneholde mellomrom</span>
+      <p hviFieldDescription>Etternavn kan ikke inneholde mellomrom</p>
       <input hviInput id="etternavn" type="text" value="Nordmann Svenske" aria-invalid="true" />
       <span hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</span>
     </hvi-field>

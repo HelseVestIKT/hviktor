@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const CheckboxBekreftingMedCheckboxExampleSource = `import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
@@ -20,5 +20,22 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
     </fieldset>
   \`,
 })
-export class CheckboxBekreftingMedCheckboxExampleComponent {}
+export class CheckboxBekreftingMedCheckboxExampleComponent {
+  minCheckedValidator(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const group = control as FormGroup;
+      const checked = Object.values(group.controls).filter((c) => c.value === true).length;
+      return checked >= min ? null : { minChecked: { required: min, actual: checked } };
+    };
+  }
+  
+  contactForm = new FormGroup(
+    {
+      epost: new FormControl(true),
+      telefon: new FormControl(false),
+      sms: new FormControl(false),
+    },
+    { validators: this.minCheckedValidator(2) },
+  );
+}
 `;

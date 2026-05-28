@@ -16,6 +16,7 @@ import { RadioEnkelRadioExampleSource } from './code-examples/radio.enkel-radio.
 import { RadioGrupperingExampleSource } from './code-examples/radio.gruppering.example.source';
 import { RadioHorisontalPlasseringExampleSource } from './code-examples/radio.horisontal-plassering.example.source';
 import { RadioMedFeilExampleSource } from './code-examples/radio.med-feil.example.source';
+import { RadioOutlineExampleSource } from './code-examples/radio.outline.example.source';
 @Component({
   selector: 'app-radio-demo',
   standalone: true,
@@ -85,16 +86,35 @@ import { RadioMedFeilExampleSource } from './code-examples/radio.med-feil.exampl
       <!-- Outline -->
       <app-demo-section
         title="Outline"
-        description="Radio-knapper har en outline-variant som gir bedre kontrast og synlighet."
+        [code]="outlineCode"
+        description="outline-attributtet legges på hvi-field – ikke på selve input-elementet. Det gir ekstra padding og en ramme rundt hvert valg for å skape en større klikkflate."
       >
         <fieldset hviFieldset>
+          <legend hviLabel weight="medium">Hvordan ønsker du at vi kontakter deg?</legend>
+          <p hviParagraph>
+            Velg metoden som passer best for deg. Vi bruker dette kun til å sende viktig informasjon
+            om saken din.
+          </p>
           <hvi-field outline>
-            <input hviInput type="radio" id="outline-radio1" name="outline" value="value" />
-            <label hviLabel for="outline-radio1">Radio med outline</label>
+            <input hviInput type="radio" id="outline-epost" name="outline-kontakt" value="epost" />
+            <label hviLabel for="outline-epost">E-post</label>
+            <span hviFieldDescription
+              >Vi bruker e-postadressen du har oppgitt tidligere (navn&#64;epost.no)</span
+            >
           </hvi-field>
           <hvi-field outline>
-            <input hviInput type="radio" id="outline-radio2" name="outline" value="value" />
-            <label hviLabel for="outline-radio2">Radio med outline</label>
+            <input hviInput type="radio" id="outline-sms" name="outline-kontakt" value="sms" />
+            <label hviLabel for="outline-sms">SMS</label>
+            <span hviFieldDescription
+              >Vi bruker telefonnummeret du har oppgitt tidligere (99 99 99 99)</span
+            >
+          </hvi-field>
+          <hvi-field outline>
+            <input hviInput type="radio" id="outline-brev" name="outline-kontakt" value="brev" />
+            <label hviLabel for="outline-brev">Brev</label>
+            <span hviFieldDescription
+              >Levering kan ta 3–5 virkedager, avhengig av posttjenesten.</span
+            >
           </hvi-field>
         </fieldset>
       </app-demo-section>
@@ -187,6 +207,7 @@ export class RadioDemoComponent {
   readonly grupperingCode = RadioGrupperingExampleSource;
   readonly medFeilCode = RadioMedFeilExampleSource;
   readonly horisontalPlasseringCode = RadioHorisontalPlasseringExampleSource;
+  readonly outlineCode = RadioOutlineExampleSource;
 
   bydelControl = new FormControl('', Validators.required);
 }

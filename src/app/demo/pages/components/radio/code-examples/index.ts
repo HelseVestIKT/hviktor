@@ -7,3 +7,5 @@ export * from './radio.horisontal-plassering.example';
 export * from './radio.horisontal-plassering.example.source';
 export * from './radio.med-feil.example';
 export * from './radio.med-feil.example.source';
+export * from './radio.outline.example';
+export * from './radio.outline.example.source';

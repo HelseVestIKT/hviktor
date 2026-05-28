@@ -338,7 +338,8 @@ function findRequiredFormsImports(content, classBody, allFormsImports) {
   if (
     content.includes('formGroup') ||
     content.includes('formControlName') ||
-    content.includes('formArrayName')
+    content.includes('formArrayName') ||
+    content.includes('[formControl]')
   ) {
     required.add('ReactiveFormsModule');
   }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
 
 @Component({
@@ -12,4 +13,6 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
     </hvi-field>
   `,
 })
-export class RadioEnkelRadioExampleComponent {}
+export class RadioEnkelRadioExampleComponent {
+  bydelControl = new FormControl('', Validators.required);
+}

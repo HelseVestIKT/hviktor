@@ -13,6 +13,12 @@ export const RadioExamplesManifest = [
     sourceExport: 'RadioGrupperingExampleSource',
   },
   {
+    slug: 'outline',
+    title: 'Outline',
+    className: 'RadioOutlineExampleComponent',
+    sourceExport: 'RadioOutlineExampleSource',
+  },
+  {
     slug: 'med-feil',
     title: 'Med feil',
     className: 'RadioMedFeilExampleComponent',
@@ -26,4 +32,9 @@ export const RadioExamplesManifest = [
   },
 ] as const;
 
-export type RadioExampleSlug = 'enkel-radio' | 'gruppering' | 'med-feil' | 'horisontal-plassering';
+export type RadioExampleSlug =
+  | 'enkel-radio'
+  | 'gruppering'
+  | 'outline'
+  | 'med-feil'
+  | 'horisontal-plassering';
