@@ -82,6 +82,23 @@ import { RadioMedFeilExampleSource } from './code-examples/radio.med-feil.exampl
         </fieldset>
       </app-demo-section>
 
+      <!-- Outline -->
+      <app-demo-section
+        title="Outline"
+        description="Radio-knapper har en outline-variant som gir bedre kontrast og synlighet."
+      >
+        <fieldset hviFieldset>
+          <hvi-field outline>
+            <input hviInput type="radio" id="outline-radio1" name="outline" value="value" />
+            <label hviLabel for="outline-radio1">Radio med outline</label>
+          </hvi-field>
+          <hvi-field outline>
+            <input hviInput type="radio" id="outline-radio2" name="outline" value="value" />
+            <label hviLabel for="outline-radio2">Radio med outline</label>
+          </hvi-field>
+        </fieldset>
+      </app-demo-section>
+
       <!-- Med feil -->
       <app-demo-section
         title="Med feil"
