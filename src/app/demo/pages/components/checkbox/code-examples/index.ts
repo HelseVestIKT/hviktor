@@ -9,5 +9,7 @@ export * from './checkbox.gruppering.example';
 export * from './checkbox.gruppering.example.source';
 export * from './checkbox.med-feil.example';
 export * from './checkbox.med-feil.example.source';
+export * from './checkbox.outline.example';
+export * from './checkbox.outline.example.source';
 export * from './checkbox.skrivebeskyttet-readonly.example';
 export * from './checkbox.skrivebeskyttet-readonly.example.source';

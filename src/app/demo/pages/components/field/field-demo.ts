@@ -6,14 +6,17 @@ import {
   HviFieldCounter,
   HviFieldDescription,
   HviFieldValidation,
+  HviFieldset,
   HviInput,
   HviLabel,
+  HviParagraph,
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { FieldAntallTegnExampleSource } from './code-examples/field.antall-tegn.example.source';
 import { FieldCheckboxOgRadioExampleSource } from './code-examples/field.checkbox-og-radio.example.source';
 import { FieldGrunnleggendeExampleSource } from './code-examples/field.grunnleggende.example.source';
+import { FieldOutlineExampleSource } from './code-examples/field.outline.example.source';
 import { FieldPlasseringExampleSource } from './code-examples/field.plassering.example.source';
 import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suffix.example.source';
 @Component({
@@ -28,8 +31,10 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
     HviFieldCounter,
     HviFieldDescription,
     HviFieldValidation,
+    HviFieldset,
     HviInput,
     HviLabel,
+    HviParagraph,
   ],
   template: `
     <app-demo-page componentId="field">
@@ -113,6 +118,33 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
           </hvi-field>
         </div>
       </app-demo-section>
+
+      <!-- Outline -->
+      <app-demo-section
+        title="Outline"
+        [code]="outlineCode"
+        description="outline-attributtet på hvi-field legger på ekstra padding og en ramme rundt valget for å skape en større klikkflate. Det er hvi-field som styrer outline – ikke selve input-elementet. Fungerer med radio, checkbox og switch."
+      >
+        <fieldset hviFieldset>
+          <legend hviLabel weight="medium">Hvordan ønsker du å bli kontaktet?</legend>
+          <p hviParagraph>Velg metoden som passer best for deg.</p>
+          <hvi-field outline>
+            <input hviInput type="radio" id="outline-epost" name="field-outline" value="epost" />
+            <label hviLabel for="outline-epost">E-post</label>
+            <span hviFieldDescription>Vi bruker e-postadressen du har oppgitt</span>
+          </hvi-field>
+          <hvi-field outline>
+            <input hviInput type="radio" id="outline-sms" name="field-outline" value="sms" />
+            <label hviLabel for="outline-sms">SMS</label>
+            <span hviFieldDescription>Vi bruker telefonnummeret du har oppgitt</span>
+          </hvi-field>
+          <hvi-field outline>
+            <input hviInput type="radio" id="outline-brev" name="field-outline" value="brev" />
+            <label hviLabel for="outline-brev">Brev</label>
+            <span hviFieldDescription>Levering kan ta 3–5 virkedager</span>
+          </hvi-field>
+        </fieldset>
+      </app-demo-section>
     </app-demo-page>
   `,
 })
@@ -122,4 +154,5 @@ export class FieldDemoComponent {
   readonly antallTegnCode = FieldAntallTegnExampleSource;
   readonly plasseringCode = FieldPlasseringExampleSource;
   readonly checkboxOgRadioCode = FieldCheckboxOgRadioExampleSource;
+  readonly outlineCode = FieldOutlineExampleSource;
 }

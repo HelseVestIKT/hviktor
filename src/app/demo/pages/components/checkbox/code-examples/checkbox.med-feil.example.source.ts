@@ -1,30 +1,7 @@
 // Auto-generated - do not edit manually
 export const CheckboxMedFeilExampleSource = `import { Component } from '@angular/core';
-import { Component } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  ValidationErrors,
-} from '@angular/forms';
-import {
-  HviControlInvalid,
-  HviField,
-  HviFieldValidation,
-  HviFieldset,
-  HviInput,
-  HviLabel,
-  HviParagraph,
-} from '@helsevestikt/hviktor';
- 
-function minCheckedValidator(min: number) {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const group = control as FormGroup;
-    const checked = Object.values(group.controls).filter((c) => c.value === true).length;
-    return checked >= min ? null : { minChecked: { required: min, actual: checked } };
-  };
-}
+import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-checkbox-med-feil-example',
@@ -71,13 +48,21 @@ function minCheckedValidator(min: number) {
   \`,
 })
 export class CheckboxMedFeilExampleComponent {
+  minCheckedValidator(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const group = control as FormGroup;
+      const checked = Object.values(group.controls).filter((c) => c.value === true).length;
+      return checked >= min ? null : { minChecked: { required: min, actual: checked } };
+    };
+  }
+  
   contactForm = new FormGroup(
     {
       epost: new FormControl(true),
       telefon: new FormControl(false),
       sms: new FormControl(false),
     },
-    { validators: minCheckedValidator(2) },
+    { validators: this.minCheckedValidator(2) },
   );
 }
 `;

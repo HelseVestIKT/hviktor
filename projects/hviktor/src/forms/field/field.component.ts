@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
+import { booleanAttribute, Component, CUSTOM_ELEMENTS_SCHEMA, Input } from '@angular/core';
 import '@digdir/designsystemet-web';
 
 /**
@@ -21,11 +21,16 @@ import '@digdir/designsystemet-web';
   selector: 'hvi-field',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
-  styles: [':host { display: contents; }'],
+  styles: [
+    ':host { display: contents; }',
+    'ds-field[data-variant="outline"] { margin-block-end: var(--dsc-fieldset-gap, var(--ds-size-2)); }',
+  ],
   template:
-    '<ds-field class="ds-field" [attr.data-position]="position ?? null"><ng-content /></ds-field>',
+    '<ds-field class="ds-field" [attr.data-position]="position ?? null" [attr.data-variant]="outline ? \'outline\' : null"><ng-content /></ds-field>',
 })
 export class HviField {
   /** Position of toggle inputs (radio, checkbox, switch) in field */
   @Input() position?: 'start' | 'end';
+  /** Outline variant for the field. Works for input types radio and checkbox */
+  @Input({ transform: booleanAttribute }) outline?: boolean = false;
 }

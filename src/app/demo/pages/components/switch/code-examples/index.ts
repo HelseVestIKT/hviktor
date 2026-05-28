@@ -5,3 +5,5 @@ export * from './switch.gruppering.example';
 export * from './switch.gruppering.example.source';
 export * from './switch.hoyrejustert.example';
 export * from './switch.hoyrejustert.example.source';
+export * from './switch.outline.example';
+export * from './switch.outline.example.source';

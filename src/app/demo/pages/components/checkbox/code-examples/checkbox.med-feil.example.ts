@@ -16,14 +16,6 @@ import {
   HviParagraph,
 } from '@helsevestikt/hviktor';
 
-function minCheckedValidator(min: number) {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const group = control as FormGroup;
-    const checked = Object.values(group.controls).filter((c) => c.value === true).length;
-    return checked >= min ? null : { minChecked: { required: min, actual: checked } };
-  };
-}
-
 @Component({
   selector: 'app-checkbox-med-feil-example',
   standalone: true,
@@ -72,12 +64,20 @@ function minCheckedValidator(min: number) {
   `,
 })
 export class CheckboxMedFeilExampleComponent {
+  minCheckedValidator(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const group = control as FormGroup;
+      const checked = Object.values(group.controls).filter((c) => c.value === true).length;
+      return checked >= min ? null : { minChecked: { required: min, actual: checked } };
+    };
+  }
+
   contactForm = new FormGroup(
     {
       epost: new FormControl(true),
       telefon: new FormControl(false),
       sms: new FormControl(false),
     },
-    { validators: minCheckedValidator(2) },
+    { validators: this.minCheckedValidator(2) },
   );
 }

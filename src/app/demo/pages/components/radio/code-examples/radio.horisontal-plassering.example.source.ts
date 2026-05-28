@@ -1,5 +1,6 @@
 // Auto-generated - do not edit manually
 export const RadioHorisontalPlasseringExampleSource = `import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
@@ -24,5 +25,6 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
   \`,
 })
 export class RadioHorisontalPlasseringExampleComponent {
+  bydelControl = new FormControl('', Validators.required);
 }
 `;
