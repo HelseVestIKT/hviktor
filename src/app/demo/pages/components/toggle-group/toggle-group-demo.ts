@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import {
   HviHeading,
   HviParagraph,
@@ -12,6 +12,10 @@ import { ToggleGroupKunIkonerExampleSource } from './code-examples/toggle-group.
 import { ToggleGroupSecondaryVariantExampleSource } from './code-examples/toggle-group.secondary-variant.example.source';
 import { ToggleGroupStorrelseExampleSource } from './code-examples/toggle-group.storrelse.example.source';
 import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-group.visningsvalg.example.source';
+
+import '@helsevestikt/hviktor-icons/icon-align-center.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-align-left.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
 @Component({
   selector: 'app-toggle-group-demo',
   standalone: true,
@@ -23,6 +27,7 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
     HviParagraph,
     HviHeading,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <app-demo-page componentId="toggle-group">
       <!-- Grunnleggende -->
@@ -95,9 +100,15 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
         description="ToggleGroup med kun ikoner. Bruk icon-attributtet for å style knappene som kun-ikon."
       >
         <hvi-toggle-group [(value)]="selectedIconOnly" variant="primary">
-          <button hviToggleGroupItem value="left" icon aria-label="Venstrestilt">⬅</button>
-          <button hviToggleGroupItem value="center" icon aria-label="Midtstilt">⬆</button>
-          <button hviToggleGroupItem value="right" icon aria-label="Høyrestilt">➡</button>
+          <button hviToggleGroupItem value="left" icon aria-label="Venstrestilt">
+            <hvi-icon-align-left></hvi-icon-align-left>
+          </button>
+          <button hviToggleGroupItem value="center" icon aria-label="Midtstilt">
+            <hvi-icon-align-center></hvi-icon-align-center>
+          </button>
+          <button hviToggleGroupItem value="right" icon aria-label="Høyrestilt">
+            <hvi-icon-align-right></hvi-icon-align-right>
+          </button>
         </hvi-toggle-group>
       </app-demo-section>
 
