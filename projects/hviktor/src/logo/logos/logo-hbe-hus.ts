@@ -4,7 +4,7 @@ export const LOGO_HBE_HUS: LogoDefinition = {
   viewBox: '0 0 348 65',
   width: 348,
   height: 65,
-  label: 'Haukeland universitetssjukehus logo',
+  label: 'Haukeland universitetssjukehus',
   paths: [
     // Accent dots
     {

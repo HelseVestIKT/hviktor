@@ -2,7 +2,7 @@ import { buildLogo } from '../logo-shared';
 import { LogoDefinition } from '../logo-types';
 
 export const LOGO_HFO: LogoDefinition = buildLogo(
-  'Helse Fonna logo',
+  'Helse Fonna',
   [
     // F
     {

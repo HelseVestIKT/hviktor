@@ -4,7 +4,7 @@ export const LOGO_HVIKTOR: LogoDefinition = {
   viewBox: '0 0 52 52',
   width: 52,
   height: 52,
-  label: 'Hviktor logo',
+  label: 'Hviktor',
   paths: [
     // Bottom-left circle — accent
     {

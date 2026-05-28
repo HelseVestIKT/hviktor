@@ -4,7 +4,7 @@ export const LOGO_SAV: LogoDefinition = {
   viewBox: '0 0 496 65',
   width: 496,
   height: 65,
-  label: 'Sjukehusapoteka Vest logo',
+  label: 'Sjukehusapoteka Vest',
   paths: [
     // Accent dots
     {

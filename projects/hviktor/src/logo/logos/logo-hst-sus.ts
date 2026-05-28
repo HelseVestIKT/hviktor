@@ -4,7 +4,7 @@ export const LOGO_HST_SUS: LogoDefinition = {
   viewBox: '0 0 363 65',
   width: 363,
   height: 65,
-  label: 'Stavanger universitetssjukehus logo',
+  label: 'Stavanger universitetssjukehus',
   paths: [
     // Accent dots
     {

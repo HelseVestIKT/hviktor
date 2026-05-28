@@ -2,7 +2,7 @@ import { buildLogo } from '../logo-shared';
 import { LogoDefinition } from '../logo-types';
 
 export const LOGO_HFD: LogoDefinition = buildLogo(
-  'Helse Førde logo',
+  'Helse Førde',
   [
     // F
     {

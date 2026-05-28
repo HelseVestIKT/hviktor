@@ -2,7 +2,7 @@ import { buildLogo } from '../logo-shared';
 import { LogoDefinition } from '../logo-types';
 
 export const LOGO_HBE: LogoDefinition = buildLogo(
-  'Helse Bergen logo',
+  'Helse Bergen',
   [
     // B
     {
