@@ -12,7 +12,6 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import { RadioEnkelRadioExampleSource } from './code-examples/radio.enkel-radio.example.source';
 import { RadioGrupperingExampleSource } from './code-examples/radio.gruppering.example.source';
 import { RadioHorisontalPlasseringExampleSource } from './code-examples/radio.horisontal-plassering.example.source';
 import { RadioMedFeilExampleSource } from './code-examples/radio.med-feil.example.source';
@@ -35,18 +34,6 @@ import { RadioOutlineExampleSource } from './code-examples/radio.outline.example
   ],
   template: `
     <app-demo-page componentId="radio">
-      <!-- Enkel radio -->
-      <app-demo-section
-        title="Enkel radio"
-        [code]="enkelRadioCode"
-        description="En enkel radio med label."
-      >
-        <hvi-field>
-          <input hviInput type="radio" id="single-radio" name="single" value="value" />
-          <label hviLabel for="single-radio">Radio</label>
-        </hvi-field>
-      </app-demo-section>
-
       <!-- Gruppering -->
       <app-demo-section
         title="Gruppering"
@@ -203,7 +190,6 @@ import { RadioOutlineExampleSource } from './code-examples/radio.outline.example
   `,
 })
 export class RadioDemoComponent {
-  readonly enkelRadioCode = RadioEnkelRadioExampleSource;
   readonly grupperingCode = RadioGrupperingExampleSource;
   readonly medFeilCode = RadioMedFeilExampleSource;
   readonly horisontalPlasseringCode = RadioHorisontalPlasseringExampleSource;
