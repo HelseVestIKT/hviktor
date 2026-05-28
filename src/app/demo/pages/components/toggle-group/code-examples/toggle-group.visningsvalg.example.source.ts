@@ -1,13 +1,14 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupVisningsvalgExampleSource = `import { Component, signal } from '@angular/core';
-import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-toggle-group-visningsvalg-example',
   standalone: true,
-  imports: [HviParagraph, HviToggleGroup, HviToggleGroupItem],
+  imports: [HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem],
   template: \`
-    <hvi-toggle-group [(value)]="selectedView" variant="primary">
+    <label hviLabel for="view-toggle">Visning:</label>
+    <hvi-toggle-group [(value)]="selectedView" variant="primary" aria-labelledby="view-toggle">
       <button hviToggleGroupItem value="liste">Liste</button>
       <button hviToggleGroupItem value="rutenett">Rutenett</button>
       <button hviToggleGroupItem value="kompakt">Kompakt</button>

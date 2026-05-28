@@ -45,6 +45,8 @@ let nextGroupId = 0;
   host: {
     class: 'ds-toggle-group',
     role: 'radiogroup',
+    '[attr.aria-label]': 'ariaLabel || null',
+    '[attr.aria-labelledby]': 'ariaLabelledby || null',
     '[attr.data-variant]': '_variant()',
     '[attr.data-size]': '_size()',
     '[tabindex]': '0',
@@ -62,6 +64,12 @@ export class HviToggleGroup implements ControlValueAccessor {
   private items!: QueryList<HviToggleGroupItem>;
 
   private readonly registeredItems: HviToggleGroupItem[] = [];
+
+  /** Accessible label for the toggle group */
+  @Input('aria-label') ariaLabel?: string;
+
+  /** ID of an element that labels the toggle group */
+  @Input('aria-labelledby') ariaLabelledby?: string;
 
   /** The variant of the toggle group */
   readonly _variant = signal<'primary' | 'secondary'>('primary');
@@ -109,6 +117,7 @@ export class HviToggleGroup implements ControlValueAccessor {
     // Update state if this item matches current value
     if (this._value() === item.value) {
       item.setSelected(true);
+      item.setFocusable(true);
     }
   }
 
@@ -124,6 +133,7 @@ export class HviToggleGroup implements ControlValueAccessor {
   selectItem(item: HviToggleGroupItem): void {
     this._value.set(item.value);
     this.updateItemStates();
+    this.updateFocusableItem(item);
     this.valueChange.emit(item.value);
     this.onChange(item.value);
     this.onTouched();
@@ -163,8 +173,15 @@ export class HviToggleGroup implements ControlValueAccessor {
     if (nextIndex !== null) {
       event.preventDefault();
       const nextItem = items[nextIndex];
+      this.updateFocusableItem(nextItem);
       nextItem.focus();
-      this.selectItem(nextItem);
+    }
+  }
+
+  /** Update which item is the roving-tabindex target */
+  private updateFocusableItem(focusedItem: HviToggleGroupItem): void {
+    for (const item of this.registeredItems) {
+      item.setFocusable(item === focusedItem);
     }
   }
 
@@ -179,6 +196,8 @@ export class HviToggleGroup implements ControlValueAccessor {
   writeValue(value: string): void {
     this._value.set(value);
     this.updateItemStates();
+    const match = this.registeredItems.find((i) => i.value === value);
+    if (match) this.updateFocusableItem(match);
   }
 
   registerOnChange(fn: (value: string) => void): void {
