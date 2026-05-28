@@ -26,7 +26,7 @@ export type RequiredTagMode = 'all-required' | 'required' | 'optional';
   standalone: true,
   imports: [HviTag],
   template: `
-    <hvi-tag variant="default" size="sm" [color]="mode === 'optional' ? 'info' : 'warning'">
+    <hvi-tag variant="default" [color]="mode === 'optional' ? 'info' : 'warning'">
       @switch (mode) {
         @case ('all-required') {
           Alle felt må fylles ut
