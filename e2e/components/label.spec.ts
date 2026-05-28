@@ -8,13 +8,15 @@ test.describe('Label', () => {
     await componentPage.goto('label');
   });
 
-  test('renders default label with ds-label class and no data-weight', async ({ page }) => {
+  test('renders regular weight label with ds-label class and data-weight="regular"', async ({
+    page,
+  }) => {
     const section = page.locator('app-demo-section[title="Varianter"]');
     await expect(section).toBeVisible();
 
-    const defaultLabel = section.locator('label.ds-label').first();
-    await expect(defaultLabel).toBeVisible();
-    await expect(defaultLabel).not.toHaveAttribute('data-weight');
+    const regularLabel = section.locator('label.ds-label[data-weight="regular"]').first();
+    await expect(regularLabel).toBeVisible();
+    await expect(regularLabel).toHaveAttribute('data-weight', 'regular');
   });
 
   test('reflects weight input as data-weight attribute', async ({ page }) => {
