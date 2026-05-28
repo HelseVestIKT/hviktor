@@ -10,20 +10,14 @@ import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helse
       <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target1">
         <div hviCardBlock>
           <h2 hviHeading>
-            <a
-              id="target1"
-              hviLink
-              href="https://designsystemet.no/no/components/docs/card/overview#lenkekort"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Card (åpnes i ny fane)</a
+            <a id="target1" hviLink href="https://www.helse-bergen.no/" rel="noopener noreferrer"
+              >Helse Bergen (helse-bergen.no)</a
             >
           </h2>
           <p hviParagraph>
-            Hvis du skal lenke til en ekstern side i en ny fane, så bør det informeres om til
-            brukeren.
+            Hvis du skal lenke til en ekstern side, så bør det informeres om til brukeren.
           </p>
-          <p hviParagraph size="sm">Designsystemet.no</p>
+          <p hviParagraph size="sm">Helse Bergen</p>
         </div>
       </hvi-card>
       <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target2">
@@ -32,12 +26,12 @@ import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helse
             <a
               id="target2"
               hviLink
-              href="https://helsevestikt.github.io/hviktor/komponenter/button"
+              href="https://helsevestikt.github.io/hviktor/komponenter/fieldset"
               rel="noopener noreferrer"
-              >Button</a
+              >Fieldset</a
             >
           </h2>
-          <p hviParagraph>Dette er et lenkekort som lenker til en intern side i samme fane.</p>
+          <p hviParagraph>Dette er et lenkekort som lenker til en intern side.</p>
         </div>
       </hvi-card>
     </div>
