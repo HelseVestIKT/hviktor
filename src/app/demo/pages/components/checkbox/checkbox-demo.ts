@@ -139,7 +139,7 @@ import { CheckboxSkrivebeskyttetReadonlyExampleSource } from './code-examples/ch
             <label hviLabel for="error-sms">SMS</label>
           </hvi-field>
           @if (contactForm.invalid) {
-            <span hviFieldValidation>Du må velge minst to alternativ</span>
+            <p hviFieldValidation>Du må velge minst to alternativ</p>
           }
         </fieldset>
       </app-demo-section>

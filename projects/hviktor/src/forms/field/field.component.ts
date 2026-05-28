@@ -11,7 +11,7 @@ import '@digdir/designsystemet-web';
  *  <label hviLabel>Name</label>
  *  <span hviFieldDescription>Fill in your full name.</span>
  *  <input type="text" />
- *  <span hviFieldValidation>This field is required.</span>
+ *  <p hviFieldValidation>This field is required.</p>
  * </hvi-field>
  * ```
  *

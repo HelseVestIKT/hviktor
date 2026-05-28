@@ -29,7 +29,13 @@ import {
     HviForm,
   ],
   template: `
-    <form hviForm [formGroup]="form" [focusOnInvalid]="summary" class="grid gap-4">
+    <form
+      hviForm
+      #hviFormRef="hviForm"
+      [formGroup]="form"
+      [focusOnInvalid]="summary"
+      class="grid gap-4"
+    >
       <hvi-field>
         <label hviLabel for="fornavn" weight="medium">Fornavn</label>
         <input
@@ -65,11 +71,16 @@ import {
         ></p>
       </hvi-field>
 
-      <hvi-error-summary #summary [form]="form" [messages]="messages" showWhen="always" />
+      <hvi-error-summary #summary [form]="form" [messages]="messages" />
 
       <div class="flex gap-2">
         <button hviButton type="submit" variant="primary">Send inn</button>
-        <button hviButton type="button" variant="secondary" (click)="form.reset()">
+        <button
+          hviButton
+          type="button"
+          variant="secondary"
+          (click)="hviFormRef.submitted = false; form.reset()"
+        >
           Nullstill
         </button>
       </div>
