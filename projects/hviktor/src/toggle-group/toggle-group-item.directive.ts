@@ -42,7 +42,7 @@ let nextId = 0;
     '[attr.data-variant]': 'computedVariant()',
     '[attr.data-icon]': 'icon ? "" : null',
     '[attr.data-roving-tabindex-item]': '"true"',
-    '[tabindex]': 'isSelected() ? 0 : -1',
+    '[tabindex]': 'isFocusable() ? 0 : -1',
     '(click)': 'onClick()',
     '(keydown)': 'onKeydown($event)',
   },
@@ -66,6 +66,12 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
   /** Whether this item is currently selected */
   readonly isSelected = this._isSelected.asReadonly();
 
+  /** Internal signal for tracking which item is the roving-tabindex target */
+  private readonly _isFocusable = signal(false);
+
+  /** Whether this item should receive focus when tabbing into the group */
+  readonly isFocusable = this._isFocusable.asReadonly();
+
   /** Computed variant based on selection state */
   readonly computedVariant = computed(() => {
     return this._isSelected() ? this.group._variant() : 'tertiary';
@@ -82,6 +88,11 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
   /** Update the selected state (called by parent group) */
   setSelected(selected: boolean): void {
     this._isSelected.set(selected);
+  }
+
+  /** Update the focusable state for roving tabindex (called by parent group) */
+  setFocusable(focusable: boolean): void {
+    this._isFocusable.set(focusable);
   }
 
   /** Focus this item's button element */

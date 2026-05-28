@@ -6,8 +6,8 @@ import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/
   standalone: true,
   imports: [HviParagraph, HviToggleGroup, HviToggleGroupItem],
   template: `
-    <hvi-toggle-group [(value)]="selectedBasic" variant="primary">
-      <button hviToggleGroupItem value="innboks">Innboks</button>
+    <hvi-toggle-group [(value)]="selectedBasic" variant="primary" aria-label="Mailboks filter">
+      <button hviToggleGroupItem value="innboks" aria>Innboks</button>
       <button hviToggleGroupItem value="utkast">Utkast</button>
       <button hviToggleGroupItem value="arkiv">Arkiv</button>
       <button hviToggleGroupItem value="sendt">Sendt</button>

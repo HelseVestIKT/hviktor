@@ -1,9 +1,11 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import {
   HviHeading,
+  HviLabel,
   HviParagraph,
   HviToggleGroup,
   HviToggleGroupItem,
+  HviTooltip,
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
@@ -26,6 +28,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
     HviToggleGroupItem,
     HviParagraph,
     HviHeading,
+    HviTooltip,
+    HviLabel,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -34,10 +38,10 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
       <app-demo-section
         title="Grunnleggende"
         [code]="grunnleggendeCode"
-        description="En enkel toggle group med tekst-knapper."
+        description="En enkel toggle group med tekst-knapper. Hvis du ikke har en tilhørende label til toggleGroup, så må du legge til en aria-label på toggleGroup for å forklare hva valgene representerer."
       >
-        <hvi-toggle-group [(value)]="selectedBasic" variant="primary">
-          <button hviToggleGroupItem value="innboks">Innboks</button>
+        <hvi-toggle-group [(value)]="selectedBasic" variant="primary" aria-label="Mailboks filter">
+          <button hviToggleGroupItem value="innboks" aria>Innboks</button>
           <button hviToggleGroupItem value="utkast">Utkast</button>
           <button hviToggleGroupItem value="arkiv">Arkiv</button>
           <button hviToggleGroupItem value="sendt">Sendt</button>
@@ -51,7 +55,12 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         [code]="secondaryVariantCode"
         description="ToggleGroup med secondary variant."
       >
-        <hvi-toggle-group [(value)]="selectedSecondary" variant="secondary">
+        <label hviLabel for="secondary-toggle">Mailboks filter:</label>
+        <hvi-toggle-group
+          [(value)]="selectedSecondary"
+          variant="secondary"
+          aria-labelledby="secondary-toggle"
+        >
           <button hviToggleGroupItem value="innboks">Innboks</button>
           <button hviToggleGroupItem value="utkast">Utkast</button>
           <button hviToggleGroupItem value="arkiv">Arkiv</button>
@@ -69,25 +78,32 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
           <div class="flex flex-col gap-2">
             <h3 hviHeading size="sm">sm</h3>
             <hvi-toggle-group [(value)]="small" variant="primary" size="sm">
-              <button hviToggleGroupItem value="innboks">Innboks</button>
-              <button hviToggleGroupItem value="utkast">Utkast</button>
-              <button hviToggleGroupItem value="arkiv">Arkiv</button>
+              <button
+                hviToggleGroupItem
+                value="innboks"
+                aria-label="
+              Innboks"
+              >
+                Innboks
+              </button>
+              <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
+              <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
             </hvi-toggle-group>
           </div>
           <div class="flex flex-col gap-2">
             <h3 hviHeading size="sm">md</h3>
             <hvi-toggle-group [(value)]="medium" variant="primary" size="md">
-              <button hviToggleGroupItem value="innboks">Innboks</button>
-              <button hviToggleGroupItem value="utkast">Utkast</button>
-              <button hviToggleGroupItem value="arkiv">Arkiv</button>
+              <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
+              <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
+              <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
             </hvi-toggle-group>
           </div>
           <div class="flex flex-col gap-2">
             <h3 hviHeading size="sm">lg</h3>
             <hvi-toggle-group [(value)]="large" variant="primary" size="lg">
-              <button hviToggleGroupItem value="innboks">Innboks</button>
-              <button hviToggleGroupItem value="utkast">Utkast</button>
-              <button hviToggleGroupItem value="arkiv">Arkiv</button>
+              <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
+              <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
+              <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
             </hvi-toggle-group>
           </div>
         </div>
@@ -97,16 +113,39 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
       <app-demo-section
         title="Kun ikoner"
         [code]="kunIkonerCode"
-        description="ToggleGroup med kun ikoner. Bruk icon-attributtet for å style knappene som kun-ikon."
+        description="ToggleGroup med kun ikoner. Bruk icon-attributtet for å style knappene som kun-ikon. ToggleGroup med kun ikoner må ha tooltip og aria-label"
       >
-        <hvi-toggle-group [(value)]="selectedIconOnly" variant="primary">
-          <button hviToggleGroupItem value="left" icon aria-label="Venstrestilt">
+        <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
+        <hvi-toggle-group
+          [(value)]="selectedIconOnly"
+          variant="primary"
+          aria-labelledby="icon-only-toggle"
+        >
+          <button
+            hviToggleGroupItem
+            hviTooltip="Venstrestilt"
+            value="left"
+            icon
+            aria-label="Venstrestilt"
+          >
             <hvi-icon-align-left></hvi-icon-align-left>
           </button>
-          <button hviToggleGroupItem value="center" icon aria-label="Midtstilt">
+          <button
+            hviToggleGroupItem
+            hviTooltip="Midtstilt"
+            value="center"
+            icon
+            aria-label="Midtstilt"
+          >
             <hvi-icon-align-center></hvi-icon-align-center>
           </button>
-          <button hviToggleGroupItem value="right" icon aria-label="Høyrestilt">
+          <button
+            hviToggleGroupItem
+            hviTooltip="Høyrestilt"
+            value="right"
+            icon
+            aria-label="Høyrestilt"
+          >
             <hvi-icon-align-right></hvi-icon-align-right>
           </button>
         </hvi-toggle-group>
@@ -118,7 +157,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         [code]="visningsvalgCode"
         description="Eksempel på bruk for å veksle mellom visninger."
       >
-        <hvi-toggle-group [(value)]="selectedView" variant="primary">
+        <label hviLabel for="view-toggle">Visning:</label>
+        <hvi-toggle-group [(value)]="selectedView" variant="primary" aria-labelledby="view-toggle">
           <button hviToggleGroupItem value="liste">Liste</button>
           <button hviToggleGroupItem value="rutenett">Rutenett</button>
           <button hviToggleGroupItem value="kompakt">Kompakt</button>

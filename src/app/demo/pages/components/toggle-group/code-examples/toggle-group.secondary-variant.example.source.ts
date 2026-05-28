@@ -1,13 +1,18 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupSecondaryVariantExampleSource = `import { Component, signal } from '@angular/core';
-import { HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviLabel, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-toggle-group-secondary-variant-example',
   standalone: true,
-  imports: [HviToggleGroup, HviToggleGroupItem],
+  imports: [HviLabel, HviToggleGroup, HviToggleGroupItem],
   template: \`
-    <hvi-toggle-group [(value)]="selectedSecondary" variant="secondary">
+    <label hviLabel for="secondary-toggle">Mailboks filter:</label>
+    <hvi-toggle-group
+      [(value)]="selectedSecondary"
+      variant="secondary"
+      aria-labelledby="secondary-toggle"
+    >
       <button hviToggleGroupItem value="innboks">Innboks</button>
       <button hviToggleGroupItem value="utkast">Utkast</button>
       <button hviToggleGroupItem value="arkiv">Arkiv</button>

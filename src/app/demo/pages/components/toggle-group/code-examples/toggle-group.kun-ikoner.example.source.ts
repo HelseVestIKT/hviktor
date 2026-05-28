@@ -1,16 +1,49 @@
 // Auto-generated - do not edit manually
-export const ToggleGroupKunIkonerExampleSource = `import { Component, signal } from '@angular/core';
-import { HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+export const ToggleGroupKunIkonerExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip } from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-align-center.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-align-left.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
 
 @Component({
   selector: 'app-toggle-group-kun-ikoner-example',
   standalone: true,
-  imports: [HviToggleGroup, HviToggleGroupItem],
+  imports: [HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: \`
-    <hvi-toggle-group [(value)]="selectedIconOnly" variant="primary">
-      <button hviToggleGroupItem value="left" icon aria-label="Venstrestilt">⬅</button>
-      <button hviToggleGroupItem value="center" icon aria-label="Midtstilt">⬆</button>
-      <button hviToggleGroupItem value="right" icon aria-label="Høyrestilt">➡</button>
+    <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
+    <hvi-toggle-group
+      [(value)]="selectedIconOnly"
+      variant="primary"
+      aria-labelledby="icon-only-toggle"
+    >
+      <button
+        hviToggleGroupItem
+        hviTooltip="Venstrestilt"
+        value="left"
+        icon
+        aria-label="Venstrestilt"
+      >
+        <hvi-icon-align-left></hvi-icon-align-left>
+      </button>
+      <button
+        hviToggleGroupItem
+        hviTooltip="Midtstilt"
+        value="center"
+        icon
+        aria-label="Midtstilt"
+      >
+        <hvi-icon-align-center></hvi-icon-align-center>
+      </button>
+      <button
+        hviToggleGroupItem
+        hviTooltip="Høyrestilt"
+        value="right"
+        icon
+        aria-label="Høyrestilt"
+      >
+        <hvi-icon-align-right></hvi-icon-align-right>
+      </button>
     </hvi-toggle-group>
   \`,
 })

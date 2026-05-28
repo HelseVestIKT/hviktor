@@ -10,25 +10,32 @@ import { HviHeading, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hv
       <div class="flex flex-col gap-2">
         <h3 hviHeading size="sm">sm</h3>
         <hvi-toggle-group [(value)]="small" variant="primary" size="sm">
-          <button hviToggleGroupItem value="innboks">Innboks</button>
-          <button hviToggleGroupItem value="utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv">Arkiv</button>
+          <button
+            hviToggleGroupItem
+            value="innboks"
+            aria-label="
+          Innboks"
+          >
+            Innboks
+          </button>
+          <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
+          <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
         </hvi-toggle-group>
       </div>
       <div class="flex flex-col gap-2">
         <h3 hviHeading size="sm">md</h3>
         <hvi-toggle-group [(value)]="medium" variant="primary" size="md">
-          <button hviToggleGroupItem value="innboks">Innboks</button>
-          <button hviToggleGroupItem value="utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv">Arkiv</button>
+          <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
+          <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
+          <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
         </hvi-toggle-group>
       </div>
       <div class="flex flex-col gap-2">
         <h3 hviHeading size="sm">lg</h3>
         <hvi-toggle-group [(value)]="large" variant="primary" size="lg">
-          <button hviToggleGroupItem value="innboks">Innboks</button>
-          <button hviToggleGroupItem value="utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv">Arkiv</button>
+          <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
+          <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
+          <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
         </hvi-toggle-group>
       </div>
     </div>
