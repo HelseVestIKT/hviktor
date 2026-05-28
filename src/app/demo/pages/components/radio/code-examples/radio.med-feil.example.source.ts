@@ -1,11 +1,12 @@
 // Auto-generated - do not edit manually
 export const RadioMedFeilExampleSource = `import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
 import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-radio-med-feil-example',
   standalone: true,
-  imports: [HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput, HviLabel, HviParagraph],
+  imports: [HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput, HviLabel, HviParagraph, ReactiveFormsModule],
   template: \`
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Hvilken bydel bor du i?</legend>

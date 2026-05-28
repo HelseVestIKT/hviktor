@@ -23,15 +23,8 @@ import { CheckboxDisabledExampleSource } from './code-examples/checkbox.disabled
 import { CheckboxEnkelCheckboxExampleSource } from './code-examples/checkbox.enkel-checkbox.example.source';
 import { CheckboxGrupperingExampleSource } from './code-examples/checkbox.gruppering.example.source';
 import { CheckboxMedFeilExampleSource } from './code-examples/checkbox.med-feil.example.source';
+import { CheckboxOutlineExampleSource } from './code-examples/checkbox.outline.example.source';
 import { CheckboxSkrivebeskyttetReadonlyExampleSource } from './code-examples/checkbox.skrivebeskyttet-readonly.example.source';
-
-function minCheckedValidator(min: number) {
-  return (control: AbstractControl): ValidationErrors | null => {
-    const group = control as FormGroup;
-    const checked = Object.values(group.controls).filter((c) => c.value === true).length;
-    return checked >= min ? null : { minChecked: { required: min, actual: checked } };
-  };
-}
 
 @Component({
   selector: 'app-checkbox-demo',
@@ -197,6 +190,45 @@ function minCheckedValidator(min: number) {
         </fieldset>
       </app-demo-section>
 
+      <!-- Outline -->
+      <app-demo-section
+        title="Outline"
+        [code]="outlineCode"
+        description="outline-attributtet legges på hvi-field – ikke på selve input-elementet. Det gir ekstra padding og en ramme rundt hvert valg for å skape en større klikkflate."
+      >
+        <fieldset hviFieldset>
+          <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
+          <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
+          <hvi-field outline>
+            <input
+              hviInput
+              type="checkbox"
+              id="outline-epost"
+              value="epost"
+              name="kontakt-outline"
+            />
+            <label hviLabel for="outline-epost">E-post</label>
+            <span hviFieldDescription>Vi bruker e-postadressen du har oppgitt</span>
+          </hvi-field>
+          <hvi-field outline>
+            <input
+              hviInput
+              type="checkbox"
+              id="outline-telefon"
+              value="telefon"
+              name="kontakt-outline"
+            />
+            <label hviLabel for="outline-telefon">Telefon</label>
+            <span hviFieldDescription>Vi ringer deg i åpningstiden</span>
+          </hvi-field>
+          <hvi-field outline>
+            <input hviInput type="checkbox" id="outline-sms" value="sms" name="kontakt-outline" />
+            <label hviLabel for="outline-sms">SMS</label>
+            <span hviFieldDescription>Vi bruker telefonnummeret du har oppgitt</span>
+          </hvi-field>
+        </fieldset>
+      </app-demo-section>
+
       <!-- Disabled -->
       <app-demo-section
         title="Disabled"
@@ -250,8 +282,17 @@ export class CheckboxDemoComponent {
   readonly bekreftingMedCheckboxCode = CheckboxBekreftingMedCheckboxExampleSource;
   readonly grupperingCode = CheckboxGrupperingExampleSource;
   readonly medFeilCode = CheckboxMedFeilExampleSource;
+  readonly outlineCode = CheckboxOutlineExampleSource;
   readonly skrivebeskyttetReadonlyCode = CheckboxSkrivebeskyttetReadonlyExampleSource;
   readonly disabledCode = CheckboxDisabledExampleSource;
+
+  minCheckedValidator(min: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const group = control as FormGroup;
+      const checked = Object.values(group.controls).filter((c) => c.value === true).length;
+      return checked >= min ? null : { minChecked: { required: min, actual: checked } };
+    };
+  }
 
   contactForm = new FormGroup(
     {
@@ -259,6 +300,6 @@ export class CheckboxDemoComponent {
       telefon: new FormControl(false),
       sms: new FormControl(false),
     },
-    { validators: minCheckedValidator(2) },
+    { validators: this.minCheckedValidator(2) },
   );
 }

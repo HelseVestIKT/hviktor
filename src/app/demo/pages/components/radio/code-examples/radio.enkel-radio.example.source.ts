@@ -1,5 +1,6 @@
 // Auto-generated - do not edit manually
 export const RadioEnkelRadioExampleSource = `import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
 
 @Component({
@@ -14,5 +15,6 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   \`,
 })
 export class RadioEnkelRadioExampleComponent {
+  bydelControl = new FormControl('', Validators.required);
 }
 `;

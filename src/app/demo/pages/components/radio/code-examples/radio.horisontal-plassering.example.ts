@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
@@ -22,4 +23,6 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
     </fieldset>
   `,
 })
-export class RadioHorisontalPlasseringExampleComponent {}
+export class RadioHorisontalPlasseringExampleComponent {
+  bydelControl = new FormControl('', Validators.required);
+}

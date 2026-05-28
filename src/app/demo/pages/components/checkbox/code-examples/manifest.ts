@@ -31,6 +31,12 @@ export const CheckboxExamplesManifest = [
     sourceExport: 'CheckboxSkrivebeskyttetReadonlyExampleSource',
   },
   {
+    slug: 'outline',
+    title: 'Outline',
+    className: 'CheckboxOutlineExampleComponent',
+    sourceExport: 'CheckboxOutlineExampleSource',
+  },
+  {
     slug: 'disabled',
     title: 'Disabled',
     className: 'CheckboxDisabledExampleComponent',
@@ -44,4 +50,5 @@ export type CheckboxExampleSlug =
   | 'gruppering'
   | 'med-feil'
   | 'skrivebeskyttet-readonly'
+  | 'outline'
   | 'disabled';

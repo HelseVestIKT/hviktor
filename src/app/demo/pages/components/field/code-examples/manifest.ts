@@ -30,6 +30,12 @@ export const FieldExamplesManifest = [
     className: 'FieldCheckboxOgRadioExampleComponent',
     sourceExport: 'FieldCheckboxOgRadioExampleSource',
   },
+  {
+    slug: 'outline',
+    title: 'Outline',
+    className: 'FieldOutlineExampleComponent',
+    sourceExport: 'FieldOutlineExampleSource',
+  },
 ] as const;
 
 export type FieldExampleSlug =
@@ -37,4 +43,5 @@ export type FieldExampleSlug =
   | 'prefix-suffix'
   | 'antall-tegn'
   | 'plassering'
-  | 'checkbox-og-radio';
+  | 'checkbox-og-radio'
+  | 'outline';
