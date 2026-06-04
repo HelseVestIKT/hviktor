@@ -4,6 +4,26 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.2.0] – 2026-06-04
+
+### Added
+
+- Size input for ToggleGroup.
+- Outline variant for field (gjelder checkbox, radio og switch når de er i en hvi-field).
+
+### Changed
+
+- Forbedret aria-label på Pagination.
+- Liten endring i alt tekst for logoer.
+- Lenkekort er forbedret.
+- Oppdatert `@digdir/designsystemet-css` og `@digdir/designsystemet-web` til 1.15.0.
+- Pakken støtter angular 22.
+
+### Fixed
+
+- Weight på label er fikset
+- Lagt til luft i skjemaelementer
+
 ## [0.1.8] – 2026-05-08
 
 ### Added
