@@ -7,7 +7,7 @@ import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValida
   standalone: true,
   imports: [HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValidation, HviInput, HviLabel, HviValidationMessage],
   template: \`
-    <form hviForm #hviFormRef="hviForm" [formGroup]="form" [focusOnInvalid]="summary" class="grid gap-4">
+    <form hviForm #hviFormRef="hviForm" [formGroup]="form" [focusOnInvalid]="summary">
       <hvi-field>
         <label hviLabel for="fornavn" weight="medium">Fornavn</label>
         <input
