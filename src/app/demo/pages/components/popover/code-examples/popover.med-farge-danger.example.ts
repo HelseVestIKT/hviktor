@@ -6,15 +6,30 @@ import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviButton, HviParagraph, HviPopover],
   template: `
-    <div class="flex flex-wrap gap-4">
-      <button hviButton color="danger" popovertarget="popoverDanger">Slett</button>
-      <hvi-popover id="popoverDanger" color="danger">
-        <p hviParagraph>Er du sikker på at du vil slette?</p>
-        <div class="mt-2 flex gap-2">
-          <button hviButton size="sm" color="danger">Slett</button>
-          <button hviButton size="sm" variant="tertiary">Avbryt</button>
-        </div>
-      </hvi-popover>
+    <div class="flex flex-col gap-4">
+      <p hviParagraph>
+        Du kan bruke
+        <code>popovertargetaction="hide"</code> på f.eks. en "Avbryt"-knapp hvis popoveren bare skal
+        lukkes ved klikk.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <button hviButton color="danger" popovertarget="popoverDanger">Slett</button>
+        <hvi-popover id="popoverDanger" color="danger">
+          <p hviParagraph>Er du sikker på at du vil slette?</p>
+          <div class="mt-2 flex gap-2">
+            <button hviButton size="sm" color="danger">Slett</button>
+            <button
+              hviButton
+              size="sm"
+              variant="tertiary"
+              popovertarget="popoverDanger"
+              popovertargetaction="hide"
+            >
+              Avbryt
+            </button>
+          </div>
+        </hvi-popover>
+      </div>
     </div>
   `,
 })

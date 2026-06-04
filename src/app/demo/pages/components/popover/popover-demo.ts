@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor';
+import { HviButton, HviLink, HviParagraph, HviPopover } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { PopoverMedFargeDangerExampleSource } from './code-examples/popover.med-farge-danger.example.source';
@@ -8,7 +8,7 @@ import { PopoverStandardExampleSource } from './code-examples/popover.standard.e
 @Component({
   selector: 'app-popover-demo',
   standalone: true,
-  imports: [HviPopover, HviButton, HviParagraph, DemoPageComponent, DemoSectionComponent],
+  imports: [HviPopover, HviButton, HviParagraph, DemoPageComponent, DemoSectionComponent, HviLink],
   template: `
     <app-demo-page componentId="popover">
       <app-demo-section title="Standard" [code]="standardCode">
@@ -35,15 +35,37 @@ import { PopoverStandardExampleSource } from './code-examples/popover.standard.e
       </app-demo-section>
 
       <app-demo-section title="Med farge (danger)" [code]="medFargeDangerCode">
-        <div class="flex flex-wrap gap-4">
-          <button hviButton color="danger" popovertarget="popoverDanger">Slett</button>
-          <hvi-popover id="popoverDanger" color="danger">
-            <p hviParagraph>Er du sikker på at du vil slette?</p>
-            <div class="mt-2 flex gap-2">
-              <button hviButton size="sm" color="danger">Slett</button>
-              <button hviButton size="sm" variant="tertiary">Avbryt</button>
-            </div>
-          </hvi-popover>
+        <div class="flex flex-col gap-4">
+          <p hviParagraph>
+            Du kan bruke
+            <code>popovertargetaction="hide"</code> på f.eks. en "Avbryt"-knapp hvis popoveren bare
+            skal lukkes ved klikk. Se videre dokumentasjon på
+            <a
+              hviLink
+              href="https://designsystemet.no/no/components/docs/popover/code"
+              target="_blank"
+              >designsystemet.no</a
+            >
+            for mer informasjon om kontrollert popover.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button hviButton color="danger" popovertarget="popoverDanger">Slett</button>
+            <hvi-popover id="popoverDanger" color="danger">
+              <p hviParagraph>Er du sikker på at du vil slette?</p>
+              <div class="mt-2 flex gap-2">
+                <button hviButton size="sm" color="danger">Slett</button>
+                <button
+                  hviButton
+                  size="sm"
+                  variant="tertiary"
+                  popovertarget="popoverDanger"
+                  popovertargetaction="hide"
+                >
+                  Avbryt
+                </button>
+              </div>
+            </hvi-popover>
+          </div>
         </div>
       </app-demo-section>
     </app-demo-page>
