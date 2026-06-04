@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviCard, HviDetails, HviDetailsContent, HviDetailsSummary } from '@helsevestikt/hviktor';
+import { HviCard, HviDetails } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { DetailsIKortExampleSource } from './code-examples/details.i-kort.example.source';
@@ -7,56 +7,41 @@ import { DetailsVarianterExampleSource } from './code-examples/details.varianter
 @Component({
   selector: 'app-details-demo',
   standalone: true,
-  imports: [
-    HviDetails,
-    HviDetailsSummary,
-    HviDetailsContent,
-    HviCard,
-    DemoPageComponent,
-    DemoSectionComponent,
-  ],
+  imports: [HviDetails, HviCard, DemoPageComponent, DemoSectionComponent],
   template: `
     <app-demo-page componentId="details">
       <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-col gap-2">
-          <hvi-details variant="tinted">
-            <hvi-details-summary>
-              <p size="md">Detaljer (tinted)</p>
-            </hvi-details-summary>
-            <hvi-details-content>
+          <details hviDetails variant="tinted">
+            <summary>Detaljer (tinted)</summary>
+            <div>
               <p>Her er innholdet i detaljene.</p>
-            </hvi-details-content>
-          </hvi-details>
+            </div>
+          </details>
 
-          <hvi-details>
-            <hvi-details-summary>
-              <p size="md">Detaljer (default)</p>
-            </hvi-details-summary>
-            <hvi-details-content>
+          <details hviDetails>
+            <summary>Detaljer (default)</summary>
+            <div>
               <p>Her er innholdet i detaljene.</p>
-            </hvi-details-content>
-          </hvi-details>
+            </div>
+          </details>
         </div>
       </app-demo-section>
 
       <app-demo-section title="I kort" [code]="iKortCode">
         <hvi-card color="brand2">
-          <hvi-details variant="tinted">
-            <hvi-details-summary>
-              <p size="md">Detaljer</p>
-            </hvi-details-summary>
-            <hvi-details-content>
+          <details hviDetails variant="tinted">
+            <summary>Detaljer</summary>
+            <div>
               <p>Her er innholdet i detaljene.</p>
-            </hvi-details-content>
-          </hvi-details>
-          <hvi-details [open]="true">
-            <hvi-details-summary>
-              <p size="md">Detaljer (åpen)</p>
-            </hvi-details-summary>
-            <hvi-details-content>
+            </div>
+          </details>
+          <details hviDetails [open]="true">
+            <summary>Detaljer (åpen)</summary>
+            <div>
               <p>Her er innholdet i detaljene.</p>
-            </hvi-details-content>
-          </hvi-details>
+            </div>
+          </details>
         </hvi-card>
       </app-demo-section>
     </app-demo-page>

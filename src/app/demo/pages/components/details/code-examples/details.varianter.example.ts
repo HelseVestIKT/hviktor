@@ -1,29 +1,25 @@
 import { Component } from '@angular/core';
-import { HviDetails, HviDetailsContent, HviDetailsSummary } from '@helsevestikt/hviktor';
+import { HviDetails } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-details-varianter-example',
   standalone: true,
-  imports: [HviDetails, HviDetailsContent, HviDetailsSummary],
+  imports: [HviDetails],
   template: `
     <div class="flex flex-col gap-2">
-      <hvi-details variant="tinted">
-        <hvi-details-summary>
-          <p size="md">Detaljer (tinted)</p>
-        </hvi-details-summary>
-        <hvi-details-content>
+      <details hviDetails variant="tinted">
+        <summary>Detaljer (tinted)</summary>
+        <div>
           <p>Her er innholdet i detaljene.</p>
-        </hvi-details-content>
-      </hvi-details>
+        </div>
+      </details>
 
-      <hvi-details>
-        <hvi-details-summary>
-          <p size="md">Detaljer (default)</p>
-        </hvi-details-summary>
-        <hvi-details-content>
+      <details hviDetails>
+        <summary>Detaljer (default)</summary>
+        <div>
           <p>Her er innholdet i detaljene.</p>
-        </hvi-details-content>
-      </hvi-details>
+        </div>
+      </details>
     </div>
   `,
 })

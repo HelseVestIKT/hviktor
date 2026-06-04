@@ -1,11 +1,5 @@
 import { AfterViewInit, Component, computed, ElementRef, input, viewChild } from '@angular/core';
-import {
-  HviDetails,
-  HviDetailsContent,
-  HviDetailsSummary,
-  HviHeading,
-  HviParagraph,
-} from '@helsevestikt/hviktor';
+import { HviDetails, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
 import hljs from 'highlight.js/lib/core';
 import typescript from 'highlight.js/lib/languages/typescript';
 
@@ -19,7 +13,7 @@ hljs.registerLanguage('typescript', typescript);
 @Component({
   selector: 'app-demo-section',
   standalone: true,
-  imports: [HviHeading, HviParagraph, HviDetails, HviDetailsSummary, HviDetailsContent],
+  imports: [HviHeading, HviParagraph, HviDetails],
   template: `
     <section [id]="sectionId()" class="my-8 scroll-mt-24 rounded-lg border border-neutral-300 p-6">
       <h2 hviHeading size="md">{{ title() }}</h2>
@@ -31,16 +25,16 @@ hljs.registerLanguage('typescript', typescript);
       </div>
       @if (code()) {
         <div class="mt-4">
-          <hvi-details (onToggle)="onDetailsToggle($event)">
-            <hvi-details-summary>
+          <details hviDetails (toggle)="onDetailsToggle($event)">
+            <summary>
               <p hviParagraph>Vis kode</p>
-            </hvi-details-summary>
-            <hvi-details-content>
+            </summary>
+            <div>
               <pre>
                 <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
               </pre>
-            </hvi-details-content>
-          </hvi-details>
+            </div>
+          </details>
         </div>
       }
     </section>
