@@ -2,7 +2,7 @@ import { Directive, Input } from '@angular/core';
 
 /**
  * @summary
- * Details directive description.
+ * Directive that styles the native `<details>` element according to Designsystemet.
  *
  * @example
  * ```html
