@@ -56,13 +56,7 @@ import { ErrorSummaryManuellModusExampleSource } from './code-examples/error-sum
         [code]="brukISkjemaCode"
         description="I eksempelet under kan du trykke på hver lenke i ErrorSummary for å navigere til det aktuelle feltet med feil."
       >
-        <form
-          hviForm
-          #hviFormRef="hviForm"
-          [formGroup]="form"
-          [focusOnInvalid]="summary"
-          class="grid gap-4"
-        >
+        <form hviForm #hviFormRef="hviForm" [formGroup]="form" [focusOnInvalid]="summary">
           <hvi-field>
             <label hviLabel for="fornavn" weight="medium">Fornavn</label>
             <input
