@@ -22,7 +22,7 @@ import '@digdir/designsystemet-web';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
   styles: [
-    ':host { display: contents; }',
+    ':host { display: block; }',
     'ds-field[data-variant="outline"] { margin-block-end: var(--dsc-fieldset-gap, var(--ds-size-2)); }',
   ],
   template:

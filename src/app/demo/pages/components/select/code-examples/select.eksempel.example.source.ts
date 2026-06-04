@@ -7,9 +7,8 @@ import { HviLabel, HviSelect } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviLabel, HviSelect],
   template: \`
-    <div class="flex flex-col gap-2">
       <form hviForm>
-        <fieldset hviFieldset class="flex flex-col gap-2">
+        <fieldset hviFieldset>
           <legend hviLabel>Ulike select</legend>
     
           <hvi-field>
@@ -69,7 +68,6 @@ import { HviLabel, HviSelect } from '@helsevestikt/hviktor';
           </hvi-field>
         </fieldset>
       </form>
-    </div>
   \`,
 })
 export class SelectEksempelExampleComponent {
