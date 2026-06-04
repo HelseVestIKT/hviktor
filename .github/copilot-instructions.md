@@ -67,7 +67,7 @@ The forms layer is the most complex subsystem — understand it before modifying
 
 ## Key integration details
 
-- Tabs use `@u-elements/u-tabs` web components; Details uses `@u-elements/u-details`.
+- Tabs use `@u-elements/u-tabs` web components.
 - Icons load SVGs at runtime via `HttpClient` with `ViewEncapsulation.None` for inline SVG styling.
 - The dialog directive wraps native `<dialog>` — preserve the `(openChange)` event contract.
 - Norwegian (Bokmål) is used for all UI text, default messages, and script output.

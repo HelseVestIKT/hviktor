@@ -15,8 +15,8 @@
   "allowedNonPeerDependencies": [
     "@digdir/designsystemet-css",
     "@digdir/designsystemet-web",
-    "@u-elements/u-details",
     "@u-elements/u-tabs",
+    "@u-elements/u-details",
     "@u-elements/u-combobox",
     "@tanstack/angular-table"
   ]

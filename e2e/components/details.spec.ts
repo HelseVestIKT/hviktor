@@ -8,25 +8,23 @@ test.describe('Details', () => {
     await componentPage.goto('details');
   });
 
-  test('varianter section renders tinted and default data-variant attributes', async ({ page }) => {
-    const section = page.locator('app-demo-section[title="Varianter"]');
-    await expect(section.locator('u-details[data-variant="tinted"]').first()).toBeVisible();
-    await expect(section.locator('u-details[data-variant="default"]').first()).toBeVisible();
+  test('details renders tinted and default data-variant attributes', async ({ page }) => {
+    await expect(
+      page.locator('app-demo-section[title="I kort"] details[data-variant="tinted"]').first(),
+    ).toBeVisible();
+    await expect(
+      page.locator('app-demo-section[title="Standard"] details[data-variant="default"]').first(),
+    ).toBeVisible();
   });
 
-  test('varianter section details expand on click', async ({ page }) => {
-    const section = page.locator('app-demo-section[title="Varianter"]');
-    const firstDetails = section.locator('u-details').first();
-    const summary = firstDetails.locator('u-summary');
+  test('standard section details expand on click', async ({ page }) => {
+    const section = page.locator('app-demo-section[title="Standard"]');
+    const firstDetails = section.locator('details').first();
+    const summary = firstDetails.locator('summary');
 
     await expect(firstDetails).not.toHaveAttribute('open');
     await summary.click();
     await expect(firstDetails).toHaveAttribute('open');
-  });
-
-  test('i kort section has a pre-opened details panel', async ({ page }) => {
-    const section = page.locator('app-demo-section[title="I kort"]');
-    await expect(section.locator('u-details[open]')).toBeVisible();
   });
 
   test('accessibility check', async ({ page }) => {
