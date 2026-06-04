@@ -11,16 +11,15 @@
         <a hviLink routerLink="/mcp-setup">MCP Setup</a>
       </nav> -->
     </div>
-    <button
-      hviButton
-      variant="tertiary"
-      color="accent"
-      (click)="themeService.toggleColorScheme()"
-      [title]="'Bytt til ' + themeService.getNextSchemeLabel() + ' modus'"
+    <hvi-toggle-group
+      [value]="themeService.colorScheme()"
+      (valueChange)="themeService.setColorScheme($event)"
+      aria-label="Fargetema"
+      size="sm"
     >
-      <span>{{ themeService.getNextSchemeIcon() }}</span>
-      <span class="hidden sm:inline">{{ themeService.getNextSchemeLabel() }}</span>
-    </button>
+      <button hviToggleGroupItem value="light"><hvi-icon-sun-fill /> Lys</button>
+      <button hviToggleGroupItem value="dark"><hvi-icon-moon-fill /> Mørk</button>
+    </hvi-toggle-group>
   </div>
 </header>
 

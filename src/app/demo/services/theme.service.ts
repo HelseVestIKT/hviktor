@@ -33,6 +33,12 @@ export class ThemeService {
     return 'light';
   }
 
+  setColorScheme(value: string): void {
+    if (value === 'light' || value === 'dark') {
+      this.colorScheme.set(value);
+    }
+  }
+
   toggleColorScheme(): void {
     this.colorScheme.set(this.colorScheme() === 'light' ? 'dark' : 'light');
   }

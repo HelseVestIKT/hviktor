@@ -1,13 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HviButton, HviLogo } from '@helsevestikt/hviktor';
+import { HviLogo, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-moon-fill.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-sun-fill.webcomponent';
 import { DEMO_COMPONENTS } from '../demo-components';
 import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-demo-layout',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, HviButton, HviLogo],
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    HviLogo,
+    HviToggleGroup,
+    HviToggleGroupItem,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: 'demo-layout.html',
   host: {
     '[attr.data-color-scheme]': 'themeService.colorScheme()',
