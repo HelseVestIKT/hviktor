@@ -39,14 +39,14 @@
           >
             {{ component.name }} @if (component.codeTested) {
             <span
-              class="ml-auto text-xs text-(--ds-color-accent-base-default)"
+              class="ml-auto text-(--ds-color-brand1-base-default)"
               title="Kode testet"
               aria-label="Kode testet"
               >✓</span
             >
             } @if (component.a11yTested) {
             <span
-              class="text-xs text-(--ds-color-brand2-base-default)"
+              class="text-(--ds-color-brand2-base-default)"
               [class.ml-auto]="!component.codeTested"
               title="A11y testet"
               aria-label="A11y testet"
