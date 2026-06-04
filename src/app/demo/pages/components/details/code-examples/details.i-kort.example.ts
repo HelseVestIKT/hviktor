@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviCard, HviDetails, HviLink, HviParagraph } from '@helsevestikt/hviktor-angular';
+import { HviCard, HviDetails, HviLink, HviParagraph } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-details-i-kort-example',

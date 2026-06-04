@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviDetails } from '@helsevestikt/hviktor-angular';
+import { HviDetails } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-details-varianter-example',
