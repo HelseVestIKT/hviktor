@@ -8,10 +8,13 @@ test.describe('Details', () => {
     await componentPage.goto('details');
   });
 
-  test('standard section renders tinted and default data-variant attributes', async ({ page }) => {
-    const section = page.locator('app-demo-section[title="Standard"]');
-    await expect(section.locator('details[data-variant="tinted"]').first()).toBeVisible();
-    await expect(section.locator('details[data-variant="default"]').first()).toBeVisible();
+  test('details renders tinted and default data-variant attributes', async ({ page }) => {
+    await expect(
+      page.locator('app-demo-section[title="I kort"] details[data-variant="tinted"]').first(),
+    ).toBeVisible();
+    await expect(
+      page.locator('app-demo-section[title="Standard"] details[data-variant="default"]').first(),
+    ).toBeVisible();
   });
 
   test('standard section details expand on click', async ({ page }) => {
