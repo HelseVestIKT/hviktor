@@ -1,26 +1,21 @@
 import { Component } from '@angular/core';
-import { HviDetails } from '@helsevestikt/hviktor';
+import { HviDetails } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-details-varianter-example',
   standalone: true,
   imports: [HviDetails],
   template: `
-    <div class="flex flex-col gap-2">
-      <details hviDetails variant="tinted">
-        <summary>Detaljer (tinted)</summary>
-        <div>
-          <p>Her er innholdet i detaljene.</p>
-        </div>
-      </details>
-
-      <details hviDetails>
-        <summary>Detaljer (default)</summary>
-        <div>
-          <p>Her er innholdet i detaljene.</p>
-        </div>
-      </details>
-    </div>
+    <details hviDetails>
+      <summary>Hvem kan registrere seg i Frivillighetsregisteret?</summary>
+      <div>
+        <p>
+          For å kunne bli registrert i Frivillighetsregisteret, må organisasjonen drive frivillig
+          virksomhet. Det er bare foreninger, stiftelser og aksjeselskap som kan registreres.
+          Virksomheten kan ikke dele ut midler til fysiske personer. Virksomheten må ha et styre.
+        </p>
+      </div>
+    </details>
   `,
 })
 export class DetailsVarianterExampleComponent {}
