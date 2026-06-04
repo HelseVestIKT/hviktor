@@ -1,11 +1,11 @@
 // Auto-generated - do not edit manually
 export const DetailsIKortExampleSource = `import { Component } from '@angular/core';
-import { HviCard, HviDetails } from '@helsevestikt/hviktor';
+import { HviCard, HviDetails, HviParagraph, HviLink} from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-details-i-kort-example',
   standalone: true,
-  imports: [HviCard, HviDetails],
+  imports: [HviCard, HviDetails, HviParagraph, HviLink],
   template: \`
      <hvi-card>
       <details hviDetails variant="tinted">

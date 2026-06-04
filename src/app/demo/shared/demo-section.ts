@@ -26,9 +26,7 @@ hljs.registerLanguage('typescript', typescript);
       @if (code()) {
         <div class="mt-4">
           <details hviDetails (toggle)="onDetailsToggle($event)">
-            <summary>
-              <p hviParagraph>Vis kode</p>
-            </summary>
+            <summary>Vis kode</summary>
             <div>
               <pre>
                 <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
