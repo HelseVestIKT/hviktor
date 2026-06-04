@@ -33,8 +33,8 @@
     "postbuild": "npx copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json schematics/package.json ../../dist/hviktor-lib && node -e \"require('fs').writeFileSync('../../dist/hviktor-lib/.npmignore','')\""
   },
   "peerDependencies": {
-    "@angular/common": ">=17.0.0 <22.0.0",
-    "@angular/core": ">=17.0.0 <22.0.0"
+    "@angular/common": ">=17.0.0 <23.0.0",
+    "@angular/core": ">=17.0.0 <23.0.0"
   },
   "schematics": "./schematics/collection.json",
   "ng-add": {
