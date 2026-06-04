@@ -32,6 +32,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Alert gir brukeren informasjon som det er ekstra viktig at de ser og forstår. Komponenten er designet for å fange brukernes oppmerksomhet. Teksten i varselet skal være kort og tydelig.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'avatar',
@@ -39,6 +40,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Avatar viser et bilde, initialer eller ikon for en person, enhet eller profil.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'badge',
@@ -62,6 +64,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Button lèt brukarane utføre handlingar.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'card',
@@ -70,6 +73,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Card fremhever informasjon eller oppgaver som hører sammen. Komponenten finnes i to varianter og kan inneholde tekst, bilde, tekstfelt, knapper og lenker.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'chip',
@@ -78,6 +82,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Chip er små, interaktive komponenter som lar brukerne styre hvordan de vil se innhold. For eksempel kan de brukes til å filtrere kategorier i et søkeresultat og vise hvilke filter som er aktive.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'details',
@@ -102,6 +107,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Divider brukes for å skape et visuelt skille mellom innhold. Det er en enkel horisontal linje som strekker seg over tilgjengelig bredde.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'form',
@@ -123,6 +129,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Label fungerer som ei tydeleg og tilgjengeleg etikett som fortel brukaren kva eit tilhøyrande skjemaelement handlar om.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'link',
@@ -130,6 +137,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Link er klikkbar tekst eller grafikk som tar brukeren videre til andre sider eller dokumenter.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'list',
@@ -137,6 +145,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'List brukes for å presentere innhold på en oversiktlig og strukturert måte, for eksempel for å oppsummere hovedpunkter eller vise brukeren hvilke trinn som må følges i en bestemt rekkefølge.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'paragraph',
@@ -144,6 +153,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Paragraph brukes til løpende tekst og benyttes typisk i artikler, komponenter, hjelpetekster og lignende.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'popover',
@@ -179,6 +189,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Checkbox gir brukerne mulighet til å velge ett eller flere alternativer. Den kan også brukes i tilfeller der brukeren skal bekrefte noe.',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'error-summary',
@@ -264,6 +275,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'SkipLink hjelper folk som bruker tastaturnavigasjon til å navigere, slik at dei enkelt kan gå til det viktigaste innhaldet på ei side.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'spinner',
@@ -271,6 +283,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Spinner brukes for å indikere at innhold eller en handling er i ferd med å laste, og at brukeren må vente før de kan fortsette.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'dropdown',
@@ -294,6 +307,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Pagination er en liste med knapper som brukes for å navigere mellom ulike sider med innhold, for eksempel søkeresultater eller tabeller.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'avatar-stack',
@@ -301,12 +315,14 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'AvatarStack stabler en samling Avatar elementer',
     ds: true,
     codeTested: true,
+    a11yTested: true,
   },
   {
     id: 'logo',
     name: 'Logo',
     description: 'Logo kan vise logoene til alle foretakene i Helse Vest.',
     hvi: true,
+    a11yTested: true,
   },
   {
     id: 'textfield',
@@ -325,6 +341,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'RequiredTag kan brukes sammen med labels i et skjema for å indikere om et felt er påkrevd, valgfritt eller om alle felt må fylles ut.',
     hvi: true,
+    a11yTested: true,
   },
   {
     id: 'multi-select',
