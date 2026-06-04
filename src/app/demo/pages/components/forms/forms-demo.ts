@@ -50,9 +50,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
 
           <hvi-textfield label="E-post" formControlName="email" type="email" required />
 
-          <div class="mt-4">
-            <button hviButton type="submit" variant="primary">Send inn</button>
-          </div>
+          <button hviButton type="submit" variant="primary">Send inn</button>
         </form>
       </app-demo-section>
 
@@ -71,9 +69,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
             [multiline]="true"
             [rows]="3"
           />
-          <div class="mt-4">
-            <button hviButton type="submit" variant="primary">Send inn</button>
-          </div>
+          <button hviButton type="submit" variant="primary">Send inn</button>
         </form>
       </app-demo-section>
 
@@ -98,31 +94,27 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
           <fieldset hviFieldset>
             <legend hviLabel>Personalia</legend>
 
-            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <hvi-field>
-                <label hviLabel for="firstName">
-                  Fornavn <hvi-required-tag mode="required" />
-                </label>
-                <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
-                <p
-                  hviFieldValidation
-                  hviValidationMessage="firstName"
-                  [messages]="messages['firstName']"
-                ></p>
-              </hvi-field>
+            <hvi-field>
+              <label hviLabel for="firstName"> Fornavn <hvi-required-tag mode="required" /> </label>
+              <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
+              <p
+                hviFieldValidation
+                hviValidationMessage="firstName"
+                [messages]="messages['firstName']"
+              ></p>
+            </hvi-field>
 
-              <hvi-field>
-                <label hviLabel for="lastName">
-                  Etternavn <hvi-required-tag mode="required" />
-                </label>
-                <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
-                <p
-                  hviFieldValidation
-                  hviValidationMessage="lastName"
-                  [messages]="messages['lastName']"
-                ></p>
-              </hvi-field>
-            </div>
+            <hvi-field>
+              <label hviLabel for="lastName">
+                Etternavn <hvi-required-tag mode="required" />
+              </label>
+              <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
+              <p
+                hviFieldValidation
+                hviValidationMessage="lastName"
+                [messages]="messages['lastName']"
+              ></p>
+            </hvi-field>
           </fieldset>
 
           <!-- Kontaktinformasjon -->
@@ -257,7 +249,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
           </fieldset>
 
           <!-- Knapper -->
-          <div class="my-4 flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2">
             <button hviButton type="submit" variant="primary">Send inn</button>
             <button
               hviButton
