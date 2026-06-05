@@ -4,8 +4,8 @@ import {
   HviButton,
   HviFieldKit,
   HviForms,
+  HviHeading,
   HviLabel,
-  HviParagraph,
   HviRequiredTag,
   HviSelect,
   HviTextfield,
@@ -14,9 +14,9 @@ import {
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import { FormsAllePakrevdExampleSource } from './code-examples/forms.alle-pakrevd.example.source';
-import { FormsBlandetExampleSource } from './code-examples/forms.blandet.example.source';
-import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktskjema.example.source';
+import { FormsAlleFeltErObligatoriskeExampleSource } from './code-examples/forms.alle-felt-er-obligatoriske.example.source';
+import { FormsObligatoriskeOgValgfrieFeltExampleSource } from './code-examples/forms.obligatoriske-og-valgfrie-felt.example.source';
+import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-examples/forms.skjema-med-validering-og-feiloppsummering.example.source';
 @Component({
   selector: 'app-forms-demo',
   standalone: true,
@@ -25,7 +25,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
     HviFieldKit,
     HviValidationKit,
     HviButton,
-    HviParagraph,
+    HviHeading,
     HviSelect,
     HviRequiredTag,
     HviTextfield,
@@ -36,47 +36,55 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
   template: `
     <app-demo-page componentId="form">
       <app-demo-section
-        title="Alle påkrevd"
-        [code]="allePakrevdCode"
-        description="Når alle felt i et skjema er påkrevde, analyserer HviForm dette automatisk og setter requiredMode til 'all-required'. Vis hvi-required-tag med mode all-required øverst i skjemaet."
+        title="Alle felt er obligatoriske"
+        [code]="alleFeltErObligatoriskeCode"
+        description="Når alle felt i skjemaet må fylles ut, vises en felles melding øverst. Denne kobles til skjemaet med aria-describedby, slik at skjermlesere leser opp meldingen når brukeren navigerer inn i skjemaet."
       >
-        <form hviForm #allReqForm="hviForm" [formGroup]="allRequiredForm" class="max-w-md">
+        <form
+          hviForm
+          #allReqForm="hviForm"
+          [formGroup]="loginForm"
+          class="max-w-sm"
+          aria-describedby="login-required-info"
+        >
+          <h2 hviHeading size="xs">Logg inn</h2>
           @if (allReqForm.requiredMode() === 'all-required') {
-            <hvi-required-tag mode="all-required" />
+            <hvi-required-tag id="login-required-info" mode="all-required" />
           }
-          <hvi-textfield label="Fornavn" formControlName="firstName" required />
-
-          <hvi-textfield label="Etternavn" formControlName="lastName" required />
-
-          <hvi-textfield label="E-post" formControlName="email" type="email" required />
-
-          <button hviButton type="submit" variant="primary">Send inn</button>
+          <hvi-textfield label="Brukernavn" formControlName="username" required />
+          <hvi-textfield label="Passord" formControlName="password" type="password" required />
+          <div class="mt-4">
+            <button hviButton type="submit" variant="primary">Logg inn</button>
+          </div>
         </form>
       </app-demo-section>
 
       <app-demo-section
-        title="Blandet"
-        [code]="blandetCode"
-        description="Når noen felt er påkrevde og andre valgfrie, setter HviForm requiredMode til 'mixed'. HviTextfield viser da automatisk riktig required- eller optional-tag per felt."
+        title="Obligatoriske og valgfrie felt"
+        [code]="obligatoriskeOgValgfrieFeltCode"
+        description="Når skjemaet har en blanding av obligatoriske og valgfrie felt, merkes hvert felt med om det må fylles ut eller er valgfritt. Brukeren ser tydelig hvilke felt som kreves."
       >
-        <form hviForm #mixedForm="hviForm" [formGroup]="mixedRequiredForm" class="max-w-md">
-          <hvi-textfield label="Fornavn" formControlName="firstName" required />
-          <hvi-textfield label="Etternavn" formControlName="lastName" required />
-          <hvi-textfield label="Telefon" formControlName="phone" type="tel" />
+        <form hviForm #mixedForm="hviForm" [formGroup]="appointmentForm" class="max-w-md">
+          <h2 hviHeading size="xs">Bestill time</h2>
+          <hvi-textfield label="Navn" formControlName="name" required />
+          <hvi-textfield label="E-postadresse" formControlName="email" type="email" required />
+          <hvi-textfield label="Ønsket tidspunkt" formControlName="preferredTime" required />
           <hvi-textfield
             label="Kommentar"
             formControlName="comment"
             [multiline]="true"
             [rows]="3"
           />
-          <button hviButton type="submit" variant="primary">Send inn</button>
+          <div class="mt-4">
+            <button hviButton type="submit" variant="primary">Bestill time</button>
+          </div>
         </form>
       </app-demo-section>
 
       <app-demo-section
-        title="Kontaktskjema"
-        [code]="kontaktskjemaCode"
-        description="Et fullstendig kontaktskjema med reaktiv validering og error summary."
+        title="Skjema med validering og feiloppsummering"
+        [code]="skjemaMedValideringOgFeiloppsummeringCode"
+        description="Et større skjema som viser feilmeldinger ved innsending. Feiloppsummeringen samler alle feil ett sted, slik at brukeren enkelt kan rette opp."
       >
         <form
           hviForm
@@ -85,14 +93,17 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
           [focusOnInvalid]="summary"
           (hviSubmitted)="onContactFormSubmit()"
           class="max-w-2xl"
+          [attr.aria-describedby]="
+            myForm.requiredMode() === 'all-required' ? 'contact-required-info' : null
+          "
         >
-          <!-- Automatisk required-tag basert på FormGroup-analyse -->
+          <h2 hviHeading size="xs">Kontakt oss</h2>
           @if (myForm.requiredMode() === 'all-required') {
-            <hvi-required-tag mode="all-required" />
+            <hvi-required-tag id="contact-required-info" mode="all-required" />
           }
-          <!-- Personalia -->
+
           <fieldset hviFieldset>
-            <legend hviLabel>Personalia</legend>
+            <legend hviLabel>Om deg</legend>
 
             <hvi-field>
               <label hviLabel for="firstName"> Fornavn <hvi-required-tag mode="required" /> </label>
@@ -117,13 +128,11 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
             </hvi-field>
           </fieldset>
 
-          <!-- Kontaktinformasjon -->
           <fieldset hviFieldset>
             <legend hviLabel>Kontaktinformasjon</legend>
 
             <hvi-field>
               <label hviLabel for="email"> E-post <hvi-required-tag mode="required" /> </label>
-              <span hviFieldDescription>Vi bruker e-posten til å svare deg</span>
               <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
               <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
             </hvi-field>
@@ -142,7 +151,6 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
             </hvi-field>
           </fieldset>
 
-          <!-- Henvendelse -->
           <fieldset hviFieldset>
             <legend hviLabel>Din henvendelse</legend>
 
@@ -153,7 +161,6 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
                 <option value="general">Generell henvendelse</option>
                 <option value="support">Teknisk support</option>
                 <option value="feedback">Tilbakemelding</option>
-                <option value="complaint">Klage</option>
                 <option value="other">Annet</option>
               </select>
               <p
@@ -165,7 +172,7 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
 
             <hvi-field>
               <label hviLabel for="message"> Melding <hvi-required-tag mode="required" /> </label>
-              <span hviFieldDescription>Beskriv henvendelsen din så detaljert som mulig</span>
+              <span hviFieldDescription>Beskriv det du lurer på</span>
               <textarea
                 hviInput
                 id="message"
@@ -183,85 +190,13 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
             </hvi-field>
           </fieldset>
 
-          <!-- Preferanser -->
-          <fieldset hviFieldset>
-            <legend hviLabel>Preferanser</legend>
-            <p hviParagraph>Hvordan vil du helst at vi skal kontakte deg?</p>
-
-            <hvi-field>
-              <input
-                hviInput
-                id="pref-email"
-                type="radio"
-                name="contactPreference"
-                value="email"
-                formControlName="contactPreference"
-              />
-              <label hviLabel for="pref-email">E-post</label>
-            </hvi-field>
-
-            <hvi-field>
-              <input
-                hviInput
-                id="pref-phone"
-                type="radio"
-                name="contactPreference"
-                value="phone"
-                formControlName="contactPreference"
-              />
-              <label hviLabel for="pref-phone">Telefon</label>
-            </hvi-field>
-
-            <hvi-field>
-              <input
-                hviInput
-                id="newsletter"
-                type="checkbox"
-                role="switch"
-                formControlName="newsletter"
-              />
-              <label hviLabel for="newsletter"> Meld meg på nyhetsbrev </label>
-            </hvi-field>
-          </fieldset>
-
-          <!-- Samtykke -->
-          <fieldset hviFieldset>
-            <legend hviLabel>Samtykke <hvi-required-tag /></legend>
-
-            <hvi-field>
-              <input
-                hviInput
-                id="consent"
-                type="checkbox"
-                formControlName="consent"
-                hviControlInvalid
-              />
-              <label hviLabel for="consent">
-                Jeg har lest og godtar
-                <a href="#" class="ds-link">personvernerklæringen</a>
-              </label>
-              <p
-                hviFieldValidation
-                hviValidationMessage="consent"
-                [messages]="messages['consent']"
-              ></p>
-            </hvi-field>
-          </fieldset>
-
-          <!-- Knapper -->
           <div class="flex flex-wrap gap-2">
             <button hviButton type="submit" variant="primary">Send inn</button>
-            <button
-              hviButton
-              type="button"
-              variant="secondary"
-              (click)="contactForm.reset({ contactPreference: 'email' })"
-            >
+            <button hviButton type="button" variant="secondary" (click)="contactForm.reset()">
               Nullstill
             </button>
           </div>
 
-          <!-- Error summary -->
           <hvi-error-summary
             #summary
             [form]="contactForm"
@@ -274,22 +209,22 @@ import { FormsKontaktskjemaExampleSource } from './code-examples/forms.kontaktsk
   `,
 })
 export class FormsDemoComponent {
-  readonly allePakrevdCode = FormsAllePakrevdExampleSource;
-  readonly blandetCode = FormsBlandetExampleSource;
-  readonly kontaktskjemaCode = FormsKontaktskjemaExampleSource;
+  readonly alleFeltErObligatoriskeCode = FormsAlleFeltErObligatoriskeExampleSource;
+  readonly obligatoriskeOgValgfrieFeltCode = FormsObligatoriskeOgValgfrieFeltExampleSource;
+  readonly skjemaMedValideringOgFeiloppsummeringCode =
+    FormsSkjemaMedValideringOgFeiloppsummeringExampleSource;
 
-  /** Alle felt er påkrevde → requiredMode = 'all-required' */
-  allRequiredForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+  /** Innloggingsskjema – alle felt er obligatoriske */
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 
-  /** Blanding av påkrevde og valgfrie → requiredMode = 'mixed' */
-  mixedRequiredForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    phone: new FormControl(''),
+  /** Bestill time – blanding av obligatoriske og valgfrie felt */
+  appointmentForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    preferredTime: new FormControl('', [Validators.required]),
     comment: new FormControl(''),
   });
 
@@ -304,9 +239,6 @@ export class FormsDemoComponent {
       Validators.minLength(10),
       Validators.maxLength(500),
     ]),
-    contactPreference: new FormControl('email'),
-    newsletter: new FormControl(false),
-    consent: new FormControl(false, [Validators.requiredTrue]),
   });
 
   messages: Record<string, HviValidationMessages> = {
@@ -333,15 +265,12 @@ export class FormsDemoComponent {
       minlength: 'Meldingen må være minst 10 tegn',
       maxlength: 'Meldingen kan ikke være mer enn 500 tegn',
     },
-    consent: {
-      requiredTrue: 'Du må godta personvernerklæringen',
-    },
   };
 
   onContactFormSubmit(): void {
     if (this.contactForm.valid) {
-      alert('Takk for din henvendelse! Vi svarer deg så snart som mulig.');
-      this.contactForm.reset({ contactPreference: 'email' });
+      alert('Takk for din henvendelse!');
+      this.contactForm.reset();
     }
   }
 }

@@ -55,7 +55,11 @@ import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
           </div>
           @if (isHvi()) {
             <div class="mb-2 flex items-center gap-2">
-              <hvi-logo company="dots" size="sm" aria-hidden="true" />
+              <hvi-logo
+                company="hviktor"
+                style="width: 1.25rem; height: 1.25rem;"
+                aria-hidden="true"
+              />
               <p hviParagraph>Denne komponenten er laget av oss.</p>
             </div>
           }

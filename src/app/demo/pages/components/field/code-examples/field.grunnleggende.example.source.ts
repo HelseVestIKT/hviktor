@@ -7,7 +7,7 @@ import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel }
   standalone: true,
   imports: [HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel],
   template: \`
-    <div style="width: 400px">
+    <div style="max-width: 400px">
       <hvi-field>
         <label hviLabel for="etternavn" weight="medium">Etternavn</label>
         <p hviFieldDescription>Etternavn kan ikke inneholde mellomrom</p>
@@ -16,10 +16,10 @@ import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel }
           id="etternavn"
           type="text"
           value="Nordmann Svenske"
-          [attr.aria-invalid]="hasError || null"
-          (input)="hasError = $any($event.target).value.includes(' ')"
+          [attr.aria-invalid]="hasEtternavnError || null"
+          (input)="hasEtternavnError = $any($event.target).value.includes(' ')"
         />
-        @if (hasError) {
+        @if (hasEtternavnError) {
           <p hviFieldValidation>Du kan ikke ha mellomrom i etternavnet ditt</p>
         }
       </hvi-field>
@@ -27,6 +27,6 @@ import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel }
   \`,
 })
 export class FieldGrunnleggendeExampleComponent {
-  hasError = true;
+  hasEtternavnError = true;
 }
 `;

@@ -19,4 +19,6 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
     </div>
   `,
 })
-export class FieldCheckboxOgRadioExampleComponent {}
+export class FieldCheckboxOgRadioExampleComponent {
+  hasEtternavnError = true;
+}

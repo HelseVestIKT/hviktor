@@ -119,14 +119,15 @@ test.describe('Table', () => {
 
   test('expand buttons start collapsed', async ({ page }) => {
     const section = page.locator('app-demo-section[title="Utvidbare rader"]');
-    await expect(
-      section.locator('tbody button[aria-label="Vis detaljer"]').first(),
-    ).toHaveAttribute('aria-expanded', 'false');
+    await expect(section.locator('tbody button[aria-expanded]').first()).toHaveAttribute(
+      'aria-expanded',
+      'false',
+    );
   });
 
   test('clicking expand button shows detail row', async ({ page }) => {
     const section = page.locator('app-demo-section[title="Utvidbare rader"]');
-    const firstButton = section.locator('tbody button[aria-label="Vis detaljer"]').first();
+    const firstButton = section.locator('tbody button[aria-expanded]').first();
 
     await firstButton.click();
     await expect(firstButton).toHaveAttribute('aria-expanded', 'true');
@@ -135,7 +136,7 @@ test.describe('Table', () => {
 
   test('clicking expand button again collapses the row', async ({ page }) => {
     const section = page.locator('app-demo-section[title="Utvidbare rader"]');
-    const firstButton = section.locator('tbody button[aria-label="Vis detaljer"]').first();
+    const firstButton = section.locator('tbody button[aria-expanded]').first();
 
     await firstButton.click();
     await expect(firstButton).toHaveAttribute('aria-expanded', 'true');

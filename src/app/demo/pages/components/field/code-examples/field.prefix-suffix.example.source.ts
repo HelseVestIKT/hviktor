@@ -7,9 +7,11 @@ import { HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel } from '@h
   standalone: true,
   imports: [HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel],
   template: \`
-    <div style="width: 400px">
+    <div style="max-width: 400px">
       <hvi-field>
-        <label hviLabel for="pris" weight="medium">Hvor mange kroner koster det per måned?</label>
+        <label hviLabel for="pris" weight="medium"
+          >Hvor mange kroner koster det per måned?</label
+        >
         <hvi-field-affixes>
           <hvi-field-affix>NOK</hvi-field-affix>
           <input hviInput id="pris" type="text" />
@@ -20,6 +22,6 @@ import { HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel } from '@h
   \`,
 })
 export class FieldPrefixSuffixExampleComponent {
-  
+  hasEtternavnError = true;
 }
 `;

@@ -7,50 +7,58 @@ import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviButton, HviMultiSelect, HviTable],
   template: \`
+    <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+      Viser {{ colFilterTable.totalFilteredRecords() }} av
+      {{ colFilterTable.totalRecords() }} rader
+    </p>
     <table
       hviTable
+      id="filter-tabell"
       [value]="data"
       [columns]="['navn', 'epost', 'avdeling', 'stilling']"
       zebra
       #colFilterTable="hviTable"
     >
+      <caption>
+        Ansattoversikt
+      </caption>
       <thead>
         <tr>
-          <th>Navn</th>
-          <th>Avdeling</th>
-          <th>Stilling</th>
+          <th scope="col">Navn</th>
+          <th scope="col">Avdeling</th>
+          <th scope="col">Stilling</th>
         </tr>
         <tr>
-          <th width="30%">
-            <span class="sr-only">Filtrer på navn</span>
+          <td width="30%">
             <hvi-multi-select
               [options]="navnOptions"
               placeholder="Alle"
               searchPlaceholder="Søk navn..."
               aria-label="Filtrer på navn"
+              aria-controls="filter-tabell"
               (selectionChange)="colFilterTable.setColumnFilter('navn', $event)"
             />
-          </th>
-          <th width="30%">
-            <span class="sr-only">Filtrer på avdeling</span>
+          </td>
+          <td width="30%">
             <hvi-multi-select
               [options]="avdelingOptions"
               placeholder="Alle"
               searchPlaceholder="Søk avdeling..."
               aria-label="Filtrer på avdeling"
+              aria-controls="filter-tabell"
               (selectionChange)="colFilterTable.setColumnFilter('avdeling', $event)"
             />
-          </th>
-          <th width="30%">
-            <span class="sr-only">Filtrer på stilling</span>
+          </td>
+          <td width="30%">
             <hvi-multi-select
               [options]="stillingOptions"
               placeholder="Alle"
               searchPlaceholder="Søk stilling..."
               aria-label="Filtrer på stilling"
+              aria-controls="filter-tabell"
               (selectionChange)="colFilterTable.setColumnFilter('stilling', $event)"
             />
-          </th>
+          </td>
         </tr>
       </thead>
       <tbody>
@@ -197,5 +205,12 @@ export class TableKolonnefiltreringExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
   
   rowsPerPage = signal(5);
+  
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
+    return \`Sorter etter \${heading}, stigende\`;
+  }
 }
 `;

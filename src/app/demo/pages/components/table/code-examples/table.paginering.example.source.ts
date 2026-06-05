@@ -7,14 +7,28 @@ import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hvikto
   standalone: true,
   imports: [HviPagination, HviSortableColumn, HviTable],
   template: \`
-    <table hviTable [value]="data" paginator [rows]="5" zebra hover #pageTable="hviTable">
+    <table
+      hviTable
+      id="paginert-tabell"
+      [value]="data"
+      paginator
+      [rows]="5"
+      zebra
+      hover
+      #pageTable="hviTable"
+    >
+      <caption>
+        Ansattoversikt
+      </caption>
       <thead>
         <tr>
-          <th hviSortableColumn="navn">
-            <button type="button">Navn</button>
+          <th hviSortableColumn="navn" scope="col">
+            <button type="button" [attr.aria-label]="getSortLabel(pageTable, 'navn', 'Navn')">
+              Navn
+            </button>
           </th>
-          <th>Epost</th>
-          <th>Avdeling</th>
+          <th scope="col">E-post</th>
+          <th scope="col">Avdeling</th>
         </tr>
       </thead>
       <tbody>
@@ -27,12 +41,16 @@ import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hvikto
         }
       </tbody>
     </table>
-    <hvi-pagination
-      [totalItems]="pageTable.totalFilteredRecords()"
-      [pageSize]="5"
-      [currentPage]="pageTable.currentPage()"
-      (currentPageChange)="pageTable.goToPage($event)"
-    />
+    <div class="mt-4">
+      <hvi-pagination
+        aria-label="Sidenavigering for tabell"
+        aria-controls="paginert-tabell"
+        [totalItems]="pageTable.totalFilteredRecords()"
+        [pageSize]="5"
+        [currentPage]="pageTable.currentPage()"
+        (currentPageChange)="pageTable.goToPage($event)"
+      />
+    </div>
   \`,
 })
 export class TablePagineringExampleComponent {
@@ -155,5 +173,12 @@ export class TablePagineringExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
   
   rowsPerPage = signal(5);
+  
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
+    return \`Sorter etter \${heading}, stigende\`;
+  }
 }
 `;

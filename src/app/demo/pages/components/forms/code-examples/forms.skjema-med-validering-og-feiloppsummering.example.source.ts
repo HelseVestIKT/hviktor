@@ -1,53 +1,32 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import {
-  HviButton,
-  HviFieldKit,
-  HviForms,
-  HviHeading,
-  HviRequiredTag,
-  HviSelect,
-  HviValidationKit,
-  HviValidationMessages,
-} from '@helsevestikt/hviktor';
+// Auto-generated - do not edit manually
+export const FormsSkjemaMedValideringOgFeiloppsummeringExampleSource = `import { Component, signal } from '@angular/core';
+import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { HviButton, HviFieldKit, HviForms, HviHeading, HviLabel, HviRequiredTag, HviSelect, HviValidationKit, HviValidationMessages } from '@helsevestikt/hviktor';
 
 @Component({
-  selector: 'app-forms-kontaktskjema-example',
+  selector: 'app-forms-skjema-med-validering-og-feiloppsummering-example',
   standalone: true,
-  imports: [
-    HviButton,
-    HviFieldKit,
-    HviForms,
-    HviHeading,
-    HviRequiredTag,
-    HviSelect,
-    HviValidationKit,
-    ReactiveFormsModule,
-  ],
-  template: `
+  imports: [HviButton, HviFieldKit, HviForms, HviHeading, HviLabel, HviRequiredTag, HviSelect, HviValidationKit, ReactiveFormsModule],
+  template: \`
     <form
       hviForm
       #myForm="hviForm"
       [formGroup]="contactForm"
       [focusOnInvalid]="summary"
-      (hviSubmitted)="onSubmit()"
+      (hviSubmitted)="onContactFormSubmit()"
       class="max-w-2xl"
-      [attr.aria-describedby]="
-        myForm.requiredMode() === 'all-required' ? 'contact-required-info' : null
-      "
+      [attr.aria-describedby]="myForm.requiredMode() === 'all-required' ? 'contact-required-info' : null"
     >
       <h2 hviHeading size="xs">Kontakt oss</h2>
       @if (myForm.requiredMode() === 'all-required') {
         <hvi-required-tag id="contact-required-info" mode="all-required" />
       }
-
+    
       <fieldset hviFieldset>
-        <legend hviLabel weight="medium">Om deg</legend>
-
+        <legend hviLabel>Om deg</legend>
+    
         <hvi-field>
-          <label hviLabel for="firstName" weight="medium">
-            Fornavn <hvi-required-tag mode="required" />
-          </label>
+          <label hviLabel for="firstName"> Fornavn <hvi-required-tag mode="required" /> </label>
           <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
           <p
             hviFieldValidation
@@ -55,9 +34,9 @@ import {
             [messages]="messages['firstName']"
           ></p>
         </hvi-field>
-
+    
         <hvi-field>
-          <label hviLabel for="lastName" weight="medium">
+          <label hviLabel for="lastName">
             Etternavn <hvi-required-tag mode="required" />
           </label>
           <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
@@ -68,22 +47,18 @@ import {
           ></p>
         </hvi-field>
       </fieldset>
-
+    
       <fieldset hviFieldset>
-        <legend hviLabel weight="medium">Kontaktinformasjon</legend>
-
+        <legend hviLabel>Kontaktinformasjon</legend>
+    
         <hvi-field>
-          <label hviLabel for="email" weight="medium">
-            E-post <hvi-required-tag mode="required" />
-          </label>
+          <label hviLabel for="email"> E-post <hvi-required-tag mode="required" /> </label>
           <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
           <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
         </hvi-field>
-
+    
         <hvi-field>
-          <label hviLabel for="phone" weight="medium">
-            Telefon <hvi-required-tag mode="optional" />
-          </label>
+          <label hviLabel for="phone"> Telefon <hvi-required-tag mode="optional" /> </label>
           <input
             hviInput
             id="phone"
@@ -95,14 +70,12 @@ import {
           <p hviFieldValidation hviValidationMessage="phone" [messages]="messages['phone']"></p>
         </hvi-field>
       </fieldset>
-
+    
       <fieldset hviFieldset>
-        <legend hviLabel weight="medium">Din henvendelse</legend>
-
+        <legend hviLabel>Din henvendelse</legend>
+    
         <hvi-field>
-          <label hviLabel for="subject" weight="medium">
-            Emne <hvi-required-tag mode="required" />
-          </label>
+          <label hviLabel for="subject"> Emne <hvi-required-tag mode="required" /> </label>
           <select hviSelect id="subject" formControlName="subject" hviControlInvalid>
             <option value="" disabled>Velg emne</option>
             <option value="general">Generell henvendelse</option>
@@ -110,13 +83,15 @@ import {
             <option value="feedback">Tilbakemelding</option>
             <option value="other">Annet</option>
           </select>
-          <p hviFieldValidation hviValidationMessage="subject" [messages]="messages['subject']"></p>
+          <p
+            hviFieldValidation
+            hviValidationMessage="subject"
+            [messages]="messages['subject']"
+          ></p>
         </hvi-field>
-
+    
         <hvi-field>
-          <label hviLabel for="message" weight="medium">
-            Melding <hvi-required-tag mode="required" />
-          </label>
+          <label hviLabel for="message"> Melding <hvi-required-tag mode="required" /> </label>
           <span hviFieldDescription>Beskriv det du lurer på</span>
           <textarea
             hviInput
@@ -127,27 +102,55 @@ import {
             maxlength="500"
           ></textarea>
           <hvi-field-counter [limit]="500" />
-          <p hviFieldValidation hviValidationMessage="message" [messages]="messages['message']"></p>
+          <p
+            hviFieldValidation
+            hviValidationMessage="message"
+            [messages]="messages['message']"
+          ></p>
         </hvi-field>
       </fieldset>
-
-      <div class="my-4 flex flex-wrap gap-2">
+    
+      <div class="flex flex-wrap gap-2">
         <button hviButton type="submit" variant="primary">Send inn</button>
-        <button hviButton type="button" variant="secondary" (click)="contactForm.reset()">
+        <button
+          hviButton
+          type="button"
+          variant="secondary"
+          (click)="contactForm.reset()"
+        >
           Nullstill
         </button>
       </div>
-
-      <hvi-error-summary #summary [form]="contactForm" [messages]="messages" showWhen="submitted" />
+    
+      <hvi-error-summary
+        #summary
+        [form]="contactForm"
+        [messages]="messages"
+        showWhen="submitted"
+      />
     </form>
-  `,
+  \`,
 })
-export class FormsKontaktskjemaExampleComponent {
+export class FormsSkjemaMedValideringOgFeiloppsummeringExampleComponent {
+  /** Innloggingsskjema – alle felt er obligatoriske */
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  });
+  
+  /** Bestill time – blanding av obligatoriske og valgfrie felt */
+  appointmentForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    preferredTime: new FormControl('', [Validators.required]),
+    comment: new FormControl(''),
+  });
+  
   contactForm = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    phone: new FormControl('', [Validators.pattern(/^(\+47)?\s?\d{3}\s?\d{2}\s?\d{3}$/)]),
+    phone: new FormControl('', [Validators.pattern(/^(\\+47)?\\s?\\d{3}\\s?\\d{2}\\s?\\d{3}$/)]),
     subject: new FormControl('', [Validators.required]),
     message: new FormControl('', [
       Validators.required,
@@ -155,7 +158,7 @@ export class FormsKontaktskjemaExampleComponent {
       Validators.maxLength(500),
     ]),
   });
-
+  
   messages: Record<string, HviValidationMessages> = {
     firstName: {
       required: 'Fornavn er påkrevd',
@@ -181,11 +184,12 @@ export class FormsKontaktskjemaExampleComponent {
       maxlength: 'Meldingen kan ikke være mer enn 500 tegn',
     },
   };
-
-  onSubmit(): void {
+  
+  onContactFormSubmit(): void {
     if (this.contactForm.valid) {
       alert('Takk for din henvendelse!');
       this.contactForm.reset();
     }
   }
 }
+`;

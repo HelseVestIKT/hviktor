@@ -8,16 +8,31 @@ import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
   imports: [HviSortableColumn, HviTable],
   template: \`
     <table hviTable [value]="data" #sortTable="hviTable">
+      <caption>
+        Ansattoversikt
+      </caption>
       <thead>
         <tr>
-          <th hviSortableColumn="navn">
-            <button type="button">Navn</button>
+          <th hviSortableColumn="navn" scope="col">
+            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
+              Navn
+            </button>
           </th>
-          <th hviSortableColumn="epost">
-            <button type="button">Epost</button>
+          <th hviSortableColumn="epost" scope="col">
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')"
+            >
+              E-post
+            </button>
           </th>
-          <th hviSortableColumn="avdeling">
-            <button type="button">Avdeling</button>
+          <th hviSortableColumn="avdeling" scope="col">
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
+            >
+              Avdeling
+            </button>
           </th>
         </tr>
       </thead>
@@ -153,5 +168,12 @@ export class TableSorteringExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
   
   rowsPerPage = signal(5);
+  
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
+    return \`Sorter etter \${heading}, stigende\`;
+  }
 }
 `;

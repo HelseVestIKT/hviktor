@@ -17,6 +17,6 @@ import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hvi
   \`,
 })
 export class FieldAntallTegnExampleComponent {
-  
+  hasEtternavnError = true;
 }
 `;

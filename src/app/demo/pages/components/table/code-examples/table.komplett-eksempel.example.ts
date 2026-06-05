@@ -12,8 +12,6 @@ import {
 } from '@helsevestikt/hviktor';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-envelope-closed.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
 
 @Component({
   selector: 'app-table-komplett-eksempel-example',
@@ -31,20 +29,28 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <div class="mb-4">
-      <label hviLabel>Søk</label>
+    <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="komplett-tabell">
+      <label hviLabel for="komplett-sok">Søk</label>
+      <p class="ds-paragraph" id="komplett-sok-beskrivelse">
+        Søk etter navn, e-post, avdeling eller stilling
+      </p>
       <hvi-search>
         <input
           hviInput
+          id="komplett-sok"
           type="search"
-          placeholder="Søk i alle kolonner..."
+          aria-describedby="komplett-sok-beskrivelse"
           (input)="fullTable.filterGlobal($any($event.target).value)"
         />
-        <button hviSearchClear type="reset" aria-label="Tøm"></button>
+        <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
       </hvi-search>
-    </div>
+    </form>
+    <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+      Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader
+    </p>
     <table
       hviTable
+      id="komplett-tabell"
       [value]="data"
       [columns]="['navn', 'epost', 'avdeling', 'stilling']"
       [globalFilterFields]="['navn', 'epost', 'avdeling', 'stilling']"
@@ -56,51 +62,66 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
       stickyHeader
       #fullTable="hviTable"
     >
+      <caption>
+        Ansattoversikt
+      </caption>
       <thead>
         <tr>
-          <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
-          <th hviSortableColumn="navn">
-            <button type="button">Navn</button>
+          <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+          <th hviSortableColumn="navn" scope="col">
+            <button type="button" [attr.aria-label]="getSortLabel(fullTable, 'navn', 'Navn')">
+              Navn
+            </button>
           </th>
-          <th hviSortableColumn="avdeling">
-            <button type="button">Avdeling</button>
+          <th hviSortableColumn="avdeling" scope="col">
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(fullTable, 'avdeling', 'Avdeling')"
+            >
+              Avdeling
+            </button>
           </th>
-          <th hviSortableColumn="stilling">
-            <button type="button">Stilling</button>
+          <th hviSortableColumn="stilling" scope="col">
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(fullTable, 'stilling', 'Stilling')"
+            >
+              Stilling
+            </button>
           </th>
         </tr>
         <tr>
-          <th><span class="sr-only">Filter</span></th>
-          <th width="30%">
-            <span class="sr-only">Filtrer på navn</span>
+          <td><span class="sr-only">Filter</span></td>
+          <td width="30%">
             <hvi-multi-select
               [options]="navnOptions"
               placeholder="Alle"
               searchPlaceholder="Søk navn..."
               aria-label="Filtrer på navn"
+              aria-controls="komplett-tabell"
               (selectionChange)="fullTable.setColumnFilter('navn', $event)"
             />
-          </th>
-          <th width="30%">
-            <span class="sr-only">Filtrer på avdeling</span>
+          </td>
+          <td width="30%">
             <hvi-multi-select
               [options]="avdelingOptions"
               placeholder="Alle"
               searchPlaceholder="Søk avdeling..."
               aria-label="Filtrer på avdeling"
+              aria-controls="komplett-tabell"
               (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
             />
-          </th>
-          <th width="30%">
-            <span class="sr-only">Filtrer på stilling</span>
+          </td>
+          <td width="30%">
             <hvi-multi-select
               [options]="stillingOptions"
               placeholder="Alle"
               searchPlaceholder="Søk stilling..."
               aria-label="Filtrer på stilling"
+              aria-controls="komplett-tabell"
               (selectionChange)="fullTable.setColumnFilter('stilling', $event)"
             />
-          </th>
+          </td>
         </tr>
       </thead>
       <tbody>
@@ -112,7 +133,12 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
                 variant="tertiary"
                 (click)="fullTable.toggleExpanded(person)"
                 [attr.aria-expanded]="fullTable.isExpanded(person)"
-                [ariaLabel]="'Vis detaljer'"
+                [attr.aria-controls]="'komplett-detalj-' + person.id"
+                [ariaLabel]="
+                  fullTable.isExpanded(person)
+                    ? 'Skjul detaljer om ' + person.navn
+                    : 'Vis detaljer om ' + person.navn
+                "
               >
                 @if (fullTable.isExpanded(person)) {
                   <hvi-icon-chevron-down />
@@ -126,17 +152,15 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
             <td>{{ person.stilling }}</td>
           </tr>
           @if (fullTable.isExpanded(person)) {
-            <tr>
+            <tr [id]="'komplett-detalj-' + person.id">
               <td colspan="4">
                 <div class="flex gap-8 py-2 pl-12">
-                  <dl class="flex items-center gap-2">
-                    <dt>
-                      <hvi-icon-envelope-closed />
-                    </dt>
+                  <dl>
+                    <dt>E-post</dt>
                     <dd>{{ person.epost }}</dd>
                   </dl>
-                  <dl class="flex items-center gap-2">
-                    <dt><hvi-icon-phone /></dt>
+                  <dl>
+                    <dt>Telefon</dt>
                     <dd>{{ person.telefon }}</dd>
                   </dl>
                 </div>
@@ -150,11 +174,10 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
         }
       </tbody>
     </table>
-    <div class="mt-4 flex items-center justify-between">
-      <p class="ds-paragraph">
-        Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader
-      </p>
+    <div class="mt-4 flex items-center justify-end">
       <hvi-pagination
+        aria-label="Sidenavigering for tabell"
+        aria-controls="komplett-tabell"
         [totalItems]="fullTable.totalFilteredRecords()"
         [pageSize]="rowsPerPage()"
         [currentPage]="fullTable.currentPage()"
@@ -283,4 +306,11 @@ export class TableKomplettEksempelExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 
   rowsPerPage = signal(5);
+
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return `Sorter etter ${heading}, synkende`;
+    if (dir === 'descending') return `Fjern sortering på ${heading}`;
+    return `Sorter etter ${heading}, stigende`;
+  }
 }
