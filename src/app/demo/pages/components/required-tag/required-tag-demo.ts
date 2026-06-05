@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HviLink, HviParagraph, HviRequiredTag } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import { RequiredTagEksempelExampleSource } from './code-examples/required-tag.eksempel.example.source';
 import { RequiredTagModesExampleSource } from './code-examples/required-tag.modes.example.source';
 @Component({
   selector: 'app-required-tag-demo',
@@ -32,5 +31,4 @@ import { RequiredTagModesExampleSource } from './code-examples/required-tag.mode
 })
 export class RequiredTagDemoComponent {
   readonly modesCode = RequiredTagModesExampleSource;
-  readonly eksempelCode = RequiredTagEksempelExampleSource;
 }

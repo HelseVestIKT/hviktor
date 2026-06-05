@@ -29,6 +29,6 @@ import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviPara
   \`,
 })
 export class FieldOutlineExampleComponent {
-  
+  hasEtternavnError = true;
 }
 `;

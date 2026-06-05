@@ -50,13 +50,25 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
         <tr>
           <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
           <th hviSortableColumn="navn" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(fullTable, 'navn', 'Navn')">Navn</button>
+            <button type="button" [attr.aria-label]="getSortLabel(fullTable, 'navn', 'Navn')">
+              Navn
+            </button>
           </th>
           <th hviSortableColumn="avdeling" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(fullTable, 'avdeling', 'Avdeling')">Avdeling</button>
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(fullTable, 'avdeling', 'Avdeling')"
+            >
+              Avdeling
+            </button>
           </th>
           <th hviSortableColumn="stilling" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(fullTable, 'stilling', 'Stilling')">Stilling</button>
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(fullTable, 'stilling', 'Stilling')"
+            >
+              Stilling
+            </button>
           </th>
         </tr>
         <tr>
@@ -103,7 +115,11 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
                 (click)="fullTable.toggleExpanded(person)"
                 [attr.aria-expanded]="fullTable.isExpanded(person)"
                 [attr.aria-controls]="'komplett-detalj-' + person.id"
-                [attr.aria-label]="fullTable.isExpanded(person) ? 'Skjul detaljer om ' + person.navn : 'Vis detaljer om ' + person.navn"
+                [attr.aria-label]="
+                  fullTable.isExpanded(person)
+                    ? 'Skjul detaljer om ' + person.navn
+                    : 'Vis detaljer om ' + person.navn
+                "
               >
                 @if (fullTable.isExpanded(person)) {
                   <hvi-icon-chevron-down />
@@ -275,6 +291,7 @@ export class TableKomplettEksempelExampleComponent {
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
     return \`Sorter etter \${heading}, stigende\`;
   }
 }

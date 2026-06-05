@@ -21,6 +21,6 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
   \`,
 })
 export class FieldCheckboxOgRadioExampleComponent {
-  
+  hasEtternavnError = true;
 }
 `;

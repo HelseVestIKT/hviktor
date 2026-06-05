@@ -34,7 +34,9 @@ import {
       [focusOnInvalid]="summary"
       (hviSubmitted)="onContactFormSubmit()"
       class="max-w-2xl"
-      aria-describedby="contact-required-info"
+      [attr.aria-describedby]="
+        myForm.requiredMode() === 'all-required' ? 'contact-required-info' : null
+      "
     >
       <h2 hviHeading size="xs">Kontakt oss</h2>
       @if (myForm.requiredMode() === 'all-required') {

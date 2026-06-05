@@ -162,6 +162,7 @@ export class TableZebrastriperOgBorderExampleComponent {
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
     return \`Sorter etter \${heading}, stigende\`;
   }
 }

@@ -12,7 +12,7 @@ import {
   standalone: true,
   imports: [HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel],
   template: `
-    <div style="width: 400px">
+    <div style="max-width: 400px">
       <hvi-field>
         <label hviLabel for="pris" weight="medium">Hvor mange kroner koster det per måned?</label>
         <hvi-field-affixes>
@@ -24,4 +24,6 @@ import {
     </div>
   `,
 })
-export class FieldPrefixSuffixExampleComponent {}
+export class FieldPrefixSuffixExampleComponent {
+  hasEtternavnError = true;
+}

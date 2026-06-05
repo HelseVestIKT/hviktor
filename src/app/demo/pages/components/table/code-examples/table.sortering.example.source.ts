@@ -14,13 +14,25 @@ import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
       <thead>
         <tr>
           <th hviSortableColumn="navn" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">Navn</button>
+            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
+              Navn
+            </button>
           </th>
           <th hviSortableColumn="epost" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')">E-post</button>
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')"
+            >
+              E-post
+            </button>
           </th>
           <th hviSortableColumn="avdeling" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')">Avdeling</button>
+            <button
+              type="button"
+              [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
+            >
+              Avdeling
+            </button>
           </th>
         </tr>
       </thead>
@@ -160,6 +172,7 @@ export class TableSorteringExampleComponent {
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
     return \`Sorter etter \${heading}, stigende\`;
   }
 }

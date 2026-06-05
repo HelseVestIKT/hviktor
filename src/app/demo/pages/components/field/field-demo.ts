@@ -113,9 +113,9 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
             <input hviInput id="flymodus" type="checkbox" role="switch" />
           </hvi-field>
           <hr hviDivider />
-          <hvi-field position="end">
-            <label hviLabel for="lydlos">Lydløs</label>
+          <hvi-field position="start">
             <input hviInput id="lydlos" type="checkbox" role="switch" />
+            <label hviLabel for="lydlos">Lydløs</label>
           </hvi-field>
           <hr hviDivider />
         </div>

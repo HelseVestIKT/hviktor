@@ -32,7 +32,11 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
                 (click)="expandTable.toggleExpanded(person)"
                 [attr.aria-expanded]="expandTable.isExpanded(person)"
                 [attr.aria-controls]="'detalj-' + person.id"
-                [attr.aria-label]="expandTable.isExpanded(person) ? 'Skjul detaljer om ' + person.navn : 'Vis detaljer om ' + person.navn"
+                [attr.aria-label]="
+                  expandTable.isExpanded(person)
+                    ? 'Skjul detaljer om ' + person.navn
+                    : 'Vis detaljer om ' + person.navn
+                "
               >
                 @if (expandTable.isExpanded(person)) {
                   <hvi-icon-chevron-down />
@@ -190,6 +194,7 @@ export class TableUtvidbareRaderExampleComponent {
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    if (dir === 'descending') return \`Fjern sortering på \${heading}\`;
     return \`Sorter etter \${heading}, stigende\`;
   }
 }

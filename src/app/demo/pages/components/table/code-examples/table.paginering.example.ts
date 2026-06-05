@@ -40,14 +40,16 @@ import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hvikto
         }
       </tbody>
     </table>
-    <hvi-pagination
-      aria-label="Sidenavigering for tabell"
-      aria-controls="paginert-tabell"
-      [totalItems]="pageTable.totalFilteredRecords()"
-      [pageSize]="5"
-      [currentPage]="pageTable.currentPage()"
-      (currentPageChange)="pageTable.goToPage($event)"
-    />
+    <div class="mt-4">
+      <hvi-pagination
+        aria-label="Sidenavigering for tabell"
+        aria-controls="paginert-tabell"
+        [totalItems]="pageTable.totalFilteredRecords()"
+        [pageSize]="5"
+        [currentPage]="pageTable.currentPage()"
+        (currentPageChange)="pageTable.goToPage($event)"
+      />
+    </div>
   `,
 })
 export class TablePagineringExampleComponent {
@@ -174,6 +176,7 @@ export class TablePagineringExampleComponent {
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return `Sorter etter ${heading}, synkende`;
+    if (dir === 'descending') return `Fjern sortering på ${heading}`;
     return `Sorter etter ${heading}, stigende`;
   }
 }
