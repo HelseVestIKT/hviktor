@@ -182,6 +182,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Skeleton brukes for å vise at innhold på en side er i ferd med å lastes inn. Den gir brukeren et visuelt hint om hvordan innholdet til slutt vil se ut.',
     ds: true,
+    a11yTested: true,
   },
   {
     id: 'checkbox',
