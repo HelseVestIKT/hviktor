@@ -349,14 +349,16 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             }
           </tbody>
         </table>
-        <hvi-pagination
-          aria-label="Sidenavigering for tabell"
-          aria-controls="paginert-tabell"
-          [totalItems]="pageTable.totalFilteredRecords()"
-          [pageSize]="5"
-          [currentPage]="pageTable.currentPage()"
-          (currentPageChange)="pageTable.goToPage($event)"
-        />
+        <div class="mt-4">
+          <hvi-pagination
+            aria-label="Sidenavigering for tabell"
+            aria-controls="paginert-tabell"
+            [totalItems]="pageTable.totalFilteredRecords()"
+            [pageSize]="5"
+            [currentPage]="pageTable.currentPage()"
+            (currentPageChange)="pageTable.goToPage($event)"
+          />
+        </div>
       </app-demo-section>
 
       <!-- Row expansion -->
