@@ -35,7 +35,7 @@ import { HviTable, type SortDirection } from './table.directive';
   selector: 'th[hviSortableColumn]',
   standalone: true,
   host: {
-    '[attr.aria-sort]': 'ariaSort',
+    '[attr.aria-sort]': 'sortDirection',
     '(click)': 'onClick($event)',
   },
 })
@@ -51,16 +51,6 @@ export class HviSortableColumn {
   /** Henter sorteringsretning fra parent table */
   get sortDirection(): SortDirection {
     return this.table?.getSortDirection(this.field) ?? 'none';
-  }
-
-  /**
-   * Returnerer aria-sort-verdi for attributtet.
-   * Returnerer null når kolonnen ikke er sortert (unngår aria-sort="none"
-   * som feilaktig indikerer for skjermlesere at kolonnen er sortert).
-   */
-  get ariaSort(): string | null {
-    const dir = this.sortDirection;
-    return dir === 'none' ? null : dir;
   }
 
   protected onClick(event: MouseEvent): void {
