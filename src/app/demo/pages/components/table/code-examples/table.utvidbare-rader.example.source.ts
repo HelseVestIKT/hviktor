@@ -32,7 +32,7 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
                 (click)="expandTable.toggleExpanded(person)"
                 [attr.aria-expanded]="expandTable.isExpanded(person)"
                 [attr.aria-controls]="'detalj-' + person.id"
-                [attr.aria-label]="
+                [ariaLabel]="
                   expandTable.isExpanded(person)
                     ? 'Skjul detaljer om ' + person.navn
                     : 'Vis detaljer om ' + person.navn

@@ -389,7 +389,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                     (click)="expandTable.toggleExpanded(person)"
                     [attr.aria-expanded]="expandTable.isExpanded(person)"
                     [attr.aria-controls]="'detalj-' + person.id"
-                    [attr.aria-label]="
+                    [ariaLabel]="
                       expandTable.isExpanded(person)
                         ? 'Skjul detaljer om ' + person.navn
                         : 'Vis detaljer om ' + person.navn
@@ -538,7 +538,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                     (click)="fullTable.toggleExpanded(person)"
                     [attr.aria-expanded]="fullTable.isExpanded(person)"
                     [attr.aria-controls]="'komplett-detalj-' + person.id"
-                    [attr.aria-label]="
+                    [ariaLabel]="
                       fullTable.isExpanded(person)
                         ? 'Skjul detaljer om ' + person.navn
                         : 'Vis detaljer om ' + person.navn

@@ -115,7 +115,7 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
                 (click)="fullTable.toggleExpanded(person)"
                 [attr.aria-expanded]="fullTable.isExpanded(person)"
                 [attr.aria-controls]="'komplett-detalj-' + person.id"
-                [attr.aria-label]="
+                [ariaLabel]="
                   fullTable.isExpanded(person)
                     ? 'Skjul detaljer om ' + person.navn
                     : 'Vis detaljer om ' + person.navn
