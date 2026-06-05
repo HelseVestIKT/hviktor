@@ -4,7 +4,7 @@ import {
   HviButton,
   HviFieldKit,
   HviForms,
-  HviParagraph,
+  HviHeading,
   HviRequiredTag,
   HviSelect,
   HviValidationKit,
@@ -18,7 +18,7 @@ import {
     HviButton,
     HviFieldKit,
     HviForms,
-    HviParagraph,
+    HviHeading,
     HviRequiredTag,
     HviSelect,
     HviValidationKit,
@@ -32,43 +32,41 @@ import {
       [focusOnInvalid]="summary"
       (hviSubmitted)="onSubmit()"
       class="max-w-2xl"
+      aria-describedby="contact-required-info"
     >
-      <!-- Automatisk required-tag basert på FormGroup-analyse -->
+      <h2 hviHeading size="xs">Kontakt oss</h2>
       @if (myForm.requiredMode() === 'all-required') {
-        <hvi-required-tag mode="all-required" />
+        <hvi-required-tag id="contact-required-info" mode="all-required" />
       }
-      <!-- Personalia -->
+
       <fieldset hviFieldset>
-        <legend hviLabel weight="medium">Personalia</legend>
+        <legend hviLabel weight="medium">Om deg</legend>
 
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <hvi-field>
-            <label hviLabel for="firstName" weight="medium">
-              Fornavn <hvi-required-tag mode="required" />
-            </label>
-            <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
-            <p
-              hviFieldValidation
-              hviValidationMessage="firstName"
-              [messages]="messages['firstName']"
-            ></p>
-          </hvi-field>
+        <hvi-field>
+          <label hviLabel for="firstName" weight="medium">
+            Fornavn <hvi-required-tag mode="required" />
+          </label>
+          <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
+          <p
+            hviFieldValidation
+            hviValidationMessage="firstName"
+            [messages]="messages['firstName']"
+          ></p>
+        </hvi-field>
 
-          <hvi-field>
-            <label hviLabel for="lastName" weight="medium">
-              Etternavn <hvi-required-tag mode="required" />
-            </label>
-            <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
-            <p
-              hviFieldValidation
-              hviValidationMessage="lastName"
-              [messages]="messages['lastName']"
-            ></p>
-          </hvi-field>
-        </div>
+        <hvi-field>
+          <label hviLabel for="lastName" weight="medium">
+            Etternavn <hvi-required-tag mode="required" />
+          </label>
+          <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
+          <p
+            hviFieldValidation
+            hviValidationMessage="lastName"
+            [messages]="messages['lastName']"
+          ></p>
+        </hvi-field>
       </fieldset>
 
-      <!-- Kontaktinformasjon -->
       <fieldset hviFieldset>
         <legend hviLabel weight="medium">Kontaktinformasjon</legend>
 
@@ -76,7 +74,6 @@ import {
           <label hviLabel for="email" weight="medium">
             E-post <hvi-required-tag mode="required" />
           </label>
-          <span hviFieldDescription>Vi bruker e-posten til å svare deg</span>
           <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
           <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
         </hvi-field>
@@ -97,7 +94,6 @@ import {
         </hvi-field>
       </fieldset>
 
-      <!-- Henvendelse -->
       <fieldset hviFieldset>
         <legend hviLabel weight="medium">Din henvendelse</legend>
 
@@ -110,7 +106,6 @@ import {
             <option value="general">Generell henvendelse</option>
             <option value="support">Teknisk support</option>
             <option value="feedback">Tilbakemelding</option>
-            <option value="complaint">Klage</option>
             <option value="other">Annet</option>
           </select>
           <p hviFieldValidation hviValidationMessage="subject" [messages]="messages['subject']"></p>
@@ -120,7 +115,7 @@ import {
           <label hviLabel for="message" weight="medium">
             Melding <hvi-required-tag mode="required" />
           </label>
-          <span hviFieldDescription>Beskriv henvendelsen din så detaljert som mulig</span>
+          <span hviFieldDescription>Beskriv det du lurer på</span>
           <textarea
             hviInput
             id="message"
@@ -134,81 +129,13 @@ import {
         </hvi-field>
       </fieldset>
 
-      <!-- Preferanser -->
-      <fieldset hviFieldset>
-        <legend hviLabel weight="medium">Preferanser</legend>
-        <p hviParagraph>Hvordan vil du helst at vi skal kontakte deg?</p>
-
-        <hvi-field>
-          <input
-            hviInput
-            id="pref-email"
-            type="radio"
-            name="contactPreference"
-            value="email"
-            formControlName="contactPreference"
-          />
-          <label hviLabel for="pref-email">E-post</label>
-        </hvi-field>
-
-        <hvi-field>
-          <input
-            hviInput
-            id="pref-phone"
-            type="radio"
-            name="contactPreference"
-            value="phone"
-            formControlName="contactPreference"
-          />
-          <label hviLabel for="pref-phone">Telefon</label>
-        </hvi-field>
-
-        <hvi-field>
-          <input
-            hviInput
-            id="newsletter"
-            type="checkbox"
-            role="switch"
-            formControlName="newsletter"
-          />
-          <label hviLabel for="newsletter" weight="medium"> Meld meg på nyhetsbrev </label>
-        </hvi-field>
-      </fieldset>
-
-      <!-- Samtykke -->
-      <fieldset hviFieldset>
-        <legend hviLabel weight="medium">Samtykke</legend>
-
-        <hvi-field>
-          <input
-            hviInput
-            id="consent"
-            type="checkbox"
-            formControlName="consent"
-            hviControlInvalid
-          />
-          <label hviLabel for="consent">
-            Jeg har lest og godtar
-            <a href="#" class="ds-link">personvernerklæringen</a>
-          </label>
-          <p hviFieldValidation hviValidationMessage="consent" [messages]="messages['consent']"></p>
-        </hvi-field>
-      </fieldset>
-
-      <!-- Knapper -->
       <div class="my-4 flex flex-wrap gap-2">
         <button hviButton type="submit" variant="primary">Send inn</button>
-        <button
-          hviButton
-          type="button"
-          variant="secondary"
-          (click)="contactForm.reset({ contactPreference: 'email' })"
-        >
+        <button hviButton type="button" variant="secondary" (click)="contactForm.reset()">
           Nullstill
         </button>
       </div>
 
-      <!-- Error summary -->
       <hvi-error-summary #summary [form]="contactForm" [messages]="messages" showWhen="submitted" />
     </form>
   `,
@@ -225,9 +152,6 @@ export class FormsKontaktskjemaExampleComponent {
       Validators.minLength(10),
       Validators.maxLength(500),
     ]),
-    contactPreference: new FormControl('email'),
-    newsletter: new FormControl(false),
-    consent: new FormControl(false, [Validators.requiredTrue]),
   });
 
   messages: Record<string, HviValidationMessages> = {
@@ -254,15 +178,12 @@ export class FormsKontaktskjemaExampleComponent {
       minlength: 'Meldingen må være minst 10 tegn',
       maxlength: 'Meldingen kan ikke være mer enn 500 tegn',
     },
-    consent: {
-      requiredTrue: 'Du må godta personvernerklæringen',
-    },
   };
 
   onSubmit(): void {
     if (this.contactForm.valid) {
-      alert('Takk for din henvendelse! Vi svarer deg så snart som mulig.');
-      this.contactForm.reset({ contactPreference: 'email' });
+      alert('Takk for din henvendelse!');
+      this.contactForm.reset();
     }
   }
 }

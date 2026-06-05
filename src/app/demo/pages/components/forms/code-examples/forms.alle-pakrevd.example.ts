@@ -4,6 +4,7 @@ import {
   HviButton,
   HviFieldKit,
   HviForms,
+  HviHeading,
   HviRequiredTag,
   HviTextfield,
   HviValidationKit,
@@ -16,30 +17,36 @@ import {
     HviButton,
     HviFieldKit,
     HviForms,
+    HviHeading,
     HviRequiredTag,
     HviTextfield,
     HviValidationKit,
     ReactiveFormsModule,
   ],
   template: `
-    <form hviForm #allReqForm="hviForm" [formGroup]="allRequiredForm" class="max-w-md">
+    <form
+      hviForm
+      #allReqForm="hviForm"
+      [formGroup]="loginForm"
+      class="max-w-sm"
+      aria-describedby="login-required-info"
+    >
+      <h2 hviHeading size="xs">Logg inn</h2>
       @if (allReqForm.requiredMode() === 'all-required') {
-        <hvi-required-tag mode="all-required" />
+        <hvi-required-tag id="login-required-info" mode="all-required" />
       }
-      <hvi-textfield label="Fornavn" formControlName="firstName" required />
-      <hvi-textfield label="Etternavn" formControlName="lastName" required />
-      <hvi-textfield label="E-post" formControlName="email" type="email" required />
+      <hvi-textfield label="Brukernavn" formControlName="username" required />
+      <hvi-textfield label="Passord" formControlName="password" type="password" required />
       <div class="mt-4">
-        <button hviButton type="submit" variant="primary">Send inn</button>
+        <button hviButton type="submit" variant="primary">Logg inn</button>
       </div>
     </form>
   `,
 })
 export class FormsAllePakrevdExampleComponent {
-  /** Alle felt er påkrevde → requiredMode = 'all-required' */
-  allRequiredForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
+  /** Innloggingsskjema – alle felt er obligatoriske */
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
   });
 }

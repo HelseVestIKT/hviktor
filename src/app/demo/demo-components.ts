@@ -114,7 +114,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     id: 'form',
     name: 'Form',
     description:
-      'Form er en direktiv for `<form>` som håndterer innsending i reaktive Angular-skjema. Komponenten setter `submitted` ved første innsending, emitter `hviSubmitted`, markerer alle felter som touched når `[formGroup]` er brukt, og kan flytte fokus til en feiloppsummering ved ugyldig skjema. Dette gir tydeligere valideringsflyt, bedre tilgjengelighet og en mer konsistent skjemaopplevelse.',
+      'Form håndterer innsending av skjema. Den sørger for at feilmeldinger vises når brukeren sender inn, og kan flytte fokus til en feiloppsummering slik at brukeren enkelt ser hva som må rettes.',
     hvi: true,
   },
   {

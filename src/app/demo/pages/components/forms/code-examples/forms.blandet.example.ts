@@ -1,29 +1,36 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HviButton, HviForms, HviTextfield, HviValidationKit } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviForms,
+  HviHeading,
+  HviTextfield,
+  HviValidationKit,
+} from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-forms-blandet-example',
   standalone: true,
-  imports: [HviButton, HviForms, HviTextfield, HviValidationKit, ReactiveFormsModule],
+  imports: [HviButton, HviForms, HviHeading, HviTextfield, HviValidationKit, ReactiveFormsModule],
   template: `
-    <form hviForm #mixedForm="hviForm" [formGroup]="mixedRequiredForm" class="max-w-md">
-      <hvi-textfield label="Fornavn" formControlName="firstName" required />
-      <hvi-textfield label="Etternavn" formControlName="lastName" required />
-      <hvi-textfield label="Telefon" formControlName="phone" type="tel" />
+    <form hviForm #mixedForm="hviForm" [formGroup]="appointmentForm" class="max-w-md">
+      <h2 hviHeading size="xs">Bestill time</h2>
+      <hvi-textfield label="Navn" formControlName="name" required />
+      <hvi-textfield label="E-postadresse" formControlName="email" type="email" required />
+      <hvi-textfield label="Ønsket tidspunkt" formControlName="preferredTime" required />
       <hvi-textfield label="Kommentar" formControlName="comment" [multiline]="true" [rows]="3" />
       <div class="mt-4">
-        <button hviButton type="submit" variant="primary">Send inn</button>
+        <button hviButton type="submit" variant="primary">Bestill time</button>
       </div>
     </form>
   `,
 })
 export class FormsBlandetExampleComponent {
-  /** Blanding av påkrevde og valgfrie → requiredMode = 'mixed' */
-  mixedRequiredForm = new FormGroup({
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    phone: new FormControl(''),
+  /** Bestill time – blanding av obligatoriske og valgfrie felt */
+  appointmentForm = new FormGroup({
+    name: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    preferredTime: new FormControl('', [Validators.required]),
     comment: new FormControl(''),
   });
 }

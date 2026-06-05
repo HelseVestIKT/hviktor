@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
-export * from './forms.alle-pakrevd.example';
-export * from './forms.alle-pakrevd.example.source';
-export * from './forms.blandet.example';
-export * from './forms.blandet.example.source';
-export * from './forms.kontaktskjema.example';
-export * from './forms.kontaktskjema.example.source';
+export * from './forms.alle-felt-er-obligatoriske.example';
+export * from './forms.alle-felt-er-obligatoriske.example.source';
+export * from './forms.obligatoriske-og-valgfrie-felt.example';
+export * from './forms.obligatoriske-og-valgfrie-felt.example.source';
+export * from './forms.skjema-med-validering-og-feiloppsummering.example';
+export * from './forms.skjema-med-validering-og-feiloppsummering.example.source';
