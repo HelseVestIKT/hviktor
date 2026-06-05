@@ -8,11 +8,14 @@ import { HviTable } from '@helsevestikt/hviktor';
   imports: [HviTable],
   template: \`
     <table hviTable zebra border hover>
+      <caption>
+        Sidevisninger per måned
+      </caption>
       <thead>
         <tr>
-          <th>Måned</th>
-          <th>2024</th>
-          <th>2025</th>
+          <th scope="col">Måned</th>
+          <th scope="col">2024</th>
+          <th scope="col">2025</th>
         </tr>
       </thead>
       <tbody>
@@ -155,5 +158,11 @@ export class TableZebrastriperOgBorderExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
   
   rowsPerPage = signal(5);
+  
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    return \`Sorter etter \${heading}, stigende\`;
+  }
 }
 `;

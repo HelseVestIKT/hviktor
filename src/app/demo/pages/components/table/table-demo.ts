@@ -14,8 +14,6 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-envelope-closed.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
 
 import { TableEnkelTabellExampleSource } from './code-examples/table.enkel-tabell.example.source';
 import { TableGlobaltSokExampleSource } from './code-examples/table.globalt-sok.example.source';
@@ -57,9 +55,9 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
           </caption>
           <thead>
             <tr>
-              <th>Prosjekt</th>
-              <th>Status</th>
-              <th>Frist</th>
+              <th scope="col">Prosjekt</th>
+              <th scope="col">Status</th>
+              <th scope="col">Frist</th>
             </tr>
           </thead>
           <tbody>
@@ -89,11 +87,14 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         description="Bruk zebra og border for å gjøre tabellen enklere å lese. Hover gir visuell tilbakemelding når brukeren holder over en rad."
       >
         <table hviTable zebra border hover>
+          <caption>
+            Sidevisninger per måned
+          </caption>
           <thead>
             <tr>
-              <th>Måned</th>
-              <th>2024</th>
-              <th>2025</th>
+              <th scope="col">Måned</th>
+              <th scope="col">2024</th>
+              <th scope="col">2025</th>
             </tr>
           </thead>
           <tbody>
@@ -123,16 +124,31 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         description="Legg til sortering på kolonner med hviSortableColumn-direktivet. Klikk på en kolonneoverskrift for å sykle gjennom: ingen → stigende → synkende → ingen."
       >
         <table hviTable [value]="data" #sortTable="hviTable">
+          <caption>
+            Ansattoversikt
+          </caption>
           <thead>
             <tr>
-              <th hviSortableColumn="navn">
-                <button type="button">Navn</button>
+              <th hviSortableColumn="navn" scope="col">
+                <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
+                  Navn
+                </button>
               </th>
-              <th hviSortableColumn="epost">
-                <button type="button">Epost</button>
+              <th hviSortableColumn="epost" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')"
+                >
+                  E-post
+                </button>
               </th>
-              <th hviSortableColumn="avdeling">
-                <button type="button">Avdeling</button>
+              <th hviSortableColumn="avdeling" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
+                >
+                  Avdeling
+                </button>
               </th>
             </tr>
           </thead>
@@ -154,31 +170,42 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="globaltSokCode"
         description="Legg til et søkefelt som filtrerer på tvers av alle angitte kolonner. Definer hvilke felter som skal inkluderes med globalFilterFields."
       >
-        <div class="mb-4">
-          <label hviLabel>Søk i tabell</label>
+        <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
+          <label hviLabel for="tabell-sok">Søk i tabell</label>
+          <p class="ds-paragraph" id="tabell-sok-beskrivelse">
+            Søk etter navn, e-post eller avdeling
+          </p>
           <hvi-search>
             <input
               hviInput
+              id="tabell-sok"
               type="search"
-              placeholder="Søk etter navn, epost eller avdeling..."
+              aria-describedby="tabell-sok-beskrivelse"
               (input)="searchTable.filterGlobal($any($event.target).value)"
             />
-            <button hviSearchClear type="reset" aria-label="Tøm"></button>
+            <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
           </hvi-search>
-        </div>
+        </form>
+        <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+          Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
+        </p>
         <table
           hviTable
+          id="sok-tabell"
           [value]="data"
           [globalFilterFields]="['navn', 'epost', 'avdeling']"
           zebra
           #searchTable="hviTable"
         >
+          <caption>
+            Ansattoversikt
+          </caption>
           <thead>
             <tr>
-              <th>Navn</th>
-              <th>Epost</th>
-              <th>Avdeling</th>
-              <th>Stilling</th>
+              <th scope="col">Navn</th>
+              <th scope="col">E-post</th>
+              <th scope="col">Avdeling</th>
+              <th scope="col">Stilling</th>
             </tr>
           </thead>
           <tbody>
@@ -196,9 +223,6 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             }
           </tbody>
         </table>
-        <p class="ds-paragraph mt-2">
-          Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
-        </p>
       </app-demo-section>
 
       <!-- Kolonnefiltrering -->
@@ -207,50 +231,58 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="kolonnefiltreringCode"
         description="Filtrer på enkeltkolonner med setColumnFilter(). Bruk multi-select i tablehead for flervalgsfiltrering. Hver th bør ha en fast bredde for å unngå at multiselecten vokser horisontalt."
       >
+        <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+          Viser {{ colFilterTable.totalFilteredRecords() }} av
+          {{ colFilterTable.totalRecords() }} rader
+        </p>
         <table
           hviTable
+          id="filter-tabell"
           [value]="data"
           [columns]="['navn', 'epost', 'avdeling', 'stilling']"
           zebra
           #colFilterTable="hviTable"
         >
+          <caption>
+            Ansattoversikt
+          </caption>
           <thead>
             <tr>
-              <th>Navn</th>
-              <th>Avdeling</th>
-              <th>Stilling</th>
+              <th scope="col">Navn</th>
+              <th scope="col">Avdeling</th>
+              <th scope="col">Stilling</th>
             </tr>
             <tr>
-              <th width="30%">
-                <span class="sr-only">Filtrer på navn</span>
+              <td width="30%">
                 <hvi-multi-select
                   [options]="navnOptions"
                   placeholder="Alle"
                   searchPlaceholder="Søk navn..."
                   aria-label="Filtrer på navn"
+                  aria-controls="filter-tabell"
                   (selectionChange)="colFilterTable.setColumnFilter('navn', $event)"
                 />
-              </th>
-              <th width="30%">
-                <span class="sr-only">Filtrer på avdeling</span>
+              </td>
+              <td width="30%">
                 <hvi-multi-select
                   [options]="avdelingOptions"
                   placeholder="Alle"
                   searchPlaceholder="Søk avdeling..."
                   aria-label="Filtrer på avdeling"
+                  aria-controls="filter-tabell"
                   (selectionChange)="colFilterTable.setColumnFilter('avdeling', $event)"
                 />
-              </th>
-              <th width="30%">
-                <span class="sr-only">Filtrer på stilling</span>
+              </td>
+              <td width="30%">
                 <hvi-multi-select
                   [options]="stillingOptions"
                   placeholder="Alle"
                   searchPlaceholder="Søk stilling..."
                   aria-label="Filtrer på stilling"
+                  aria-controls="filter-tabell"
                   (selectionChange)="colFilterTable.setColumnFilter('stilling', $event)"
                 />
-              </th>
+              </td>
             </tr>
           </thead>
           <tbody>
@@ -283,14 +315,28 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="pagineringCode"
         description="Aktiver paginering med paginator-attributtet og sett antall rader med rows. Bruk HviPagination for navigasjon."
       >
-        <table hviTable [value]="data" paginator [rows]="5" zebra hover #pageTable="hviTable">
+        <table
+          hviTable
+          id="paginert-tabell"
+          [value]="data"
+          paginator
+          [rows]="5"
+          zebra
+          hover
+          #pageTable="hviTable"
+        >
+          <caption>
+            Ansattoversikt
+          </caption>
           <thead>
             <tr>
-              <th hviSortableColumn="navn">
-                <button type="button">Navn</button>
+              <th hviSortableColumn="navn" scope="col">
+                <button type="button" [attr.aria-label]="getSortLabel(pageTable, 'navn', 'Navn')">
+                  Navn
+                </button>
               </th>
-              <th>Epost</th>
-              <th>Avdeling</th>
+              <th scope="col">E-post</th>
+              <th scope="col">Avdeling</th>
             </tr>
           </thead>
           <tbody>
@@ -304,6 +350,8 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
           </tbody>
         </table>
         <hvi-pagination
+          aria-label="Sidenavigering for tabell"
+          aria-controls="paginert-tabell"
           [totalItems]="pageTable.totalFilteredRecords()"
           [pageSize]="5"
           [currentPage]="pageTable.currentPage()"
@@ -318,12 +366,15 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         description="Vis ekstra informasjon under en rad med toggleExpanded() og isExpanded(). Nyttig for detaljer som ikke trenger en egen kolonne."
       >
         <table hviTable [value]="data" hover #expandTable="hviTable">
+          <caption>
+            Ansattoversikt med kontaktinformasjon
+          </caption>
           <thead>
             <tr>
-              <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
-              <th>Navn</th>
-              <th>Avdeling</th>
-              <th>Stilling</th>
+              <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+              <th scope="col">Navn</th>
+              <th scope="col">Avdeling</th>
+              <th scope="col">Stilling</th>
             </tr>
           </thead>
           <tbody>
@@ -335,7 +386,12 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                     variant="tertiary"
                     (click)="expandTable.toggleExpanded(person)"
                     [attr.aria-expanded]="expandTable.isExpanded(person)"
-                    [ariaLabel]="'Vis detaljer'"
+                    [attr.aria-controls]="'detalj-' + person.id"
+                    [attr.aria-label]="
+                      expandTable.isExpanded(person)
+                        ? 'Skjul detaljer om ' + person.navn
+                        : 'Vis detaljer om ' + person.navn
+                    "
                   >
                     @if (expandTable.isExpanded(person)) {
                       <hvi-icon-chevron-down />
@@ -349,17 +405,15 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                 <td>{{ person.stilling }}</td>
               </tr>
               @if (expandTable.isExpanded(person)) {
-                <tr>
+                <tr [id]="'detalj-' + person.id">
                   <td colspan="4">
                     <div class="flex gap-8 py-2 pl-12">
-                      <dl class="flex items-center gap-2">
-                        <dt>
-                          <hvi-icon-envelope-closed />
-                        </dt>
+                      <dl>
+                        <dt>E-post</dt>
                         <dd>{{ person.epost }}</dd>
                       </dl>
-                      <dl class="flex items-center gap-2">
-                        <dt><hvi-icon-phone /></dt>
+                      <dl>
+                        <dt>Telefon</dt>
                         <dd>{{ person.telefon }}</dd>
                       </dl>
                     </div>
@@ -377,20 +431,28 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="komplettEksempelCode"
         description="Tabell med søk, sortering, kolonnefiltrering, paginering og utvidbare rader kombinert."
       >
-        <div class="mb-4">
-          <label hviLabel>Søk</label>
+        <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="komplett-tabell">
+          <label hviLabel for="komplett-sok">Søk</label>
+          <p class="ds-paragraph" id="komplett-sok-beskrivelse">
+            Søk etter navn, e-post, avdeling eller stilling
+          </p>
           <hvi-search>
             <input
               hviInput
+              id="komplett-sok"
               type="search"
-              placeholder="Søk i alle kolonner..."
+              aria-describedby="komplett-sok-beskrivelse"
               (input)="fullTable.filterGlobal($any($event.target).value)"
             />
-            <button hviSearchClear type="reset" aria-label="Tøm"></button>
+            <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
           </hvi-search>
-        </div>
+        </form>
+        <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+          Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader
+        </p>
         <table
           hviTable
+          id="komplett-tabell"
           [value]="data"
           [columns]="['navn', 'epost', 'avdeling', 'stilling']"
           [globalFilterFields]="['navn', 'epost', 'avdeling', 'stilling']"
@@ -402,51 +464,66 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
           stickyHeader
           #fullTable="hviTable"
         >
+          <caption>
+            Ansattoversikt
+          </caption>
           <thead>
             <tr>
-              <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
-              <th hviSortableColumn="navn">
-                <button type="button">Navn</button>
+              <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+              <th hviSortableColumn="navn" scope="col">
+                <button type="button" [attr.aria-label]="getSortLabel(fullTable, 'navn', 'Navn')">
+                  Navn
+                </button>
               </th>
-              <th hviSortableColumn="avdeling">
-                <button type="button">Avdeling</button>
+              <th hviSortableColumn="avdeling" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(fullTable, 'avdeling', 'Avdeling')"
+                >
+                  Avdeling
+                </button>
               </th>
-              <th hviSortableColumn="stilling">
-                <button type="button">Stilling</button>
+              <th hviSortableColumn="stilling" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(fullTable, 'stilling', 'Stilling')"
+                >
+                  Stilling
+                </button>
               </th>
             </tr>
             <tr>
-              <th><span class="sr-only">Filter</span></th>
-              <th width="30%">
-                <span class="sr-only">Filtrer på navn</span>
+              <td><span class="sr-only">Filter</span></td>
+              <td width="30%">
                 <hvi-multi-select
                   [options]="navnOptions"
                   placeholder="Alle"
                   searchPlaceholder="Søk navn..."
                   aria-label="Filtrer på navn"
+                  aria-controls="komplett-tabell"
                   (selectionChange)="fullTable.setColumnFilter('navn', $event)"
                 />
-              </th>
-              <th width="30%">
-                <span class="sr-only">Filtrer på avdeling</span>
+              </td>
+              <td width="30%">
                 <hvi-multi-select
                   [options]="avdelingOptions"
                   placeholder="Alle"
                   searchPlaceholder="Søk avdeling..."
                   aria-label="Filtrer på avdeling"
+                  aria-controls="komplett-tabell"
                   (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
                 />
-              </th>
-              <th width="30%">
-                <span class="sr-only">Filtrer på stilling</span>
+              </td>
+              <td width="30%">
                 <hvi-multi-select
                   [options]="stillingOptions"
                   placeholder="Alle"
                   searchPlaceholder="Søk stilling..."
                   aria-label="Filtrer på stilling"
+                  aria-controls="komplett-tabell"
                   (selectionChange)="fullTable.setColumnFilter('stilling', $event)"
                 />
-              </th>
+              </td>
             </tr>
           </thead>
           <tbody>
@@ -458,7 +535,12 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                     variant="tertiary"
                     (click)="fullTable.toggleExpanded(person)"
                     [attr.aria-expanded]="fullTable.isExpanded(person)"
-                    [ariaLabel]="'Vis detaljer'"
+                    [attr.aria-controls]="'komplett-detalj-' + person.id"
+                    [attr.aria-label]="
+                      fullTable.isExpanded(person)
+                        ? 'Skjul detaljer om ' + person.navn
+                        : 'Vis detaljer om ' + person.navn
+                    "
                   >
                     @if (fullTable.isExpanded(person)) {
                       <hvi-icon-chevron-down />
@@ -472,17 +554,15 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                 <td>{{ person.stilling }}</td>
               </tr>
               @if (fullTable.isExpanded(person)) {
-                <tr>
+                <tr [id]="'komplett-detalj-' + person.id">
                   <td colspan="4">
                     <div class="flex gap-8 py-2 pl-12">
-                      <dl class="flex items-center gap-2">
-                        <dt>
-                          <hvi-icon-envelope-closed />
-                        </dt>
+                      <dl>
+                        <dt>E-post</dt>
                         <dd>{{ person.epost }}</dd>
                       </dl>
-                      <dl class="flex items-center gap-2">
-                        <dt><hvi-icon-phone /></dt>
+                      <dl>
+                        <dt>Telefon</dt>
                         <dd>{{ person.telefon }}</dd>
                       </dl>
                     </div>
@@ -496,11 +576,10 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             }
           </tbody>
         </table>
-        <div class="mt-4 flex items-center justify-between">
-          <p class="ds-paragraph">
-            Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader
-          </p>
+        <div class="mt-4 flex items-center justify-end">
           <hvi-pagination
+            aria-label="Sidenavigering for tabell"
+            aria-controls="komplett-tabell"
             [totalItems]="fullTable.totalFilteredRecords()"
             [pageSize]="rowsPerPage()"
             [currentPage]="fullTable.currentPage()"
@@ -640,4 +719,10 @@ export class TableDemoComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 
   rowsPerPage = signal(5);
+
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return `Sorter etter ${heading}, synkende`;
+    return `Sorter etter ${heading}, stigende`;
+  }
 }

@@ -2,8 +2,6 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { HviButton, HviTable } from '@helsevestikt/hviktor';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-envelope-closed.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
 
 @Component({
   selector: 'app-table-utvidbare-rader-example',
@@ -12,12 +10,15 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <table hviTable [value]="data" hover #expandTable="hviTable">
+      <caption>
+        Ansattoversikt med kontaktinformasjon
+      </caption>
       <thead>
         <tr>
-          <th style="width: 3rem"><span class="sr-only">Utvid</span></th>
-          <th>Navn</th>
-          <th>Avdeling</th>
-          <th>Stilling</th>
+          <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+          <th scope="col">Navn</th>
+          <th scope="col">Avdeling</th>
+          <th scope="col">Stilling</th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +30,12 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
                 variant="tertiary"
                 (click)="expandTable.toggleExpanded(person)"
                 [attr.aria-expanded]="expandTable.isExpanded(person)"
-                [ariaLabel]="'Vis detaljer'"
+                [attr.aria-controls]="'detalj-' + person.id"
+                [attr.aria-label]="
+                  expandTable.isExpanded(person)
+                    ? 'Skjul detaljer om ' + person.navn
+                    : 'Vis detaljer om ' + person.navn
+                "
               >
                 @if (expandTable.isExpanded(person)) {
                   <hvi-icon-chevron-down />
@@ -43,17 +49,15 @@ import '@helsevestikt/hviktor-icons/icon-phone.webcomponent';
             <td>{{ person.stilling }}</td>
           </tr>
           @if (expandTable.isExpanded(person)) {
-            <tr>
+            <tr [id]="'detalj-' + person.id">
               <td colspan="4">
                 <div class="flex gap-8 py-2 pl-12">
-                  <dl class="flex items-center gap-2">
-                    <dt>
-                      <hvi-icon-envelope-closed />
-                    </dt>
+                  <dl>
+                    <dt>E-post</dt>
                     <dd>{{ person.epost }}</dd>
                   </dl>
-                  <dl class="flex items-center gap-2">
-                    <dt><hvi-icon-phone /></dt>
+                  <dl>
+                    <dt>Telefon</dt>
                     <dd>{{ person.telefon }}</dd>
                   </dl>
                 </div>
@@ -185,4 +189,10 @@ export class TableUtvidbareRaderExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 
   rowsPerPage = signal(5);
+
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return `Sorter etter ${heading}, synkende`;
+    return `Sorter etter ${heading}, stigende`;
+  }
 }

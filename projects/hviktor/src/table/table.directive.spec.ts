@@ -322,9 +322,9 @@ describe('HviTable sortable column directive', () => {
     fixture.detectChanges();
   });
 
-  it('should set aria-sort to none initially', () => {
+  it('should not set aria-sort when column is not sorted', () => {
     const th = fixture.nativeElement.querySelector('th[hviSortableColumn="navn"]');
-    expect(th.getAttribute('aria-sort')).toBe('none');
+    expect(th.getAttribute('aria-sort')).toBeNull();
   });
 
   it('should cycle through sort directions on repeated clicks', () => {
@@ -341,7 +341,7 @@ describe('HviTable sortable column directive', () => {
 
     btn.click();
     fixture.detectChanges();
-    expect(th.getAttribute('aria-sort')).toBe('none');
+    expect(th.getAttribute('aria-sort')).toBeNull();
   });
 });
 

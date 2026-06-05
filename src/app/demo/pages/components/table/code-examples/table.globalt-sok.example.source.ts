@@ -7,31 +7,42 @@ import { HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsev
   standalone: true,
   imports: [HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
   template: \`
-    <div class="mb-4">
-      <label hviLabel>Søk i tabell</label>
+    <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
+      <label hviLabel for="tabell-sok">Søk i tabell</label>
+      <p class="ds-paragraph" id="tabell-sok-beskrivelse">
+        Søk etter navn, e-post eller avdeling
+      </p>
       <hvi-search>
         <input
           hviInput
+          id="tabell-sok"
           type="search"
-          placeholder="Søk etter navn, epost eller avdeling..."
+          aria-describedby="tabell-sok-beskrivelse"
           (input)="searchTable.filterGlobal($any($event.target).value)"
         />
-        <button hviSearchClear type="reset" aria-label="Tøm"></button>
+        <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
       </hvi-search>
-    </div>
+    </form>
+    <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+      Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
+    </p>
     <table
       hviTable
+      id="sok-tabell"
       [value]="data"
       [globalFilterFields]="['navn', 'epost', 'avdeling']"
       zebra
       #searchTable="hviTable"
     >
+      <caption>
+        Ansattoversikt
+      </caption>
       <thead>
         <tr>
-          <th>Navn</th>
-          <th>Epost</th>
-          <th>Avdeling</th>
-          <th>Stilling</th>
+          <th scope="col">Navn</th>
+          <th scope="col">E-post</th>
+          <th scope="col">Avdeling</th>
+          <th scope="col">Stilling</th>
         </tr>
       </thead>
       <tbody>
@@ -49,9 +60,6 @@ import { HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsev
         }
       </tbody>
     </table>
-    <p class="ds-paragraph mt-2">
-      Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
-    </p>
   \`,
 })
 export class TableGlobaltSokExampleComponent {
@@ -174,5 +182,11 @@ export class TableGlobaltSokExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
   
   rowsPerPage = signal(5);
+  
+  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
+    const dir = table.getSortDirection(field);
+    if (dir === 'ascending') return \`Sorter etter \${heading}, synkende\`;
+    return \`Sorter etter \${heading}, stigende\`;
+  }
 }
 `;
