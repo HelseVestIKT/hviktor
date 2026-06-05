@@ -1,22 +1,24 @@
 // Auto-generated - do not edit manually
 export const FieldPlasseringExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviInput, HviLabel, HviDivider } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-field-plassering-example',
   standalone: true,
-  imports: [HviField, HviInput, HviLabel],
+  imports: [HviField, HviInput, HviLabel, HviDivider],
   template: \`
-    <div class="flex flex-col gap-4" style="max-width: 300px">
+    <div class="grid gap-2" style="max-width: 300px">
+      <hr hviDivider />
       <hvi-field position="end">
-        <label hviLabel for="flymodus" weight="medium">Flymodus</label>
+        <label hviLabel for="flymodus">Flymodus</label>
         <input hviInput id="flymodus" type="checkbox" role="switch" />
       </hvi-field>
-    
-      <hvi-field position="start">
-        <input hviInput id="bluetooth" type="checkbox" role="switch" checked />
-        <label hviLabel for="bluetooth" weight="medium">Bluetooth</label>
+      <hr hviDivider />
+      <hvi-field position="end">
+        <label hviLabel for="lydlos">Lydløs</label>
+        <input hviInput id="lydlos" type="checkbox" role="switch" />
       </hvi-field>
+      <hr hviDivider />
     </div>
   \`,
 })

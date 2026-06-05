@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  HviDivider,
   HviField,
   HviFieldAffix,
   HviFieldAffixes,
@@ -35,6 +36,7 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
     HviInput,
     HviLabel,
     HviParagraph,
+    HviDivider,
   ],
   template: `
     <app-demo-page componentId="field">
@@ -44,7 +46,7 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="grunnleggendeCode"
         description="Field kobler automatisk sammen label, description og validation med feltet via riktige ARIA-attributter."
       >
-        <div style="width: 400px">
+        <div style="max-width: 400px">
           <hvi-field>
             <label hviLabel for="etternavn" weight="medium">Etternavn</label>
             <p hviFieldDescription>Etternavn kan ikke inneholde mellomrom</p>
@@ -69,7 +71,7 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="prefixSuffixCode"
         description="Prefixer og suffixer er nyttige for å vise enheter, valuta eller andre typer informasjon som er relevant for feltet. Du skal ikke bruke disse alene, siden skjermlesere ikke leser dem opp."
       >
-        <div style="width: 400px">
+        <div style="max-width: 400px">
           <hvi-field>
             <label hviLabel for="pris" weight="medium"
               >Hvor mange kroner koster det per måned?</label
@@ -104,16 +106,18 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         [code]="plasseringCode"
         description="Når du bruker Field sammen med valgkomponenter som Switch, kan du plassere etiketten enten før eller etter kontrollen med position-attributtet."
       >
-        <div class="flex flex-col gap-4" style="max-width: 300px">
+        <div class="grid gap-2" style="max-width: 300px">
+          <hr hviDivider />
           <hvi-field position="end">
-            <label hviLabel for="flymodus" weight="medium">Flymodus</label>
+            <label hviLabel for="flymodus">Flymodus</label>
             <input hviInput id="flymodus" type="checkbox" role="switch" />
           </hvi-field>
-
-          <hvi-field position="start">
-            <input hviInput id="bluetooth" type="checkbox" role="switch" checked />
-            <label hviLabel for="bluetooth" weight="medium">Bluetooth</label>
+          <hr hviDivider />
+          <hvi-field position="end">
+            <label hviLabel for="lydlos">Lydløs</label>
+            <input hviInput id="lydlos" type="checkbox" role="switch" />
           </hvi-field>
+          <hr hviDivider />
         </div>
       </app-demo-section>
 
