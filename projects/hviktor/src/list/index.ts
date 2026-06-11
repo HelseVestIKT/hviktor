@@ -1,1 +1,1 @@
-export * from './list.directive';
+export { HviList } from './list.directive';
