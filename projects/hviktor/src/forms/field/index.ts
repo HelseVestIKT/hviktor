@@ -1,7 +1,7 @@
-export * from './field-affix.component';
-export * from './field-affixes.component';
-export * from './field-counter.component';
-export * from './field-description.directive';
-export * from './field-optional.directive';
-export * from './field-validation.directive';
-export * from './field.component';
+export { HviFieldAffix } from './field-affix.component';
+export { HviFieldAffixes } from './field-affixes.component';
+export { HviFieldCounter } from './field-counter.component';
+export { HviFieldDescription } from './field-description.directive';
+export { HviFieldOptional } from './field-optional.directive';
+export { HviFieldValidation } from './field-validation.directive';
+export { HviField } from './field.component';

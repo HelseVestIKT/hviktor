@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
 
 /**
- * Decorative affix container displayed alongside a text input.
+ * @summary Decorative affix container displayed alongside a text input.
  *
- * @remarks
- * Used together with the `hvi-field-affixes` component to wrap leading and trailing adornments.
- *
- * @example
+ * @example Prefix and suffix affixes
  * ```html
- *  <hvi-field-affixes>
- *    <hvi-field-affix>NOK</hvi-field-affix>
- *    <input hviInput type="text" placeholder="Amount" />
- *    <hvi-field-affix>per month</hvi-field-affix>
+ * <hvi-field-affixes>
+ *   <hvi-field-affix>NOK</hvi-field-affix>
+ *   <input hviInput type="text" placeholder="Amount" />
+ *   <hvi-field-affix>per month</hvi-field-affix>
  * </hvi-field-affixes>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/field/code#prefixsuffix
+ * @see {@link https://designsystemet.no/no/components/docs/field/code}
  */
 @Component({
   selector: 'hvi-field-affix',
