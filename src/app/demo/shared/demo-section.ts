@@ -1,5 +1,16 @@
-import { AfterViewInit, Component, computed, ElementRef, input, viewChild } from '@angular/core';
-import { HviDetails, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import {
+  AfterViewInit,
+  Component,
+  computed,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { HviButton, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-chevron-up.webcomponent';
 import hljs from 'highlight.js/lib/core';
 import typescript from 'highlight.js/lib/languages/typescript';
 
@@ -13,35 +24,66 @@ hljs.registerLanguage('typescript', typescript);
 @Component({
   selector: 'app-demo-section',
   standalone: true,
-  imports: [HviHeading, HviParagraph, HviDetails],
+  imports: [HviHeading, HviParagraph, HviButton, HviParagraph],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <section [id]="sectionId()" class="my-8 scroll-mt-24 rounded-lg border border-neutral-300 p-6">
+    <section [id]="sectionId()" class="gap-4">
       <h2 hviHeading size="md">{{ title() }}</h2>
       @if (description()) {
-        <p hviParagraph class="max-w-3xl">{{ description() }}</p>
+        <p hviParagraph class="max-w-3xl pt-2">{{ description() }}</p>
       }
-      <div class="mt-4">
+
+      <div class="componentDisplay | mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-6">
         <ng-content />
       </div>
+
       @if (code()) {
-        <div class="mt-4">
-          <details hviDetails (toggle)="onDetailsToggle($event)">
-            <summary>Vis kode</summary>
-            <div>
-              <pre>
-                <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
-              </pre>
-            </div>
-          </details>
+        <div
+          class="mb-8 flex scroll-mt-24 justify-end rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300"
+        >
+          <button
+            hviButton
+            variant="tertiary"
+            color="neutral"
+            class="toggleButton"
+            aria-expanded="{{ showCode() ? 'true' : 'false' }}"
+            (click)="toggleCode()"
+          >
+            @if (showCode()) {
+              <hvi-icon-chevron-up />
+              Skjul kode
+            } @else {
+              <hvi-icon-chevron-down />
+              Vis kode
+            }
+          </button>
         </div>
       }
     </section>
+
+    @if (showCode()) {
+      <section aria-label="Vis kode" class="gap-4">
+        <div
+          class="componentDisplay | mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4"
+        >
+          <p hviParagraph>Angular</p>
+        </div>
+        <div
+          class="codeExample | mb-8 rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300 p-4"
+        >
+          <pre>
+              <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
+            </pre>
+        </div>
+      </section>
+    }
   `,
 })
 export class DemoSectionComponent implements AfterViewInit {
   title = input.required<string>();
   description = input<string>();
   code = input<string>();
+  showCode = signal(false);
 
   sectionId = computed(() =>
     this.title()
@@ -54,29 +96,23 @@ export class DemoSectionComponent implements AfterViewInit {
   );
 
   codeBlock = viewChild<ElementRef<HTMLElement>>('codeBlock');
-  private highlighted = false;
 
   ngAfterViewInit() {
     this.highlightCode();
   }
 
-  onDetailsToggle(event: Event) {
-    // Highlight when details is opened
-    if ((event.target as HTMLDetailsElement)?.open) {
-      this.highlightCode();
+  toggleCode() {
+    this.showCode.update((value) => !value);
+    if (this.showCode()) {
+      // Wait for the code block to be rendered before highlighting.
+      setTimeout(() => this.highlightCode(), 0);
     }
   }
 
   private highlightCode() {
-    if (this.highlighted) return;
-
     const el = this.codeBlock()?.nativeElement;
     if (el && this.code()) {
-      // Use setTimeout to ensure DOM is ready
-      setTimeout(() => {
-        hljs.highlightElement(el);
-        this.highlighted = true;
-      }, 0);
+      hljs.highlightElement(el);
     }
   }
 }
