@@ -1,18 +1,27 @@
 import { Directive, Input } from '@angular/core';
 
 /**
- * Info
+ * @summary Directive that applies Designsystemet link styling to anchor or button elements.
  *
- * Eksempel på bruk:
+ * @example Basic link
  * ```html
- * <a hviLink />
+ * <a hviLink href="/page">Go to page</a>
  * ```
  *
- * Dokumentasjon: https://designsystemet.no/no/components/docs/input/overview
+ * @example Neutral color variant
+ * ```html
+ * <a hviLink href="/privacy" color="neutral">Privacy policy</a>
+ * ```
+ *
+ * @example Link styled as button
+ * ```html
+ * <button hviLink (click)="navigate()">Navigate</button>
+ * ```
+ *
+ * @see {@link https://designsystemet.no/no/components/docs/link}
  */
-
 @Directive({
-  selector: 'a[hviLink]',
+  selector: 'a[hviLink], button[hviLink]',
   standalone: true,
   host: {
     class: 'ds-link',
@@ -20,6 +29,6 @@ import { Directive, Input } from '@angular/core';
   },
 })
 export class HviLink {
-  /** Used to change the appearance of the link. */
-  @Input() color?: 'default' | 'neutral' = 'default';
+  /** Color variant for the link. Only `neutral` changes appearance; omit for default styling. */
+  @Input() color?: 'neutral';
 }
