@@ -46,7 +46,7 @@ import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
         description="Vurder om tooltip skal plasseres over, under eller ved siden av elementet."
       >
         <div class="flex justify-center">
-          <button hviButton variant="secondary" hviTooltip="Kopier" tooltipPlacement="bottom">
+          <button hviButton variant="secondary" icon hviTooltip="Kopier" tooltipPlacement="bottom" aria-label="Kopier">
             <hvi-icon-clipboard />
           </button>
         </div>
