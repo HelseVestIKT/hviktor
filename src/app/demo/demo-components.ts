@@ -215,6 +215,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Fieldset brukes til å gruppere og navngi felt som naturlig hører sammen, for eksempel datofelt eller adressefelt. Komponenten hjelper med å organisere informasjon, gjøre skjemaer mer oversiktlige og forbedre tilgjengeligheten for skjermlesere.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'input',

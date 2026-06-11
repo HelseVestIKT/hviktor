@@ -1,1 +1,1 @@
-export * from './fieldset.directive';
+export { HviFieldset } from './fieldset.directive';
