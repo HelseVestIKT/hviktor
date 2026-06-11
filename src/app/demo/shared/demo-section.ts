@@ -64,7 +64,7 @@ hljs.registerLanguage('typescript', typescript);
     @if (showCode()) {
       <section aria-label="Vis kode" class="gap-4">
         <div
-          class="componentDisplay | mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4"
+          class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4"
         >
           <p hviParagraph>Angular</p>
         </div>
