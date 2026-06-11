@@ -123,6 +123,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     name: 'Heading',
     description: 'Heading brukes til å strukturere innhold og skape hierarki på siden.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'label',

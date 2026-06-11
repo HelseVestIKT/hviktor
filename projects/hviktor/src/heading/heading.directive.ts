@@ -1,14 +1,24 @@
 import { Directive, Input } from '@angular/core';
 
 /**
- * Heading is used to structure content and create hierarchy on a page.
+ * @summary Directive that applies Designsystemet heading typography to native heading elements.
  *
- * @example
+ * @example Large page title
  * ```html
- * <h1 hviHeading size="xl">This is a heading</h1>
+ * <h1 hviHeading size="xl">Page Title</h1>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/heading/overview
+ * @example Section heading with medium size
+ * ```html
+ * <h2 hviHeading size="md">Section Title</h2>
+ * ```
+ *
+ * @example Small subsection heading
+ * ```html
+ * <h3 hviHeading size="sm">Subsection</h3>
+ * ```
+ *
+ * @see {@link https://designsystemet.no/komponenter/heading}
  */
 @Directive({
   selector:
@@ -20,6 +30,6 @@ import { Directive, Input } from '@angular/core';
   },
 })
 export class HviHeading {
-  /** The size of the heading */
+  /** The visual size of the heading. When omitted, defaults to the CSS default (md). */
   @Input() size?: '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 }
