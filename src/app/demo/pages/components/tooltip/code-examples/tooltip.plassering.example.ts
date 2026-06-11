@@ -9,7 +9,7 @@ import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="flex justify-center">
-      <button hviButton variant="secondary" hviTooltip="Kopier" tooltipPlacement="bottom">
+      <button hviButton variant="secondary" icon hviTooltip="Kopier" tooltipPlacement="bottom" aria-label="Kopier">
         <hvi-icon-clipboard />
       </button>
     </div>
