@@ -7,15 +7,9 @@ import { HviTooltip } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviTooltip],
   template: \`
-    <div class="flex flex-wrap items-center gap-4">
-      <span hviTooltip="Organisasjonsnummer" class="cursor-help underline decoration-dotted">
+    <div class="flex justify-center">
+      <span hviTooltip="Organisasjonsnummer" tabindex="0">
         Org.nr.
-      </span>
-      <span hviTooltip="Fødselsnummer" class="cursor-help underline decoration-dotted">
-        Fødselsnr.
-      </span>
-      <span hviTooltip="Value Added Tax" class="cursor-help underline decoration-dotted">
-        MVA
       </span>
     </div>
   \`,

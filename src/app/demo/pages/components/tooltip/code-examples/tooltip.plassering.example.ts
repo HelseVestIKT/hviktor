@@ -1,23 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HviButton, HviTooltip } from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
 
 @Component({
   selector: 'app-tooltip-plassering-example',
   standalone: true,
   imports: [HviButton, HviTooltip],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <div class="flex flex-wrap items-center justify-center gap-4 py-8">
-      <button hviButton variant="secondary" hviTooltip="Over (standard)" tooltipPlacement="top">
-        Top
-      </button>
-      <button hviButton variant="secondary" hviTooltip="Til høyre" tooltipPlacement="right">
-        Right
-      </button>
-      <button hviButton variant="secondary" hviTooltip="Under" tooltipPlacement="bottom">
-        Bottom
-      </button>
-      <button hviButton variant="secondary" hviTooltip="Til venstre" tooltipPlacement="left">
-        Left
+    <div class="flex justify-center">
+      <button hviButton variant="secondary" hviTooltip="Kopier" tooltipPlacement="bottom">
+        <hvi-icon-clipboard />
       </button>
     </div>
   `,
