@@ -33,7 +33,7 @@ hljs.registerLanguage('typescript', typescript);
         <p hviParagraph class="max-w-3xl pt-2">{{ description() }}</p>
       }
 
-      <div class="componentDisplay | mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-6">
+      <div class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-6">
         <ng-content />
       </div>
 
