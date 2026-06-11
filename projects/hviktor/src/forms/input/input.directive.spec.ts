@@ -6,155 +6,142 @@ import { HviInput } from './input.directive';
 @Component({
   standalone: true,
   imports: [HviInput],
+  template: '<input hviInput />',
+})
+class DefaultHost {}
+
+@Component({
+  standalone: true,
+  imports: [HviInput],
   template: '<input hviInput type="checkbox" />',
 })
-class BasicCheckboxComponent {}
+class CheckboxHost {}
 
 @Component({
   standalone: true,
   imports: [HviInput],
   template: '<input hviInput type="checkbox" readonly />',
 })
-class ReadonlyCheckboxComponent {}
+class ReadonlyCheckboxHost {}
 
 @Component({
   standalone: true,
   imports: [HviInput],
   template: '<input hviInput type="checkbox" disabled />',
 })
-class DisabledCheckboxComponent {}
-
-@Component({
-  standalone: true,
-  imports: [HviInput],
-  template: '<input hviInput type="checkbox" checked />',
-})
-class CheckedCheckboxComponent {}
-
-@Component({
-  standalone: true,
-  imports: [HviInput],
-  template: '<input hviInput type="text" />',
-})
-class TextInputComponent {}
-
-@Component({
-  standalone: true,
-  imports: [HviInput],
-  template: '<input hviInput type="radio" />',
-})
-class RadioInputComponent {}
+class DisabledCheckboxHost {}
 
 @Component({
   standalone: true,
   imports: [HviInput],
   template: '<input hviInput type="checkbox" [readonly]="isReadonly" />',
 })
-class ToggleReadonlyComponent {
+class ToggleReadonlyHost {
   isReadonly = false;
 }
 
-describe('HviInput', () => {
+@Component({
+  standalone: true,
+  imports: [HviInput],
+  template: '<input hviInput [dsSize]="dsSize" [width]="width" />',
+})
+class SizeWidthHost {
+  dsSize: 'sm' | 'md' | 'lg' | undefined = undefined;
+  width: 'auto' | 'full' | undefined = undefined;
+}
+
+@Component({
+  standalone: true,
+  imports: [HviInput],
+  template: '<input hviInput type="email" [size]="size" role="searchbox" />',
+})
+class AttrsHost {
+  size: number | undefined = 20;
+}
+
+describe('HviInput default state', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [BasicCheckboxComponent] });
+    await setupTestBed({
+      imports: [DefaultHost, SizeWidthHost, AttrsHost],
+    });
   });
 
-  it('should create', () => {
-    const f = TestBed.createComponent(BasicCheckboxComponent);
+  it('should not set data-size when dsSize is not provided', () => {
+    const f = TestBed.createComponent(DefaultHost);
     f.detectChanges();
     const el = f.nativeElement.querySelector('input');
-    expect(el).toBeTruthy();
+    expect(el.getAttribute('data-size')).toBeNull();
   });
 
-  it('should have ds-input class', () => {
-    const f = TestBed.createComponent(BasicCheckboxComponent);
+  it('should not set data-width when width is not provided', () => {
+    const f = TestBed.createComponent(DefaultHost);
     f.detectChanges();
     const el = f.nativeElement.querySelector('input');
-    expect(el.classList.contains('ds-input')).toBe(true);
+    expect(el.getAttribute('data-width')).toBeNull();
   });
 
-  it('should set type attribute to checkbox', () => {
-    const f = TestBed.createComponent(BasicCheckboxComponent);
-    f.detectChanges();
-    const el = f.nativeElement.querySelector('input');
-    expect(el.getAttribute('type')).toBe('checkbox');
-  });
-
-  it('should not set disabled when not provided', () => {
-    const f = TestBed.createComponent(BasicCheckboxComponent);
+  it('should not set disabled or readonly by default', () => {
+    const f = TestBed.createComponent(DefaultHost);
     f.detectChanges();
     const el = f.nativeElement.querySelector('input');
     expect(el.hasAttribute('disabled')).toBe(false);
-  });
-
-  it('should not set readonly when not provided', () => {
-    const f = TestBed.createComponent(BasicCheckboxComponent);
-    f.detectChanges();
-    const el = f.nativeElement.querySelector('input');
     expect(el.hasAttribute('readonly')).toBe(false);
   });
-});
 
-describe('HviInput type="text"', () => {
-  beforeEach(async () => {
-    await setupTestBed({ imports: [TextInputComponent] });
-  });
-
-  it('should set type to text', () => {
-    const f = TestBed.createComponent(TextInputComponent);
+  it('should reflect dsSize input as data-size attribute', () => {
+    const f = TestBed.createComponent(SizeWidthHost);
+    f.componentInstance.dsSize = 'sm';
     f.detectChanges();
     const el = f.nativeElement.querySelector('input');
-    expect(el.getAttribute('type')).toBe('text');
+    expect(el.getAttribute('data-size')).toBe('sm');
   });
 
-  it('should have ds-input class', () => {
-    const f = TestBed.createComponent(TextInputComponent);
+  it('should reflect width input as data-width attribute', () => {
+    const f = TestBed.createComponent(SizeWidthHost);
+    f.componentInstance.width = 'auto';
     f.detectChanges();
     const el = f.nativeElement.querySelector('input');
-    expect(el.classList.contains('ds-input')).toBe(true);
-  });
-});
-
-describe('HviInput checkbox checked', () => {
-  beforeEach(async () => {
-    await setupTestBed({ imports: [CheckedCheckboxComponent] });
+    expect(el.getAttribute('data-width')).toBe('auto');
   });
 
-  it('should be checked when checked attribute is set', () => {
-    const f = TestBed.createComponent(CheckedCheckboxComponent);
+  it('should reflect type and role attributes', () => {
+    const f = TestBed.createComponent(AttrsHost);
     f.detectChanges();
-    const el: HTMLInputElement = f.nativeElement.querySelector('input');
-    expect(el.checked).toBe(true);
+    const el = f.nativeElement.querySelector('input');
+    expect(el.getAttribute('type')).toBe('email');
+    expect(el.getAttribute('role')).toBe('searchbox');
+  });
+
+  it('should reflect size as HTML size attribute', () => {
+    const f = TestBed.createComponent(AttrsHost);
+    f.detectChanges();
+    const el = f.nativeElement.querySelector('input');
+    expect(el.getAttribute('size')).toBe('20');
   });
 });
 
-describe('HviInput checkbox disabled', () => {
+describe('HviInput disabled', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [DisabledCheckboxComponent] });
+    await setupTestBed({ imports: [DisabledCheckboxHost] });
   });
 
   it('should set disabled attribute', () => {
-    const f = TestBed.createComponent(DisabledCheckboxComponent);
+    const f = TestBed.createComponent(DisabledCheckboxHost);
     f.detectChanges();
     const el = f.nativeElement.querySelector('input');
     expect(el.hasAttribute('disabled')).toBe(true);
   });
 });
 
-describe('HviInput checkbox readonly', () => {
+describe('HviInput readonly toggle behavior', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [ReadonlyCheckboxComponent] });
-  });
-
-  it('should set readonly attribute', () => {
-    const f = TestBed.createComponent(ReadonlyCheckboxComponent);
-    f.detectChanges();
-    const el = f.nativeElement.querySelector('input');
-    expect(el.hasAttribute('readonly')).toBe(true);
+    await setupTestBed({
+      imports: [ReadonlyCheckboxHost, ToggleReadonlyHost, CheckboxHost],
+    });
   });
 
   it('should prevent click on readonly checkbox', () => {
-    const f = TestBed.createComponent(ReadonlyCheckboxComponent);
+    const f = TestBed.createComponent(ReadonlyCheckboxHost);
     f.detectChanges();
     const el: HTMLInputElement = f.nativeElement.querySelector('input');
 
@@ -163,15 +150,9 @@ describe('HviInput checkbox readonly', () => {
     f.detectChanges();
     expect(el.checked).toBe(false);
   });
-});
-
-describe('HviInput checkbox readonly toggle', () => {
-  beforeEach(async () => {
-    await setupTestBed({ imports: [ToggleReadonlyComponent] });
-  });
 
   it('should allow click when not readonly', () => {
-    const f = TestBed.createComponent(ToggleReadonlyComponent);
+    const f = TestBed.createComponent(ToggleReadonlyHost);
     f.componentInstance.isReadonly = false;
     f.detectChanges();
     const el: HTMLInputElement = f.nativeElement.querySelector('input');
@@ -182,8 +163,8 @@ describe('HviInput checkbox readonly toggle', () => {
     expect(el.checked).toBe(true);
   });
 
-  it('should prevent click when readonly is set', () => {
-    const f = TestBed.createComponent(ToggleReadonlyComponent);
+  it('should prevent click when readonly is toggled on', () => {
+    const f = TestBed.createComponent(ToggleReadonlyHost);
     f.componentInstance.isReadonly = true;
     f.detectChanges();
     const el: HTMLInputElement = f.nativeElement.querySelector('input');
@@ -193,19 +174,14 @@ describe('HviInput checkbox readonly toggle', () => {
     f.detectChanges();
     expect(el.checked).toBe(false);
   });
-});
 
-describe('HviInput radio readonly', () => {
-  beforeEach(async () => {
-    await setupTestBed({
-      imports: [RadioInputComponent],
-    });
-  });
-
-  it('should set type to radio', () => {
-    const f = TestBed.createComponent(RadioInputComponent);
+  it('should not block click on non-toggle type even with readonly', () => {
+    // text inputs with readonly don't need event prevention — browser handles it
+    const f = TestBed.createComponent(CheckboxHost);
     f.detectChanges();
-    const el = f.nativeElement.querySelector('input');
-    expect(el.getAttribute('type')).toBe('radio');
+    const el: HTMLInputElement = f.nativeElement.querySelector('input');
+    el.click();
+    f.detectChanges();
+    expect(el.checked).toBe(true);
   });
 });

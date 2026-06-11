@@ -3,8 +3,7 @@ import { booleanAttribute, Directive, HostListener, Input } from '@angular/core'
 type HviAriaRole = 'switch' | 'button' | 'checkbox' | 'radio' | 'textbox' | 'searchbox' | string;
 
 /**
- * @summary
- * Input directive applied to native `<input>` and `<textarea>` elements.
+ * @summary Input directive applied to native `<input>` and `<textarea>` elements.
  * Adds the `ds-input` CSS class and supports all standard input types including
  * `checkbox`, `radio`, and `text`. Handles `disabled` and `readonly` states —
  * for toggle inputs (checkbox/radio), readonly prevents click, change, and
@@ -17,7 +16,7 @@ type HviAriaRole = 'switch' | 'button' | 'checkbox' | 'radio' | 'textbox' | 'sea
  * <input hviInput type="text" />
  * ```
  *
- * @example Checkbox
+ * @example Checkbox inside a field
  * ```html
  * <hvi-field>
  *   <input hviInput type="checkbox" id="check" />
@@ -33,7 +32,12 @@ type HviAriaRole = 'switch' | 'button' | 'checkbox' | 'radio' | 'textbox' | 'sea
  * </hvi-field>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/checkbox/code/}
+ * @example Small input with auto width
+ * ```html
+ * <input hviInput type="text" dsSize="sm" width="auto" />
+ * ```
+ *
+ * @see {@link https://designsystemet.no/no/components/docs/input}
  */
 @Directive({
   selector: 'input[hviInput], textarea[hviInput]',
@@ -42,6 +46,8 @@ type HviAriaRole = 'switch' | 'button' | 'checkbox' | 'radio' | 'textbox' | 'sea
     class: 'ds-input',
     '[attr.type]': 'type ?? null',
     '[attr.size]': 'size ?? null',
+    '[attr.data-size]': 'dsSize ?? null',
+    '[attr.data-width]': 'width ?? null',
     '[attr.disabled]': '_disabled ? "" : null',
     '[attr.readonly]': '_readOnly ? "" : null',
     '[attr.role]': 'role ?? null',
@@ -68,8 +74,14 @@ export class HviInput {
     | 'url'
     | 'week';
 
-  /** Set size attribute on input element */
+  /** Set size attribute on input element (character width) */
   @Input() size?: number;
+
+  /** Visual size of the input, maps to the `data-size` CSS attribute */
+  @Input() dsSize?: 'sm' | 'md' | 'lg';
+
+  /** Width of the input, maps to the `data-width` CSS attribute */
+  @Input() width?: 'auto' | 'full';
 
   /** Set role, e.g. `switch` when `checkbox` or `radio` */
   @Input() role?: HviAriaRole;
