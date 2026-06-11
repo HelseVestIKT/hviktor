@@ -1,22 +1,27 @@
 import { Component, input } from '@angular/core';
 
 /**
- * Counter that displays remaining/exceeded character count for a field.
+ * @summary Displays remaining or exceeded character count for a field input.
  *
- * Must be used inside a `hvi-field` component alongside a textarea or input.
- * The ds-field web component automatically tracks the input/textarea,
- * so you only need to provide the `limit` property.
- *
- * @example
+ * @example Counter with custom labels
  * ```html
  * <hvi-field>
- *   <label hviLabel for="description">Beskrivelse</label>
- *   <textarea hviInput id="description" rows="3"></textarea>
- *   <hvi-field-counter [limit]="100" />
+ *   <label hviLabel for="desc">Description</label>
+ *   <textarea hviInput id="desc" rows="3"></textarea>
+ *   <hvi-field-counter [limit]="100" over="%d characters too many" under="%d characters remaining" />
  * </hvi-field>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/field/code
+ * @example Basic counter
+ * ```html
+ * <hvi-field>
+ *   <label hviLabel for="name">Name</label>
+ *   <input hviInput id="name" type="text" />
+ *   <hvi-field-counter [limit]="50" />
+ * </hvi-field>
+ * ```
+ *
+ * @see {@link https://designsystemet.no/no/components/docs/field/code}
  */
 @Component({
   selector: 'hvi-field-counter',
