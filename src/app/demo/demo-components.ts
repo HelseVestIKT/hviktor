@@ -332,6 +332,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description: 'Logo kan vise logoene til alle foretakene i Helse Vest.',
     hvi: true,
     a11yTested: true,
+    codeTested: true,
   },
   {
     id: 'textfield',

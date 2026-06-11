@@ -3,7 +3,7 @@ import { LogoCompany, LOGOS } from './logo-paths';
 import { LogoDefinition, LogoSize } from './logo-types';
 
 /**
- * Logo displays a Helse Vest company logo with automatic light/dark mode support.
+ * @summary Displays a Helse Vest company logo as an inline SVG with automatic light/dark mode support.
  *
  * The themed paths (text and dark dot) use `currentColor` so they respond to the
  * CSS `color` property, while accent paths (blue dots) keep a fixed color.
@@ -15,11 +15,22 @@ import { LogoDefinition, LogoSize } from './logo-types';
  * (e.g. "Helse Vest logo"). If the logo is purely decorative (e.g. next to a
  * text heading), add `aria-hidden="true"` on the host element.
  *
- * @example
+ * @example Default Helse Vest logo
  * ```html
  * <hvi-logo company="hve" />
+ * ```
+ *
+ * @example Large logo variant
+ * ```html
  * <hvi-logo company="hve" size="lg" />
  * ```
+ *
+ * @example Dots-only logo
+ * ```html
+ * <hvi-logo company="dots" />
+ * ```
+ *
+ * @see {@link https://helsevestikt.github.io/hviktor/komponenter/logo}
  */
 @Component({
   selector: 'hvi-logo',
