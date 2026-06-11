@@ -18,16 +18,6 @@ export const TooltipExamplesManifest = [
     className: 'TooltipPlasseringExampleComponent',
     sourceExport: 'TooltipPlasseringExampleSource',
   },
-  {
-    slug: 'tastatursnarvei',
-    title: 'Tastatursnarvei',
-    className: 'TooltipTastatursnarveiExampleComponent',
-    sourceExport: 'TooltipTastatursnarveiExampleSource',
-  },
 ] as const;
 
-export type TooltipExampleSlug =
-  | 'ikon-knapp-med-tooltip'
-  | 'tekst-med-tooltip'
-  | 'plassering'
-  | 'tastatursnarvei';
+export type TooltipExampleSlug = 'ikon-knapp-med-tooltip' | 'tekst-med-tooltip' | 'plassering';
