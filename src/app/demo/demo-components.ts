@@ -225,6 +225,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Input er et skjemaelement for å samle inn brukerdata. Det tilbyr grunnleggende funksjonalitet og er ideell når du trenger full kontroll over komponentens oppsett og validering, noe som gjør den ideell for bygging av spesialtilpassede elementer.',
     ds: true,
+    codeTested: true,
   },
   {
     id: 'radio',
