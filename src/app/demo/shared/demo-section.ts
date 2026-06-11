@@ -24,7 +24,7 @@ hljs.registerLanguage('typescript', typescript);
 @Component({
   selector: 'app-demo-section',
   standalone: true,
-  imports: [HviHeading, HviParagraph, HviButton, HviParagraph],
+  imports: [HviHeading, HviParagraph, HviButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <section [id]="sectionId()" class="gap-4">
