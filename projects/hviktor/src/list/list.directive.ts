@@ -1,25 +1,27 @@
 import { Directive } from '@angular/core';
 
 /**
- * @summary
- * List directive description.
+ * @summary Applies Designsystemet list styling to ordered and unordered lists.
  *
- * @example
+ * @example Unordered list
  * ```html
- * <ol hviList>
- *  <li>First item</li>
- *  <li>Second item</li>
- *  <li>Third item</li>
- * </ol>
- *
  * <ul hviList>
- *  <li>First item</li>
- *  <li>Second item</li>
- *  <li>Third item</li>
+ *   <li>First item</li>
+ *   <li>Second item</li>
+ *   <li>Third item</li>
  * </ul>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/input/code
+ * @example Ordered list
+ * ```html
+ * <ol hviList>
+ *   <li>Step one</li>
+ *   <li>Step two</li>
+ *   <li>Step three</li>
+ * </ol>
+ * ```
+ *
+ * @see {@link https://designsystemet.no/no/components/docs/list}
  */
 
 @Directive({

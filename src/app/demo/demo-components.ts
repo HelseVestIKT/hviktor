@@ -150,6 +150,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'List brukes for å presentere innhold på en oversiktlig og strukturert måte, for eksempel for å oppsummere hovedpunkter eller vise brukeren hvilke trinn som må følges i en bestemt rekkefølge.',
     ds: true,
     a11yTested: true,
+    codeTested: true,
   },
   {
     id: 'paragraph',
