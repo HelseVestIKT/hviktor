@@ -133,20 +133,6 @@ import {
   `,
 })
 export class FormsSkjemaMedValideringOgFeiloppsummeringExampleComponent {
-  /** Innloggingsskjema – alle felt er obligatoriske */
-  loginForm = new FormGroup({
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  });
-
-  /** Bestill time – blanding av obligatoriske og valgfrie felt */
-  appointmentForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    preferredTime: new FormControl('', [Validators.required]),
-    comment: new FormControl(''),
-  });
-
   contactForm = new FormGroup({
     firstName: new FormControl('', [Validators.required, Validators.minLength(2)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(2)]),

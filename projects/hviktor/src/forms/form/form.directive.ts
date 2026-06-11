@@ -3,7 +3,6 @@ import {
   computed,
   Directive,
   EventEmitter,
-  HostListener,
   inject,
   Input,
   OnInit,
@@ -12,17 +11,17 @@ import {
 } from '@angular/core';
 import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 
-/** Resultatet av required-analysen av en FormGroup. */
+/** The result of analyzing required validators in a FormGroup. */
 export type FormRequiredMode = 'all-required' | 'mixed' | 'none';
 
 /**
- * Analyserer en FormGroup og returnerer required-modus.
+ * Analyzes a FormGroup and returns the required mode.
  *
- * Alle controls telles – også de uten validators (de regnes som optional).
+ * All controls are counted — including those without validators (treated as optional).
  *
- * - `'all-required'` – alle controls har required/requiredTrue
- * - `'mixed'` – noen controls er required, noen ikke
- * - `'none'` – ingen controls har required
+ * - `'all-required'` — every control has `Validators.required` or `Validators.requiredTrue`
+ * - `'mixed'` — some controls are required, some are not
+ * - `'none'` — no controls have required validation
  */
 export function analyzeFormRequired(formGroup: FormGroup): FormRequiredMode {
   const controls = Object.values(formGroup.controls);
@@ -45,61 +44,65 @@ export function analyzeFormRequired(formGroup: FormGroup): FormRequiredMode {
 }
 
 /**
- * Legges på `<form>` for å gi submit-håndtering og automatisk required-tag-analyse
- * for Angular reactive forms.
+ * @summary Form directive that provides submit handling, touched-state management,
+ * and automatic required-mode analysis for Angular reactive forms.
  *
- * - Tracker submitted-state
- * - Marker alle controls som touched ved submit
- * - Analyserer FormGroup og eksponerer `requiredMode()` som child-komponenter
- *   (f.eks. `HviTextfield`) kan injisere for automatisk required/optional-tagging
- * - Sett `[showRequiredTags]="false"` for å skru av automatisk tagging
- *
- * @example
+ * @example Basic form with required-tag
  * ```html
- * <form hviForm [formGroup]="myForm">
- *   @if (myHviForm.requiredMode() === 'all-required') {
+ * <form hviForm #myForm="hviForm" [formGroup]="formGroup">
+ *   @if (myForm.requiredMode() === 'all-required') {
  *     <hvi-required-tag mode="all-required" />
  *   }
- *   <hvi-textfield label="Navn" formControlName="name" />
+ *   <hvi-textfield label="Name" formControlName="name" required />
+ *   <button hviButton type="submit">Submit</button>
  * </form>
  * ```
+ *
+ * @example Form with error summary focus
+ * ```html
+ * <form hviForm [formGroup]="form" [focusOnInvalid]="summary">
+ *   <hvi-textfield label="Email" formControlName="email" required />
+ *   <button hviButton type="submit">Send</button>
+ *   <hvi-error-summary #summary [form]="form" [messages]="messages" showWhen="submitted" />
+ * </form>
+ * ```
+ *
+ * @see {@link https://helsevestikt.github.io/hviktor/komponenter/form}
  */
 @Directive({
   selector: 'form[hviForm]',
   standalone: true,
   exportAs: 'hviForm',
+  host: {
+    '(submit)': 'onSubmit($event)',
+  },
 })
 export class HviForm implements OnInit {
-  /** Emits when the form has been submitted */
+  /** Emits when the form has been submitted. */
   @Output() hviSubmitted = new EventEmitter<void>();
 
-  /** True after first submit attempt */
+  /** True after the first submit attempt. */
   submitted = false;
 
-  /** Optional focus target (e.g. HviErrorSummaryComponent) */
+  /** Optional focus target (e.g. HviErrorSummary) to focus when the form is invalid on submit. */
   @Input() focusOnInvalid?: { focus?: () => void } | null;
 
-  /**
-   * Skru av/på automatisk required-tag-visning for child-komponenter.
-   * Default `true`. Sett til `false` for manuell kontroll.
-   */
+  /** Whether to automatically show required/optional tags on child fields. Defaults to `true`. */
   @Input({ transform: booleanAttribute }) showRequiredTags = true;
 
-  // Optional injection: present when the form uses [formGroup] and ReactiveFormsModule is in scope
   private readonly formGroupDir = inject(FormGroupDirective, { optional: true });
 
-  /** Internal signal som oppdateres ved submit og init */
   private readonly _requiredMode = signal<FormRequiredMode>('none');
 
   /**
-   * Analysert required-modus for FormGroup-en.
-   * - `'all-required'` – alle validerte controls er required
-   * - `'mixed'` – blanding av required og optional
-   * - `'none'` – ingen required-validering
+   * Computed required mode for the bound FormGroup.
+   * - `'all-required'` — all controls have required validation
+   * - `'mixed'` — some controls are required, some are optional
+   * - `'none'` — no required validators found
    */
   readonly requiredMode = computed(() => this._requiredMode());
 
-  /** Oppdater required-analyse. Kalles automatisk ved submit, men kan kalles manuelt. */
+  /** Refresh the required-mode analysis. Called automatically on init and submit. */
   refreshRequiredMode(): void {
     const form = this.formGroupDir?.form;
     if (!form) {
@@ -109,7 +112,6 @@ export class HviForm implements OnInit {
     this._requiredMode.set(analyzeFormRequired(form));
   }
 
-  @HostListener('submit', ['$event'])
   onSubmit(event: Event): void {
     this.submitted = true;
     this.hviSubmitted.emit();

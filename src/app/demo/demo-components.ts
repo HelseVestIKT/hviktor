@@ -116,6 +116,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Form håndterer innsending av skjema. Den sørger for at feilmeldinger vises når brukeren sender inn, og kan flytte fokus til en feiloppsummering slik at brukeren enkelt ser hva som må rettes.',
     hvi: true,
+    codeTested: true,
   },
   {
     id: 'heading',
