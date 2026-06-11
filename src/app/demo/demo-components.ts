@@ -141,6 +141,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
       'Link er klikkbar tekst eller grafikk som tar brukeren videre til andre sider eller dokumenter.',
     ds: true,
     a11yTested: true,
+    codeTested: true,
   },
   {
     id: 'list',

@@ -1,1 +1,1 @@
-export * from './link.directive';
+export { HviLink } from './link.directive';
