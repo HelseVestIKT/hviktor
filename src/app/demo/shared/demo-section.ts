@@ -71,9 +71,7 @@ hljs.registerLanguage('typescript', typescript);
         <div
           class="codeExample mb-8 rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300 p-4"
         >
-          <pre>
-              <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
-            </pre>
+          <pre><code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code></pre>
         </div>
       </section>
     }
