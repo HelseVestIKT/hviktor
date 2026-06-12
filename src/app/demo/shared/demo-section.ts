@@ -42,10 +42,7 @@ hljs.registerLanguage('typescript', typescript);
           class="mb-8 flex scroll-mt-24 justify-end rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300"
         >
           <button
-            hviButton
-            variant="tertiary"
-            color="neutral"
-            class="toggleButton"
+            class="toggleButton ds-button"
             aria-expanded="{{ showCode() ? 'true' : 'false' }}"
             (click)="toggleCode()"
           >
