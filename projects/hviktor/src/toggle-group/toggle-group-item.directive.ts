@@ -9,7 +9,7 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { HviToggleGroup } from './toggle-group.component';
+import { HviToggleGroup } from './toggle-group.directive';
 
 let nextId = 0;
 
@@ -28,28 +28,23 @@ let nextId = 0;
  * @see {@link https://designsystemet.no/no/components/toggle-group}
  */
 @Directive({
-  selector: 'button[hviToggleGroupItem]',
+  selector: 'label[hviToggleGroupItem]',
   standalone: true,
   host: {
     class: 'ds-button',
-    type: 'button',
-    role: 'radio',
     '[id]': 'id',
-    '[attr.value]': 'value',
-    '[attr.name]': 'group._name()',
-    '[attr.aria-checked]': 'isSelected()',
-    '[attr.aria-current]': 'isSelected()',
     '[attr.data-variant]': 'computedVariant()',
     '[attr.data-icon]': 'icon ? "" : null',
-    '[attr.data-roving-tabindex-item]': '"true"',
-    '[tabindex]': 'isFocusable() ? 0 : -1',
     '(click)': 'onClick()',
     '(keydown)': 'onKeydown($event)',
   },
 })
 export class HviToggleGroupItem implements OnInit, OnDestroy {
   readonly group = inject(HviToggleGroup);
-  private readonly elementRef = inject(ElementRef<HTMLButtonElement>);
+  private readonly elementRef = inject(ElementRef<HTMLLabelElement>);
+
+  /** The hidden radio input rendered inside the label */
+  private radioInput!: HTMLInputElement;
 
   /** Unique ID for this item */
   readonly id = `togglegroup-item-${++nextId}`;
@@ -78,6 +73,7 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
+    this.createRadioInput();
     this.group.registerItem(this);
   }
 
@@ -88,16 +84,22 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
   /** Update the selected state (called by parent group) */
   setSelected(selected: boolean): void {
     this._isSelected.set(selected);
+    if (this.radioInput) {
+      this.radioInput.checked = selected;
+    }
   }
 
   /** Update the focusable state for roving tabindex (called by parent group) */
   setFocusable(focusable: boolean): void {
     this._isFocusable.set(focusable);
+    if (this.radioInput) {
+      this.radioInput.tabIndex = focusable ? 0 : -1;
+    }
   }
 
-  /** Focus this item's button element */
+  /** Focus this item's radio input to trigger label:has(input:focus-visible) CSS */
   focus(): void {
-    this.elementRef.nativeElement.focus();
+    this.radioInput.focus();
   }
 
   protected onClick(): void {
@@ -106,5 +108,18 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
 
   protected onKeydown(event: KeyboardEvent): void {
     this.group.handleKeydown(event, this);
+  }
+
+  /** Create and prepend the hidden radio input inside the label */
+  private createRadioInput(): void {
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = this.group._name();
+    input.value = this.value;
+    input.checked = this._isSelected();
+    input.tabIndex = this._isFocusable() ? 0 : -1;
+    input.addEventListener('keydown', (e) => this.onKeydown(e));
+    this.radioInput = input;
+    this.elementRef.nativeElement.prepend(input);
   }
 }

@@ -8,16 +8,12 @@ import { HviLabel, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hvik
   imports: [HviLabel, HviToggleGroup, HviToggleGroupItem],
   template: \`
     <label hviLabel for="secondary-toggle">Mailboks filter:</label>
-    <hvi-toggle-group
-      [(value)]="selectedSecondary"
-      variant="secondary"
-      aria-labelledby="secondary-toggle"
-    >
-      <button hviToggleGroupItem value="innboks">Innboks</button>
-      <button hviToggleGroupItem value="utkast">Utkast</button>
-      <button hviToggleGroupItem value="arkiv">Arkiv</button>
-      <button hviToggleGroupItem value="sendt">Sendt</button>
-    </hvi-toggle-group>
+    <fieldset hviToggleGroup variant="secondary" aria-labelledby="secondary-toggle">
+      <label hviToggleGroupItem value="innboks">Innboks</label>
+      <label hviToggleGroupItem value="utkast">Utkast</label>
+      <label hviToggleGroupItem value="arkiv">Arkiv</label>
+      <label hviToggleGroupItem value="sendt">Sendt</label>
+    </fieldset>
   \`,
 })
 export class ToggleGroupSecondaryVariantExampleComponent {

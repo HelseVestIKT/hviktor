@@ -7,12 +7,12 @@ import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/
   standalone: true,
   imports: [HviParagraph, HviToggleGroup, HviToggleGroupItem],
   template: \`
-    <hvi-toggle-group [(value)]="selectedBasic" variant="primary" aria-label="Mailboks filter">
-      <button hviToggleGroupItem value="innboks" aria>Innboks</button>
-      <button hviToggleGroupItem value="utkast">Utkast</button>
-      <button hviToggleGroupItem value="arkiv">Arkiv</button>
-      <button hviToggleGroupItem value="sendt">Sendt</button>
-    </hvi-toggle-group>
+    <fieldset hviToggleGroup variant="primary" aria-label="Mailboks filter">
+      <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+      <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+      <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+      <label hviToggleGroupItem value="sendt" aria-label="Sendt">Sendt</label>
+    </fieldset>
     <p hviParagraph class="mt-2">Valgt: {{ selectedBasic() }}</p>
   \`,
 })

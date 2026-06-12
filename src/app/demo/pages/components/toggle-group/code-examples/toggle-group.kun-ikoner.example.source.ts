@@ -12,12 +12,12 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: \`
     <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
-    <hvi-toggle-group
+    <fieldset hviToggleGroup
       [(value)]="selectedIconOnly"
       variant="primary"
       aria-labelledby="icon-only-toggle"
     >
-      <button
+      <label
         hviToggleGroupItem
         hviTooltip="Venstrestilt"
         value="left"
@@ -25,8 +25,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         aria-label="Venstrestilt"
       >
         <hvi-icon-align-left></hvi-icon-align-left>
-      </button>
-      <button
+      </label>
+      <label
         hviToggleGroupItem
         hviTooltip="Midtstilt"
         value="center"
@@ -34,8 +34,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         aria-label="Midtstilt"
       >
         <hvi-icon-align-center></hvi-icon-align-center>
-      </button>
-      <button
+      </label>
+      <label
         hviToggleGroupItem
         hviTooltip="Høyrestilt"
         value="right"
@@ -43,8 +43,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         aria-label="Høyrestilt"
       >
         <hvi-icon-align-right></hvi-icon-align-right>
-      </button>
-    </hvi-toggle-group>
+      </label>
+    </fieldset>
   \`,
 })
 export class ToggleGroupKunIkonerExampleComponent {

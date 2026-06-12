@@ -26,11 +26,11 @@ import { LogoVarianterExampleSource } from './code-examples/logo.varianter.examp
     <app-demo-page componentId="logo">
       Endre størrelse på logoen med <code>size</code>-attributtet.
 
-      <hvi-toggle-group [(value)]="selectedSize" variant="primary">
-        <button hviToggleGroupItem value="sm">sm</button>
-        <button hviToggleGroupItem value="md">md</button>
-        <button hviToggleGroupItem value="lg">lg</button>
-      </hvi-toggle-group>
+      <fieldset hviToggleGroup variant="primary">
+        <label hviToggleGroupItem value="sm">sm</label>
+        <label hviToggleGroupItem value="md">md</label>
+        <label hviToggleGroupItem value="lg">lg</label>
+      </fieldset>
       <app-demo-section title="Varianter" [code]="varianterCode">
         <div class="flex flex-col gap-8">
           <p hviParagraph>Variant endres med <code>company</code>-attributtet.</p>

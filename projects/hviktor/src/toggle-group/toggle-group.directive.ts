@@ -1,6 +1,6 @@
 import {
-  Component,
   ContentChildren,
+  Directive,
   EventEmitter,
   forwardRef,
   Input,
@@ -38,18 +38,15 @@ let nextGroupId = 0;
  *
  * @see {@link https://designsystemet.no/no/components/toggle-group}
  */
-@Component({
-  selector: 'hvi-toggle-group',
+@Directive({
+  selector: 'fieldset[hviToggleGroup]',
   standalone: true,
-  template: '<ng-content />',
   host: {
     class: 'ds-toggle-group',
-    role: 'radiogroup',
     '[attr.aria-label]': 'ariaLabel || null',
     '[attr.aria-labelledby]': 'ariaLabelledby || null',
     '[attr.data-variant]': '_variant()',
     '[attr.data-size]': '_size()',
-    '[tabindex]': '0',
   },
   providers: [
     {
@@ -96,6 +93,10 @@ export class HviToggleGroup implements ControlValueAccessor {
     this.updateItemStates();
   }
 
+  get value(): string | undefined {
+    return this._value();
+  }
+
   @Input()
   set variant(val: 'primary' | 'secondary') {
     this._variant.set(val);
@@ -114,8 +115,12 @@ export class HviToggleGroup implements ControlValueAccessor {
   /** Register an item with this group */
   registerItem(item: HviToggleGroupItem): void {
     this.registeredItems.push(item);
-    // Update state if this item matches current value
-    if (this._value() === item.value) {
+    // Auto-select first item if no value is set
+    if (this._value() === undefined && this.registeredItems.length === 1) {
+      this._value.set(item.value);
+      item.setSelected(true);
+      item.setFocusable(true);
+    } else if (this._value() === item.value) {
       item.setSelected(true);
       item.setFocusable(true);
     }

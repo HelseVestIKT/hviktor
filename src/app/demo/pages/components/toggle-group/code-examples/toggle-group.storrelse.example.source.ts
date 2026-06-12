@@ -10,34 +10,34 @@ import { HviHeading, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hv
     <div class="flex flex-row flex-wrap gap-4">
       <div class="flex flex-col gap-2">
         <h3 hviHeading size="sm">sm</h3>
-        <hvi-toggle-group [(value)]="small" variant="primary" size="sm">
-          <button
+        <fieldset hviToggleGroup variant="primary" size="sm">
+          <label
             hviToggleGroupItem
             value="innboks"
             aria-label="
           Innboks"
           >
             Innboks
-          </button>
-          <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
-        </hvi-toggle-group>
+          </label>
+          <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+          <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+        </fieldset>
       </div>
       <div class="flex flex-col gap-2">
         <h3 hviHeading size="sm">md</h3>
-        <hvi-toggle-group [(value)]="medium" variant="primary" size="md">
-          <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
-          <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
-        </hvi-toggle-group>
+        <fieldset hviToggleGroup variant="primary" size="md">
+          <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+          <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+          <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+        </fieldset>
       </div>
       <div class="flex flex-col gap-2">
         <h3 hviHeading size="sm">lg</h3>
-        <hvi-toggle-group [(value)]="large" variant="primary" size="lg">
-          <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
-          <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
-        </hvi-toggle-group>
+        <fieldset hviToggleGroup variant="primary" size="lg">
+          <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+          <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+          <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+        </fieldset>
       </div>
     </div>
   \`,

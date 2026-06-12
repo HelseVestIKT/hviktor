@@ -40,12 +40,18 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         [code]="grunnleggendeCode"
         description="En enkel toggle group med tekst-knapper. Hvis du ikke har en tilhørende label til toggleGroup, så må du legge til en aria-label på toggleGroup for å forklare hva valgene representerer."
       >
-        <hvi-toggle-group [(value)]="selectedBasic" variant="primary" aria-label="Mailboks filter">
-          <button hviToggleGroupItem value="innboks" aria>Innboks</button>
-          <button hviToggleGroupItem value="utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv">Arkiv</button>
-          <button hviToggleGroupItem value="sendt">Sendt</button>
-        </hvi-toggle-group>
+        <fieldset
+          hviToggleGroup
+          [value]="selectedBasic()"
+          (valueChange)="selectedBasic.set($event)"
+          variant="primary"
+          aria-label="Mailboks filter"
+        >
+          <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+          <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+          <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+          <label hviToggleGroupItem value="sendt" aria-label="Sendt">Sendt</label>
+        </fieldset>
         <p hviParagraph class="mt-2">Valgt: {{ selectedBasic() }}</p>
       </app-demo-section>
 
@@ -56,16 +62,12 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         description="ToggleGroup med secondary variant."
       >
         <label hviLabel for="secondary-toggle">Mailboks filter:</label>
-        <hvi-toggle-group
-          [(value)]="selectedSecondary"
-          variant="secondary"
-          aria-labelledby="secondary-toggle"
-        >
-          <button hviToggleGroupItem value="innboks">Innboks</button>
-          <button hviToggleGroupItem value="utkast">Utkast</button>
-          <button hviToggleGroupItem value="arkiv">Arkiv</button>
-          <button hviToggleGroupItem value="sendt">Sendt</button>
-        </hvi-toggle-group>
+        <fieldset hviToggleGroup variant="secondary" aria-labelledby="secondary-toggle">
+          <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+          <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+          <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+          <label hviToggleGroupItem value="sendt" aria-label="Sendt">Sendt</label>
+        </fieldset>
       </app-demo-section>
 
       <!-- Størrelse -->
@@ -77,34 +79,34 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         <div class="flex flex-row flex-wrap gap-4">
           <div class="flex flex-col gap-2">
             <h3 hviHeading size="sm">sm</h3>
-            <hvi-toggle-group [(value)]="small" variant="primary" size="sm">
-              <button
+            <fieldset hviToggleGroup variant="primary" size="sm">
+              <label
                 hviToggleGroupItem
                 value="innboks"
                 aria-label="
               Innboks"
               >
                 Innboks
-              </button>
-              <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
-              <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
-            </hvi-toggle-group>
+              </label>
+              <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+              <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+            </fieldset>
           </div>
           <div class="flex flex-col gap-2">
             <h3 hviHeading size="sm">md</h3>
-            <hvi-toggle-group [(value)]="medium" variant="primary" size="md">
-              <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
-              <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
-              <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
-            </hvi-toggle-group>
+            <fieldset hviToggleGroup variant="primary" size="md">
+              <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+              <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+              <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+            </fieldset>
           </div>
           <div class="flex flex-col gap-2">
             <h3 hviHeading size="sm">lg</h3>
-            <hvi-toggle-group [(value)]="large" variant="primary" size="lg">
-              <button hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</button>
-              <button hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</button>
-              <button hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</button>
-            </hvi-toggle-group>
+            <fieldset hviToggleGroup variant="primary" size="lg">
+              <label hviToggleGroupItem value="innboks" aria-label="Innboks">Innboks</label>
+              <label hviToggleGroupItem value="utkast" aria-label="Utkast">Utkast</label>
+              <label hviToggleGroupItem value="arkiv" aria-label="Arkiv">Arkiv</label>
+            </fieldset>
           </div>
         </div>
       </app-demo-section>
@@ -116,12 +118,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         description="ToggleGroup med kun ikoner. Bruk icon-attributtet for å style knappene som kun-ikon. ToggleGroup med kun ikoner må ha tooltip og aria-label"
       >
         <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
-        <hvi-toggle-group
-          [(value)]="selectedIconOnly"
-          variant="primary"
-          aria-labelledby="icon-only-toggle"
-        >
-          <button
+        <fieldset hviToggleGroup variant="primary" aria-labelledby="icon-only-toggle">
+          <label
             hviToggleGroupItem
             hviTooltip="Venstrestilt"
             value="left"
@@ -129,8 +127,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
             aria-label="Venstrestilt"
           >
             <hvi-icon-align-left></hvi-icon-align-left>
-          </button>
-          <button
+          </label>
+          <label
             hviToggleGroupItem
             hviTooltip="Midtstilt"
             value="center"
@@ -138,8 +136,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
             aria-label="Midtstilt"
           >
             <hvi-icon-align-center></hvi-icon-align-center>
-          </button>
-          <button
+          </label>
+          <label
             hviToggleGroupItem
             hviTooltip="Høyrestilt"
             value="right"
@@ -147,8 +145,8 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
             aria-label="Høyrestilt"
           >
             <hvi-icon-align-right></hvi-icon-align-right>
-          </button>
-        </hvi-toggle-group>
+          </label>
+        </fieldset>
       </app-demo-section>
 
       <!-- Visningsvalg -->
@@ -158,11 +156,17 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         description="Eksempel på bruk for å veksle mellom visninger."
       >
         <label hviLabel for="view-toggle">Visning:</label>
-        <hvi-toggle-group [(value)]="selectedView" variant="primary" aria-labelledby="view-toggle">
-          <button hviToggleGroupItem value="liste">Liste</button>
-          <button hviToggleGroupItem value="rutenett">Rutenett</button>
-          <button hviToggleGroupItem value="kompakt">Kompakt</button>
-        </hvi-toggle-group>
+        <fieldset
+          hviToggleGroup
+          variant="primary"
+          aria-labelledby="view-toggle"
+          [value]="selectedView()"
+          (valueChange)="selectedView.set($event)"
+        >
+          <label hviToggleGroupItem value="liste">Liste</label>
+          <label hviToggleGroupItem value="rutenett">Rutenett</label>
+          <label hviToggleGroupItem value="kompakt">Kompakt</label>
+        </fieldset>
         <p hviParagraph class="mt-2">Viser innhold som: {{ selectedView() }}</p>
       </app-demo-section>
     </app-demo-page>
