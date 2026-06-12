@@ -305,6 +305,7 @@ export class FormsDemoComponent {
     if (this.contactForm.valid) {
       alert('Takk for din henvendelse!');
       this.contactForm.reset();
+      this.myForm?.reset();
     }
   }
 
