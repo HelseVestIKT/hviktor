@@ -50,7 +50,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
         >
           <h2 hviHeading size="xs" id="login-heading">Logg inn</h2>
           @if (allReqForm.requiredMode() === 'all-required') {
-            <hvi-required-tag id="login-required-info" mode="all-required" class="mt-2" />
+            <hvi-required-tag id="login-required-info" mode="all-required" />
           }
           <hvi-textfield label="Brukernavn" formControlName="username" required />
           <hvi-textfield label="Passord" formControlName="password" type="password" required />
@@ -103,7 +103,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
             <hvi-required-tag id="contact-required-info" mode="all-required" />
           }
 
-          <fieldset hviFieldset class="mt-6">
+          <fieldset hviFieldset>
             <legend hviLabel>Om deg</legend>
 
             <hvi-field>
@@ -143,7 +143,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
             </hvi-field>
           </fieldset>
 
-          <fieldset hviFieldset class="mt-6">
+          <fieldset hviFieldset>
             <legend hviLabel>Kontaktinformasjon</legend>
 
             <hvi-field>
@@ -175,7 +175,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
             </hvi-field>
           </fieldset>
 
-          <fieldset hviFieldset class="mt-6">
+          <fieldset hviFieldset>
             <legend hviLabel>Din henvendelse</legend>
 
             <hvi-field>

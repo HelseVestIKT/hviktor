@@ -41,7 +41,8 @@ export type RequiredTagMode = 'all-required' | 'required' | 'optional';
     </hvi-tag>
   `,
   host: {
-    style: 'display: contents',
+    '[style.display]': 'mode === "all-required" ? "block" : "contents"',
+    '[style.margin-block-start]': 'mode === "all-required" ? "var(--ds-size-2)" : null',
   },
 })
 export class HviRequiredTag {
