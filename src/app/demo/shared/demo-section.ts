@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { HviButton, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviHeading, HviParagraph } from '@helsevestikt/hviktor';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-up.webcomponent';
 import hljs from 'highlight.js/lib/core';
@@ -24,7 +24,7 @@ hljs.registerLanguage('typescript', typescript);
 @Component({
   selector: 'app-demo-section',
   standalone: true,
-  imports: [HviHeading, HviParagraph, HviButton],
+  imports: [HviHeading, HviParagraph],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <section [id]="sectionId()" class="gap-4">
@@ -60,9 +60,7 @@ hljs.registerLanguage('typescript', typescript);
 
     @if (showCode()) {
       <section aria-label="Vis kode" class="gap-4">
-        <div
-          class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4"
-        >
+        <div class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4">
           <p hviParagraph>Angular</p>
         </div>
         <div
