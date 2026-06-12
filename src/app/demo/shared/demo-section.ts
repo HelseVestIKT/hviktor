@@ -24,7 +24,7 @@ hljs.registerLanguage('typescript', typescript);
 @Component({
   selector: 'app-demo-section',
   standalone: true,
-  imports: [HviHeading, HviParagraph, HviButton, HviParagraph],
+  imports: [HviHeading, HviParagraph, HviButton],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <section [id]="sectionId()" class="gap-4">
@@ -33,7 +33,7 @@ hljs.registerLanguage('typescript', typescript);
         <p hviParagraph class="max-w-3xl pt-2">{{ description() }}</p>
       }
 
-      <div class="componentDisplay | mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-6">
+      <div class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-6">
         <ng-content />
       </div>
 
@@ -61,16 +61,14 @@ hljs.registerLanguage('typescript', typescript);
     @if (showCode()) {
       <section aria-label="Vis kode" class="gap-4">
         <div
-          class="componentDisplay | mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4"
+          class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4"
         >
           <p hviParagraph>Angular</p>
         </div>
         <div
-          class="codeExample | mb-8 rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300 p-4"
+          class="codeExample mb-8 rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300 p-4"
         >
-          <pre>
-              <code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code>
-            </pre>
+          <pre><code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code></pre>
         </div>
       </section>
     }
