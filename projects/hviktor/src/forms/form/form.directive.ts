@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   booleanAttribute,
   computed,
   Directive,
+  ElementRef,
   EventEmitter,
   inject,
   Input,
@@ -10,6 +12,8 @@ import {
   signal,
 } from '@angular/core';
 import { FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+
+let formHeadingId = 0;
 
 /** The result of analyzing required validators in a FormGroup. */
 export type FormRequiredMode = 'all-required' | 'mixed' | 'none';
@@ -77,7 +81,9 @@ export function analyzeFormRequired(formGroup: FormGroup): FormRequiredMode {
     '(submit)': 'onSubmit($event)',
   },
 })
-export class HviForm implements OnInit {
+export class HviForm implements OnInit, AfterViewInit {
+  private readonly el = inject(ElementRef<HTMLFormElement>);
+
   /** Emits when the form has been submitted. */
   @Output() hviSubmitted = new EventEmitter<void>();
 
@@ -127,7 +133,35 @@ export class HviForm implements OnInit {
     }
   }
 
+  /** Resets the submitted state. Call alongside FormGroup.reset() to fully reset the form. */
+  reset(): void {
+    this.submitted = false;
+  }
+
   ngOnInit(): void {
     this.refreshRequiredMode();
+  }
+
+  ngAfterViewInit(): void {
+    const formEl = this.el.nativeElement as HTMLFormElement;
+
+    // Respect any consumer-provided labelling.
+    if (formEl.hasAttribute('aria-labelledby')) return;
+
+    // Prefer a DS heading (hviHeading) if present; otherwise only consider a direct child heading
+    // to avoid picking up headings inside nested components (e.g. error summary).
+    const heading = (formEl.querySelector(
+      'h1[hviHeading], h2[hviHeading], h3[hviHeading], h4[hviHeading], h5[hviHeading], h6[hviHeading]',
+    ) ??
+      formEl.querySelector(
+        ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6',
+      )) as HTMLHeadingElement | null;
+
+    if (!heading) return;
+
+    if (!heading.id) {
+      heading.id = `hvi-form-heading-${formHeadingId++}`;
+    }
+    formEl.setAttribute('aria-labelledby', heading.id);
   }
 }

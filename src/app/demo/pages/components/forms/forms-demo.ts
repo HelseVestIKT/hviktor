@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   HviButton,
   HviFieldKit,
+  HviForm,
   HviForms,
   HviHeading,
   HviLabel,
@@ -47,7 +48,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
           class="max-w-sm"
           aria-describedby="login-required-info"
         >
-          <h2 hviHeading size="xs">Logg inn</h2>
+          <h2 hviHeading size="xs" id="login-heading">Logg inn</h2>
           @if (allReqForm.requiredMode() === 'all-required') {
             <hvi-required-tag id="login-required-info" mode="all-required" />
           }
@@ -65,7 +66,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
         description="Når skjemaet har en blanding av obligatoriske og valgfrie felt, merkes hvert felt med om det må fylles ut eller er valgfritt. Brukeren ser tydelig hvilke felt som kreves."
       >
         <form hviForm #mixedForm="hviForm" [formGroup]="appointmentForm" class="max-w-md">
-          <h2 hviHeading size="xs">Bestill time</h2>
+          <h2 hviHeading size="xs" id="appointment-heading">Bestill time</h2>
           <hvi-textfield label="Navn" formControlName="name" required />
           <hvi-textfield label="E-postadresse" formControlName="email" type="email" required />
           <hvi-textfield label="Ønsket tidspunkt" formControlName="preferredTime" required />
@@ -97,7 +98,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
             myForm.requiredMode() === 'all-required' ? 'contact-required-info' : null
           "
         >
-          <h2 hviHeading size="xs">Kontakt oss</h2>
+          <h2 hviHeading size="xs" id="contact-heading">Kontakt oss</h2>
           @if (myForm.requiredMode() === 'all-required') {
             <hvi-required-tag id="contact-required-info" mode="all-required" />
           }
@@ -107,7 +108,14 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
 
             <hvi-field>
               <label hviLabel for="firstName"> Fornavn <hvi-required-tag mode="required" /> </label>
-              <input hviInput id="firstName" formControlName="firstName" hviControlInvalid />
+              <input
+                hviInput
+                id="firstName"
+                formControlName="firstName"
+                hviControlInvalid
+                required
+                class="max-w-xs"
+              />
               <p
                 hviFieldValidation
                 hviValidationMessage="firstName"
@@ -119,7 +127,14 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
               <label hviLabel for="lastName">
                 Etternavn <hvi-required-tag mode="required" />
               </label>
-              <input hviInput id="lastName" formControlName="lastName" hviControlInvalid />
+              <input
+                hviInput
+                id="lastName"
+                formControlName="lastName"
+                hviControlInvalid
+                required
+                class="max-w-xs"
+              />
               <p
                 hviFieldValidation
                 hviValidationMessage="lastName"
@@ -133,19 +148,28 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
 
             <hvi-field>
               <label hviLabel for="email"> E-post <hvi-required-tag mode="required" /> </label>
-              <input hviInput id="email" type="email" formControlName="email" hviControlInvalid />
+              <input
+                hviInput
+                id="email"
+                type="email"
+                formControlName="email"
+                hviControlInvalid
+                required
+                class="max-w-sm"
+              />
               <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
             </hvi-field>
 
             <hvi-field>
               <label hviLabel for="phone"> Telefon <hvi-required-tag mode="optional" /> </label>
+              <span hviFieldDescription>Format: +47 000 00 000</span>
               <input
                 hviInput
                 id="phone"
                 type="tel"
                 formControlName="phone"
                 hviControlInvalid
-                placeholder="+47 000 00 000"
+                class="max-w-xs"
               />
               <p hviFieldValidation hviValidationMessage="phone" [messages]="messages['phone']"></p>
             </hvi-field>
@@ -156,7 +180,14 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
 
             <hvi-field>
               <label hviLabel for="subject"> Emne <hvi-required-tag mode="required" /> </label>
-              <select hviSelect id="subject" formControlName="subject" hviControlInvalid>
+              <select
+                hviSelect
+                id="subject"
+                formControlName="subject"
+                hviControlInvalid
+                required
+                class="max-w-sm"
+              >
                 <option value="" disabled>Velg emne</option>
                 <option value="general">Generell henvendelse</option>
                 <option value="support">Teknisk support</option>
@@ -178,6 +209,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
                 id="message"
                 formControlName="message"
                 hviControlInvalid
+                required
                 rows="5"
                 maxlength="500"
               ></textarea>
@@ -190,9 +222,9 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
             </hvi-field>
           </fieldset>
 
-          <div class="flex flex-wrap gap-2">
+          <div class="mt-6 flex flex-wrap gap-2">
             <button hviButton type="submit" variant="primary">Send inn</button>
-            <button hviButton type="button" variant="secondary" (click)="contactForm.reset()">
+            <button hviButton type="button" variant="secondary" (click)="resetContactForm()">
               Nullstill
             </button>
           </div>
@@ -209,6 +241,8 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
   `,
 })
 export class FormsDemoComponent {
+  @ViewChild('myForm') myForm?: HviForm;
+
   readonly alleFeltErObligatoriskeCode = FormsAlleFeltErObligatoriskeExampleSource;
   readonly obligatoriskeOgValgfrieFeltCode = FormsObligatoriskeOgValgfrieFeltExampleSource;
   readonly skjemaMedValideringOgFeiloppsummeringCode =
@@ -243,15 +277,15 @@ export class FormsDemoComponent {
 
   messages: Record<string, HviValidationMessages> = {
     firstName: {
-      required: 'Fornavn er påkrevd',
+      required: 'Fyll inn fornavn',
       minlength: 'Fornavn må være minst 2 tegn',
     },
     lastName: {
-      required: 'Etternavn er påkrevd',
+      required: 'Fyll inn etternavn',
       minlength: 'Etternavn må være minst 2 tegn',
     },
     email: {
-      required: 'E-post er påkrevd',
+      required: 'Fyll inn e-postadresse',
       email: 'Oppgi en gyldig e-postadresse',
     },
     phone: {
@@ -271,6 +305,12 @@ export class FormsDemoComponent {
     if (this.contactForm.valid) {
       alert('Takk for din henvendelse!');
       this.contactForm.reset();
+      this.myForm?.reset();
     }
+  }
+
+  resetContactForm(): void {
+    this.contactForm.reset();
+    this.myForm?.reset();
   }
 }
