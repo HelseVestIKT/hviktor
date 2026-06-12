@@ -211,6 +211,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     description:
       'Field er et hjelpemiddel for å automatisk koble et felt sammen med HviLabel, HviFieldDescription, HviValidationMessage og HviFieldCounter.',
     ds: true,
+    a11yTested: true,
     codeTested: true,
   },
   {
