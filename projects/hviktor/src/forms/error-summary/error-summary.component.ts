@@ -95,7 +95,7 @@ const DEFAULT_ERROR_PRIORITY = [
     style: 'display: block; max-width: 731px;',
   },
   template: `
-    <ds-error-summary class="ds-error-summary" [hidden]="!shouldShow">
+    <ds-error-summary class="ds-error-summary" tabindex="-1" [hidden]="!shouldShow">
       @switch (headingLevel) {
         @case (1) {
           <h1 class="ds-heading">{{ heading }}</h1>

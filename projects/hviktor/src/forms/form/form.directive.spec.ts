@@ -79,10 +79,46 @@ class SubmitHost {
 })
 class NoFormGroupHost {}
 
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, HviForm],
+  template: `<form hviForm #f="hviForm" [formGroup]="form">
+    <h2>My Form</h2>
+    <input formControlName="name" />
+  </form>`,
+})
+class HeadingHost {
+  form = new FormGroup({
+    name: new FormControl(''),
+  });
+}
+
+@Component({
+  standalone: true,
+  imports: [ReactiveFormsModule, HviForm],
+  template: `<form hviForm #f="hviForm" [formGroup]="form">
+    <h2 id="custom-id">Custom ID</h2>
+    <input formControlName="name" />
+  </form>`,
+})
+class HeadingWithIdHost {
+  form = new FormGroup({
+    name: new FormControl(''),
+  });
+}
+
 describe('HviForm', () => {
   beforeEach(async () => {
     await setupTestBed({
-      imports: [AllRequiredHost, MixedHost, NoneRequiredHost, SubmitHost, NoFormGroupHost],
+      imports: [
+        AllRequiredHost,
+        MixedHost,
+        NoneRequiredHost,
+        SubmitHost,
+        NoFormGroupHost,
+        HeadingHost,
+        HeadingWithIdHost,
+      ],
     });
   });
 
@@ -214,6 +250,53 @@ describe('HviForm', () => {
       f.detectChanges();
 
       expect(directive.submitted).toBe(true);
+    });
+  });
+
+  describe('reset', () => {
+    it('should reset submitted state', () => {
+      const f = TestBed.createComponent(SubmitHost);
+      f.detectChanges();
+      const directive = f.debugElement.children[0].injector.get(HviForm);
+
+      f.nativeElement.querySelector('button').click();
+      f.detectChanges();
+      expect(directive.submitted).toBe(true);
+
+      directive.reset();
+      expect(directive.submitted).toBe(false);
+    });
+  });
+
+  describe('aria-labelledby', () => {
+    it('should set aria-labelledby on the form pointing to the first heading', () => {
+      const f = TestBed.createComponent(HeadingHost);
+      f.detectChanges();
+
+      const form: HTMLFormElement = f.nativeElement.querySelector('form');
+      const heading: HTMLHeadingElement = f.nativeElement.querySelector('h2');
+
+      expect(heading.id).toBeTruthy();
+      expect(form.getAttribute('aria-labelledby')).toBe(heading.id);
+    });
+
+    it('should use existing id on heading if present', () => {
+      const f = TestBed.createComponent(HeadingWithIdHost);
+      f.detectChanges();
+
+      const form: HTMLFormElement = f.nativeElement.querySelector('form');
+      const heading: HTMLHeadingElement = f.nativeElement.querySelector('h2');
+
+      expect(heading.id).toBe('custom-id');
+      expect(form.getAttribute('aria-labelledby')).toBe('custom-id');
+    });
+
+    it('should not set aria-labelledby when no heading is present', () => {
+      const f = TestBed.createComponent(NoFormGroupHost);
+      f.detectChanges();
+
+      const form: HTMLFormElement = f.nativeElement.querySelector('form');
+      expect(form.getAttribute('aria-labelledby')).toBeNull();
     });
   });
 });
