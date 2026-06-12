@@ -13,3 +13,24 @@ code {
   border: 1px solid var(--ds-color-neutral-border-subtle);
   box-decoration-break: clone;
 }
+
+.componentDisplay {
+  background: var(--ds-color-neutral-background-tinted);
+}
+
+.toggleButton {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  background: var(--ds-color-neutral-background-default);
+  color: var(--ds-color-neutral-text-subtle);
+}
+
+.toggleButton:hover {
+  background: var(--ds-color-neutral-surface-hover);
+  color: var(--ds-color-neutral-text-subtle);
+}
+
+.toggleButton:active {
+  background: var(--ds-color-neutral-surface-active);
+}
