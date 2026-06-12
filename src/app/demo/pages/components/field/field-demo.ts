@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  HviDivider,
   HviField,
   HviFieldAffix,
   HviFieldAffixes,
@@ -18,7 +17,6 @@ import { FieldAntallTegnExampleSource } from './code-examples/field.antall-tegn.
 import { FieldCheckboxOgRadioExampleSource } from './code-examples/field.checkbox-og-radio.example.source';
 import { FieldGrunnleggendeExampleSource } from './code-examples/field.grunnleggende.example.source';
 import { FieldOutlineExampleSource } from './code-examples/field.outline.example.source';
-import { FieldPlasseringExampleSource } from './code-examples/field.plassering.example.source';
 import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suffix.example.source';
 @Component({
   selector: 'app-field-demo',
@@ -36,7 +34,6 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
     HviInput,
     HviLabel,
     HviParagraph,
-    HviDivider,
   ],
   template: `
     <app-demo-page componentId="field">
@@ -100,27 +97,6 @@ import { FieldPrefixSuffixExampleSource } from './code-examples/field.prefix-suf
         </div>
       </app-demo-section>
 
-      <!-- Plassering med Switch -->
-      <app-demo-section
-        title="Plassering"
-        [code]="plasseringCode"
-        description="Når du bruker Field sammen med valgkomponenter som Switch, kan du plassere etiketten enten før eller etter kontrollen med position-attributtet."
-      >
-        <div class="grid gap-2" style="max-width: 300px">
-          <hr hviDivider />
-          <hvi-field position="end">
-            <label hviLabel for="flymodus">Flymodus</label>
-            <input hviInput id="flymodus" type="checkbox" role="switch" />
-          </hvi-field>
-          <hr hviDivider />
-          <hvi-field position="start">
-            <input hviInput id="lydlos" type="checkbox" role="switch" />
-            <label hviLabel for="lydlos">Lydløs</label>
-          </hvi-field>
-          <hr hviDivider />
-        </div>
-      </app-demo-section>
-
       <!-- Checkbox og Radio plassering -->
       <app-demo-section
         title="Checkbox og Radio"
@@ -175,7 +151,6 @@ export class FieldDemoComponent {
   readonly grunnleggendeCode = FieldGrunnleggendeExampleSource;
   readonly prefixSuffixCode = FieldPrefixSuffixExampleSource;
   readonly antallTegnCode = FieldAntallTegnExampleSource;
-  readonly plasseringCode = FieldPlasseringExampleSource;
   readonly checkboxOgRadioCode = FieldCheckboxOgRadioExampleSource;
   readonly outlineCode = FieldOutlineExampleSource;
 }

@@ -36,13 +36,6 @@ test.describe('Field', () => {
     await expect(counter).toHaveAttribute('data-limit', '10');
   });
 
-  test('position attribute is reflected on ds-field element', async ({ page }) => {
-    const section = page.locator('app-demo-section[title="Plassering"]');
-    await expect(section).toBeVisible();
-    await expect(section.locator('ds-field[data-position="end"]')).toBeVisible();
-    await expect(section.locator('ds-field[data-position="start"]')).toBeVisible();
-  });
-
   test('outline variant applies data-variant attribute', async ({ page }) => {
     const section = page.locator('app-demo-section[title="Outline"]');
     await expect(section).toBeVisible();
