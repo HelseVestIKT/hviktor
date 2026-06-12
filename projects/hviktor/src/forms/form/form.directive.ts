@@ -143,20 +143,19 @@ export class HviForm implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const formEl = this.el.nativeElement;
+    const formEl = this.el.nativeElement as HTMLFormElement;
 
     // Respect any consumer-provided labelling.
     if (formEl.hasAttribute('aria-labelledby')) return;
 
     // Prefer a DS heading (hviHeading) if present; otherwise only consider a direct child heading
     // to avoid picking up headings inside nested components (e.g. error summary).
-    const heading =
+    const heading = (formEl.querySelector(
+      'h1[hviHeading], h2[hviHeading], h3[hviHeading], h4[hviHeading], h5[hviHeading], h6[hviHeading]',
+    ) ??
       formEl.querySelector(
-        'h1[hviHeading], h2[hviHeading], h3[hviHeading], h4[hviHeading], h5[hviHeading], h6[hviHeading]'
-      ) ??
-      (Array.from(formEl.children).find((c) => /^H[1-6]$/.test(c.tagName)) as
-        | HTMLHeadingElement
-        | undefined);
+        ':scope > h1, :scope > h2, :scope > h3, :scope > h4, :scope > h5, :scope > h6',
+      )) as HTMLHeadingElement | null;
 
     if (!heading) return;
 
