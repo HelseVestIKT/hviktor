@@ -4,6 +4,23 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.2.1] – 2026-06-18
+
+### Added
+
+- unit-tester for flere komponenter
+- size-input for input-komponenten
+
+### Changed
+
+- u-details er tatt bort fra details-komponenten.
+- forbedret a11y i field, fieldset og form.
+- oppdatert `@digdir/designsystemet-css` og `@digdir/designsystemet-web` til 1.16.0.
+
+### Fixed
+
+- required-tag i all-required modus har nå tilstrekkelig margin
+
 ## [0.2.0] – 2026-06-04
 
 ### Added
