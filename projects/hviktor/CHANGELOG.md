@@ -4,6 +4,12 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.2.2] – 2026-06-18
+
+### Fixed
+
+- Liten fiks i schematics etter oppdatering av Angular til 22.0.2
+
 ## [0.2.1] – 2026-06-18
 
 ### Added
