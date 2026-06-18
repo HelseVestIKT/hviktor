@@ -7,7 +7,7 @@ import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor';
   standalone: true,
   imports: [HviTab, HviTabPanel, HviTabs],
   template: \`
-    <hvi-tabs defaultValue="overview">
+    <hvi-tabs aria-label="Brukerinnstillinger" defaultValue="overview">
       <hvi-tab value="overview">Oversikt</hvi-tab>
       <hvi-tab value="details">Detaljer</hvi-tab>
       <hvi-tab value="settings">Innstillinger</hvi-tab>

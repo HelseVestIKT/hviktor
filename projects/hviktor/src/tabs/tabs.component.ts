@@ -38,7 +38,7 @@ import { HviTab } from './tab.component';
   imports: [NgTemplateOutlet],
   template: `
     <u-tabs #uTabsRef class="ds-tabs">
-      <u-tablist>
+      <u-tablist [attr.aria-label]="ariaLabel">
         @for (tab of tabs; track tab.value) {
           <u-tab [attr.data-value]="tab.value">
             <ng-container [ngTemplateOutlet]="tab.templateRef" />
@@ -62,6 +62,9 @@ export class HviTabs implements AfterContentInit {
   @ViewChild('uTabsRef') uTabsRef!: ElementRef;
   @ContentChildren(HviTab) tabs!: QueryList<HviTab>;
   @ContentChildren(HviTabPanel) panels!: QueryList<HviTabPanel>;
+
+  /** Accessible label for the tab list. Defaults to `'Faner'`. */
+  @Input('aria-label') ariaLabel: string = 'Faner';
 
   /** Controlled state for Tabs component */
   @Input() value?: string;
