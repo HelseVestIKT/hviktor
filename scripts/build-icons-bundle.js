@@ -9,7 +9,7 @@ const esbuild = require('esbuild');
 const path = require('path');
 const fs = require('fs');
 
-const distPath = path.join(__dirname, '..', 'dist', 'icons');
+const distPath = path.join(__dirname, '..', 'projects', 'icons', 'dist');
 const bundlePath = path.join(distPath, 'bundles');
 
 // Ensure the bundles directory exists
@@ -22,7 +22,7 @@ async function buildWebComponentsBundle() {
     console.log('Building Web Components bundle...');
 
     await esbuild.build({
-      entryPoints: [path.join(__dirname, '..', 'projects', 'icons', 'src', 'standalone.ts')],
+      entryPoints: [path.join(__dirname, '..', 'projects', 'icons', 'src', 'index.ts')],
       bundle: true,
       outfile: path.join(bundlePath, 'hviktor-icons.js'),
       format: 'iife',

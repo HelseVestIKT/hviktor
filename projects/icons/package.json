@@ -1,6 +1,6 @@
 {
   "name": "@helsevestikt/hviktor-icons",
-  "version": "0.0.48",
+  "version": "0.0.51",
   "description": "Pure Web Components icon library with 900+ icons, works in any framework",
   "main": "dist/index.js",
   "module": "dist/index.js",

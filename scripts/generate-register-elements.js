@@ -127,7 +127,7 @@ function main() {
   console.log('💡 Next steps:');
   console.log('   1. Build: npm run build:icons:bundle');
   console.log('   2. Test the registerIconsAsCustomElements() function');
-  console.log('   3. Publish: npm run publish:icons:patch');
+  console.log('   3. Publish: npm run publish:icons');
 }
 
 main();
