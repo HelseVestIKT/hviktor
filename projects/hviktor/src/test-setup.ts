@@ -6,6 +6,14 @@ if (typeof globalThis.CSS === 'undefined') {
   Object.defineProperty(globalThis, 'CSS', { value: { supports: () => false } });
 }
 
+/**
+ * Polyfill for adoptedStyleSheets which is not available in jsdom.
+ * Required because @oddbird/popover-polyfill (used by designsystemet-web) iterates it.
+ */
+if (typeof document !== 'undefined' && !document.adoptedStyleSheets) {
+  Object.defineProperty(document, 'adoptedStyleSheets', { value: [], writable: true });
+}
+
 if (typeof globalThis.requestAnimationFrame === 'undefined') {
   Object.defineProperty(globalThis, 'requestAnimationFrame', {
     value: (cb: FrameRequestCallback) => setTimeout(() => cb(Date.now()), 0),
