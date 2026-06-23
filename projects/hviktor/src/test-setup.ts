@@ -7,6 +7,19 @@ if (typeof globalThis.CSS === 'undefined') {
 }
 
 /**
+ * Stub native popover API so @oddbird/popover-polyfill skips activation in jsdom.
+ * Without this, the polyfill sets up MutationObservers and adoptedStyleSheets
+ * that crash the Vitest worker process during teardown in CI.
+ */
+if (typeof HTMLElement !== 'undefined' && !('popover' in HTMLElement.prototype)) {
+  Object.defineProperty(HTMLElement.prototype, 'popover', {
+    value: null,
+    writable: true,
+    configurable: true,
+  });
+}
+
+/**
  * Polyfill for document.adoptedStyleSheets which is not available in jsdom.
  * Required because @oddbird/popover-polyfill iterates over adoptedStyleSheets on import.
  */
