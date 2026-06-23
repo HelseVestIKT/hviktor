@@ -439,9 +439,9 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         <form
           class="mb-1"
           role="search"
+          aria-label="Søk i komplett tabell"
           (submit)="$event.preventDefault()"
           aria-controls="komplett-tabell"
-        >
           <label hviLabel for="komplett-sok">Søk</label>
           <p class="ds-paragraph" id="komplett-sok-beskrivelse">
             Søk etter navn, e-post, avdeling eller stilling
