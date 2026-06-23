@@ -172,8 +172,8 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="globaltSokCode"
         description="Legg til et søkefelt som filtrerer på tvers av alle angitte kolonner. Definer hvilke felter som skal inkluderes med globalFilterFields."
       >
-        <h3 hviHeading size="xs">Ansattoversikt</h3>
-        <form role="search" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
+        <h3 hviHeading size="xs" id="ansattoversikt-heading">Ansattoversikt</h3>
+        <form role="search" aria-labelledby="ansattoversikt-heading" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
           <label hviLabel for="tabell-sok">Søk i tabell</label>
           <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
             Søk etter navn, e-post eller avdeling
