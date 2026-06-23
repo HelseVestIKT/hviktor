@@ -8,12 +8,7 @@ import { HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } f
   imports: [HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
   template: \`
     <h3 hviHeading size="xs">Ansattoversikt</h3>
-    <form
-      class="mb-2"
-      role="search"
-      (submit)="$event.preventDefault()"
-      aria-controls="sok-tabell"
-    >
+    <form role="search" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
       <label hviLabel for="tabell-sok">Søk i tabell</label>
       <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
         Søk etter navn, e-post eller avdeling
@@ -29,7 +24,7 @@ import { HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } f
         <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
       </hvi-search>
     </form>
-    <p class="ds-paragraph mt-1 mb-2" role="status" aria-live="polite" aria-atomic="true">
+    <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
       Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
     </p>
     <table

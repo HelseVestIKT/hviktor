@@ -173,12 +173,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         description="Legg til et søkefelt som filtrerer på tvers av alle angitte kolonner. Definer hvilke felter som skal inkluderes med globalFilterFields."
       >
         <h3 hviHeading size="xs">Ansattoversikt</h3>
-        <form
-          class="mb-2"
-          role="search"
-          (submit)="$event.preventDefault()"
-          aria-controls="sok-tabell"
-        >
+        <form role="search" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
           <label hviLabel for="tabell-sok">Søk i tabell</label>
           <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
             Søk etter navn, e-post eller avdeling
@@ -194,7 +189,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
           </hvi-search>
         </form>
-        <p class="ds-paragraph mt-1 mb-2" role="status" aria-live="polite" aria-atomic="true">
+        <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
           Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
         </p>
         <table
@@ -441,7 +436,12 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="komplettEksempelCode"
         description="Tabell med søk, sortering, kolonnefiltrering, paginering og utvidbare rader kombinert."
       >
-        <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="komplett-tabell">
+        <form
+          class="mb-1"
+          role="search"
+          (submit)="$event.preventDefault()"
+          aria-controls="komplett-tabell"
+        >
           <label hviLabel for="komplett-sok">Søk</label>
           <p class="ds-paragraph" id="komplett-sok-beskrivelse">
             Søk etter navn, e-post, avdeling eller stilling
@@ -457,7 +457,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
             <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
           </hvi-search>
         </form>
-        <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+        <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
           Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader
         </p>
         <table
