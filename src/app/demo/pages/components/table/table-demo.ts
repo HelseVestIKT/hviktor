@@ -173,7 +173,12 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         description="Legg til et søkefelt som filtrerer på tvers av alle angitte kolonner. Definer hvilke felter som skal inkluderes med globalFilterFields."
       >
         <h3 hviHeading size="xs" id="ansattoversikt-heading">Ansattoversikt</h3>
-        <form role="search" aria-labelledby="ansattoversikt-heading" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
+        <form
+          role="search"
+          aria-labelledby="ansattoversikt-heading"
+          (submit)="$event.preventDefault()"
+          aria-controls="sok-tabell"
+        >
           <label hviLabel for="tabell-sok">Søk i tabell</label>
           <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
             Søk etter navn, e-post eller avdeling
@@ -442,6 +447,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
           aria-label="Søk i komplett tabell"
           (submit)="$event.preventDefault()"
           aria-controls="komplett-tabell"
+        >
           <label hviLabel for="komplett-sok">Søk</label>
           <p class="ds-paragraph" id="komplett-sok-beskrivelse">
             Søk etter navn, e-post, avdeling eller stilling
