@@ -176,7 +176,7 @@ async function importIcons() {
   console.log(`\n💡 Next steps:`);
   console.log(`   1. Run: npm run build:icons:bundle`);
   console.log(`   2. Test the icons in your application`);
-  console.log(`   3. Publish: npm run publish:icons:patch`);
+  console.log(`   3. Publish: npm run publish:icons`);
 }
 
 /**

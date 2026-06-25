@@ -88,7 +88,13 @@ export class HviForm implements OnInit, AfterViewInit {
   @Output() hviSubmitted = new EventEmitter<void>();
 
   /** True after the first submit attempt. */
-  submitted = false;
+  private readonly _submitted = signal(false);
+  get submitted(): boolean {
+    return this._submitted();
+  }
+  set submitted(value: boolean) {
+    this._submitted.set(value);
+  }
 
   /** Optional focus target (e.g. HviErrorSummary) to focus when the form is invalid on submit. */
   @Input() focusOnInvalid?: { focus?: () => void } | null;

@@ -29,7 +29,12 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="komplett-tabell">
+    <form
+      class="mb-1"
+      role="search"
+      (submit)="$event.preventDefault()"
+      aria-controls="komplett-tabell"
+    >
       <label hviLabel for="komplett-sok">Søk</label>
       <p class="ds-paragraph" id="komplett-sok-beskrivelse">
         Søk etter navn, e-post, avdeling eller stilling
@@ -45,7 +50,7 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
         <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
       </hvi-search>
     </form>
-    <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+    <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
       Viser {{ fullTable.totalFilteredRecords() }} av {{ fullTable.totalRecords() }} rader
     </p>
     <table
@@ -309,8 +314,8 @@ export class TableKomplettEksempelExampleComponent {
 
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
-    if (dir === 'ascending') return `Sorter etter ${heading}, synkende`;
-    if (dir === 'descending') return `Fjern sortering på ${heading}`;
-    return `Sorter etter ${heading}, stigende`;
+    if (dir === 'ascending') return `Sorter etter ${heading} (synkende)`;
+    if (dir === 'descending') return `Fjern sortering for ${heading}`;
+    return `Sorter etter ${heading} (stigende)`;
   }
 }

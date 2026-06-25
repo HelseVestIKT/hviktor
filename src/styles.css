@@ -22,7 +22,7 @@ code {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 0;
-  background: var(--ds-color-neutral-background-default);
+  background: transparent;
   color: var(--ds-color-neutral-text-subtle);
 }
 
