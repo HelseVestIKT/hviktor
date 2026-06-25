@@ -1,14 +1,24 @@
 import { Component, signal } from '@angular/core';
-import { HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsevestikt/hviktor';
+import {
+  HviHeading,
+  HviInput,
+  HviLabel,
+  HviSearch,
+  HviSearchClear,
+  HviTable,
+} from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-table-globalt-sok-example',
   standalone: true,
-  imports: [HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
+  imports: [HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
   template: `
-    <form class="mb-4" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
+    <h3 hviHeading size="xs">Ansattoversikt</h3>
+    <form role="search" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
       <label hviLabel for="tabell-sok">Søk i tabell</label>
-      <p class="ds-paragraph" id="tabell-sok-beskrivelse">Søk etter navn, e-post eller avdeling</p>
+      <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
+        Søk etter navn, e-post eller avdeling
+      </p>
       <hvi-search>
         <input
           hviInput
@@ -20,7 +30,7 @@ import { HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsev
         <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
       </hvi-search>
     </form>
-    <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+    <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
       Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
     </p>
     <table
@@ -32,7 +42,7 @@ import { HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsev
       #searchTable="hviTable"
     >
       <caption>
-        Ansattoversikt
+        Ansatte
       </caption>
       <thead>
         <tr>
@@ -182,8 +192,8 @@ export class TableGlobaltSokExampleComponent {
 
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
-    if (dir === 'ascending') return `Sorter etter ${heading}, synkende`;
-    if (dir === 'descending') return `Fjern sortering på ${heading}`;
-    return `Sorter etter ${heading}, stigende`;
+    if (dir === 'ascending') return `Sorter etter ${heading} (synkende)`;
+    if (dir === 'descending') return `Fjern sortering for ${heading}`;
+    return `Sorter etter ${heading} (stigende)`;
   }
 }
