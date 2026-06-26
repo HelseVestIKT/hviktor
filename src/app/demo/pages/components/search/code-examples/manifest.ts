@@ -13,11 +13,11 @@ export const SearchExamplesManifest = [
     sourceExport: 'SearchVarianterExampleSource',
   },
   {
-    slug: 'med-label',
-    title: 'Med Label',
-    className: 'SearchMedLabelExampleComponent',
-    sourceExport: 'SearchMedLabelExampleSource',
+    slug: 'tekst',
+    title: 'Tekst',
+    className: 'SearchTekstExampleComponent',
+    sourceExport: 'SearchTekstExampleSource',
   },
 ] as const;
 
-export type SearchExampleSlug = 'grunnleggende' | 'varianter' | 'med-label';
+export type SearchExampleSlug = 'grunnleggende' | 'varianter' | 'tekst';

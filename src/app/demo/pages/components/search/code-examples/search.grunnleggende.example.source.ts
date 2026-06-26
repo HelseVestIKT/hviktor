@@ -7,14 +7,14 @@ import { HviButton, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hv
   standalone: true,
   imports: [HviButton, HviInput, HviSearch, HviSearchClear],
   template: \`
-    <hvi-search>
-      <input hviInput type="search" placeholder="" aria-label="Søk" />
-      <button hviSearchClear aria-label="Tøm"></button>
-      <button hviButton variant="primary" type="submit">Søk</button>
-    </hvi-search>
+    <form role="search">
+      <hvi-search class="max-w-md">
+        <input hviInput type="search" placeholder="" aria-label="Søk" />
+        <button hviSearchClear aria-label="Tøm"></button>
+        <button hviButton variant="primary" type="submit">Søk</button>
+      </hvi-search>
+    </form>
   \`,
 })
-export class SearchGrunnleggendeExampleComponent {
-  
-}
+export class SearchGrunnleggendeExampleComponent {}
 `;
