@@ -27,7 +27,7 @@ hljs.registerLanguage('typescript', typescript);
   imports: [HviHeading, HviParagraph],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
-    <section [id]="sectionId()" class="gap-4">
+    <section [id]="sectionId()" class="scroll-mt-24 gap-4">
       <h2 hviHeading size="md">{{ title() }}</h2>
       @if (description()) {
         <p hviParagraph class="max-w-3xl pt-2">{{ description() }}</p>

@@ -7,8 +7,13 @@ import { HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } f
   standalone: true,
   imports: [HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
   template: \`
-    <h3 hviHeading size="xs">Ansattoversikt</h3>
-    <form role="search" (submit)="$event.preventDefault()" aria-controls="sok-tabell">
+    <h3 hviHeading size="xs" id="ansattoversikt-heading">Ansattoversikt</h3>
+    <form
+      role="search"
+      aria-labelledby="ansattoversikt-heading"
+      (submit)="$event.preventDefault()"
+      aria-controls="sok-tabell"
+    >
       <label hviLabel for="tabell-sok">Søk i tabell</label>
       <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
         Søk etter navn, e-post eller avdeling
@@ -181,14 +186,5 @@ export class TableGlobaltSokExampleComponent {
   navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
   avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
-  
-  rowsPerPage = signal(5);
-  
-  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
-    const dir = table.getSortDirection(field);
-    if (dir === 'ascending') return \`Sorter etter \${heading} (synkende)\`;
-    if (dir === 'descending') return \`Fjern sortering for \${heading}\`;
-    return \`Sorter etter \${heading} (stigende)\`;
-  }
 }
 `;

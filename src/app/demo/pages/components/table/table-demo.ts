@@ -10,18 +10,21 @@ import {
   HviSearchClear,
   HviSortableColumn,
   HviTable,
+  type SortingFn,
 } from '@helsevestikt/hviktor';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
 
+import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
 import { TableEnkelTabellExampleSource } from './code-examples/table.enkel-tabell.example.source';
 import { TableGlobaltSokExampleSource } from './code-examples/table.globalt-sok.example.source';
 import { TableKolonnefiltreringExampleSource } from './code-examples/table.kolonnefiltrering.example.source';
 import { TableKomplettEksempelExampleSource } from './code-examples/table.komplett-eksempel.example.source';
 import { TablePagineringExampleSource } from './code-examples/table.paginering.example.source';
 import { TableSorteringExampleSource } from './code-examples/table.sortering.example.source';
+import { TableUtvidbareRaderEnkeltmodusExampleSource } from './code-examples/table.utvidbare-rader-enkeltmodus.example.source';
 import { TableUtvidbareRaderExampleSource } from './code-examples/table.utvidbare-rader.example.source';
 import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.zebrastriper-og-border.example.source';
 
@@ -160,6 +163,56 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                 <td>{{ person.navn }}</td>
                 <td>{{ person.epost }}</td>
                 <td>{{ person.avdeling }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </app-demo-section>
+
+      <!-- Custom sorteringsfunksjon -->
+      <app-demo-section
+        title="Custom sorteringsfunksjon"
+        [code]="customSorteringCode"
+        description="Bruk [sortFn] på hviSortableColumn for å gi en kolonne en egendefinert komparator. TanStack reverserer automatisk ved synkende sortering."
+      >
+        <table hviTable [value]="priorityData" #customSortTable="hviTable">
+          <caption>
+            Sensoroversikt med prioritetssortering
+          </caption>
+          <thead>
+            <tr>
+              <th hviSortableColumn="namn" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(customSortTable, 'namn', 'Namn')"
+                >
+                  Namn
+                </button>
+              </th>
+              <th hviSortableColumn="status" [sortFn]="prioritetSort" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(customSortTable, 'status', 'Status')"
+                >
+                  Status
+                </button>
+              </th>
+              <th hviSortableColumn="lokasjon" scope="col">
+                <button
+                  type="button"
+                  [attr.aria-label]="getSortLabel(customSortTable, 'lokasjon', 'Lokasjon')"
+                >
+                  Lokasjon
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (sensor of customSortTable.filteredValue(); track sensor.id) {
+              <tr>
+                <td>{{ sensor.namn }}</td>
+                <td>{{ sensor.status }}</td>
+                <td>{{ sensor.lokasjon }}</td>
               </tr>
             }
           </tbody>
@@ -435,6 +488,72 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         </table>
       </app-demo-section>
 
+      <!-- Row expansion single mode -->
+      <app-demo-section
+        title="Utvidbare rader (enkeltmodus)"
+        [code]="utvidbareRaderSingleCode"
+        description="Med expandMode='single' kan bare én rad være åpen om gangen. Å åpne en ny rad lukker den forrige automatisk."
+      >
+        <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">
+          <caption>
+            Ansattoversikt – kun én rad åpen om gangen
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+              <th scope="col">Navn</th>
+              <th scope="col">Avdeling</th>
+              <th scope="col">Stilling</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (person of singleExpandTable.filteredValue(); track person.id) {
+              <tr>
+                <td>
+                  <button
+                    hviButton
+                    variant="tertiary"
+                    (click)="singleExpandTable.toggleExpanded(person)"
+                    [attr.aria-expanded]="singleExpandTable.isExpanded(person)"
+                    [attr.aria-controls]="'single-detalj-' + person.id"
+                    [ariaLabel]="
+                      singleExpandTable.isExpanded(person)
+                        ? 'Skjul detaljer om ' + person.navn
+                        : 'Vis detaljer om ' + person.navn
+                    "
+                  >
+                    @if (singleExpandTable.isExpanded(person)) {
+                      <hvi-icon-chevron-down />
+                    } @else {
+                      <hvi-icon-chevron-right />
+                    }
+                  </button>
+                </td>
+                <td>{{ person.navn }}</td>
+                <td>{{ person.avdeling }}</td>
+                <td>{{ person.stilling }}</td>
+              </tr>
+              @if (singleExpandTable.isExpanded(person)) {
+                <tr [id]="'single-detalj-' + person.id">
+                  <td colspan="4">
+                    <div class="flex gap-8 py-2 pl-12">
+                      <dl>
+                        <dt>E-post</dt>
+                        <dd>{{ person.epost }}</dd>
+                      </dl>
+                      <dl>
+                        <dt>Telefon</dt>
+                        <dd>{{ person.telefon }}</dd>
+                      </dl>
+                    </div>
+                  </td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </app-demo-section>
+
       <!-- Komplett eksempel -->
       <app-demo-section
         title="Komplett eksempel"
@@ -610,10 +729,12 @@ export class TableDemoComponent {
   readonly enkelTabellCode = TableEnkelTabellExampleSource;
   readonly zebrastriperOgBorderCode = TableZebrastriperOgBorderExampleSource;
   readonly sorteringCode = TableSorteringExampleSource;
+  readonly customSorteringCode = TableCustomSorteringsfunksjonExampleSource;
   readonly globaltSokCode = TableGlobaltSokExampleSource;
   readonly kolonnefiltreringCode = TableKolonnefiltreringExampleSource;
   readonly pagineringCode = TablePagineringExampleSource;
   readonly utvidbareRaderCode = TableUtvidbareRaderExampleSource;
+  readonly utvidbareRaderSingleCode = TableUtvidbareRaderEnkeltmodusExampleSource;
   readonly komplettEksempelCode = TableKomplettEksempelExampleSource;
 
   data = [
@@ -735,6 +856,29 @@ export class TableDemoComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 
   rowsPerPage = signal(5);
+
+  /** Eksempeldata for custom sortering – sensorer med ulik prioritet */
+  priorityData = [
+    { id: 1, namn: 'Sensor A', status: 'Aktivt varsel', lokasjon: 'Bergen' },
+    { id: 2, namn: 'Sensor B', status: 'Normal', lokasjon: 'Stavanger' },
+    { id: 3, namn: 'Sensor C', status: 'Varsling aktivert', lokasjon: 'Oslo' },
+    { id: 4, namn: 'Sensor D', status: 'Aktivt varsel', lokasjon: 'Trondheim' },
+    { id: 5, namn: 'Sensor E', status: 'Normal', lokasjon: 'Haugesund' },
+    { id: 6, namn: 'Sensor F', status: 'Varsling aktivert', lokasjon: 'Førde' },
+  ];
+
+  /**
+   * Custom komparator: Aktivt varsel (0) → Varsling aktivert (1) → Normal (2).
+   * TanStack reverserer automatisk ved synkende sortering.
+   */
+  prioritetSort: SortingFn<unknown> = (radA, radB, columnId) => {
+    const rang = (val: unknown): number => {
+      if (val === 'Aktivt varsel') return 0;
+      if (val === 'Varsling aktivert') return 1;
+      return 2;
+    };
+    return rang(radA.getValue(columnId)) - rang(radB.getValue(columnId));
+  };
 
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);

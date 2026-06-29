@@ -141,6 +141,9 @@ export class HviTable<T = unknown> {
    */
   @Input() rowId: string | ((item: T) => unknown) = 'id';
 
+  /** Om flere rader kan være åpne samtidig ('multiple') eller bare én ('single'). */
+  @Input() expandMode: 'single' | 'multiple' = 'multiple';
+
   /** Antall rader per side (når paginator er aktivert) */
   @Input({ transform: numberAttribute })
   set rows(v: number) {
@@ -191,13 +194,20 @@ export class HviTable<T = unknown> {
   private _pageSize = signal(10);
   private _pageIndex = signal(0);
   private _expanded = signal<ExpandedState>({});
+  private _customSortFnRegistry: Record<string, SortingFn<T>> = {};
 
-  /** Norsk sorteringsfunksjon med localeCompare('nb') */
+  /**
+   * Sorteringsfunksjon som sjekker custom registry, deretter faller tilbake til norsk sortering.
+   * Samme referanse hele tiden — uavhengig av TanStack sin kolonne-memoization.
+   */
   private norwegianSortFn: SortingFn<T> = (
     rowA: Row<T>,
     rowB: Row<T>,
     columnId: string,
   ): number => {
+    const customFn = this._customSortFnRegistry[columnId];
+    if (customFn) return customFn(rowA, rowB, columnId);
+
     const a = rowA.getValue(columnId);
     const b = rowB.getValue(columnId);
     if (a == null && b == null) return 0;
@@ -460,6 +470,12 @@ export class HviTable<T = unknown> {
   toggleExpanded(item: T): void {
     const id = String(this.getRowId(item));
     this._expanded.update((prev) => {
+      const isOpen = prev === true ? true : !!prev[id];
+
+      if (this.expandMode === 'single') {
+        return isOpen ? {} : { [id]: true };
+      }
+
       const record = prev === true ? {} : { ...prev };
       if (record[id]) {
         delete record[id];
@@ -563,5 +579,14 @@ export class HviTable<T = unknown> {
   private getRowId(item: T): unknown {
     if (typeof this.rowId === 'function') return this.rowId(item);
     return this.getFieldValue(item, this.rowId);
+  }
+
+  /** Registrer (eller fjern) en custom sorteringsfunksjon for et felt. Kalles av HviSortableColumn. */
+  setSortFn(field: string, fn: SortingFn<T> | undefined): void {
+    if (fn) {
+      this._customSortFnRegistry[field] = fn;
+    } else {
+      delete this._customSortFnRegistry[field];
+    }
   }
 }

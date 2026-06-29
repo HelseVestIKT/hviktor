@@ -1,80 +1,78 @@
-import { Component } from '@angular/core';
-import {
-  HviHeading,
-  HviInput,
-  HviLabel,
-  HviSearch,
-  HviSearchClear,
-  HviTable,
-} from '@helsevestikt/hviktor';
+// Auto-generated - do not edit manually
+export const TableUtvidbareRaderEnkeltmodusExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HviButton, HviTable } from '@helsevestikt/hviktor';
+import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
 
 @Component({
-  selector: 'app-table-globalt-sok-example',
+  selector: 'app-table-utvidbare-rader-enkeltmodus-example',
   standalone: true,
-  imports: [HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
-  template: `
-    <h3 hviHeading size="xs" id="ansattoversikt-heading">Ansattoversikt</h3>
-    <form
-      role="search"
-      aria-labelledby="ansattoversikt-heading"
-      (submit)="$event.preventDefault()"
-      aria-controls="sok-tabell"
-    >
-      <label hviLabel for="tabell-sok">Søk i tabell</label>
-      <p class="ds-paragraph mb-2" id="tabell-sok-beskrivelse">
-        Søk etter navn, e-post eller avdeling
-      </p>
-      <hvi-search>
-        <input
-          hviInput
-          id="tabell-sok"
-          type="search"
-          aria-describedby="tabell-sok-beskrivelse"
-          (input)="searchTable.filterGlobal($any($event.target).value)"
-        />
-        <button hviSearchClear type="reset" aria-label="Tøm søk"></button>
-      </hvi-search>
-    </form>
-    <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
-      Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
-    </p>
-    <table
-      hviTable
-      id="sok-tabell"
-      [value]="data"
-      [globalFilterFields]="['navn', 'epost', 'avdeling']"
-      zebra
-      #searchTable="hviTable"
-    >
+  imports: [HviButton, HviTable],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: \`
+    <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">
       <caption>
-        Ansatte
+        Ansattoversikt – kun én rad åpen om gangen
       </caption>
       <thead>
         <tr>
+          <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
           <th scope="col">Navn</th>
-          <th scope="col">E-post</th>
           <th scope="col">Avdeling</th>
           <th scope="col">Stilling</th>
         </tr>
       </thead>
       <tbody>
-        @for (person of searchTable.filteredValue(); track person.id) {
+        @for (person of singleExpandTable.filteredValue(); track person.id) {
           <tr>
+            <td>
+              <button
+                hviButton
+                variant="tertiary"
+                (click)="singleExpandTable.toggleExpanded(person)"
+                [attr.aria-expanded]="singleExpandTable.isExpanded(person)"
+                [attr.aria-controls]="'single-detalj-' + person.id"
+                [ariaLabel]="
+                  singleExpandTable.isExpanded(person)
+                    ? 'Skjul detaljer om ' + person.navn
+                    : 'Vis detaljer om ' + person.navn
+                "
+              >
+                @if (singleExpandTable.isExpanded(person)) {
+                  <hvi-icon-chevron-down />
+                } @else {
+                  <hvi-icon-chevron-right />
+                }
+              </button>
+            </td>
             <td>{{ person.navn }}</td>
-            <td>{{ person.epost }}</td>
             <td>{{ person.avdeling }}</td>
             <td>{{ person.stilling }}</td>
           </tr>
-        } @empty {
-          <tr>
-            <td colspan="4">Ingen treff</td>
-          </tr>
+          @if (singleExpandTable.isExpanded(person)) {
+            <tr [id]="'single-detalj-' + person.id">
+              <td colspan="4">
+                <div class="flex gap-8 py-2 pl-12">
+                  <dl>
+                    <dt>E-post</dt>
+                    <dd>{{ person.epost }}</dd>
+                  </dl>
+                  <dl>
+                    <dt>Telefon</dt>
+                    <dd>{{ person.telefon }}</dd>
+                  </dl>
+                </div>
+              </td>
+            </tr>
+          }
         }
       </tbody>
     </table>
-  `,
+  \`,
 })
-export class TableGlobaltSokExampleComponent {
+export class TableUtvidbareRaderEnkeltmodusExampleComponent {
+  readonly utvidbareRaderSingleCode = '';
+  
   data = [
     {
       id: 1,
@@ -173,23 +171,5 @@ export class TableGlobaltSokExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
-  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
-  stillinger = [
-    'Utvikler',
-    'Rådgiver',
-    'Teamleder',
-    'Controller',
-    'Arkitekt',
-    'Leder',
-    'Analytiker',
-    'Tester',
-    'Direktør',
-    'Designer',
-    'Revisor',
-    'Rekrutterer',
-  ];
-
-  navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
-  avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
-  stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 }
+`;

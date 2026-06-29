@@ -19,6 +19,12 @@ export const TableExamplesManifest = [
     sourceExport: 'TableSorteringExampleSource',
   },
   {
+    slug: 'custom-sorteringsfunksjon',
+    title: 'Custom sorteringsfunksjon',
+    className: 'TableCustomSorteringsfunksjonExampleComponent',
+    sourceExport: 'TableCustomSorteringsfunksjonExampleSource',
+  },
+  {
     slug: 'globalt-sok',
     title: 'Globalt søk',
     className: 'TableGlobaltSokExampleComponent',
@@ -43,6 +49,12 @@ export const TableExamplesManifest = [
     sourceExport: 'TableUtvidbareRaderExampleSource',
   },
   {
+    slug: 'utvidbare-rader-enkeltmodus',
+    title: 'Utvidbare rader (enkeltmodus)',
+    className: 'TableUtvidbareRaderEnkeltmodusExampleComponent',
+    sourceExport: 'TableUtvidbareRaderEnkeltmodusExampleSource',
+  },
+  {
     slug: 'komplett-eksempel',
     title: 'Komplett eksempel',
     className: 'TableKomplettEksempelExampleComponent',
@@ -54,8 +66,10 @@ export type TableExampleSlug =
   | 'enkel-tabell'
   | 'zebrastriper-og-border'
   | 'sortering'
+  | 'custom-sorteringsfunksjon'
   | 'globalt-sok'
   | 'kolonnefiltrering'
   | 'paginering'
   | 'utvidbare-rader'
+  | 'utvidbare-rader-enkeltmodus'
   | 'komplett-eksempel';

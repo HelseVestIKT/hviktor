@@ -32,6 +32,7 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
     <form
       class="mb-1"
       role="search"
+      aria-label="Søk i komplett tabell"
       (submit)="$event.preventDefault()"
       aria-controls="komplett-tabell"
     >

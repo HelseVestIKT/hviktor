@@ -13,6 +13,7 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
     <form
       class="mb-1"
       role="search"
+      aria-label="Søk i komplett tabell"
       (submit)="$event.preventDefault()"
       aria-controls="komplett-tabell"
     >
@@ -292,7 +293,7 @@ export class TableKomplettEksempelExampleComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
   
   rowsPerPage = signal(5);
-  
+
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading} (synkende)\`;
