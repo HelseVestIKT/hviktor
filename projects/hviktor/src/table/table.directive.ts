@@ -194,14 +194,20 @@ export class HviTable<T = unknown> {
   private _pageSize = signal(10);
   private _pageIndex = signal(0);
   private _expanded = signal<ExpandedState>({});
-  private _customSortFns = signal<Record<string, SortingFn<T>>>({});
+  private _customSortFnRegistry: Record<string, SortingFn<T>> = {};
 
-  /** Norsk sorteringsfunksjon med localeCompare('nb') */
+  /**
+   * Sorteringsfunksjon som sjekker custom registry, deretter faller tilbake til norsk sortering.
+   * Samme referanse hele tiden — uavhengig av TanStack sin kolonne-memoization.
+   */
   private norwegianSortFn: SortingFn<T> = (
     rowA: Row<T>,
     rowB: Row<T>,
     columnId: string,
   ): number => {
+    const customFn = this._customSortFnRegistry[columnId];
+    if (customFn) return customFn(rowA, rowB, columnId);
+
     const a = rowA.getValue(columnId);
     const b = rowB.getValue(columnId);
     if (a == null && b == null) return 0;
@@ -243,13 +249,12 @@ export class HviTable<T = unknown> {
     const fields = this._fields();
     const globalFields = this._globalFilterFields();
     const hasGlobalFields = globalFields.length > 0;
-    const customSortFns = this._customSortFns();
 
     return fields.map((field) => ({
       id: field,
       accessorFn: (row: T) => this.getFieldValue(row, field),
       enableGlobalFilter: !hasGlobalFields || globalFields.includes(field),
-      sortingFn: customSortFns[field] ?? this.norwegianSortFn,
+      sortingFn: this.norwegianSortFn,
       filterFn: this.multiValueFilterFn,
     }));
   });
@@ -578,14 +583,10 @@ export class HviTable<T = unknown> {
 
   /** Registrer (eller fjern) en custom sorteringsfunksjon for et felt. Kalles av HviSortableColumn. */
   setSortFn(field: string, fn: SortingFn<T> | undefined): void {
-    this._customSortFns.update((prev) => {
-      const next = { ...prev };
-      if (fn) {
-        next[field] = fn;
-      } else {
-        delete next[field];
-      }
-      return next;
-    });
+    if (fn) {
+      this._customSortFnRegistry[field] = fn;
+    } else {
+      delete this._customSortFnRegistry[field];
+    }
   }
 }

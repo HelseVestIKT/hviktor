@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { SortingFn } from '@tanstack/angular-table';
 import { setupTestBed } from '../testing/test-utils';
 import { HviSortableColumn } from './table-sort.directive';
 import { HviTable } from './table.directive';
@@ -183,6 +184,57 @@ class CustomRowIdTableComponent {
     { navn: 'Kari', epost: 'kari@test.no', avdeling: 'HR' },
   ];
   rowIdFn = (item: Omit<Person, 'id'>) => item.epost;
+}
+
+interface Sensor {
+  id: number;
+  namn: string;
+  status: string;
+}
+
+const SENSOR_DATA: Sensor[] = [
+  { id: 1, namn: 'Sensor A', status: 'Aktivt varsel' },
+  { id: 2, namn: 'Sensor B', status: 'Normal' },
+  { id: 3, namn: 'Sensor C', status: 'Varsling aktivert' },
+  { id: 4, namn: 'Sensor D', status: 'Aktivt varsel' },
+  { id: 5, namn: 'Sensor E', status: 'Normal' },
+];
+
+const prioritetSort: SortingFn<unknown> = (radA, radB, columnId) => {
+  const rang = (val: unknown): number => {
+    if (val === 'Aktivt varsel') return 0;
+    if (val === 'Varsling aktivert') return 1;
+    return 2;
+  };
+  return rang(radA.getValue(columnId)) - rang(radB.getValue(columnId));
+};
+
+@Component({
+  standalone: true,
+  imports: [HviTable, HviSortableColumn],
+  template: `
+    <table hviTable [value]="data" #t="hviTable">
+      <thead>
+        <tr>
+          <th hviSortableColumn="namn"><button type="button">Namn</button></th>
+          <th hviSortableColumn="status" [sortFn]="customSort">
+            <button type="button">Status</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (sensor of t.filteredValue(); track sensor.id) {
+          <tr>
+            <td>{{ sensor.status }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  `,
+})
+class CustomSortTableComponent {
+  data = SENSOR_DATA;
+  customSort = prioritetSort;
 }
 
 // ========== Tests ==========
@@ -668,5 +720,65 @@ describe('HviTable clear/reset', () => {
     expect(table.currentGlobalFilter()).toBe('');
     expect(table.currentPage()).toBe(1);
     expect(table.isExpanded(TEST_DATA[0])).toBe(false);
+  });
+});
+
+describe('HviTable custom sortFn', () => {
+  let fixture: ComponentFixture<CustomSortTableComponent>;
+  let table: HviTable<Sensor>;
+
+  beforeEach(async () => {
+    await setupTestBed({ imports: [CustomSortTableComponent] });
+    fixture = TestBed.createComponent(CustomSortTableComponent);
+    fixture.detectChanges();
+    table = fixture.debugElement.children[0].injector.get(HviTable<Sensor>);
+  });
+
+  it('should sort with custom function when sortFn is provided', () => {
+    // Sort ascending
+    table.sort('status');
+    fixture.detectChanges();
+
+    const sorted = table.filteredValue();
+    const statuses = sorted.map((s) => s.status);
+
+    // Custom sort: Aktivt varsel (0) → Varsling aktivert (1) → Normal (2)
+    expect(statuses).toEqual([
+      'Aktivt varsel',
+      'Aktivt varsel',
+      'Varsling aktivert',
+      'Normal',
+      'Normal',
+    ]);
+  });
+
+  it('should reverse custom sort when descending', () => {
+    // Sort ascending then descending
+    table.sort('status');
+    table.sort('status');
+    fixture.detectChanges();
+
+    const sorted = table.filteredValue();
+    const statuses = sorted.map((s) => s.status);
+
+    // Reversed: Normal (2) → Varsling aktivert (1) → Aktivt varsel (0)
+    expect(statuses).toEqual([
+      'Normal',
+      'Normal',
+      'Varsling aktivert',
+      'Aktivt varsel',
+      'Aktivt varsel',
+    ]);
+  });
+
+  it('should use normal sort for columns without custom sortFn', () => {
+    table.sort('namn');
+    fixture.detectChanges();
+
+    const sorted = table.filteredValue();
+    const names = sorted.map((s) => s.namn);
+
+    // Normal Norwegian locale sort
+    expect(names).toEqual(['Sensor A', 'Sensor B', 'Sensor C', 'Sensor D', 'Sensor E']);
   });
 });
