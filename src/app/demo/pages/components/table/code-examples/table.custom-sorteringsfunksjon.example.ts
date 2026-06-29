@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
-import { Row, RowData } from '@tanstack/table-core';
-
-export interface SortingFn<TData extends RowData> {
-  (rowA: Row<TData>, rowB: Row<TData>, columnId: string): number;
-}
+import { HviSortableColumn, HviTable, type SortingFn } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-table-custom-sorteringsfunksjon-example',
