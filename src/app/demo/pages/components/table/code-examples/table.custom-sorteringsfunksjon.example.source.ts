@@ -1,10 +1,6 @@
 // Auto-generated - do not edit manually
-export const TableCustomSorteringsfunksjonExampleSource = `import { Component, signal } from '@angular/core';
-import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
-
-export interface SortingFn<TData extends RowData> {
-  (rowA: Row<TData>, rowB: Row<TData>, columnId: string): number;
-}
+export const TableCustomSorteringsfunksjonExampleSource = `import { Component } from '@angular/core';
+import { HviSortableColumn, HviTable, type SortingFn } from '@helsevestikt/hviktor';
 
 @Component({
   selector: 'app-table-custom-sorteringsfunksjon-example',
