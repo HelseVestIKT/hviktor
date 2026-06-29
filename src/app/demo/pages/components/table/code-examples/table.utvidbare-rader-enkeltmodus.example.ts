@@ -70,8 +70,6 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
   `,
 })
 export class TableUtvidbareRaderEnkeltmodusExampleComponent {
-  readonly utvidbareRaderSingleCode = '';
-
   data = [
     {
       id: 1,
