@@ -1,4 +1,5 @@
-import { Directive, inject, Input } from '@angular/core';
+import { Directive, inject, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import type { SortingFn } from '@tanstack/angular-table';
 import { HviTable, type SortDirection } from './table.directive';
 
 /**
@@ -15,14 +16,16 @@ import { HviTable, type SortDirection } from './table.directive';
  *       <th hviSortableColumn="navn">
  *         <button type="button">Navn</button>
  *       </th>
- *       <th>Epost</th>
+ *       <th hviSortableColumn="prioritet" [sortFn]="prioritetSort">
+ *         <button type="button">Prioritet</button>
+ *       </th>
  *     </tr>
  *   </thead>
  *   <tbody>
  *     @for (person of table.filteredValue(); track person.id) {
  *       <tr>
  *         <td>{{ person.navn }}</td>
- *         <td>{{ person.epost }}</td>
+ *         <td>{{ person.prioritet }}</td>
  *       </tr>
  *     }
  *   </tbody>
@@ -39,7 +42,7 @@ import { HviTable, type SortDirection } from './table.directive';
     '(click)': 'onClick($event)',
   },
 })
-export class HviSortableColumn {
+export class HviSortableColumn implements OnChanges, OnDestroy {
   private table = inject(HviTable, { optional: true });
 
   /**
@@ -47,6 +50,27 @@ export class HviSortableColumn {
    * Må matche property-navn i data-objektene.
    */
   @Input({ required: true, alias: 'hviSortableColumn' }) field!: string;
+
+  /**
+   * Valgfri custom komparator for sortering.
+   * Settes uten desc-håndtering – TanStack reverserer selv ved synkende.
+   */
+  @Input() sortFn?: SortingFn<unknown>;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['field'] || changes['sortFn']) {
+      // Fjern gammel registrering ved feltendring
+      const prevField = changes['field']?.previousValue;
+      if (prevField && prevField !== this.field) {
+        this.table?.setSortFn(prevField, undefined);
+      }
+      this.table?.setSortFn(this.field, this.sortFn as SortingFn<unknown> | undefined);
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.table?.setSortFn(this.field, undefined);
+  }
 
   /** Henter sorteringsretning fra parent table */
   get sortDirection(): SortDirection {
