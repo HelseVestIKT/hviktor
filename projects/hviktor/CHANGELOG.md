@@ -4,6 +4,20 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.3.0] – 2026-06-29
+
+### Added
+
+- Lagt til aria-label på tabs.
+- Lagt til støtte for custom sorting på tabell-kolonner.
+- Lagt til støtte for single-mode i radutvidelse på Table.
+
+### Changed
+
+- Diverse UU-forbedringer i Table.
+- Lagt til block-luft på Search-komponenten.
+- Oppdatert `@digdir/designsystemet-css` og `@digdir/designsystemet-web` til 1.18.0.
+
 ## [0.2.2] – 2026-06-18
 
 ### Fixed
