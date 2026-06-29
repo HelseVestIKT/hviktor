@@ -726,9 +726,6 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
   `,
 })
 export class TableDemoComponent {
-  readonly customSorteringsfunksjonCode = TableCustomSorteringsfunksjonExampleSource;
-  readonly utvidbareRaderEnkeltmodusCode = TableUtvidbareRaderEnkeltmodusExampleSource;
-
   readonly enkelTabellCode = TableEnkelTabellExampleSource;
   readonly zebrastriperOgBorderCode = TableZebrastriperOgBorderExampleSource;
   readonly sorteringCode = TableSorteringExampleSource;
