@@ -49,6 +49,7 @@ import { Component } from '@angular/core';
   selector: 'hvi-search',
   standalone: true,
   template: '<ng-content />',
+  styles: [':host { display: grid; margin-block: var(--ds-size-1); }'],
   host: {
     class: 'ds-search',
   },
