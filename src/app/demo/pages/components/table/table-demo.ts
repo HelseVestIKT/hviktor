@@ -17,17 +17,17 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
 
+import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
 import { TableEnkelTabellExampleSource } from './code-examples/table.enkel-tabell.example.source';
 import { TableGlobaltSokExampleSource } from './code-examples/table.globalt-sok.example.source';
 import { TableKolonnefiltreringExampleSource } from './code-examples/table.kolonnefiltrering.example.source';
 import { TableKomplettEksempelExampleSource } from './code-examples/table.komplett-eksempel.example.source';
 import { TablePagineringExampleSource } from './code-examples/table.paginering.example.source';
 import { TableSorteringExampleSource } from './code-examples/table.sortering.example.source';
+import { TableUtvidbareRaderEnkeltmodusExampleSource } from './code-examples/table.utvidbare-rader-enkeltmodus.example.source';
 import { TableUtvidbareRaderExampleSource } from './code-examples/table.utvidbare-rader.example.source';
 import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.zebrastriper-og-border.example.source';
 
-import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
-import { TableUtvidbareRaderEnkeltmodusExampleSource } from './code-examples/table.utvidbare-rader-enkeltmodus.example.source';
 @Component({
   selector: 'app-table-demo',
   standalone: true,
@@ -732,12 +732,12 @@ export class TableDemoComponent {
   readonly enkelTabellCode = TableEnkelTabellExampleSource;
   readonly zebrastriperOgBorderCode = TableZebrastriperOgBorderExampleSource;
   readonly sorteringCode = TableSorteringExampleSource;
-  readonly customSorteringCode = '';
+  readonly customSorteringCode = TableCustomSorteringsfunksjonExampleSource;
   readonly globaltSokCode = TableGlobaltSokExampleSource;
   readonly kolonnefiltreringCode = TableKolonnefiltreringExampleSource;
   readonly pagineringCode = TablePagineringExampleSource;
   readonly utvidbareRaderCode = TableUtvidbareRaderExampleSource;
-  readonly utvidbareRaderSingleCode = '';
+  readonly utvidbareRaderSingleCode = TableUtvidbareRaderEnkeltmodusExampleSource;
   readonly komplettEksempelCode = TableKomplettEksempelExampleSource;
 
   data = [
