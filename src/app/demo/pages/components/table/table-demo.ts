@@ -26,6 +26,8 @@ import { TableSorteringExampleSource } from './code-examples/table.sortering.exa
 import { TableUtvidbareRaderExampleSource } from './code-examples/table.utvidbare-rader.example.source';
 import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.zebrastriper-og-border.example.source';
 
+import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
+import { TableUtvidbareRaderEnkeltmodusExampleSource } from './code-examples/table.utvidbare-rader-enkeltmodus.example.source';
 @Component({
   selector: 'app-table-demo',
   standalone: true,
@@ -724,6 +726,9 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
   `,
 })
 export class TableDemoComponent {
+  readonly customSorteringsfunksjonCode = TableCustomSorteringsfunksjonExampleSource;
+  readonly utvidbareRaderEnkeltmodusCode = TableUtvidbareRaderEnkeltmodusExampleSource;
+
   readonly enkelTabellCode = TableEnkelTabellExampleSource;
   readonly zebrastriperOgBorderCode = TableZebrastriperOgBorderExampleSource;
   readonly sorteringCode = TableSorteringExampleSource;

@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor';
 
 @Component({
@@ -201,13 +201,4 @@ export class TableKolonnefiltreringExampleComponent {
   navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
   avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
-
-  rowsPerPage = signal(5);
-
-  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
-    const dir = table.getSortDirection(field);
-    if (dir === 'ascending') return `Sorter etter ${heading} (synkende)`;
-    if (dir === 'descending') return `Fjern sortering for ${heading}`;
-    return `Sorter etter ${heading} (stigende)`;
-  }
 }

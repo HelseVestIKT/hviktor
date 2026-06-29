@@ -71,6 +71,8 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
   \`,
 })
 export class TableUtvidbareRaderExampleComponent {
+  readonly utvidbareRaderSingleCode = '';
+  
   data = [
     {
       id: 1,
@@ -169,33 +171,5 @@ export class TableUtvidbareRaderExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
-  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
-  stillinger = [
-    'Utvikler',
-    'Rådgiver',
-    'Teamleder',
-    'Controller',
-    'Arkitekt',
-    'Leder',
-    'Analytiker',
-    'Tester',
-    'Direktør',
-    'Designer',
-    'Revisor',
-    'Rekrutterer',
-  ];
-  
-  navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
-  avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
-  stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
-  
-  rowsPerPage = signal(5);
-  
-  getSortLabel(table: HviTable<any>, field: string, heading: string): string {
-    const dir = table.getSortDirection(field);
-    if (dir === 'ascending') return \`Sorter etter \${heading} (synkende)\`;
-    if (dir === 'descending') return \`Fjern sortering for \${heading}\`;
-    return \`Sorter etter \${heading} (stigende)\`;
-  }
 }
 `;
