@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviSpinner } from '@helsevestikt/hviktor';
+import { HviSpinner } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-spinner-storrelser-example',

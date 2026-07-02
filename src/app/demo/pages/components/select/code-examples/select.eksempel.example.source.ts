@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SelectEksempelExampleSource = `import { Component } from '@angular/core';
-import { HviLabel, HviSelect } from '@helsevestikt/hviktor';
+import { HviLabel, HviSelect } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-select-eksempel-example',

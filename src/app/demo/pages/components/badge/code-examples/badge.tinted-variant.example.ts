@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviBadge } from '@helsevestikt/hviktor';
+import { HviBadge } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-badge-tinted-variant-example',

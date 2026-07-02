@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviField, HviLabel, HviSelect } from '@helsevestikt/hviktor';
+import { HviField, HviLabel, HviSelect } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-select-eksempel-example',

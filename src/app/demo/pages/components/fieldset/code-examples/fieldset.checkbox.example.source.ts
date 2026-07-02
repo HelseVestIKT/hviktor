@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FieldsetCheckboxExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-fieldset-checkbox-example',

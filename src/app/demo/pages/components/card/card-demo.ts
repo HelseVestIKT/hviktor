@@ -7,7 +7,7 @@ import {
   HviHeading,
   HviLink,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { CardCardSomErEnKnappExampleSource } from './code-examples/card.card-som-er-en-knapp.example.source';

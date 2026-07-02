@@ -1,5 +1,10 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
-import { HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip } from '@helsevestikt/hviktor';
+import {
+  HviLabel,
+  HviToggleGroup,
+  HviToggleGroupItem,
+  HviTooltip,
+} from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-align-center.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-align-left.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';

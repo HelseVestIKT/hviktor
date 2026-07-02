@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviParagraph, HviSkipLink } from '@helsevestikt/hviktor';
+import { HviParagraph, HviSkipLink } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SkipLinkEksempelExampleSource } from './code-examples/skip-link.eksempel.example.source';

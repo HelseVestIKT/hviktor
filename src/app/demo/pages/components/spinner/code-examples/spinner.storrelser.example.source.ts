@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SpinnerStorrelserExampleSource = `import { Component } from '@angular/core';
-import { HviSpinner } from '@helsevestikt/hviktor';
+import { HviSpinner } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-spinner-storrelser-example',

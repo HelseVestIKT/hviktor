@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviAvatar, HviAvatarStack } from '@helsevestikt/hviktor';
+import { HviAvatar, HviAvatarStack } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-avatar-stack-expandable-example',

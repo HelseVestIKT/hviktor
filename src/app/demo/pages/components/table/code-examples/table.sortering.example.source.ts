@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TableSorteringExampleSource = `import { Component, signal } from '@angular/core';
-import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-sortering-example',

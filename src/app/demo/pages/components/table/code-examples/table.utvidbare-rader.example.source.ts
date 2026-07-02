@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TableUtvidbareRaderExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HviButton, HviTable } from '@helsevestikt/hviktor';
+import { HviButton, HviTable } from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
 

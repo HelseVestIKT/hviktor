@@ -6,7 +6,7 @@ import {
   HviToggleGroup,
   HviToggleGroupItem,
   LogoSize,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { LogoVarianterExampleSource } from './code-examples/logo.varianter.example.source';

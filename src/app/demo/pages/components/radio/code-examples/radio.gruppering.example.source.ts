@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const RadioGrupperingExampleSource = `import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-radio-gruppering-example',

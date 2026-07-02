@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const FormsAlleFeltErObligatoriskeExampleSource = `import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HviButton, HviForms, HviHeading, HviRequiredTag, HviTextfield, HviValidationMessages } from '@helsevestikt/hviktor';
+import { HviButton, HviForms, HviHeading, HviRequiredTag, HviTextfield, HviValidationMessages } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-alle-felt-er-obligatoriske-example',

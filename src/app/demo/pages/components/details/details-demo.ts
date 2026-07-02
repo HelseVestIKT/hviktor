@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviCard, HviDetails, HviLink, HviParagraph } from '@helsevestikt/hviktor';
+import { HviCard, HviDetails, HviLink, HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { DetailsIKortExampleSource } from './code-examples/details.i-kort.example.source';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor';
+import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SkeletonArtikkelSkeletonExampleSource } from './code-examples/skeleton.artikkel-skeleton.example.source';

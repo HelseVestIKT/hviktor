@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviTag } from '@helsevestikt/hviktor';
+import { HviTag } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { TagFargerExampleSource } from './code-examples/tag.farger.example.source';

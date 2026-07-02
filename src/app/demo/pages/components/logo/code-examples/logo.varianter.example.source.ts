@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const LogoVarianterExampleSource = `import { Component, signal } from '@angular/core';
 import type { LogoSize } from '@helsevestikt/hviktor-angular';
-import { HviHeading, HviLogo, HviParagraph } from '@helsevestikt/hviktor';
+import { HviHeading, HviLogo, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-logo-varianter-example',

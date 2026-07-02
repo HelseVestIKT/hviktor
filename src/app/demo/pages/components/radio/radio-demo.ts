@@ -9,7 +9,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { RadioGrupperingExampleSource } from './code-examples/radio.gruppering.example.source';

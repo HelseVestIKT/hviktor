@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const BadgeMedPosisjoneringExampleSource = `import { Component } from '@angular/core';
-import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor';
+import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-badge-med-posisjonering-example',

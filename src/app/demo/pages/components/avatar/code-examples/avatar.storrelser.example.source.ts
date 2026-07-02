@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const AvatarStorrelserExampleSource = `import { Component } from '@angular/core';
-import { HviAvatar } from '@helsevestikt/hviktor';
+import { HviAvatar } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-avatar-storrelser-example',

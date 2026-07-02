@@ -12,7 +12,7 @@ import {
   HviTextfield,
   HviValidationKit,
   HviValidationMessages,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { FormsAlleFeltErObligatoriskeExampleSource } from './code-examples/forms.alle-felt-er-obligatoriske.example.source';

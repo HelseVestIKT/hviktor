@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HviErrorSummary, HviValidationMessages } from '@helsevestikt/hviktor';
+import { HviErrorSummary, HviValidationMessages } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-error-summary-manuell-modus-example',

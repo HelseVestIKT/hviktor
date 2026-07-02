@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviDivider, HviParagraph } from '@helsevestikt/hviktor';
+import { HviDivider, HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { DividerStandardExampleSource } from './code-examples/divider.standard.example.source';

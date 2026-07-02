@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { HviField, HviFieldDescription, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldDescription, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-enkel-checkbox-example',

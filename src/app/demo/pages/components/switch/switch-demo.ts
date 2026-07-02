@@ -6,7 +6,7 @@ import {
   HviFieldset,
   HviInput,
   HviLabel,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SwitchGrunnleggendeExampleSource } from './code-examples/switch.grunnleggende.example.source';

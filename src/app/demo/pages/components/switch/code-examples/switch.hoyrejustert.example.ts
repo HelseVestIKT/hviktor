@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviDivider, HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviDivider, HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-switch-hoyrejustert-example',

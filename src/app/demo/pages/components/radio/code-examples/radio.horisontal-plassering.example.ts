@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import {
+  HviField,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-radio-horisontal-plassering-example',

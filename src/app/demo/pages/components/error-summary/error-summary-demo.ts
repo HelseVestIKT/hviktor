@@ -11,7 +11,7 @@ import {
   HviLabel,
   HviValidationMessage,
   HviValidationMessages,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ErrorSummaryBrukISkjemaExampleSource } from './code-examples/error-summary.bruk-i-skjema.example.source';

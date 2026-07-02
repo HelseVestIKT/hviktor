@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const CardStandardExampleSource = `import { Component } from '@angular/core';
-import { HviCard, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviCard, HviHeading, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-standard-example',

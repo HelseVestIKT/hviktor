@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SuggestionStandardSuggestionExampleSource = `import { Component } from '@angular/core';
-import { HviInput, HviLabel, HviSuggestion, HviSuggestionDatalist, HviSuggestionOption } from '@helsevestikt/hviktor';
+import { HviInput, HviLabel, HviSuggestion, HviSuggestionDatalist, HviSuggestionOption } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-suggestion-standard-suggestion-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor';
+import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dropdown-standard-example',

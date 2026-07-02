@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TableGlobaltSokExampleSource = `import { Component, signal } from '@angular/core';
-import { HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsevestikt/hviktor';
+import { HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-globalt-sok-example',

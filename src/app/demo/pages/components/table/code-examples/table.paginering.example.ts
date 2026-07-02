@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-paginering-example',

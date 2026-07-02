@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TablePagineringExampleSource = `import { Component, signal } from '@angular/core';
-import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-paginering-example',

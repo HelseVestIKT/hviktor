@@ -7,7 +7,7 @@ import {
   HviSuggestion,
   HviSuggestionDatalist,
   HviSuggestionOption,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SuggestionFlervalgExampleSource } from './code-examples/suggestion.flervalg.example.source';

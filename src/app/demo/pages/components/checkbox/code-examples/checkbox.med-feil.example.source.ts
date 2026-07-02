@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const CheckboxMedFeilExampleSource = `import { Component } from '@angular/core';
 import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-med-feil-example',

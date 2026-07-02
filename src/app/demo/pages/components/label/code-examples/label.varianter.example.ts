@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviLabel } from '@helsevestikt/hviktor';
+import { HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-label-varianter-example',

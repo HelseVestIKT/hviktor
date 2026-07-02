@@ -1,6 +1,6 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HviLogo, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviLogo, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-moon-fill.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-sun-fill.webcomponent';
 import { DEMO_COMPONENTS } from '../demo-components';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-switch-gruppering-example',

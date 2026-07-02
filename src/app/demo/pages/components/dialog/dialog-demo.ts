@@ -9,7 +9,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { DialogDialogSomDrawerExampleSource } from './code-examples/dialog.dialog-som-drawer.example.source';

@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import {
+  HviField,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-fieldset-radio-gruppe-example',

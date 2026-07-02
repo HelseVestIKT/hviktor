@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-input-ulike-typer-example',

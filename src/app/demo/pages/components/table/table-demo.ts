@@ -11,7 +11,7 @@ import {
   HviSortableColumn,
   HviTable,
   type SortingFn,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';

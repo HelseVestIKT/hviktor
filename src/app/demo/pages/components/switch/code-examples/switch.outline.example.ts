@@ -5,7 +5,7 @@ import {
   HviFieldset,
   HviInput,
   HviLabel,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-switch-outline-example',

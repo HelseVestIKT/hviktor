@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FieldsetLegendSomHeadingExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldset, HviHeading, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldset, HviHeading, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-fieldset-legend-som-heading-example',

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TooltipIkonKnappMedTooltipExampleSource = `import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HviButton, HviTooltip } from '@helsevestikt/hviktor';
+import { HviButton, HviTooltip } from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
 
 

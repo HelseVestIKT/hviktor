@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupGrunnleggendeExampleSource = `import { Component, signal } from '@angular/core';
-import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-toggle-group-grunnleggende-example',

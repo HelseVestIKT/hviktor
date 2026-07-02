@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const FormsObligatoriskeOgValgfrieFeltExampleSource = `import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HviButton, HviForms, HviHeading, HviTextfield } from '@helsevestikt/hviktor';
+import { HviButton, HviForms, HviHeading, HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-obligatoriske-og-valgfrie-felt-example',

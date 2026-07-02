@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helsevestikt/hviktor';
+import {
+  HviCard,
+  HviCardBlock,
+  HviHeading,
+  HviLink,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 import { DEMO_COMPONENTS } from '../../demo-components';
 
 @Component({

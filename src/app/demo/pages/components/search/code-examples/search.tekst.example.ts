@@ -1,5 +1,11 @@
 import { Component, computed, signal } from '@angular/core';
-import { HviButton, HviInput, HviLabel, HviSearch, HviSearchClear } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviInput,
+  HviLabel,
+  HviSearch,
+  HviSearchClear,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-search-tekst-example',

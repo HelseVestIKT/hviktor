@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviFieldKit, HviForms, HviLabel, HviSelect } from '@helsevestikt/hviktor';
+import { HviFieldKit, HviForms, HviLabel, HviSelect } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SelectEksempelExampleSource } from './code-examples/select.eksempel.example.source';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviBreadcrumbs, HviLink } from '@helsevestikt/hviktor';
+import { HviBreadcrumbs, HviLink } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { BreadcrumbsStandardExampleSource } from './code-examples/breadcrumbs.standard.example.source';

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SkeletonVarianterExampleSource = `import { Component } from '@angular/core';
-import { HviSkeleton } from '@helsevestikt/hviktor';
+import { HviSkeleton } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-skeleton-varianter-example',

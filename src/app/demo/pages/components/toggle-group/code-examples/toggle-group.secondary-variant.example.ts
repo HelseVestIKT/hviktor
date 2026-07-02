@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviLabel, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviLabel, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-toggle-group-secondary-variant-example',

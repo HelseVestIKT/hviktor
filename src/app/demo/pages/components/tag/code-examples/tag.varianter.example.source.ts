@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TagVarianterExampleSource = `import { Component } from '@angular/core';
-import { HviTag } from '@helsevestikt/hviktor';
+import { HviTag } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-tag-varianter-example',

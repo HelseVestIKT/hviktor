@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FieldGrunnleggendeExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-field-grunnleggende-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviList } from '@helsevestikt/hviktor';
+import { HviList } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ListNummerertListeExampleSource } from './code-examples/list.nummerert-liste.example.source';

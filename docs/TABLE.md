@@ -137,7 +137,7 @@ Sorteringssyklus ved klikk: **ingen → stigende → synkende → ingen**.
 Standard sorterer tekst med norsk locale (`localeCompare('nb')`), tall numerisk, og datoer kronologisk. For avanserte behov kan du gi en kolonne en egen komparator via `[sortFn]`.
 
 ```ts
-import type { SortingFn } from '@helsevestikt/hviktor';
+import type { SortingFn } from '@helsevestikt/hviktor-angular';
 
 // Prioritet: aktivt varsel (0) → varsling aktivert (1) → resten (2)
 prioritetSort: SortingFn<unknown> = (radA, radB, columnId) => {
@@ -276,7 +276,7 @@ import {
   type SortDirection,
   type TableSortEvent,
   type TablePageEvent,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   imports: [HviTable, HviSortableColumn],

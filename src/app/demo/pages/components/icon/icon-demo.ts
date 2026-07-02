@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HviButton, HviCard, HviLink, HviParagraph } from '@helsevestikt/hviktor';
+import { HviButton, HviCard, HviLink, HviParagraph } from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-arrow-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-arrow-left.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-arrow-right.webcomponent';

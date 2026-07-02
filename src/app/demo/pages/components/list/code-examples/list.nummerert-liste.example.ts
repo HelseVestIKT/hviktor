@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviList } from '@helsevestikt/hviktor';
+import { HviList } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-list-nummerert-liste-example',

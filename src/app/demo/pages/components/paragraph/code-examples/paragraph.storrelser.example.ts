@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviParagraph } from '@helsevestikt/hviktor';
+import { HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-paragraph-storrelser-example',

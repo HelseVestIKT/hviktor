@@ -9,7 +9,7 @@ import {
   HviSearchClear,
   HviSortableColumn,
   HviTable,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
 

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const DetailsIKortExampleSource = `import { Component } from '@angular/core';
-import { HviCard, HviDetails, HviParagraph, HviLink } from '@helsevestikt/hviktor';
+import { HviCard, HviDetails, HviParagraph, HviLink } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-details-i-kort-example',

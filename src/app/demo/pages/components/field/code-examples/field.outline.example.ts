@@ -6,7 +6,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-field-outline-example',

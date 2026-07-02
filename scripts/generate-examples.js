@@ -410,7 +410,9 @@ function generateExampleComponent(
   }
 
   if (requiredHviImports.length > 0) {
-    importLines.push(`import { ${requiredHviImports.join(', ')} } from '@helsevestikt/hviktor';`);
+    importLines.push(
+      `import { ${requiredHviImports.join(', ')} } from '@helsevestikt/hviktor-angular';`,
+    );
   }
 
   // Build imports array for @Component (HVI components/directives/kits + forms modules)

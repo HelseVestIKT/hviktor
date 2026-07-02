@@ -9,7 +9,7 @@ import {
   HviList,
   HviSearch,
   HviSearchClear,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SearchGrunnleggendeExampleSource } from './code-examples/search.grunnleggende.example.source';

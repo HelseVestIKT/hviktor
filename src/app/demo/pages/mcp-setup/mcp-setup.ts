@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviHeading, HviLink, HviParagraph, HviTag } from '@helsevestikt/hviktor';
+import { HviHeading, HviLink, HviParagraph, HviTag } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-mcp-setup',

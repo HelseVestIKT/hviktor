@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviHeading } from '@helsevestikt/hviktor';
+import { HviHeading } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { HeadingStorrelserExampleSource } from './code-examples/heading.storrelser.example.source';

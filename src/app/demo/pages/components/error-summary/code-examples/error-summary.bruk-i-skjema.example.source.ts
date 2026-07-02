@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const ErrorSummaryBrukISkjemaExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValidation, HviInput, HviLabel, HviValidationMessage } from '@helsevestikt/hviktor';
+import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValidation, HviInput, HviLabel, HviValidationMessage } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-error-summary-bruk-i-skjema-example',

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviPagination } from '@helsevestikt/hviktor';
+import { HviPagination } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { PaginationFaElementerExampleSource } from './code-examples/pagination.fa-elementer.example.source';

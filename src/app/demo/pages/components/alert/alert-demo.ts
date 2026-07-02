@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviAlert, HviParagraph } from '@helsevestikt/hviktor';
+import { HviAlert, HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 import { AlertMedTittelExampleSource } from './code-examples/alert.med-tittel.example.source';
 import { AlertUtenTittelExampleSource } from './code-examples/alert.uten-tittel.example.source';

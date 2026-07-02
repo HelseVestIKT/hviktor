@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const PaginationMangeSiderExampleSource = `import { Component, signal } from '@angular/core';
-import { HviPagination } from '@helsevestikt/hviktor';
+import { HviPagination } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-pagination-mange-sider-example',

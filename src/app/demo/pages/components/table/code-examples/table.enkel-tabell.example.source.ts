@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TableEnkelTabellExampleSource = `import { Component, signal } from '@angular/core';
-import { HviTable } from '@helsevestikt/hviktor';
+import { HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-enkel-tabell-example',

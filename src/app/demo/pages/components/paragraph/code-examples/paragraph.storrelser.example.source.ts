@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const ParagraphStorrelserExampleSource = `import { Component } from '@angular/core';
-import { HviParagraph } from '@helsevestikt/hviktor';
+import { HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-paragraph-storrelser-example',

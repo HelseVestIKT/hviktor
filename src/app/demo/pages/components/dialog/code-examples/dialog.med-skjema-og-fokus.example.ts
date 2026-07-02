@@ -7,7 +7,7 @@ import {
   HviFieldAffixes,
   HviInput,
   HviLabel,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-med-skjema-og-fokus-example',

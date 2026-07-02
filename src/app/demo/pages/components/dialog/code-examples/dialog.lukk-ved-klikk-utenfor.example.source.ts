@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const DialogLukkVedKlikkUtenforExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestikt/hviktor';
+import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-lukk-ved-klikk-utenfor-example',

@@ -13,7 +13,7 @@ import {
   HviLogo,
   HviParagraph,
   HviTag,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
 import { DemoSectionComponent } from './demo-section';
 

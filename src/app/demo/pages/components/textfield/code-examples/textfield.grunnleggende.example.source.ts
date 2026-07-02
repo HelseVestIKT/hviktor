@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TextfieldGrunnleggendeExampleSource = `import { Component } from '@angular/core';
-import { HviTextfield } from '@helsevestikt/hviktor';
+import { HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-textfield-grunnleggende-example',

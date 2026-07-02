@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HviField, HviLabel, HviSelect, HviTextfield } from '@helsevestikt/hviktor';
+import { HviField, HviLabel, HviSelect, HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-textfield-type-example',

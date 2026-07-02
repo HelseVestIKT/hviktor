@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor';
+import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-kolonnefiltrering-example',

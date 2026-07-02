@@ -7,7 +7,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-outline-example',

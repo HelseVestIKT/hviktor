@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hviktor';
+import { HviButton, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-search-grunnleggende-example',

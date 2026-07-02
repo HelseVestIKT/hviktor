@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviLink, HviParagraph, HviRequiredTag } from '@helsevestikt/hviktor';
+import { HviLink, HviParagraph, HviRequiredTag } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { RequiredTagModesExampleSource } from './code-examples/required-tag.modes.example.source';

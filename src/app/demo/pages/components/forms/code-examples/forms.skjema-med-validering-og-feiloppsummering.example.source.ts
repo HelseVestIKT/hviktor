@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const FormsSkjemaMedValideringOgFeiloppsummeringExampleSource = `import { Component, signal } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HviButton, HviFieldKit, HviForms, HviHeading, HviLabel, HviRequiredTag, HviSelect, HviValidationKit, HviValidationMessages } from '@helsevestikt/hviktor';
+import { HviButton, HviFieldKit, HviForms, HviHeading, HviLabel, HviRequiredTag, HviSelect, HviValidationKit, HviValidationMessages } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-skjema-med-validering-og-feiloppsummering-example',

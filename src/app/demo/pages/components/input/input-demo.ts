@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { InputDisabledExampleSource } from './code-examples/input.disabled.example.source';

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TableKolonnefiltreringExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor';
+import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-kolonnefiltrering-example',

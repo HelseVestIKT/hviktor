@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviTable } from '@helsevestikt/hviktor';
+import { HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-zebrastriper-og-border-example',

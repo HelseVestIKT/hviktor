@@ -8,7 +8,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-radio-med-feil-example',

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TextareaMedTegntellerExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-textarea-med-tegnteller-example',

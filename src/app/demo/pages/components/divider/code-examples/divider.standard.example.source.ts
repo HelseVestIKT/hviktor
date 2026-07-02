@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const DividerStandardExampleSource = `import { Component } from '@angular/core';
-import { HviDivider, HviParagraph } from '@helsevestikt/hviktor';
+import { HviDivider, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-divider-standard-example',

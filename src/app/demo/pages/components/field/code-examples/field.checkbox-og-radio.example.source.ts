@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FieldCheckboxOgRadioExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-field-checkbox-og-radio-example',

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviHeading, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviHeading, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-toggle-group-storrelse-example',

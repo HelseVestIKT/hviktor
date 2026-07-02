@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FieldPrefixSuffixExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldAffix, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-field-prefix-suffix-example',

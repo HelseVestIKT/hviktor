@@ -10,7 +10,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { FieldAntallTegnExampleSource } from './code-examples/field.antall-tegn.example.source';

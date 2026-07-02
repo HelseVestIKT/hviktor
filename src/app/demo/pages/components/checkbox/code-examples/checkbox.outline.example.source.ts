@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const CheckboxOutlineExampleSource = `import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-outline-example',

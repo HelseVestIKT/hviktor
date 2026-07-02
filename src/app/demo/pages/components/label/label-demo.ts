@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviLabel } from '@helsevestikt/hviktor';
+import { HviLabel } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { LabelVarianterExampleSource } from './code-examples/label.varianter.example.source';

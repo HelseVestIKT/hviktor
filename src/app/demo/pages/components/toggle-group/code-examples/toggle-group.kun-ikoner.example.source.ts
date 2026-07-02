@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupKunIkonerExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip } from '@helsevestikt/hviktor';
+import { HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip } from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-align-center.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-align-left.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';

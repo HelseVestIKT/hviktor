@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const RequiredTagEksempelExampleSource = `import { Component } from '@angular/core';
-import { HviLabel, HviParagraph, HviRequiredTag } from '@helsevestikt/hviktor';
+import { HviLabel, HviParagraph, HviRequiredTag } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-required-tag-eksempel-example',

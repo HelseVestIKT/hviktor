@@ -5,7 +5,7 @@ import {
   HviSuggestion,
   HviSuggestionDatalist,
   HviSuggestionOption,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-suggestion-standard-suggestion-example',

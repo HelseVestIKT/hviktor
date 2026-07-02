@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HviButton } from '@helsevestikt/hviktor';
+import { HviButton } from '@helsevestikt/hviktor-angular';
 
 import '@helsevestikt/hviktor-icons/icon-cog.webcomponent';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';

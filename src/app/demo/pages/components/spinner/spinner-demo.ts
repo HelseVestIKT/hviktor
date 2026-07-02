@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviSpinner } from '@helsevestikt/hviktor';
+import { HviSpinner } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { SpinnerStandardExampleSource } from './code-examples/spinner.standard.example.source';

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviTooltip } from '@helsevestikt/hviktor';
+import { HviTooltip } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-tooltip-tekst-med-tooltip-example',

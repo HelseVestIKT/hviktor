@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TextfieldMedTellerExampleSource = `import { Component } from '@angular/core';
-import { HviTextfield } from '@helsevestikt/hviktor';
+import { HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-textfield-med-teller-example',

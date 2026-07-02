@@ -6,7 +6,7 @@ import {
   HviLink,
   HviMultiSelect,
   HviMultiSelectOption,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 @Component({

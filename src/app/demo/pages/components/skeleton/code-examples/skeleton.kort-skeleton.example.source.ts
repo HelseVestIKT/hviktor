@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SkeletonKortSkeletonExampleSource = `import { Component } from '@angular/core';
-import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor';
+import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-skeleton-kort-skeleton-example',

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TableCustomSorteringsfunksjonExampleSource = `import { Component } from '@angular/core';
-import { HviSortableColumn, HviTable, type SortingFn } from '@helsevestikt/hviktor';
+import { HviSortableColumn, HviTable, type SortingFn } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-custom-sorteringsfunksjon-example',

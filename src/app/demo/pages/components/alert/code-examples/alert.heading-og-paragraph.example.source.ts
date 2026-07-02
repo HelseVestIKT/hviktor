@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const AlertHeadingOgParagraphExampleSource = `import { Component } from '@angular/core';
-import { HviAlert, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviAlert, HviHeading, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-alert-heading-og-paragraph-example',

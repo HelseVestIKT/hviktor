@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor';
+import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-sortering-example',

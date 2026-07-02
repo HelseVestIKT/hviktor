@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FieldOutlineExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-field-outline-example',

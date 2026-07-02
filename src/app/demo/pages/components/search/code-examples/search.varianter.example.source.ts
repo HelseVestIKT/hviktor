@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SearchVarianterExampleSource = `import { Component } from '@angular/core';
-import { HviButton, HviDivider, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hviktor';
+import { HviButton, HviDivider, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-search-varianter-example',

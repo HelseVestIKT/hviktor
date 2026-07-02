@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const DetailsVarianterExampleSource = `import { Component } from '@angular/core';
-import { HviDetails } from '@helsevestikt/hviktor';
+import { HviDetails } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-details-varianter-example',

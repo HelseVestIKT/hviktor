@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const DialogMedSkjemaOgFokusExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-med-skjema-og-fokus-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviLink } from '@helsevestikt/hviktor';
+import { HviLink } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-link-varianter-example',

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SkipLinkEksempelExampleSource = `import { Component } from '@angular/core';
-import { HviParagraph, HviSkipLink } from '@helsevestikt/hviktor';
+import { HviParagraph, HviSkipLink } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-skip-link-eksempel-example',

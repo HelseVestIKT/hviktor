@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const ErrorSummaryManuellModusExampleSource = `import { Component } from '@angular/core';
-import { HviErrorSummary } from '@helsevestikt/hviktor';
+import { HviErrorSummary } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-error-summary-manuell-modus-example',

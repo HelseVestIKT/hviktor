@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const PopoverMedFargeDangerExampleSource = `import { Component } from '@angular/core';
-import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor';
+import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-popover-med-farge-danger-example',

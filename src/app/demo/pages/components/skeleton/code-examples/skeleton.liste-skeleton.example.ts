@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviSkeleton } from '@helsevestikt/hviktor';
+import { HviSkeleton } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-skeleton-liste-skeleton-example',

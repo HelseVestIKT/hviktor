@@ -10,7 +10,7 @@ import {
   HviSelect,
   HviValidationKit,
   HviValidationMessages,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-skjema-med-validering-og-feiloppsummering-example',

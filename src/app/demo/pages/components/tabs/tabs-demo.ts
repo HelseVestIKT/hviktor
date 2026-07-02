@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor';
+import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { TabsGrunnleggendeBrukExampleSource } from './code-examples/tabs.grunnleggende-bruk.example.source';

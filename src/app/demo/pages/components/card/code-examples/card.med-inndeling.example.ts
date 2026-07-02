@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { HviButton, HviCard, HviCardBlock, HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviCard,
+  HviCardBlock,
+  HviHeading,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-med-inndeling-example',

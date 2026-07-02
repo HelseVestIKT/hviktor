@@ -1,5 +1,5 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { HviButton, HviTooltip } from '@helsevestikt/hviktor';
+import { HviButton, HviTooltip } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { TooltipIkonKnappMedTooltipExampleSource } from './code-examples/tooltip.ikon-knapp-med-tooltip.example.source';
@@ -46,7 +46,14 @@ import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
         description="Vurder om tooltip skal plasseres over, under eller ved siden av elementet."
       >
         <div class="flex justify-center">
-          <button hviButton variant="secondary" icon hviTooltip="Kopier" tooltipPlacement="bottom" aria-label="Kopier">
+          <button
+            hviButton
+            variant="secondary"
+            icon
+            hviTooltip="Kopier"
+            tooltipPlacement="bottom"
+            aria-label="Kopier"
+          >
             <hvi-icon-clipboard />
           </button>
         </div>

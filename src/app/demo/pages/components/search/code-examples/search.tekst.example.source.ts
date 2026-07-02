@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SearchTekstExampleSource = `import { Component, signal, computed } from '@angular/core';
-import { HviButton, HviInput, HviLabel, HviSearch, HviSearchClear } from '@helsevestikt/hviktor';
+import { HviButton, HviInput, HviLabel, HviSearch, HviSearchClear } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-search-tekst-example',

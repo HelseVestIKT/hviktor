@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor';
+import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-tabs-kontrollert-example',

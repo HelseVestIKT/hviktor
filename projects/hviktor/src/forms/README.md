@@ -54,7 +54,7 @@ Komplett guide til å bygge tilgjengelige, valideringsvennlige skjemaer med Hvik
 ```ts
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { HviForms, HviTextfield } from '@helsevestikt/hviktor';
+import { HviForms, HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   standalone: true,
@@ -154,7 +154,7 @@ For å slippe å importere mange enkelt-komponenter finnes det ferdiglagde impor
 | `HviForms`         | `HviValidationKit` + `HviFieldKit` + `HviInput` + `HviFieldset` + `HviErrorSummary`                                                                  | Du vil ha alt som trengs for DS-skjema      |
 
 ```ts
-import { HviForms, HviTextfield, HviSelect, HviButton } from '@helsevestikt/hviktor';
+import { HviForms, HviTextfield, HviSelect, HviButton } from '@helsevestikt/hviktor-angular';
 
 @Component({
   imports: [HviForms, HviTextfield, HviSelect, HviButton],
@@ -627,7 +627,7 @@ messages: HviValidationMessages = {
 For å holde validators og meldinger samlet tilbyr Hviktor **validator bundles**:
 
 ```ts
-import { hviRequired, hviMinLength, hviEmail, hviValidators } from '@helsevestikt/hviktor';
+import { hviRequired, hviMinLength, hviEmail, hviValidators } from '@helsevestikt/hviktor-angular';
 
 const emailConfig = hviValidators([
   hviRequired('E-post er påkrevd'),
@@ -766,7 +766,7 @@ import {
   HviSelect,
   HviTextfield,
   HviValidationMessages,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   standalone: true,

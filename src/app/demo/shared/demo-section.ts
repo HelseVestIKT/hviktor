@@ -8,7 +8,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { HviHeading, HviParagraph } from '@helsevestikt/hviktor';
+import { HviHeading, HviParagraph } from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-chevron-up.webcomponent';
 import hljs from 'highlight.js/lib/core';

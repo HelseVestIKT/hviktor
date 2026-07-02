@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const AlertMedTittelExampleSource = `import { Component } from '@angular/core';
-import { HviAlert, HviParagraph } from '@helsevestikt/hviktor';
+import { HviAlert, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-alert-med-tittel-example',

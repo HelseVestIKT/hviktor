@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviLink } from '@helsevestikt/hviktor';
+import { HviLink } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { LinkVarianterExampleSource } from './code-examples/link.varianter.example.source';

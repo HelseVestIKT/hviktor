@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviDropdown } from '@helsevestikt/hviktor';
+import { HviButton, HviDropdown } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dropdown-med-dropdownplacement-kan-man-definere-ulike-plasseringer-example',

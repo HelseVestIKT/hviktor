@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const CardLenkekortExampleSource = `import { Component } from '@angular/core';
-import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helsevestikt/hviktor';
+import { HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-lenkekort-example',

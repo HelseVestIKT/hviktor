@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupVisningsvalgExampleSource = `import { Component, signal } from '@angular/core';
-import { HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor';
+import { HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-toggle-group-visningsvalg-example',

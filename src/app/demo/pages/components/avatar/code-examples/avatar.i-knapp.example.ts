@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviAvatar, HviButton } from '@helsevestikt/hviktor';
+import { HviAvatar, HviButton } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-avatar-i-knapp-example',

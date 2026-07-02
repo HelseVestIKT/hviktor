@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviChipButton, HviChipLabel, HviFieldKit, HviInput } from '@helsevestikt/hviktor';
+import { HviChipButton, HviChipLabel, HviFieldKit, HviInput } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ChipButtonRemovableExampleSource } from './code-examples/chip.button-removable.example.source';

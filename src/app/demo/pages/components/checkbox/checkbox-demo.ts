@@ -15,7 +15,7 @@ import {
   HviInput,
   HviLabel,
   HviParagraph,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { CheckboxBekreftingMedCheckboxExampleSource } from './code-examples/checkbox.bekrefting-med-checkbox.example.source';

@@ -11,7 +11,7 @@ import {
   HviLabel,
   HviValidationMessage,
   HviValidationMessages,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-error-summary-bruk-i-skjema-example',

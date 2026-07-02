@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviAlert, HviAvatar, HviAvatarStack, HviLink } from '@helsevestikt/hviktor';
+import { HviAlert, HviAvatar, HviAvatarStack, HviLink } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { AvatarStackExpandableExampleSource } from './code-examples/avatar-stack.expandable.example.source';

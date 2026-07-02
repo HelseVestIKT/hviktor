@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const PopoverMedPlasseringExampleSource = `import { Component } from '@angular/core';
-import { HviButton, HviPopover } from '@helsevestikt/hviktor';
+import { HviButton, HviPopover } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-popover-med-plassering-example',

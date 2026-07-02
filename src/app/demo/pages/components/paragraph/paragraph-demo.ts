@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviParagraph } from '@helsevestikt/hviktor';
+import { HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { ParagraphStorrelserExampleSource } from './code-examples/paragraph.storrelser.example.source';

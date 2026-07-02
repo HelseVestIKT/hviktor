@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const RequiredTagModesExampleSource = `import { Component } from '@angular/core';
-import { HviRequiredTag } from '@helsevestikt/hviktor';
+import { HviRequiredTag } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-required-tag-modes-example',

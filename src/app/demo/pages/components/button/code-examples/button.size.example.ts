@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton } from '@helsevestikt/hviktor';
+import { HviButton } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-button-size-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor';
+import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { BadgeBaseVariantExampleSource } from './code-examples/badge.base-variant.example.source';

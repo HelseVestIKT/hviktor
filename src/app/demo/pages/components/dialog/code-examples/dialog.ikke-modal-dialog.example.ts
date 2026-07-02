@@ -1,5 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import {
+  HviButton,
+  HviDialog,
+  HviDialogBlock,
+  HviInput,
+  HviLabel,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-ikke-modal-dialog-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviLink, HviParagraph, HviPopover } from '@helsevestikt/hviktor';
+import { HviButton, HviLink, HviParagraph, HviPopover } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { PopoverMedFargeDangerExampleSource } from './code-examples/popover.med-farge-danger.example.source';

@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestikt/hviktor';
+import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-modal-dialog-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor';
+import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { DropdownMedDropdownplacementKanManDefinereUlikePlasseringerExampleSource } from './code-examples/dropdown.med-dropdownplacement-kan-man-definere-ulike-plasseringer.example.source';

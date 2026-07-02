@@ -6,7 +6,7 @@ import {
   HviSearch,
   HviSearchClear,
   HviTable,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-globalt-sok-example',

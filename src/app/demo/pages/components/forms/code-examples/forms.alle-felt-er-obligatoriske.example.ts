@@ -6,7 +6,7 @@ import {
   HviHeading,
   HviRequiredTag,
   HviTextfield,
-} from '@helsevestikt/hviktor';
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-alle-felt-er-obligatoriske-example',

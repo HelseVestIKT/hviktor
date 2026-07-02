@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { TextareaDisabledExampleSource } from './code-examples/textarea.disabled.example.source';

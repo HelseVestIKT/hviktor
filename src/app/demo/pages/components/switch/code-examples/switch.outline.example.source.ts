@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const SwitchOutlineExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor';
+import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-switch-outline-example',

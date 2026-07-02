@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const HeadingStorrelserExampleSource = `import { Component } from '@angular/core';
-import { HviHeading } from '@helsevestikt/hviktor';
+import { HviHeading } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-heading-storrelser-example',

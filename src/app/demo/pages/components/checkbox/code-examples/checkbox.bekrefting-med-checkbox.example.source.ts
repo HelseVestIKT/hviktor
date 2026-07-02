@@ -1,7 +1,7 @@
 // Auto-generated - do not edit manually
 export const CheckboxBekreftingMedCheckboxExampleSource = `import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor';
+import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-bekrefting-med-checkbox-example',

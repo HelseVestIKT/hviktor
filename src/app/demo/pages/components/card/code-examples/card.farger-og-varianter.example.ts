@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HviCard, HviCardBlock, HviParagraph } from '@helsevestikt/hviktor';
+import { HviCard, HviCardBlock, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-farger-og-varianter-example',

@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TextfieldPakrevdeOgValgfrieFeltExampleSource = `import { Component } from '@angular/core';
-import { HviTextfield } from '@helsevestikt/hviktor';
+import { HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-textfield-pakrevde-og-valgfrie-felt-example',
