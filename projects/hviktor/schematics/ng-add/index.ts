@@ -6,12 +6,25 @@ const HVIKTOR_PACKAGE = '@helsevestikt/hviktor-angular';
 const HVIKTOR_IMPORT = `@import '${HVIKTOR_PACKAGE}/styles.css';`;
 
 const ICONS_PACKAGE = '@helsevestikt/hviktor-icons';
+const ICONS_VERSION = '^0.0.51';
 const ICONS_DOCS_URL = 'https://www.npmjs.com/package/@helsevestikt/hviktor-icons';
 
 const TAILWIND_V4_IMPORT = `@import 'tailwindcss';`;
 const TAILWIND_V3_IMPORT = `@tailwind base;
 @tailwind components;
 @tailwind utilities;`;
+
+/**
+ * Kjennetegn på at Tailwind allerede er satt opp i en styles-fil,
+ * uavhengig av versjon og fnutt-type.
+ */
+const TAILWIND_MARKERS = [
+  `@import 'tailwindcss'`,
+  `@import "tailwindcss"`,
+  '@tailwind base',
+  '@tailwind components',
+  '@tailwind utilities',
+];
 
 // ANSI-farger for terminal-output
 const RESET = '\x1b[0m';
@@ -20,6 +33,7 @@ const DIM = '\x1b[2m';
 const BLUE = '\x1b[34m';
 const LIGHT_BLUE = '\x1b[94m';
 const GREEN = '\x1b[32m';
+const YELLOW = '\x1b[33m';
 
 // ---------------------------------------------------------------------------
 // Terminal-output
@@ -58,7 +72,7 @@ function printSummary(context: SchematicContext, summary: SummaryOptions): void 
   if (summary.tailwind && summary.tailwindMajor === 3) {
     context.logger.info(`${check} Tailwind CSS v3 satt opp (tailwind.config.js)`);
     context.logger.info(
-      `  ${DIM}Angular-versjonen din støtter ikke Tailwind v4 sitt PostCSS-oppsett,` +
+      `  ${DIM}Angular-oppsettet ditt støtter ikke Tailwind v4 sitt PostCSS-oppsett,` +
         ` så v3 ble valgt automatisk.${RESET}`,
     );
   }
@@ -134,7 +148,8 @@ function getStylesPath(tree: Tree, project?: string): string {
 
 /**
  * Leser major-versjonen av Angular fra @angular/core i package.json.
- * Returnerer null om den ikke kan bestemmes.
+ * Returnerer null om den ikke kan bestemmes (f.eks. "workspace:*" eller
+ * "file:"-referanser uten tall).
  */
 function getAngularMajorVersion(tree: Tree): number | null {
   const content = tree.read('/package.json');
@@ -157,26 +172,46 @@ function getAngularMajorVersion(tree: Tree): number | null {
  * Den gamle webpack-baserte builderen (@angular-devkit/build-angular:browser)
  * støtter ikke egendefinert PostCSS-konfig uansett Angular-versjon.
  */
-function usesLegacyWebpackBuilder(tree: Tree, project?: string): boolean {
+function isPostcssCapableBuilder(tree: Tree, project?: string): boolean {
   const buildTarget = getBuildTarget(tree, project);
   const builder: string | undefined = buildTarget?.builder;
-  return builder === '@angular-devkit/build-angular:browser';
+  if (!builder) {
+    // Uten kjent build-target kan vi ikke garantere PostCSS-støtte.
+    return false;
+  }
+  return builder !== '@angular-devkit/build-angular:browser';
 }
 
 /**
  * Tailwind v4 krever støtte for egendefinerte PostCSS-konfigfiler
  * (.postcssrc.json), som kom i application-builderen i Angular 18.
- * Eldre versjoner (og webpack-builderen) får Tailwind v3, som Angular CLI
- * har innebygd støtte for via tailwind.config.js.
+ *
+ * Vi velger v4 kun når vi positivt vet at oppsettet støtter det
+ * (Angular >= 18 og en PostCSS-kompatibel builder). I alle andre
+ * tilfeller – inkludert når versjonen ikke kan bestemmes – faller vi
+ * tilbake til v3, som Angular CLI har innebygd støtte for via
+ * tailwind.config.js. Det gir i verste fall et litt eldre Tailwind,
+ * aldri et build som feiler.
  */
-function resolveTailwindMajor(tree: Tree, project?: string): 3 | 4 {
+function resolveTailwindMajor(tree: Tree, context: SchematicContext, project?: string): 3 | 4 {
   const angularMajor = getAngularMajorVersion(tree);
-  if (angularMajor !== null && angularMajor < 18) {
+
+  if (angularMajor === null) {
+    context.logger.warn(
+      `${YELLOW}Kunne ikke bestemme Angular-versjonen fra package.json – ` +
+        `setter opp Tailwind v3 som en trygg standard.${RESET}`,
+    );
     return 3;
   }
-  if (usesLegacyWebpackBuilder(tree, project)) {
+
+  if (angularMajor < 18) {
     return 3;
   }
+
+  if (!isPostcssCapableBuilder(tree, project)) {
+    return 3;
+  }
+
   return 4;
 }
 
@@ -211,16 +246,58 @@ function addPackageJsonDependency(
   tree.overwrite(packageJsonPath, JSON.stringify(json, null, 2) + '\n');
 }
 
+/**
+ * Finner posisjonen rett etter eksisterende Tailwind-oppsett i styles-filen,
+ * slik at nye imports (spesielt Hviktor) alltid havner etter Tailwind.
+ * Returnerer 0 hvis Tailwind ikke finnes fra før (prepend øverst).
+ */
+function findInsertIndexAfterTailwind(content: string): number {
+  let index = 0;
+  for (const marker of TAILWIND_MARKERS) {
+    const pos = content.indexOf(marker);
+    if (pos === -1) {
+      continue;
+    }
+    const lineEnd = content.indexOf('\n', pos);
+    const end = lineEnd === -1 ? content.length : lineEnd + 1;
+    if (end > index) {
+      index = end;
+    }
+  }
+  return index;
+}
+
 function updateStylesCss(tree: Tree, stylesPath: string, imports: string[]): void {
   const existing = tree.read(stylesPath);
   const content = existing ? existing.toString('utf-8') : '';
 
-  const newImports = imports.filter((imp) => !content.includes(imp));
+  const hasTailwindAlready = TAILWIND_MARKERS.some((marker) => content.includes(marker));
+
+  const newImports = imports.filter((imp) => {
+    // Hopp over imports som allerede finnes ordrett
+    if (content.includes(imp)) {
+      return false;
+    }
+    // Hopp over Tailwind-import hvis filen allerede har Tailwind i en
+    // annen variant (f.eks. v3-direktiver når vi ville lagt til v4-import)
+    const isTailwindImport = imp === TAILWIND_V3_IMPORT || imp === TAILWIND_V4_IMPORT;
+    if (isTailwindImport && hasTailwindAlready) {
+      return false;
+    }
+    return true;
+  });
+
   if (newImports.length === 0) {
     return;
   }
 
-  const updatedContent = newImports.join('\n') + '\n' + content;
+  const block = newImports.join('\n') + '\n';
+  const insertIndex = findInsertIndexAfterTailwind(content);
+  const updatedContent =
+    insertIndex === 0
+      ? block + content
+      : content.slice(0, insertIndex) + block + content.slice(insertIndex);
+
   if (existing) {
     tree.overwrite(stylesPath, updatedContent);
   } else {
@@ -244,16 +321,19 @@ function setupTailwindV4(tree: Tree): void {
   }
 }
 
-function setupTailwindV3(tree: Tree): void {
+function setupTailwindV3(tree: Tree, project?: string): void {
   addPackageJsonDependency(tree, 'tailwindcss', '^3.4.0', true);
   addPackageJsonDependency(tree, 'postcss', '^8.4.31', true);
   addPackageJsonDependency(tree, 'autoprefixer', '^10.4.0', true);
 
   const configPath = '/tailwind.config.js';
   if (!tree.exists(configPath)) {
+    const projectConfig = getProjectConfig(tree, project);
+    const sourceRoot: string = projectConfig?.sourceRoot ?? 'src';
+
     const config = `/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{html,ts}'],
+  content: ['./${sourceRoot}/**/*.{html,ts}'],
   theme: {
     extend: {},
   },
@@ -277,22 +357,22 @@ export function ngAdd(options: Schema): Rule {
 
     // Betinget: sett opp Tailwind CSS i riktig versjon for prosjektet
     if (options.tailwind) {
-      tailwindMajor = resolveTailwindMajor(tree, options.project);
+      tailwindMajor = resolveTailwindMajor(tree, context, options.project);
 
       if (tailwindMajor === 4) {
         setupTailwindV4(tree);
         styleImports.push(TAILWIND_V4_IMPORT);
       } else {
-        setupTailwindV3(tree);
+        setupTailwindV3(tree, options.project);
         styleImports.push(TAILWIND_V3_IMPORT);
       }
     }
 
     // Betinget: installer hviktor-icons.
-    // Ikonene importeres enkeltvis der de brukes, så vi legger ikke lenger
-    // inn noen global import i main.ts – bare avhengigheten + veiledning.
+    // Ikonene importeres enkeltvis der de brukes, så vi legger ikke inn
+    // noen global import i main.ts – bare avhengigheten + veiledning.
     if (options.icons !== false) {
-      addPackageJsonDependency(tree, ICONS_PACKAGE, 'latest', false);
+      addPackageJsonDependency(tree, ICONS_PACKAGE, ICONS_VERSION, false);
     }
 
     // Hviktor-importen skal alltid komme etter Tailwind
