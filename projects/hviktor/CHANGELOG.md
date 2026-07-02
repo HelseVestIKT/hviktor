@@ -4,6 +4,12 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.3.1] – 2026-07-02
+
+### Changed
+
+- Oppdatert ng-add schematic til å håndtere tailwind versjon samt riktig implementasjon av hviktor-icons
+
 ## [0.3.0] – 2026-06-29
 
 ### Added
