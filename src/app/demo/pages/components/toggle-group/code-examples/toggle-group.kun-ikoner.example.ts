@@ -21,7 +21,7 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
       variant="primary"
       aria-labelledby="icon-only-toggle"
     >
-      <button
+      <label
         hviToggleGroupItem
         hviTooltip="Venstrestilt"
         value="left"
@@ -29,13 +29,13 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
         aria-label="Venstrestilt"
       >
         <hvi-icon-align-left></hvi-icon-align-left>
-      </button>
-      <button hviToggleGroupItem hviTooltip="Midtstilt" value="center" icon aria-label="Midtstilt">
+      </label>
+      <label hviToggleGroupItem hviTooltip="Midtstilt" value="center" icon aria-label="Midtstilt">
         <hvi-icon-align-center></hvi-icon-align-center>
-      </button>
-      <button hviToggleGroupItem hviTooltip="Høyrestilt" value="right" icon aria-label="Høyrestilt">
+      </label>
+      <label hviToggleGroupItem hviTooltip="Høyrestilt" value="right" icon aria-label="Høyrestilt">
         <hvi-icon-align-right></hvi-icon-align-right>
-      </button>
+      </label>
     </hvi-toggle-group>
   `,
 })
