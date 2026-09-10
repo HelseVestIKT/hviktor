@@ -9,9 +9,9 @@ import { HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@hel
   template: \`
     <label hviLabel for="view-toggle">Visning:</label>
     <hvi-toggle-group [(value)]="selectedView" variant="primary" aria-labelledby="view-toggle">
-      <button hviToggleGroupItem value="liste">Liste</button>
-      <button hviToggleGroupItem value="rutenett">Rutenett</button>
-      <button hviToggleGroupItem value="kompakt">Kompakt</button>
+      <label hviToggleGroupItem value="liste">Liste</label>
+      <label hviToggleGroupItem value="rutenett">Rutenett</label>
+      <label hviToggleGroupItem value="kompakt">Kompakt</label>
     </hvi-toggle-group>
     <p hviParagraph class="mt-2">Viser innhold som: {{ selectedView() }}</p>
   \`,

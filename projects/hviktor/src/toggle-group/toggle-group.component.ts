@@ -1,29 +1,28 @@
 import {
+  booleanAttribute,
   Component,
-  ContentChildren,
   EventEmitter,
   forwardRef,
   Input,
   Output,
-  QueryList,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import type { HviToggleGroupItem } from './toggle-group-item.directive';
+import { HviToggleGroupItem } from './toggle-group-item.directive';
 
 let nextGroupId = 0;
 
 /**
  * @summary
- * ToggleGroup collects related options. The component consists of a group of
- * buttons that are connected, where only one button can be selected at a time.
+ * ToggleGroup collects related options in a connected group where only one
+ * option can be selected at a time.
  *
  * @example
  * ```html
  * <hvi-toggle-group [(value)]="selected" variant="primary">
- *   <button hviToggleGroupItem value="innboks">Innboks</button>
- *   <button hviToggleGroupItem value="utkast">Utkast</button>
- *   <button hviToggleGroupItem value="sendt">Sendt</button>
+ *   <label hviToggleGroupItem value="innboks">Innboks</label>
+ *   <label hviToggleGroupItem value="utkast">Utkast</label>
+ *   <label hviToggleGroupItem value="sendt">Sendt</label>
  * </hvi-toggle-group>
  * ```
  *
@@ -31,8 +30,8 @@ let nextGroupId = 0;
  * With reactive forms:
  * ```html
  * <hvi-toggle-group formControlName="view" variant="secondary">
- *   <button hviToggleGroupItem value="list">Liste</button>
- *   <button hviToggleGroupItem value="grid">Rutenett</button>
+ *   <label hviToggleGroupItem value="list">Liste</label>
+ *   <label hviToggleGroupItem value="grid">Rutenett</label>
  * </hvi-toggle-group>
  * ```
  *
@@ -41,16 +40,18 @@ let nextGroupId = 0;
 @Component({
   selector: 'hvi-toggle-group',
   standalone: true,
-  template: '<ng-content />',
-  host: {
-    class: 'ds-toggle-group',
-    role: 'radiogroup',
-    '[attr.aria-label]': 'ariaLabel || null',
-    '[attr.aria-labelledby]': 'ariaLabelledby || null',
-    '[attr.data-variant]': '_variant()',
-    '[attr.data-size]': '_size()',
-    '[tabindex]': '0',
-  },
+  template: `
+    <fieldset
+      class="ds-toggle-group"
+      [attr.aria-label]="ariaLabel || null"
+      [attr.aria-labelledby]="ariaLabelledby || null"
+      [attr.data-variant]="_variant()"
+      [attr.data-size]="_size()"
+      [attr.disabled]="_disabled() ? '' : null"
+    >
+      <ng-content />
+    </fieldset>
+  `,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -60,9 +61,6 @@ let nextGroupId = 0;
   ],
 })
 export class HviToggleGroup implements ControlValueAccessor {
-  @ContentChildren(forwardRef(() => HviToggleGroupItemToken) as never)
-  private items!: QueryList<HviToggleGroupItem>;
-
   private readonly registeredItems: HviToggleGroupItem[] = [];
 
   /** Accessible label for the toggle group */
@@ -76,6 +74,9 @@ export class HviToggleGroup implements ControlValueAccessor {
 
   /** The size of the toggle group */
   readonly _size = signal<'sm' | 'md' | 'lg'>('md');
+
+  /** Whether the group is disabled */
+  readonly _disabled = signal(false);
 
   /** Form element name */
   readonly _name = signal(`togglegroup-name-${++nextGroupId}`);
@@ -108,16 +109,34 @@ export class HviToggleGroup implements ControlValueAccessor {
 
   @Input()
   set name(val: string) {
-    if (val) this._name.set(val);
+    if (!val) return;
+    this._name.set(val);
+    this.syncItemsWithGroup();
+  }
+
+  @Input({ transform: booleanAttribute })
+  set disabled(val: boolean) {
+    this._disabled.set(val);
+    this.syncItemsWithGroup();
   }
 
   /** Register an item with this group */
   registerItem(item: HviToggleGroupItem): void {
     this.registeredItems.push(item);
-    // Update state if this item matches current value
-    if (this._value() === item.value) {
-      item.setSelected(true);
-      item.setFocusable(true);
+    item.syncWithGroup();
+    const shouldSelect = this._value() === item.value;
+    item.setSelected(shouldSelect);
+
+    if (shouldSelect) {
+      this.updateFocusableItem(item);
+      return;
+    }
+
+    const hasFocusableItem = this.registeredItems.some((registeredItem) =>
+      registeredItem.isFocusable(),
+    );
+    if (!hasFocusableItem) {
+      this.updateFocusableItem(this.registeredItems[0]);
     }
   }
 
@@ -131,6 +150,7 @@ export class HviToggleGroup implements ControlValueAccessor {
 
   /** Select an item and update all states */
   selectItem(item: HviToggleGroupItem): void {
+    if (this._disabled()) return;
     this._value.set(item.value);
     this.updateItemStates();
     this.updateFocusableItem(item);
@@ -188,7 +208,14 @@ export class HviToggleGroup implements ControlValueAccessor {
   private updateItemStates(): void {
     const currentValue = this._value();
     for (const item of this.registeredItems) {
+      item.syncWithGroup();
       item.setSelected(item.value === currentValue);
+    }
+  }
+
+  private syncItemsWithGroup(): void {
+    for (const item of this.registeredItems) {
+      item.syncWithGroup();
     }
   }
 
@@ -207,7 +234,9 @@ export class HviToggleGroup implements ControlValueAccessor {
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-}
 
-// Token for forward reference to avoid circular dependency
-export const HviToggleGroupItemToken = Symbol('HviToggleGroupItem');
+  setDisabledState(isDisabled: boolean): void {
+    this._disabled.set(isDisabled);
+    this.syncItemsWithGroup();
+  }
+}
