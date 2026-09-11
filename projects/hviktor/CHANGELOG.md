@@ -4,6 +4,23 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.3.5] – 2026-09-11
+
+### Added
+
+- Lagt til nytt direktiv: hviCardLink. Direktovet gjør et helt kort klikkbart.
+- Lagt til ny nabefalt bruk av togglegroup med label i stedet for button.
+
+### Changed
+
+- digdir pakker oppdatert til 1.21.1. Releasenotes her: https://github.com/digdir/designsystemet/releases/tag/v1.21.1
+- hviktor-angular bruker nå vårt eget theme bygget med [Temabyggeren](https://designsystemet.no/no/fundamentals/start-here/own-theme)
+
+### Fixed
+
+- Tooltip med tom verdi viste likevel en tom boks. Dette er fikset.
+- Paginator viser nå aktiv side med farget bakgrunn.
+
 ## [0.3.4] – 2026-09-01
 
 ### Added
