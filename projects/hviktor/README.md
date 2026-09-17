@@ -86,7 +86,7 @@ Se [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) for
 
 ## Krav
 
-- Angular 17–21
+- Angular 17–22
 - Node.js 20+
 
 ## Endringslogg
