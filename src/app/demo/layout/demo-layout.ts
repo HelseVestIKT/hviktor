@@ -1,6 +1,12 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { HviLogo, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
+import {
+  HviButton,
+  HviLogo,
+  HviToggleGroup,
+  HviToggleGroupItem,
+} from '@helsevestikt/hviktor-angular';
 import '@helsevestikt/hviktor-icons/icon-moon-fill.webcomponent';
 import '@helsevestikt/hviktor-icons/icon-sun-fill.webcomponent';
 import { DEMO_COMPONENTS } from '../demo-components';
@@ -10,9 +16,11 @@ import { ThemeService } from '../services/theme.service';
   selector: 'app-demo-layout',
   standalone: true,
   imports: [
+    NgTemplateOutlet,
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
+    HviButton,
     HviLogo,
     HviToggleGroup,
     HviToggleGroupItem,
@@ -26,4 +34,13 @@ import { ThemeService } from '../services/theme.service';
 export class DemoLayoutComponent {
   themeService = inject(ThemeService);
   components = DEMO_COMPONENTS;
+
+  private sideMenu = viewChild<ElementRef<HTMLElement>>('sideMenu');
+
+  closeSideMenu() {
+    const element = this.sideMenu()?.nativeElement;
+    if (element?.matches(':popover-open')) {
+      element.hidePopover();
+    }
+  }
 }

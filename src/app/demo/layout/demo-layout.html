@@ -24,42 +24,64 @@
 </header>
 
 <div class="mx-auto min-h-screen max-w-screen-2xl lg:flex">
+  <div class="border-b border-neutral-300 bg-(--ds-color-neutral-background-default) p-3 lg:hidden">
+    <button hviButton variant="secondary" size="sm" popovertarget="sidemeny">Vis sidemeny</button>
+  </div>
+
+  <nav
+    #sideMenu
+    id="sidemeny"
+    popover
+    aria-label="Komponenter"
+    class="bg-(--ds-color-neutral-background-default) text-(--ds-color-neutral-text-default) lg:hidden"
+  >
+    <p class="mt-0 mb-2 font-medium">Komponenter</p>
+    <ng-container [ngTemplateOutlet]="componentNav" />
+  </nav>
+
   <aside
-    class="border-b border-neutral-300 bg-(--ds-color-neutral-background-default) lg:sticky lg:top-20 lg:h-[calc(100vh-80px)] lg:w-60 lg:shrink-0 lg:overflow-y-auto lg:border-r lg:border-b-0"
+    class="hidden bg-(--ds-color-neutral-background-default) lg:sticky lg:top-20 lg:block lg:h-[calc(100vh-80px)] lg:w-60 lg:shrink-0 lg:overflow-y-auto lg:border-r lg:border-neutral-300"
   >
     <nav>
-      <p class="hidden font-medium lg:block lg:px-4 lg:pt-4">Komponenter</p>
-      <ul class="m-0 flex list-none gap-1 overflow-x-auto p-3 pb-4 lg:block lg:px-4 lg:pb-8">
-        @for (component of components; track component.id) {
-        <li class="shrink-0 lg:mb-1">
-          <a
-            [routerLink]="['/komponenter', component.id]"
-            routerLinkActive="font-semibold border-l-4 lg:border-l-6 bg-(--ds-color-neutral-surface-tinted)"
-            class="flex items-center gap-1.5 rounded px-3 py-2 whitespace-nowrap transition-colors hover:bg-(--ds-color-neutral-surface-hover) active:bg-(--ds-color-neutral-surface-active)"
-          >
-            {{ component.name }} @if (component.codeTested) {
-            <span
-              class="ml-auto text-(--ds-color-brand1-base-default)"
-              title="Kode testet"
-              aria-label="Kode testet"
-              >✓</span
-            >
-            } @if (component.a11yTested) {
-            <span
-              class="text-(--ds-color-brand2-base-default)"
-              [class.ml-auto]="!component.codeTested"
-              title="A11y testet"
-              aria-label="A11y testet"
-              >✓</span
-            >
-            }
-          </a>
-        </li>
-        }
-      </ul>
+      <p class="px-4 pt-4 font-medium">Komponenter</p>
+      <div class="px-4 pb-8">
+        <ng-container [ngTemplateOutlet]="componentNav" />
+      </div>
     </nav>
   </aside>
   <main class="min-w-0 flex-1 p-4 sm:p-6 lg:p-10">
     <router-outlet />
   </main>
 </div>
+
+<ng-template #componentNav>
+  <ul class="m-0 flex list-none flex-col gap-1 p-0">
+    @for (component of components; track component.id) {
+    <li>
+      <a
+        [routerLink]="['/komponenter', component.id]"
+        routerLinkActive="font-semibold border-l-4 lg:border-l-6 bg-(--ds-color-neutral-surface-tinted)"
+        (click)="closeSideMenu()"
+        class="flex items-center gap-1.5 rounded px-3 py-2 whitespace-nowrap transition-colors hover:bg-(--ds-color-neutral-surface-hover) active:bg-(--ds-color-neutral-surface-active)"
+      >
+        {{ component.name }} @if (component.codeTested) {
+        <span
+          class="ml-auto text-(--ds-color-brand1-base-default)"
+          title="Kode testet"
+          aria-label="Kode testet"
+          >✓</span
+        >
+        } @if (component.a11yTested) {
+        <span
+          class="text-(--ds-color-brand2-base-default)"
+          [class.ml-auto]="!component.codeTested"
+          title="A11y testet"
+          aria-label="A11y testet"
+          >✓</span
+        >
+        }
+      </a>
+    </li>
+    }
+  </ul>
+</ng-template>
