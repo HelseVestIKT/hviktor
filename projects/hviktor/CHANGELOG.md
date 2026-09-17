@@ -4,6 +4,16 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.3.6] – 2026-09-17
+
+### Changed
+
+- Oppdatert @digdir pakkene til 1.22.0 (https://github.com/digdir/designsystemet/releases/tag/v1.22.0)
+
+### Fixed
+
+- Fikset en liten feil i README som sa at pakken bare var støttet opp til Angular 21.
+
 ## [0.3.5] – 2026-09-11
 
 ### Added
