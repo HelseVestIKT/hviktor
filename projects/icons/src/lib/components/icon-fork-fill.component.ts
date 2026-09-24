@@ -1,0 +1,23 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HviIconBase } from '../base-icon.component';
+
+@Component({
+  selector: 'hvi-icon-fork-fill',
+  standalone: true,
+  template: `<svg
+    [attr.width]="sizePx()"
+    [attr.height]="sizePx()"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" [attr.d]="path" />
+  </svg>`,
+  styles: [':host { display: inline-block; line-height: 0; }', 'svg { display: block; }'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class HviIconForkFill extends HviIconBase {
+  protected override readonly path =
+    'M10 3.25C10.4142 3.25 10.75 3.58579 10.75 4V7.25C10.75 7.38807 10.8619 7.5 11 7.5C11.1381 7.5 11.25 7.38807 11.25 7.25V4C11.25 3.58579 11.5858 3.25 12 3.25C12.4142 3.25 12.75 3.58579 12.75 4V7.25C12.75 7.38807 12.8619 7.5 13 7.5C13.1381 7.5 13.25 7.38807 13.25 7.25V4C13.25 3.58579 13.5858 3.25 14 3.25C14.4142 3.25 14.75 3.58579 14.75 4V9C14.75 10.2588 13.9043 11.32 12.75 11.6465V20C12.75 20.4142 12.4142 20.75 12 20.75C11.5858 20.75 11.25 20.4142 11.25 20V11.6465C10.0957 11.32 9.25 10.2588 9.25 9V4C9.25 3.58579 9.58579 3.25 10 3.25Z';
+}

@@ -5,7 +5,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 import { TooltipIkonKnappMedTooltipExampleSource } from './code-examples/tooltip.ikon-knapp-med-tooltip.example.source';
 import { TooltipPlasseringExampleSource } from './code-examples/tooltip.plassering.example.source';
 
-import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
+import { HviIconClipboard } from '../../../../../../projects/icons/src/lib/components/icon-clipboard.component';
 import { TooltipBetingetTooltipExampleSource } from './code-examples/tooltip.betinget-tooltip.example.source';
 import { TooltipMedTekstExampleSource } from './code-examples/tooltip.med-tekst.example.source';
 
@@ -20,6 +20,7 @@ import { TooltipMedTekstExampleSource } from './code-examples/tooltip.med-tekst.
     HviInput,
     HviLabel,
     HviTooltip,
+    HviIconClipboard,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `

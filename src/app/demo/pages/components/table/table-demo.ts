@@ -14,9 +14,8 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
-
+import { HviIconChevronDown } from '../../../../../../projects/icons/src/lib/components/icon-chevron-down.component';
+import { HviIconChevronRight } from '../../../../../../projects/icons/src/lib/components/icon-chevron-right.component';
 import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
 import { TableEnkelTabellExampleSource } from './code-examples/table.enkel-tabell.example.source';
 import { TableGlobaltSokExampleSource } from './code-examples/table.globalt-sok.example.source';
@@ -44,6 +43,8 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
     HviMultiSelect,
     DemoPageComponent,
     DemoSectionComponent,
+    HviIconChevronDown,
+    HviIconChevronRight,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
@@ -727,6 +728,9 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
   `,
 })
 export class TableDemoComponent {
+  readonly customSorteringsfunksjonCode = TableCustomSorteringsfunksjonExampleSource;
+  readonly utvidbareRaderEnkeltmodusCode = TableUtvidbareRaderEnkeltmodusExampleSource;
+
   readonly enkelTabellCode = TableEnkelTabellExampleSource;
   readonly zebrastriperOgBorderCode = TableZebrastriperOgBorderExampleSource;
   readonly sorteringCode = TableSorteringExampleSource;

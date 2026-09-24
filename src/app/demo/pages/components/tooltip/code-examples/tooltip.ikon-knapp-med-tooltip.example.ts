@@ -1,5 +1,4 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
 
 @Component({
   selector: 'app-tooltip-ikon-knapp-med-tooltip-example',

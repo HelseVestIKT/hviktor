@@ -1,12 +1,12 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HviButton, HviTable } from '@helsevestikt/hviktor-angular';
-import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
+import { HviIconChevronDown } from '../../../../../../../projects/icons/src/lib/components/icon-chevron-down.component';
+import { HviIconChevronRight } from '../../../../../../../projects/icons/src/lib/components/icon-chevron-right.component';
 
 @Component({
   selector: 'app-table-utvidbare-rader-enkeltmodus-example',
   standalone: true,
-  imports: [HviButton, HviTable],
+  imports: [HviButton, HviTable, HviIconChevronDown, HviIconChevronRight],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">

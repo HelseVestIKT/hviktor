@@ -1,190 +1,50 @@
-# Converting to Web Components
+# Icons Guide
 
-This guide explains how to convert the Angular icon components to pure Web Components.
+This file is kept for backward compatibility with old links.
 
-## Quick Start
+The icons package now exposes standalone Angular icon components.
 
-Run the conversion script:
+## Recommended usage
 
-```bash
-cd projects/icons
-npm run convert
-```
+Import specific icons from the package root:
 
-This will:
-
-1. Read all existing Angular icon components
-2. Convert them to Web Component classes
-3. Generate TypeScript declarations for IntelliSense
-4. Create the main entry point that registers all components
-
-## What Gets Generated
-
-### 1. Web Component Classes (`src/lib/webcomponents/`)
-
-Each icon gets converted to a pure Web Component:
-
-```typescript
-export class HviIconAirplaneWebComponent extends HviIconBase {
-  protected get path(): string {
-    return 'M6.38832...'; // SVG path data
-  }
-}
-
-customElements.define('hvi-icon-airplane', HviIconAirplaneWebComponent);
-```
-
-### 2. TypeScript Declarations (`src/lib/icons.d.ts`)
-
-Provides IntelliSense for all frameworks:
-
-```typescript
-interface HTMLElementTagNameMap {
-  'hvi-icon-airplane': HviIconAirplaneWebComponent;
-  // ... all other icons
-}
-```
-
-### 3. Main Entry Point (`src/index.ts`)
-
-Imports and registers all components:
-
-```typescript
-import './lib/webcomponents/icon-Airplane.webcomponent';
-// ... all other imports
-
-export * from './lib/icons.d';
-export { HviIconBase } from './lib/base-icon.webcomponent';
-```
-
-## Usage in Angular
-
-### 1. Install the package
-
-```bash
-npm install @helsevestikt/hviktor-icons
-```
-
-### 2. Import in your app
-
-```typescript
-// app.config.ts or main.ts
-import '@helsevestikt/hviktor-icons';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    // ... your providers
-  ],
-};
-```
-
-### 3. Add CUSTOM_ELEMENTS_SCHEMA
-
-```typescript
-// For standalone components in app.component.ts
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+```ts
+import { Component } from '@angular/core';
+import { HviIconAirplane, HviIconPerson } from '@helsevestikt/hviktor-icons';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  // ...
+  imports: [HviIconAirplane, HviIconPerson],
+  template: `
+    <hvi-icon-airplane size="lg"></hvi-icon-airplane>
+    <hvi-icon-person size="md"></hvi-icon-person>
+  `,
 })
+export class AppComponent {}
 ```
 
-### 4. Use in templates with full IntelliSense
+## Optional: all-icons convenience entrypoint
 
-```html
-<hvi-icon-airplane size="lg"></hvi-icon-airplane>
-<hvi-icon-search size="md"></hvi-icon-search>
-<hvi-icon-close size="sm"></hvi-icon-close>
+For demo/playground usage and fast IntelliSense, import all icons at once:
+
+```ts
+import { Component } from '@angular/core';
+import { HVI_ALL_ICONS } from '@helsevestikt/hviktor-icons/all-icons';
+
+@Component({
+  standalone: true,
+  imports: [...HVI_ALL_ICONS],
+  template: `<hvi-icon-person />`,
+})
+export class AppComponent {}
 ```
 
-## Usage in Other Frameworks
+For production apps where bundle size matters, prefer per-icon imports.
 
-### React
+## Sizes
 
-```jsx
-import '@helsevestikt/hviktor-icons';
+Supported `size` values:
 
-function MyComponent() {
-  return <hvi-icon-airplane size="lg"></hvi-icon-airplane>;
-}
-```
-
-### Vue
-
-```vue
-<template>
-  <hvi-icon-airplane size="lg"></hvi-icon-airplane>
-</template>
-
-<script>
-import '@helsevestikt/hviktor-icons';
-</script>
-```
-
-### Blazor
-
-```html
-<!-- In _Host.cshtml, _Layout.cshtml, or index.html -->
-<script type="module">
-  import '@helsevestikt/hviktor-icons';
-</script>
-
-<!-- Or using a CDN -->
-<script type="module" src="https://unpkg.com/@helsevestikt/hviktor-icons"></script>
-
-<!-- Then in your Razor components -->
-<hvi-icon-airplane size="lg"></hvi-icon-airplane>
-```
-
-### Vanilla JavaScript
-
-```html
-<script type="module">
-  import '@helsevestikt/hviktor-icons';
-</script>
-
-<hvi-icon-airplane size="lg"></hvi-icon-airplane>
-```
-
-## Benefits
-
-✅ **No framework dependency** - Works everywhere
-✅ **Smaller bundle size** - No Angular runtime needed
-✅ **Full IntelliSense** - TypeScript declarations provide autocomplete
-✅ **Type safety** - Catch errors at compile time
-✅ **Better performance** - Native Web Components are fast
-✅ **Future-proof** - Standard web platform APIs
-
-## Advanced: Custom Icons
-
-You can extend the base class to create custom icons:
-
-```typescript
-import { HviIconBase } from '@helsevestikt/hviktor-icons';
-
-class MyCustomIcon extends HviIconBase {
-  protected get path(): string {
-    return 'M12 2L2 7v10l10 5 10-5V7L12 2z';
-  }
-}
-
-customElements.define('my-custom-icon', MyCustomIcon);
-```
-
-## Building for Production
-
-Build the library:
-
-```bash
-npm run build
-```
-
-Publish to npm:
-
-```bash
-cd dist/@helsevestikt/hviktor-icons
-npm publish
-```
+- `sm` (16px)
+- `md` (24px, default)
+- `lg` (32px)

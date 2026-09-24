@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.resolve(__dirname, '..');
-const sourceDir = path.join(rootDir, 'src', 'lib', 'webcomponents');
+const sourceDir = path.join(rootDir, 'src', 'lib', 'components');
 const outputDir = path.join(rootDir, 'dist');
 const outputFile = path.join(outputDir, 'custom-elements.json');
 
@@ -15,7 +15,7 @@ function getWebComponentFiles(dir) {
 
   return fs
     .readdirSync(dir)
-    .filter((file) => file.endsWith('.webcomponent.ts'))
+    .filter((file) => file.endsWith('.component.ts'))
     .sort((a, b) => a.localeCompare(b));
 }
 
@@ -27,7 +27,7 @@ function readClassName(filePath) {
 
 function readTagName(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
-  const tagMatch = content.match(/customElements\.define\('([^']+)'\s*,/);
+  const tagMatch = content.match(/selector:\s*'([^']+)'/);
   return tagMatch ? tagMatch[1] : null;
 }
 
@@ -38,7 +38,7 @@ function buildManifest(files) {
       const className = readClassName(sourceFilePath);
       const tagName = readTagName(sourceFilePath);
       const jsFile = file.replace('.ts', '.js');
-      const modulePath = `dist/lib/webcomponents/${jsFile}`;
+      const modulePath = `dist/lib/components/${jsFile}`;
 
       if (!className || !tagName) {
         return null;
@@ -61,14 +61,6 @@ function buildManifest(files) {
                 name: 'size',
                 type: {
                   text: "'sm' | 'md' | 'lg'",
-                },
-              },
-            ],
-            events: [
-              {
-                name: 'hvi-size-change',
-                type: {
-                  text: 'CustomEvent<HviIconSizeChangeDetail>',
                 },
               },
             ],

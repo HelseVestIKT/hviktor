@@ -1,0 +1,23 @@
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { HviIconBase } from '../base-icon.component';
+
+@Component({
+  selector: 'hvi-icon-knife-fill',
+  standalone: true,
+  template: `<svg
+    [attr.width]="sizePx()"
+    [attr.height]="sizePx()"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path fill-rule="evenodd" clip-rule="evenodd" fill="currentColor" [attr.d]="path" />
+  </svg>`,
+  styles: [':host { display: inline-block; line-height: 0; }', 'svg { display: block; }'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class HviIconKnifeFill extends HviIconBase {
+  protected override readonly path =
+    'M13.9385 3.39157C14.1341 3.53254 14.25 3.75892 14.25 4.00001V20C14.25 20.4142 13.9142 20.75 13.5 20.75C13.0858 20.75 12.75 20.4142 12.75 20V13.75H12.5C10.9812 13.75 9.75 12.5188 9.75 11V7.88304C9.75 5.8385 11.0583 4.02334 12.9979 3.3768L13.2628 3.28849C13.4915 3.21226 13.743 3.25061 13.9385 3.39157Z';
+}

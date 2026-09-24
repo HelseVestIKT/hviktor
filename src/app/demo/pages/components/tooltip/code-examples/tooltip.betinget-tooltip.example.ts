@@ -1,5 +1,4 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, signal, WritableSignal } from '@angular/core';
-import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
 
 @Component({
   selector: 'app-tooltip-betinget-tooltip-example',

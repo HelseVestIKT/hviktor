@@ -9,16 +9,15 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { HviIconAlignCenter } from '../../../../../../projects/icons/src/lib/components/icon-align-center.component';
+import { HviIconAlignLeft } from '../../../../../../projects/icons/src/lib/components/icon-align-left.component';
+import { HviIconAlignRight } from '../../../../../../projects/icons/src/lib/components/icon-align-right.component';
 import { ToggleGroupGrunnleggendeExampleSource } from './code-examples/toggle-group.grunnleggende.example.source';
 import { ToggleGroupKunIkonerExampleSource } from './code-examples/toggle-group.kun-ikoner.example.source';
 import { ToggleGroupNyAnbefaltBrukExampleSource } from './code-examples/toggle-group.ny-anbefalt-bruk.example.source';
 import { ToggleGroupSecondaryVariantExampleSource } from './code-examples/toggle-group.secondary-variant.example.source';
 import { ToggleGroupStorrelseExampleSource } from './code-examples/toggle-group.storrelse.example.source';
 import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-group.visningsvalg.example.source';
-
-import '@helsevestikt/hviktor-icons/icon-align-center.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-align-left.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
 @Component({
   selector: 'app-toggle-group-demo',
   standalone: true,
@@ -31,6 +30,9 @@ import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
     HviHeading,
     HviTooltip,
     HviLabel,
+    HviIconAlignCenter,
+    HviIconAlignLeft,
+    HviIconAlignRight,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
