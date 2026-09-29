@@ -15,12 +15,11 @@ import {
   HviParagraph,
   HviTag,
 } from '@helsevestikt/hviktor-angular';
+import { HviIconClipboardCheckmark } from '../../../../projects/icons/src/lib/components/icon-clipboard-checkmark.component';
+import { HviIconClipboard } from '../../../../projects/icons/src/lib/components/icon-clipboard.component';
+import { HviIconExternalLink } from '../../../../projects/icons/src/lib/components/icon-external-link.component';
 import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
 import { DemoSectionComponent } from './demo-section';
-
-import '@helsevestikt/hviktor-icons/icon-clipboard-checkmark.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-external-link.webcomponent';
 
 /**
  * Wrapper-komponent for demo-sider.
@@ -29,7 +28,18 @@ import '@helsevestikt/hviktor-icons/icon-external-link.webcomponent';
 @Component({
   selector: 'app-demo-page',
   standalone: true,
-  imports: [HviButton, HviHeading, HviParagraph, HviLink, HviLogo, HviTag, HviDivider],
+  imports: [
+    HviButton,
+    HviHeading,
+    HviParagraph,
+    HviLink,
+    HviLogo,
+    HviTag,
+    HviDivider,
+    HviIconClipboard,
+    HviIconClipboardCheckmark,
+    HviIconExternalLink,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="xl:flex xl:gap-8">

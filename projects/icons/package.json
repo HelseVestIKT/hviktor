@@ -1,7 +1,7 @@
 {
   "name": "@helsevestikt/hviktor-icons",
   "version": "0.0.51",
-  "description": "Pure Web Components icon library with 900+ icons, works in any framework",
+  "description": "Angular icon component library with 900+ icons based on NAV Aksel",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/lib/icons.d.ts",
@@ -12,12 +12,17 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./custom-elements.json": "./dist/custom-elements.json",
-    "./*.webcomponent": {
-      "import": "./dist/lib/webcomponents/*.webcomponent.js",
-      "default": "./dist/lib/webcomponents/*.webcomponent.js"
+    "./all-icons": {
+      "types": "./dist/all-icons.d.ts",
+      "import": "./dist/all-icons.js",
+      "default": "./dist/all-icons.js"
     },
-    "./dist/lib/webcomponents/*": "./dist/lib/webcomponents/*"
+    "./custom-elements.json": "./dist/custom-elements.json",
+    "./*.component": {
+      "import": "./dist/lib/components/*.component.js",
+      "default": "./dist/lib/components/*.component.js"
+    },
+    "./dist/lib/components/*": "./dist/lib/components/*"
   },
   "files": [
     "dist/**/*",
@@ -33,13 +38,11 @@
   },
   "keywords": [
     "icons",
-    "web-components",
-    "custom-elements",
+    "angular-icons",
     "svg",
     "angular",
-    "react",
-    "vue",
-    "blazor"
+    "standalone-components",
+    "designsystem"
   ],
   "author": "Helse Vest IKT",
   "license": "MIT",
@@ -57,7 +60,7 @@
   },
   "sideEffects": [
     "dist/index.js",
-    "dist/lib/webcomponents/*.js",
-    "dist/lib/webcomponents/*.webcomponent.js"
+    "dist/lib/components/*.js",
+    "dist/lib/components/*.component.js"
   ]
 }

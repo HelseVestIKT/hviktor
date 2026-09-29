@@ -1,9 +1,9 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HviButton } from '@helsevestikt/hviktor-angular';
 
-import '@helsevestikt/hviktor-icons/icon-cog.webcomponent';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { HviIconCog } from '../../../../../../projects/icons/src/lib/components/icon-cog.component';
 import { ButtonColorExampleSource } from './code-examples/button.color.example.source';
 import { ButtonSizeExampleSource } from './code-examples/button.size.example.source';
 import { ButtonVariantExampleSource } from './code-examples/button.variant.example.source';
@@ -12,7 +12,7 @@ import { ButtonVarianterExampleSource } from './code-examples/button.varianter.e
   selector: 'app-button-demo',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   standalone: true,
-  imports: [HviButton, DemoPageComponent, DemoSectionComponent],
+  imports: [HviButton, DemoPageComponent, DemoSectionComponent, HviIconCog],
   template: `
     <app-demo-page componentId="button">
       <app-demo-section title="Variant" [code]="variantCode">

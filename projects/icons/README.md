@@ -1,6 +1,6 @@
 # Hviktor Icons
 
-En samling med 900+ ikoner som rene Web Components som fungerer i alle rammeverk: Angular, React, Vue, Blazor eller vanilla JavaScript.
+En samling med 900+ Angular-ikoner basert pa NAV Aksel.
 
 ## Installasjon
 
@@ -11,30 +11,27 @@ npm install @helsevestikt/hviktor-icons
 ## Funksjoner
 
 - 900+ ikoner basert på NAV Aksel
-- Rene Web Components (ingen avhengighet til rammeverk)
-- Fungerer i Angular, React, Vue, Blazor og vanilla JS
+- Standalone Angular-komponenter
+- Enkeltimport av enkel-ikoner for god bundle-kontroll
+- Valgfri all-icons entrypoint for rask IntelliSense i demo/playground
 - Tre innebygde størrelser: `sm` (16px), `md` (24px), `lg` (32px)
 - Arver farge gjennom `currentColor`
 - TypeScript typinger + `custom-elements.json`
 
 ## Bruk
 
-Du kan enten laste inn hele kodepakken (900+ ikoner), eller hente inn kun de ikonene du skal bruke i løsningen. Ikonene følger automatisk tekstfargen på siden, så de tilpasser seg for eksempel fargen i en knapp.
+Du kan importere enkelt-ikoner (anbefalt for produksjon), eller bruke all-icons entrypoint i demo/playground for rask utvikling. Ikonene følger automatisk tekstfargen på siden, sa de tilpasser seg for eksempel fargen i en knapp.
 
 ### Angular
 
 ```ts
-// Importerer hele ikon-biblioteket:
-import '@helsevestikt/hviktor-icons';
-// eller importer ett og ett ikon:
-import '@helsevestikt/hviktor-icons/icon-airplane.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-person.webcomponent';
-
-import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component } from '@angular/core';
+import { HviIconAirplane, HviIconPerson } from '@helsevestikt/hviktor-icons';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviIconAirplane, HviIconPerson],
   template: `
     <hvi-icon-airplane size="lg"></hvi-icon-airplane>
     <hvi-icon-person size="md"></hvi-icon-person>
@@ -43,16 +40,25 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class AppComponent {}
 ```
 
-### Blazor / vanlig HTML
+### Angular (valgfritt: alle ikoner)
 
-```html
-<script type="module">
-  import '@helsevestikt/hviktor-icons';
-</script>
+Hvis du vil ha rask IntelliSense-oppslag i templates kan du importere `HVI_ALL_ICONS`
+fra en egen entrypoint:
 
-<hvi-icon-airplane size="lg"></hvi-icon-airplane>
-<hvi-icon-person size="md"></hvi-icon-person>
+```ts
+import { Component } from '@angular/core';
+import { HVI_ALL_ICONS } from '@helsevestikt/hviktor-icons/all-icons';
+
+@Component({
+  standalone: true,
+  imports: [...HVI_ALL_ICONS],
+  template: `<hvi-icon-person />`,
+})
+export class AppComponent {}
 ```
+
+Merk: For produksjonskode med fokus pa bundle-storrelse anbefales per-ikon imports
+fra `@helsevestikt/hviktor-icons` i stedet for `HVI_ALL_ICONS`.
 
 ## Størrelse
 

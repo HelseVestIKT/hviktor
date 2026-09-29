@@ -9,10 +9,10 @@ import {
   viewChild,
 } from '@angular/core';
 import { HviHeading, HviParagraph } from '@helsevestikt/hviktor-angular';
-import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-chevron-up.webcomponent';
 import hljs from 'highlight.js/lib/core';
 import typescript from 'highlight.js/lib/languages/typescript';
+import { HviIconChevronDown } from '../../../../projects/icons/src/lib/components/icon-chevron-down.component';
+import { HviIconChevronUp } from '../../../../projects/icons/src/lib/components/icon-chevron-up.component';
 
 // Register TypeScript language
 hljs.registerLanguage('typescript', typescript);
@@ -24,7 +24,7 @@ hljs.registerLanguage('typescript', typescript);
 @Component({
   selector: 'app-demo-section',
   standalone: true,
-  imports: [HviHeading, HviParagraph],
+  imports: [HviHeading, HviParagraph, HviIconChevronDown, HviIconChevronUp],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <section [id]="sectionId()" class="scroll-mt-24 gap-4">

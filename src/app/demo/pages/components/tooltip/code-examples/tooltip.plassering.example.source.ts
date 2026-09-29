@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const TooltipPlasseringExampleSource = `import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@helsevestikt/hviktor-icons/icon-clipboard.webcomponent';
+import '@helsevestikt/hviktor-icons/icon-clipboard.component';
 
 @Component({
   selector: 'app-tooltip-plassering-example',

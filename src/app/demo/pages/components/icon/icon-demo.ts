@@ -1,18 +1,32 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HviButton, HviCard, HviLink, HviParagraph } from '@helsevestikt/hviktor-angular';
-import '@helsevestikt/hviktor-icons/icon-arrow-down.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-arrow-left.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-arrow-right.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-arrow-up.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-exclamationmark-triangle.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-person.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-triangle.webcomponent';
+import { HviIconArrowDown } from '../../../../../../projects/icons/src/lib/components/icon-arrow-down.component';
+import { HviIconArrowLeft } from '../../../../../../projects/icons/src/lib/components/icon-arrow-left.component';
+import { HviIconArrowRight } from '../../../../../../projects/icons/src/lib/components/icon-arrow-right.component';
+import { HviIconArrowUp } from '../../../../../../projects/icons/src/lib/components/icon-arrow-up.component';
+import { HviIconExclamationmarkTriangle } from '../../../../../../projects/icons/src/lib/components/icon-exclamationmark-triangle.component';
+import { HviIconPerson } from '../../../../../../projects/icons/src/lib/components/icon-person.component';
+import { HviIconTriangle } from '../../../../../../projects/icons/src/lib/components/icon-triangle.component';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 @Component({
   selector: 'app-icon-demo',
   standalone: true,
-  imports: [HviCard, HviButton, HviLink, HviParagraph, DemoPageComponent, DemoSectionComponent],
+  imports: [
+    HviCard,
+    HviButton,
+    HviLink,
+    HviParagraph,
+    DemoPageComponent,
+    DemoSectionComponent,
+    HviIconArrowDown,
+    HviIconArrowLeft,
+    HviIconArrowRight,
+    HviIconArrowUp,
+    HviIconExclamationmarkTriangle,
+    HviIconPerson,
+    HviIconTriangle,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <app-demo-page componentId="icon">

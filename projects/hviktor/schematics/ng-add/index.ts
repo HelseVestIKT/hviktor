@@ -84,7 +84,7 @@ function printSummary(context: SchematicContext, summary: SummaryOptions): void 
     context.logger.info(`   Importer kun ikonene du trenger, ett og ett:`);
     context.logger.info('');
     context.logger.info(
-      `   ${LIGHT_BLUE}import '@helsevestikt/hviktor-icons/icon-person.webcomponent';${RESET}`,
+      `   ${LIGHT_BLUE}import '@helsevestikt/hviktor-icons/icon-person.component';${RESET}`,
     );
     context.logger.info(`   ${LIGHT_BLUE}<hvi-icon-person size="md"></hvi-icon-person>${RESET}`);
     context.logger.info('');

@@ -10,8 +10,8 @@ import {
   HviSortableColumn,
   HviTable,
 } from '@helsevestikt/hviktor-angular';
-import '@helsevestikt/hviktor-icons/icon-chevron-down.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
+import { HviIconChevronDown } from '../../../../../../../projects/icons/src/lib/components/icon-chevron-down.component';
+import { HviIconChevronRight } from '../../../../../../../projects/icons/src/lib/components/icon-chevron-right.component';
 
 @Component({
   selector: 'app-table-komplett-eksempel-example',
@@ -26,6 +26,8 @@ import '@helsevestikt/hviktor-icons/icon-chevron-right.webcomponent';
     HviSearchClear,
     HviSortableColumn,
     HviTable,
+    HviIconChevronDown,
+    HviIconChevronRight,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `

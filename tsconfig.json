@@ -6,7 +6,9 @@
     "strict": true,
     "paths": {
       "@helsevestikt/hviktor": ["./dist/hviktor-lib", "./projects/hviktor/src/public-api"],
-      "@helsevestikt/hviktor/*": ["./dist/hviktor-lib/*", "./projects/hviktor/src/*"]
+      "@helsevestikt/hviktor/*": ["./dist/hviktor-lib/*", "./projects/hviktor/src/*"],
+      "@helsevestikt/hviktor-icons": ["./projects/icons/src/index.ts"],
+      "@helsevestikt/hviktor-icons/*": ["./projects/icons/src/*"]
     },
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
