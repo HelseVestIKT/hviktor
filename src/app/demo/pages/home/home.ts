@@ -27,6 +27,16 @@ import { DEMO_COMPONENTS } from '../../demo-components';
         >
       </p>
       <p hviParagraph>
+        Ikoner er fra
+        <a
+          hviLink
+          href="https://www.npmjs.com/package/@helsevestikt/hviktor-icons?activeTab=readme"
+          target="_blank"
+          rel="noopener noreferrer"
+          >@helsevestikt/hviktor-icons</a
+        >
+      </p>
+      <p hviParagraph>
         Alle komponenter er bygget på
         <a
           hviLink
@@ -37,7 +47,7 @@ import { DEMO_COMPONENTS } from '../../demo-components';
         >
       </p>
       <p hviParagraph>
-        Koden til denne siden og til hviktor-angular er tilgjengelig på
+        Koden til denne siden, hviktor-angular og hviktor-icons er tilgjengelig på
         <a
           hviLink
           href="https://github.com/HelseVestIKT/hviktor"
@@ -49,13 +59,6 @@ import { DEMO_COMPONENTS } from '../../demo-components';
     </header>
 
     <section class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-4">
-      <a routerLink="/ikoner" class="text-inherit no-underline">
-        <hvi-card class="hover-outline-2 h-full hover:outline">
-          <div hviCardBlock>
-            <h2 hviHeading size="sm">Ikoner</h2>
-          </div>
-        </hvi-card>
-      </a>
       @for (component of components; track component.id) {
         <a [routerLink]="['/komponenter', component.id]" class="text-inherit no-underline">
           <hvi-card class="hover-outline-2 h-full hover:outline">
