@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, ElementRef, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   HviButton,
@@ -7,7 +7,7 @@ import {
   HviToggleGroup,
   HviToggleGroupItem,
 } from '@helsevestikt/hviktor-angular';
-import { HviIconMoonFill, HviIconSunFill } from '@helsevestikt/hviktor-icons';
+import { HviIconMoonFill, HviIconSunFill, HviIconXMark } from '@helsevestikt/hviktor-icons';
 import { DEMO_COMPONENTS } from '../demo-components';
 import { ThemeService } from '../services/theme.service';
 
@@ -25,6 +25,7 @@ import { ThemeService } from '../services/theme.service';
     HviToggleGroupItem,
     HviIconMoonFill,
     HviIconSunFill,
+    HviIconXMark,
   ],
   templateUrl: 'demo-layout.html',
   host: {
@@ -34,8 +35,13 @@ import { ThemeService } from '../services/theme.service';
 export class DemoLayoutComponent {
   themeService = inject(ThemeService);
   components = DEMO_COMPONENTS;
+  sideMenuOpen = signal(false);
 
   private sideMenu = viewChild<ElementRef<HTMLElement>>('sideMenu');
+
+  onSideMenuToggle() {
+    this.sideMenuOpen.set(this.sideMenu()?.nativeElement.matches(':popover-open') ?? false);
+  }
 
   closeSideMenu() {
     const element = this.sideMenu()?.nativeElement;
