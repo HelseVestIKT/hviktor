@@ -1,16 +1,17 @@
 import { Component } from '@angular/core';
-import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor-angular';
+import { HviBadge, HviBadgePosition, HviButton, HviTag } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { BadgeBaseVariantExampleSource } from './code-examples/badge.base-variant.example.source';
 import { BadgeMedPosisjoneringExampleSource } from './code-examples/badge.med-posisjonering.example.source';
 import { BadgeStatusIndikatorExampleSource } from './code-examples/badge.status-indikator.example.source';
 import { BadgeStorrelserExampleSource } from './code-examples/badge.storrelser.example.source';
+import { BadgeTilgjengeligNavnExampleSource } from './code-examples/badge.tilgjengelig-navn.example.source';
 import { BadgeTintedVariantExampleSource } from './code-examples/badge.tinted-variant.example.source';
 @Component({
   selector: 'app-badge-demo',
   standalone: true,
-  imports: [HviBadge, HviBadgePosition, DemoPageComponent, DemoSectionComponent, HviTag],
+  imports: [HviBadge, HviBadgePosition, HviButton, DemoPageComponent, DemoSectionComponent, HviTag],
   template: `
     <app-demo-page componentId="badge">
       <app-demo-section title="Base variant" [code]="baseVariantCode">
@@ -62,6 +63,24 @@ import { BadgeTintedVariantExampleSource } from './code-examples/badge.tinted-va
           </hvi-badge-position>
         </div>
       </app-demo-section>
+
+      <app-demo-section
+        title="Tilgjengelig navn"
+        description="Når badgen ligger inline, blir innholdet en del av knappens tilgjengelige navn. Når badgen vises som et overlegg eller mangler lesbart innhold, må knappens aria-label beskrive hele budskapet."
+        [code]="tilgjengeligNavnCode"
+      >
+        <div class="flex flex-wrap items-center gap-2" role="group">
+          <button hviButton type="button">
+            Innboks <hvi-badge color="danger" count="2"></hvi-badge>
+          </button>
+          <button hviButton type="button" aria-label="Innboks, 2 uleste meldinger">
+            <hvi-badge-position placement="top-right">
+              <hvi-badge color="danger" count="2"></hvi-badge>
+              <span class="pr-4">Innboks</span>
+            </hvi-badge-position>
+          </button>
+        </div>
+      </app-demo-section>
     </app-demo-page>
   `,
 })
@@ -72,4 +91,5 @@ export class BadgeDemoComponent {
   readonly tintedVariantCode = BadgeTintedVariantExampleSource;
   readonly statusIndikatorCode = BadgeStatusIndikatorExampleSource;
   readonly medPosisjoneringCode = BadgeMedPosisjoneringExampleSource;
+  readonly tilgjengeligNavnCode = BadgeTilgjengeligNavnExampleSource;
 }

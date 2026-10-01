@@ -30,6 +30,12 @@ export const BadgeExamplesManifest = [
     className: 'BadgeMedPosisjoneringExampleComponent',
     sourceExport: 'BadgeMedPosisjoneringExampleSource',
   },
+  {
+    slug: 'tilgjengelig-navn',
+    title: 'Tilgjengelig navn',
+    className: 'BadgeTilgjengeligNavnExampleComponent',
+    sourceExport: 'BadgeTilgjengeligNavnExampleSource',
+  },
 ] as const;
 
 export type BadgeExampleSlug =
@@ -37,4 +43,5 @@ export type BadgeExampleSlug =
   | 'tinted-variant'
   | 'storrelser'
   | 'status-indikator'
-  | 'med-posisjonering';
+  | 'med-posisjonering'
+  | 'tilgjengelig-navn';

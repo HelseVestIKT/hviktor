@@ -7,5 +7,7 @@ export * from './badge.status-indikator.example';
 export * from './badge.status-indikator.example.source';
 export * from './badge.storrelser.example';
 export * from './badge.storrelser.example.source';
+export * from './badge.tilgjengelig-navn.example';
+export * from './badge.tilgjengelig-navn.example.source';
 export * from './badge.tinted-variant.example';
 export * from './badge.tinted-variant.example.source';
