@@ -27,6 +27,16 @@ import { DEMO_COMPONENTS } from '../../demo-components';
         >
       </p>
       <p hviParagraph>
+        Ikoner er fra
+        <a
+          hviLink
+          href="https://www.npmjs.com/package/@helsevestikt/hviktor-icons?activeTab=readme"
+          target="_blank"
+          rel="noopener noreferrer"
+          >@helsevestikt/hviktor-icons</a
+        >
+      </p>
+      <p hviParagraph>
         Alle komponenter er bygget på
         <a
           hviLink
@@ -37,7 +47,7 @@ import { DEMO_COMPONENTS } from '../../demo-components';
         >
       </p>
       <p hviParagraph>
-        Koden til denne siden og til hviktor-angular er tilgjengelig på
+        Koden til denne siden, hviktor-angular og hviktor-icons er tilgjengelig på
         <a
           hviLink
           href="https://github.com/HelseVestIKT/hviktor"

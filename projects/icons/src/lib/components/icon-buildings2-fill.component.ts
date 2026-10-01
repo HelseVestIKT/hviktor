@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HviIconBase } from '../base-icon.component';
 
 @Component({
-  selector: 'hvi-icon-buildings2fill',
+  selector: 'hvi-icon-buildings2-fill',
   standalone: true,
   template: `<svg
     [attr.width]="sizePx()"

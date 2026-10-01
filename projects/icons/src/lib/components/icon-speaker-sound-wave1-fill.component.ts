@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HviIconBase } from '../base-icon.component';
 
 @Component({
-  selector: 'hvi-icon-speaker-sound-wave1fill',
+  selector: 'hvi-icon-speaker-sound-wave1-fill',
   standalone: true,
   template: `<svg
     [attr.width]="sizePx()"
