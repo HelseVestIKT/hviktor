@@ -1,6 +1,6 @@
 {
   "name": "@helsevestikt/hviktor-angular",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "Angular-komponenter basert på Digdir Designsystemet for Helse Vest IKT",
   "keywords": [
     "angular",
@@ -41,14 +41,14 @@
     "save": "dependencies"
   },
   "dependencies": {
-    "@digdir/designsystemet-css": "~1.22.0",
-    "@digdir/designsystemet-types": "~1.22.0",
-    "@digdir/designsystemet-web": "~1.22.0",
+    "@digdir/designsystemet-css": "~1.23.0",
+    "@digdir/designsystemet-types": "~1.23.0",
+    "@digdir/designsystemet-web": "~1.23.0",
     "@fontsource-variable/albert-sans": "^5.3.0",
     "@tanstack/angular-table": "^8.21.4",
-    "@u-elements/u-combobox": "^2.0.4",
+    "@u-elements/u-combobox": "^2.1.5",
     "@u-elements/u-details": "^1.0.0",
-    "@u-elements/u-tabs": "^1.0.3",
+    "@u-elements/u-tabs": "^1.0.4",
     "tslib": "^2.3.0"
   },
   "exports": {
