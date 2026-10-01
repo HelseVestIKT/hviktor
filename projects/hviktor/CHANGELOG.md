@@ -4,6 +4,21 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] – 2026-10-01
+
+### @helsevestikt/hviktor-angular
+
+#### Changed
+
+- Oppdatert @digdir pakkene til 1.23.0 (https://github.com/digdir/designsystemet/releases/tag/v1.23.0)
+
+### @helsevestikt/hviktor-icons
+
+#### Changed
+
+- Brekkende endringer: alle ikoner er gjort om fra webcomponents til angular komponenter. Se hviktor.no/ikoner (https://hviktor.no/ikoner) for installasjon og bruk.
+  Har du brukt webcomponents-versjonen av ikonene, må du endre til angular-komponentene ved å importere ikonet fra `@helsevestikt/hviktor-icons` og legge ikonet til i imports-arrayet. Det er ikke nødvendig å endre noe i html-koden.
+
 ## [0.3.6] – 2026-09-17
 
 ### Changed
