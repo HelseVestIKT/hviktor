@@ -1,12 +1,15 @@
 import { Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 import { Schema } from './schema';
 
 const HVIKTOR_PACKAGE = '@helsevestikt/hviktor-angular';
 const HVIKTOR_IMPORT = `@import '${HVIKTOR_PACKAGE}/styles.css';`;
 
 const ICONS_PACKAGE = '@helsevestikt/hviktor-icons';
-const ICONS_VERSION = '^0.0.51';
+// Ikonpakken releases alltid med samme versjon som denne pakken
+const ICONS_VERSION = `^${JSON.parse(readFileSync(join(__dirname, '..', '..', 'package.json'), 'utf-8')).version}`;
 const ICONS_DOCS_URL = 'https://www.npmjs.com/package/@helsevestikt/hviktor-icons';
 
 const TAILWIND_V4_IMPORT = `@import 'tailwindcss';`;
@@ -81,16 +84,14 @@ function printSummary(context: SchematicContext, summary: SummaryOptions): void 
     context.logger.info(`${check} ${ICONS_PACKAGE} er installert`);
     context.logger.info('');
     context.logger.info(`   ${BOLD}Slik bruker du ikonene:${RESET}`);
-    context.logger.info(`   Importer kun ikonene du trenger, ett og ett:`);
+    context.logger.info(`   Importer ikonene du trenger og legg dem i komponentens imports:`);
     context.logger.info('');
     context.logger.info(
-      `   ${LIGHT_BLUE}import '@helsevestikt/hviktor-icons/icon-person.component';${RESET}`,
+      `   ${LIGHT_BLUE}import { HviIconPerson } from '${ICONS_PACKAGE}';${RESET}`,
     );
-    context.logger.info(`   ${LIGHT_BLUE}<hvi-icon-person size="md"></hvi-icon-person>${RESET}`);
+    context.logger.info(`   ${LIGHT_BLUE}imports: [HviIconPerson]${RESET}`);
+    context.logger.info(`   ${LIGHT_BLUE}<hvi-icon-person size="md" />${RESET}`);
     context.logger.info('');
-    context.logger.info(
-      `   ${DIM}Husk CUSTOM_ELEMENTS_SCHEMA i komponenten som bruker ikonene.${RESET}`,
-    );
     context.logger.info(`   ${DIM}Full dokumentasjon: ${ICONS_DOCS_URL}${RESET}`);
   }
 

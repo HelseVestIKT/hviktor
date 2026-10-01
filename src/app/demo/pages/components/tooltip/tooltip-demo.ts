@@ -1,11 +1,11 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal, WritableSignal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
 import { HviButton, HviField, HviInput, HviLabel, HviTooltip } from '@helsevestikt/hviktor-angular';
+import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { TooltipIkonKnappMedTooltipExampleSource } from './code-examples/tooltip.ikon-knapp-med-tooltip.example.source';
 import { TooltipPlasseringExampleSource } from './code-examples/tooltip.plassering.example.source';
 
-import { HviIconClipboard } from '../../../../../../projects/icons/src/lib/components/icon-clipboard.component';
 import { TooltipBetingetTooltipExampleSource } from './code-examples/tooltip.betinget-tooltip.example.source';
 import { TooltipMedTekstExampleSource } from './code-examples/tooltip.med-tekst.example.source';
 
@@ -22,7 +22,6 @@ import { TooltipMedTekstExampleSource } from './code-examples/tooltip.med-tekst.
     HviTooltip,
     HviIconClipboard,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <app-demo-page componentId="tooltip">
       <!-- Grunnleggende eksempel med ikon-knapp -->

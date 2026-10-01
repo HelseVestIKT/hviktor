@@ -1,16 +1,18 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal, WritableSignal } from '@angular/core';
+import { Component, signal, WritableSignal } from '@angular/core';
+import { HviButton, HviField, HviInput, HviLabel, HviTooltip } from '@helsevestikt/hviktor-angular';
+import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-tooltip-betinget-tooltip-example',
   standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviButton, HviField, HviInput, HviLabel, HviTooltip, HviIconClipboard],
   template: `
     <div class="flex justify-center">
       <button
         hviButton
         variant="secondary"
         icon
-        [attr.hviTooltip]="visTooltip() ? 'Kopier' : null"
+        [hviTooltip]="visTooltip() ? 'Kopier' : ''"
         tooltipPlacement="bottom"
         aria-label="Kopier"
       >

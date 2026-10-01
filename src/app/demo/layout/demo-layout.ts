@@ -1,5 +1,5 @@
 import { NgTemplateOutlet } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, ElementRef, inject, viewChild } from '@angular/core';
+import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   HviButton,
@@ -7,8 +7,7 @@ import {
   HviToggleGroup,
   HviToggleGroupItem,
 } from '@helsevestikt/hviktor-angular';
-import { HviIconMoonFill } from '../../../../projects/icons/src/lib/components/icon-moon-fill.component';
-import { HviIconSunFill } from '../../../../projects/icons/src/lib/components/icon-sun-fill.component';
+import { HviIconMoonFill, HviIconSunFill } from '@helsevestikt/hviktor-icons';
 import { DEMO_COMPONENTS } from '../demo-components';
 import { ThemeService } from '../services/theme.service';
 
@@ -27,7 +26,6 @@ import { ThemeService } from '../services/theme.service';
     HviIconMoonFill,
     HviIconSunFill,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: 'demo-layout.html',
   host: {
     '[attr.data-color-scheme]': 'themeService.colorScheme()',

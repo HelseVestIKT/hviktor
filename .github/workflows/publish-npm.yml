@@ -1,4 +1,4 @@
-# Publiserer biblioteket til npm når en ny tag pushes (f.eks. v0.1.0)
+# Publiserer begge pakkene til npm med samme versjon når en ny tag pushes (f.eks. v0.1.0)
 
 name: Publish to npm
 
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   publish:
-    name: Build & Publish NPM package
+    name: Build & Publish NPM packages
     runs-on: ubuntu-latest
     environment: npm-publish
 
@@ -47,10 +47,14 @@ jobs:
         id: version
         run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_OUTPUT
 
-      - name: Update package version
+      - name: Update package versions
         run: |
-          cd projects/hviktor
-          npm version ${{ steps.version.outputs.VERSION }} --no-git-tag-version --allow-same-version
+          for dir in projects/hviktor projects/icons; do
+            (cd "$dir" && npm version ${{ steps.version.outputs.VERSION }} --no-git-tag-version --allow-same-version)
+          done
+
+      - name: Build icons
+        run: npm run build:icons
 
       - name: Build library
         run: npm run build:lib
@@ -60,7 +64,15 @@ jobs:
           cd projects/hviktor
           npm run build
 
-      - name: Publish to npm
+      # Ikoner først: ng-add i hviktor-angular installerer ikonene med samme versjon
+      - name: Publish icons to npm
+        run: |
+          cd dist/hviktor-icons
+          npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish library to npm
         run: |
           cd dist/hviktor-lib
           npm publish --access public --provenance

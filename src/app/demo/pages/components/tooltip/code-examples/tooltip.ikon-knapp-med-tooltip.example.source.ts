@@ -1,11 +1,12 @@
 // Auto-generated - do not edit manually
-export const TooltipIkonKnappMedTooltipExampleSource = `import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@helsevestikt/hviktor-icons/icon-clipboard.component';
+export const TooltipIkonKnappMedTooltipExampleSource = `import { Component } from '@angular/core';
+import { HviButton, HviTooltip } from '@helsevestikt/hviktor-angular';
+import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-tooltip-ikon-knapp-med-tooltip-example',
   standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviButton, HviTooltip, HviIconClipboard],
   template: \`
     <div class="flex justify-center">
       <button hviButton variant="primary" icon hviTooltip="Kopier" aria-label="Kopier">

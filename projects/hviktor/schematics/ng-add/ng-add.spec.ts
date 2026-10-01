@@ -12,6 +12,7 @@
  */
 import { Tree } from '@angular-devkit/schematics';
 import { SchematicTestRunner, UnitTestTree } from '@angular-devkit/schematics/testing';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
@@ -173,7 +174,7 @@ describe('ng-add', () => {
   });
 
   describe('ikoner', () => {
-    it('installerer hviktor-icons med semver-range uten å røre main.ts', async () => {
+    it('installerer hviktor-icons med samme versjon som hviktor-angular uten å røre main.ts', async () => {
       const base = createWorkspace({ angularVersion: '^19.0.0' });
       base.create(
         '/src/main.ts',
@@ -181,8 +182,14 @@ describe('ng-add', () => {
       );
       const tree = await runNgAdd(base);
       const pkg = JSON.parse(tree.readContent('/package.json'));
+      const libPkg = JSON.parse(
+        readFileSync(
+          new URL('../../../../dist/hviktor-lib/package.json', import.meta.url),
+          'utf-8',
+        ),
+      );
 
-      expect(pkg.dependencies['@helsevestikt/hviktor-icons']).toMatch(/^\^/);
+      expect(pkg.dependencies['@helsevestikt/hviktor-icons']).toBe(`^${libPkg.version}`);
       expect(tree.readContent('/src/main.ts')).not.toContain('hviktor-icons');
     });
 

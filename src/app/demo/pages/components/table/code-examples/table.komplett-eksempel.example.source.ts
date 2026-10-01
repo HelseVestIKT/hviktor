@@ -1,14 +1,12 @@
 // Auto-generated - do not edit manually
-export const TableKomplettEksempelExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+export const TableKomplettEksempelExampleSource = `import { Component, signal } from '@angular/core';
 import { HviButton, HviInput, HviLabel, HviMultiSelect, HviPagination, HviSearch, HviSearchClear, HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
-import '@helsevestikt/hviktor-icons/icon-chevron-down.component';
-import '@helsevestikt/hviktor-icons/icon-chevron-right.component';
+import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-table-komplett-eksempel-example',
   standalone: true,
-  imports: [HviButton, HviInput, HviLabel, HviMultiSelect, HviPagination, HviSearch, HviSearchClear, HviSortableColumn, HviTable],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviButton, HviInput, HviLabel, HviMultiSelect, HviPagination, HviSearch, HviSearchClear, HviSortableColumn, HviTable, HviIconChevronDown, HviIconChevronRight],
   template: \`
     <form
       class="mb-1"

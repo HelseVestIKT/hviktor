@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   HviButton,
   HviInput,
@@ -10,8 +10,7 @@ import {
   HviSortableColumn,
   HviTable,
 } from '@helsevestikt/hviktor-angular';
-import { HviIconChevronDown } from '../../../../../../../projects/icons/src/lib/components/icon-chevron-down.component';
-import { HviIconChevronRight } from '../../../../../../../projects/icons/src/lib/components/icon-chevron-right.component';
+import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-table-komplett-eksempel-example',
@@ -29,7 +28,6 @@ import { HviIconChevronRight } from '../../../../../../../projects/icons/src/lib
     HviIconChevronDown,
     HviIconChevronRight,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <form
       class="mb-1"

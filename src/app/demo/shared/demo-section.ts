@@ -2,17 +2,15 @@ import {
   AfterViewInit,
   Component,
   computed,
-  CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
   input,
   signal,
   viewChild,
 } from '@angular/core';
 import { HviHeading, HviParagraph } from '@helsevestikt/hviktor-angular';
+import { HviIconChevronDown, HviIconChevronUp } from '@helsevestikt/hviktor-icons';
 import hljs from 'highlight.js/lib/core';
 import typescript from 'highlight.js/lib/languages/typescript';
-import { HviIconChevronDown } from '../../../../projects/icons/src/lib/components/icon-chevron-down.component';
-import { HviIconChevronUp } from '../../../../projects/icons/src/lib/components/icon-chevron-up.component';
 
 // Register TypeScript language
 hljs.registerLanguage('typescript', typescript);
@@ -25,7 +23,6 @@ hljs.registerLanguage('typescript', typescript);
   selector: 'app-demo-section',
   standalone: true,
   imports: [HviHeading, HviParagraph, HviIconChevronDown, HviIconChevronUp],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <section [id]="sectionId()" class="scroll-mt-24 gap-4">
       <h2 hviHeading size="md">{{ title() }}</h2>

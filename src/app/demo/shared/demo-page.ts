@@ -1,11 +1,4 @@
-import {
-  Component,
-  computed,
-  contentChildren,
-  CUSTOM_ELEMENTS_SCHEMA,
-  input,
-  signal,
-} from '@angular/core';
+import { Component, computed, contentChildren, input, signal } from '@angular/core';
 import {
   HviButton,
   HviDivider,
@@ -15,9 +8,11 @@ import {
   HviParagraph,
   HviTag,
 } from '@helsevestikt/hviktor-angular';
-import { HviIconClipboardCheckmark } from '../../../../projects/icons/src/lib/components/icon-clipboard-checkmark.component';
-import { HviIconClipboard } from '../../../../projects/icons/src/lib/components/icon-clipboard.component';
-import { HviIconExternalLink } from '../../../../projects/icons/src/lib/components/icon-external-link.component';
+import {
+  HviIconClipboard,
+  HviIconClipboardCheckmark,
+  HviIconExternalLink,
+} from '@helsevestikt/hviktor-icons';
 import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
 import { DemoSectionComponent } from './demo-section';
 
@@ -40,7 +35,6 @@ import { DemoSectionComponent } from './demo-section';
     HviIconClipboardCheckmark,
     HviIconExternalLink,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="xl:flex xl:gap-8">
       <article class="min-w-0 flex-1">

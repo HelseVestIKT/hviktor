@@ -1,14 +1,12 @@
 // Auto-generated - do not edit manually
-export const TableUtvidbareRaderExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+export const TableUtvidbareRaderExampleSource = `import { Component, signal } from '@angular/core';
 import { HviButton, HviTable } from '@helsevestikt/hviktor-angular';
-import '@helsevestikt/hviktor-icons/icon-chevron-down.component';
-import '@helsevestikt/hviktor-icons/icon-chevron-right.component';
+import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-table-utvidbare-rader-example',
   standalone: true,
-  imports: [HviButton, HviTable],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviButton, HviTable, HviIconChevronDown, HviIconChevronRight],
   template: \`
     <table hviTable [value]="data" hover #expandTable="hviTable">
       <caption>

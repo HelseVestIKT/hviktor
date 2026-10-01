@@ -35,6 +35,9 @@ jobs:
       - name: Build library
         run: npm run build:lib
 
+      - name: Build icons
+        run: npm run build:icons
+
       - name: Link library
         run: npm install --ignore-scripts
 
