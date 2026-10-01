@@ -15,35 +15,35 @@ import { BadgeTintedVariantExampleSource } from './code-examples/badge.tinted-va
     <app-demo-page componentId="badge">
       <app-demo-section title="Base variant" [code]="baseVariantCode">
         <div class="flex flex-wrap items-center gap-2" role="group">
-          <hvi-badge color="neutral" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="danger" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="info" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="warning" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="brand1" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="brand2" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="brand3" count="9+" aria-label="9+" variant="base"></hvi-badge>
-          <hvi-badge color="accent" count="9+" aria-label="9+" variant="base"></hvi-badge>
+          <hvi-badge color="neutral" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="danger" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="info" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="warning" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="brand1" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="brand2" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="brand3" count="9+" variant="base"></hvi-badge>
+          <hvi-badge color="accent" count="9+" variant="base"></hvi-badge>
         </div>
       </app-demo-section>
 
       <app-demo-section title="Tinted variant" [code]="tintedVariantCode">
         <div class="flex flex-wrap items-center gap-2" role="group">
-          <hvi-badge color="neutral" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="danger" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="info" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="warning" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="brand1" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="brand2" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="brand3" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
-          <hvi-badge color="accent" count="9+" aria-label="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="neutral" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="danger" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="info" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="warning" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="brand1" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="brand2" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="brand3" count="9+" variant="tinted"></hvi-badge>
+          <hvi-badge color="accent" count="9+" variant="tinted"></hvi-badge>
         </div>
       </app-demo-section>
 
       <app-demo-section title="Størrelser" [code]="storrelserCode">
         <div class="flex flex-wrap items-center gap-2" role="group">
-          <hvi-badge color="danger" count="9+" aria-label="9+" size="sm"></hvi-badge>
-          <hvi-badge color="danger" count="9+" aria-label="9+" size="md"></hvi-badge>
-          <hvi-badge color="danger" count="9+" aria-label="9+" size="lg"></hvi-badge>
+          <hvi-badge color="danger" count="9+" size="sm"></hvi-badge>
+          <hvi-badge color="danger" count="9+" size="md"></hvi-badge>
+          <hvi-badge color="danger" count="9+" size="lg"></hvi-badge>
         </div>
       </app-demo-section>
 
@@ -57,7 +57,7 @@ import { BadgeTintedVariantExampleSource } from './code-examples/badge.tinted-va
       <app-demo-section title="Med posisjonering" [code]="medPosisjoneringCode">
         <div class="flex flex-wrap items-center gap-2" role="group">
           <hvi-badge-position placement="top-left">
-            <hvi-badge color="danger" count="3" aria-label="3"></hvi-badge>
+            <hvi-badge color="danger" count="3"></hvi-badge>
             <hvi-tag color="info">Tag med badge</hvi-tag>
           </hvi-badge-position>
         </div>
