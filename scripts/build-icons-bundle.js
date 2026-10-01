@@ -9,7 +9,7 @@ const esbuild = require('esbuild');
 const path = require('path');
 const fs = require('fs');
 
-const distPath = path.join(__dirname, '..', 'projects', 'icons', 'dist');
+const distPath = path.join(__dirname, '..', 'dist', 'hviktor-icons');
 const bundlePath = path.join(distPath, 'bundles');
 
 // Ensure the bundles directory exists

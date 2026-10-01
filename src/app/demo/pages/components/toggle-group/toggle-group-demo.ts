@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   HviHeading,
   HviLabel,
@@ -9,9 +9,11 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import '@helsevestikt/hviktor-icons/icon-align-center.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-align-left.webcomponent';
-import '@helsevestikt/hviktor-icons/icon-align-right.webcomponent';
+import {
+  HviIconAlignCenter,
+  HviIconAlignLeft,
+  HviIconAlignRight,
+} from '@helsevestikt/hviktor-icons';
 
 import { ToggleGroupGrunnleggendeExampleSource } from './code-examples/toggle-group.grunnleggende.example.source';
 import { ToggleGroupKunIkonerExampleSource } from './code-examples/toggle-group.kun-ikoner.example.source';
@@ -31,8 +33,10 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
     HviHeading,
     HviTooltip,
     HviLabel,
+    HviIconAlignCenter,
+    HviIconAlignLeft,
+    HviIconAlignRight,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <app-demo-page componentId="toggle-group">
       <!-- Grunnleggende -->
