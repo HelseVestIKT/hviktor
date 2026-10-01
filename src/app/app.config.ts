@@ -44,7 +44,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(
       routes,
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      withInMemoryScrolling({ scrollPositionRestoration: 'disabled' }),
       withNavigationErrorHandler(({ error, url }) => handleNavigationError(error, url)),
     ),
     provideHttpClient(),
