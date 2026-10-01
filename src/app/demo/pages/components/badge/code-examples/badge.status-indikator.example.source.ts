@@ -7,7 +7,7 @@ import { HviBadge } from '@helsevestikt/hviktor-angular';
   standalone: true,
   imports: [HviBadge],
   template: \`
-    <div class="flex flex-wrap items-center gap-4">
+    <div class="flex flex-wrap items-center gap-2" role="group">
       <hvi-badge color="success" variant="base"></hvi-badge>
       <p>Aktiv</p>
     </div>

@@ -111,7 +111,7 @@ function parseDemoFile(filePath) {
 
   // Extract HVI imports from the original imports
   const hviImportMatch = content.match(
-    /import\s+\{([^}]+)\}\s+from\s+['"]@helsevestikt\/hviktor['"]/,
+    /import\s+\{([^}]+)\}\s+from\s+['"]@helsevestikt\/hviktor(?:-angular)?['"]/,
   );
   const allHviImports = hviImportMatch
     ? hviImportMatch[1]

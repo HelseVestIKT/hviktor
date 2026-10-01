@@ -6,7 +6,7 @@ import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor-angula
   standalone: true,
   imports: [HviBadge, HviBadgePosition, HviTag],
   template: `
-    <div class="flex flex-wrap items-center gap-4">
+    <div class="flex flex-wrap items-center gap-2" role="group">
       <hvi-badge-position placement="top-left">
         <hvi-badge color="danger" count="3"></hvi-badge>
         <hvi-tag color="info">Tag med badge</hvi-tag>
