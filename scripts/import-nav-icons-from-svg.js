@@ -1,20 +1,21 @@
 #!/usr/bin/env node
 
 /**
- * Import NAV Aksel icons from SVG files
+ * Importerer Nav Aksel-ikoner fra SVG-filer som Angular-komponenter.
  *
- * This script:
- * 1. Reads SVG files from a directory
- * 2. Extracts the path data from each SVG
- * 3. Generates an icon component file for each icon
- * 4. Regenerates src/index.ts and src/all-icons.ts from all icon components
+ * Skriptet:
+ * 1. Leser SVG-filer (standard: node_modules/@navikt/aksel-icons/dist/svg)
+ * 2. Lager en komponent per nytt ikon i projects/icons/src/lib/components
+ * 3. Skriver src/index.ts og src/all-icons.ts på nytt
+ * 4. Kjører generate-icon-metadata.js for ikonsiden i demoappen
  *
- * Usage:
- * 1. Download icons from: https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip
- * 2. Extract to a folder (e.g., temp/nav-icons/)
- * 3. Run: node scripts/import-nav-icons-from-svg.js temp/nav-icons/svg
+ * Bruk:
+ *   npm run import:nav-icons                       # fra @navikt/aksel-icons i node_modules
+ *   npm run import:nav-icons -- <svg-mappe>        # fra en annen mappe, f.eks. utpakket zip
+ *   npm run import:nav-icons -- --force            # oppdater også SVG-path i eksisterende ikoner
+ *   npm run import:nav-icons -- --entries          # skriv bare index.ts og all-icons.ts på nytt
  *
- * Regenerate only the entry files: node scripts/import-nav-icons-from-svg.js --entries
+ * Se projects/icons/UPDATING_ICONS.md.
  */
 
 const fs = require('fs');
@@ -25,33 +26,26 @@ const ICONS_DIR = path.join(ICONS_SRC, 'lib/components');
 const INDEX_PATH = path.join(ICONS_SRC, 'index.ts');
 const ALL_ICONS_PATH = path.join(ICONS_SRC, 'all-icons.ts');
 const PACKAGE_NAME = '@helsevestikt/hviktor-icons';
+const DEFAULT_SVG_DIR = path.join(__dirname, '../node_modules/@navikt/aksel-icons/dist/svg');
 
-const [, , svgSourceDir] = process.argv;
+const args = process.argv.slice(2);
+const force = args.includes('--force');
+const svgSourceDir = args.find((arg) => !arg.startsWith('--')) ?? DEFAULT_SVG_DIR;
 
-if (svgSourceDir === '--entries') {
+if (args.includes('--entries')) {
   writeEntryFiles();
   process.exit(0);
 }
 
-if (!svgSourceDir) {
-  console.error('❌ Please provide the path to SVG files directory');
-  console.error('   Usage: node scripts/import-nav-icons-from-svg.js <svg-directory>');
-  console.error('');
-  console.error('   Example:');
-  console.error('   1. Download: https://cdn.nav.no/aksel/icons/zip/aksel-icons.zip');
-  console.error('   2. Extract the zip file');
-  console.error('   3. Run: node scripts/import-nav-icons-from-svg.js ./aksel-icons/svg');
-  process.exit(1);
-}
-
 if (!fs.existsSync(svgSourceDir)) {
-  console.error(`❌ Directory not found: ${svgSourceDir}`);
+  console.error(`❌ Fant ikke mappen: ${svgSourceDir}`);
+  console.error('   Kjør `npm install` eller oppgi en mappe med SVG-filer.');
   process.exit(1);
 }
 
 /**
- * Convert filename to component name
- * Example: "chevron-down.svg" -> "ChevronDown"
+ * Aksel-filnavn (PascalCase eller kebab-case) til PascalCase.
+ * Eksempel: "ChevronDown.svg" og "chevron-down.svg" -> "ChevronDown"
  */
 function fileNameToComponentName(fileName) {
   return fileName
@@ -59,6 +53,17 @@ function fileNameToComponentName(fileName) {
     .split('-')
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join('');
+}
+
+/**
+ * PascalCase til kebab-case.
+ * Eksempel: "ChevronDown" -> "chevron-down", "XMark" -> "x-mark", "Buildings2Fill" -> "buildings2-fill"
+ */
+function toKebab(name) {
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/([A-Z])([A-Z][a-z])/g, '$1-$2')
+    .toLowerCase();
 }
 
 /**
@@ -116,8 +121,8 @@ export class ${className} extends HviIconBase {
  * Main function to import all icons
  */
 async function importIcons() {
-  console.log('🚀 Importing NAV Aksel icons from SVG files...\n');
-  console.log(`📁 Source directory: ${svgSourceDir}\n`);
+  console.log('🚀 Importerer Aksel-ikoner fra SVG-filer...\n');
+  console.log(`📁 Kilde: ${svgSourceDir}\n`);
 
   // Ensure icons directory exists
   if (!fs.existsSync(ICONS_DIR)) {
@@ -135,6 +140,7 @@ async function importIcons() {
   console.log(`Found ${svgFiles.length} SVG files\n`);
 
   let successCount = 0;
+  let updateCount = 0;
   let skipCount = 0;
   let errorCount = 0;
 
@@ -142,46 +148,64 @@ async function importIcons() {
     const svgPath = path.join(svgSourceDir, svgFile);
     const svgContent = fs.readFileSync(svgPath, 'utf-8');
 
-    const kebabName = svgFile.replace('.svg', '');
     const componentName = fileNameToComponentName(svgFile);
+    const kebabName = toKebab(componentName);
     const fileName = `icon-${kebabName}.component.ts`;
     const filePath = path.join(ICONS_DIR, fileName);
 
-    // Check if file already exists
-    if (fs.existsSync(filePath)) {
-      console.log(`⏭️  Skipping ${kebabName} (already exists)`);
-      skipCount++;
-      continue;
-    }
-
-    // Extract SVG path
     const pathData = extractPathFromSvg(svgContent);
 
     if (!pathData) {
-      console.error(`❌ Failed to extract path from ${svgFile}`);
+      console.error(`❌ Fant ingen path i ${svgFile}`);
       errorCount++;
       continue;
     }
 
-    // Generate component file
+    if (fs.existsSync(filePath)) {
+      if (force && updatePath(filePath, pathData)) {
+        console.log(`🔄 Oppdaterte ${fileName}`);
+        updateCount++;
+      } else {
+        skipCount++;
+      }
+      continue;
+    }
+
     const componentContent = generateComponentFile(componentName, kebabName, pathData);
     fs.writeFileSync(filePath, componentContent, 'utf-8');
 
-    console.log(`✅ Generated ${fileName}`);
+    console.log(`✅ Laget ${fileName}`);
     successCount++;
   }
 
-  console.log(`\n📊 Summary:`);
-  console.log(`   ✅ Created: ${successCount}`);
-  console.log(`   ⏭️  Skipped: ${skipCount}`);
-  console.log(`   ❌ Errors: ${errorCount}`);
+  console.log(`\n📊 Oppsummering:`);
+  console.log(`   ✅ Nye: ${successCount}`);
+  if (force) {
+    console.log(`   🔄 Oppdatert: ${updateCount}`);
+  }
+  console.log(`   ⏭️  Uendret: ${skipCount}`);
+  console.log(`   ❌ Feil: ${errorCount}`);
 
   writeEntryFiles();
+  require('./generate-icon-metadata.js');
 
-  console.log('\n🎉 Done!');
-  console.log(`\n💡 Next steps:`);
-  console.log(`   1. Run: npm run build:icons`);
-  console.log(`   2. Test the icons in the demo app`);
+  console.log('\n💡 Neste steg:');
+  console.log('   1. Se over endringene med git status / git diff');
+  console.log('   2. npm run build:icons');
+  console.log('   3. Sjekk /ikoner i demoappen');
+}
+
+/**
+ * Bytter ut SVG-path i en eksisterende komponent. Returnerer true hvis innholdet endret seg.
+ */
+function updatePath(filePath, pathData) {
+  const content = fs.readFileSync(filePath, 'utf-8');
+  const updated = content.replace(/(readonly path =\s*')[^']*(')/, `$1${pathData}$2`);
+  if (updated === content) {
+    return false;
+  }
+  fs.writeFileSync(filePath, updated, 'utf-8');
+  return true;
 }
 
 /**

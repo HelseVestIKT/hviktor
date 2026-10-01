@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HviIconBase } from '../base-icon.component';
 
 @Component({
-  selector: 'hvi-icon-density2fill',
+  selector: 'hvi-icon-density1-fill',
   standalone: true,
   template: `<svg
     [attr.width]="sizePx()"
@@ -17,7 +17,7 @@ import { HviIconBase } from '../base-icon.component';
   styles: [':host { display: inline-block; line-height: 0; }', 'svg { display: block; }'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HviIconDensity2Fill extends HviIconBase {
+export class HviIconDensity1Fill extends HviIconBase {
   protected override readonly path =
-    'M6.25 3C6.25 2.58579 6.58579 2.25 7 2.25H17C17.4142 2.25 17.75 2.58579 17.75 3V7C17.75 7.41421 17.4142 7.75 17 7.75H7C6.58579 7.75 6.25 7.41421 6.25 7V3ZM6.25 10C6.25 9.58579 6.58579 9.25 7 9.25H17C17.4142 9.25 17.75 9.58579 17.75 10V14C17.75 14.4142 17.4142 14.75 17 14.75H7C6.58579 14.75 6.25 14.4142 6.25 14V10ZM7 16.25C6.58579 16.25 6.25 16.5858 6.25 17V21C6.25 21.4142 6.58579 21.75 7 21.75H17C17.4142 21.75 17.75 21.4142 17.75 21V17C17.75 16.5858 17.4142 16.25 17 16.25H7Z';
+    'M7 2.25C6.58579 2.25 6.25 2.58579 6.25 3V10.5C6.25 10.9142 6.58579 11.25 7 11.25H17C17.4142 11.25 17.75 10.9142 17.75 10.5V3C17.75 2.58579 17.4142 2.25 17 2.25H7ZM7 12.75C6.58579 12.75 6.25 13.0858 6.25 13.5V21C6.25 21.4142 6.58579 21.75 7 21.75H17C17.4142 21.75 17.75 21.4142 17.75 21V13.5C17.75 13.0858 17.4142 12.75 17 12.75H7Z';
 }

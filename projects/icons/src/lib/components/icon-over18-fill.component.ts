@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { HviIconBase } from '../base-icon.component';
 
 @Component({
-  selector: 'hvi-icon-over18fill',
+  selector: 'hvi-icon-over18-fill',
   standalone: true,
   template: `<svg
     [attr.width]="sizePx()"

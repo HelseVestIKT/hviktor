@@ -1,4 +1,4 @@
-import { Component, computed, contentChildren, input, signal } from '@angular/core';
+import { Component, computed, contentChildren, input } from '@angular/core';
 import {
   HviButton,
   HviDivider,
@@ -8,12 +8,9 @@ import {
   HviParagraph,
   HviTag,
 } from '@helsevestikt/hviktor-angular';
-import {
-  HviIconClipboard,
-  HviIconClipboardCheckmark,
-  HviIconExternalLink,
-} from '@helsevestikt/hviktor-icons';
+import { HviIconExternalLink } from '@helsevestikt/hviktor-icons';
 import { DEMO_COMPONENTS, designSystemUrl } from '../demo-components';
+import { CopyButtonComponent } from './copy-button';
 import { DemoSectionComponent } from './demo-section';
 
 /**
@@ -31,9 +28,8 @@ import { DemoSectionComponent } from './demo-section';
     HviLogo,
     HviTag,
     HviDivider,
-    HviIconClipboard,
-    HviIconClipboardCheckmark,
     HviIconExternalLink,
+    CopyButtonComponent,
   ],
   template: `
     <div class="xl:flex xl:gap-8">
@@ -49,15 +45,7 @@ import { DemoSectionComponent } from './demo-section';
                 <hvi-tag color="brand2">A11y testet ✓</hvi-tag>
               }
             </div>
-            <button hviButton variant="secondary" size="sm" (click)="copyPageAsMarkdown()">
-              @if (copied()) {
-                <hvi-icon-clipboard-checkmark />
-                Kopiert!
-              } @else {
-                <hvi-icon-clipboard />
-                Kopiér Markdown
-              }
-            </button>
+            <app-copy-button [text]="pageAsMarkdown" label="Kopiér Markdown" />
           </div>
           @if (isHvi()) {
             <div class="mb-2 flex items-center gap-2">
@@ -148,14 +136,13 @@ export class DemoPageComponent {
   componentId = input.required<string>();
 
   sections = contentChildren(DemoSectionComponent);
-  copied = signal(false);
 
   scrollTo(event: Event, id: string) {
     event.preventDefault();
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
 
-  copyPageAsMarkdown() {
+  pageAsMarkdown = (): string => {
     const lines: string[] = [];
     lines.push(`# ${this.name()}`);
     lines.push('');
@@ -186,23 +173,8 @@ export class DemoPageComponent {
       }
     }
 
-    const markdown = lines.join('\n');
-    const writeText = navigator.clipboard?.writeText;
-
-    if (!writeText) {
-      return;
-    }
-
-    writeText
-      .call(navigator.clipboard, markdown)
-      .then(() => {
-        this.copied.set(true);
-        setTimeout(() => this.copied.set(false), 2000);
-      })
-      .catch((error) => {
-        console.error('Kunne ikke kopiere markdown til utklippstavlen.', error);
-      });
-  }
+    return lines.join('\n');
+  };
 
   /** Slår opp komponent-konfigurasjon fra DEMO_COMPONENTS basert på componentId. */
   private component = computed(() => DEMO_COMPONENTS.find((c) => c.id === this.componentId()));
