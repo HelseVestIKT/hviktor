@@ -16,7 +16,7 @@ npm install @helsevestikt/hviktor-icons
 - Valgfri all-icons entrypoint for rask IntelliSense i demo/playground
 - Tre innebygde størrelser: `sm` (16px), `md` (24px), `lg` (32px)
 - Arver farge gjennom `currentColor`
-- TypeScript typinger + `custom-elements.json`
+- TypeScript-typinger
 
 ## Bruk
 

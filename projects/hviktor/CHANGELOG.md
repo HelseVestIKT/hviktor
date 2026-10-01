@@ -1,6 +1,6 @@
 # Changelog
 
-Alle vesentlige endringer i `@helsevestikt/hviktor-angular` dokumenteres her.
+Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hviktor-icons` dokumenteres her. Fra og med 0.4.0 har pakkene alltid samme versjon.
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 

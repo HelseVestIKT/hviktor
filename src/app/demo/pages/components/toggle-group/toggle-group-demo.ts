@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   HviHeading,
   HviLabel,
@@ -9,9 +9,12 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import { HviIconAlignCenter } from '../../../../../../projects/icons/src/lib/components/icon-align-center.component';
-import { HviIconAlignLeft } from '../../../../../../projects/icons/src/lib/components/icon-align-left.component';
-import { HviIconAlignRight } from '../../../../../../projects/icons/src/lib/components/icon-align-right.component';
+import {
+  HviIconAlignCenter,
+  HviIconAlignLeft,
+  HviIconAlignRight,
+} from '@helsevestikt/hviktor-icons';
+
 import { ToggleGroupGrunnleggendeExampleSource } from './code-examples/toggle-group.grunnleggende.example.source';
 import { ToggleGroupKunIkonerExampleSource } from './code-examples/toggle-group.kun-ikoner.example.source';
 import { ToggleGroupNyAnbefaltBrukExampleSource } from './code-examples/toggle-group.ny-anbefalt-bruk.example.source';
@@ -34,7 +37,6 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
     HviIconAlignLeft,
     HviIconAlignRight,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <app-demo-page componentId="toggle-group">
       <!-- Grunnleggende -->

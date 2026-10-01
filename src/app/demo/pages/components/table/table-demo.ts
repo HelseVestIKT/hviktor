@@ -1,4 +1,4 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   HviButton,
   HviHeading,
@@ -12,10 +12,9 @@ import {
   HviTable,
   type SortingFn,
 } from '@helsevestikt/hviktor-angular';
+import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
-import { HviIconChevronDown } from '../../../../../../projects/icons/src/lib/components/icon-chevron-down.component';
-import { HviIconChevronRight } from '../../../../../../projects/icons/src/lib/components/icon-chevron-right.component';
 import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
 import { TableEnkelTabellExampleSource } from './code-examples/table.enkel-tabell.example.source';
 import { TableGlobaltSokExampleSource } from './code-examples/table.globalt-sok.example.source';
@@ -46,7 +45,6 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
     HviIconChevronDown,
     HviIconChevronRight,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <app-demo-page componentId="table">
       <!-- Enkel tabell -->

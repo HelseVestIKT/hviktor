@@ -1,13 +1,15 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   HviLabel,
   HviToggleGroup,
   HviToggleGroupItem,
   HviTooltip,
 } from '@helsevestikt/hviktor-angular';
-import { HviIconAlignCenter } from '../../../../../../../projects/icons/src/lib/components/icon-align-center.component';
-import { HviIconAlignLeft } from '../../../../../../../projects/icons/src/lib/components/icon-align-left.component';
-import { HviIconAlignRight } from '../../../../../../../projects/icons/src/lib/components/icon-align-right.component';
+import {
+  HviIconAlignCenter,
+  HviIconAlignLeft,
+  HviIconAlignRight,
+} from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-toggle-group-kun-ikoner-example',
@@ -21,7 +23,6 @@ import { HviIconAlignRight } from '../../../../../../../projects/icons/src/lib/c
     HviIconAlignLeft,
     HviIconAlignRight,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
     <hvi-toggle-group

@@ -1,26 +1,26 @@
 #!/usr/bin/env node
 
 /**
- * Release-script for @helsevestikt/hviktor-angular
+ * Release-script for @helsevestikt/hviktor-angular og @helsevestikt/hviktor-icons
  *
- * Synkroniserer versjon i package.json med git tag, slik at begge alltid er oppdatert.
+ * Begge pakkene har alltid samme versjon, og versjonen synkroniseres med git tag.
  *
  * Bruk:
  *   npm run release patch    # 0.0.23 → 0.0.24
  *   npm run release minor    # 0.0.23 → 0.1.0
  *   npm run release major    # 0.0.23 → 1.0.0
- *   npm run release 1.2.3    # Eksplisitt versjon
+ *   npm run release 1.2.3    # Eksplisitt versjon (påkrevd hvis pakkene har ulik versjon)
  *
  * Scriptet gjør følgende:
  *   1. Sjekker at du er på main-branch
  *   2. Sjekker at working directory er rent
  *   3. Beregner ny versjon (patch/minor/major eller eksplisitt)
- *   4. Oppdaterer version i projects/hviktor/package.json
+ *   4. Oppdaterer version i package.json for begge pakkene
  *   5. Committer endringen
  *   6. Oppretter git tag (v<versjon>)
  *   7. Pusher commit og tag til origin
  *
- * CI-workflowen (publish-npm.yml) plukker opp tagen og publiserer til npm.
+ * CI-workflowen (publish-npm.yml) plukker opp tagen og publiserer begge pakkene til npm.
  */
 
 const { execSync } = require('child_process');
@@ -28,8 +28,12 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const PACKAGE_JSON_PATH = path.resolve(__dirname, '..', 'projects', 'hviktor', 'package.json');
-const CHANGELOG_PATH = path.resolve(__dirname, '..', 'projects', 'hviktor', 'CHANGELOG.md');
+const ROOT = path.resolve(__dirname, '..');
+const PACKAGES = [
+  { name: '@helsevestikt/hviktor-angular', dir: 'projects/hviktor' },
+  { name: '@helsevestikt/hviktor-icons', dir: 'projects/icons' },
+].map((p) => ({ ...p, packageJsonPath: path.join(ROOT, p.dir, 'package.json') }));
+const CHANGELOG_PATH = path.join(ROOT, 'projects', 'hviktor', 'CHANGELOG.md');
 
 function run(cmd) {
   return execSync(cmd, { encoding: 'utf-8', cwd: path.resolve(__dirname, '..') }).trim();
@@ -70,7 +74,10 @@ function ask(question) {
 
 function updateChangelog(version) {
   const today = new Date().toISOString().slice(0, 10);
-  const template = `## [${version}] – ${today}\n\n### Added\n\n- \n\n### Changed\n\n- \n\n### Fixed\n\n- \n`;
+  const packageSections = PACKAGES.map(
+    ({ name }) => `### ${name}\n\n#### Added\n\n- \n\n#### Changed\n\n- \n\n#### Fixed\n\n- \n`,
+  ).join('\n');
+  const template = `## [${version}] – ${today}\n\n${packageSections}\n`;
 
   let content = fs.readFileSync(CHANGELOG_PATH, 'utf-8');
   const marker = content.match(/^## \[/m);
@@ -94,8 +101,13 @@ function openEditorSync() {
 
 function cleanChangelog() {
   let content = fs.readFileSync(CHANGELOG_PATH, 'utf-8');
-  // Fjern tomme seksjoner (### Header\n\n- \n)
-  content = content.replace(/### \w+\n\n- \n\n?/g, '');
+  // Fjern tomme seksjoner (#### Header\n\n- \n)
+  content = content.replace(/#### \w+\n\n- \n\n?/g, '');
+  // Pakker uten endringer får en tydelig tekst, slik Digdir gjør i sine release notes
+  for (const { name } of PACKAGES) {
+    const emptySection = new RegExp(`(### ${name}\n)\n*(?=### |## \\[|$)`, 'g');
+    content = content.replace(emptySection, '$1\nIngen endringer i denne releasen.\n\n');
+  }
   // Fjern doble blank linjer
   content = content.replace(/\n{3,}/g, '\n\n');
   fs.writeFileSync(CHANGELOG_PATH, content);
@@ -135,12 +147,22 @@ Eksempler:
   run('git pull --rebase origin main');
 
   // 4. Les nåværende versjon
-  const pkg = JSON.parse(fs.readFileSync(PACKAGE_JSON_PATH, 'utf-8'));
-  const currentVersion = pkg.version;
+  const pkgs = PACKAGES.map((p) => ({
+    ...p,
+    json: JSON.parse(fs.readFileSync(p.packageJsonPath, 'utf-8')),
+  }));
+  const versions = new Set(pkgs.map((p) => p.json.version));
+  const currentVersion = pkgs[0].json.version;
 
   // 5. Beregn ny versjon
   let newVersion;
   if (['patch', 'minor', 'major'].includes(arg)) {
+    if (versions.size > 1) {
+      fail(
+        `Pakkene har ulik versjon (${pkgs.map((p) => `${p.name}@${p.json.version}`).join(', ')}). ` +
+          'Oppgi en eksplisitt versjon, f.eks. npm run release 1.0.0',
+      );
+    }
     newVersion = bumpVersion(currentVersion, arg);
   } else if (isValidSemver(arg)) {
     newVersion = arg;
@@ -150,12 +172,17 @@ Eksempler:
     );
   }
 
-  console.log(`\n📦 Versjon: ${currentVersion} → ${newVersion}\n`);
+  for (const p of pkgs) {
+    console.log(`\n📦 ${p.name}: ${p.json.version} → ${newVersion}`);
+  }
+  console.log('');
 
   // 6. Oppdater package.json
-  pkg.version = newVersion;
-  fs.writeFileSync(PACKAGE_JSON_PATH, JSON.stringify(pkg, null, 2) + '\n');
-  console.log(`✅ Oppdatert ${path.relative(process.cwd(), PACKAGE_JSON_PATH)}`);
+  for (const p of pkgs) {
+    p.json.version = newVersion;
+    fs.writeFileSync(p.packageJsonPath, JSON.stringify(p.json, null, 2) + '\n');
+    console.log(`✅ Oppdatert ${path.relative(process.cwd(), p.packageJsonPath)}`);
+  }
 
   // 7. Oppdater CHANGELOG
   console.log('\n📝 Oppdaterer CHANGELOG...');
@@ -171,7 +198,8 @@ Eksempler:
   console.log(`✅ CHANGELOG oppdatert`);
 
   // 8. Commit
-  run(`git add "${PACKAGE_JSON_PATH}" "${CHANGELOG_PATH}"`);
+  const packageJsonPaths = pkgs.map((p) => `"${p.packageJsonPath}"`).join(' ');
+  run(`git add ${packageJsonPaths} "${CHANGELOG_PATH}"`);
   run(`git commit -m "chore: release v${newVersion}"`);
   console.log(`✅ Committet: chore: release v${newVersion}`);
 
@@ -190,7 +218,9 @@ Eksempler:
 Neste steg:
   1. Gå til GitHub Actions og verifiser at publish-workflowen kjører
   2. Godkjenn "npm-publish" environment i GitHub
-  3. Verifiser pakken på https://www.npmjs.com/package/@helsevestikt/hviktor-angular
+  3. Verifiser pakkene på npm:
+     https://www.npmjs.com/package/@helsevestikt/hviktor-angular
+     https://www.npmjs.com/package/@helsevestikt/hviktor-icons
 `);
 })().catch((err) => {
   console.error(`\n❌ ${err.message}\n`);

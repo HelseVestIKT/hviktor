@@ -1,11 +1,12 @@
 // Auto-generated - do not edit manually
-export const TooltipBetingetTooltipExampleSource = `import { Component, signal, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@helsevestikt/hviktor-icons/icon-clipboard.component';
+export const TooltipBetingetTooltipExampleSource = `import { Component, signal, WritableSignal } from '@angular/core';
+import { HviButton, HviField, HviInput, HviLabel, HviTooltip } from '@helsevestikt/hviktor-angular';
+import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-tooltip-betinget-tooltip-example',
   standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviButton, HviField, HviInput, HviLabel, HviTooltip, HviIconClipboard],
   template: \`
     <div class="flex justify-center">
       <button

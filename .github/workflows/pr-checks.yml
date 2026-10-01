@@ -23,9 +23,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
 
       - name: Install dependencies
         run: npm ci
@@ -37,6 +37,9 @@ jobs:
         run: npm run test -- --project hviktor-lib
       - name: Build library
         run: npm run build:lib
+
+      - name: Build icons
+        run: npm run build:icons
 
   e2e:
     name: E2E Tests
@@ -50,9 +53,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
-          cache: 'npm'
-          cache-dependency-path: 'package-lock.json'
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
 
       - name: Install dependencies
         run: npm ci
@@ -62,6 +65,9 @@ jobs:
 
       - name: Build library
         run: npm run build:lib
+
+      - name: Build icons
+        run: npm run build:icons
 
       - name: Run E2E tests
         run: npx playwright test --project=chromium

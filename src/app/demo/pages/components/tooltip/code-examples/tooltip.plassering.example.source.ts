@@ -1,11 +1,12 @@
 // Auto-generated - do not edit manually
-export const TooltipPlasseringExampleSource = `import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@helsevestikt/hviktor-icons/icon-clipboard.component';
+export const TooltipPlasseringExampleSource = `import { Component } from '@angular/core';
+import { HviButton, HviTooltip } from '@helsevestikt/hviktor-angular';
+import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-tooltip-plassering-example',
   standalone: true,
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [HviButton, HviTooltip, HviIconClipboard],
   template: \`
     <div class="flex justify-center">
       <button
