@@ -29,17 +29,23 @@
     #sideMenu
     id="sidemeny"
     popover
-    aria-label="Komponenter"
+    aria-label="Sidemeny"
     class="bg-(--ds-color-neutral-background-default) text-(--ds-color-neutral-text-default) lg:hidden"
   >
-    <p class="mt-0 mb-2 font-medium">Komponenter</p>
+    <p class="mt-0 mb-2 font-medium">Ikoner</p>
+    <ng-container [ngTemplateOutlet]="iconNav" />
+    <p class="mt-4 mb-2 font-medium">Komponenter</p>
     <ng-container [ngTemplateOutlet]="componentNav" />
   </nav>
 
   <aside
     class="hidden bg-(--ds-color-neutral-background-default) lg:sticky lg:top-20 lg:block lg:h-[calc(100vh-80px)] lg:w-60 lg:shrink-0 lg:overflow-y-auto lg:border-r lg:border-neutral-300"
   >
-    <nav>
+    <nav aria-label="Sidemeny">
+      <p class="px-4 pt-4 font-medium">Ikoner</p>
+      <div class="px-4">
+        <ng-container [ngTemplateOutlet]="iconNav" />
+      </div>
       <p class="px-4 pt-4 font-medium">Komponenter</p>
       <div class="px-4 pb-8">
         <ng-container [ngTemplateOutlet]="componentNav" />
@@ -50,6 +56,21 @@
     <router-outlet />
   </main>
 </div>
+
+<ng-template #iconNav>
+  <ul class="m-0 flex list-none flex-col gap-1 p-0">
+    <li>
+      <a
+        routerLink="/ikoner"
+        routerLinkActive="font-semibold border-l-4 lg:border-l-6 bg-(--ds-color-neutral-surface-tinted)"
+        (click)="closeSideMenu()"
+        class="flex items-center gap-1.5 rounded px-3 py-2 whitespace-nowrap transition-colors hover:bg-(--ds-color-neutral-surface-hover) active:bg-(--ds-color-neutral-surface-active)"
+      >
+        Ikoner
+      </a>
+    </li>
+  </ul>
+</ng-template>
 
 <ng-template #componentNav>
   <ul class="m-0 flex list-none flex-col gap-1 p-0">

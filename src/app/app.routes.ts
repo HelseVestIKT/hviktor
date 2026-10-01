@@ -11,6 +11,10 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/pages/home/home').then((m) => m.HomeComponent),
       },
       {
+        path: 'ikoner',
+        loadComponent: () => import('./demo/pages/icons/icons-page').then((m) => m.IconsPage),
+      },
+      {
         path: 'komponenter/alert',
         loadComponent: () =>
           import('./demo/pages/components/alert/alert-demo').then((m) => m.AlertDemoComponent),

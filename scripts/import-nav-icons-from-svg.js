@@ -177,6 +177,7 @@ async function importIcons() {
   console.log(`   ❌ Errors: ${errorCount}`);
 
   writeEntryFiles();
+  require('./generate-icon-metadata.js');
 
   console.log('\n🎉 Done!');
   console.log(`\n💡 Next steps:`);
