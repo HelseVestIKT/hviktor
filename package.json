@@ -56,6 +56,7 @@
     "@angular/cli": "^22.2.0",
     "@angular/compiler-cli": "^22.2.1",
     "@axe-core/playwright": "^4.11.1",
+    "@digdir/designsystemet": "~1.23.0",
     "@navikt/aksel-icons": "^8.18.0",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4.1.12",
