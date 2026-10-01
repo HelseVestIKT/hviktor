@@ -13,6 +13,12 @@ export const BadgeExamplesManifest = [
     sourceExport: 'BadgeTintedVariantExampleSource',
   },
   {
+    slug: 'storrelser',
+    title: 'Størrelser',
+    className: 'BadgeStorrelserExampleComponent',
+    sourceExport: 'BadgeStorrelserExampleSource',
+  },
+  {
     slug: 'status-indikator',
     title: 'Status indikator',
     className: 'BadgeStatusIndikatorExampleComponent',
@@ -29,5 +35,6 @@ export const BadgeExamplesManifest = [
 export type BadgeExampleSlug =
   | 'base-variant'
   | 'tinted-variant'
+  | 'storrelser'
   | 'status-indikator'
   | 'med-posisjonering';

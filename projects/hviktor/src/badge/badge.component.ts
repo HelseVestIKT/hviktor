@@ -25,6 +25,7 @@ import { Component, Input } from '@angular/core';
   host: {
     class: 'ds-badge',
     '[attr.data-variant]': 'variant ?? null',
+    '[attr.data-size]': 'size ?? null',
     '[attr.data-count]': 'count ?? null',
     '[attr.data-color]': 'color ?? null',
   },
@@ -32,6 +33,9 @@ import { Component, Input } from '@angular/core';
 export class HviBadge {
   /** The visual style of the badge. */
   @Input() variant?: 'base' | 'tinted';
+
+  /** The size of the badge. */
+  @Input() size?: 'sm' | 'md' | 'lg';
 
   /** A count or label displayed inside the badge (e.g. `"9+"`). */
   @Input() count?: string;
