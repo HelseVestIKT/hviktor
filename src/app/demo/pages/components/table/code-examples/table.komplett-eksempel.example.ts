@@ -105,6 +105,7 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
               searchPlaceholder="Søk navn..."
               aria-label="Filtrer på navn"
               aria-controls="komplett-tabell"
+              [value]="fullTable.getColumnFilterValue('navn')"
               (selectionChange)="fullTable.setColumnFilter('navn', $event)"
             />
           </td>
@@ -115,6 +116,7 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
               searchPlaceholder="Søk avdeling..."
               aria-label="Filtrer på avdeling"
               aria-controls="komplett-tabell"
+              [value]="fullTable.getColumnFilterValue('avdeling')"
               (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
             />
           </td>
@@ -125,6 +127,7 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
               searchPlaceholder="Søk stilling..."
               aria-label="Filtrer på stilling"
               aria-controls="komplett-tabell"
+              [value]="fullTable.getColumnFilterValue('stilling')"
               (selectionChange)="fullTable.setColumnFilter('stilling', $event)"
             />
           </td>

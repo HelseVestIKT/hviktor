@@ -426,9 +426,17 @@ export class HviTable<T = unknown> {
     this.resetToFirstPage();
   }
 
-  /** Hent nåværende filterverdi for en kolonne */
-  getColumnFilterValue(field: string): unknown {
-    return this._columnFilters().find((f) => f.id === field)?.value;
+  /**
+   * Hent nåværende filterverdi for en kolonne (`undefined` om kolonnen ikke er filtrert).
+   *
+   * Leser fra et signal, så den kan bindes direkte i malen. Bind filterkontrollens verdi hit
+   * for å holde kontrollen i synk med tabellen, også når filtre nullstilles med
+   * `clearAllColumnFilters()`, `clearColumnFilter()` eller `clear()`.
+   *
+   * Typeparameteren angir forventet type (f.eks. `string[]` for flervalg). Den sjekkes ikke ved kjøretid.
+   */
+  getColumnFilterValue<V = unknown>(field: string): V | undefined {
+    return this._columnFilters().find((f) => f.id === field)?.value as V | undefined;
   }
 
   // ========== Sortering ==========
