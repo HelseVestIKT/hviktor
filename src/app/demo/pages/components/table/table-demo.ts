@@ -1,15 +1,22 @@
 import { Component, signal } from '@angular/core';
 import {
+  HviAlert,
   HviButton,
+  HviDialog,
+  HviDialogBlock,
+  HviField,
+  HviFieldset,
   HviHeading,
   HviInput,
   HviLabel,
   HviMultiSelect,
   HviPagination,
+  HviParagraph,
   HviSearch,
   HviSearchClear,
   HviSortableColumn,
   HviTable,
+  HviTableScroll,
   type SortingFn,
 } from '@helsevestikt/hviktor-angular';
 import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
@@ -18,6 +25,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 import { TableCustomSorteringsfunksjonExampleSource } from './code-examples/table.custom-sorteringsfunksjon.example.source';
 import { TableEnkelTabellExampleSource } from './code-examples/table.enkel-tabell.example.source';
 import { TableGlobaltSokExampleSource } from './code-examples/table.globalt-sok.example.source';
+import { TableKolonnefiltreringIDialogExampleSource } from './code-examples/table.kolonnefiltrering-i-dialog.example.source';
 import { TableKolonnefiltreringExampleSource } from './code-examples/table.kolonnefiltrering.example.source';
 import { TableKomplettEksempelExampleSource } from './code-examples/table.komplett-eksempel.example.source';
 import { TablePagineringExampleSource } from './code-examples/table.paginering.example.source';
@@ -31,6 +39,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
   standalone: true,
   imports: [
     HviTable,
+    HviTableScroll,
     HviSortableColumn,
     HviPagination,
     HviButton,
@@ -40,6 +49,12 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
     HviInput,
     HviLabel,
     HviMultiSelect,
+    HviAlert,
+    HviParagraph,
+    HviDialog,
+    HviDialogBlock,
+    HviField,
+    HviFieldset,
     DemoPageComponent,
     DemoSectionComponent,
     HviIconChevronDown,
@@ -47,41 +62,60 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
   ],
   template: `
     <app-demo-page componentId="table">
+      <hvi-alert title="Tabeller på små skjermer" class="mb-8">
+        <p hviParagraph>
+          Pakk tabellen inn i et element med <code>hviTableScroll</code>, så scroller den
+          horisontalt når den ikke får plass, i stedet for at kolonneoverskrifter og
+          sorteringsikoner brytes over flere linjer. Når tabellen faktisk scroller, blir beholderen
+          fokuserbar og får navn fra tabellens <code>caption</code>, slik at den også kan scrolles
+          med tastaturet.
+        </p>
+        <p hviParagraph>
+          Alle eksemplene på denne siden gjør dette, unntatt de med multiselect i tabellhodet.
+          Beholderen klipper innhold som henger utenfor, så nedtrekkslisten kunne blitt kuttet.
+          Bruker du <code>stickyHeader</code>, må beholderen ha en høyde (f.eks.
+          <code>max-height</code>), fordi overskriften da fester seg til toppen av beholderen og
+          ikke til siden.
+        </p>
+      </hvi-alert>
+
       <!-- Enkel tabell -->
       <app-demo-section
         title="Enkel tabell"
         [code]="enkelTabellCode"
         description="En grunnleggende tabell med Designsystemets styling. Bruk data-attributter for zebrastriper, border og hover-effekt."
       >
-        <table hviTable>
-          <caption>
-            Prosjektstatus
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Prosjekt</th>
-              <th scope="col">Status</th>
-              <th scope="col">Frist</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Designsystem</td>
-              <td>Aktiv</td>
-              <td>2026-06-01</td>
-            </tr>
-            <tr>
-              <td>Migrering</td>
-              <td>Planlagt</td>
-              <td>2026-09-15</td>
-            </tr>
-            <tr>
-              <td>Dokumentasjon</td>
-              <td>Aktiv</td>
-              <td>2026-05-01</td>
-            </tr>
-          </tbody>
-        </table>
+        <div hviTableScroll>
+          <table hviTable>
+            <caption>
+              Prosjektstatus
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Prosjekt</th>
+                <th scope="col">Status</th>
+                <th scope="col">Frist</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Designsystem</td>
+                <td>Aktiv</td>
+                <td>2026-06-01</td>
+              </tr>
+              <tr>
+                <td>Migrering</td>
+                <td>Planlagt</td>
+                <td>2026-09-15</td>
+              </tr>
+              <tr>
+                <td>Dokumentasjon</td>
+                <td>Aktiv</td>
+                <td>2026-05-01</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Zebrastriper og border -->
@@ -90,35 +124,37 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="zebrastriperOgBorderCode"
         description="Bruk zebra og border for å gjøre tabellen enklere å lese. Hover gir visuell tilbakemelding når brukeren holder over en rad."
       >
-        <table hviTable zebra border hover>
-          <caption>
-            Sidevisninger per måned
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Måned</th>
-              <th scope="col">2024</th>
-              <th scope="col">2025</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Januar</th>
-              <td>1 230</td>
-              <td>1 450</td>
-            </tr>
-            <tr>
-              <th scope="row">Februar</th>
-              <td>980</td>
-              <td>1 120</td>
-            </tr>
-            <tr>
-              <th scope="row">Mars</th>
-              <td>1 150</td>
-              <td>1 300</td>
-            </tr>
-          </tbody>
-        </table>
+        <div hviTableScroll>
+          <table hviTable zebra border hover>
+            <caption>
+              Sidevisninger per måned
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Måned</th>
+                <th scope="col">2024</th>
+                <th scope="col">2025</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Januar</th>
+                <td>1 230</td>
+                <td>1 450</td>
+              </tr>
+              <tr>
+                <th scope="row">Februar</th>
+                <td>980</td>
+                <td>1 120</td>
+              </tr>
+              <tr>
+                <th scope="row">Mars</th>
+                <td>1 150</td>
+                <td>1 300</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Sortering -->
@@ -127,45 +163,47 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="sorteringCode"
         description="Legg til sortering på kolonner med hviSortableColumn-direktivet. Klikk på en kolonneoverskrift for å sykle gjennom: ingen → stigende → synkende → ingen."
       >
-        <table hviTable [value]="data" #sortTable="hviTable">
-          <caption>
-            Ansattoversikt
-          </caption>
-          <thead>
-            <tr>
-              <th hviSortableColumn="navn" scope="col">
-                <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
-                  Navn
-                </button>
-              </th>
-              <th hviSortableColumn="epost" scope="col">
-                <button
-                  type="button"
-                  [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')"
-                >
-                  E-post
-                </button>
-              </th>
-              <th hviSortableColumn="avdeling" scope="col">
-                <button
-                  type="button"
-                  [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
-                >
-                  Avdeling
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (person of sortTable.filteredValue(); track person.id) {
+        <div hviTableScroll>
+          <table hviTable [value]="data" #sortTable="hviTable">
+            <caption>
+              Ansattoversikt
+            </caption>
+            <thead>
               <tr>
-                <td>{{ person.navn }}</td>
-                <td>{{ person.epost }}</td>
-                <td>{{ person.avdeling }}</td>
+                <th hviSortableColumn="navn" scope="col">
+                  <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
+                    Navn
+                  </button>
+                </th>
+                <th hviSortableColumn="epost" scope="col">
+                  <button
+                    type="button"
+                    [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')"
+                  >
+                    E-post
+                  </button>
+                </th>
+                <th hviSortableColumn="avdeling" scope="col">
+                  <button
+                    type="button"
+                    [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
+                  >
+                    Avdeling
+                  </button>
+                </th>
               </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              @for (person of sortTable.filteredValue(); track person.id) {
+                <tr>
+                  <td>{{ person.navn }}</td>
+                  <td>{{ person.epost }}</td>
+                  <td>{{ person.avdeling }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Custom sorteringsfunksjon -->
@@ -174,48 +212,50 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="customSorteringCode"
         description="Bruk [sortFn] på hviSortableColumn for å gi en kolonne en egendefinert komparator. TanStack reverserer automatisk ved synkende sortering."
       >
-        <table hviTable [value]="priorityData" #customSortTable="hviTable">
-          <caption>
-            Sensoroversikt med prioritetssortering
-          </caption>
-          <thead>
-            <tr>
-              <th hviSortableColumn="namn" scope="col">
-                <button
-                  type="button"
-                  [attr.aria-label]="getSortLabel(customSortTable, 'namn', 'Namn')"
-                >
-                  Namn
-                </button>
-              </th>
-              <th hviSortableColumn="status" [sortFn]="prioritetSort" scope="col">
-                <button
-                  type="button"
-                  [attr.aria-label]="getSortLabel(customSortTable, 'status', 'Status')"
-                >
-                  Status
-                </button>
-              </th>
-              <th hviSortableColumn="lokasjon" scope="col">
-                <button
-                  type="button"
-                  [attr.aria-label]="getSortLabel(customSortTable, 'lokasjon', 'Lokasjon')"
-                >
-                  Lokasjon
-                </button>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (sensor of customSortTable.filteredValue(); track sensor.id) {
+        <div hviTableScroll>
+          <table hviTable [value]="priorityData" #customSortTable="hviTable">
+            <caption>
+              Sensoroversikt med prioritetssortering
+            </caption>
+            <thead>
               <tr>
-                <td>{{ sensor.namn }}</td>
-                <td>{{ sensor.status }}</td>
-                <td>{{ sensor.lokasjon }}</td>
+                <th hviSortableColumn="namn" scope="col">
+                  <button
+                    type="button"
+                    [attr.aria-label]="getSortLabel(customSortTable, 'namn', 'Namn')"
+                  >
+                    Namn
+                  </button>
+                </th>
+                <th hviSortableColumn="status" [sortFn]="prioritetSort" scope="col">
+                  <button
+                    type="button"
+                    [attr.aria-label]="getSortLabel(customSortTable, 'status', 'Status')"
+                  >
+                    Status
+                  </button>
+                </th>
+                <th hviSortableColumn="lokasjon" scope="col">
+                  <button
+                    type="button"
+                    [attr.aria-label]="getSortLabel(customSortTable, 'lokasjon', 'Lokasjon')"
+                  >
+                    Lokasjon
+                  </button>
+                </th>
               </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              @for (sensor of customSortTable.filteredValue(); track sensor.id) {
+                <tr>
+                  <td>{{ sensor.namn }}</td>
+                  <td>{{ sensor.status }}</td>
+                  <td>{{ sensor.lokasjon }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Globalt søk -->
@@ -249,40 +289,42 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
           Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
         </p>
-        <table
-          hviTable
-          id="sok-tabell"
-          [value]="data"
-          [globalFilterFields]="['navn', 'epost', 'avdeling']"
-          zebra
-          #searchTable="hviTable"
-        >
-          <caption>
-            Ansatte
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">Navn</th>
-              <th scope="col">E-post</th>
-              <th scope="col">Avdeling</th>
-              <th scope="col">Stilling</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (person of searchTable.filteredValue(); track person.id) {
+        <div hviTableScroll>
+          <table
+            hviTable
+            id="sok-tabell"
+            [value]="data"
+            [globalFilterFields]="['navn', 'epost', 'avdeling']"
+            zebra
+            #searchTable="hviTable"
+          >
+            <caption>
+              Ansatte
+            </caption>
+            <thead>
               <tr>
-                <td>{{ person.navn }}</td>
-                <td>{{ person.epost }}</td>
-                <td>{{ person.avdeling }}</td>
-                <td>{{ person.stilling }}</td>
+                <th scope="col">Navn</th>
+                <th scope="col">E-post</th>
+                <th scope="col">Avdeling</th>
+                <th scope="col">Stilling</th>
               </tr>
-            } @empty {
-              <tr>
-                <td colspan="4">Ingen treff</td>
-              </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              @for (person of searchTable.filteredValue(); track person.id) {
+                <tr>
+                  <td>{{ person.navn }}</td>
+                  <td>{{ person.epost }}</td>
+                  <td>{{ person.avdeling }}</td>
+                  <td>{{ person.stilling }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="4">Ingen treff</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Kolonnefiltrering -->
@@ -372,6 +414,135 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         </button>
       </app-demo-section>
 
+      <!-- Kolonnefiltrering i dialog -->
+      <app-demo-section
+        title="Kolonnefiltrering i dialog"
+        [code]="kolonnefiltreringIDialogCode"
+        description="Filterkontrollene trenger ikke ligge i tabellen. Her er de avkrysningsbokser i en dialog som åpnes fra siden. Avkrysningsboksene leser verdien sin fra getColumnFilterValue() og setter den med setColumnFilter(), så de holder seg i synk med tabellen, også når filtrene nullstilles utenfor dialogen. Uten multiselect i tabellhodet kan tabellen pakkes inn i hviTableScroll."
+      >
+        <div class="mb-2 flex flex-wrap items-center gap-2">
+          <button
+            hviButton
+            variant="secondary"
+            type="button"
+            aria-haspopup="dialog"
+            (click)="filterDialogOpen.set(true)"
+          >
+            Filtrer
+            @if (antallAktiveFiltre(dialogFilterTable); as antall) {
+              ({{ antall }})
+            }
+          </button>
+          <button
+            hviButton
+            variant="tertiary"
+            type="button"
+            [disabled]="!antallAktiveFiltre(dialogFilterTable)"
+            (click)="dialogFilterTable.clearAllColumnFilters()"
+          >
+            Nullstill filtre
+          </button>
+        </div>
+        <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
+          Viser {{ dialogFilterTable.totalFilteredRecords() }} av
+          {{ dialogFilterTable.totalRecords() }} rader
+        </p>
+        <div hviTableScroll>
+          <table
+            hviTable
+            id="dialog-filter-tabell"
+            [value]="data"
+            [columns]="['navn', 'epost', 'avdeling', 'stilling']"
+            zebra
+            #dialogFilterTable="hviTable"
+          >
+            <caption>
+              Ansattoversikt
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Navn</th>
+                <th scope="col">E-post</th>
+                <th scope="col">Avdeling</th>
+                <th scope="col">Stilling</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (person of dialogFilterTable.filteredValue(); track person.id) {
+                <tr>
+                  <td>{{ person.navn }}</td>
+                  <td>{{ person.epost }}</td>
+                  <td>{{ person.avdeling }}</td>
+                  <td>{{ person.stilling }}</td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td colspan="4">Ingen treff</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+        <dialog
+          hviDialog
+          title="Filtrer ansatte"
+          placement="right"
+          closedby="any"
+          [open]="filterDialogOpen()"
+          (openChange)="filterDialogOpen.set($event)"
+        >
+          <div hviDialogBlock>
+            <fieldset hviFieldset>
+              <legend hviLabel weight="medium">Avdeling</legend>
+              @for (avdeling of avdelinger; track avdeling) {
+                <hvi-field>
+                  <input
+                    hviInput
+                    type="checkbox"
+                    [id]="'dialog-filter-avdeling-' + $index"
+                    aria-controls="dialog-filter-tabell"
+                    [checked]="erValgt(dialogFilterTable, 'avdeling', avdeling)"
+                    (change)="veksleFilter(dialogFilterTable, 'avdeling', avdeling)"
+                  />
+                  <label hviLabel [for]="'dialog-filter-avdeling-' + $index">{{ avdeling }}</label>
+                </hvi-field>
+              }
+            </fieldset>
+          </div>
+          <div hviDialogBlock>
+            <fieldset hviFieldset>
+              <legend hviLabel weight="medium">Stilling</legend>
+              @for (stilling of stillinger; track stilling) {
+                <hvi-field>
+                  <input
+                    hviInput
+                    type="checkbox"
+                    [id]="'dialog-filter-stilling-' + $index"
+                    aria-controls="dialog-filter-tabell"
+                    [checked]="erValgt(dialogFilterTable, 'stilling', stilling)"
+                    (change)="veksleFilter(dialogFilterTable, 'stilling', stilling)"
+                  />
+                  <label hviLabel [for]="'dialog-filter-stilling-' + $index">{{ stilling }}</label>
+                </hvi-field>
+              }
+            </fieldset>
+          </div>
+          <div hviDialogBlock class="flex flex-wrap gap-2">
+            <button hviButton type="button" (click)="filterDialogOpen.set(false)">
+              Vis {{ dialogFilterTable.totalFilteredRecords() }} rader
+            </button>
+            <button
+              hviButton
+              variant="tertiary"
+              type="button"
+              (click)="dialogFilterTable.clearAllColumnFilters()"
+            >
+              Nullstill filtre
+            </button>
+          </div>
+        </dialog>
+      </app-demo-section>
+
       <!-- Paginering -->
       <app-demo-section
         title="Paginering"
@@ -379,40 +550,42 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         description="Aktiver paginering med paginator-attributtet og sett antall rader med rows. Bruk HviPagination for navigasjon.
         Som standard er [autoResetPageIndex] satt til true. Dette gjør at tabellen automatisk går tilbake til første side ved f. eks. filtrering av tabellen. Dersom du har en tabell som oppdaterer sine verdier svært hyppig kan du sette [autoResetPageIndex] til false på tabellen. Dette forhindrer at tabellen hopper tilbake til første side ved hver oppdatering, som kan være forstyrrende for brukeren."
       >
-        <table
-          hviTable
-          id="paginert-tabell"
-          [value]="data"
-          paginator
-          [rows]="5"
-          zebra
-          hover
-          #pageTable="hviTable"
-        >
-          <caption>
-            Ansattoversikt
-          </caption>
-          <thead>
-            <tr>
-              <th hviSortableColumn="navn" scope="col">
-                <button type="button" [attr.aria-label]="getSortLabel(pageTable, 'navn', 'Navn')">
-                  Navn
-                </button>
-              </th>
-              <th scope="col">E-post</th>
-              <th scope="col">Avdeling</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (person of pageTable.paginatedValue(); track person.id) {
+        <div hviTableScroll>
+          <table
+            hviTable
+            id="paginert-tabell"
+            [value]="data"
+            paginator
+            [rows]="5"
+            zebra
+            hover
+            #pageTable="hviTable"
+          >
+            <caption>
+              Ansattoversikt
+            </caption>
+            <thead>
               <tr>
-                <td>{{ person.navn }}</td>
-                <td>{{ person.epost }}</td>
-                <td>{{ person.avdeling }}</td>
+                <th hviSortableColumn="navn" scope="col">
+                  <button type="button" [attr.aria-label]="getSortLabel(pageTable, 'navn', 'Navn')">
+                    Navn
+                  </button>
+                </th>
+                <th scope="col">E-post</th>
+                <th scope="col">Avdeling</th>
               </tr>
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              @for (person of pageTable.paginatedValue(); track person.id) {
+                <tr>
+                  <td>{{ person.navn }}</td>
+                  <td>{{ person.epost }}</td>
+                  <td>{{ person.avdeling }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
         <div class="mt-4">
           <hvi-pagination
             aria-label="Sidenavigering for tabell"
@@ -431,64 +604,66 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="utvidbareRaderCode"
         description="Vis ekstra informasjon under en rad med toggleExpanded() og isExpanded(). Nyttig for detaljer som ikke trenger en egen kolonne."
       >
-        <table hviTable [value]="data" hover #expandTable="hviTable">
-          <caption>
-            Ansattoversikt med kontaktinformasjon
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
-              <th scope="col">Navn</th>
-              <th scope="col">Avdeling</th>
-              <th scope="col">Stilling</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (person of expandTable.filteredValue(); track person.id) {
+        <div hviTableScroll>
+          <table hviTable [value]="data" hover #expandTable="hviTable">
+            <caption>
+              Ansattoversikt med kontaktinformasjon
+            </caption>
+            <thead>
               <tr>
-                <td>
-                  <button
-                    hviButton
-                    variant="tertiary"
-                    (click)="expandTable.toggleExpanded(person)"
-                    [attr.aria-expanded]="expandTable.isExpanded(person)"
-                    [attr.aria-controls]="'detalj-' + person.id"
-                    [ariaLabel]="
-                      expandTable.isExpanded(person)
-                        ? 'Skjul detaljer om ' + person.navn
-                        : 'Vis detaljer om ' + person.navn
-                    "
-                  >
-                    @if (expandTable.isExpanded(person)) {
-                      <hvi-icon-chevron-down />
-                    } @else {
-                      <hvi-icon-chevron-right />
-                    }
-                  </button>
-                </td>
-                <td>{{ person.navn }}</td>
-                <td>{{ person.avdeling }}</td>
-                <td>{{ person.stilling }}</td>
+                <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+                <th scope="col">Navn</th>
+                <th scope="col">Avdeling</th>
+                <th scope="col">Stilling</th>
               </tr>
-              @if (expandTable.isExpanded(person)) {
-                <tr [id]="'detalj-' + person.id">
-                  <td colspan="4">
-                    <div class="flex gap-8 py-2 pl-12">
-                      <dl>
-                        <dt>E-post</dt>
-                        <dd>{{ person.epost }}</dd>
-                      </dl>
-                      <dl>
-                        <dt>Telefon</dt>
-                        <dd>{{ person.telefon }}</dd>
-                      </dl>
-                    </div>
+            </thead>
+            <tbody>
+              @for (person of expandTable.filteredValue(); track person.id) {
+                <tr>
+                  <td>
+                    <button
+                      hviButton
+                      variant="tertiary"
+                      (click)="expandTable.toggleExpanded(person)"
+                      [attr.aria-expanded]="expandTable.isExpanded(person)"
+                      [attr.aria-controls]="'detalj-' + person.id"
+                      [ariaLabel]="
+                        expandTable.isExpanded(person)
+                          ? 'Skjul detaljer om ' + person.navn
+                          : 'Vis detaljer om ' + person.navn
+                      "
+                    >
+                      @if (expandTable.isExpanded(person)) {
+                        <hvi-icon-chevron-down />
+                      } @else {
+                        <hvi-icon-chevron-right />
+                      }
+                    </button>
                   </td>
+                  <td>{{ person.navn }}</td>
+                  <td>{{ person.avdeling }}</td>
+                  <td>{{ person.stilling }}</td>
                 </tr>
+                @if (expandTable.isExpanded(person)) {
+                  <tr [id]="'detalj-' + person.id">
+                    <td colspan="4">
+                      <div class="flex gap-8 py-2 pl-12">
+                        <dl>
+                          <dt>E-post</dt>
+                          <dd>{{ person.epost }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>Telefon</dt>
+                          <dd>{{ person.telefon }}</dd>
+                        </dl>
+                      </div>
+                    </td>
+                  </tr>
+                }
               }
-            }
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Row expansion single mode -->
@@ -497,64 +672,66 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
         [code]="utvidbareRaderSingleCode"
         description="Med expandMode='single' kan bare én rad være åpen om gangen. Å åpne en ny rad lukker den forrige automatisk."
       >
-        <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">
-          <caption>
-            Ansattoversikt – kun én rad åpen om gangen
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
-              <th scope="col">Navn</th>
-              <th scope="col">Avdeling</th>
-              <th scope="col">Stilling</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (person of singleExpandTable.filteredValue(); track person.id) {
+        <div hviTableScroll>
+          <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">
+            <caption>
+              Ansattoversikt – kun én rad åpen om gangen
+            </caption>
+            <thead>
               <tr>
-                <td>
-                  <button
-                    hviButton
-                    variant="tertiary"
-                    (click)="singleExpandTable.toggleExpanded(person)"
-                    [attr.aria-expanded]="singleExpandTable.isExpanded(person)"
-                    [attr.aria-controls]="'single-detalj-' + person.id"
-                    [ariaLabel]="
-                      singleExpandTable.isExpanded(person)
-                        ? 'Skjul detaljer om ' + person.navn
-                        : 'Vis detaljer om ' + person.navn
-                    "
-                  >
-                    @if (singleExpandTable.isExpanded(person)) {
-                      <hvi-icon-chevron-down />
-                    } @else {
-                      <hvi-icon-chevron-right />
-                    }
-                  </button>
-                </td>
-                <td>{{ person.navn }}</td>
-                <td>{{ person.avdeling }}</td>
-                <td>{{ person.stilling }}</td>
+                <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+                <th scope="col">Navn</th>
+                <th scope="col">Avdeling</th>
+                <th scope="col">Stilling</th>
               </tr>
-              @if (singleExpandTable.isExpanded(person)) {
-                <tr [id]="'single-detalj-' + person.id">
-                  <td colspan="4">
-                    <div class="flex gap-8 py-2 pl-12">
-                      <dl>
-                        <dt>E-post</dt>
-                        <dd>{{ person.epost }}</dd>
-                      </dl>
-                      <dl>
-                        <dt>Telefon</dt>
-                        <dd>{{ person.telefon }}</dd>
-                      </dl>
-                    </div>
+            </thead>
+            <tbody>
+              @for (person of singleExpandTable.filteredValue(); track person.id) {
+                <tr>
+                  <td>
+                    <button
+                      hviButton
+                      variant="tertiary"
+                      (click)="singleExpandTable.toggleExpanded(person)"
+                      [attr.aria-expanded]="singleExpandTable.isExpanded(person)"
+                      [attr.aria-controls]="'single-detalj-' + person.id"
+                      [ariaLabel]="
+                        singleExpandTable.isExpanded(person)
+                          ? 'Skjul detaljer om ' + person.navn
+                          : 'Vis detaljer om ' + person.navn
+                      "
+                    >
+                      @if (singleExpandTable.isExpanded(person)) {
+                        <hvi-icon-chevron-down />
+                      } @else {
+                        <hvi-icon-chevron-right />
+                      }
+                    </button>
                   </td>
+                  <td>{{ person.navn }}</td>
+                  <td>{{ person.avdeling }}</td>
+                  <td>{{ person.stilling }}</td>
                 </tr>
+                @if (singleExpandTable.isExpanded(person)) {
+                  <tr [id]="'single-detalj-' + person.id">
+                    <td colspan="4">
+                      <div class="flex gap-8 py-2 pl-12">
+                        <dl>
+                          <dt>E-post</dt>
+                          <dd>{{ person.epost }}</dd>
+                        </dl>
+                        <dl>
+                          <dt>Telefon</dt>
+                          <dd>{{ person.telefon }}</dd>
+                        </dl>
+                      </div>
+                    </td>
+                  </tr>
+                }
               }
-            }
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </app-demo-section>
 
       <!-- Komplett eksempel -->
@@ -741,6 +918,7 @@ export class TableDemoComponent {
   readonly customSorteringCode = TableCustomSorteringsfunksjonExampleSource;
   readonly globaltSokCode = TableGlobaltSokExampleSource;
   readonly kolonnefiltreringCode = TableKolonnefiltreringExampleSource;
+  readonly kolonnefiltreringIDialogCode = TableKolonnefiltreringIDialogExampleSource;
   readonly pagineringCode = TablePagineringExampleSource;
   readonly utvidbareRaderCode = TableUtvidbareRaderExampleSource;
   readonly utvidbareRaderSingleCode = TableUtvidbareRaderEnkeltmodusExampleSource;
@@ -865,6 +1043,30 @@ export class TableDemoComponent {
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 
   rowsPerPage = signal(5);
+
+  filterDialogOpen = signal(false);
+
+  /** Om en verdi er valgt i filteret for en kolonne */
+  erValgt(table: HviTable<any>, felt: string, verdi: string): boolean {
+    return table.getColumnFilterValue<string[]>(felt)?.includes(verdi) ?? false;
+  }
+
+  /** Legger til eller fjerner en verdi i filteret for en kolonne */
+  veksleFilter(table: HviTable<any>, felt: string, verdi: string): void {
+    const valgt = table.getColumnFilterValue<string[]>(felt) ?? [];
+    table.setColumnFilter(
+      felt,
+      valgt.includes(verdi) ? valgt.filter((v) => v !== verdi) : [...valgt, verdi],
+    );
+  }
+
+  /** Antall valgte filterverdier i dialogen */
+  antallAktiveFiltre(table: HviTable<any>): number {
+    return ['avdeling', 'stilling'].reduce(
+      (sum, felt) => sum + (table.getColumnFilterValue<string[]>(felt)?.length ?? 0),
+      0,
+    );
+  }
 
   /** Eksempeldata for custom sortering – sensorer med ulik prioritet */
   priorityData = [

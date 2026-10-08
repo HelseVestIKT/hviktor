@@ -1,46 +1,48 @@
 // Auto-generated - do not edit manually
 export const TablePagineringExampleSource = `import { Component, signal } from '@angular/core';
-import { HviPagination, HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
+import { HviPagination, HviSortableColumn, HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-paginering-example',
   standalone: true,
-  imports: [HviPagination, HviSortableColumn, HviTable],
+  imports: [HviPagination, HviSortableColumn, HviTable, HviTableScroll],
   template: \`
-    <table
-      hviTable
-      id="paginert-tabell"
-      [value]="data"
-      paginator
-      [rows]="5"
-      zebra
-      hover
-      #pageTable="hviTable"
-    >
-      <caption>
-        Ansattoversikt
-      </caption>
-      <thead>
-        <tr>
-          <th hviSortableColumn="navn" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(pageTable, 'navn', 'Navn')">
-              Navn
-            </button>
-          </th>
-          <th scope="col">E-post</th>
-          <th scope="col">Avdeling</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (person of pageTable.paginatedValue(); track person.id) {
+    <div hviTableScroll>
+      <table
+        hviTable
+        id="paginert-tabell"
+        [value]="data"
+        paginator
+        [rows]="5"
+        zebra
+        hover
+        #pageTable="hviTable"
+      >
+        <caption>
+          Ansattoversikt
+        </caption>
+        <thead>
           <tr>
-            <td>{{ person.navn }}</td>
-            <td>{{ person.epost }}</td>
-            <td>{{ person.avdeling }}</td>
+            <th hviSortableColumn="navn" scope="col">
+              <button type="button" [attr.aria-label]="getSortLabel(pageTable, 'navn', 'Navn')">
+                Navn
+              </button>
+            </th>
+            <th scope="col">E-post</th>
+            <th scope="col">Avdeling</th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (person of pageTable.paginatedValue(); track person.id) {
+            <tr>
+              <td>{{ person.navn }}</td>
+              <td>{{ person.epost }}</td>
+              <td>{{ person.avdeling }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
     <div class="mt-4">
       <hvi-pagination
         aria-label="Sidenavigering for tabell"

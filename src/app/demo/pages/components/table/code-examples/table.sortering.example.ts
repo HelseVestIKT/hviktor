@@ -1,47 +1,49 @@
 import { Component } from '@angular/core';
-import { HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
+import { HviSortableColumn, HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-sortering-example',
   standalone: true,
-  imports: [HviSortableColumn, HviTable],
+  imports: [HviSortableColumn, HviTable, HviTableScroll],
   template: `
-    <table hviTable [value]="data" #sortTable="hviTable">
-      <caption>
-        Ansattoversikt
-      </caption>
-      <thead>
-        <tr>
-          <th hviSortableColumn="navn" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
-              Navn
-            </button>
-          </th>
-          <th hviSortableColumn="epost" scope="col">
-            <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')">
-              E-post
-            </button>
-          </th>
-          <th hviSortableColumn="avdeling" scope="col">
-            <button
-              type="button"
-              [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
-            >
-              Avdeling
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (person of sortTable.filteredValue(); track person.id) {
+    <div hviTableScroll>
+      <table hviTable [value]="data" #sortTable="hviTable">
+        <caption>
+          Ansattoversikt
+        </caption>
+        <thead>
           <tr>
-            <td>{{ person.navn }}</td>
-            <td>{{ person.epost }}</td>
-            <td>{{ person.avdeling }}</td>
+            <th hviSortableColumn="navn" scope="col">
+              <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'navn', 'Navn')">
+                Navn
+              </button>
+            </th>
+            <th hviSortableColumn="epost" scope="col">
+              <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')">
+                E-post
+              </button>
+            </th>
+            <th hviSortableColumn="avdeling" scope="col">
+              <button
+                type="button"
+                [attr.aria-label]="getSortLabel(sortTable, 'avdeling', 'Avdeling')"
+              >
+                Avdeling
+              </button>
+            </th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (person of sortTable.filteredValue(); track person.id) {
+            <tr>
+              <td>{{ person.navn }}</td>
+              <td>{{ person.epost }}</td>
+              <td>{{ person.avdeling }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
 })
 export class TableSorteringExampleComponent {

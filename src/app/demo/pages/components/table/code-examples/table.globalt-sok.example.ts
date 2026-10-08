@@ -6,12 +6,13 @@ import {
   HviSearch,
   HviSearchClear,
   HviTable,
+  HviTableScroll,
 } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-globalt-sok-example',
   standalone: true,
-  imports: [HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable],
+  imports: [HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable, HviTableScroll],
   template: `
     <h3 hviHeading size="xs" id="ansattoversikt-heading">Ansattoversikt</h3>
     <form
@@ -38,40 +39,42 @@ import {
     <p class="ds-paragraph mt-1 mb-3" role="status" aria-live="polite" aria-atomic="true">
       Viser {{ searchTable.totalFilteredRecords() }} av {{ searchTable.totalRecords() }} rader
     </p>
-    <table
-      hviTable
-      id="sok-tabell"
-      [value]="data"
-      [globalFilterFields]="['navn', 'epost', 'avdeling']"
-      zebra
-      #searchTable="hviTable"
-    >
-      <caption>
-        Ansatte
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">Navn</th>
-          <th scope="col">E-post</th>
-          <th scope="col">Avdeling</th>
-          <th scope="col">Stilling</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (person of searchTable.filteredValue(); track person.id) {
+    <div hviTableScroll>
+      <table
+        hviTable
+        id="sok-tabell"
+        [value]="data"
+        [globalFilterFields]="['navn', 'epost', 'avdeling']"
+        zebra
+        #searchTable="hviTable"
+      >
+        <caption>
+          Ansatte
+        </caption>
+        <thead>
           <tr>
-            <td>{{ person.navn }}</td>
-            <td>{{ person.epost }}</td>
-            <td>{{ person.avdeling }}</td>
-            <td>{{ person.stilling }}</td>
+            <th scope="col">Navn</th>
+            <th scope="col">E-post</th>
+            <th scope="col">Avdeling</th>
+            <th scope="col">Stilling</th>
           </tr>
-        } @empty {
-          <tr>
-            <td colspan="4">Ingen treff</td>
-          </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (person of searchTable.filteredValue(); track person.id) {
+            <tr>
+              <td>{{ person.navn }}</td>
+              <td>{{ person.epost }}</td>
+              <td>{{ person.avdeling }}</td>
+              <td>{{ person.stilling }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4">Ingen treff</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   `,
 })
 export class TableGlobaltSokExampleComponent {
