@@ -98,11 +98,11 @@ export class HviTabs implements AfterContentInit {
     uTabs.addEventListener('click', (event: Event) => {
       const target = event.target as Element;
       const tab = target.closest('u-tab');
-      if (tab) {
-        const value = tab.getAttribute('data-value');
-        if (value) {
-          this.valueChange.emit(value);
-        }
+      if (!tab || tab.closest('u-tabs') !== uTabs) return;
+
+      const value = tab.getAttribute('data-value');
+      if (value) {
+        this.valueChange.emit(value);
       }
     });
   }
