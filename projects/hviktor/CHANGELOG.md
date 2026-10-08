@@ -4,6 +4,24 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.4.1] – 2026-10-08
+
+### @helsevestikt/hviktor-angular
+
+#### Added
+
+- Badge: Lagt til input for size.
+- MultiSelect: Lagt til input for value for bedre styring av valgt verdi.
+- Table: Lagt til nytt direktiv, hviTableScroll, for horisontal scrolling på små skjermer. Tabeller kan pakkes inn i et element med dette direktivet for å aktivere scrolling av selve tabellen og hindre at elementer i f.eks. header brytes over flere linjer.
+
+#### Fixed
+
+- Tidligere hvis man hadde nestede tabs, så ble den ytterste tabben påvirket av value change fra den innerste. Dette skal ikke skje nå.
+
+### @helsevestikt/hviktor-icons
+
+Ingen endringer
+
 ## [0.4.0] – 2026-10-01
 
 ### @helsevestikt/hviktor-angular
