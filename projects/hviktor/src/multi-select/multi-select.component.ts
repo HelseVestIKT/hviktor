@@ -42,6 +42,17 @@ let nextId = 0;
  * ```
  *
  * @example
+ * Controlled via the `value` input (without forms), e.g. as a column filter for `hviTable`.
+ * Bind `value` to the state you own, so the component stays in sync when it is reset from outside:
+ * ```html
+ * <hvi-multi-select
+ *   [options]="avdelingOptions"
+ *   [value]="table.getColumnFilterValue('avdeling')"
+ *   (selectionChange)="table.setColumnFilter('avdeling', $event)"
+ * />
+ * ```
+ *
+ * @example
  * With reactive forms:
  * ```html
  * <hvi-multi-select
@@ -300,6 +311,16 @@ export class HviMultiSelect implements ControlValueAccessor {
   /** Size of the component. */
   @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
+  /**
+   * Selected values. Use this to control the selection from the parent without forms,
+   * e.g. so the component is cleared when filters are reset elsewhere.
+   * Not needed when using `formControl`/`ngModel`.
+   */
+  @Input()
+  set value(value: readonly string[] | null | undefined) {
+    this.setSelected(value);
+  }
+
   /** Event emitted when the selection changes. */
   @Output() selectionChange = new EventEmitter<string[]>();
 
@@ -351,8 +372,8 @@ export class HviMultiSelect implements ControlValueAccessor {
   private onChange: (value: string[]) => void = () => {};
   private onTouched: () => void = () => {};
 
-  writeValue(value: string[]): void {
-    this.selectedValues.set(new Set(value ?? []));
+  writeValue(value: string[] | null | undefined): void {
+    this.setSelected(value);
   }
 
   registerOnChange(fn: (value: string[]) => void): void {
@@ -445,6 +466,15 @@ export class HviMultiSelect implements ControlValueAccessor {
   }
 
   // --- Helpers ---
+  private setSelected(value: readonly string[] | null | undefined): void {
+    const next = new Set(value ?? []);
+    const current = this.selectedValues();
+    if (next.size === current.size && [...next].every((v) => current.has(v))) return;
+    this.selectedValues.set(next);
+    // Recalculate comma text vs. count after the DOM has been updated
+    setTimeout(() => this.checkOverflow());
+  }
+
   private close(): void {
     this.isOpen.set(false);
     this.searchText.set('');

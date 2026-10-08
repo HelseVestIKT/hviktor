@@ -289,7 +289,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
       <app-demo-section
         title="Kolonnefiltrering"
         [code]="kolonnefiltreringCode"
-        description="Filtrer på enkeltkolonner med setColumnFilter(). Bruk multi-select i tablehead for flervalgsfiltrering. Hver th bør ha en fast bredde for å unngå at multiselecten vokser horisontalt."
+        description="Filtrer på enkeltkolonner med setColumnFilter(). Tabellen eier filtertilstanden, mens du velger selv hvilke kontroller som setter den, f.eks. multi-select i tablehead som her, eller avkrysningsbokser i en sidemeny. Bind kontrollens verdi til getColumnFilterValue() slik at den følger med når filtrene nullstilles. Hver th bør ha en fast bredde for å unngå at multiselecten vokser horisontalt."
       >
         <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
           Viser {{ colFilterTable.totalFilteredRecords() }} av
@@ -320,6 +320,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   searchPlaceholder="Søk navn..."
                   aria-label="Filtrer på navn"
                   aria-controls="filter-tabell"
+                  [value]="colFilterTable.getColumnFilterValue('navn')"
                   (selectionChange)="colFilterTable.setColumnFilter('navn', $event)"
                 />
               </td>
@@ -330,6 +331,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   searchPlaceholder="Søk avdeling..."
                   aria-label="Filtrer på avdeling"
                   aria-controls="filter-tabell"
+                  [value]="colFilterTable.getColumnFilterValue('avdeling')"
                   (selectionChange)="colFilterTable.setColumnFilter('avdeling', $event)"
                 />
               </td>
@@ -340,6 +342,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   searchPlaceholder="Søk stilling..."
                   aria-label="Filtrer på stilling"
                   aria-controls="filter-tabell"
+                  [value]="colFilterTable.getColumnFilterValue('stilling')"
                   (selectionChange)="colFilterTable.setColumnFilter('stilling', $event)"
                 />
               </td>
@@ -636,6 +639,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   searchPlaceholder="Søk navn..."
                   aria-label="Filtrer på navn"
                   aria-controls="komplett-tabell"
+                  [value]="fullTable.getColumnFilterValue('navn')"
                   (selectionChange)="fullTable.setColumnFilter('navn', $event)"
                 />
               </td>
@@ -646,6 +650,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   searchPlaceholder="Søk avdeling..."
                   aria-label="Filtrer på avdeling"
                   aria-controls="komplett-tabell"
+                  [value]="fullTable.getColumnFilterValue('avdeling')"
                   (selectionChange)="fullTable.setColumnFilter('avdeling', $event)"
                 />
               </td>
@@ -656,6 +661,7 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
                   searchPlaceholder="Søk stilling..."
                   aria-label="Filtrer på stilling"
                   aria-controls="komplett-tabell"
+                  [value]="fullTable.getColumnFilterValue('stilling')"
                   (selectionChange)="fullTable.setColumnFilter('stilling', $event)"
                 />
               </td>
