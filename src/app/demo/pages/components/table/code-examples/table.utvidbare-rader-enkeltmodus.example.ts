@@ -1,70 +1,72 @@
 import { Component } from '@angular/core';
-import { HviButton, HviTable } from '@helsevestikt/hviktor-angular';
+import { HviButton, HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
 import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-table-utvidbare-rader-enkeltmodus-example',
   standalone: true,
-  imports: [HviButton, HviTable, HviIconChevronDown, HviIconChevronRight],
+  imports: [HviButton, HviTable, HviTableScroll, HviIconChevronDown, HviIconChevronRight],
   template: `
-    <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">
-      <caption>
-        Ansattoversikt – kun én rad åpen om gangen
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
-          <th scope="col">Navn</th>
-          <th scope="col">Avdeling</th>
-          <th scope="col">Stilling</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (person of singleExpandTable.filteredValue(); track person.id) {
+    <div hviTableScroll>
+      <table hviTable [value]="data" hover expandMode="single" #singleExpandTable="hviTable">
+        <caption>
+          Ansattoversikt – kun én rad åpen om gangen
+        </caption>
+        <thead>
           <tr>
-            <td>
-              <button
-                hviButton
-                variant="tertiary"
-                (click)="singleExpandTable.toggleExpanded(person)"
-                [attr.aria-expanded]="singleExpandTable.isExpanded(person)"
-                [attr.aria-controls]="'single-detalj-' + person.id"
-                [ariaLabel]="
-                  singleExpandTable.isExpanded(person)
-                    ? 'Skjul detaljer om ' + person.navn
-                    : 'Vis detaljer om ' + person.navn
-                "
-              >
-                @if (singleExpandTable.isExpanded(person)) {
-                  <hvi-icon-chevron-down />
-                } @else {
-                  <hvi-icon-chevron-right />
-                }
-              </button>
-            </td>
-            <td>{{ person.navn }}</td>
-            <td>{{ person.avdeling }}</td>
-            <td>{{ person.stilling }}</td>
+            <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
+            <th scope="col">Navn</th>
+            <th scope="col">Avdeling</th>
+            <th scope="col">Stilling</th>
           </tr>
-          @if (singleExpandTable.isExpanded(person)) {
-            <tr [id]="'single-detalj-' + person.id">
-              <td colspan="4">
-                <div class="flex gap-8 py-2 pl-12">
-                  <dl>
-                    <dt>E-post</dt>
-                    <dd>{{ person.epost }}</dd>
-                  </dl>
-                  <dl>
-                    <dt>Telefon</dt>
-                    <dd>{{ person.telefon }}</dd>
-                  </dl>
-                </div>
+        </thead>
+        <tbody>
+          @for (person of singleExpandTable.filteredValue(); track person.id) {
+            <tr>
+              <td>
+                <button
+                  hviButton
+                  variant="tertiary"
+                  (click)="singleExpandTable.toggleExpanded(person)"
+                  [attr.aria-expanded]="singleExpandTable.isExpanded(person)"
+                  [attr.aria-controls]="'single-detalj-' + person.id"
+                  [ariaLabel]="
+                    singleExpandTable.isExpanded(person)
+                      ? 'Skjul detaljer om ' + person.navn
+                      : 'Vis detaljer om ' + person.navn
+                  "
+                >
+                  @if (singleExpandTable.isExpanded(person)) {
+                    <hvi-icon-chevron-down />
+                  } @else {
+                    <hvi-icon-chevron-right />
+                  }
+                </button>
               </td>
+              <td>{{ person.navn }}</td>
+              <td>{{ person.avdeling }}</td>
+              <td>{{ person.stilling }}</td>
             </tr>
+            @if (singleExpandTable.isExpanded(person)) {
+              <tr [id]="'single-detalj-' + person.id">
+                <td colspan="4">
+                  <div class="flex gap-8 py-2 pl-12">
+                    <dl>
+                      <dt>E-post</dt>
+                      <dd>{{ person.epost }}</dd>
+                    </dl>
+                    <dl>
+                      <dt>Telefon</dt>
+                      <dd>{{ person.telefon }}</dd>
+                    </dl>
+                  </div>
+                </td>
+              </tr>
+            }
           }
-        }
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   `,
 })
 export class TableUtvidbareRaderEnkeltmodusExampleComponent {

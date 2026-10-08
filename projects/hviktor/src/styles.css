@@ -56,3 +56,20 @@ ol.ds-list {
 ul.ds-list {
   list-style-type: disc;
 }
+
+/* hviTableScroll: tabellen scroller horisontalt i stedet for at innholdet brytes om */
+.hvi-table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.hvi-table-scroll:focus-visible {
+  box-shadow: 0 0 0 var(--ds-border-width-focus) var(--ds-color-focus-inner);
+  outline: var(--ds-border-width-focus) solid var(--ds-color-focus-outer);
+  outline-offset: var(--ds-border-width-focus);
+}
+
+/* Hold tekst og sorteringsikon på samme linje, så tabellen heller blir bredere og scroller */
+.hvi-table-scroll > .ds-table > thead > tr > [aria-sort] > button {
+  white-space: nowrap;
+}

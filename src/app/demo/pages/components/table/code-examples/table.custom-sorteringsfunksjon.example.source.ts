@@ -1,54 +1,56 @@
 // Auto-generated - do not edit manually
 export const TableCustomSorteringsfunksjonExampleSource = `import { Component } from '@angular/core';
-import { HviSortableColumn, HviTable, type SortingFn } from '@helsevestikt/hviktor-angular';
+import { HviSortableColumn, HviTable, HviTableScroll, type SortingFn } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-custom-sorteringsfunksjon-example',
   standalone: true,
-  imports: [HviSortableColumn, HviTable],
+  imports: [HviSortableColumn, HviTable, HviTableScroll],
   template: \`
-    <table hviTable [value]="priorityData" #customSortTable="hviTable">
-      <caption>
-        Sensoroversikt med prioritetssortering
-      </caption>
-      <thead>
-        <tr>
-          <th hviSortableColumn="namn" scope="col">
-            <button
-              type="button"
-              [attr.aria-label]="getSortLabel(customSortTable, 'namn', 'Namn')"
-            >
-              Namn
-            </button>
-          </th>
-          <th hviSortableColumn="status" [sortFn]="prioritetSort" scope="col">
-            <button
-              type="button"
-              [attr.aria-label]="getSortLabel(customSortTable, 'status', 'Status')"
-            >
-              Status
-            </button>
-          </th>
-          <th hviSortableColumn="lokasjon" scope="col">
-            <button
-              type="button"
-              [attr.aria-label]="getSortLabel(customSortTable, 'lokasjon', 'Lokasjon')"
-            >
-              Lokasjon
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (sensor of customSortTable.filteredValue(); track sensor.id) {
+    <div hviTableScroll>
+      <table hviTable [value]="priorityData" #customSortTable="hviTable">
+        <caption>
+          Sensoroversikt med prioritetssortering
+        </caption>
+        <thead>
           <tr>
-            <td>{{ sensor.namn }}</td>
-            <td>{{ sensor.status }}</td>
-            <td>{{ sensor.lokasjon }}</td>
+            <th hviSortableColumn="namn" scope="col">
+              <button
+                type="button"
+                [attr.aria-label]="getSortLabel(customSortTable, 'namn', 'Namn')"
+              >
+                Namn
+              </button>
+            </th>
+            <th hviSortableColumn="status" [sortFn]="prioritetSort" scope="col">
+              <button
+                type="button"
+                [attr.aria-label]="getSortLabel(customSortTable, 'status', 'Status')"
+              >
+                Status
+              </button>
+            </th>
+            <th hviSortableColumn="lokasjon" scope="col">
+              <button
+                type="button"
+                [attr.aria-label]="getSortLabel(customSortTable, 'lokasjon', 'Lokasjon')"
+              >
+                Lokasjon
+              </button>
+            </th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (sensor of customSortTable.filteredValue(); track sensor.id) {
+            <tr>
+              <td>{{ sensor.namn }}</td>
+              <td>{{ sensor.status }}</td>
+              <td>{{ sensor.lokasjon }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
   \`,
 })
 export class TableCustomSorteringsfunksjonExampleComponent {

@@ -1,40 +1,42 @@
 import { Component } from '@angular/core';
-import { HviTable } from '@helsevestikt/hviktor-angular';
+import { HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-zebrastriper-og-border-example',
   standalone: true,
-  imports: [HviTable],
+  imports: [HviTable, HviTableScroll],
   template: `
-    <table hviTable zebra border hover>
-      <caption>
-        Sidevisninger per måned
-      </caption>
-      <thead>
-        <tr>
-          <th scope="col">Måned</th>
-          <th scope="col">2024</th>
-          <th scope="col">2025</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Januar</th>
-          <td>1 230</td>
-          <td>1 450</td>
-        </tr>
-        <tr>
-          <th scope="row">Februar</th>
-          <td>980</td>
-          <td>1 120</td>
-        </tr>
-        <tr>
-          <th scope="row">Mars</th>
-          <td>1 150</td>
-          <td>1 300</td>
-        </tr>
-      </tbody>
-    </table>
+    <div hviTableScroll>
+      <table hviTable zebra border hover>
+        <caption>
+          Sidevisninger per måned
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Måned</th>
+            <th scope="col">2024</th>
+            <th scope="col">2025</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Januar</th>
+            <td>1 230</td>
+            <td>1 450</td>
+          </tr>
+          <tr>
+            <th scope="row">Februar</th>
+            <td>980</td>
+            <td>1 120</td>
+          </tr>
+          <tr>
+            <th scope="row">Mars</th>
+            <td>1 150</td>
+            <td>1 300</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   `,
 })
 export class TableZebrastriperOgBorderExampleComponent {}

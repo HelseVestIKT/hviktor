@@ -5,6 +5,8 @@ export * from './table.enkel-tabell.example';
 export * from './table.enkel-tabell.example.source';
 export * from './table.globalt-sok.example';
 export * from './table.globalt-sok.example.source';
+export * from './table.kolonnefiltrering-i-dialog.example';
+export * from './table.kolonnefiltrering-i-dialog.example.source';
 export * from './table.kolonnefiltrering.example';
 export * from './table.kolonnefiltrering.example.source';
 export * from './table.komplett-eksempel.example';

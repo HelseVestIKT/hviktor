@@ -37,6 +37,12 @@ export const TableExamplesManifest = [
     sourceExport: 'TableKolonnefiltreringExampleSource',
   },
   {
+    slug: 'kolonnefiltrering-i-dialog',
+    title: 'Kolonnefiltrering i dialog',
+    className: 'TableKolonnefiltreringIDialogExampleComponent',
+    sourceExport: 'TableKolonnefiltreringIDialogExampleSource',
+  },
+  {
     slug: 'paginering',
     title: 'Paginering',
     className: 'TablePagineringExampleComponent',
@@ -69,6 +75,7 @@ export type TableExampleSlug =
   | 'custom-sorteringsfunksjon'
   | 'globalt-sok'
   | 'kolonnefiltrering'
+  | 'kolonnefiltrering-i-dialog'
   | 'paginering'
   | 'utvidbare-rader'
   | 'utvidbare-rader-enkeltmodus'
