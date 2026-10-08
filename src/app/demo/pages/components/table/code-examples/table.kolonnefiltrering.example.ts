@@ -34,6 +34,7 @@ import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angul
               searchPlaceholder="Søk navn..."
               aria-label="Filtrer på navn"
               aria-controls="filter-tabell"
+              [value]="colFilterTable.getColumnFilterValue('navn')"
               (selectionChange)="colFilterTable.setColumnFilter('navn', $event)"
             />
           </td>
@@ -44,6 +45,7 @@ import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angul
               searchPlaceholder="Søk avdeling..."
               aria-label="Filtrer på avdeling"
               aria-controls="filter-tabell"
+              [value]="colFilterTable.getColumnFilterValue('avdeling')"
               (selectionChange)="colFilterTable.setColumnFilter('avdeling', $event)"
             />
           </td>
@@ -54,6 +56,7 @@ import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angul
               searchPlaceholder="Søk stilling..."
               aria-label="Filtrer på stilling"
               aria-controls="filter-tabell"
+              [value]="colFilterTable.getColumnFilterValue('stilling')"
               (selectionChange)="colFilterTable.setColumnFilter('stilling', $event)"
             />
           </td>
