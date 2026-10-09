@@ -72,6 +72,8 @@ import { HviHeading } from '../heading';
     '[attr.closedby]': 'closedby',
     '(close)': 'handleClose()',
     '(cancel)': 'handleCancel($event)',
+    '(pointerdown)': 'onPointerDown($event)',
+    '(pointercancel)': 'resetBackdropPress()',
     '(click)': 'onBackdropClick($event)',
   },
   template: `
@@ -180,6 +182,7 @@ export class HviDialog {
   @Output() readonly openChange = new EventEmitter<boolean>();
 
   private readonly element = inject(ElementRef<HTMLDialogElement>).nativeElement;
+  private pressStartedOnBackdrop = false;
 
   get closeButtonAriaLabel(): string {
     return typeof this.closeButton === 'string' ? this.closeButton : 'Lukk dialogvindu';
@@ -207,6 +210,7 @@ export class HviDialog {
    * Emits `openChange(false)` to sync with external state.
    */
   handleClose(): void {
+    this.resetBackdropPress();
     this.openChange.emit(false);
   }
 
@@ -219,24 +223,45 @@ export class HviDialog {
     this.setOpen(false);
   }
 
-  onBackdropClick(event: MouseEvent): void {
-    if (this.closedby === 'any' && this.element.open) {
-      if (event.target === this.element) {
-        const rect = this.element.getBoundingClientRect();
-        const isInDialog =
-          event.clientX >= rect.left &&
-          event.clientX <= rect.right &&
-          event.clientY >= rect.top &&
-          event.clientY <= rect.bottom;
+  onPointerDown(event: PointerEvent): void {
+    this.pressStartedOnBackdrop =
+      event.button === 0 && this.element.open && this.isBackdropEvent(event);
+  }
 
-        if (!isInDialog) {
-          this.close();
-        }
-      }
+  resetBackdropPress(): void {
+    this.pressStartedOnBackdrop = false;
+  }
+
+  onBackdropClick(event: MouseEvent): void {
+    const startedOnBackdrop = this.pressStartedOnBackdrop;
+    this.resetBackdropPress();
+
+    if (
+      this.closedby === 'any' &&
+      this.element.open &&
+      startedOnBackdrop &&
+      this.isBackdropEvent(event)
+    ) {
+      this.close();
     }
   }
 
+  private isBackdropEvent(event: MouseEvent): boolean {
+    if (event.target !== this.element) {
+      return false;
+    }
+
+    const rect = this.element.getBoundingClientRect();
+    return (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    );
+  }
+
   private setOpen(shouldOpen: boolean): void {
+    this.resetBackdropPress();
     if (shouldOpen) {
       if (this.element.open) {
         return;
