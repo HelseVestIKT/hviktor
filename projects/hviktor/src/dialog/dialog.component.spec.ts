@@ -550,6 +550,7 @@ describe('HviDialog — Backdrop click behavior', () => {
 
     const closeSpy = vi.spyOn(directive, 'close');
     // Dispatch on nativeDialog so event.target === this.element; coords outside the mocked rect
+    nativeDialog.dispatchEvent(new MouseEvent('pointerdown', { clientX: 50, clientY: 50 }));
     nativeDialog.dispatchEvent(
       new MouseEvent('click', { bubbles: false, clientX: 50, clientY: 50 }),
     );
@@ -574,6 +575,7 @@ describe('HviDialog — Backdrop click behavior', () => {
     } as DOMRect);
 
     const closeSpy = vi.spyOn(directive, 'close');
+    nativeDialog.dispatchEvent(new MouseEvent('pointerdown', { clientX: 50, clientY: 50 }));
     nativeDialog.dispatchEvent(
       new MouseEvent('click', { bubbles: false, clientX: 50, clientY: 50 }),
     );
@@ -599,10 +601,61 @@ describe('HviDialog — Backdrop click behavior', () => {
 
     const closeSpy = vi.spyOn(directive, 'close');
     // Coords inside the mocked rect (100-300)
+    nativeDialog.dispatchEvent(new MouseEvent('pointerdown', { clientX: 150, clientY: 150 }));
     nativeDialog.dispatchEvent(
       new MouseEvent('click', { bubbles: false, clientX: 150, clientY: 150 }),
     );
     expect(closeSpy).not.toHaveBeenCalled();
+  });
+
+  it('should not close when a press starts inside and ends on the backdrop', () => {
+    fixture.componentInstance.closedby = 'any';
+    fixture.detectChanges();
+    directive.openModal();
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(100, 100, 200, 200),
+    );
+
+    const content = document.createElement('p');
+    nativeDialog.append(content);
+    content.dispatchEvent(
+      new MouseEvent('pointerdown', { bubbles: true, clientX: 150, clientY: 150 }),
+    );
+    nativeDialog.dispatchEvent(new MouseEvent('pointerup', { clientX: 50, clientY: 50 }));
+    nativeDialog.dispatchEvent(new MouseEvent('click', { clientX: 50, clientY: 50 }));
+
+    expect(nativeDialog.close).not.toHaveBeenCalled();
+    expect(directive.open).toBe(true);
+  });
+
+  it('should not close when a press starts on the backdrop and ends inside', () => {
+    fixture.componentInstance.closedby = 'any';
+    fixture.detectChanges();
+    directive.openModal();
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(100, 100, 200, 200),
+    );
+
+    nativeDialog.dispatchEvent(new MouseEvent('pointerdown', { clientX: 50, clientY: 50 }));
+    nativeDialog.dispatchEvent(new MouseEvent('click', { clientX: 150, clientY: 150 }));
+    nativeDialog.dispatchEvent(new MouseEvent('click', { clientX: 50, clientY: 50 }));
+
+    expect(nativeDialog.close).not.toHaveBeenCalled();
+  });
+
+  it('should discard a canceled backdrop press', () => {
+    fixture.componentInstance.closedby = 'any';
+    fixture.detectChanges();
+    directive.openModal();
+    vi.spyOn(nativeDialog, 'getBoundingClientRect').mockReturnValue(
+      new DOMRect(100, 100, 200, 200),
+    );
+
+    nativeDialog.dispatchEvent(new MouseEvent('pointerdown', { clientX: 50, clientY: 50 }));
+    nativeDialog.dispatchEvent(new Event('pointercancel'));
+    nativeDialog.dispatchEvent(new MouseEvent('click', { clientX: 50, clientY: 50 }));
+
+    expect(nativeDialog.close).not.toHaveBeenCalled();
   });
 
   it('should not respond to backdrop clicks when dialog is closed', () => {
