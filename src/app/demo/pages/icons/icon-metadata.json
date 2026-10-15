@@ -17626,7 +17626,7 @@
     "className": "HviIconBold",
     "selector": "hvi-icon-bold",
     "source": "custom",
-    "category": "Textediting",
+    "category": "Formatting",
     "keywords": [
       "fet",
       "fet skrift",
@@ -17643,7 +17643,7 @@
     "className": "HviIconItalic",
     "selector": "hvi-icon-italic",
     "source": "custom",
-    "category": "Textediting",
+    "category": "Formatting",
     "keywords": [
       "kursiv",
       "tekst",
@@ -17658,7 +17658,7 @@
     "className": "HviIconUnderline",
     "selector": "hvi-icon-underline",
     "source": "custom",
-    "category": "Textediting",
+    "category": "Formatting",
     "keywords": [
       "understreket",
       "tekst",
