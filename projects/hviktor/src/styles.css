@@ -42,6 +42,16 @@ form[hviForm] > * + * {
   margin-block-start: var(--ds-size-4);
 }
 
+/* Radiogruppe med feil: aria-invalid ligger på fieldset (hviFieldset), ikke på hver radio,
+   så skjermleser sier «ugyldig» én gang for gruppen. Radioene får fortsatt rød feilstil. */
+@layer ds.components {
+  .ds-fieldset[aria-invalid='true'] .ds-input[type='radio'] {
+    --dsc-input-border-color: var(--dsc-input-accent-color--invalid);
+    --dsc-input-accent-color: var(--dsc-input-accent-color--invalid);
+    --dsc-input-stroke-color: var(--dsc-input-stroke-color--invalid);
+  }
+}
+
 /* ds-suggestion: gi chips luft i flervalgsmodus */
 .ds-suggestion[data-multiple]::part(items) {
   padding-block: var(--ds-size-2);

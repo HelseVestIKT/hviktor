@@ -16,6 +16,7 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           hviInput
           hviControlInvalid
           type="radio"
+          name="bydel"
           id="bydel-ostbyen"
           value="ostbyen"
           [formControl]="bydelControl"
@@ -27,6 +28,7 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           hviInput
           hviControlInvalid
           type="radio"
+          name="bydel"
           id="bydel-lerkendal"
           value="lerkendal"
           [formControl]="bydelControl"
@@ -38,6 +40,7 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           hviInput
           hviControlInvalid
           type="radio"
+          name="bydel"
           id="bydel-heimdal"
           value="heimdal"
           [formControl]="bydelControl"
@@ -49,6 +52,7 @@ import { HviControlInvalid, HviField, HviFieldset, HviFieldValidation, HviInput,
           hviInput
           hviControlInvalid
           type="radio"
+          name="bydel"
           id="bydel-midtbyen"
           value="midtbyen"
           [formControl]="bydelControl"
