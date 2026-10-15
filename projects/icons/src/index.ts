@@ -961,5 +961,10 @@ export { HviIconZoomMinus } from './lib/components/icon-zoom-minus.component';
 export { HviIconZoomPlusFill } from './lib/components/icon-zoom-plus-fill.component';
 export { HviIconZoomPlus } from './lib/components/icon-zoom-plus.component';
 
+// Egenutviklede ikoner (kilde: projects/icons/custom/svg)
+export { HviIconBold } from './lib/custom/icon-bold.component';
+export { HviIconItalic } from './lib/custom/icon-italic.component';
+export { HviIconUnderline } from './lib/custom/icon-underline.component';
+
 // Export base class if consumers want to extend it
 export { HviIconBase } from './lib/base-icon.component';

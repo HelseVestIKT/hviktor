@@ -3,10 +3,10 @@
     <header class="mb-6">
       <h1 hviHeading size="xl">Ikoner</h1>
       <p hviParagraph class="max-w-lg">
-        {{ totalCount }} ikoner som Angular-komponenter, basert på
+        Ikoner som Angular-komponenter, basert på
         <a hviLink href="https://aksel.nav.no/ikoner" target="_blank" rel="noopener noreferrer"
           >Aksel-ikonene fra Nav</a
-        >. Velg et ikon for å se hvordan du bruker det.
+        >, supplert med noen egenutviklede ikoner. Velg et ikon for å se hvordan du bruker det.
       </p>
     </header>
 
@@ -118,6 +118,8 @@
     <dl class="m-0 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1">
       <dt class="font-medium">Kategori</dt>
       <dd class="m-0">{{ icon.category }}</dd>
+      <dt class="font-medium">Kilde</dt>
+      <dd class="m-0">{{ icon.source === 'custom' ? 'Egenutviklet' : 'Aksel' }}</dd>
       <dt class="font-medium">Variant</dt>
       <dd class="m-0">{{ icon.variant === 'fill' ? 'Fill' : 'Stroke' }}</dd>
       @if (icon.keywords.length) {

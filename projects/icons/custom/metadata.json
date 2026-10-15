@@ -1,0 +1,14 @@
+{
+  "Bold": {
+    "category": "Formatting",
+    "keywords": ["fet", "fet skrift", "uthevet", "tekst", "formatering", "bold"]
+  },
+  "Italic": {
+    "category": "Formatting",
+    "keywords": ["kursiv", "tekst", "formatering", "italic"]
+  },
+  "Underline": {
+    "category": "Formatting",
+    "keywords": ["understreket", "tekst", "formatering", "underline"]
+  }
+}

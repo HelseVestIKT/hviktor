@@ -11,6 +11,7 @@ npm install @helsevestikt/hviktor-icons
 ## Funksjoner
 
 - 900+ ikoner basert på NAV Aksel
+- Noen egenutviklede ikoner der Aksel ikke har det vi trenger. De brukes på samme måte som de andre.
 - Standalone Angular-komponenter
 - Enkeltimport av enkel-ikoner for god bundle-kontroll
 - Valgfri all-icons entrypoint for rask IntelliSense i demo/playground
