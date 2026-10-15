@@ -26,7 +26,7 @@ import { Component, input } from '@angular/core';
 @Component({
   selector: 'hvi-field-counter',
   standalone: true,
-  styles: [':host { display: contents; }'],
+  styles: [':host { display: block; }'],
   template: `<p
     class="ds-validation-message"
     data-field="counter"

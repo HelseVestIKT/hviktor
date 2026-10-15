@@ -93,7 +93,6 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
           [formGroup]="contactForm"
           [focusOnInvalid]="summary"
           (hviSubmitted)="onContactFormSubmit()"
-          class="max-w-2xl"
           [attr.aria-describedby]="
             myForm.requiredMode() === 'all-required' ? 'contact-required-info' : null
           "
@@ -103,7 +102,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
             <hvi-required-tag id="contact-required-info" mode="all-required" />
           }
 
-          <fieldset hviFieldset>
+          <fieldset hviFieldset class="max-w-xs">
             <legend hviLabel>Om deg</legend>
 
             <hvi-field>
@@ -114,7 +113,6 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
                 formControlName="firstName"
                 hviControlInvalid
                 required
-                class="max-w-xs"
               />
               <p
                 hviFieldValidation
@@ -127,14 +125,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
               <label hviLabel for="lastName">
                 Etternavn <hvi-required-tag mode="required" />
               </label>
-              <input
-                hviInput
-                id="lastName"
-                formControlName="lastName"
-                hviControlInvalid
-                required
-                class="max-w-xs"
-              />
+              <input hviInput id="lastName" formControlName="lastName" hviControlInvalid required />
               <p
                 hviFieldValidation
                 hviValidationMessage="lastName"
@@ -146,7 +137,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
           <fieldset hviFieldset>
             <legend hviLabel>Kontaktinformasjon</legend>
 
-            <hvi-field>
+            <hvi-field class="max-w-sm">
               <label hviLabel for="email"> E-post <hvi-required-tag mode="required" /> </label>
               <input
                 hviInput
@@ -155,12 +146,11 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
                 formControlName="email"
                 hviControlInvalid
                 required
-                class="max-w-sm"
               />
               <p hviFieldValidation hviValidationMessage="email" [messages]="messages['email']"></p>
             </hvi-field>
 
-            <hvi-field>
+            <hvi-field class="max-w-3xs">
               <label hviLabel for="phone"> Telefon <hvi-required-tag mode="optional" /> </label>
               <span hviFieldDescription>Format: +47 000 00 000</span>
               <input
@@ -178,16 +168,9 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
           <fieldset hviFieldset>
             <legend hviLabel>Din henvendelse</legend>
 
-            <hvi-field>
+            <hvi-field class="max-w-xs">
               <label hviLabel for="subject"> Emne <hvi-required-tag mode="required" /> </label>
-              <select
-                hviSelect
-                id="subject"
-                formControlName="subject"
-                hviControlInvalid
-                required
-                class="max-w-sm"
-              >
+              <select hviSelect id="subject" formControlName="subject" hviControlInvalid required>
                 <option value="" disabled>Velg emne</option>
                 <option value="general">Generell henvendelse</option>
                 <option value="support">Teknisk support</option>
@@ -201,7 +184,7 @@ import { FormsSkjemaMedValideringOgFeiloppsummeringExampleSource } from './code-
               ></p>
             </hvi-field>
 
-            <hvi-field>
+            <hvi-field class="max-w-lg">
               <label hviLabel for="message"> Melding <hvi-required-tag mode="required" /> </label>
               <span hviFieldDescription>Beskriv det du lurer på</span>
               <textarea
