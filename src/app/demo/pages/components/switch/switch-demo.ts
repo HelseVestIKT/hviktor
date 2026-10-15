@@ -9,10 +9,12 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { SwitchDisabledExampleSource } from './code-examples/switch.disabled.example.source';
 import { SwitchGrunnleggendeExampleSource } from './code-examples/switch.grunnleggende.example.source';
 import { SwitchGrupperingExampleSource } from './code-examples/switch.gruppering.example.source';
 import { SwitchHoyrejustertExampleSource } from './code-examples/switch.hoyrejustert.example.source';
 import { SwitchOutlineExampleSource } from './code-examples/switch.outline.example.source';
+import { SwitchReadonlyExampleSource } from './code-examples/switch.readonly.example.source';
 @Component({
   selector: 'app-switch-demo',
   standalone: true,
@@ -122,6 +124,36 @@ import { SwitchOutlineExampleSource } from './code-examples/switch.outline.examp
           </hvi-field>
         </fieldset>
       </app-demo-section>
+      <app-demo-section
+        title="ReadOnly"
+        [code]="readonlyCode"
+        description="Bruk readOnly når du vil vise en forhåndsvalgt innstilling som brukeren ikke kan endre, for eksempel når innstillingen er bestemt av systemet. Bryteren kan fortsatt få tastaturfokus."
+      >
+        <hvi-field>
+          <input
+            hviInput
+            type="checkbox"
+            role="switch"
+            id="readonly-switch-varsler"
+            checked
+            readOnly
+          />
+          <label hviLabel for="readonly-switch-varsler">Driftsvarsler</label>
+          <span hviFieldDescription>Aktivert av administratoren din</span>
+        </hvi-field>
+      </app-demo-section>
+
+      <app-demo-section
+        title="Disabled"
+        [code]="disabledCode"
+        description="Unngå å deaktivere switch hvis du kan. Brukeren forstår ikke alltid hvorfor innstillingen ikke er tilgjengelig, og deaktiverte felt har lav kontrast. Vurder om bryteren trengs, om readOnly passer bedre, eller om informasjonen kan vises som tekst."
+      >
+        <hvi-field>
+          <input hviInput type="checkbox" role="switch" id="disabled-switch-sms" disabled />
+          <label hviLabel for="disabled-switch-sms">SMS-varsler</label>
+          <span hviFieldDescription>Legg til et mobilnummer for å aktivere SMS-varsler</span>
+        </hvi-field>
+      </app-demo-section>
     </app-demo-page>
   `,
 })
@@ -130,4 +162,6 @@ export class SwitchDemoComponent {
   readonly grupperingCode = SwitchGrupperingExampleSource;
   readonly hoyrejustertCode = SwitchHoyrejustertExampleSource;
   readonly outlineCode = SwitchOutlineExampleSource;
+  readonly readonlyCode = SwitchReadonlyExampleSource;
+  readonly disabledCode = SwitchDisabledExampleSource;
 }
