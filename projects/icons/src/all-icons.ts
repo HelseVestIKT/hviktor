@@ -501,6 +501,7 @@ import {
   HviIconInformation,
   HviIconInformationSquare,
   HviIconInformationSquareFill,
+  HviIconItalic,
   HviIconIvFluidBag,
   HviIconIvFluidBagFill,
   HviIconKeyHorizontal,
@@ -932,6 +933,7 @@ import {
   HviIconTruckPercentFill,
   HviIconUmbrella,
   HviIconUmbrellaFill,
+  HviIconUnderline,
   HviIconUpload,
   HviIconVideo,
   HviIconVideoFill,
@@ -1925,6 +1927,8 @@ export const HVI_ALL_ICONS = [
   HviIconZoomPlusFill,
   HviIconZoomPlus,
   HviIconBold,
+  HviIconItalic,
+  HviIconUnderline,
   HviIconBase,
 ] as const;
 
