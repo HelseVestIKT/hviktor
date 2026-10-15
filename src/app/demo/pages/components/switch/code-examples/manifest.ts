@@ -24,6 +24,19 @@ export const SwitchExamplesManifest = [
     className: 'SwitchOutlineExampleComponent',
     sourceExport: 'SwitchOutlineExampleSource',
   },
+  {
+    slug: 'readonly',
+    title: 'ReadOnly',
+    className: 'SwitchReadonlyExampleComponent',
+    sourceExport: 'SwitchReadonlyExampleSource',
+  },
+  {
+    slug: 'disabled',
+    title: 'Disabled',
+    className: 'SwitchDisabledExampleComponent',
+    sourceExport: 'SwitchDisabledExampleSource',
+  },
 ] as const;
 
-export type SwitchExampleSlug = 'grunnleggende' | 'gruppering' | 'hoyrejustert' | 'outline';
+export type SwitchExampleSlug =
+  'grunnleggende' | 'gruppering' | 'hoyrejustert' | 'outline' | 'readonly' | 'disabled';
