@@ -4,6 +4,29 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.4.2] – 2026-10-15
+
+### @helsevestikt/hviktor-angular
+
+#### Added
+
+- Fieldset: UU-forbedringer for radio.
+- Popover: UU-forbedringer og fokusstyring.
+
+#### Changed
+
+- Dialog: forbedret håndtering av backdrop klikk.
+
+#### Fixed
+
+- FieldCounter: Endret til display: block for å få effekt av margin-regler.
+
+### @helsevestikt/hviktor-icons
+
+#### Added
+
+- Det er lagt til tre ikoner vi har laget selv. Alle tre ligger under kategorien Formatting.
+
 ## [0.4.1] – 2026-10-08
 
 ### @helsevestikt/hviktor-angular
