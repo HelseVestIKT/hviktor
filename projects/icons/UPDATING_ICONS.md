@@ -4,6 +4,8 @@ Ikonene i `@helsevestikt/hviktor-icons` er generert fra [Aksel-ikonene til Nav](
 
 Alle kommandoer kjøres fra repo-roten.
 
+Egenutviklede ikoner ligger i en egen mappe og påvirkes ikke av Aksel-oppdateringer. Se [CUSTOM_ICONS.md](./CUSTOM_ICONS.md).
+
 ## 1. Hent nyeste versjon av Aksel-ikonene
 
 ```bash

@@ -74,6 +74,7 @@ import {
   HviIconBicycle,
   HviIconBoat,
   HviIconBoatFill,
+  HviIconBold,
   HviIconBone,
   HviIconBoneBroken,
   HviIconBoneFill,
@@ -1923,6 +1924,7 @@ export const HVI_ALL_ICONS = [
   HviIconZoomMinus,
   HviIconZoomPlusFill,
   HviIconZoomPlus,
+  HviIconBold,
   HviIconBase,
 ] as const;
 

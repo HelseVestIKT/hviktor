@@ -26,6 +26,7 @@
     "scaffold:demo": "node ./scripts/scaffold-demo.js",
     "generate:examples": "node ./scripts/generate-examples.js",
     "import:nav-icons": "node ./scripts/import-nav-icons-from-svg.js",
+    "import:custom-icons": "node ./scripts/import-custom-icons.js",
     "generate:icon-metadata": "node ./scripts/generate-icon-metadata.js",
     "lint": "eslint . --ext .ts,.html",
     "lint:staged": "eslint --fix",

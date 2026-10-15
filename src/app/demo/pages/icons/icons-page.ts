@@ -28,6 +28,7 @@ hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('xml', xml);
 
 type IconVariant = 'stroke' | 'fill';
+type IconSource = 'aksel' | 'custom';
 
 interface IconEntry {
   /** Aksel-navn, f.eks. `ChevronDown`. */
@@ -36,6 +37,8 @@ interface IconEntry {
   slug: string;
   className: string;
   selector: string;
+  /** `aksel` for Aksel-ikoner, `custom` for egenutviklede ikoner fra projects/icons/custom/svg. */
+  source: IconSource;
   category: string;
   keywords: string[];
   variant: IconVariant;
@@ -55,8 +58,17 @@ const XL_MEDIA_QUERY = '(min-width: 80rem)';
 const ICONS: IconEntry[] = ICON_METADATA.map((meta) => ({
   ...meta,
   variant: meta.variant as IconVariant,
+  source: meta.source as IconSource,
   slug: meta.selector.replace(/^hvi-icon-/, ''),
-  searchText: [meta.name, meta.selector, meta.category, ...meta.keywords].join(' ').toLowerCase(),
+  searchText: [
+    meta.name,
+    meta.selector,
+    meta.category,
+    ...meta.keywords,
+    meta.source === 'custom' ? 'egenutviklet' : '',
+  ]
+    .join(' ')
+    .toLowerCase(),
 })).sort((a, b) => a.name.localeCompare(b.name));
 
 const ICONS_BY_SLUG = new Map(ICONS.map((icon) => [icon.slug, icon]));
