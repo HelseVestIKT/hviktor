@@ -79,6 +79,10 @@ let nextId = 0;
 @Component({
   selector: 'hvi-textfield',
   standalone: true,
+  host: {
+    // `id` gjelder inputfeltet. Fjern den fra vertselementet så id-en ikke finnes to ganger.
+    '[attr.id]': 'null',
+  },
   styles: [
     ':host { display: block; }',
     // Designsystemet bruker bare data-width på select, så vi lar det styre input også.

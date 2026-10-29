@@ -65,6 +65,13 @@ class WidthHost {
   readonly multiline = signal(false);
 }
 
+@Component({
+  standalone: true,
+  imports: [HviTextfield],
+  template: `<hvi-textfield id="postnummer" label="Postnummer" />`,
+})
+class IdHost {}
+
 function type(control: HTMLInputElement, text: string) {
   control.value = text;
   control.dispatchEvent(new Event('input'));
@@ -74,7 +81,9 @@ const settle = () => new Promise((resolve) => setTimeout(resolve));
 
 describe('HviTextfield', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [AffixHost, FormHost, NumberValueHost, SizeHost, WidthHost] });
+    await setupTestBed({
+      imports: [AffixHost, FormHost, NumberValueHost, SizeHost, WidthHost, IdHost],
+    });
   });
 
   describe('prefiks og suffiks', () => {
@@ -264,6 +273,28 @@ describe('HviTextfield', () => {
       const textarea = (fixture.nativeElement as HTMLElement).querySelector('textarea')!;
 
       expect(textarea.hasAttribute('data-width')).toBe(false);
+    });
+  });
+
+  describe('id', () => {
+    it('setter id bare på inputfeltet, ikke på vertselementet', () => {
+      const fixture = TestBed.createComponent(IdHost);
+      fixture.detectChanges();
+      const el: HTMLElement = fixture.nativeElement;
+
+      expect(el.querySelectorAll('#postnummer')).toHaveLength(1);
+      expect(el.querySelector('#postnummer')!.tagName).toBe('INPUT');
+      expect(el.querySelector('hvi-textfield')!.hasAttribute('id')).toBe(false);
+    });
+
+    it('kobler labelen til inputfeltet', async () => {
+      const fixture = TestBed.createComponent(IdHost);
+      fixture.detectChanges();
+      await fixture.whenStable();
+      const label = (fixture.nativeElement as HTMLElement).querySelector('label')!;
+
+      expect(label.htmlFor).toBe('postnummer');
+      expect(label.control?.id).toBe('postnummer');
     });
   });
 });
