@@ -4,6 +4,29 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.4.3] – 2026-10-29
+
+### @helsevestikt/hviktor-angular
+
+#### Added
+
+- Textfield: Lagt til input for width (`auto` eller `full`).
+
+#### Changed
+
+- **Brekkende endring**: Textfield med `type="number"` gir nå `number` til skjemaet, og `null` når feltet er tomt, slik som `<input type="number">`. Tidligere fikk man en string.
+
+#### Fixed
+
+- Textfield: Prefiks og suffiks leses nå opp av skjermlesere.
+- Textfield: `size` hadde ingen effekt. Dette er fikset.
+- Textfield: Når `id` var satt, ble ikke label koblet til feltet. Dette er fikset.
+- Tabs: Fanen byttes nå når `value` endres. Bruk `[(value)]` hvis du styrer fanene fra koden.
+
+### @helsevestikt/hviktor-icons
+
+Ingen endringer i denne releasen.
+
 ## [0.4.2] – 2026-10-15
 
 ### @helsevestikt/hviktor-angular
