@@ -1,4 +1,6 @@
 // Auto-generated - do not edit manually
+export * from './textfield.bredde.example';
+export * from './textfield.bredde.example.source';
 export * from './textfield.grunnleggende.example';
 export * from './textfield.grunnleggende.example.source';
 export * from './textfield.med-prefiks-og-suffiks.example';

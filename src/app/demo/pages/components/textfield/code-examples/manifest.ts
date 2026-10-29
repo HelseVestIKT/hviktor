@@ -19,6 +19,12 @@ export const TextfieldExamplesManifest = [
     sourceExport: 'TextfieldMedTellerExampleSource',
   },
   {
+    slug: 'bredde',
+    title: 'Bredde',
+    className: 'TextfieldBreddeExampleComponent',
+    sourceExport: 'TextfieldBreddeExampleSource',
+  },
+  {
     slug: 'pakrevde-og-valgfrie-felt',
     title: 'Påkrevde og valgfrie felt',
     className: 'TextfieldPakrevdeOgValgfrieFeltExampleComponent',
@@ -42,6 +48,7 @@ export type TextfieldExampleSlug =
   | 'grunnleggende'
   | 'med-prefiks-og-suffiks'
   | 'med-teller'
+  | 'bredde'
   | 'pakrevde-og-valgfrie-felt'
   | 'type'
   | 'toveisbinding';

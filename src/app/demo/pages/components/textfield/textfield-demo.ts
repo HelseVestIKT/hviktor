@@ -9,6 +9,7 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { TextfieldBreddeExampleSource } from './code-examples/textfield.bredde.example.source';
 import { TextfieldGrunnleggendeExampleSource } from './code-examples/textfield.grunnleggende.example.source';
 import { TextfieldMedPrefiksOgSuffiksExampleSource } from './code-examples/textfield.med-prefiks-og-suffiks.example.source';
 import { TextfieldMedTellerExampleSource } from './code-examples/textfield.med-teller.example.source';
@@ -82,6 +83,20 @@ export type HviTextfieldType =
         ></hvi-textfield>
       </app-demo-section>
 
+      <!-- Bredde -->
+      <app-demo-section
+        title="Bredde"
+        [code]="breddeCode"
+        description="Tilpass bredden etter hva brukerne skal skrive inn: kort bredde for postnummer og telefonnummer, bredere for stedsnavn. Ulik bredde gjør det lettere å navigere i skjemaer med mange felt. Bruk size for å angi bredden i antall tegn, eller width med verdien auto for feltets naturlige bredde. Uten disse fyller feltet hele bredden."
+      >
+        <div class="space-y-4">
+          <hvi-textfield label="Postnummer" [size]="4" autocomplete="postal-code" />
+          <hvi-textfield label="Telefonnummer" type="tel" [size]="10" autocomplete="tel" />
+          <hvi-textfield label="Poststed" width="auto" autocomplete="address-level2" />
+          <hvi-textfield label="Adresse" autocomplete="street-address" />
+        </div>
+      </app-demo-section>
+
       <!-- Påkrevde og valgfrie felt -->
       <app-demo-section
         title="Påkrevde og valgfrie felt"
@@ -138,6 +153,7 @@ export class TextfieldDemoComponent {
   readonly grunnleggendeCode = TextfieldGrunnleggendeExampleSource;
   readonly medPrefiksOgSuffiksCode = TextfieldMedPrefiksOgSuffiksExampleSource;
   readonly medTellerCode = TextfieldMedTellerExampleSource;
+  readonly breddeCode = TextfieldBreddeExampleSource;
   readonly pakrevdeOgValgfrieFeltCode = TextfieldPakrevdeOgValgfrieFeltExampleSource;
   readonly typeCode = TextfieldTypeExampleSource;
   readonly toveisbindingCode = TextfieldToveisbindingExampleSource;
