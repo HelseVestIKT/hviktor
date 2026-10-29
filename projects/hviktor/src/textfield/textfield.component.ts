@@ -2,12 +2,14 @@ import {
   booleanAttribute,
   Component,
   computed,
+  ElementRef,
   forwardRef,
   inject,
   input,
   model,
   numberAttribute,
   signal,
+  viewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HviFieldAffix } from '../forms/field/field-affix.component';
@@ -38,6 +40,9 @@ export type HviTextfieldType =
   | 'url'
   | 'week';
 
+/** Verdien til et textfield: tekst, eller tall/`null` når `type="number"`. */
+export type HviTextfieldValue = string | number | null;
+
 let nextId = 0;
 
 /**
@@ -62,6 +67,11 @@ let nextId = 0;
  * @example
  * ```html
  * <hvi-textfield label="Pris" prefix="NOK" suffix="pr. mnd"></hvi-textfield>
+ * ```
+ *
+ * @example Tallfelt – skjemaet får `number`, eller `null` når feltet er tomt
+ * ```html
+ * <hvi-textfield label="Antall" type="number" formControlName="antall"></hvi-textfield>
  * ```
  *
  * @see {@link https://designsystemet.no/en/components/docs/textfield/code}
@@ -105,6 +115,7 @@ let nextId = 0;
         }
         @if (multiline()) {
           <textarea
+            #control
             hviInput
             [id]="inputId()"
             [attr.name]="name() ?? null"
@@ -117,12 +128,13 @@ let nextId = 0;
             [attr.aria-describedby]="affixDescribedBy()"
             [attr.required]="required() ? '' : null"
             [attr.autocomplete]="autocomplete() ?? null"
-            [value]="value()"
+            [value]="displayValue()"
             (input)="handleInput($event)"
             (blur)="onTouched()"
           ></textarea>
         } @else {
           <input
+            #control
             hviInput
             [id]="inputId()"
             [type]="type()"
@@ -136,7 +148,7 @@ let nextId = 0;
             [attr.aria-describedby]="affixDescribedBy()"
             [attr.required]="required() ? '' : null"
             [attr.autocomplete]="autocomplete() ?? null"
-            [value]="value()"
+            [value]="displayValue()"
             (input)="handleInput($event)"
             (blur)="onTouched()"
           />
@@ -154,7 +166,7 @@ let nextId = 0;
     </hvi-field>
   `,
 })
-export class HviTextfield implements ControlValueAccessor {
+export class HviTextfield<T extends HviTextfieldValue = string> implements ControlValueAccessor {
   /** Ledetekst for feltet. */
   readonly label = input<string>('');
 
@@ -219,8 +231,13 @@ export class HviTextfield implements ControlValueAccessor {
   /** Maks antall tegn. */
   readonly maxLength = input<number | undefined>(undefined, { transform: numberAttribute });
 
-  /** Verdien i feltet. Toveisbinding, og settes også av `ngModel`/`formControlName`. */
-  readonly value = model<string>('');
+  /**
+   * Verdien i feltet. Toveisbinding, og settes også av `ngModel`, `formControlName` og `[formField]`.
+   *
+   * Med `type="number"` er verdien et tall, eller `null` når feltet er tomt – på samme måte
+   * som Angular gjør for `<input type="number">`. For alle andre typer er verdien en streng.
+   */
+  readonly value = model<T>('' as T);
 
   /** Marker feltet som påkrevd. */
   readonly required = input(false, { transform: booleanAttribute });
@@ -284,20 +301,48 @@ export class HviTextfield implements ControlValueAccessor {
     }
   });
 
-  private onChange: (value: string) => void = () => undefined;
+  /** Det brukeren sist skrev, slik at f.eks. «1.0» ikke skrives om til «1» mens man skriver. */
+  private readonly rawInput = signal<string | null>(null);
+
+  /** Teksten som vises i feltet. */
+  protected readonly displayValue = computed(() => {
+    const value = this.value();
+    const raw = this.rawInput();
+    if (raw !== null && this.parse(raw) === value) return raw;
+    return value === null || value === undefined ? '' : String(value);
+  });
+
+  private readonly control =
+    viewChild<ElementRef<HTMLInputElement | HTMLTextAreaElement>>('control');
+
+  private onChange: (value: T) => void = () => undefined;
   protected onTouched: () => void = () => undefined;
 
   protected handleInput(event: Event): void {
-    const target = event.target as HTMLInputElement | HTMLTextAreaElement;
-    this.value.set(target.value);
-    this.onChange(target.value);
+    const raw = (event.target as HTMLInputElement | HTMLTextAreaElement).value;
+    const value = this.parse(raw);
+    this.rawInput.set(raw);
+    this.value.set(value);
+    this.onChange(value);
   }
 
-  writeValue(value: string | null): void {
-    this.value.set(value ?? '');
+  /** Samme konvertering som Angulars `NumberValueAccessor`: tomt felt gir `null`, ellers et tall. */
+  private parse(raw: string): T {
+    if (this.type() !== 'number' || this.multiline()) return raw as T;
+    return (raw === '' ? null : parseFloat(raw)) as T;
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  writeValue(value: T | null | undefined): void {
+    this.rawInput.set(null);
+    this.value.set((value ?? (this.type() === 'number' ? null : '')) as T);
+
+    // Skriv også rett til feltet, slik Angular gjør. Ellers blir f.eks. ugyldig tekst
+    // i et tallfelt stående når skjemaet nullstilles, fordi den viste verdien er uendret.
+    const control = this.control()?.nativeElement;
+    if (control) control.value = this.displayValue();
+  }
+
+  registerOnChange(fn: (value: T) => void): void {
     this.onChange = fn;
   }
 
