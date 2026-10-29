@@ -61,7 +61,7 @@ export type HviTextfieldType =
       <app-demo-section
         title="Med prefiks og suffiks"
         [code]="medPrefiksOgSuffiksCode"
-        description="Prefixer og suffixer er nyttige for å vise enheter, valuta eller annen informasjon som er relevant for feltet. Disse skal ikke brukes uten label, da skjermlesere ikke leser dem opp."
+        description="Prefikser og suffikser er nyttige for å vise enheter, valuta eller annen informasjon som er relevant for feltet. De kobles til feltet med aria-describedby slik at skjermlesere leser dem opp, men samme informasjon skal også stå i ledeteksten."
       >
         <hvi-textfield
           label="Hvor mange kroner koster det per måned?"

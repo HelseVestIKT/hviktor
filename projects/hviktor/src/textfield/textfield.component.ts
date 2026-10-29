@@ -101,7 +101,7 @@ let nextId = 0;
       }
       <hvi-field-affixes>
         @if (prefix()) {
-          <hvi-field-affix>{{ prefix() }}</hvi-field-affix>
+          <hvi-field-affix [id]="prefixId()">{{ prefix() }}</hvi-field-affix>
         }
         @if (multiline()) {
           <textarea
@@ -114,6 +114,7 @@ let nextId = 0;
             [readOnly]="readOnly()"
             [attr.maxlength]="maxLength() ?? null"
             [attr.aria-invalid]="error() ? 'true' : null"
+            [attr.aria-describedby]="affixDescribedBy()"
             [attr.required]="required() ? '' : null"
             [attr.autocomplete]="autocomplete() ?? null"
             [value]="value()"
@@ -132,6 +133,7 @@ let nextId = 0;
             [readOnly]="readOnly()"
             [attr.maxlength]="maxLength() ?? null"
             [attr.aria-invalid]="error() ? 'true' : null"
+            [attr.aria-describedby]="affixDescribedBy()"
             [attr.required]="required() ? '' : null"
             [attr.autocomplete]="autocomplete() ?? null"
             [value]="value()"
@@ -140,7 +142,7 @@ let nextId = 0;
           />
         }
         @if (suffix()) {
-          <hvi-field-affix>{{ suffix() }}</hvi-field-affix>
+          <hvi-field-affix [id]="suffixId()">{{ suffix() }}</hvi-field-affix>
         }
       </hvi-field-affixes>
       @if (counterLimit(); as limit) {
@@ -159,10 +161,16 @@ export class HviTextfield implements ControlValueAccessor {
   /** Hjelpetekst under ledeteksten. */
   readonly description = input<string>();
 
-  /** Dekorativ tekst foran inputfeltet. Leses ikke av skjermlesere. */
+  /**
+   * Tekst foran inputfeltet, f.eks. valuta. Kobles til feltet med `aria-describedby`
+   * slik at skjermlesere leser den opp. Samme informasjon bør også stå i ledeteksten.
+   */
   readonly prefix = input<string>();
 
-  /** Dekorativ tekst etter inputfeltet. Leses ikke av skjermlesere. */
+  /**
+   * Tekst etter inputfeltet, f.eks. enhet. Kobles til feltet med `aria-describedby`
+   * slik at skjermlesere leser den opp. Samme informasjon bør også stå i ledeteksten.
+   */
   readonly suffix = input<string>();
 
   /** Feilmelding for feltet. */
@@ -235,6 +243,20 @@ export class HviTextfield implements ControlValueAccessor {
   private readonly uniqueId = nextId++;
 
   readonly inputId = computed(() => this.id() ?? `hvi-textfield-${this.uniqueId}`);
+
+  protected readonly prefixId = computed(() => `${this.inputId()}-prefix`);
+  protected readonly suffixId = computed(() => `${this.inputId()}-suffix`);
+
+  /**
+   * Kobler prefiks og suffiks til feltet. `ds-field` legger selv til beskrivelse
+   * og feilmelding i `aria-describedby`, og beholder id-ene vi setter her.
+   */
+  protected readonly affixDescribedBy = computed(() => {
+    const ids = [this.prefix() && this.prefixId(), this.suffix() && this.suffixId()].filter(
+      Boolean,
+    );
+    return ids.length ? ids.join(' ') : null;
+  });
 
   /**
    * Beregnet required-tag-mode basert på manuell overstyring eller HviForm-kontekst.
