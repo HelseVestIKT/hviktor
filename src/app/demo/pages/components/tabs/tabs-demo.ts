@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
+import { HviButton, HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { TabsGrunnleggendeBrukExampleSource } from './code-examples/tabs.grunnleggende-bruk.example.source';
@@ -8,7 +8,7 @@ import { TabsMedMerInnholdExampleSource } from './code-examples/tabs.med-mer-inn
 @Component({
   selector: 'app-tabs-demo',
   standalone: true,
-  imports: [HviTabs, HviTab, HviTabPanel, DemoPageComponent, DemoSectionComponent],
+  imports: [HviTabs, HviTab, HviTabPanel, HviButton, DemoPageComponent, DemoSectionComponent],
   template: `
     <app-demo-page componentId="tabs">
       <app-demo-section
@@ -26,15 +26,34 @@ import { TabsMedMerInnholdExampleSource } from './code-examples/tabs.med-mer-inn
         </hvi-tabs>
       </app-demo-section>
 
-      <app-demo-section title="Kontrollert" [code]="kontrollertCode">
+      <app-demo-section
+        title="Kontrollert"
+        [code]="kontrollertCode"
+        description="Bruk [(value)] for å styre valgt fane fra koden, for eksempel fra en knapp eller lenke inne i et panel. Verdien oppdateres også når brukeren klikker på en fane."
+      >
         <p class="ds-paragraph">Valgt tab: {{ selectedTab() }}</p>
-        <hvi-tabs [value]="selectedTab()" (valueChange)="selectedTab.set($event)">
+        <hvi-tabs [(value)]="selectedTab">
           <hvi-tab value="value1">Tab 1</hvi-tab>
           <hvi-tab value="value2">Tab 2</hvi-tab>
           <hvi-tab value="value3">Tab 3</hvi-tab>
-          <hvi-tab-panel value="value1">Innhold for tab 1</hvi-tab-panel>
-          <hvi-tab-panel value="value2">Innhold for tab 2</hvi-tab-panel>
-          <hvi-tab-panel value="value3">Innhold for tab 3</hvi-tab-panel>
+          <hvi-tab-panel value="value1">
+            <p class="ds-paragraph">Innhold for tab 1</p>
+            <button hviButton variant="secondary" (click)="selectedTab.set('value2')">
+              Gå til tab 2
+            </button>
+          </hvi-tab-panel>
+          <hvi-tab-panel value="value2">
+            <p class="ds-paragraph">Innhold for tab 2</p>
+            <button hviButton variant="secondary" (click)="selectedTab.set('value3')">
+              Gå til tab 3
+            </button>
+          </hvi-tab-panel>
+          <hvi-tab-panel value="value3">
+            <p class="ds-paragraph">Innhold for tab 3</p>
+            <button hviButton variant="secondary" (click)="selectedTab.set('value1')">
+              Tilbake til tab 1
+            </button>
+          </hvi-tab-panel>
         </hvi-tabs>
       </app-demo-section>
 
@@ -77,5 +96,5 @@ export class TabsDemoComponent {
   readonly kontrollertCode = TabsKontrollertExampleSource;
   readonly medMerInnholdCode = TabsMedMerInnholdExampleSource;
 
-  selectedTab = signal('value1');
+  readonly selectedTab = signal('value1');
 }

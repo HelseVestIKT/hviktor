@@ -1,15 +1,14 @@
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  AfterContentInit,
+  afterRenderEffect,
   Component,
-  ContentChildren,
+  contentChildren,
   CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  QueryList,
-  ViewChild,
+  input,
+  linkedSignal,
+  output,
+  viewChild,
 } from '@angular/core';
 import '@u-elements/u-tabs';
 import { HviTabPanel } from './tab-panel.component';
@@ -19,12 +18,27 @@ import { HviTab } from './tab.component';
  * Tabs lar brukerne navigere mellom relaterte deler av innholdet,
  * der én del vises om gangen.
  *
+ * Bruk `defaultValue` for å velge fanen som vises først, eller `[(value)]` for å
+ * styre valgt fane selv – f.eks. for å bytte fane fra en knapp eller lenke.
+ *
  * @example
  * ```html
  * <hvi-tabs defaultValue="tab1">
  *   <hvi-tab value="tab1">Tab 1</hvi-tab>
  *   <hvi-tab value="tab2">Tab 2</hvi-tab>
  *   <hvi-tab-panel value="tab1">Content 1</hvi-tab-panel>
+ *   <hvi-tab-panel value="tab2">Content 2</hvi-tab-panel>
+ * </hvi-tabs>
+ * ```
+ *
+ * @example Styrt fra koden
+ * ```html
+ * <hvi-tabs [(value)]="currentTab">
+ *   <hvi-tab value="tab1">Tab 1</hvi-tab>
+ *   <hvi-tab value="tab2">Tab 2</hvi-tab>
+ *   <hvi-tab-panel value="tab1">
+ *     <button hviButton (click)="currentTab.set('tab2')">Gå til tab 2</button>
+ *   </hvi-tab-panel>
  *   <hvi-tab-panel value="tab2">Content 2</hvi-tab-panel>
  * </hvi-tabs>
  * ```
@@ -37,15 +51,15 @@ import { HviTab } from './tab.component';
   standalone: true,
   imports: [NgTemplateOutlet],
   template: `
-    <u-tabs #uTabsRef class="ds-tabs">
-      <u-tablist [attr.aria-label]="ariaLabel">
-        @for (tab of tabs; track tab.value) {
+    <u-tabs class="ds-tabs">
+      <u-tablist #tabList [attr.aria-label]="ariaLabel()" (click)="onTabClick($event)">
+        @for (tab of tabs(); track tab.value) {
           <u-tab [attr.data-value]="tab.value">
             <ng-container [ngTemplateOutlet]="tab.templateRef" />
           </u-tab>
         }
       </u-tablist>
-      @for (panel of panels; track panel.value) {
+      @for (panel of panels(); track panel.value) {
         <u-tabpanel [attr.data-value]="panel.value">
           <ng-container [ngTemplateOutlet]="panel.templateRef" />
         </u-tabpanel>
@@ -56,54 +70,56 @@ import { HviTab } from './tab.component';
       <ng-content />
     </div>
   `,
-  host: {},
 })
-export class HviTabs implements AfterContentInit {
-  @ViewChild('uTabsRef') uTabsRef!: ElementRef;
-  @ContentChildren(HviTab) tabs!: QueryList<HviTab>;
-  @ContentChildren(HviTabPanel) panels!: QueryList<HviTabPanel>;
+export class HviTabs {
+  protected readonly tabs = contentChildren(HviTab);
+  protected readonly panels = contentChildren(HviTabPanel);
+
+  private readonly tabList = viewChild.required<ElementRef<HTMLElement>>('tabList');
 
   /** Accessible label for the tab list. Defaults to `'Faner'`. */
-  @Input('aria-label') ariaLabel: string = 'Faner';
+  readonly ariaLabel = input('Faner', { alias: 'aria-label' });
 
-  /** Controlled state for Tabs component */
-  @Input() value?: string;
+  /**
+   * Valgt fane. Bruk `[(value)]` for å styre fanene fra koden – da oppdateres verdien
+   * også når brukeren klikker på en fane.
+   */
+  readonly value = input<string>();
 
-  /** Default selected tab value */
-  @Input() defaultValue?: string;
+  /** Fanen som er valgt før brukeren har gjort et valg. Brukes når `value` ikke er satt. */
+  readonly defaultValue = input<string>();
 
-  /** Callback when selected tab changes */
-  @Output() valueChange = new EventEmitter<string>();
+  /** Sendes når brukeren velger en annen fane. */
+  readonly valueChange = output<string>();
 
-  ngAfterContentInit() {
-    // Wait for view to be ready
-    setTimeout(() => {
-      this.setupTabs();
+  /** Valgt fane: følger `value`, og oppdateres når brukeren klikker. */
+  private readonly selected = linkedSignal(() => this.value() ?? this.defaultValue());
+
+  constructor() {
+    // Hold u-tabs i synk med valgt fane, også når fanene endres.
+    afterRenderEffect(() => {
+      this.tabs();
+      const value = this.selected();
+      if (value !== undefined) this.select(value);
     });
   }
 
-  private setupTabs() {
-    const uTabs = this.uTabsRef?.nativeElement;
-    if (!uTabs) return;
+  protected onTabClick(event: Event): void {
+    const tab = (event.target as Element).closest('u-tab');
+    if (!tab || tab.parentElement !== this.tabList().nativeElement) return;
 
-    if (this.defaultValue) {
-      const tabsArray = this.tabs.toArray();
-      const index = tabsArray.findIndex((t) => t.value === this.defaultValue);
-      if (index >= 0) {
-        uTabs.selectedIndex = index;
-      }
-    }
+    const value = tab.getAttribute('data-value');
+    if (value === null || value === this.selected()) return;
 
-    // Listen for tab clicks
-    uTabs.addEventListener('click', (event: Event) => {
-      const target = event.target as Element;
-      const tab = target.closest('u-tab');
-      if (!tab || tab.closest('u-tabs') !== uTabs) return;
+    this.selected.set(value);
+    this.valueChange.emit(value);
+  }
 
-      const value = tab.getAttribute('data-value');
-      if (value) {
-        this.valueChange.emit(value);
-      }
-    });
+  private select(value: string): void {
+    const tab = Array.from(this.tabList().nativeElement.children).find(
+      (el) => el.getAttribute('data-value') === value,
+    ) as (HTMLElement & { selected: boolean }) | undefined;
+
+    if (tab && !tab.selected) tab.selected = true;
   }
 }
