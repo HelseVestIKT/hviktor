@@ -9,10 +9,10 @@ import {
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
+import { TextfieldBreddeExampleSource } from './code-examples/textfield.bredde.example.source';
 import { TextfieldGrunnleggendeExampleSource } from './code-examples/textfield.grunnleggende.example.source';
 import { TextfieldMedPrefiksOgSuffiksExampleSource } from './code-examples/textfield.med-prefiks-og-suffiks.example.source';
 import { TextfieldMedTellerExampleSource } from './code-examples/textfield.med-teller.example.source';
-import { TextfieldMultilineExampleSource } from './code-examples/textfield.multiline.example.source';
 import { TextfieldPakrevdeOgValgfrieFeltExampleSource } from './code-examples/textfield.pakrevde-og-valgfrie-felt.example.source';
 import { TextfieldToveisbindingExampleSource } from './code-examples/textfield.toveisbinding.example.source';
 import { TextfieldTypeExampleSource } from './code-examples/textfield.type.example.source';
@@ -58,20 +58,11 @@ export type HviTextfieldType =
         <hvi-textfield label="Label"></hvi-textfield>
       </app-demo-section>
 
-      <!-- Multiline -->
-      <app-demo-section
-        title="Multiline"
-        [code]="multilineCode"
-        description="Du endrer til textarea ved å sette multiline til true. Da kan brukerne skrive lengre tekster."
-      >
-        <hvi-textfield label="Label" [multiline]="true" [rows]="4"></hvi-textfield>
-      </app-demo-section>
-
       <!-- Med prefiks og suffiks -->
       <app-demo-section
         title="Med prefiks og suffiks"
         [code]="medPrefiksOgSuffiksCode"
-        description="Prefixer og suffixer er nyttige for å vise enheter, valuta eller annen informasjon som er relevant for feltet. Disse skal ikke brukes uten label, da skjermlesere ikke leser dem opp."
+        description="Prefikser og suffikser er nyttige for å vise enheter, valuta eller annen informasjon som er relevant for feltet. De kobles til feltet med aria-describedby slik at skjermlesere leser dem opp, men samme informasjon skal også stå i ledeteksten."
       >
         <hvi-textfield
           label="Hvor mange kroner koster det per måned?"
@@ -90,6 +81,20 @@ export type HviTextfieldType =
           label="Hvor mange kroner koster det per måned?"
           [counterLimit]="10"
         ></hvi-textfield>
+      </app-demo-section>
+
+      <!-- Bredde -->
+      <app-demo-section
+        title="Bredde"
+        [code]="breddeCode"
+        description="Tilpass bredden etter hva brukerne skal skrive inn: kort bredde for postnummer og telefonnummer, bredere for stedsnavn. Ulik bredde gjør det lettere å navigere i skjemaer med mange felt. Bruk size for å angi bredden i antall tegn, eller width med verdien auto for feltets naturlige bredde. Uten disse fyller feltet hele bredden."
+      >
+        <div class="space-y-4">
+          <hvi-textfield label="Postnummer" [size]="4" autocomplete="postal-code" />
+          <hvi-textfield label="Telefonnummer" type="tel" [size]="10" autocomplete="tel" />
+          <hvi-textfield label="Poststed" width="auto" autocomplete="address-level2" />
+          <hvi-textfield label="Adresse" autocomplete="street-address" />
+        </div>
       </app-demo-section>
 
       <!-- Påkrevde og valgfrie felt -->
@@ -146,9 +151,9 @@ export type HviTextfieldType =
 })
 export class TextfieldDemoComponent {
   readonly grunnleggendeCode = TextfieldGrunnleggendeExampleSource;
-  readonly multilineCode = TextfieldMultilineExampleSource;
   readonly medPrefiksOgSuffiksCode = TextfieldMedPrefiksOgSuffiksExampleSource;
   readonly medTellerCode = TextfieldMedTellerExampleSource;
+  readonly breddeCode = TextfieldBreddeExampleSource;
   readonly pakrevdeOgValgfrieFeltCode = TextfieldPakrevdeOgValgfrieFeltExampleSource;
   readonly typeCode = TextfieldTypeExampleSource;
   readonly toveisbindingCode = TextfieldToveisbindingExampleSource;
