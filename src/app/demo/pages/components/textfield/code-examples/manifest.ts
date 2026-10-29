@@ -7,12 +7,6 @@ export const TextfieldExamplesManifest = [
     sourceExport: 'TextfieldGrunnleggendeExampleSource',
   },
   {
-    slug: 'multiline',
-    title: 'Multiline',
-    className: 'TextfieldMultilineExampleComponent',
-    sourceExport: 'TextfieldMultilineExampleSource',
-  },
-  {
     slug: 'med-prefiks-og-suffiks',
     title: 'Med prefiks og suffiks',
     className: 'TextfieldMedPrefiksOgSuffiksExampleComponent',
@@ -36,12 +30,18 @@ export const TextfieldExamplesManifest = [
     className: 'TextfieldTypeExampleComponent',
     sourceExport: 'TextfieldTypeExampleSource',
   },
+  {
+    slug: 'toveisbinding',
+    title: 'Toveisbinding',
+    className: 'TextfieldToveisbindingExampleComponent',
+    sourceExport: 'TextfieldToveisbindingExampleSource',
+  },
 ] as const;
 
 export type TextfieldExampleSlug =
   | 'grunnleggende'
-  | 'multiline'
   | 'med-prefiks-og-suffiks'
   | 'med-teller'
   | 'pakrevde-og-valgfrie-felt'
-  | 'type';
+  | 'type'
+  | 'toveisbinding';

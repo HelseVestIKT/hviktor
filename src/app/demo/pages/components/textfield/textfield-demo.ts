@@ -12,7 +12,6 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 import { TextfieldGrunnleggendeExampleSource } from './code-examples/textfield.grunnleggende.example.source';
 import { TextfieldMedPrefiksOgSuffiksExampleSource } from './code-examples/textfield.med-prefiks-og-suffiks.example.source';
 import { TextfieldMedTellerExampleSource } from './code-examples/textfield.med-teller.example.source';
-import { TextfieldMultilineExampleSource } from './code-examples/textfield.multiline.example.source';
 import { TextfieldPakrevdeOgValgfrieFeltExampleSource } from './code-examples/textfield.pakrevde-og-valgfrie-felt.example.source';
 import { TextfieldToveisbindingExampleSource } from './code-examples/textfield.toveisbinding.example.source';
 import { TextfieldTypeExampleSource } from './code-examples/textfield.type.example.source';
@@ -56,15 +55,6 @@ export type HviTextfieldType =
         description="Et enkelt tekstfelt med label."
       >
         <hvi-textfield label="Label"></hvi-textfield>
-      </app-demo-section>
-
-      <!-- Multiline -->
-      <app-demo-section
-        title="Multiline"
-        [code]="multilineCode"
-        description="Du endrer til textarea ved å sette multiline til true. Da kan brukerne skrive lengre tekster."
-      >
-        <hvi-textfield label="Label" [multiline]="true" [rows]="4"></hvi-textfield>
       </app-demo-section>
 
       <!-- Med prefiks og suffiks -->
@@ -146,7 +136,6 @@ export type HviTextfieldType =
 })
 export class TextfieldDemoComponent {
   readonly grunnleggendeCode = TextfieldGrunnleggendeExampleSource;
-  readonly multilineCode = TextfieldMultilineExampleSource;
   readonly medPrefiksOgSuffiksCode = TextfieldMedPrefiksOgSuffiksExampleSource;
   readonly medTellerCode = TextfieldMedTellerExampleSource;
   readonly pakrevdeOgValgfrieFeltCode = TextfieldPakrevdeOgValgfrieFeltExampleSource;
