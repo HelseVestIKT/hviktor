@@ -46,6 +46,15 @@ class NumberValueHost {
   readonly antall = signal<number | null>(null);
 }
 
+@Component({
+  standalone: true,
+  imports: [HviTextfield],
+  template: `<hvi-textfield label="Postnummer" [size]="size()" />`,
+})
+class SizeHost {
+  readonly size = signal<number | undefined>(4);
+}
+
 function type(control: HTMLInputElement, text: string) {
   control.value = text;
   control.dispatchEvent(new Event('input'));
@@ -55,7 +64,7 @@ const settle = () => new Promise((resolve) => setTimeout(resolve));
 
 describe('HviTextfield', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [AffixHost, FormHost, NumberValueHost] });
+    await setupTestBed({ imports: [AffixHost, FormHost, NumberValueHost, SizeHost] });
   });
 
   describe('prefiks og suffiks', () => {
@@ -200,6 +209,25 @@ describe('HviTextfield', () => {
       await fixture.whenStable();
 
       expect(input.value).toBe('2');
+    });
+  });
+
+  describe('bredde', () => {
+    it('setter size på inputfeltet', () => {
+      const fixture = TestBed.createComponent(SizeHost);
+      fixture.detectChanges();
+      const input = (fixture.nativeElement as HTMLElement).querySelector('input')!;
+
+      expect(input.getAttribute('size')).toBe('4');
+    });
+
+    it('setter ikke size når den ikke er oppgitt', () => {
+      const fixture = TestBed.createComponent(SizeHost);
+      fixture.componentInstance.size.set(undefined);
+      fixture.detectChanges();
+      const input = (fixture.nativeElement as HTMLElement).querySelector('input')!;
+
+      expect(input.hasAttribute('size')).toBe(false);
     });
   });
 });
