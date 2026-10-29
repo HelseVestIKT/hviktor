@@ -79,7 +79,14 @@ let nextId = 0;
 @Component({
   selector: 'hvi-textfield',
   standalone: true,
-  styles: [':host { display: block; }'],
+  styles: [
+    ':host { display: block; }',
+    // Designsystemet bruker bare data-width på select, så vi lar det styre input også.
+    '.ds-input[data-width="auto"] { width: auto; }',
+    '.ds-input[data-width="full"] { width: 100%; }',
+    '.ds-field-affixes:has(> .ds-input[data-width="auto"]) { width: fit-content; }',
+    '.ds-field-affixes:has(> .ds-input[data-width="full"]) { width: auto; }',
+  ],
   imports: [
     HviField,
     HviLabel,
@@ -140,6 +147,7 @@ let nextId = 0;
             [type]="type()"
             [attr.name]="name() ?? null"
             [size]="size() || undefined"
+            [width]="width()"
             [attr.placeholder]="placeholder() ?? null"
             [disabled]="isDisabled()"
             [readOnly]="readOnly()"
@@ -216,7 +224,16 @@ export class HviTextfield<T extends HviTextfieldValue = string> implements Contr
   /** Antall rader i textarea. */
   readonly rows = input<number | undefined>(undefined, { transform: numberAttribute });
 
-  /** Bredden på inputfeltet målt i antall tegn. */
+  /**
+   * Bredden på feltet:
+   * - `'full'`: hele tilgjengelige bredden, også når `size` er satt.
+   * - `'auto'`: feltets naturlige bredde – `size` tegn, eller ca. 20 tegn uten `size`.
+   *
+   * Ikke satt: hele bredden, med mindre `size` er satt. Gjelder ikke `multiline`.
+   */
+  readonly width = input<'auto' | 'full'>();
+
+  /** Bredden på inputfeltet målt i antall tegn. Bruk det for å gi feltet en realistisk bredde. */
   readonly size = input<number | undefined>(undefined, { transform: numberAttribute });
 
   /** Plassholdertekst. Unngå å bruke dette i stedet for ledetekst. */

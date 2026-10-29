@@ -55,6 +55,16 @@ class SizeHost {
   readonly size = signal<number | undefined>(4);
 }
 
+@Component({
+  standalone: true,
+  imports: [HviTextfield],
+  template: `<hvi-textfield label="Poststed" [width]="width()" [multiline]="multiline()" />`,
+})
+class WidthHost {
+  readonly width = signal<'auto' | 'full' | undefined>('auto');
+  readonly multiline = signal(false);
+}
+
 function type(control: HTMLInputElement, text: string) {
   control.value = text;
   control.dispatchEvent(new Event('input'));
@@ -64,7 +74,7 @@ const settle = () => new Promise((resolve) => setTimeout(resolve));
 
 describe('HviTextfield', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [AffixHost, FormHost, NumberValueHost, SizeHost] });
+    await setupTestBed({ imports: [AffixHost, FormHost, NumberValueHost, SizeHost, WidthHost] });
   });
 
   describe('prefiks og suffiks', () => {
@@ -228,6 +238,32 @@ describe('HviTextfield', () => {
       const input = (fixture.nativeElement as HTMLElement).querySelector('input')!;
 
       expect(input.hasAttribute('size')).toBe(false);
+    });
+
+    it('setter data-width på inputfeltet', () => {
+      const fixture = TestBed.createComponent(WidthHost);
+      fixture.detectChanges();
+      const input = (fixture.nativeElement as HTMLElement).querySelector('input')!;
+
+      expect(input.getAttribute('data-width')).toBe('auto');
+    });
+
+    it('setter ikke data-width når width ikke er oppgitt', () => {
+      const fixture = TestBed.createComponent(WidthHost);
+      fixture.componentInstance.width.set(undefined);
+      fixture.detectChanges();
+      const input = (fixture.nativeElement as HTMLElement).querySelector('input')!;
+
+      expect(input.hasAttribute('data-width')).toBe(false);
+    });
+
+    it('setter ikke data-width på textarea', () => {
+      const fixture = TestBed.createComponent(WidthHost);
+      fixture.componentInstance.multiline.set(true);
+      fixture.detectChanges();
+      const textarea = (fixture.nativeElement as HTMLElement).querySelector('textarea')!;
+
+      expect(textarea.hasAttribute('data-width')).toBe(false);
     });
   });
 });
