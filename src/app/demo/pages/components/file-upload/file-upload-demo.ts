@@ -1,6 +1,6 @@
 import { Component, computed, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HviButton, HviFileUpload, HviParagraph } from '@helsevestikt/hviktor-angular';
+import { HviAlert, HviButton, HviFileUpload, HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { FileUploadFeilmeldingExampleSource } from './code-examples/file-upload.feilmelding.example.source';
@@ -19,9 +19,14 @@ import { FileUploadSendeFileneTilEtApiExampleSource } from './code-examples/file
     HviButton,
     HviParagraph,
     ReactiveFormsModule,
+    HviAlert,
   ],
   template: `
     <app-demo-page componentId="file-upload">
+      <hvi-alert class="mb-6"
+        >FileUpload er under utvikling og foreløpig ikke tilgjengelig i
+        <code>@helsevestikt/hviktor-angular</code>
+      </hvi-alert>
       <!-- Grunnleggende -->
       <app-demo-section
         title="Grunnleggende"
