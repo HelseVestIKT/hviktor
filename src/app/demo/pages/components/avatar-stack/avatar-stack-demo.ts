@@ -11,7 +11,7 @@ import { AvatarStackStandardAvatarStackExampleSource } from './code-examples/ava
   imports: [DemoPageComponent, DemoSectionComponent, HviAvatarStack, HviAvatar, HviAlert, HviLink],
   template: `
     <app-demo-page componentId="avatar-stack">
-      <hvi-alert
+      <hvi-alert class="mb-6"
         >AvatarStack er fortsatt under utvikling hos
         <a
           hviLink
