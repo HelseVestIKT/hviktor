@@ -14,6 +14,7 @@ export * from './details';
 export * from './dialog';
 export * from './divider';
 export * from './dropdown';
+export * from './file-upload';
 export * from './forms';
 export * from './heading';
 export * from './label';
