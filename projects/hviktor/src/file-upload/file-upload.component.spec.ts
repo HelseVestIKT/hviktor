@@ -13,6 +13,7 @@ import { HviFileUpload } from './file-upload.component';
       description="Filen må være mindre enn 2 MB"
       [multiple]="multiple()"
       [accept]="accept()"
+      [maxFiles]="maxFiles()"
       [readOnly]="readOnly()"
       [error]="error()"
       [formControl]="files"
@@ -22,6 +23,7 @@ import { HviFileUpload } from './file-upload.component';
 class Host {
   readonly multiple = signal(false);
   readonly accept = signal<string | undefined>(undefined);
+  readonly maxFiles = signal<number | undefined>(undefined);
   readonly readOnly = signal(false);
   readonly error = signal<string | undefined>(undefined);
   readonly files = new FormControl<File[]>([], { nonNullable: true });
@@ -105,6 +107,25 @@ describe('HviFileUpload', () => {
     expect(input.getAttribute('aria-invalid')).toBe('true');
     expect(el.querySelector('.ds-validation-message')!.textContent).toContain(
       'notat.txt ble ikke lagt til fordi filtypen ikke er tillatt',
+    );
+  });
+
+  it('stopper ved maxFiles og stenger området når grensen er nådd', async () => {
+    const { fixture, host, el, input } = render((host) => {
+      host.multiple.set(true);
+      host.maxFiles.set(2);
+    });
+    const notat = new File(['notat'], 'notat.pdf', { type: 'application/pdf', lastModified: 3 });
+    selectFiles(input, [cv, attest, notat]);
+    await fixture.whenStable();
+
+    expect(host.files.value).toEqual([cv, attest]);
+    expect(el.querySelector('.ds-validation-message')!.textContent).toContain(
+      'notat.pdf ble ikke lagt til fordi du kan laste opp maks 2 filer',
+    );
+    expect(input.getAttribute('aria-readonly')).toBe('true');
+    expect(el.querySelector('.ds-file-upload')!.textContent).toContain(
+      'Du kan ikke laste opp flere filer',
     );
   });
 

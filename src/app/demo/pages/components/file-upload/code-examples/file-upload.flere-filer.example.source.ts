@@ -13,6 +13,7 @@ import { HviFileUpload } from '@helsevestikt/hviktor-angular';
       description="Du kan laste opp inntil 5 filer i pdf-format"
       accept=".pdf"
       multiple
+      [maxFiles]="5"
       [(value)]="vedlegg"
     />
   \`,

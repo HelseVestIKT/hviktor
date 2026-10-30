@@ -51,13 +51,14 @@ import { FileUploadSendeFileneTilEtApiExampleSource } from './code-examples/file
       <app-demo-section
         title="Flere filer"
         [code]="flereFilerCode"
-        description="Med multiple legges nye filer til de som allerede er valgt, og samme fil kommer bare med én gang. Verdien er en liste med alle valgte filer."
+        description="Med multiple legges nye filer til de som allerede er valgt, og samme fil kommer bare med én gang. Bruk maxFiles for å begrense antallet: når grensen er nådd, stenges området, og filer utover grensen legges ikke til. Verdien er en liste med alle valgte filer."
       >
         <hvi-file-upload
           label="Vedlegg"
           description="Du kan laste opp inntil 5 filer i pdf-format"
           accept=".pdf"
           multiple
+          [maxFiles]="5"
           [(value)]="vedlegg"
         />
       </app-demo-section>

@@ -9,6 +9,7 @@ import {
   Injector,
   input,
   model,
+  numberAttribute,
   signal,
   viewChild,
 } from '@angular/core';
@@ -67,6 +68,8 @@ function formatFileSize(bytes: number): string {
  * Med `multiple` legges nye filer til de som allerede er valgt. Uten `multiple` erstatter
  * en ny fil den forrige. Skjermlesere får beskjed når filer legges til eller fjernes.
  *
+ * Med `maxFiles` stenges området når grensen er nådd, og filer utover grensen legges ikke til.
+ *
  * Verdien er alltid en liste med filer (`File[]`). Komponenten laster ikke opp noe selv:
  * send filene sammen med resten av skjemaet, f.eks. som `FormData` med `HttpClient`.
  *
@@ -85,9 +88,9 @@ function formatFileSize(bytes: number): string {
  * />
  * ```
  *
- * @example Flere filer med toveisbinding
+ * @example Inntil 5 filer med toveisbinding
  * ```html
- * <hvi-file-upload label="Vedlegg" multiple [(value)]="vedlegg" />
+ * <hvi-file-upload label="Vedlegg" multiple [maxFiles]="5" [(value)]="vedlegg" />
  * ```
  *
  * @example Send filene til et API
@@ -105,6 +108,9 @@ function formatFileSize(bytes: number): string {
   host: {
     // `id` gjelder inputen. Fjern den fra vertselementet så id-en ikke finnes to ganger.
     '[attr.id]': 'null',
+    // Et stengt område tar ikke imot slipp. Uten dette åpner nettleseren filen i fanen.
+    '(dragover)': 'blockDropIfClosed($event)',
+    '(drop)': 'blockDropIfClosed($event)',
   },
   styles: [
     ':host { display: block; }',
@@ -173,16 +179,20 @@ function formatFileSize(bytes: number): string {
         <div hviFieldDescription>{{ description() }}</div>
       }
       <div class="ds-file-upload" [attr.data-dragover]="dragOver() ? '' : null">
-        <p class="ds-paragraph" hviFieldDescription>
-          {{ dragOver() ? 'Slipp for å legge til' : effectiveDropzoneText() }}
-        </p>
-        @if (dropzoneDescription()) {
-          <p class="ds-paragraph" hviFieldDescription>{{ dropzoneDescription() }}</p>
+        @if (isFull()) {
+          <p class="ds-paragraph" hviFieldDescription>Du kan ikke laste opp flere filer</p>
+        } @else {
+          <p class="ds-paragraph" hviFieldDescription>
+            {{ dragOver() ? 'Slipp for å legge til' : effectiveDropzoneText() }}
+          </p>
+          @if (dropzoneDescription()) {
+            <p class="ds-paragraph" hviFieldDescription>{{ dropzoneDescription() }}</p>
+          }
+          <!-- Bare visuell: det er inputen under som er den ekte, klikkbare kontrollen. -->
+          <span class="ds-button" data-variant="secondary" aria-hidden="true">
+            {{ effectiveButtonText() }}
+          </span>
         }
-        <!-- Bare visuell: det er inputen under som er den ekte, klikkbare kontrollen. -->
-        <span class="ds-button" data-variant="secondary" aria-hidden="true">
-          {{ effectiveButtonText() }}
-        </span>
         <input
           #fileInput
           type="file"
@@ -191,11 +201,11 @@ function formatFileSize(bytes: number): string {
           [attr.accept]="accept() ?? null"
           [multiple]="multiple()"
           [disabled]="isDisabled()"
-          [attr.readonly]="readOnly() ? '' : null"
-          [attr.aria-readonly]="readOnly() ? 'true' : null"
+          [attr.readonly]="isClosed() ? '' : null"
+          [attr.aria-readonly]="isClosed() ? 'true' : null"
           [attr.aria-invalid]="shownError() ? 'true' : null"
           [attr.aria-required]="required() ? 'true' : null"
-          (click)="preventIfReadOnly($event)"
+          (click)="preventIfClosed($event)"
           (change)="handleChange()"
           (blur)="onTouched()"
           (dragenter)="handleDragEnter($event)"
@@ -272,6 +282,15 @@ export class HviFileUpload implements ControlValueAccessor {
   /** La brukeren velge flere filer. Nye filer legges da til de som allerede er valgt. */
   readonly multiple = input(false, { transform: booleanAttribute });
 
+  /**
+   * Maks antall filer med `multiple`. Når grensen er nådd, stenges området med teksten
+   * «Du kan ikke laste opp flere filer», og filer utover grensen legges ikke til.
+   */
+  readonly maxFiles = input<number | undefined, unknown>(undefined, {
+    // `numberAttribute` gjør `undefined` om til `NaN`. Behold `undefined` som «ingen grense».
+    transform: (value: unknown) => (value == null ? undefined : numberAttribute(value)),
+  });
+
   /** Feilmelding for feltet. Markerer også feltet som ugyldig. */
   readonly error = input<string>();
 
@@ -320,11 +339,20 @@ export class HviFileUpload implements ControlValueAccessor {
   /** Brukeren kan legge til og fjerne filer. */
   protected readonly canEdit = computed(() => !this.isDisabled() && !this.readOnly());
 
-  /** Feilmelding når brukeren har prøvd å legge til filer med feil type. */
-  private readonly typeError = signal<string | undefined>(undefined);
+  /** Antall filer er nådd, så det kan ikke legges til flere. */
+  protected readonly isFull = computed(() => {
+    const max = this.maxFiles();
+    return this.multiple() && max !== undefined && this.value().length >= max;
+  });
 
-  /** Feilen fra `error` vinner, ellers vises feil filtype. */
-  protected readonly shownError = computed(() => this.error() ?? this.typeError());
+  /** Området tar ikke imot nye filer: skrivebeskyttet eller fullt. */
+  protected readonly isClosed = computed(() => this.readOnly() || this.isFull());
+
+  /** Feilmelding når brukeren har prøvd å legge til filer som ble avvist. */
+  private readonly rejectError = signal<string | undefined>(undefined);
+
+  /** Feilen fra `error` vinner, ellers vises hvorfor filer ble avvist. */
+  protected readonly shownError = computed(() => this.error() ?? this.rejectError());
 
   /** En fil dras over området akkurat nå. */
   protected readonly dragOver = signal(false);
@@ -360,14 +388,21 @@ export class HviFileUpload implements ControlValueAccessor {
   protected onTouched: () => void = () => undefined;
 
   /** `readonly` stopper ikke filvelgeren, så vi stopper klikket (også fra tastaturet). */
-  protected preventIfReadOnly(event: Event): void {
-    if (this.readOnly()) event.preventDefault();
+  protected preventIfClosed(event: Event): void {
+    if (this.isClosed()) event.preventDefault();
+  }
+
+  /** Viser «ikke tillatt»-markør og hindrer at nettleseren åpner filen. */
+  protected blockDropIfClosed(event: DragEvent): void {
+    if (this.canEdit() && !this.isFull()) return;
+    event.preventDefault();
+    if (event.dataTransfer) event.dataTransfer.dropEffect = 'none';
   }
 
   /** Marker området bare når det er filer som dras, ikke f.eks. markert tekst. */
   protected handleDragEnter(event: DragEvent): void {
     const hasFiles = event.dataTransfer?.types.includes('Files') ?? false;
-    this.dragOver.set(hasFiles && this.canEdit());
+    this.dragOver.set(hasFiles && this.canEdit() && !this.isFull());
   }
 
   protected handleChange(): void {
@@ -380,18 +415,24 @@ export class HviFileUpload implements ControlValueAccessor {
     if (!selected.length) return;
 
     const accepted = selected.filter((file) => matchesAccept(file, this.accept()));
-    const rejected = selected.filter((file) => !accepted.includes(file));
-    this.typeError.set(this.rejectedMessage(rejected));
-    this.onTouched();
+    const wrongType = selected.filter((file) => !accepted.includes(file));
 
-    const added = this.multiple()
+    const candidates = this.multiple()
       ? accepted.filter((file) => !this.value().some((existing) => isSameFile(existing, file)))
       : accepted.slice(0, 1);
+    const room = this.multiple()
+      ? (this.maxFiles() ?? Infinity) - this.value().length
+      : candidates.length;
+    const added = candidates.slice(0, Math.max(room, 0));
+    const overLimit = candidates.slice(added.length);
+
+    this.rejectError.set(this.rejectedMessage(wrongType, overLimit));
+    this.onTouched();
     if (added.length) {
       this.update(this.multiple() ? [...this.value(), ...added] : added);
     }
 
-    const messages = [added.length ? this.message(added, 'er lagt til') : '', this.typeError()];
+    const messages = [added.length ? this.message(added, 'er lagt til') : '', this.rejectError()];
     this.announcement.set(messages.filter(Boolean).join('. '));
   }
 
@@ -399,7 +440,7 @@ export class HviFileUpload implements ControlValueAccessor {
   protected removeFile(file: File): void {
     const index = this.value().indexOf(file);
     this.update(this.value().filter((existing) => existing !== file));
-    this.typeError.set(undefined);
+    this.rejectError.set(undefined);
     this.announcement.set(this.message([file], 'er fjernet'));
 
     afterNextRender(
@@ -425,14 +466,25 @@ export class HviFileUpload implements ControlValueAccessor {
     return `${subject} ${action}`;
   }
 
-  private rejectedMessage(rejected: File[]): string | undefined {
-    if (!rejected.length) return undefined;
-    return `${this.message(rejected, 'ble ikke lagt til')} fordi filtypen ikke er tillatt`;
+  /** F.eks. «notat.txt ble ikke lagt til fordi filtypen ikke er tillatt». */
+  private rejectedMessage(wrongType: File[], overLimit: File[]): string | undefined {
+    const reasons = [];
+    if (wrongType.length) {
+      reasons.push(
+        `${this.message(wrongType, 'ble ikke lagt til')} fordi filtypen ikke er tillatt`,
+      );
+    }
+    if (overLimit.length) {
+      reasons.push(
+        `${this.message(overLimit, 'ble ikke lagt til')} fordi du kan laste opp maks ${this.maxFiles()} filer`,
+      );
+    }
+    return reasons.length ? reasons.join('. ') : undefined;
   }
 
   writeValue(value: File[] | null | undefined): void {
     this.value.set(value ?? []);
-    this.typeError.set(undefined);
+    this.rejectError.set(undefined);
   }
 
   registerOnChange(fn: (value: File[]) => void): void {
