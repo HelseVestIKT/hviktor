@@ -28,6 +28,26 @@ function isSameFile(a: File, b: File): boolean {
   return a.name === b.name && a.size === b.size && a.lastModified === b.lastModified;
 }
 
+/**
+ * Sjekker en fil mot `accept` på samme måte som nettleseren: filendelse (`.pdf`),
+ * MIME-type (`application/pdf`) eller MIME-gruppe (`image/*`). Tom `accept` godtar alt.
+ */
+function matchesAccept(file: File, accept: string | undefined): boolean {
+  const rules = (accept ?? '')
+    .split(',')
+    .map((rule) => rule.trim().toLowerCase())
+    .filter(Boolean);
+  if (!rules.length) return true;
+
+  const name = file.name.toLowerCase();
+  const type = file.type.toLowerCase();
+  return rules.some((rule) => {
+    if (rule.startsWith('.')) return name.endsWith(rule);
+    if (rule.endsWith('/*')) return type.startsWith(rule.slice(0, -1));
+    return type === rule;
+  });
+}
+
 /** Filstørrelse som «512 B», «1,2 kB» eller «3,4 MB». */
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -51,8 +71,9 @@ function formatFileSize(bytes: number): string {
  * send filene sammen med resten av skjemaet, f.eks. som `FormData` med `HttpClient`.
  *
  * Fortell alltid brukeren hvilke filtyper og størrelser som er tillatt, f.eks. i `description`.
- * Merk at `accept` bare filtrerer filvelgeren. Filer som slippes i området sjekkes ikke,
- * så filtype og størrelse må fortsatt valideres.
+ * Filer som ikke passer med `accept` legges ikke til, heller ikke når de slippes i området,
+ * og brukeren får en feilmelding. Størrelse og innhold må du validere selv, og API-et
+ * må alltid sjekke filene på nytt.
  *
  * @example
  * ```html
@@ -172,7 +193,7 @@ function formatFileSize(bytes: number): string {
           [disabled]="isDisabled()"
           [attr.readonly]="readOnly() ? '' : null"
           [attr.aria-readonly]="readOnly() ? 'true' : null"
-          [attr.aria-invalid]="error() ? 'true' : null"
+          [attr.aria-invalid]="shownError() ? 'true' : null"
           [attr.aria-required]="required() ? 'true' : null"
           (click)="preventIfReadOnly($event)"
           (change)="handleChange()"
@@ -219,8 +240,8 @@ function formatFileSize(bytes: number): string {
           }
         </ul>
       }
-      @if (error()) {
-        <p hviFieldValidation>{{ error() }}</p>
+      @if (shownError()) {
+        <p hviFieldValidation>{{ shownError() }}</p>
       }
     </hvi-field>
     <div class="ds-sr-only" role="status">{{ announcement() }}</div>
@@ -243,8 +264,8 @@ export class HviFileUpload implements ControlValueAccessor {
   readonly buttonText = input<string>();
 
   /**
-   * Tillatte filtyper, f.eks. `'.pdf'` eller `'image/*'`. Sendes rett til `<input accept>`.
-   * Filtrerer bare filvelgeren, ikke filer som slippes i området.
+   * Tillatte filtyper, f.eks. `'.pdf'`, `'.xlsx, .csv'` eller `'image/*'`. Filtrerer filvelgeren,
+   * og filer med annen type avvises også når de slippes i området.
    */
   readonly accept = input<string>();
 
@@ -299,6 +320,12 @@ export class HviFileUpload implements ControlValueAccessor {
   /** Brukeren kan legge til og fjerne filer. */
   protected readonly canEdit = computed(() => !this.isDisabled() && !this.readOnly());
 
+  /** Feilmelding når brukeren har prøvd å legge til filer med feil type. */
+  private readonly typeError = signal<string | undefined>(undefined);
+
+  /** Feilen fra `error` vinner, ellers vises feil filtype. */
+  protected readonly shownError = computed(() => this.error() ?? this.typeError());
+
   /** En fil dras over området akkurat nå. */
   protected readonly dragOver = signal(false);
 
@@ -352,21 +379,28 @@ export class HviFileUpload implements ControlValueAccessor {
     input.value = '';
     if (!selected.length) return;
 
-    const added = this.multiple()
-      ? selected.filter((file) => !this.value().some((existing) => isSameFile(existing, file)))
-      : selected.slice(0, 1);
-    const files = this.multiple() ? [...this.value(), ...added] : added;
-
-    this.update(files);
+    const accepted = selected.filter((file) => matchesAccept(file, this.accept()));
+    const rejected = selected.filter((file) => !accepted.includes(file));
+    this.typeError.set(this.rejectedMessage(rejected));
     this.onTouched();
-    this.announce(added, 'lagt til');
+
+    const added = this.multiple()
+      ? accepted.filter((file) => !this.value().some((existing) => isSameFile(existing, file)))
+      : accepted.slice(0, 1);
+    if (added.length) {
+      this.update(this.multiple() ? [...this.value(), ...added] : added);
+    }
+
+    const messages = [added.length ? this.message(added, 'er lagt til') : '', this.typeError()];
+    this.announcement.set(messages.filter(Boolean).join('. '));
   }
 
   /** Fjerner en fil og flytter fokus til neste fil, eller til filvelgeren når lista er tom. */
   protected removeFile(file: File): void {
     const index = this.value().indexOf(file);
     this.update(this.value().filter((existing) => existing !== file));
-    this.announce([file], 'fjernet');
+    this.typeError.set(undefined);
+    this.announcement.set(this.message([file], 'er fjernet'));
 
     afterNextRender(
       () => {
@@ -385,14 +419,20 @@ export class HviFileUpload implements ControlValueAccessor {
     this.onChange(files);
   }
 
-  private announce(files: File[], action: 'lagt til' | 'fjernet'): void {
-    if (!files.length) return;
+  /** F.eks. «cv.pdf er lagt til» eller «3 filer er fjernet». */
+  private message(files: File[], action: string): string {
     const subject = files.length === 1 ? files[0].name : `${files.length} filer`;
-    this.announcement.set(`${subject} er ${action}`);
+    return `${subject} ${action}`;
+  }
+
+  private rejectedMessage(rejected: File[]): string | undefined {
+    if (!rejected.length) return undefined;
+    return `${this.message(rejected, 'ble ikke lagt til')} fordi filtypen ikke er tillatt`;
   }
 
   writeValue(value: File[] | null | undefined): void {
     this.value.set(value ?? []);
+    this.typeError.set(undefined);
   }
 
   registerOnChange(fn: (value: File[]) => void): void {

@@ -66,11 +66,12 @@ import { FileUploadSendeFileneTilEtApiExampleSource } from './code-examples/file
       <app-demo-section
         title="Feilmelding"
         [code]="feilmeldingCode"
-        description="Valider filene selv og vis en spesifikk feilmelding med error. accept filtrerer bare filvelgeren, ikke filer som slippes i området. Fjerner brukeren filen, forsvinner feilen."
+        description="Filer som ikke passer med accept legges ikke til, heller ikke når de slippes i området, og komponenten viser selv en feilmelding. Annen validering, som størrelse, gjør du selv og viser med error. Fjerner brukeren filen, forsvinner feilen."
       >
         <hvi-file-upload
           label="Last opp CV"
-          description="Filen må være mindre enn 1 MB"
+          description="Filen må være i pdf- eller Word-format og mindre enn 1 MB"
+          accept=".pdf,.doc,.docx"
           [error]="cvFeil()"
           [(value)]="cv"
         />

@@ -10,7 +10,8 @@ import { HviFileUpload } from '@helsevestikt/hviktor-angular';
   template: \`
     <hvi-file-upload
       label="Last opp CV"
-      description="Filen må være mindre enn 1 MB"
+      description="Filen må være i pdf- eller Word-format og mindre enn 1 MB"
+      accept=".pdf,.doc,.docx"
       [error]="cvFeil()"
       [(value)]="cv"
     />

@@ -12,6 +12,7 @@ import { HviFileUpload } from './file-upload.component';
       label="Last opp vedlegg"
       description="Filen må være mindre enn 2 MB"
       [multiple]="multiple()"
+      [accept]="accept()"
       [readOnly]="readOnly()"
       [error]="error()"
       [formControl]="files"
@@ -20,6 +21,7 @@ import { HviFileUpload } from './file-upload.component';
 })
 class Host {
   readonly multiple = signal(false);
+  readonly accept = signal<string | undefined>(undefined);
   readonly readOnly = signal(false);
   readonly error = signal<string | undefined>(undefined);
   readonly files = new FormControl<File[]>([], { nonNullable: true });
@@ -86,6 +88,24 @@ describe('HviFileUpload', () => {
     selectFiles(input, [attest]);
 
     expect(host.files.value).toEqual([attest]);
+  });
+
+  it('avviser filer som ikke passer med accept, også når de slippes i området', async () => {
+    const { fixture, host, el, input, fileNames } = render((host) => {
+      host.multiple.set(true);
+      host.accept.set('.pdf, image/*');
+    });
+    const bilde = new File(['bilde'], 'bilde.png', { type: 'image/png' });
+    const notat = new File(['notat'], 'notat.txt', { type: 'text/plain' });
+    selectFiles(input, [cv, bilde, notat]);
+    await fixture.whenStable();
+
+    expect(host.files.value).toEqual([cv, bilde]);
+    expect(fileNames()).toEqual(['cv.pdf', 'bilde.png']);
+    expect(input.getAttribute('aria-invalid')).toBe('true');
+    expect(el.querySelector('.ds-validation-message')!.textContent).toContain(
+      'notat.txt ble ikke lagt til fordi filtypen ikke er tillatt',
+    );
   });
 
   it('fjerner en fil med knappen og sier fra til skjermlesere', async () => {
