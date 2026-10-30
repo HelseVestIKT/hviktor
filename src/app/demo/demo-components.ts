@@ -296,6 +296,13 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     a11yTested: true,
   },
   {
+    id: 'file-upload',
+    name: 'FileUpload',
+    description:
+      'File upload er et skjemaelement for å laste opp filer. Brukeren kan velge filer ved å klikke eller ved å slippe dem i området.',
+    ds: true,
+  },
+  {
     id: 'dropdown',
     name: 'Dropdown',
     description:
