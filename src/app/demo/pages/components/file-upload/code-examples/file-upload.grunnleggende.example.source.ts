@@ -1,5 +1,6 @@
 // Auto-generated - do not edit manually
 export const FileUploadGrunnleggendeExampleSource = `import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HviFileUpload } from '@helsevestikt/hviktor-angular';
 
 @Component({

@@ -25,12 +25,12 @@ export const FileUploadExamplesManifest = [
     sourceExport: 'FileUploadFeilmeldingExampleSource',
   },
   {
-    slug: 'skrivebeskyttet',
-    title: 'Skrivebeskyttet',
-    className: 'FileUploadSkrivebeskyttetExampleComponent',
-    sourceExport: 'FileUploadSkrivebeskyttetExampleSource',
+    slug: 'sende-filene-til-et-api',
+    title: 'Sende filene til et API',
+    className: 'FileUploadSendeFileneTilEtApiExampleComponent',
+    sourceExport: 'FileUploadSendeFileneTilEtApiExampleSource',
   },
 ] as const;
 
 export type FileUploadExampleSlug =
-  'grunnleggende' | 'med-beskrivelse' | 'flere-filer' | 'feilmelding' | 'skrivebeskyttet';
+  'grunnleggende' | 'med-beskrivelse' | 'flere-filer' | 'feilmelding' | 'sende-filene-til-et-api';

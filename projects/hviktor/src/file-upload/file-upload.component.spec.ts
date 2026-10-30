@@ -25,6 +25,9 @@ class Host {
   readonly files = new FormControl<File[]>([], { nonNullable: true });
 }
 
+const cv = new File(['cv'], 'cv.pdf', { type: 'application/pdf', lastModified: 1 });
+const attest = new File(['attest'], 'attest.pdf', { type: 'application/pdf', lastModified: 2 });
+
 /** Simulerer at brukeren velger filer. jsdom lar oss ikke sette `files` direkte. */
 function selectFiles(input: HTMLInputElement, files: File[]) {
   Object.defineProperty(input, 'files', { value: files, configurable: true });
@@ -42,7 +45,9 @@ describe('HviFileUpload', () => {
     fixture.detectChanges();
     const el: HTMLElement = fixture.nativeElement;
     const input = el.querySelector<HTMLInputElement>('.ds-file-upload > input[type="file"]')!;
-    return { fixture, host: fixture.componentInstance, el, input };
+    const fileNames = () =>
+      Array.from(el.querySelectorAll('.hvi-file-upload__name')).map((name) => name.textContent);
+    return { fixture, host: fixture.componentInstance, el, input, fileNames };
   }
 
   it('kobler label og beskrivelser til fil-inputen', async () => {
@@ -64,31 +69,67 @@ describe('HviFileUpload', () => {
     expect(el.querySelector('.ds-button')!.textContent!.trim()).toBe('Velg filer');
   });
 
-  it('gir valgte filer til skjemaet', () => {
-    const { host, input } = render();
-    const file = new File(['innhold'], 'cv.pdf', { type: 'application/pdf' });
-    selectFiles(input, [file]);
-
-    expect(host.files.value).toEqual([file]);
-    expect(host.files.touched).toBe(true);
-  });
-
-  it('tømmer inputen når skjemaet nullstilles', async () => {
-    const { fixture, host, input } = render();
-    const clear = vi.spyOn(input, 'value', 'set');
-    host.files.reset();
+  it('legger nye filer til de valgte med multiple, uten dubletter', async () => {
+    const { fixture, host, input, fileNames } = render((host) => host.multiple.set(true));
+    selectFiles(input, [cv]);
+    selectFiles(input, [cv, attest]);
     await fixture.whenStable();
 
-    expect(clear).toHaveBeenCalledWith('');
+    expect(host.files.value).toEqual([cv, attest]);
+    expect(host.files.touched).toBe(true);
+    expect(fileNames()).toEqual(['cv.pdf', 'attest.pdf']);
   });
 
-  it('åpner ikke filvelgeren når feltet er skrivebeskyttet', () => {
-    const { input } = render((host) => host.readOnly.set(true));
+  it('erstatter filen uten multiple', () => {
+    const { host, input } = render();
+    selectFiles(input, [cv]);
+    selectFiles(input, [attest]);
+
+    expect(host.files.value).toEqual([attest]);
+  });
+
+  it('fjerner en fil med knappen og sier fra til skjermlesere', async () => {
+    const { fixture, host, el, fileNames } = render();
+    host.files.setValue([cv]);
+    await fixture.whenStable();
+
+    const remove = el.querySelector<HTMLButtonElement>('.hvi-file-upload__remove')!;
+    expect(remove.getAttribute('aria-label')).toBe('Fjern cv.pdf');
+
+    remove.click();
+    await fixture.whenStable();
+
+    expect(host.files.value).toEqual([]);
+    expect(fileNames()).toEqual([]);
+    expect(el.querySelector('[role="status"]')!.textContent).toBe('cv.pdf er fjernet');
+  });
+
+  it('markerer området når en fil dras over det', async () => {
+    const { fixture, el, input } = render();
+    const dragEnter = new Event('dragenter');
+    Object.defineProperty(dragEnter, 'dataTransfer', { value: { types: ['Files'] } });
+    input.dispatchEvent(dragEnter);
+    await fixture.whenStable();
+    const zone = el.querySelector('.ds-file-upload')!;
+
+    expect(zone.hasAttribute('data-dragover')).toBe(true);
+
+    input.dispatchEvent(new Event('dragleave'));
+    await fixture.whenStable();
+
+    expect(zone.hasAttribute('data-dragover')).toBe(false);
+  });
+
+  it('åpner ikke filvelgeren og skjuler fjern-knappene når feltet er skrivebeskyttet', async () => {
+    const { fixture, host, el, input } = render((host) => host.readOnly.set(true));
+    host.files.setValue([cv]);
+    await fixture.whenStable();
     const click = new MouseEvent('click', { cancelable: true });
     input.dispatchEvent(click);
 
     expect(click.defaultPrevented).toBe(true);
     expect(input.getAttribute('aria-readonly')).toBe('true');
+    expect(el.querySelector('.hvi-file-upload__remove')).toBeNull();
   });
 
   it('viser feilmelding og markerer inputen som ugyldig', () => {

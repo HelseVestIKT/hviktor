@@ -7,5 +7,5 @@ export * from './file-upload.grunnleggende.example';
 export * from './file-upload.grunnleggende.example.source';
 export * from './file-upload.med-beskrivelse.example';
 export * from './file-upload.med-beskrivelse.example.source';
-export * from './file-upload.skrivebeskyttet.example';
-export * from './file-upload.skrivebeskyttet.example.source';
+export * from './file-upload.sende-filene-til-et-api.example';
+export * from './file-upload.sende-filene-til-et-api.example.source';
