@@ -40,7 +40,7 @@ export interface Sensor {
   imports: [DemoPageComponent, DemoSectionComponent, FormsModule, HviSuggestion, HviAlert, HviLink],
   template: `
     <app-demo-page componentId="suggestion">
-      <hvi-alert
+      <hvi-alert class="mb-4"
         >Suggestion er fortsatt under utvikling både her og i
 
         <a
@@ -132,19 +132,19 @@ export interface Sensor {
         description="Bruk readOnly når du vil vise valgte verdier som brukeren ikke kan endre. Feltet får samme stil som Select i readonly, og valgte chips kan ikke fjernes."
       >
         <hvi-suggestion
-          label="Blodbank"
-          placeholder="Søk etter blodbank"
+          label="Sykehus"
+          placeholder="Søk etter sykehus"
           [readOnly]="true"
-          [(ngModel)]="readonlyBlodbank"
-          [suggestions]="blodbanker"
+          [(ngModel)]="readonlySykehus"
+          [suggestions]="sykehus"
         />
         <hvi-suggestion
-          label="Blodbanker"
-          placeholder="Søk etter region eller blodbank"
+          label="Sykehus"
+          placeholder="Søk etter sykehus"
           [readOnly]="true"
           [multiple]="true"
-          [(ngModel)]="readonlyBlodbanker"
-          [suggestions]="blodbanker"
+          [(ngModel)]="readonlySykehuser"
+          [suggestions]="sykehus"
         />
       </app-demo-section>
     </app-demo-page>
@@ -160,15 +160,15 @@ export class SuggestionDemoComponent {
 
   readonly kommuner = ['Sogndal', 'Bergen', 'Oslo', 'Stavanger', 'Trondheim'];
 
-  readonly blodbanker = [
+  readonly sykehus = [
     'Haukeland universitetssjukehus',
     'Stavanger universitetssjukehus',
     'Haugesund sjukehus',
     'Førde sentralsjukehus',
   ];
 
-  readonlyBlodbank: string | null = 'Haukeland universitetssjukehus';
-  readonlyBlodbanker: string[] = [
+  readonlySykehus: string | null = 'Haukeland universitetssjukehus';
+  readonlySykehuser: string[] = [
     'Haukeland universitetssjukehus',
     'Stavanger universitetssjukehus',
   ];
