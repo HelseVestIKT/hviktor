@@ -34,7 +34,7 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
         [code]="grunnleggendeCode"
         description="Et enkelt input-felt uten label. Bruk aria-label for tilgjengelighet."
       >
-        <input hviInput type="text" aria-label="input" />
+        <input hviInput type="text" aria-label="Fødselsnummer" />
       </app-demo-section>
 
       <!-- Med label -->
@@ -53,7 +53,7 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
       <app-demo-section
         title="Med feil"
         [code]="medFeilCode"
-        description="Bruk aria-invalid for å indikere at feltet har en feil."
+        description="Skriv inn et fødselsnummer. En melding vises hvis verdien ikke inneholder nøyaktig 11 siffer."
       >
         <hvi-field>
           <label hviLabel for="fnr-error" weight="medium">Fødselsnummer</label>
@@ -79,7 +79,14 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
       >
         <hvi-field>
           <label hviLabel for="fnr-disabled" weight="medium">Fødselsnummer</label>
-          <input hviInput type="text" id="fnr-disabled" value="12345678901" disabled />
+          <input
+            hviInput
+            type="text"
+            id="fnr-disabled"
+            value="12345678901"
+            inputmode="numeric"
+            disabled
+          />
         </hvi-field>
       </app-demo-section>
 
@@ -91,7 +98,14 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
       >
         <hvi-field>
           <label hviLabel for="fnr-readonly" weight="medium">Fødselsnummer</label>
-          <input hviInput type="text" id="fnr-readonly" value="12345678901" readOnly />
+          <input
+            hviInput
+            type="text"
+            id="fnr-readonly"
+            value="12345678901"
+            inputmode="numeric"
+            readOnly
+          />
         </hvi-field>
       </app-demo-section>
 
@@ -132,10 +146,10 @@ import { InputUlikeTyperExampleSource } from './code-examples/input.ulike-typer.
   `,
 })
 export class InputDemoComponent {
-  hasFodselsnummerError = true;
+  hasFodselsnummerError = false;
 
   validerFodselsnummer(value: string): void {
-    this.hasFodselsnummerError = !/^\d{11}$/.test(value);
+    this.hasFodselsnummerError = value.length > 0 && !/^\d{11}$/.test(value);
   }
 
   readonly grunnleggendeCode = InputGrunnleggendeExampleSource;

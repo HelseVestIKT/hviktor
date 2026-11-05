@@ -1,12 +1,6 @@
 // Auto-generated - do not edit manually
 export const InputMedFeilExampleSource = `import { Component } from '@angular/core';
-import {
-  HviField,
-  HviFieldDescription,
-  HviFieldValidation,
-  HviInput,
-  HviLabel,
-} from '@helsevestikt/hviktor-angular';
+import { HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-input-med-feil-example',
@@ -30,8 +24,8 @@ import {
   \`,
 })
 export class InputMedFeilExampleComponent {
-  hasFodselsnummerError = true;
-
+  hasFodselsnummerError = false;
+  
   validerFodselsnummer(value: string): void {
     this.hasFodselsnummerError = !/^\\d{11}$/.test(value);
   }

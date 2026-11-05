@@ -29,9 +29,9 @@ import {
   `,
 })
 export class InputMedFeilExampleComponent {
-  hasFodselsnummerError = true;
+  hasFodselsnummerError = false;
 
   validerFodselsnummer(value: string): void {
-    this.hasFodselsnummerError = !/^\d{11}$/.test(value);
+    this.hasFodselsnummerError = value.length > 0 && !/^\d{11}$/.test(value);
   }
 }
