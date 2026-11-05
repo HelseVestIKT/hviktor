@@ -39,6 +39,27 @@ Pakken leveres med Helse Vest IKT sitt eget tema, bygget med [Designsystemets Te
 
 Fonten **Albert Sans** følger også med pakken som webfont, så du trenger verken å installere den lokalt eller laste den fra et CDN.
 
+### Fonten lastes ikke på IIS eller Azure App Service (Windows)
+
+Webfonten er en `.woff2`-fil som appen din leverer selv. IIS leverer bare filtyper den har en MIME-type for, og svarer 404 på resten. Da faller siden tilbake til en systemfont (typisk Segoe UI) uten noen feilmelding. Lokalt ser alt riktig ut, så feilen viser seg først etter deploy.
+
+Legg til MIME-typen i `web.config`:
+
+```xml
+<configuration>
+  <system.webServer>
+    <staticContent>
+      <remove fileExtension=".woff2" />
+      <mimeMap fileExtension=".woff2" mimeType="font/woff2" />
+    </staticContent>
+  </system.webServer>
+</configuration>
+```
+
+Ta med `<remove>`. Har serveren allerede en MIME-type for `.woff2`, gir en ny `<mimeMap>` uten `<remove>` feilen _duplicate collection entry_, og da svarer IIS med 500 for alle statiske filer, ikke bare fonten.
+
+Du kan sjekke at fonten lastes i fanen Network i utviklerverktøyene: filen `albert-sans-*.woff2` skal ha status 200. Linux App Service, Azure Static Web Apps og nginx leverer `.woff2` uten ekstra oppsett.
+
 ### Farger og størrelser
 
 Temaet definerer fargene `accent`, `brand1`, `brand2`, `brand3` og `neutral`, i tillegg til systemfargene `info`, `success`, `warning` og `danger`.
