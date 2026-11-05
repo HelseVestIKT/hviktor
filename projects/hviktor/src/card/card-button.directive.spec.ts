@@ -17,9 +17,18 @@ class DefaultCardButtonComponent {}
 })
 class MaxWidthCardButtonComponent {}
 
+@Component({
+  standalone: true,
+  imports: [HviCardButton],
+  template: '<button hviCardButton variant="tinted" color="accent">Click me</button>',
+})
+class CustomCardButtonComponent {}
+
 describe('HviCardButton', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [DefaultCardButtonComponent, MaxWidthCardButtonComponent] });
+    await setupTestBed({
+      imports: [DefaultCardButtonComponent, MaxWidthCardButtonComponent, CustomCardButtonComponent],
+    });
   });
 
   it('should add ds-card class to its host element', () => {
@@ -41,6 +50,14 @@ describe('HviCardButton', () => {
     f.detectChanges();
     const button = f.nativeElement.querySelector('button');
     expect(button.getAttribute('data-color')).toBe('neutral');
+  });
+
+  it('should apply variant and color when set', () => {
+    const f = TestBed.createComponent(CustomCardButtonComponent);
+    f.detectChanges();
+    const button = f.nativeElement.querySelector('button');
+    expect(button.getAttribute('data-variant')).toBe('tinted');
+    expect(button.getAttribute('data-color')).toBe('accent');
   });
 
   it('should apply max-width style when maxWidth is set', () => {
