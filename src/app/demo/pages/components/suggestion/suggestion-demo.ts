@@ -15,6 +15,7 @@ import { SuggestionStandardSuggestionExampleSource } from './code-examples/sugge
 
 import { SuggestionLangeListerExampleSource } from './code-examples';
 import { SuggestionEgenMalForAlternativeneExampleSource } from './code-examples/suggestion.egen-mal-for-alternativene.example.source';
+import { SuggestionReadonlyExampleSource } from './code-examples/suggestion.readonly.example.source';
 import { SuggestionSokIBackendExampleSource } from './code-examples/suggestion.sok-i-backend.example.source';
 
 export interface Kommando {
@@ -124,6 +125,28 @@ export interface Sensor {
         </hvi-suggestion>
         <p>Valgt: {{ valgtKommando?.navn ?? 'ingen' }}</p>
       </app-demo-section>
+
+      <app-demo-section
+        title="ReadOnly"
+        [code]="readonlyCode"
+        description="Bruk readOnly når du vil vise valgte verdier som brukeren ikke kan endre. Feltet får samme stil som Select i readonly, og valgte chips kan ikke fjernes."
+      >
+        <hvi-suggestion
+          label="Blodbank"
+          placeholder="Søk etter blodbank"
+          [readOnly]="true"
+          [(ngModel)]="readonlyBlodbank"
+          [suggestions]="blodbanker"
+        />
+        <hvi-suggestion
+          label="Blodbanker"
+          placeholder="Søk etter region eller blodbank"
+          [readOnly]="true"
+          [multiple]="true"
+          [(ngModel)]="readonlyBlodbanker"
+          [suggestions]="blodbanker"
+        />
+      </app-demo-section>
     </app-demo-page>
   `,
 })
@@ -133,8 +156,22 @@ export class SuggestionDemoComponent {
   readonly backendSokCode = SuggestionSokIBackendExampleSource;
   readonly langeListerCode = SuggestionLangeListerExampleSource;
   readonly egenMalForAlternativeneCode = SuggestionEgenMalForAlternativeneExampleSource;
+  readonly readonlyCode = SuggestionReadonlyExampleSource;
 
   readonly kommuner = ['Sogndal', 'Bergen', 'Oslo', 'Stavanger', 'Trondheim'];
+
+  readonly blodbanker = [
+    'Haukeland universitetssjukehus',
+    'Stavanger universitetssjukehus',
+    'Haugesund sjukehus',
+    'Førde sentralsjukehus',
+  ];
+
+  readonlyBlodbank: string | null = 'Haukeland universitetssjukehus';
+  readonlyBlodbanker: string[] = [
+    'Haukeland universitetssjukehus',
+    'Stavanger universitetssjukehus',
+  ];
 
   kommune: string | null = 'Bergen';
   valgteKommuner: string[] = ['Bergen'];

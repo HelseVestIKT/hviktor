@@ -30,6 +30,12 @@ export const SuggestionExamplesManifest = [
     className: 'SuggestionEgenMalForAlternativeneExampleComponent',
     sourceExport: 'SuggestionEgenMalForAlternativeneExampleSource',
   },
+  {
+    slug: 'readonly',
+    title: 'ReadOnly',
+    className: 'SuggestionReadonlyExampleComponent',
+    sourceExport: 'SuggestionReadonlyExampleSource',
+  },
 ] as const;
 
 export type SuggestionExampleSlug =
@@ -37,4 +43,5 @@ export type SuggestionExampleSlug =
   | 'flervalg'
   | 'sok-i-backend'
   | 'lange-lister'
-  | 'egen-mal-for-alternativene';
+  | 'egen-mal-for-alternativene'
+  | 'readonly';
