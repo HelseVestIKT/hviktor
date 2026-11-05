@@ -62,7 +62,7 @@ let nextId = 0;
  * />
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/combobox/code}
+ * @see {@link https://hviktor.no/komponenter/multi-select}
  */
 @Component({
   selector: 'hvi-multi-select',

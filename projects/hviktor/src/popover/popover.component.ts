@@ -40,7 +40,7 @@ let nextId = 0;
  * </hvi-popover>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/popover/code}
+ * @see {@link https://hviktor.no/komponenter/popover}
  */
 @Component({
   selector: 'hvi-popover',

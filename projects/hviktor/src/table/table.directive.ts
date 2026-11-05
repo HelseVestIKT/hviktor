@@ -81,7 +81,7 @@ export interface TablePageEvent {
  * </table>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/table/code}
+ * @see {@link https://hviktor.no/komponenter/table}
  */
 @Directive({
   selector: '[hviTable]',

@@ -80,7 +80,7 @@ let nextId = 0;
  * />
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/suggestion/code}
+ * @see {@link https://hviktor.no/komponenter/suggestion}
  * @see {@link https://u-elements.github.io/u-elements/elements/u-combobox}
  */
 @Component({

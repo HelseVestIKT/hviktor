@@ -58,7 +58,7 @@ import { HviHeading } from '../heading';
  * </dialog>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/dialog/overview}
+ * @see {@link https://hviktor.no/komponenter/dialog}
  */
 @Component({
   selector: 'dialog[hviDialog]',

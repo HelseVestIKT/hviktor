@@ -16,7 +16,7 @@ import { Component, Input } from '@angular/core';
  * <hvi-badge variant="tinted" color="success">Active</hvi-badge>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/badge/code/}
+ * @see {@link https://hviktor.no/komponenter/badge}
  */
 @Component({
   selector: 'hvi-badge',

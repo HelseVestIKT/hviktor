@@ -84,7 +84,7 @@ const DEFAULT_ERROR_PRIORITY = [
  * } as const;
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/error-summary/overview}
+ * @see {@link https://hviktor.no/komponenter/error-summary}
  */
 @Component({
   selector: 'hvi-error-summary',

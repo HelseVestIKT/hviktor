@@ -18,7 +18,7 @@ import { Directive, Input } from '@angular/core';
  * <h3 hviHeading size="sm">Subsection</h3>
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/heading}
+ * @see {@link https://hviktor.no/komponenter/heading}
  */
 @Directive({
   selector:

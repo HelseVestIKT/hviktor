@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
  * <hvi-skeleton variant="rectangle" width="100px" height="20px"></hvi-skeleton>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/skeleton/code}
+ * @see {@link https://hviktor.no/komponenter/skeleton}
  */
 
 @Component({

@@ -1290,7 +1290,8 @@ async function updateDemoFile(filePath, demo, examples) {
   const edits = [];
   const missing = [];
 
-  for (const [name, source] of properties) {
+  // Sections were visited from the end, so reverse to get them in template order
+  for (const [name, source] of [...properties].reverse()) {
     const member = componentClass.members.find(
       (m) => ts.isPropertyDeclaration(m) && m.name && propertyNameText(m.name) === name,
     );

@@ -100,7 +100,7 @@ function formatFileSize(bytes: number): string {
  * this.http.post('/api/vedlegg', formData).subscribe();
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/file-upload/code}
+ * @see {@link https://hviktor.no/komponenter/file-upload}
  */
 @Component({
   selector: 'hvi-file-upload',

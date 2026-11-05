@@ -18,7 +18,7 @@ import { Directive, Input } from '@angular/core';
  * <button hviLink (click)="navigate()">Navigate</button>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/link}
+ * @see {@link https://hviktor.no/komponenter/link}
  */
 @Directive({
   selector: 'a[hviLink], button[hviLink]',

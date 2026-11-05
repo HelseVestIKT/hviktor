@@ -27,7 +27,7 @@ import { Component, Input } from '@angular/core';
  * <span>Ola Nordmann</span>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/avatar/code/}
+ * @see {@link https://hviktor.no/komponenter/avatar}
  */
 @Component({
   selector: 'hvi-avatar',

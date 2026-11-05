@@ -10,7 +10,7 @@ import { Directive, Input } from '@angular/core';
  * </p>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/paragraph/overview
+ * @see {@link https://hviktor.no/komponenter/paragraph}
  */
 @Directive({
   selector: 'p[hviParagraph]',
