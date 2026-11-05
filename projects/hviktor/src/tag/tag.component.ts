@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
  * <hvi-tag variant="outline" size="sm" color="info">Small info tag</hvi-tag>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/tag/code
+ * @see {@link https://hviktor.no/komponenter/tag}
  */
 
 @Component({

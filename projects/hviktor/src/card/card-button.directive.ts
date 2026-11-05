@@ -16,7 +16,7 @@ import { Directive, Input } from '@angular/core';
  * </button>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/card/code/}
+ * @see {@link https://hviktor.no/komponenter/card}
  */
 @Directive({
   selector: 'button[hviCardButton]',

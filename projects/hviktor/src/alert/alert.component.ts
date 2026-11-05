@@ -41,7 +41,7 @@ type HviAlertRole = 'status' | 'alert' | string;
  * </hvi-alert>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/alert/overview}
+ * @see {@link https://hviktor.no/komponenter/alert}
  */
 @Component({
   selector: 'hvi-alert',

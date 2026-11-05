@@ -55,7 +55,7 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
  * </button>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/button/code/}
+ * @see {@link https://hviktor.no/komponenter/button}
  */
 @Directive({
   selector: 'button[hviButton], a[hviButton]',

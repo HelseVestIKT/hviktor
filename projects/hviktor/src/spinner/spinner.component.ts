@@ -14,7 +14,7 @@ export type SpinnerSize = '2xs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl';
  * <hvi-spinner label="Henter data" size="lg" />
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/spinner}
+ * @see {@link https://hviktor.no/komponenter/spinner}
  */
 @Component({
   selector: 'hvi-spinner',

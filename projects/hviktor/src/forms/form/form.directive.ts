@@ -71,7 +71,7 @@ export function analyzeFormRequired(formGroup: FormGroup): FormRequiredMode {
  * </form>
  * ```
  *
- * @see {@link https://helsevestikt.github.io/hviktor/komponenter/form}
+ * @see {@link https://hviktor.no/komponenter/form}
  */
 @Directive({
   selector: 'form[hviForm]',

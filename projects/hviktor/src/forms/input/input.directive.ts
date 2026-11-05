@@ -37,7 +37,7 @@ type HviAriaRole = 'switch' | 'button' | 'checkbox' | 'radio' | 'textbox' | 'sea
  * <input hviInput type="text" dsSize="sm" width="auto" />
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/input}
+ * @see {@link https://hviktor.no/komponenter/input}
  */
 @Directive({
   selector: 'input[hviInput], textarea[hviInput]',

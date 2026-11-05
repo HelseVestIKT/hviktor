@@ -26,7 +26,7 @@ let nextId = 0;
  * </hvi-toggle-group>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/toggle-group}
+ * @see {@link https://hviktor.no/komponenter/toggle-group}
  */
 @Directive({
   selector: 'button[hviToggleGroupItem],label[hviToggleGroupItem]',

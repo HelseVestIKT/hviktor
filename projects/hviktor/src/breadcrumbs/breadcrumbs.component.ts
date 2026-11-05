@@ -45,7 +45,7 @@ import '@digdir/designsystemet-web';
  * </hvi-breadcrumbs>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/breadcrumbs/code/}
+ * @see {@link https://hviktor.no/komponenter/breadcrumbs}
  */
 @Component({
   selector: 'hvi-breadcrumbs',

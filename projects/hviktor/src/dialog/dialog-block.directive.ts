@@ -30,7 +30,7 @@ import { Directive } from '@angular/core';
  * </dialog>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/dialog/code}
+ * @see {@link https://hviktor.no/komponenter/dialog}
  */
 @Directive({
   selector: '[hviDialogBlock]',

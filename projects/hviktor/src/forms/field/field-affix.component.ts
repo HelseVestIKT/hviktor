@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
  * </hvi-field-affixes>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/field/code}
+ * @see {@link https://hviktor.no/komponenter/field}
  */
 @Component({
   selector: 'hvi-field-affix',

@@ -14,7 +14,7 @@ import { Directive, ElementRef, HostListener, inject } from '@angular/core';
  * </hvi-search>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/search}
+ * @see {@link https://hviktor.no/komponenter/search}
  */
 @Directive({
   selector: 'button[hviSearchClear]',

@@ -30,7 +30,7 @@ import '@digdir/designsystemet-web';
  * </hvi-field>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/field/overview}
+ * @see {@link https://hviktor.no/komponenter/field}
  */
 @Component({
   selector: 'hvi-field',

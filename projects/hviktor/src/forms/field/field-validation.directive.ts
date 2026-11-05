@@ -31,7 +31,7 @@ let nextValidationId = 0;
  * </fieldset>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/field/code}
+ * @see {@link https://hviktor.no/komponenter/field}
  */
 @Directive({
   selector: '[hviFieldValidation]',

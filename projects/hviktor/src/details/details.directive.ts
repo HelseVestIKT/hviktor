@@ -14,7 +14,7 @@ import { Directive, Input } from '@angular/core';
  * </details>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/details/code}
+ * @see {@link https://hviktor.no/komponenter/details}
  */
 
 @Directive({

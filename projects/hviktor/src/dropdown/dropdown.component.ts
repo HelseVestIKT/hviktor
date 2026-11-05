@@ -33,7 +33,7 @@ import '@digdir/designsystemet-web';
  * </hvi-dropdown>
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/dropdown}
+ * @see {@link https://hviktor.no/komponenter/dropdown}
  */
 
 @Component({

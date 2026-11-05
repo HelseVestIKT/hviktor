@@ -22,7 +22,7 @@ import { Component, Input } from '@angular/core';
  * </hvi-avatar-stack>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/avatar-stack/code}
+ * @see {@link https://hviktor.no/komponenter/avatar-stack}
  */
 
 @Component({

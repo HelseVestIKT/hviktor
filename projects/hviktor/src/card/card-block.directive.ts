@@ -20,7 +20,7 @@ import { Directive } from '@angular/core';
  * </hvi-card>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/card/code/}
+ * @see {@link https://hviktor.no/komponenter/card}
  */
 @Directive({
   selector: '[hviCardBlock]',
