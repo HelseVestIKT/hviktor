@@ -4,6 +4,25 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] – 2026-11-05
+
+### @helsevestikt/hviktor-angular
+
+#### Added
+
+- FileUpload: Lagt til ny komponent for filopplasting. Denne er ikke ferdig og en må regne med brekkende endrigner senere dersom den tas i bruk.
+- CardLink og CardButton: Disse manglet inputs for color og variant. Dette er lagt til.
+
+#### Changed
+
+- Suggestion: Lagt til readOnly-styling lik andre skjema-element i Hviktor.
+- JSDocs: Alle linkene for mer informasjon er endret til å peke mot komponenten sin side på hviktor.no. JSDocs er det som vises når du hovrer over et HTML-element i f.eks. VS Code.
+- Lagt til info i README om webfonten Albert Sans og hvordan den håndteres på IIS. Se README for detaljer.
+
+### @helsevestikt/hviktor-icons
+
+Ingen endringer i denne releasen.
+
 ## [0.4.3] – 2026-10-29
 
 ### @helsevestikt/hviktor-angular
