@@ -13,7 +13,5 @@ import { HviTag } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class TagVarianterExampleComponent {
-  
-}
+export class TagVarianterExampleComponent {}
 `;

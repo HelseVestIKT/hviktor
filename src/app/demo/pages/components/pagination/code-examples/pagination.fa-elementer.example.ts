@@ -5,8 +5,8 @@ import { HviPagination } from '@helsevestikt/hviktor-angular';
   selector: 'app-pagination-fa-elementer-example',
   standalone: true,
   imports: [HviPagination],
-  template: ` <hvi-pagination [totalItems]="25" [pageSize]="10" [(currentPage)]="currentPage" /> `,
+  template: ` <hvi-pagination [totalItems]="25" [pageSize]="10" [(currentPage)]="currentPage5" /> `,
 })
 export class PaginationFaElementerExampleComponent {
-  currentPage = signal(1);
+  currentPage5 = signal(1);
 }

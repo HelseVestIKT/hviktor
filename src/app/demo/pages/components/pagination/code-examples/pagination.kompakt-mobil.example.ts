@@ -11,10 +11,10 @@ import { HviPagination } from '@helsevestikt/hviktor-angular';
       [pageSize]="10"
       [siblingCount]="0"
       [showPreviousNextLabels]="false"
-      [(currentPage)]="currentPage"
+      [(currentPage)]="currentPage3"
     />
   `,
 })
 export class PaginationKompaktMobilExampleComponent {
-  currentPage = signal(3);
+  currentPage3 = signal(3);
 }

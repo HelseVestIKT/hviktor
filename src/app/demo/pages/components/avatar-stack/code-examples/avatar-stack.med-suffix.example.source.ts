@@ -33,7 +33,5 @@ import { HviAvatar, HviAvatarStack } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AvatarStackMedSuffixExampleComponent {
-  
-}
+export class AvatarStackMedSuffixExampleComponent {}
 `;

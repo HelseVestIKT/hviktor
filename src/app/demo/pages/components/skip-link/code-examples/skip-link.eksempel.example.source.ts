@@ -16,19 +16,13 @@ import { HviParagraph, HviSkipLink } from '@helsevestikt/hviktor-angular';
       </p>
       <a hviSkipLink href="#demo-main-content">Hopp til hovedinnhold</a>
     </div>
-    
-    <main
-      id="demo-main-content"
-      tabindex="-1"
-      class="mt-4 rounded border p-4 focus-within:ring-2"
-    >
+
+    <main id="demo-main-content" tabindex="-1" class="mt-4 rounded border p-4 focus-within:ring-2">
       <p hviParagraph>
         <strong>Hovedinnhold:</strong> Dette er regionen som mottar fokus fra SkipLink.
       </p>
     </main>
   \`,
 })
-export class SkipLinkEksempelExampleComponent {
-  
-}
+export class SkipLinkEksempelExampleComponent {}
 `;

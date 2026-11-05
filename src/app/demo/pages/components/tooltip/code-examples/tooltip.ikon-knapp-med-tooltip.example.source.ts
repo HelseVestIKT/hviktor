@@ -6,7 +6,7 @@ import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 @Component({
   selector: 'app-tooltip-ikon-knapp-med-tooltip-example',
   standalone: true,
-  imports: [HviButton, HviTooltip, HviIconClipboard],
+  imports: [HviButton, HviIconClipboard, HviTooltip],
   template: \`
     <div class="flex justify-center">
       <button hviButton variant="primary" icon hviTooltip="Kopier" aria-label="Kopier">
@@ -15,6 +15,5 @@ import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
     </div>
   \`,
 })
-export class TooltipIkonKnappMedTooltipExampleComponent {
-}
+export class TooltipIkonKnappMedTooltipExampleComponent {}
 `;

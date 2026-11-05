@@ -15,13 +15,13 @@ import {
   selector: 'app-toggle-group-kun-ikoner-example',
   standalone: true,
   imports: [
+    HviIconAlignCenter,
+    HviIconAlignLeft,
+    HviIconAlignRight,
     HviLabel,
     HviToggleGroup,
     HviToggleGroupItem,
     HviTooltip,
-    HviIconAlignCenter,
-    HviIconAlignLeft,
-    HviIconAlignRight,
   ],
   template: `
     <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
@@ -49,11 +49,5 @@ import {
   `,
 })
 export class ToggleGroupKunIkonerExampleComponent {
-  selectedBasic = signal('innboks');
-  selectedSecondary = signal('innboks');
   selectedIconOnly = signal('left');
-  selectedView = signal('liste');
-  small = signal('innboks');
-  medium = signal('innboks');
-  large = signal('innboks');
 }

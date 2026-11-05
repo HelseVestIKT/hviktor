@@ -8,7 +8,7 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
   imports: [HviButton, HviDialog, HviDialogBlock, HviParagraph],
   template: \`
     <button hviButton (click)="modalOpen.set(true)">Åpne modal Dialog</button>
-    
+
     <dialog
       hviDialog
       title="Er du sikker på at du vil endre søknaden?"
@@ -17,9 +17,9 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
     >
       <div hviDialogBlock>
         <p hviParagraph>
-          OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden
-          nå, er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00
-          00 hvis du trenger veiledning.
+          OBS! Du bør ikke endre søknaden etter at fristen har gått ut. Hvis du endrer søknaden nå,
+          er du ikke lenger med i kommende opptak. Ring kontaktsenteret på telefon 00 00 00 00 hvis
+          du trenger veiledning.
         </p>
       </div>
       <div hviDialogBlock>
@@ -35,10 +35,5 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
 })
 export class DialogModalDialogExampleComponent {
   readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
-  readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

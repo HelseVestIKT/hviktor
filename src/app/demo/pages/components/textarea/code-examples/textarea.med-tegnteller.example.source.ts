@@ -15,7 +15,5 @@ import { HviField, HviFieldCounter, HviInput, HviLabel } from '@helsevestikt/hvi
     </hvi-field>
   \`,
 })
-export class TextareaMedTegntellerExampleComponent {
-  
-}
+export class TextareaMedTegntellerExampleComponent {}
 `;

@@ -1,6 +1,13 @@
 // Auto-generated - do not edit manually
 export const FieldOutlineExampleSource = `import { Component } from '@angular/core';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
+import {
+  HviField,
+  HviFieldDescription,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-field-outline-example',
@@ -28,7 +35,5 @@ import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviPara
     </fieldset>
   \`,
 })
-export class FieldOutlineExampleComponent {
-  hasEtternavnError = true;
-}
+export class FieldOutlineExampleComponent {}
 `;

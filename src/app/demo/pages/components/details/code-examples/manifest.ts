@@ -1,10 +1,10 @@
 // Auto-generated - do not edit manually
 export const DetailsExamplesManifest = [
   {
-    slug: 'varianter',
-    title: 'Varianter',
-    className: 'DetailsVarianterExampleComponent',
-    sourceExport: 'DetailsVarianterExampleSource',
+    slug: 'standard',
+    title: 'Standard',
+    className: 'DetailsStandardExampleComponent',
+    sourceExport: 'DetailsStandardExampleSource',
   },
   {
     slug: 'i-kort',
@@ -14,4 +14,4 @@ export const DetailsExamplesManifest = [
   },
 ] as const;
 
-export type DetailsExampleSlug = 'varianter' | 'i-kort';
+export type DetailsExampleSlug = 'standard' | 'i-kort';

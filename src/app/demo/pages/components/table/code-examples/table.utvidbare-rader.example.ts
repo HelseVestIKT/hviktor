@@ -5,7 +5,7 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
 @Component({
   selector: 'app-table-utvidbare-rader-example',
   standalone: true,
-  imports: [HviButton, HviTable, HviTableScroll, HviIconChevronDown, HviIconChevronRight],
+  imports: [HviButton, HviIconChevronDown, HviIconChevronRight, HviTable, HviTableScroll],
   template: `
     <div hviTableScroll>
       <table hviTable [value]="data" hover #expandTable="hviTable">

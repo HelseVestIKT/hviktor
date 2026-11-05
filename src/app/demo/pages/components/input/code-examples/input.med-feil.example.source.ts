@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'app-input-med-feil-example',
   standalone: true,
-  imports: [HviField, HviInput, HviLabel, HviFieldDescription, HviFieldValidation],
+  imports: [HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel],
   template: \`
     <hvi-field>
       <label hviLabel for="fnr-error" weight="medium">Fødselsnummer</label>
@@ -33,7 +33,7 @@ export class InputMedFeilExampleComponent {
   hasFodselsnummerError = true;
 
   validerFodselsnummer(value: string): void {
-    this.hasFodselsnummerError = !/^\d{11}$/.test(value);
+    this.hasFodselsnummerError = !/^\\d{11}$/.test(value);
   }
 }
 `;

@@ -13,7 +13,5 @@ import { HviButton, HviPopover } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class PopoverStandardExampleComponent {
-  
-}
+export class PopoverStandardExampleComponent {}
 `;

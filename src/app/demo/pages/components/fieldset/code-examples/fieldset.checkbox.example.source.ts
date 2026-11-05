@@ -16,7 +16,5 @@ import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor
     </fieldset>
   \`,
 })
-export class FieldsetCheckboxExampleComponent {
-  
-}
+export class FieldsetCheckboxExampleComponent {}
 `;

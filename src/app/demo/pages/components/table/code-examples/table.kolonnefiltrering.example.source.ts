@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const TableKolonnefiltreringExampleSource = `import { Component, signal } from '@angular/core';
+export const TableKolonnefiltreringExampleSource = `import { Component } from '@angular/core';
 import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -8,8 +8,7 @@ import { HviButton, HviMultiSelect, HviTable } from '@helsevestikt/hviktor-angul
   imports: [HviButton, HviMultiSelect, HviTable],
   template: \`
     <p class="ds-paragraph mb-2" role="status" aria-live="polite" aria-atomic="true">
-      Viser {{ colFilterTable.totalFilteredRecords() }} av
-      {{ colFilterTable.totalRecords() }} rader
+      Viser {{ colFilterTable.totalFilteredRecords() }} av {{ colFilterTable.totalRecords() }} rader
     </p>
     <table
       hviTable
@@ -202,7 +201,7 @@ export class TableKolonnefiltreringExampleComponent {
     'Revisor',
     'Rekrutterer',
   ];
-  
+
   navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
   avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));

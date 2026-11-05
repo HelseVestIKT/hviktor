@@ -31,14 +31,10 @@ import { HviField, HviFieldset, HviInput, HviLabel } from '@helsevestikt/hviktor
           aria-describedby="switch-soverom-desc"
         />
         <label hviLabel for="switch-soverom">Soverom</label>
-        <div data-field="description" id="switch-soverom-desc">
-          Får ikke kontakt med lyspærene
-        </div>
+        <div data-field="description" id="switch-soverom-desc">Får ikke kontakt med lyspærene</div>
       </hvi-field>
     </fieldset>
   \`,
 })
-export class SwitchGrupperingExampleComponent {
-  
-}
+export class SwitchGrupperingExampleComponent {}
 `;

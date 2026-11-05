@@ -13,6 +13,5 @@ import { HviTextfield } from '@helsevestikt/hviktor-angular';
     ></hvi-textfield>
   \`,
 })
-export class TextfieldMedTellerExampleComponent {
-}
+export class TextfieldMedTellerExampleComponent {}
 `;

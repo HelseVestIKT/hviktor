@@ -1,10 +1,10 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupExamplesManifest = [
   {
-    slug: 'ny-anbefalt-bruk',
+    slug: 'ny-anbefalt-bruk-label',
     title: 'Ny anbefalt bruk (label)',
-    className: 'ToggleGroupNyAnbefaltBrukExampleComponent',
-    sourceExport: 'ToggleGroupNyAnbefaltBrukExampleSource',
+    className: 'ToggleGroupNyAnbefaltBrukLabelExampleComponent',
+    sourceExport: 'ToggleGroupNyAnbefaltBrukLabelExampleSource',
   },
   {
     slug: 'grunnleggende',
@@ -39,7 +39,7 @@ export const ToggleGroupExamplesManifest = [
 ] as const;
 
 export type ToggleGroupExampleSlug =
-  | 'ny-anbefalt-bruk'
+  | 'ny-anbefalt-bruk-label'
   | 'grunnleggende'
   | 'secondary-variant'
   | 'storrelse'

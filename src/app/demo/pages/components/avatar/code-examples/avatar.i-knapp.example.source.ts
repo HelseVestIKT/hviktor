@@ -15,7 +15,5 @@ import { HviAvatar, HviButton } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AvatarIKnappExampleComponent {
-  
-}
+export class AvatarIKnappExampleComponent {}
 `;

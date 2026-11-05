@@ -12,7 +12,5 @@ import { HviSpinner } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class SpinnerStandardExampleComponent {
-  
-}
+export class SpinnerStandardExampleComponent {}
 `;

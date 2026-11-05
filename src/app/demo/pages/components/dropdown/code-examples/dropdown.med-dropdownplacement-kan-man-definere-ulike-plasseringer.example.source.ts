@@ -19,7 +19,7 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor-angular';
           </li>
         </ul>
       </hvi-dropdown>
-    
+
       <button hviButton popovertarget="left">left</button>
       <hvi-dropdown id="left" dropdownPlacement="left">
         <ul>
@@ -31,7 +31,7 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor-angular';
           </li>
         </ul>
       </hvi-dropdown>
-    
+
       <button hviButton popovertarget="right">right</button>
       <hvi-dropdown id="right" dropdownPlacement="right">
         <ul>
@@ -46,6 +46,5 @@ import { HviButton, HviDropdown } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class DropdownMedDropdownplacementKanManDefinereUlikePlasseringerExampleComponent {
-}
+export class DropdownMedDropdownplacementKanManDefinereUlikePlasseringerExampleComponent {}
 `;

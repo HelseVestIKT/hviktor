@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { HviCardBlock, HviCardLink, HviHeading, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-kort-som-er-en-lenke-example',
   standalone: true,
+  imports: [HviCardBlock, HviCardLink, HviHeading, HviParagraph, RouterLink],
   template: `
-    som ytterst element. Dette er nyttig når du ønsker at all tekst og innhold i Card blir lest opp
-    av skjermlesere som én sammenhengende lenke." >
     <div class="flex flex-wrap gap-4">
       <a hviCardLink href="https://www.helse-bergen.no/" maxWidth="420px" rel="noopener noreferrer">
         <div hviCardBlock>

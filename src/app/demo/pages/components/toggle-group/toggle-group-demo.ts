@@ -17,7 +17,7 @@ import {
 
 import { ToggleGroupGrunnleggendeExampleSource } from './code-examples/toggle-group.grunnleggende.example.source';
 import { ToggleGroupKunIkonerExampleSource } from './code-examples/toggle-group.kun-ikoner.example.source';
-import { ToggleGroupNyAnbefaltBrukExampleSource } from './code-examples/toggle-group.ny-anbefalt-bruk.example.source';
+import { ToggleGroupNyAnbefaltBrukLabelExampleSource } from './code-examples/toggle-group.ny-anbefalt-bruk-label.example.source';
 import { ToggleGroupSecondaryVariantExampleSource } from './code-examples/toggle-group.secondary-variant.example.source';
 import { ToggleGroupStorrelseExampleSource } from './code-examples/toggle-group.storrelse.example.source';
 import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-group.visningsvalg.example.source';
@@ -194,7 +194,7 @@ import { ToggleGroupVisningsvalgExampleSource } from './code-examples/toggle-gro
 })
 export class ToggleGroupDemoComponent {
   readonly storrelseCode = ToggleGroupStorrelseExampleSource;
-  readonly nyAnbefaltBrukCode = ToggleGroupNyAnbefaltBrukExampleSource;
+  readonly nyAnbefaltBrukCode = ToggleGroupNyAnbefaltBrukLabelExampleSource;
   readonly grunnleggendeCode = ToggleGroupGrunnleggendeExampleSource;
   readonly secondaryVariantCode = ToggleGroupSecondaryVariantExampleSource;
   readonly kunIkonerCode = ToggleGroupKunIkonerExampleSource;

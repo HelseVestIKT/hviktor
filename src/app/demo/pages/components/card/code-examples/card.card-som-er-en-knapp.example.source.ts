@@ -1,9 +1,16 @@
 // Auto-generated - do not edit manually
 export const CardCardSomErEnKnappExampleSource = `import { Component } from '@angular/core';
+import {
+  HviCardBlock,
+  HviCardButton,
+  HviHeading,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-card-som-er-en-knapp-example',
   standalone: true,
+  imports: [HviCardBlock, HviCardButton, HviHeading, HviParagraph],
   template: \`
     <div class="flex flex-wrap gap-4">
       <button hviCardButton maxWidth="420px">
@@ -11,8 +18,8 @@ export const CardCardSomErEnKnappExampleSource = `import { Component } from '@an
           <h2 hviHeading>Innstillinger og personvern</h2>
           <p hviParagraph>
             Dette åpner en dialog der du kan oppdatere personvernvalg, justere innstillinger og
-            tilpasse hvordan tjenesten behandler informasjonen din. Du kan se gjennom endringene
-            før du lagrer.
+            tilpasse hvordan tjenesten behandler informasjonen din. Du kan se gjennom endringene før
+            du lagrer.
           </p>
           <p hviParagraph size="sm">Innstillinger og personvern</p>
         </div>
@@ -20,7 +27,5 @@ export const CardCardSomErEnKnappExampleSource = `import { Component } from '@an
     </div>
   \`,
 })
-export class CardCardSomErEnKnappExampleComponent {
-  
-}
+export class CardCardSomErEnKnappExampleComponent {}
 `;

@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
-import { HviCard } from '@helsevestikt/hviktor-angular';
+import {
+  HviButton,
+  HviCard,
+  HviCardBlock,
+  HviHeading,
+  HviLink,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-kort-med-lenkende-elementer-example',
   standalone: true,
-  imports: [HviCard],
+  imports: [HviButton, HviCard, HviCardBlock, HviHeading, HviLink, HviParagraph],
   template: `
     <div class="flex flex-wrap gap-4">
       <hvi-card color="neutral" maxWidth="420px" clickDelegateFor="target1">

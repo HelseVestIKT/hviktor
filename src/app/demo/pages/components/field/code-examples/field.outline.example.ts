@@ -34,6 +34,4 @@ import {
     </fieldset>
   `,
 })
-export class FieldOutlineExampleComponent {
-  hasEtternavnError = true;
-}
+export class FieldOutlineExampleComponent {}

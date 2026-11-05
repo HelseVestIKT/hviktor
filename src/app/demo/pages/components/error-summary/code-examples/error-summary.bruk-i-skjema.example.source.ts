@@ -1,11 +1,33 @@
 // Auto-generated - do not edit manually
-export const ErrorSummaryBrukISkjemaExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValidation, HviInput, HviLabel, HviValidationMessage } from '@helsevestikt/hviktor-angular';
+export const ErrorSummaryBrukISkjemaExampleSource = `import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  HviButton,
+  HviControlInvalid,
+  HviErrorSummary,
+  HviField,
+  HviFieldValidation,
+  HviForms,
+  HviInput,
+  HviLabel,
+  HviValidationMessage,
+  HviValidationMessages,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-error-summary-bruk-i-skjema-example',
   standalone: true,
-  imports: [HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValidation, HviInput, HviLabel, HviValidationMessage],
+  imports: [
+    HviButton,
+    HviControlInvalid,
+    HviErrorSummary,
+    HviField,
+    HviFieldValidation,
+    HviForms,
+    HviInput,
+    HviLabel,
+    HviValidationMessage,
+  ],
   template: \`
     <form hviForm #hviFormRef="hviForm" [formGroup]="form" [focusOnInvalid]="summary">
       <hvi-field>
@@ -24,7 +46,7 @@ import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValida
           [messages]="messages['fornavn']"
         ></p>
       </hvi-field>
-    
+
       <hvi-field>
         <label hviLabel for="telefon" weight="medium">Telefon</label>
         <input
@@ -42,12 +64,17 @@ import { HviButton, HviControlInvalid, HviErrorSummary, HviField, HviFieldValida
           [messages]="messages['telefon']"
         ></p>
       </hvi-field>
-    
+
       <hvi-error-summary #summary [form]="form" [messages]="messages" />
-    
+
       <div class="flex gap-2">
         <button hviButton type="submit" variant="primary">Send inn</button>
-        <button hviButton type="button" variant="secondary" (click)="hviFormRef.submitted = false; form.reset()">
+        <button
+          hviButton
+          type="button"
+          variant="secondary"
+          (click)="hviFormRef.submitted = false; form.reset()"
+        >
           Nullstill
         </button>
       </div>
@@ -59,7 +86,7 @@ export class ErrorSummaryBrukISkjemaExampleComponent {
     fornavn: new FormControl('', [Validators.required, Validators.minLength(2)]),
     telefon: new FormControl('', [Validators.required, Validators.pattern(/^\\d+$/)]),
   });
-  
+
   messages: Record<string, HviValidationMessages> = {
     fornavn: {
       required: 'Fornavn er påkrevd',

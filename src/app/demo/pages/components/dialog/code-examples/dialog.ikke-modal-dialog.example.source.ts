@@ -1,6 +1,12 @@
 // Auto-generated - do not edit manually
 export const DialogIkkeModalDialogExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
+import {
+  HviButton,
+  HviDialog,
+  HviDialogBlock,
+  HviInput,
+  HviLabel,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-ikke-modal-dialog-example',
@@ -8,7 +14,7 @@ import { HviButton, HviDialog, HviDialogBlock, HviInput, HviLabel } from '@helse
   imports: [HviButton, HviDialog, HviDialogBlock, HviInput, HviLabel],
   template: \`
     <button hviButton (click)="nonModalOpen.set(true)">Åpne ikke-modal Dialog</button>
-    
+
     <dialog
       hviDialog
       title="Vi ønsker din mening"
@@ -28,11 +34,6 @@ import { HviButton, HviDialog, HviDialogBlock, HviInput, HviLabel } from '@helse
   \`,
 })
 export class DialogIkkeModalDialogExampleComponent {
-  readonly modalOpen = signal(false);
   readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
-  readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

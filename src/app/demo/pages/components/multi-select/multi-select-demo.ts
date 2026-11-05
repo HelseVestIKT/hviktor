@@ -8,6 +8,7 @@ import {
   HviMultiSelectOption,
 } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
+import { MultiSelectStandardExampleSource } from './code-examples/multi-select.standard.example.source';
 
 @Component({
   selector: 'app-multi-select-demo',
@@ -38,7 +39,7 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
         </p>
       </div>
 
-      <app-demo-section title="Standard">
+      <app-demo-section title="Standard" [code]="standardCode">
         <div class="flex max-w-sm flex-col gap-4">
           <hvi-field>
             <label hviLabel>Velg kommuner</label>
@@ -50,6 +51,8 @@ import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
   `,
 })
 export class MultiSelectDemoComponent {
+  readonly standardCode = MultiSelectStandardExampleSource;
+
   readonly kommuner: HviMultiSelectOption[] = [
     { label: 'Oslo', value: 'oslo' },
     { label: 'Bergen', value: 'bergen' },

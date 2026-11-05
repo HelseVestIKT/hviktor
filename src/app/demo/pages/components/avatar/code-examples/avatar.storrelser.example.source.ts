@@ -15,7 +15,5 @@ import { HviAvatar } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AvatarStorrelserExampleComponent {
-  
-}
+export class AvatarStorrelserExampleComponent {}
 `;

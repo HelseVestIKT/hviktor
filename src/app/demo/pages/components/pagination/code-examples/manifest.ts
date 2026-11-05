@@ -33,8 +33,4 @@ export const PaginationExamplesManifest = [
 ] as const;
 
 export type PaginationExampleSlug =
-  | 'standard'
-  | 'mange-sider'
-  | 'kompakt-mobil'
-  | 'uten-forste-siste-side'
-  | 'fa-elementer';
+  'standard' | 'mange-sider' | 'kompakt-mobil' | 'uten-forste-siste-side' | 'fa-elementer';

@@ -15,7 +15,5 @@ import { HviBadge, HviBadgePosition, HviTag } from '@helsevestikt/hviktor-angula
     </div>
   \`,
 })
-export class BadgeMedPosisjoneringExampleComponent {
-  
-}
+export class BadgeMedPosisjoneringExampleComponent {}
 `;

@@ -3,7 +3,7 @@ import { HviCard, HviDetails, HviLink, HviParagraph } from '@helsevestikt/hvikto
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 
 import { DetailsIKortExampleSource } from './code-examples/details.i-kort.example.source';
-import { DetailsVarianterExampleSource } from './code-examples/details.varianter.example.source';
+import { DetailsStandardExampleSource } from './code-examples/details.standard.example.source';
 @Component({
   selector: 'app-details-demo',
   standalone: true,
@@ -61,6 +61,6 @@ import { DetailsVarianterExampleSource } from './code-examples/details.varianter
   `,
 })
 export class DetailsDemoComponent {
-  readonly varianterCode = DetailsVarianterExampleSource;
+  readonly varianterCode = DetailsStandardExampleSource;
   readonly iKortCode = DetailsIKortExampleSource;
 }

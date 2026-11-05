@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const TabsGrunnleggendeBrukExampleSource = `import { Component, signal } from '@angular/core';
+export const TabsGrunnleggendeBrukExampleSource = `import { Component } from '@angular/core';
 import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -17,7 +17,5 @@ import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
     </hvi-tabs>
   \`,
 })
-export class TabsGrunnleggendeBrukExampleComponent {
-  selectedTab = signal('value1');
-}
+export class TabsGrunnleggendeBrukExampleComponent {}
 `;

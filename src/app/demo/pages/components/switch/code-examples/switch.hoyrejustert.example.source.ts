@@ -22,7 +22,5 @@ import { HviDivider, HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-
     </div>
   \`,
 })
-export class SwitchHoyrejustertExampleComponent {
-  
-}
+export class SwitchHoyrejustertExampleComponent {}
 `;

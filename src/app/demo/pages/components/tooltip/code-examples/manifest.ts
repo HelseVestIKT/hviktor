@@ -27,7 +27,4 @@ export const TooltipExamplesManifest = [
 ] as const;
 
 export type TooltipExampleSlug =
-  | 'ikon-knapp-med-tooltip'
-  | 'med-tekst'
-  | 'plassering'
-  | 'betinget-tooltip';
+  'ikon-knapp-med-tooltip' | 'med-tekst' | 'plassering' | 'betinget-tooltip';

@@ -23,7 +23,5 @@ import { HviField, HviFieldDescription, HviLabel, HviSelect } from '@helsevestik
     </hvi-field>
   \`,
 })
-export class SelectReadonlyExampleComponent {
-  
-}
+export class SelectReadonlyExampleComponent {}
 `;

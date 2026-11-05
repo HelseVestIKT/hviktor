@@ -7,11 +7,11 @@ import { HviPagination } from '@helsevestikt/hviktor-angular';
   standalone: true,
   imports: [HviPagination],
   template: \`
-    <hvi-pagination [totalItems]="100" [pageSize]="10" [(currentPage)]="currentPage" />
-    <p>Nåværende side: {{ currentPage() }}</p>
+    <hvi-pagination [totalItems]="100" [pageSize]="10" [(currentPage)]="currentPage1" />
+    <p>Nåværende side: {{ currentPage1() }}</p>
   \`,
 })
 export class PaginationStandardExampleComponent {
-  currentPage = signal(1);
+  currentPage1 = signal(1);
 }
 `;

@@ -1,12 +1,34 @@
 // Auto-generated - do not edit manually
 export const TableKomplettEksempelExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviInput, HviLabel, HviMultiSelect, HviPagination, HviSearch, HviSearchClear, HviSortableColumn, HviTable } from '@helsevestikt/hviktor-angular';
+import {
+  HviButton,
+  HviInput,
+  HviLabel,
+  HviMultiSelect,
+  HviPagination,
+  HviSearch,
+  HviSearchClear,
+  HviSortableColumn,
+  HviTable,
+} from '@helsevestikt/hviktor-angular';
 import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-table-komplett-eksempel-example',
   standalone: true,
-  imports: [HviButton, HviInput, HviLabel, HviMultiSelect, HviPagination, HviSearch, HviSearchClear, HviSortableColumn, HviTable, HviIconChevronDown, HviIconChevronRight],
+  imports: [
+    HviButton,
+    HviIconChevronDown,
+    HviIconChevronRight,
+    HviInput,
+    HviLabel,
+    HviMultiSelect,
+    HviPagination,
+    HviSearch,
+    HviSearchClear,
+    HviSortableColumn,
+    HviTable,
+  ],
   template: \`
     <form
       class="mb-1"
@@ -288,11 +310,11 @@ export class TableKomplettEksempelExampleComponent {
     'Revisor',
     'Rekrutterer',
   ];
-  
+
   navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
   avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
   stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
-  
+
   rowsPerPage = signal(5);
 
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {

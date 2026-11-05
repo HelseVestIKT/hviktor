@@ -8,7 +8,7 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
   imports: [HviButton, HviDialog, HviDialogBlock, HviParagraph],
   template: \`
     <button hviButton (click)="drawerOpen.set(true)">Åpne Dialog (Bottom)</button>
-    
+
     <dialog
       hviDialog
       placement="bottom"
@@ -19,20 +19,15 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
     >
       <div hviDialogBlock>
         <p hviParagraph>
-          Dette er en modal dialog med <code>placement="bottom"</code>. Tilgjengelige
-          plasseringer er <code>top</code>, <code>bottom</code>, <code>left</code>,
-          <code>right</code> og <code>center</code>.
+          Dette er en modal dialog med <code>placement="bottom"</code>. Tilgjengelige plasseringer
+          er <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code> og
+          <code>center</code>.
         </p>
       </div>
     </dialog>
   \`,
 })
 export class DialogDialogSomDrawerExampleComponent {
-  readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
   readonly drawerOpen = signal(false);
-  readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

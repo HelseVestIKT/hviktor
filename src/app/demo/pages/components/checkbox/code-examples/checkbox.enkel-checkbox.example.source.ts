@@ -1,6 +1,5 @@
 // Auto-generated - do not edit manually
 export const CheckboxEnkelCheckboxExampleSource = `import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
 import { HviField, HviFieldDescription, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -15,22 +14,5 @@ import { HviField, HviFieldDescription, HviInput, HviLabel } from '@helsevestikt
     </hvi-field>
   \`,
 })
-export class CheckboxEnkelCheckboxExampleComponent {
-  minCheckedValidator(min: number) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const group = control as FormGroup;
-      const checked = Object.values(group.controls).filter((c) => c.value === true).length;
-      return checked >= min ? null : { minChecked: { required: min, actual: checked } };
-    };
-  }
-  
-  contactForm = new FormGroup(
-    {
-      epost: new FormControl(true),
-      telefon: new FormControl(false),
-      sms: new FormControl(false),
-    },
-    { validators: this.minCheckedValidator(2) },
-  );
-}
+export class CheckboxEnkelCheckboxExampleComponent {}
 `;

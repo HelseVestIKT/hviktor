@@ -1,3 +1,4 @@
+// Auto-generated - do not edit manually
 export const SuggestionLangeListerExampleSource = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HviSuggestion } from '@helsevestikt/hviktor-angular';
@@ -30,4 +31,5 @@ export class SuggestionLangeListerExampleComponent {
   }));
 
   valgteSensorer: Sensor[] = [];
-}`;
+}
+`;

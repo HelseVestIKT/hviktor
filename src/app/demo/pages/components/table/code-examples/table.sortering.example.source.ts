@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const TableSorteringExampleSource = `import { Component, signal } from '@angular/core';
+export const TableSorteringExampleSource = `import { Component } from '@angular/core';
 import { HviSortableColumn, HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -20,10 +20,7 @@ import { HviSortableColumn, HviTable, HviTableScroll } from '@helsevestikt/hvikt
               </button>
             </th>
             <th hviSortableColumn="epost" scope="col">
-              <button
-                type="button"
-                [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')"
-              >
+              <button type="button" [attr.aria-label]="getSortLabel(sortTable, 'epost', 'E-post')">
                 E-post
               </button>
             </th>
@@ -149,7 +146,7 @@ export class TableSorteringExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
-  
+
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading} (synkende)\`;

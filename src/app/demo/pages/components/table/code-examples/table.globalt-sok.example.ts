@@ -176,23 +176,4 @@ export class TableGlobaltSokExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
-  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
-  stillinger = [
-    'Utvikler',
-    'Rådgiver',
-    'Teamleder',
-    'Controller',
-    'Arkitekt',
-    'Leder',
-    'Analytiker',
-    'Tester',
-    'Direktør',
-    'Designer',
-    'Revisor',
-    'Rekrutterer',
-  ];
-
-  navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
-  avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
-  stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 }

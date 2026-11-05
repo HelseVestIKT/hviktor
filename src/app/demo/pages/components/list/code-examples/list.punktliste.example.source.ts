@@ -14,7 +14,5 @@ import { HviList } from '@helsevestikt/hviktor-angular';
     </ul>
   \`,
 })
-export class ListPunktlisteExampleComponent {
-  
-}
+export class ListPunktlisteExampleComponent {}
 `;

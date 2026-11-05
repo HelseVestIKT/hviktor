@@ -26,7 +26,5 @@ import { HviAvatar, HviAvatarStack } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AvatarStackExpandableExampleComponent {
-  
-}
+export class AvatarStackExpandableExampleComponent {}
 `;

@@ -27,7 +27,5 @@ import { HviSkeleton } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class SkeletonArtikkelSkeletonExampleComponent {
-  
-}
+export class SkeletonArtikkelSkeletonExampleComponent {}
 `;

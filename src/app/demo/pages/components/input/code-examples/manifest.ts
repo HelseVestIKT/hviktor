@@ -39,9 +39,4 @@ export const InputExamplesManifest = [
 ] as const;
 
 export type InputExampleSlug =
-  | 'grunnleggende'
-  | 'med-label'
-  | 'med-feil'
-  | 'disabled'
-  | 'readonly'
-  | 'ulike-typer';
+  'grunnleggende' | 'med-label' | 'med-feil' | 'disabled' | 'readonly' | 'ulike-typer';

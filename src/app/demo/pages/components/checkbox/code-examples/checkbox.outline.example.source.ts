@@ -1,7 +1,13 @@
 // Auto-generated - do not edit manually
 export const CheckboxOutlineExampleSource = `import { Component } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
+import {
+  HviField,
+  HviFieldDescription,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-outline-example',
@@ -12,13 +18,7 @@ import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviPara
       <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
       <p hviParagraph>Velg alle alternativene som er relevante for deg.</p>
       <hvi-field outline>
-        <input
-          hviInput
-          type="checkbox"
-          id="outline-epost"
-          value="epost"
-          name="kontakt-outline"
-        />
+        <input hviInput type="checkbox" id="outline-epost" value="epost" name="kontakt-outline" />
         <label hviLabel for="outline-epost">E-post</label>
         <span hviFieldDescription>Vi bruker e-postadressen du har oppgitt</span>
       </hvi-field>
@@ -41,22 +41,5 @@ import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviPara
     </fieldset>
   \`,
 })
-export class CheckboxOutlineExampleComponent {
-  minCheckedValidator(min: number) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      const group = control as FormGroup;
-      const checked = Object.values(group.controls).filter((c) => c.value === true).length;
-      return checked >= min ? null : { minChecked: { required: min, actual: checked } };
-    };
-  }
-  
-  contactForm = new FormGroup(
-    {
-      epost: new FormControl(true),
-      telefon: new FormControl(false),
-      sms: new FormControl(false),
-    },
-    { validators: this.minCheckedValidator(2) },
-  );
-}
+export class CheckboxOutlineExampleComponent {}
 `;

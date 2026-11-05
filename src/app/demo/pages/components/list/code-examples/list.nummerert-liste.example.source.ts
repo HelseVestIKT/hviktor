@@ -14,7 +14,5 @@ import { HviList } from '@helsevestikt/hviktor-angular';
     </ol>
   \`,
 })
-export class ListNummerertListeExampleComponent {
-  
-}
+export class ListNummerertListeExampleComponent {}
 `;

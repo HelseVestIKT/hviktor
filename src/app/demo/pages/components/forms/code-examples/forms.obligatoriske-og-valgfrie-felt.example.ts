@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HviButton, HviForms, HviHeading, HviTextfield } from '@helsevestikt/hviktor-angular';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  HviButton,
+  HviForms,
+  HviHeading,
+  HviTextfield,
+  HviValidationKit,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-obligatoriske-og-valgfrie-felt-example',
   standalone: true,
-  imports: [HviButton, HviForms, HviHeading, HviTextfield, ReactiveFormsModule],
+  imports: [HviButton, HviForms, HviHeading, HviTextfield, HviValidationKit],
   template: `
     <form hviForm #mixedForm="hviForm" [formGroup]="appointmentForm" class="max-w-md">
-      <h2 hviHeading size="xs">Bestill time</h2>
+      <h2 hviHeading size="xs" id="appointment-heading">Bestill time</h2>
       <hvi-textfield label="Navn" formControlName="name" required />
       <hvi-textfield label="E-postadresse" formControlName="email" type="email" required />
       <hvi-textfield label="Ønsket tidspunkt" formControlName="preferredTime" required />

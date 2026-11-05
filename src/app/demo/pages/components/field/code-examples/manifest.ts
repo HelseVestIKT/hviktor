@@ -19,12 +19,6 @@ export const FieldExamplesManifest = [
     sourceExport: 'FieldAntallTegnExampleSource',
   },
   {
-    slug: 'plassering',
-    title: 'Plassering',
-    className: 'FieldPlasseringExampleComponent',
-    sourceExport: 'FieldPlasseringExampleSource',
-  },
-  {
     slug: 'checkbox-og-radio',
     title: 'Checkbox og Radio',
     className: 'FieldCheckboxOgRadioExampleComponent',
@@ -39,9 +33,4 @@ export const FieldExamplesManifest = [
 ] as const;
 
 export type FieldExampleSlug =
-  | 'grunnleggende'
-  | 'prefix-suffix'
-  | 'antall-tegn'
-  | 'plassering'
-  | 'checkbox-og-radio'
-  | 'outline';
+  'grunnleggende' | 'prefix-suffix' | 'antall-tegn' | 'checkbox-og-radio' | 'outline';

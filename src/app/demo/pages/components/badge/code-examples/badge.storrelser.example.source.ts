@@ -14,7 +14,5 @@ import { HviBadge } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class BadgeStorrelserExampleComponent {
-  
-}
+export class BadgeStorrelserExampleComponent {}
 `;

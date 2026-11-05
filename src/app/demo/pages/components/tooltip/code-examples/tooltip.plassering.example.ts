@@ -5,7 +5,7 @@ import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 @Component({
   selector: 'app-tooltip-plassering-example',
   standalone: true,
-  imports: [HviButton, HviTooltip, HviIconClipboard],
+  imports: [HviButton, HviIconClipboard, HviTooltip],
   template: `
     <div class="flex justify-center">
       <button

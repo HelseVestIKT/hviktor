@@ -1,6 +1,14 @@
 // Auto-generated - do not edit manually
 export const DialogMedSkjemaOgFokusExampleSource = `import { Component, signal } from '@angular/core';
-import { HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
+import {
+  HviButton,
+  HviDialog,
+  HviDialogBlock,
+  HviField,
+  HviFieldAffixes,
+  HviInput,
+  HviLabel,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-dialog-med-skjema-og-fokus-example',
@@ -8,7 +16,7 @@ import { HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInp
   imports: [HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInput, HviLabel],
   template: \`
     <button hviButton (click)="formOpen.set(true)">Åpne Dialog</button>
-    
+
     <dialog
       hviDialog
       title="Dialog med skjema"
@@ -34,11 +42,6 @@ import { HviButton, HviDialog, HviDialogBlock, HviField, HviFieldAffixes, HviInp
   \`,
 })
 export class DialogMedSkjemaOgFokusExampleComponent {
-  readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
   readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
-  readonly backdropOpen = signal(false);
 }
 `;

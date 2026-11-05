@@ -1,6 +1,14 @@
 // Auto-generated - do not edit manually
-export const TableGlobaltSokExampleSource = `import { Component, signal } from '@angular/core';
-import { HviHeading, HviInput, HviLabel, HviSearch, HviSearchClear, HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
+export const TableGlobaltSokExampleSource = `import { Component } from '@angular/core';
+import {
+  HviHeading,
+  HviInput,
+  HviLabel,
+  HviSearch,
+  HviSearchClear,
+  HviTable,
+  HviTableScroll,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-globalt-sok-example',
@@ -169,24 +177,5 @@ export class TableGlobaltSokExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
-  avdelinger = ['IT', 'HR', 'Økonomi', 'Ledelse'];
-  stillinger = [
-    'Utvikler',
-    'Rådgiver',
-    'Teamleder',
-    'Controller',
-    'Arkitekt',
-    'Leder',
-    'Analytiker',
-    'Tester',
-    'Direktør',
-    'Designer',
-    'Revisor',
-    'Rekrutterer',
-  ];
-  
-  navnOptions = this.data.map((p) => ({ label: p.navn, value: p.navn }));
-  avdelingOptions = this.avdelinger.map((a) => ({ label: a, value: a }));
-  stillingOptions = this.stillinger.map((s) => ({ label: s, value: s }));
 }
 `;

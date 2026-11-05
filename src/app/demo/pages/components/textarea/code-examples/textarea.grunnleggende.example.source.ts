@@ -13,7 +13,5 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
     </hvi-field>
   \`,
 })
-export class TextareaGrunnleggendeExampleComponent {
-  
-}
+export class TextareaGrunnleggendeExampleComponent {}
 `;

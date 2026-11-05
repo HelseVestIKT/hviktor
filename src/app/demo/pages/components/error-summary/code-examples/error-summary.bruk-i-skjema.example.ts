@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   HviButton,
   HviControlInvalid,
   HviErrorSummary,
   HviField,
   HviFieldValidation,
-  HviForm,
+  HviForms,
   HviInput,
   HviLabel,
   HviValidationMessage,
@@ -22,20 +22,13 @@ import {
     HviErrorSummary,
     HviField,
     HviFieldValidation,
+    HviForms,
     HviInput,
     HviLabel,
     HviValidationMessage,
-    ReactiveFormsModule,
-    HviForm,
   ],
   template: `
-    <form
-      hviForm
-      #hviFormRef="hviForm"
-      [formGroup]="form"
-      [focusOnInvalid]="summary"
-      class="grid gap-4"
-    >
+    <form hviForm #hviFormRef="hviForm" [formGroup]="form" [focusOnInvalid]="summary">
       <hvi-field>
         <label hviLabel for="fornavn" weight="medium">Fornavn</label>
         <input

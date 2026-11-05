@@ -21,7 +21,5 @@ import { HviTag } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class TagFargerExampleComponent {
-  
-}
+export class TagFargerExampleComponent {}
 `;

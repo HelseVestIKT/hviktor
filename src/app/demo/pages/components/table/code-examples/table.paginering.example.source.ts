@@ -1,6 +1,11 @@
 // Auto-generated - do not edit manually
-export const TablePagineringExampleSource = `import { Component, signal } from '@angular/core';
-import { HviPagination, HviSortableColumn, HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
+export const TablePagineringExampleSource = `import { Component } from '@angular/core';
+import {
+  HviPagination,
+  HviSortableColumn,
+  HviTable,
+  HviTableScroll,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-paginering-example',
@@ -154,7 +159,7 @@ export class TablePagineringExampleComponent {
       stilling: 'Rekrutterer',
     },
   ];
-  
+
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading} (synkende)\`;

@@ -1,12 +1,29 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupKunIkonerExampleSource = `import { Component, signal } from '@angular/core';
-import { HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip } from '@helsevestikt/hviktor-angular';
-import { HviIconAlignCenter, HviIconAlignLeft, HviIconAlignRight } from '@helsevestikt/hviktor-icons';
+import {
+  HviLabel,
+  HviToggleGroup,
+  HviToggleGroupItem,
+  HviTooltip,
+} from '@helsevestikt/hviktor-angular';
+import {
+  HviIconAlignCenter,
+  HviIconAlignLeft,
+  HviIconAlignRight,
+} from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-toggle-group-kun-ikoner-example',
   standalone: true,
-  imports: [HviLabel, HviToggleGroup, HviToggleGroupItem, HviTooltip, HviIconAlignCenter, HviIconAlignLeft, HviIconAlignRight],
+  imports: [
+    HviIconAlignCenter,
+    HviIconAlignLeft,
+    HviIconAlignRight,
+    HviLabel,
+    HviToggleGroup,
+    HviToggleGroupItem,
+    HviTooltip,
+  ],
   template: \`
     <label hviLabel for="icon-only-toggle">Tekstjustering:</label>
     <hvi-toggle-group
@@ -23,34 +40,16 @@ import { HviIconAlignCenter, HviIconAlignLeft, HviIconAlignRight } from '@helsev
       >
         <hvi-icon-align-left></hvi-icon-align-left>
       </label>
-      <label
-        hviToggleGroupItem
-        hviTooltip="Midtstilt"
-        value="center"
-        icon
-        aria-label="Midtstilt"
-      >
+      <label hviToggleGroupItem hviTooltip="Midtstilt" value="center" icon aria-label="Midtstilt">
         <hvi-icon-align-center></hvi-icon-align-center>
       </label>
-      <label
-        hviToggleGroupItem
-        hviTooltip="Høyrestilt"
-        value="right"
-        icon
-        aria-label="Høyrestilt"
-      >
+      <label hviToggleGroupItem hviTooltip="Høyrestilt" value="right" icon aria-label="Høyrestilt">
         <hvi-icon-align-right></hvi-icon-align-right>
       </label>
     </hvi-toggle-group>
   \`,
 })
 export class ToggleGroupKunIkonerExampleComponent {
-  selectedBasic = signal('innboks');
-  selectedSecondary = signal('innboks');
   selectedIconOnly = signal('left');
-  selectedView = signal('liste');
-  small = signal('innboks');
-  medium = signal('innboks');
-  large = signal('innboks');
 }
 `;

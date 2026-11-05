@@ -20,7 +20,5 @@ import { HviBadge, HviBadgePosition, HviButton } from '@helsevestikt/hviktor-ang
     </div>
   \`,
 })
-export class BadgeTilgjengeligNavnExampleComponent {
-  
-}
+export class BadgeTilgjengeligNavnExampleComponent {}
 `;

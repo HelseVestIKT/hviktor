@@ -23,6 +23,5 @@ import { HviButton, HviDropdown, HviParagraph } from '@helsevestikt/hviktor-angu
     </div>
   \`,
 })
-export class DropdownStandardExampleComponent {
-}
+export class DropdownStandardExampleComponent {}
 `;

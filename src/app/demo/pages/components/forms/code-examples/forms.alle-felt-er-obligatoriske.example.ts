@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   HviButton,
+  HviFieldKit,
   HviForms,
   HviHeading,
   HviRequiredTag,
   HviTextfield,
+  HviValidationKit,
 } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-alle-felt-er-obligatoriske-example',
   standalone: true,
-  imports: [HviButton, HviForms, HviHeading, HviRequiredTag, HviTextfield, ReactiveFormsModule],
+  imports: [
+    HviButton,
+    HviFieldKit,
+    HviForms,
+    HviHeading,
+    HviRequiredTag,
+    HviTextfield,
+    HviValidationKit,
+  ],
   template: `
     <form
       hviForm
@@ -20,7 +30,7 @@ import {
       class="max-w-sm"
       aria-describedby="login-required-info"
     >
-      <h2 hviHeading size="xs">Logg inn</h2>
+      <h2 hviHeading size="xs" id="login-heading">Logg inn</h2>
       @if (allReqForm.requiredMode() === 'all-required') {
         <hvi-required-tag id="login-required-info" mode="all-required" />
       }

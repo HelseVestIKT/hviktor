@@ -33,8 +33,4 @@ export const TextareaExamplesManifest = [
 ] as const;
 
 export type TextareaExampleSlug =
-  | 'grunnleggende'
-  | 'med-hjelpetekst'
-  | 'med-tegnteller'
-  | 'disabled'
-  | 'readonly';
+  'grunnleggende' | 'med-hjelpetekst' | 'med-tegnteller' | 'disabled' | 'readonly';

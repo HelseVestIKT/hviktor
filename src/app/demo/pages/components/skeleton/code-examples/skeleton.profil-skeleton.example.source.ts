@@ -16,7 +16,7 @@ import { HviSkeleton } from '@helsevestikt/hviktor-angular';
           <hvi-skeleton variant="text" width="200px" height="1em" />
         </div>
       </div>
-    
+
       <!-- Profile Card 2 -->
       <div class="flex items-center gap-4 rounded-lg p-4">
         <hvi-skeleton variant="circle" width="64px" height="64px" />
@@ -28,7 +28,5 @@ import { HviSkeleton } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class SkeletonProfilSkeletonExampleComponent {
-  
-}
+export class SkeletonProfilSkeletonExampleComponent {}
 `;

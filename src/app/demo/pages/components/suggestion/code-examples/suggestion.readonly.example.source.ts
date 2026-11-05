@@ -9,31 +9,34 @@ import { HviSuggestion } from '@helsevestikt/hviktor-angular';
   imports: [FormsModule, HviSuggestion],
   template: \`
     <hvi-suggestion
-      label="Blodbank"
-      placeholder="Søk etter blodbank"
+      label="Sykehus"
+      placeholder="Søk etter sykehus"
       [readOnly]="true"
-      [(ngModel)]="blodbank"
-      [suggestions]="blodbanker"
+      [(ngModel)]="readonlySykehus"
+      [suggestions]="sykehus"
     />
     <hvi-suggestion
-      label="Blodbanker"
-      placeholder="Søk etter region eller blodbank"
+      label="Sykehus"
+      placeholder="Søk etter sykehus"
       [readOnly]="true"
       [multiple]="true"
-      [(ngModel)]="valgteBlodbanker"
-      [suggestions]="blodbanker"
+      [(ngModel)]="readonlySykehuser"
+      [suggestions]="sykehus"
     />
   \`,
 })
 export class SuggestionReadonlyExampleComponent {
-  readonly blodbanker = [
+  readonly sykehus = [
     'Haukeland universitetssjukehus',
     'Stavanger universitetssjukehus',
     'Haugesund sjukehus',
     'Førde sentralsjukehus',
   ];
 
-  blodbank: string | null = 'Haukeland universitetssjukehus';
-  valgteBlodbanker: string[] = ['Haukeland universitetssjukehus', 'Stavanger universitetssjukehus'];
+  readonlySykehus: string | null = 'Haukeland universitetssjukehus';
+  readonlySykehuser: string[] = [
+    'Haukeland universitetssjukehus',
+    'Stavanger universitetssjukehus',
+  ];
 }
 `;
