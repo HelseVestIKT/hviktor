@@ -57,6 +57,7 @@ type HviAlertRole = 'status' | 'alert' | string;
     class: 'ds-alert',
     style: 'display: block; height: fit-content; align-self: flex-start; max-width: 731px;',
     '[attr.data-color]': 'color',
+    '[attr.data-size]': 'size',
     '[attr.role]': 'role ?? (color === "danger" ? "alert" : "status")',
     '[attr.aria-label]': 'title || ariaLabelForColor',
   },
@@ -64,6 +65,9 @@ type HviAlertRole = 'status' | 'alert' | string;
 export class HviAlert {
   /** Sets the color and visual style of the alert to indicate severity. */
   @Input() color?: HviAlertColor;
+
+  /** Sets the visual size of the alert. */
+  @Input() size: 'sm' | 'md' | 'lg' = 'md';
 
   /**
    * Renders a visible `<h2>` heading inside the alert and sets the accessible name (`aria-label`).

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { HviAlert, HviParagraph } from '@helsevestikt/hviktor-angular';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
 import { AlertMedTittelExampleSource } from './code-examples/alert.med-tittel.example.source';
+import { AlertStorrelserExampleSource } from './code-examples/alert.storrelser.example.source';
 import { AlertUtenTittelExampleSource } from './code-examples/alert.uten-tittel.example.source';
 import { AlertVarianterExampleSource } from './code-examples/alert.varianter.example.source';
 
@@ -17,6 +18,13 @@ import { AlertVarianterExampleSource } from './code-examples/alert.varianter.exa
           <hvi-alert color="success">Dette er en success alert</hvi-alert>
           <hvi-alert color="warning">Dette er en warning alert</hvi-alert>
           <hvi-alert color="danger">Dette er en danger alert</hvi-alert>
+        </div>
+      </app-demo-section>
+      <app-demo-section title="Størrelser (default er md)" [code]="storrelserCode">
+        <div class="flex flex-col gap-2">
+          <hvi-alert size="sm">Liten alert (sm)</hvi-alert>
+          <hvi-alert size="md">Mellomstor alert (md)</hvi-alert>
+          <hvi-alert size="lg">Stor alert (lg)</hvi-alert>
         </div>
       </app-demo-section>
       <app-demo-section title="Med tittel" [code]="medTittelCode">
@@ -41,6 +49,7 @@ import { AlertVarianterExampleSource } from './code-examples/alert.varianter.exa
 })
 export class AlertDemoComponent {
   readonly varianterCode = AlertVarianterExampleSource;
+  readonly storrelserCode = AlertStorrelserExampleSource;
   readonly medTittelCode = AlertMedTittelExampleSource;
   readonly utenTittelCode = AlertUtenTittelExampleSource;
 }
