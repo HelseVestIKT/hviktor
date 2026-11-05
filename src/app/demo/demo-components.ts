@@ -273,6 +273,13 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     ds: true,
   },
   {
+    id: 'toast',
+    name: 'Toast',
+    description:
+      'Hviktor har bevisst ikke en toast-komponent, fordi toast har kjente tilgjengelighetsproblemer. Her ser du hva du kan bruke i stedet.',
+    ds: true,
+  },
+  {
     id: 'tooltip',
     name: 'Tooltip',
     description:

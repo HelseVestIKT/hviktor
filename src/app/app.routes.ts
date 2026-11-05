@@ -189,6 +189,11 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'komponenter/toast',
+        loadComponent: () =>
+          import('./demo/pages/components/toast/toast-demo').then((m) => m.ToastDemoComponent),
+      },
+      {
         path: 'komponenter/tooltip',
         loadComponent: () =>
           import('./demo/pages/components/tooltip/tooltip-demo').then(
