@@ -1,12 +1,28 @@
 // Auto-generated - do not edit manually
-export const FormsAlleFeltErObligatoriskeExampleSource = `import { Component, signal } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
-import { HviButton, HviForms, HviHeading, HviRequiredTag, HviTextfield, HviValidationMessages } from '@helsevestikt/hviktor-angular';
+export const FormsAlleFeltErObligatoriskeExampleSource = `import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  HviButton,
+  HviFieldKit,
+  HviForms,
+  HviHeading,
+  HviRequiredTag,
+  HviTextfield,
+  HviValidationKit,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-forms-alle-felt-er-obligatoriske-example',
   standalone: true,
-  imports: [HviButton, HviForms, HviHeading, HviRequiredTag, HviTextfield, ReactiveFormsModule],
+  imports: [
+    HviButton,
+    HviFieldKit,
+    HviForms,
+    HviHeading,
+    HviRequiredTag,
+    HviTextfield,
+    HviValidationKit,
+  ],
   template: \`
     <form
       hviForm
@@ -15,17 +31,12 @@ import { HviButton, HviForms, HviHeading, HviRequiredTag, HviTextfield, HviValid
       class="max-w-sm"
       aria-describedby="login-required-info"
     >
-      <h2 hviHeading size="xs">Logg inn</h2>
+      <h2 hviHeading size="xs" id="login-heading">Logg inn</h2>
       @if (allReqForm.requiredMode() === 'all-required') {
         <hvi-required-tag id="login-required-info" mode="all-required" />
       }
       <hvi-textfield label="Brukernavn" formControlName="username" required />
-      <hvi-textfield
-        label="Passord"
-        formControlName="password"
-        type="password"
-        required
-      />
+      <hvi-textfield label="Passord" formControlName="password" type="password" required />
       <div class="mt-4">
         <button hviButton type="submit" variant="primary">Logg inn</button>
       </div>

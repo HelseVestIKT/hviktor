@@ -14,7 +14,5 @@ import { HviDivider, HviParagraph } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class DividerStandardExampleComponent {
-  
-}
+export class DividerStandardExampleComponent {}
 `;

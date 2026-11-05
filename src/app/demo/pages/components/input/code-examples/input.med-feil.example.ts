@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'app-input-med-feil-example',
   standalone: true,
-  imports: [HviField, HviInput, HviLabel, HviFieldDescription, HviFieldValidation],
+  imports: [HviField, HviFieldDescription, HviFieldValidation, HviInput, HviLabel],
   template: `
     <hvi-field>
       <label hviLabel for="fnr-error" weight="medium">Fødselsnummer</label>

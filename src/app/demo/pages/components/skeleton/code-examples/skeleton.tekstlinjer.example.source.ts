@@ -15,7 +15,5 @@ import { HviSkeleton } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class SkeletonTekstlinjerExampleComponent {
-  
-}
+export class SkeletonTekstlinjerExampleComponent {}
 `;

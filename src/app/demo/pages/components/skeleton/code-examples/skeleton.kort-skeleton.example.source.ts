@@ -16,7 +16,7 @@ import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor-angula
           <hvi-skeleton variant="text" width="90%" height="1em" />
         </div>
       </hvi-card>
-    
+
       <hvi-card>
         <hvi-skeleton variant="rectangle" width="100%" height="160px" />
         <div hviCardBlock class="flex flex-col gap-2">
@@ -25,7 +25,7 @@ import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor-angula
           <hvi-skeleton variant="text" width="85%" height="1em" />
         </div>
       </hvi-card>
-    
+
       <hvi-card>
         <hvi-skeleton variant="rectangle" width="100%" height="160px" />
         <div hviCardBlock class="flex flex-col gap-2">
@@ -37,7 +37,5 @@ import { HviCard, HviCardBlock, HviSkeleton } from '@helsevestikt/hviktor-angula
     </div>
   \`,
 })
-export class SkeletonKortSkeletonExampleComponent {
-  
-}
+export class SkeletonKortSkeletonExampleComponent {}
 `;

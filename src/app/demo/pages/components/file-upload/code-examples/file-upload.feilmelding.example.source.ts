@@ -1,6 +1,5 @@
 // Auto-generated - do not edit manually
 export const FileUploadFeilmeldingExampleSource = `import { Component, computed, signal } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HviFileUpload } from '@helsevestikt/hviktor-angular';
 
 @Component({

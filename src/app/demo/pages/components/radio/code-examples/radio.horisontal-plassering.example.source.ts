@@ -1,7 +1,12 @@
 // Auto-generated - do not edit manually
 export const RadioHorisontalPlasseringExampleSource = `import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
+import {
+  HviField,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-radio-horisontal-plassering-example',
@@ -24,7 +29,5 @@ import { HviField, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsev
     </fieldset>
   \`,
 })
-export class RadioHorisontalPlasseringExampleComponent {
-  bydelControl = new FormControl('', Validators.required);
-}
+export class RadioHorisontalPlasseringExampleComponent {}
 `;

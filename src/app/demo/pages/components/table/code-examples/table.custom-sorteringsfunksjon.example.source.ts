@@ -1,6 +1,11 @@
 // Auto-generated - do not edit manually
 export const TableCustomSorteringsfunksjonExampleSource = `import { Component } from '@angular/core';
-import { HviSortableColumn, HviTable, HviTableScroll, type SortingFn } from '@helsevestikt/hviktor-angular';
+import {
+  HviSortableColumn,
+  HviTable,
+  HviTableScroll,
+  type SortingFn,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-table-custom-sorteringsfunksjon-example',
@@ -63,7 +68,7 @@ export class TableCustomSorteringsfunksjonExampleComponent {
     { id: 5, namn: 'Sensor E', status: 'Normal', lokasjon: 'Haugesund' },
     { id: 6, namn: 'Sensor F', status: 'Varsling aktivert', lokasjon: 'Førde' },
   ];
-  
+
   /**
    * Custom komparator: Aktivt varsel (0) → Varsling aktivert (1) → Normal (2).
    * TanStack reverserer automatisk ved synkende sortering.
@@ -76,7 +81,7 @@ export class TableCustomSorteringsfunksjonExampleComponent {
     };
     return rang(radA.getValue(columnId)) - rang(radB.getValue(columnId));
   };
-  
+
   getSortLabel(table: HviTable<any>, field: string, heading: string): string {
     const dir = table.getSortDirection(field);
     if (dir === 'ascending') return \`Sorter etter \${heading} (synkende)\`;

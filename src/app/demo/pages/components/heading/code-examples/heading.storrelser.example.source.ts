@@ -17,7 +17,5 @@ import { HviHeading } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class HeadingStorrelserExampleComponent {
-  
-}
+export class HeadingStorrelserExampleComponent {}
 `;

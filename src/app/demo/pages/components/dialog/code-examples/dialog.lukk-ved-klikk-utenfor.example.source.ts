@@ -8,7 +8,7 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
   imports: [HviButton, HviDialog, HviDialogBlock, HviParagraph],
   template: \`
     <button hviButton (click)="backdropOpen.set(true)">Åpne Dialog</button>
-    
+
     <dialog
       hviDialog
       closedby="any"
@@ -20,11 +20,6 @@ import { HviButton, HviDialog, HviDialogBlock, HviParagraph } from '@helsevestik
   \`,
 })
 export class DialogLukkVedKlikkUtenforExampleComponent {
-  readonly modalOpen = signal(false);
-  readonly nonModalOpen = signal(false);
-  readonly drawerOpen = signal(false);
-  readonly formOpen = signal(false);
-  readonly blocksOpen = signal(false);
   readonly backdropOpen = signal(false);
 }
 `;

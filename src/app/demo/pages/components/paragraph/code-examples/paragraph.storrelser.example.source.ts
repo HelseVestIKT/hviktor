@@ -20,7 +20,5 @@ import { HviParagraph } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class ParagraphStorrelserExampleComponent {
-  
-}
+export class ParagraphStorrelserExampleComponent {}
 `;

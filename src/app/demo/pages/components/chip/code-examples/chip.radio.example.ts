@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { HviChipLabel, HviInput } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-chip-radio-example',
   standalone: true,
+  imports: [HviChipLabel, HviInput],
   template: `
     <div class="flex flex-wrap gap-2">
       <label hviChip>

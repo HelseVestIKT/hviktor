@@ -1,12 +1,35 @@
 // Auto-generated - do not edit manually
 export const CheckboxMedFeilExampleSource = `import { Component } from '@angular/core';
-import { ReactiveFormsModule, AbstractControl, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
-import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  ValidationErrors,
+} from '@angular/forms';
+import {
+  HviControlInvalid,
+  HviField,
+  HviFieldValidation,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-checkbox-med-feil-example',
   standalone: true,
-  imports: [HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput, HviLabel, HviParagraph, ReactiveFormsModule],
+  imports: [
+    HviControlInvalid,
+    HviField,
+    HviFieldValidation,
+    HviFieldset,
+    HviInput,
+    HviLabel,
+    HviParagraph,
+    ReactiveFormsModule,
+  ],
   template: \`
     <fieldset hviFieldset [formGroup]="contactForm">
       <legend hviLabel weight="medium">Hvordan vil du helst at vi skal kontakte deg?</legend>
@@ -32,13 +55,7 @@ import { HviControlInvalid, HviField, HviFieldValidation, HviFieldset, HviInput,
         <label hviLabel for="error-telefon">Telefon</label>
       </hvi-field>
       <hvi-field>
-        <input
-          hviInput
-          hviControlInvalid
-          type="checkbox"
-          id="error-sms"
-          formControlName="sms"
-        />
+        <input hviInput hviControlInvalid type="checkbox" id="error-sms" formControlName="sms" />
         <label hviLabel for="error-sms">SMS</label>
       </hvi-field>
       @if (contactForm.invalid) {
@@ -55,7 +72,7 @@ export class CheckboxMedFeilExampleComponent {
       return checked >= min ? null : { minChecked: { required: min, actual: checked } };
     };
   }
-  
+
   contactForm = new FormGroup(
     {
       epost: new FormControl(true),

@@ -1,11 +1,11 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, WritableSignal, signal } from '@angular/core';
 import { HviButton, HviField, HviInput, HviLabel, HviTooltip } from '@helsevestikt/hviktor-angular';
 import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
 
 @Component({
   selector: 'app-tooltip-betinget-tooltip-example',
   standalone: true,
-  imports: [HviButton, HviField, HviInput, HviLabel, HviTooltip, HviIconClipboard],
+  imports: [HviButton, HviField, HviIconClipboard, HviInput, HviLabel, HviTooltip],
   template: `
     <div class="flex justify-center">
       <button
@@ -19,17 +19,19 @@ import { HviIconClipboard } from '@helsevestikt/hviktor-icons';
         <hvi-icon-clipboard />
       </button>
     </div>
-    <hvi-field class="mt-4 flex justify-center">
-      <input
-        hviInput
-        type="checkbox"
-        role="switch"
-        id="tooltip-toggle"
-        [checked]="visTooltip()"
-        (change)="toggleTooltip()"
-      />
-      <label hviLabel for="tooltip-toggle">Vis tooltip</label>
-    </hvi-field>
+    <div class="flex justify-center">
+      <hvi-field class="mt-4 flex justify-center">
+        <input
+          hviInput
+          type="checkbox"
+          role="switch"
+          id="tooltip-toggle"
+          [checked]="visTooltip()"
+          (change)="toggleTooltip()"
+        />
+        <label hviLabel for="tooltip-toggle">Vis tooltip</label>
+      </hvi-field>
+    </div>
   `,
 })
 export class TooltipBetingetTooltipExampleComponent {

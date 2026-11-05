@@ -30,7 +30,5 @@ import { HviField, HviLabel, HviSelect } from '@helsevestikt/hviktor-angular';
     </hvi-field>
   \`,
 })
-export class SelectBreddeExampleComponent {
-  
-}
+export class SelectBreddeExampleComponent {}
 `;

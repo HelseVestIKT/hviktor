@@ -6,11 +6,7 @@ import { HviInput } from '@helsevestikt/hviktor-angular';
   selector: 'app-input-grunnleggende-example',
   standalone: true,
   imports: [HviInput],
-  template: \`
-    <input hviInput type="text" aria-label="input" />
-  \`,
+  template: \` <input hviInput type="text" aria-label="input" /> \`,
 })
-export class InputGrunnleggendeExampleComponent {
-  
-}
+export class InputGrunnleggendeExampleComponent {}
 `;

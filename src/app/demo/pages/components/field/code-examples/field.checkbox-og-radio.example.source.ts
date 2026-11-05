@@ -12,7 +12,7 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
         <input hviInput id="aksept" type="checkbox" />
         <label hviLabel for="aksept">Jeg godtar vilkårene</label>
       </hvi-field>
-    
+
       <hvi-field>
         <input hviInput id="nyhetsbrev" type="checkbox" checked />
         <label hviLabel for="nyhetsbrev">Meld meg på nyhetsbrev</label>
@@ -20,7 +20,5 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class FieldCheckboxOgRadioExampleComponent {
-  hasEtternavnError = true;
-}
+export class FieldCheckboxOgRadioExampleComponent {}
 `;

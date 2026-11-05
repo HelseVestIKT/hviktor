@@ -15,5 +15,4 @@ export const DropdownExamplesManifest = [
 ] as const;
 
 export type DropdownExampleSlug =
-  | 'standard'
-  | 'med-dropdownplacement-kan-man-definere-ulike-plasseringer';
+  'standard' | 'med-dropdownplacement-kan-man-definere-ulike-plasseringer';

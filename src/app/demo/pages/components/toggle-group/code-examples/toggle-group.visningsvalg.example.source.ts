@@ -1,6 +1,11 @@
 // Auto-generated - do not edit manually
 export const ToggleGroupVisningsvalgExampleSource = `import { Component, signal } from '@angular/core';
-import { HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@helsevestikt/hviktor-angular';
+import {
+  HviLabel,
+  HviParagraph,
+  HviToggleGroup,
+  HviToggleGroupItem,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-toggle-group-visningsvalg-example',
@@ -17,12 +22,6 @@ import { HviLabel, HviParagraph, HviToggleGroup, HviToggleGroupItem } from '@hel
   \`,
 })
 export class ToggleGroupVisningsvalgExampleComponent {
-  selectedBasic = signal('innboks');
-  selectedSecondary = signal('innboks');
-  selectedIconOnly = signal('left');
   selectedView = signal('liste');
-  small = signal('innboks');
-  medium = signal('innboks');
-  large = signal('innboks');
 }
 `;

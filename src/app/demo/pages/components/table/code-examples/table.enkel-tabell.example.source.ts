@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const TableEnkelTabellExampleSource = `import { Component, signal } from '@angular/core';
+export const TableEnkelTabellExampleSource = `import { Component } from '@angular/core';
 import { HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -40,6 +40,5 @@ import { HviTable, HviTableScroll } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class TableEnkelTabellExampleComponent {
-}
+export class TableEnkelTabellExampleComponent {}
 `;

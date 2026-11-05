@@ -14,7 +14,5 @@ import { HviButton } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class ButtonVariantExampleComponent {
-  
-}
+export class ButtonVariantExampleComponent {}
 `;

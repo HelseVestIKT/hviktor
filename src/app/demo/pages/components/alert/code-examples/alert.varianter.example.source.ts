@@ -15,7 +15,5 @@ import { HviAlert } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AlertVarianterExampleComponent {
-  
-}
+export class AlertVarianterExampleComponent {}
 `;

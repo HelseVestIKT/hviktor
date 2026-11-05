@@ -13,7 +13,5 @@ import { HviLink } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class LinkVarianterExampleComponent {
-  
-}
+export class LinkVarianterExampleComponent {}
 `;

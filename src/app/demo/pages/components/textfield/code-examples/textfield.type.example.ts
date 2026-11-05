@@ -1,17 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  HviField,
-  HviLabel,
-  HviSelect,
-  HviTextfield,
-  HviTextfieldType,
-} from '@helsevestikt/hviktor-angular';
+import { HviField, HviLabel, HviSelect, HviTextfield } from '@helsevestikt/hviktor-angular';
+import { HviTextfieldType } from '../textfield-demo';
 
 @Component({
   selector: 'app-textfield-type-example',
   standalone: true,
-  imports: [HviField, HviLabel, HviSelect, HviTextfield, FormsModule],
+  imports: [FormsModule, HviField, HviLabel, HviSelect, HviTextfield],
   template: `
     <div class="flex gap-2">
       <hvi-field>

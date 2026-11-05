@@ -20,7 +20,5 @@ import { HviBreadcrumbs, HviLink } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class BreadcrumbsStandardExampleComponent {
-  
-}
+export class BreadcrumbsStandardExampleComponent {}
 `;

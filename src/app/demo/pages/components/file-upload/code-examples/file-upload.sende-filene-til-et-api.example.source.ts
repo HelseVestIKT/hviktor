@@ -1,6 +1,6 @@
 // Auto-generated - do not edit manually
 export const FileUploadSendeFileneTilEtApiExampleSource = `import { Component, signal } from '@angular/core';
-import { ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HviButton, HviFileUpload, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({

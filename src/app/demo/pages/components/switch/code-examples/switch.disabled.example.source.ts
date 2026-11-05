@@ -14,7 +14,5 @@ import { HviField, HviFieldDescription, HviInput, HviLabel } from '@helsevestikt
     </hvi-field>
   \`,
 })
-export class SwitchDisabledExampleComponent {
-  
-}
+export class SwitchDisabledExampleComponent {}
 `;

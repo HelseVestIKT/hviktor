@@ -1,5 +1,5 @@
 // Auto-generated - do not edit manually
-export const TabsMedMerInnholdExampleSource = `import { Component, signal } from '@angular/core';
+export const TabsMedMerInnholdExampleSource = `import { Component } from '@angular/core';
 import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -30,15 +30,13 @@ import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
       <hvi-tab-panel value="settings">
         <div class="ds-paragraph">
           <p>
-            I denne seksjonen kan du konfigurere ulike innstillinger. Tilpass oppsettet etter
-            dine behov og preferanser.
+            I denne seksjonen kan du konfigurere ulike innstillinger. Tilpass oppsettet etter dine
+            behov og preferanser.
           </p>
         </div>
       </hvi-tab-panel>
     </hvi-tabs>
   \`,
 })
-export class TabsMedMerInnholdExampleComponent {
-  selectedTab = signal('value1');
-}
+export class TabsMedMerInnholdExampleComponent {}
 `;

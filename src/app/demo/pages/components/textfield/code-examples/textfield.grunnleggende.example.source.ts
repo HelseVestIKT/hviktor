@@ -6,10 +6,7 @@ import { HviTextfield } from '@helsevestikt/hviktor-angular';
   selector: 'app-textfield-grunnleggende-example',
   standalone: true,
   imports: [HviTextfield],
-  template: \`
-    <hvi-textfield label="Label"></hvi-textfield>
-  \`,
+  template: \` <hvi-textfield label="Label"></hvi-textfield> \`,
 })
-export class TextfieldGrunnleggendeExampleComponent {
-}
+export class TextfieldGrunnleggendeExampleComponent {}
 `;

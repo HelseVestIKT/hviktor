@@ -14,6 +14,5 @@ import { HviTextfield } from '@helsevestikt/hviktor-angular';
     ></hvi-textfield>
   \`,
 })
-export class TextfieldMedPrefiksOgSuffiksExampleComponent {
-}
+export class TextfieldMedPrefiksOgSuffiksExampleComponent {}
 `;

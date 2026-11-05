@@ -13,6 +13,5 @@ import { HviTextfield } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class TextfieldPakrevdeOgValgfrieFeltExampleComponent {
-}
+export class TextfieldPakrevdeOgValgfrieFeltExampleComponent {}
 `;

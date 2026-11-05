@@ -1,11 +1,11 @@
+// Auto-generated - do not edit manually
 export const TextfieldToveisbindingExampleSource = `import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { HviButton, HviTextfield } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-textfield-toveisbinding-example',
   standalone: true,
-  imports: [HviTextfield, FormsModule, HviButton],
+  imports: [HviButton, HviTextfield],
   template: \`
     <div class="space-y-4">
       <hvi-textfield label="Navn" [(value)]="navn" />

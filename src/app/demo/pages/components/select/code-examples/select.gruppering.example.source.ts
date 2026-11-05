@@ -27,7 +27,5 @@ import { HviField, HviLabel, HviSelect } from '@helsevestikt/hviktor-angular';
     </hvi-field>
   \`,
 })
-export class SelectGrupperingExampleComponent {
-  
-}
+export class SelectGrupperingExampleComponent {}
 `;

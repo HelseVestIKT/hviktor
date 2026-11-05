@@ -14,7 +14,5 @@ import { HviAlert } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AlertUtenTittelExampleComponent {
-  
-}
+export class AlertUtenTittelExampleComponent {}
 `;

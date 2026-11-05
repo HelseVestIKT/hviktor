@@ -17,6 +17,8 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
   standalone: true,
   imports: [
     HviButton,
+    HviIconChevronDown,
+    HviIconChevronRight,
     HviInput,
     HviLabel,
     HviMultiSelect,
@@ -25,8 +27,6 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
     HviSearchClear,
     HviSortableColumn,
     HviTable,
-    HviIconChevronDown,
-    HviIconChevronRight,
   ],
   template: `
     <form

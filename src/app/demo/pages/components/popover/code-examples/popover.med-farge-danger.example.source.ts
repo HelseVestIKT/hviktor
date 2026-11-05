@@ -1,17 +1,21 @@
 // Auto-generated - do not edit manually
 export const PopoverMedFargeDangerExampleSource = `import { Component } from '@angular/core';
-import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor-angular';
+import { HviButton, HviLink, HviParagraph, HviPopover } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-popover-med-farge-danger-example',
   standalone: true,
-  imports: [HviButton, HviParagraph, HviPopover],
+  imports: [HviButton, HviLink, HviParagraph, HviPopover],
   template: \`
     <div class="flex flex-col gap-4">
       <p hviParagraph>
         Du kan bruke
-        <code>popovertargetaction="hide"</code> på f.eks. en "Avbryt"-knapp hvis popoveren bare
-        skal lukkes ved klikk.
+        <code>popovertargetaction="hide"</code> på f.eks. en "Avbryt"-knapp hvis popoveren bare skal
+        lukkes ved klikk. Se videre dokumentasjon på
+        <a hviLink href="https://designsystemet.no/no/components/docs/popover/code" target="_blank"
+          >designsystemet.no</a
+        >
+        for mer informasjon om kontrollert popover.
       </p>
       <div class="flex flex-wrap gap-4">
         <button hviButton color="danger" popovertarget="popoverDanger">Slett</button>
@@ -34,7 +38,5 @@ import { HviButton, HviParagraph, HviPopover } from '@helsevestikt/hviktor-angul
     </div>
   \`,
 })
-export class PopoverMedFargeDangerExampleComponent {
-  
-}
+export class PopoverMedFargeDangerExampleComponent {}
 `;

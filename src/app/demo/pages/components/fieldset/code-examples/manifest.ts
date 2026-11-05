@@ -27,7 +27,4 @@ export const FieldsetExamplesManifest = [
 ] as const;
 
 export type FieldsetExampleSlug =
-  | 'radio-gruppe'
-  | 'checkbox'
-  | 'legend-som-heading'
-  | 'checkbox-gruppe';
+  'radio-gruppe' | 'checkbox' | 'legend-som-heading' | 'checkbox-gruppe';

@@ -24,6 +24,4 @@ import {
     </div>
   `,
 })
-export class FieldPrefixSuffixExampleComponent {
-  hasEtternavnError = true;
-}
+export class FieldPrefixSuffixExampleComponent {}

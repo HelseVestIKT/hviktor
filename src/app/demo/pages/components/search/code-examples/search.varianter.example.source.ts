@@ -1,6 +1,12 @@
 // Auto-generated - do not edit manually
 export const SearchVarianterExampleSource = `import { Component } from '@angular/core';
-import { HviButton, HviDivider, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hviktor-angular';
+import {
+  HviButton,
+  HviDivider,
+  HviInput,
+  HviSearch,
+  HviSearchClear,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-search-varianter-example',
@@ -15,9 +21,9 @@ import { HviButton, HviDivider, HviInput, HviSearch, HviSearchClear } from '@hel
           <button hviSearchClear aria-label="Tøm"></button>
         </hvi-search>
       </form>
-    
+
       <hr hviDivider aria-hidden="true" />
-    
+
       <!-- Med primær knapp -->
       <form role="search">
         <hvi-search class="max-w-md">
@@ -26,9 +32,9 @@ import { HviButton, HviDivider, HviInput, HviSearch, HviSearchClear } from '@hel
           <button hviButton variant="primary" type="submit">Søk</button>
         </hvi-search>
       </form>
-    
+
       <hr hviDivider aria-hidden="true" />
-    
+
       <!-- Med sekundær knapp -->
       <form role="search">
         <hvi-search class="max-w-md">

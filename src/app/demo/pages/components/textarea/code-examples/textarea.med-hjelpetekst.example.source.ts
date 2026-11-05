@@ -14,7 +14,5 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
     </hvi-field>
   \`,
 })
-export class TextareaMedHjelpetekstExampleComponent {
-  
-}
+export class TextareaMedHjelpetekstExampleComponent {}
 `;

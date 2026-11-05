@@ -7,8 +7,8 @@ import { HviLabel } from '@helsevestikt/hviktor-angular';
   imports: [HviLabel],
   template: `
     <div class="flex flex-col gap-2">
-      <label hviLabel>Regular weight</label>
-      <label hviLabel weight="medium">Medium weight</label>
+      <label hviLabel weight="regular">Regular weight</label>
+      <label hviLabel weight="medium">Medium weight (default)</label>
       <label hviLabel weight="semibold">Semibold weight</label>
     </div>
   `,

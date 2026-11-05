@@ -14,7 +14,5 @@ import { HviAvatar } from '@helsevestikt/hviktor-angular';
     </div>
   \`,
 })
-export class AvatarVarianterExampleComponent {
-  
-}
+export class AvatarVarianterExampleComponent {}
 `;

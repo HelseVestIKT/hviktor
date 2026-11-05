@@ -3,8 +3,8 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   HviControlInvalid,
   HviField,
-  HviFieldset,
   HviFieldValidation,
+  HviFieldset,
   HviInput,
   HviLabel,
   HviParagraph,
@@ -16,8 +16,8 @@ import {
   imports: [
     HviControlInvalid,
     HviField,
-    HviFieldset,
     HviFieldValidation,
+    HviFieldset,
     HviInput,
     HviLabel,
     HviParagraph,

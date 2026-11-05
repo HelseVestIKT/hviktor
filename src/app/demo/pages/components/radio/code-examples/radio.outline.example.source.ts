@@ -1,7 +1,13 @@
 // Auto-generated - do not edit manually
 export const RadioOutlineExampleSource = `import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviParagraph } from '@helsevestikt/hviktor-angular';
+import {
+  HviField,
+  HviFieldDescription,
+  HviFieldset,
+  HviInput,
+  HviLabel,
+  HviParagraph,
+} from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-radio-outline-example',
@@ -11,8 +17,8 @@ import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviPara
     <fieldset hviFieldset>
       <legend hviLabel weight="medium">Hvordan ønsker du at vi kontakter deg?</legend>
       <p hviParagraph>
-        Velg metoden som passer best for deg. Vi bruker dette kun til å sende viktig informasjon
-        om saken din.
+        Velg metoden som passer best for deg. Vi bruker dette kun til å sende viktig informasjon om
+        saken din.
       </p>
       <hvi-field outline>
         <input hviInput type="radio" id="outline-epost" name="outline-kontakt" value="epost" />
@@ -31,14 +37,10 @@ import { HviField, HviFieldDescription, HviFieldset, HviInput, HviLabel, HviPara
       <hvi-field outline>
         <input hviInput type="radio" id="outline-brev" name="outline-kontakt" value="brev" />
         <label hviLabel for="outline-brev">Brev</label>
-        <span hviFieldDescription
-          >Levering kan ta 3–5 virkedager, avhengig av posttjenesten.</span
-        >
+        <span hviFieldDescription>Levering kan ta 3–5 virkedager, avhengig av posttjenesten.</span>
       </hvi-field>
     </fieldset>
   \`,
 })
-export class RadioOutlineExampleComponent {
-  bydelControl = new FormControl('', Validators.required);
-}
+export class RadioOutlineExampleComponent {}
 `;

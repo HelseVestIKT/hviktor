@@ -6,12 +6,6 @@ export const RequiredTagExamplesManifest = [
     className: 'RequiredTagModesExampleComponent',
     sourceExport: 'RequiredTagModesExampleSource',
   },
-  {
-    slug: 'eksempel',
-    title: 'Eksempel',
-    className: 'RequiredTagEksempelExampleComponent',
-    sourceExport: 'RequiredTagEksempelExampleSource',
-  },
 ] as const;
 
-export type RequiredTagExampleSlug = 'modes' | 'eksempel';
+export type RequiredTagExampleSlug = 'modes';

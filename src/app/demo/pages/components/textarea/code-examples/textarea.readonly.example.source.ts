@@ -8,14 +8,11 @@ import { HviField, HviInput, HviLabel } from '@helsevestikt/hviktor-angular';
   imports: [HviField, HviInput, HviLabel],
   template: \`
     <hvi-field>
-              <label hviLabel for="readonly-textarea" weight="medium">Vilkår</label>
-              <textarea hviInput id="readonly-textarea" rows="3" readOnly>
-    Dette er skrivebeskyttet innhold som brukeren kan lese men ikke endre.</textarea
-              >
-            </hvi-field>
+      <label hviLabel for="readonly-textarea" weight="medium">Vilkår</label>
+      <textarea hviInput id="readonly-textarea" rows="3" readOnly>
+    Dette er skrivebeskyttet innhold som brukeren kan lese men ikke endre.</textarea>
+    </hvi-field>
   \`,
 })
-export class TextareaReadonlyExampleComponent {
-  
-}
+export class TextareaReadonlyExampleComponent {}
 `;

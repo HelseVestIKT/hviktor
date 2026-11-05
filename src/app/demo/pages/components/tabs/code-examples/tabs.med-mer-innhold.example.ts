@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -37,6 +37,4 @@ import { HviTab, HviTabPanel, HviTabs } from '@helsevestikt/hviktor-angular';
     </hvi-tabs>
   `,
 })
-export class TabsMedMerInnholdExampleComponent {
-  selectedTab = signal('value1');
-}
+export class TabsMedMerInnholdExampleComponent {}

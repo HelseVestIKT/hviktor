@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { HviCard } from '@helsevestikt/hviktor-angular';
+import { HviCard, HviCardBlock, HviParagraph } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-card-farger-og-varianter-example',
   standalone: true,
-  imports: [HviCard],
+  imports: [HviCard, HviCardBlock, HviParagraph],
   template: `
     <div class="flex flex-wrap gap-4">
       <hvi-card color="accent" variant="default" maxWidth="220px">
