@@ -21,7 +21,7 @@ import { Directive } from '@angular/core';
  * </label>
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/chip}
+ * @see {@link https://hviktor.no/komponenter/chip}
  */
 @Directive({
   selector: 'label[hviChip]',

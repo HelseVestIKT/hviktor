@@ -14,7 +14,7 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
  * <button hviChip removable aria-label="Remove Norway">Norway</button>
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/chip}
+ * @see {@link https://hviktor.no/komponenter/chip}
  */
 @Directive({
   selector: 'button[hviChip]',

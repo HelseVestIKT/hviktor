@@ -43,7 +43,7 @@ import { HviTab } from './tab.component';
  * </hvi-tabs>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/tabs/overview}
+ * @see {@link https://hviktor.no/komponenter/tabs}
  */
 @Component({
   selector: 'hvi-tabs',

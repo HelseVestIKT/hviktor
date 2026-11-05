@@ -21,7 +21,7 @@ import { Directive, Input } from '@angular/core';
  * </fieldset>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/label/overview}
+ * @see {@link https://hviktor.no/komponenter/label}
  */
 @Directive({
   selector: 'label[hviLabel], legend[hviLabel]',

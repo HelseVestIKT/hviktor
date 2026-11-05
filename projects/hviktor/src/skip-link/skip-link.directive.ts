@@ -14,7 +14,7 @@ import { Directive, ElementRef, HostListener, inject } from '@angular/core';
  * </main>
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/skip-link}
+ * @see {@link https://hviktor.no/komponenter/skip-link}
  */
 @Directive({
   selector: 'a[hviSkipLink]',

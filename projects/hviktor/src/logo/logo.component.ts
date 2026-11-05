@@ -30,7 +30,7 @@ import { LogoDefinition, LogoSize } from './logo-types';
  * <hvi-logo company="dots" />
  * ```
  *
- * @see {@link https://helsevestikt.github.io/hviktor/komponenter/logo}
+ * @see {@link https://hviktor.no/komponenter/logo}
  */
 @Component({
   selector: 'hvi-logo',

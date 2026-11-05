@@ -21,7 +21,7 @@ import { Directive } from '@angular/core';
  * </ol>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/list}
+ * @see {@link https://hviktor.no/komponenter/list}
  */
 
 @Directive({

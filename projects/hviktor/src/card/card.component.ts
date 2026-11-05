@@ -37,7 +37,7 @@ import { Component, Input } from '@angular/core';
  * </hvi-card>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/card/code/}
+ * @see {@link https://hviktor.no/komponenter/card}
  */
 @Component({
   selector: 'hvi-card',

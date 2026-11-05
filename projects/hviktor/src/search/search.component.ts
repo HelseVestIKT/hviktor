@@ -43,7 +43,7 @@ import { Component } from '@angular/core';
  * </hvi-field>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/search}
+ * @see {@link https://hviktor.no/komponenter/search}
  */
 @Component({
   selector: 'hvi-search',

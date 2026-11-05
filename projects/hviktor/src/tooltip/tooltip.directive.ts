@@ -16,7 +16,7 @@ import '@digdir/designsystemet-web';
  * <span [hviTooltip]="erLaast() ? 'Feltet er låst' : ''">Status</span>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/tooltip/code}
+ * @see {@link https://hviktor.no/komponenter/tooltip}
  */
 @Directive({
   selector: '[hviTooltip]',

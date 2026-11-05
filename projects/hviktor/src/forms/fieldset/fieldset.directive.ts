@@ -73,7 +73,7 @@ export function optionalBooleanAttribute(value: unknown): boolean | undefined {
  * </fieldset>
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/fieldset}
+ * @see {@link https://hviktor.no/komponenter/fieldset}
  */
 @Directive({
   selector: 'fieldset[hviFieldset]',

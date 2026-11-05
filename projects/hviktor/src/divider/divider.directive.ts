@@ -13,7 +13,7 @@ import { Directive } from '@angular/core';
  * <hr hviDivider />
  * ```
  *
- * @see {@link https://designsystemet.no/komponenter/divider}
+ * @see {@link https://hviktor.no/komponenter/divider}
  */
 
 @Directive({

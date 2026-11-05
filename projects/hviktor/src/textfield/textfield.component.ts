@@ -74,7 +74,7 @@ let nextId = 0;
  * <hvi-textfield label="Antall" type="number" formControlName="antall"></hvi-textfield>
  * ```
  *
- * @see {@link https://designsystemet.no/en/components/docs/textfield/code}
+ * @see {@link https://hviktor.no/komponenter/textfield}
  */
 @Component({
   selector: 'hvi-textfield',

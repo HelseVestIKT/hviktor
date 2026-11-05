@@ -35,7 +35,7 @@ let nextGroupId = 0;
  * </hvi-toggle-group>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/toggle-group}
+ * @see {@link https://hviktor.no/komponenter/toggle-group}
  */
 @Component({
   selector: 'hvi-toggle-group',

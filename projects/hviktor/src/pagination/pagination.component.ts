@@ -13,10 +13,7 @@ import '@digdir/designsystemet-web';
 
 /** Type for hvert element i pagineringslisten */
 export type PaginationItem =
-  | { type: 'page'; page: number }
-  | { type: 'ellipsis' }
-  | { type: 'previous' }
-  | { type: 'next' };
+  { type: 'page'; page: number } | { type: 'ellipsis' } | { type: 'previous' } | { type: 'next' };
 
 /** Event som emitteres ved sideendring */
 export interface PageChangeEvent {
@@ -38,7 +35,7 @@ export interface PageChangeEvent {
  * />
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/pagination/code}
+ * @see {@link https://hviktor.no/komponenter/pagination}
  */
 @Component({
   selector: 'hvi-pagination',

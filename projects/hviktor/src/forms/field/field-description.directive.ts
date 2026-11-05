@@ -12,7 +12,7 @@ import { Directive } from '@angular/core';
  * </hvi-field>
  * ```
  *
- * @see {@link https://designsystemet.no/no/components/docs/field/code}
+ * @see {@link https://hviktor.no/komponenter/field}
  */
 @Directive({
   selector: '[hviFieldDescription]',

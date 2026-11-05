@@ -13,7 +13,7 @@ import { booleanAttribute, Directive, HostListener, Input } from '@angular/core'
  * </select>
  * ```
  *
- * Documentation: https://designsystemet.no/en/components/docs/select/code
+ * @see {@link https://hviktor.no/komponenter/select}
  */
 
 @Directive({

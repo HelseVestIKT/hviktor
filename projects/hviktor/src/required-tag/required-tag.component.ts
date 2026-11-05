@@ -20,6 +20,7 @@ export type RequiredTagMode = 'all-required' | 'required' | 'optional';
  * <hvi-required-tag mode="optional" />
  * <hvi-required-tag mode="all-required" />
  * ```
+ * @see {@link https://hviktor.no/komponenter/required-tag}
  */
 @Component({
   selector: 'hvi-required-tag',
