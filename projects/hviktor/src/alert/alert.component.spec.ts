@@ -18,6 +18,10 @@ describe('HviAlert', () => {
     expect(element.getAttribute('data-color')).toBeNull();
   });
 
+  it('should default to medium size', () => {
+    expect(element.getAttribute('data-size')).toBe('md');
+  });
+
   it('should set status role by default', () => {
     expect(element.getAttribute('role')).toBe('status');
   });
@@ -30,6 +34,12 @@ describe('HviAlert', () => {
     fixture.componentRef.setInput('color', 'danger');
     fixture.detectChanges();
     expect(element.getAttribute('data-color')).toBe('danger');
+  });
+
+  it('should reflect size input as data-size attribute', () => {
+    fixture.componentRef.setInput('size', 'lg');
+    fixture.detectChanges();
+    expect(element.getAttribute('data-size')).toBe('lg');
   });
 
   it('should map danger color to role alert', () => {

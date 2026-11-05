@@ -7,6 +7,12 @@ export const AlertExamplesManifest = [
     sourceExport: 'AlertVarianterExampleSource',
   },
   {
+    slug: 'storrelser',
+    title: 'Størrelser',
+    className: 'AlertStorrelserExampleComponent',
+    sourceExport: 'AlertStorrelserExampleSource',
+  },
+  {
     slug: 'med-tittel',
     title: 'Med tittel',
     className: 'AlertMedTittelExampleComponent',
@@ -20,4 +26,4 @@ export const AlertExamplesManifest = [
   },
 ] as const;
 
-export type AlertExampleSlug = 'varianter' | 'med-tittel' | 'uten-tittel';
+export type AlertExampleSlug = 'varianter' | 'storrelser' | 'med-tittel' | 'uten-tittel';
