@@ -58,6 +58,27 @@ form[hviForm] > * + * {
   padding-inline: var(--ds-size-2);
 }
 
+/*
+ * ds-suggestion i readonly: inputfeltet får .ds-input[readonly] fra Designsystemet,
+ * samme som hviSelect. Chipsene får de samme readonly-tokenene og mister
+ * fjern-ikonet, siden u-combobox uansett ignorerer klikk når inputen er readonly.
+ */
+.ds-suggestion:has(> input[readonly]) {
+  --dsc-suggestion-chip-background: var(--ds-color-neutral-surface-tinted);
+  --dsc-suggestion-chip-background--hover: var(--ds-color-neutral-surface-tinted);
+  --dsc-suggestion-chip-border-color: var(--ds-color-neutral-border-subtle);
+  --dsc-suggestion-chip-color: var(--ds-color-neutral-text-default);
+}
+
+.ds-suggestion:has(> input[readonly]) > data {
+  cursor: default;
+  padding-inline-end: var(--ds-size-3);
+}
+
+.ds-suggestion:has(> input[readonly]) > data::after {
+  display: none;
+}
+
 /* adding styling to lists that tailwind has removed */
 ol.ds-list {
   list-style-type: decimal;

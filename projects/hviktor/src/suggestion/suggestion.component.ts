@@ -123,6 +123,7 @@ let nextId = 0;
           type="text"
           [id]="inputId()"
           [disabled]="disabled()"
+          [readOnly]="readOnly()"
           [attr.name]="name()"
           [attr.placeholder]="placeholder()"
           [attr.aria-label]="label() ? null : ariaLabel()"
@@ -243,6 +244,12 @@ export class HviSuggestion<T = unknown> implements ControlValueAccessor {
   /** Deaktiverer feltet. Settes også av `formControlName`. */
   readonly disabled = model(false);
 
+  /**
+   * Viser valgt verdi uten at den kan endres. Feltet får samme
+   * readonly-stil som `hviSelect`, og valgte chips kan ikke fjernes.
+   */
+  readonly readOnly = input(false, { transform: booleanAttribute });
+
   /** Aria-label på tøm-knappen. */
   readonly clearLabel = input('Tøm');
 
@@ -326,7 +333,7 @@ export class HviSuggestion<T = unknown> implements ControlValueAccessor {
   }
 
   protected onFocus(event: Event): void {
-    if (this.completeOnFocus()) this.complete(event);
+    if (this.completeOnFocus() && !this.readOnly()) this.complete(event);
   }
 
   /**

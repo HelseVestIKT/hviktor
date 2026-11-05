@@ -5,6 +5,8 @@ export * from './suggestion.flervalg.example';
 export * from './suggestion.flervalg.example.source';
 export * from './suggestion.lange-lister.example';
 export * from './suggestion.lange-lister.example.source';
+export * from './suggestion.readonly.example';
+export * from './suggestion.readonly.example.source';
 export * from './suggestion.sok-i-backend.example';
 export * from './suggestion.sok-i-backend.example.source';
 export * from './suggestion.standard-suggestion.example';

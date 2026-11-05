@@ -15,6 +15,7 @@ import { SuggestionStandardSuggestionExampleSource } from './code-examples/sugge
 
 import { SuggestionLangeListerExampleSource } from './code-examples';
 import { SuggestionEgenMalForAlternativeneExampleSource } from './code-examples/suggestion.egen-mal-for-alternativene.example.source';
+import { SuggestionReadonlyExampleSource } from './code-examples/suggestion.readonly.example.source';
 import { SuggestionSokIBackendExampleSource } from './code-examples/suggestion.sok-i-backend.example.source';
 
 export interface Kommando {
@@ -39,7 +40,7 @@ export interface Sensor {
   imports: [DemoPageComponent, DemoSectionComponent, FormsModule, HviSuggestion, HviAlert, HviLink],
   template: `
     <app-demo-page componentId="suggestion">
-      <hvi-alert
+      <hvi-alert class="mb-4"
         >Suggestion er fortsatt under utvikling både her og i
 
         <a
@@ -124,6 +125,28 @@ export interface Sensor {
         </hvi-suggestion>
         <p>Valgt: {{ valgtKommando?.navn ?? 'ingen' }}</p>
       </app-demo-section>
+
+      <app-demo-section
+        title="ReadOnly"
+        [code]="readonlyCode"
+        description="Bruk readOnly når du vil vise valgte verdier som brukeren ikke kan endre. Feltet får samme stil som Select i readonly, og valgte chips kan ikke fjernes."
+      >
+        <hvi-suggestion
+          label="Sykehus"
+          placeholder="Søk etter sykehus"
+          [readOnly]="true"
+          [(ngModel)]="readonlySykehus"
+          [suggestions]="sykehus"
+        />
+        <hvi-suggestion
+          label="Sykehus"
+          placeholder="Søk etter sykehus"
+          [readOnly]="true"
+          [multiple]="true"
+          [(ngModel)]="readonlySykehuser"
+          [suggestions]="sykehus"
+        />
+      </app-demo-section>
     </app-demo-page>
   `,
 })
@@ -133,8 +156,22 @@ export class SuggestionDemoComponent {
   readonly backendSokCode = SuggestionSokIBackendExampleSource;
   readonly langeListerCode = SuggestionLangeListerExampleSource;
   readonly egenMalForAlternativeneCode = SuggestionEgenMalForAlternativeneExampleSource;
+  readonly readonlyCode = SuggestionReadonlyExampleSource;
 
   readonly kommuner = ['Sogndal', 'Bergen', 'Oslo', 'Stavanger', 'Trondheim'];
+
+  readonly sykehus = [
+    'Haukeland universitetssjukehus',
+    'Stavanger universitetssjukehus',
+    'Haugesund sjukehus',
+    'Førde sentralsjukehus',
+  ];
+
+  readonlySykehus: string | null = 'Haukeland universitetssjukehus';
+  readonlySykehuser: string[] = [
+    'Haukeland universitetssjukehus',
+    'Stavanger universitetssjukehus',
+  ];
 
   kommune: string | null = 'Bergen';
   valgteKommuner: string[] = ['Bergen'];
