@@ -340,6 +340,59 @@ describe('HviSuggestionMultiple', () => {
     expect(chips).toEqual(['Bergen', 'Oslo']);
   });
 
+  describe('text that is not an option', () => {
+    /** Simulates u-combobox asking to add an item. Returns whether it was allowed. */
+    const beforeSelect = (f: ComponentFixture<unknown>, value: string, label: string) => {
+      const data = document.createElement('data');
+      data.value = value;
+      data.textContent = label;
+      return combobox(f).dispatchEvent(
+        new CustomEvent('comboboxbeforeselect', { bubbles: true, cancelable: true, detail: data }),
+      );
+    };
+
+    it('should stop the empty option from being added without creatable', async () => {
+      const f = TestBed.createComponent(MultipleFormHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      expect(beforeSelect(f, '', 'tull')).toBe(false);
+      expect(beforeSelect(f, 'Bergen', 'Bergen')).toBe(true);
+    });
+
+    it('should always allow removing a chip', async () => {
+      const f = TestBed.createComponent(MultipleFormHost);
+      f.componentInstance.kommuner$.setValue(['Bergen']);
+      f.detectChanges();
+      await f.whenStable();
+
+      const chip = combobox(f).querySelector(':scope > data');
+      const allowed = combobox(f).dispatchEvent(
+        new CustomEvent('comboboxbeforeselect', { bubbles: true, cancelable: true, detail: chip }),
+      );
+      expect(allowed).toBe(true);
+    });
+
+    it('should drop items that are not options without creatable', async () => {
+      const f = TestBed.createComponent(MultipleFormHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      commitSelection(f, '', 'tull');
+      await f.whenStable();
+      expect(f.componentInstance.kommuner$.value).toEqual([]);
+      expect(combobox(f).querySelector(':scope > data')).toBeNull();
+    });
+
+    it('should allow new text with creatable', async () => {
+      const f = TestBed.createComponent(CreatableHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      expect(beforeSelect(f, 'Nyby', 'Nyby')).toBe(true);
+    });
+  });
+
   it('should create new objects with createOption', async () => {
     const f = TestBed.createComponent(CreatableHost);
     f.detectChanges();
