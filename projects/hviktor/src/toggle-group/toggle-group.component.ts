@@ -10,6 +10,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HviToggleGroupItem } from './toggle-group-item.directive';
 
+/** Allowed value types for HviToggleGroup and HviToggleGroupItem */
+export type HviToggleGroupValue = string | number;
+
 let nextGroupId = 0;
 
 /**
@@ -82,17 +85,17 @@ export class HviToggleGroup implements ControlValueAccessor {
   readonly _name = signal(`togglegroup-name-${++nextGroupId}`);
 
   /** The currently selected value */
-  private readonly _value = signal<string | undefined>(undefined);
+  private readonly _value = signal<HviToggleGroupValue | undefined>(undefined);
 
   /** Event emitted when value changes */
-  @Output() valueChange = new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<HviToggleGroupValue>();
 
   // ControlValueAccessor callbacks
-  private onChange: (value: string) => void = () => {};
+  private onChange: (value: HviToggleGroupValue) => void = () => {};
   private onTouched: () => void = () => {};
 
   @Input()
-  set value(val: string | undefined) {
+  set value(val: HviToggleGroupValue | undefined) {
     this._value.set(val);
     this.updateItemStates();
   }
@@ -220,14 +223,14 @@ export class HviToggleGroup implements ControlValueAccessor {
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: string): void {
+  writeValue(value: HviToggleGroupValue | undefined): void {
     this._value.set(value);
     this.updateItemStates();
     const match = this.registeredItems.find((i) => i.value === value);
     if (match) this.updateFocusableItem(match);
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: HviToggleGroupValue) => void): void {
     this.onChange = fn;
   }
 

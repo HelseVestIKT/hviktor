@@ -10,7 +10,7 @@ import {
   Renderer2,
   signal,
 } from '@angular/core';
-import { HviToggleGroup } from './toggle-group.component';
+import { HviToggleGroup, HviToggleGroupValue } from './toggle-group.component';
 
 let nextId = 0;
 
@@ -23,6 +23,12 @@ let nextId = 0;
  * <hvi-toggle-group [(value)]="selected">
  *   <label hviToggleGroupItem value="option1">Option 1</label>
  *   <label hviToggleGroupItem value="option2">Option 2</label>
+ * </hvi-toggle-group>
+ *
+ * <!-- Number values -->
+ * <hvi-toggle-group [(value)]="selectedNumber">
+ *   <label hviToggleGroupItem [value]="0">Null</label>
+ *   <label hviToggleGroupItem [value]="1">En</label>
  * </hvi-toggle-group>
  * ```
  *
@@ -61,15 +67,15 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
   readonly id = `togglegroup-item-${++nextId}`;
 
   /** The value of this toggle item */
-  private _value = '';
+  private _value: HviToggleGroupValue = '';
 
   @Input({ required: true })
-  set value(val: string) {
+  set value(val: HviToggleGroupValue) {
     this._value = val;
     this.syncNativeInputState();
   }
 
-  get value(): string {
+  get value(): HviToggleGroupValue {
     return this._value;
   }
 
@@ -181,7 +187,7 @@ export class HviToggleGroupItem implements OnInit, OnDestroy {
   private syncNativeInputState(): void {
     if (!this.inputElement) return;
     this.inputElement.name = this.group._name();
-    this.inputElement.value = this.value;
+    this.inputElement.value = String(this.value);
     this.inputElement.checked = this.isSelected();
     this.inputElement.tabIndex = -1;
     this.inputElement.disabled = this.group._disabled();
