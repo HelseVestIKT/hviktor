@@ -63,7 +63,11 @@ export interface Sensor {
         og kan derfor ikke anses som ferdig</hvi-alert
       >
 
-      <app-demo-section title="Standard Suggestion" [code]="standardSuggestionCode">
+      <app-demo-section
+        title="Standard Suggestion"
+        [code]="standardSuggestionCode"
+        description="Bruk hvi-suggestion når brukeren skal velge ett alternativ. Verdien er alternativet som er valgt, eller null. Pila til høyre åpner og lukker lista, og «Ingen treff» vises når ingenting matcher (emptyText)."
+      >
         <hvi-suggestion
           label="Velg en kommune"
           placeholder="Skriv for å søke..."
@@ -73,7 +77,11 @@ export interface Sensor {
         <p>Valgt: {{ kommune ?? 'ingen' }}</p>
       </app-demo-section>
 
-      <app-demo-section title="Flervalg" [code]="flervalgCode">
+      <app-demo-section
+        title="Flervalg"
+        [code]="flervalgCode"
+        description="Bruk hvi-suggestion-multiple når brukeren kan velge flere alternativer. Verdien er alltid en liste, og en tom liste når ingenting er valgt. Valgte alternativer vises som chips og kan fjernes med klikk eller med Enter etter å ha navigert til venstre fra feltet."
+      >
         <hvi-suggestion-multiple
           label="Velg kommuner"
           placeholder="Skriv for å søke..."
@@ -101,7 +109,11 @@ export interface Sensor {
         <p>Valgt: {{ beskrivKommuner(egneKommuner) }}</p>
       </app-demo-section>
 
-      <app-demo-section title="Søk i backend" [code]="backendSokCode">
+      <app-demo-section
+        title="Søk i backend"
+        [code]="backendSokCode"
+        description="Sett filter til false og oppdater suggestions når completeMethod sendes. Den sendes når brukeren skriver eller tømmer feltet, men ikke når et forslag velges. Mens loading er satt og det ikke finnes forslag, vises «Søker …» (loadingText)."
+      >
         <hvi-suggestion
           label="Søk etter kommune"
           description="Søket kjøres mot et API. Skriv minst to tegn."
