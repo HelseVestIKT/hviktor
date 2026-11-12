@@ -1,6 +1,10 @@
 {
   "$schema": "https://designsystemet.no/schemas/config/latest.json",
-  "outDir": "./design-tokens",
+  "output": [
+    { "type": "design-tokens", "dir": "./design-tokens", "cleanDir": true },
+    { "type": "css", "dir": "./projects/hviktor/src/design-tokens-build", "cleanDir": true },
+    { "type": "types", "dir": "./projects/hviktor/src/design-tokens-build", "cleanDir": true }
+  ],
   "themes": {
     "hvikt": {
       "colors": {

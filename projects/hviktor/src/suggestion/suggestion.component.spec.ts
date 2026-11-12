@@ -171,6 +171,16 @@ const commitSelection = (f: ComponentFixture<unknown>, value: string, label: str
   combobox(f).dispatchEvent(new CustomEvent('comboboxafterselect', { bubbles: true }));
 };
 
+/** Simulates u-combobox asking to add an item. Returns whether it was allowed. */
+const beforeSelect = (f: ComponentFixture<unknown>, value: string, label: string) => {
+  const data = document.createElement('data');
+  data.value = value;
+  data.textContent = label;
+  return combobox(f).dispatchEvent(
+    new CustomEvent('comboboxbeforeselect', { bubbles: true, cancelable: true, detail: data }),
+  );
+};
+
 describe('HviSuggestion', () => {
   beforeEach(async () => {
     await setupTestBed({
@@ -207,6 +217,27 @@ describe('HviSuggestion', () => {
         .forEach((el) => el.remove());
       commitSelection(f, OSLO.nummer, OSLO.navn);
       expect(f.componentInstance.kommune.value).toBe(OSLO);
+    });
+  });
+
+  describe('text that is not an option', () => {
+    it('should stop the empty option from being selected', async () => {
+      const f = TestBed.createComponent(SingleFormHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      expect(beforeSelect(f, '', 'tull')).toBe(false);
+      expect(beforeSelect(f, OSLO.nummer, OSLO.navn)).toBe(true);
+    });
+
+    it('should keep the selected option when an unknown item is committed', async () => {
+      const f = TestBed.createComponent(SingleFormHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      commitSelection(f, '', 'tull');
+      await f.whenStable();
+      expect(f.componentInstance.kommune.value).toBe(BERGEN);
     });
   });
 
@@ -338,6 +369,49 @@ describe('HviSuggestionMultiple', () => {
       el.textContent?.trim(),
     );
     expect(chips).toEqual(['Bergen', 'Oslo']);
+  });
+
+  describe('text that is not an option', () => {
+    it('should stop the empty option from being added without creatable', async () => {
+      const f = TestBed.createComponent(MultipleFormHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      expect(beforeSelect(f, '', 'tull')).toBe(false);
+      expect(beforeSelect(f, 'Bergen', 'Bergen')).toBe(true);
+    });
+
+    it('should always allow removing a chip', async () => {
+      const f = TestBed.createComponent(MultipleFormHost);
+      f.componentInstance.kommuner$.setValue(['Bergen']);
+      f.detectChanges();
+      await f.whenStable();
+
+      const chip = combobox(f).querySelector(':scope > data');
+      const allowed = combobox(f).dispatchEvent(
+        new CustomEvent('comboboxbeforeselect', { bubbles: true, cancelable: true, detail: chip }),
+      );
+      expect(allowed).toBe(true);
+    });
+
+    it('should drop items that are not options without creatable', async () => {
+      const f = TestBed.createComponent(MultipleFormHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      commitSelection(f, '', 'tull');
+      await f.whenStable();
+      expect(f.componentInstance.kommuner$.value).toEqual([]);
+      expect(combobox(f).querySelector(':scope > data')).toBeNull();
+    });
+
+    it('should allow new text with creatable', async () => {
+      const f = TestBed.createComponent(CreatableHost);
+      f.detectChanges();
+      await f.whenStable();
+
+      expect(beforeSelect(f, 'Nyby', 'Nyby')).toBe(true);
+    });
   });
 
   it('should create new objects with createOption', async () => {

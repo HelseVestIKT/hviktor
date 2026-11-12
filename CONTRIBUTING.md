@@ -124,19 +124,19 @@ docs: update README with new examples
 
 Temaet «hvikt» er bygget med [Designsystemets Temabygger](https://theme.designsystemet.no/) og følger med npm-pakken.
 
-| Sti                                         | Rolle                                                                      |
-| ------------------------------------------- | -------------------------------------------------------------------------- |
+| Sti                                         | Rolle                                                                          |
+| ------------------------------------------- | ------------------------------------------------------------------------------ |
 | `designsystemet.config.json`                | Kilden til temaets farger og `borderRadius`; fonten overstyres i `styles.css`. |
-| `design-tokens/`                            | Genererte design tokens. Dette er mappen Tokens Studio i Figma synker mot. |
-| `projects/hviktor/src/design-tokens-build/` | Generert CSS og typer. Byggeartefakt — gitignored og skal ikke redigeres.  |
+| `design-tokens/`                            | Genererte design tokens. Dette er mappen Tokens Studio i Figma synker mot.     |
+| `projects/hviktor/src/design-tokens-build/` | Generert CSS og typer. Byggeartefakt — gitignored og skal ikke redigeres.      |
 
 ### Endre temaet
 
-1. Generer et nytt tema i Temabyggeren og lim config-en inn i `designsystemet.config.json`.
-2. Kjør `npm run tokens` (kjører både `tokens:create` og `tokens:build`).
+1. Generer et nytt tema i Temabyggeren og lim `themes` inn i `designsystemet.config.json`. Behold `output`-feltet, som styrer hvor tokens, CSS og typer havner.
+2. Kjør `npm run tokens`.
 3. Commit endringene i `designsystemet.config.json` og `design-tokens/`.
 
-`tokens:build` kjøres automatisk før `build:lib`, så CSS-en er alltid i sync med tokens.
+`npm run tokens` kjøres automatisk før `build:lib`, så tokens og CSS er alltid i sync med config-fila.
 
 Design tokens og generert CSS skal **aldri** redigeres direkte — Digdir regner dem som implementasjonsdetaljer, og endringene forsvinner ved neste `npm run tokens`. Alle tilpasninger gjøres i config-fila. Av samme grunn ligger begge mappene i `.prettierignore`.
 

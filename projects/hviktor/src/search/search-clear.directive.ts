@@ -1,14 +1,16 @@
-import { Directive, ElementRef, HostListener, inject } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 /**
  * @summary
  * SearchClear is a button directive for clearing the search input.
  * It automatically finds the input field inside the parent `hvi-search` component and clears it.
+ * Native reset is prevented: it would not update `ngModel`/`formControl`, and inside a form
+ * it would reset every field. Instead the input is cleared and an `input` event is dispatched.
  *
  * @example
  * ```html
  * <hvi-search>
- *   <input hviInput type="search" placeholder="" aria-label="Søk" />
+ *   <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
  *   <button hviSearchClear type="reset" aria-label="Tøm"></button>
  *   <button hviButton variant="primary" type="submit">Søk</button>
  * </hvi-search>
@@ -24,17 +26,16 @@ import { Directive, ElementRef, HostListener, inject } from '@angular/core';
     '[attr.data-icon]': '"true"',
     '[attr.data-variant]': '"tertiary"',
     type: 'reset',
+    '(click)': 'onClick($event)',
   },
 })
 export class HviSearchClear {
   private readonly elementRef = inject(ElementRef<HTMLButtonElement>);
 
-  @HostListener('click', ['$event'])
   onClick(event: Event): void {
-    // Prevent default reset behavior (only works in forms anyway)
     event.preventDefault();
 
-    const searchContainer = this.elementRef.nativeElement.closest('.ds-search');
+    const searchContainer = this.elementRef.nativeElement.closest('.hvi-search');
     if (!searchContainer) return;
 
     const input = searchContainer.querySelector('input') as HTMLInputElement | null;

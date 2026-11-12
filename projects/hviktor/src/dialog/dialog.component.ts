@@ -1,4 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, Output, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  inject,
+} from '@angular/core';
 import { HviButton } from '../button';
 import { HviHeading } from '../heading';
 
@@ -13,7 +22,9 @@ import { HviHeading } from '../heading';
  * - **Non-modal**: Displays above content but allows interaction with the rest of the page
  *
  * Use `title` to set a visible heading and accessible name at the same time.
- * When no `title` is set, the dialog falls back to `aria-label="Dialogboks"`.
+ * Without `title`, the dialog is named by your own `aria-label` or `aria-labelledby`, or else
+ * by the first heading (h2–h6) in the content, like Designsystemet does. Only when there is
+ * no heading either does it fall back to `aria-label="Dialogboks"`.
  *
  * Use `placement` to display the dialog as a drawer from any side (left, right, top, bottom) instead of centered.
  * Use `closedby="any"` to allow closing by clicking outside the dialog.
@@ -66,11 +77,11 @@ import { HviHeading } from '../heading';
   host: {
     class: 'ds-dialog',
     '[attr.id]': 'id',
-    '[attr.aria-label]': 'title || "Dialogboks"',
     '[attr.data-placement]': 'placement === "center" ? null : placement',
     '[attr.data-modal]': 'modal',
     '[attr.closedby]': 'closedby',
     '(close)': 'handleClose()',
+    '(toggle)': 'handleToggle($event)',
     '(cancel)': 'handleCancel($event)',
     '(pointerdown)': 'onPointerDown($event)',
     '(pointercancel)': 'resetBackdropPress()',
@@ -98,7 +109,7 @@ import { HviHeading } from '../heading';
   `,
   imports: [HviButton, HviHeading],
 })
-export class HviDialog {
+export class HviDialog implements OnChanges, AfterViewInit {
   /**
    * Optional `id` attribute for the dialog element.
    * Use this when triggering the dialog from external controls or for accessibility.
@@ -109,8 +120,9 @@ export class HviDialog {
 
   /**
    * Visible title rendered as an `<h2>` inside the dialog, and used as the accessible name
-   * (`aria-label`) for the dialog element. When omitted, `aria-label="Dialogboks"` is used
-   * as a fallback and no heading is rendered.
+   * (`aria-label`) for the dialog element. When omitted, no heading is rendered, and the
+   * accessible name comes from your own `aria-label`/`aria-labelledby` or the first heading
+   * in the content, with `aria-label="Dialogboks"` as the last fallback.
    *
    * @type {string | undefined}
    */
@@ -183,6 +195,19 @@ export class HviDialog {
 
   private readonly element = inject(ElementRef<HTMLDialogElement>).nativeElement;
   private pressStartedOnBackdrop = false;
+  /**
+   * The `aria-label` this component last wrote. Any other `aria-label` belongs to the
+   * consumer and is kept, also when it is added or changed after the dialog was created.
+   */
+  private generatedAriaLabel: string | null = null;
+
+  ngOnChanges(): void {
+    this.updateAccessibleName();
+  }
+
+  ngAfterViewInit(): void {
+    this.updateAccessibleName();
+  }
 
   get closeButtonAriaLabel(): string {
     return typeof this.closeButton === 'string' ? this.closeButton : 'Lukk dialogvindu';
@@ -212,6 +237,14 @@ export class HviDialog {
   handleClose(): void {
     this.resetBackdropPress();
     this.openChange.emit(false);
+  }
+
+  /**
+   * @internal Handles the native 'toggle' event. Updates the accessible name when the dialog
+   * opens, also when opened outside this component (for example with invoker commands).
+   */
+  handleToggle(event: Event): void {
+    if ((event as ToggleEvent).newState === 'open') this.updateAccessibleName();
   }
 
   /**
@@ -260,12 +293,34 @@ export class HviDialog {
     );
   }
 
+  /**
+   * Sets `aria-label` from `title`, or else from the first heading in the content, or else
+   * «Dialogboks». A name the consumer set (`aria-label` or `aria-labelledby`) is kept.
+   * The heading is read again on every open, since the content may have changed.
+   */
+  private updateAccessibleName(): void {
+    const dialog = this.element;
+    const current = dialog.getAttribute('aria-label');
+    const consumerNamed =
+      dialog.hasAttribute('aria-labelledby') ||
+      (!!current?.trim() && current !== this.generatedAriaLabel);
+    if (consumerNamed) return;
+
+    const heading = dialog.querySelector('h2, h3, h4, h5, h6')?.textContent?.trim();
+    const name = this.title || heading || 'Dialogboks';
+    dialog.setAttribute('aria-label', name);
+    this.generatedAriaLabel = name;
+  }
+
   private setOpen(shouldOpen: boolean): void {
     this.resetBackdropPress();
     if (shouldOpen) {
       if (this.element.open) {
         return;
       }
+
+      // Before opening, so Designsystemet does not warn about a missing name.
+      this.updateAccessibleName();
 
       if (this.modal) {
         this.element.showModal();

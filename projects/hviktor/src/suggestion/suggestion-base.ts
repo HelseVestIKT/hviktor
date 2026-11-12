@@ -61,9 +61,10 @@ export interface HviSuggestionSrText {
 }
 
 /**
- * Decodes CSS escapes (`\e5 ` → `å`). Designsystemet's CSS is built with non-ASCII
- * characters escaped, and designsystemet-web reads the CSS variables without
- * decoding them. Without this, screen readers announce «Trykk for backslash e5 fjerne».
+ * Decodes CSS escapes (`\e5 ` → `å`). Designsystemet ships the texts unescaped, but the
+ * Angular build (esbuild) escapes non-ASCII characters in the bundled CSS, and
+ * designsystemet-web reads the CSS variables without decoding them. Without this,
+ * screen readers announce «Trykk for backslash e5 fjerne».
  */
 const unescapeCss = (text: string): string =>
   text.replace(/\\([0-9a-fA-F]{1,6})\s?/g, (_, hex: string) =>
@@ -105,6 +106,7 @@ export const HVI_SUGGESTION_TEMPLATE = `
     <ds-suggestion
       #combobox
       class="ds-suggestion"
+      (comboboxbeforeselect)="beforeSelect($event)"
       (comboboxafterselect)="readFromDom()"
       [attr.data-multiple]="multiple ? '' : undefined"
       [attr.data-creatable]="creatable() ? '' : undefined"
@@ -450,14 +452,32 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     }
   }
 
+  /**
+   * Stops text that is not an option from being added when `creatable` is not set.
+   * Designsystemet sets the typed text as `label` on the empty option («Ingen treff»),
+   * so u-combobox treats it as a match when the user presses Enter.
+   */
+  protected beforeSelect(event: Event): void {
+    if (this.creatable()) return;
+
+    const item = (event as CustomEvent<HTMLDataElement | undefined>).detail;
+    // An item already in the DOM is a chip being removed. That is always allowed.
+    if (!item || item.isConnected) return;
+
+    if (this.resolve(item.value) === undefined) event.preventDefault();
+  }
+
   /** Reads the `<data>` elements back after the user has changed the selection. */
   protected readFromDom(): void {
     const combobox = this.comboboxRef()?.nativeElement;
     if (!combobox) return;
 
-    const options = Array.from(combobox.items).map((data) => {
+    // Without `creatable`, items that are not options are dropped. writeToDom then removes them.
+    const options = Array.from(combobox.items).flatMap((data) => {
       const label = data.textContent?.trim() ?? '';
-      return this.resolve(data.value || label) ?? this.create(label);
+      const option = this.resolve(data.value || label);
+      if (option !== undefined) return [option];
+      return this.creatable() ? [this.create(label)] : [];
     });
 
     const value = this.fromArray(options);

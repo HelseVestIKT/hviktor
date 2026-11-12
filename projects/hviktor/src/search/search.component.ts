@@ -9,13 +9,19 @@ import { Component } from '@angular/core';
  * Use `hviSearchClear` for the clear button.
  * Use `hviButton` for the submit button.
  *
- * Important: Add an empty `placeholder=""` on the input if you have a clear button.
+ * Important: Add `placeholder=" "` on the input if you have a clear button. The clear button
+ * is only shown when the field has text, which relies on `:placeholder-shown`. A space gives
+ * no visible placeholder text. Add `enterkeyhint="search"` to show a search key on mobile
+ * keyboards.
+ *
+ * Designsystemet deprecated Search in 1.24 and removes it in v2. `hvi-search` therefore
+ * ships its own styles (the `hvi-search` class in `styles.css`) instead of `ds-search`.
  *
  * @example
  * Basic search with clear and submit button:
  * ```html
  * <hvi-search>
- *   <input hviInput type="search" placeholder="" aria-label="Søk" />
+ *   <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
  *   <button hviSearchClear type="reset" aria-label="Tøm"></button>
  *   <button hviButton variant="primary" type="submit">Søk</button>
  * </hvi-search>
@@ -25,7 +31,7 @@ import { Component } from '@angular/core';
  * Search without submit button:
  * ```html
  * <hvi-search>
- *   <input hviInput type="search" placeholder="" aria-label="Søk" />
+ *   <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
  *   <button hviSearchClear type="reset" aria-label="Tøm"></button>
  * </hvi-search>
  * ```
@@ -36,7 +42,7 @@ import { Component } from '@angular/core';
  * <hvi-field>
  *   <label hviLabel>Søk etter katter</label>
  *   <hvi-search>
- *     <input hviInput type="search" placeholder="" name="cat-search" />
+ *     <input hviInput type="search" placeholder=" " enterkeyhint="search" name="cat-search" />
  *     <button hviSearchClear type="reset" aria-label="Tøm"></button>
  *     <button hviButton variant="primary" type="submit">Søk</button>
  *   </hvi-search>
@@ -51,7 +57,7 @@ import { Component } from '@angular/core';
   template: '<ng-content />',
   styles: [':host { display: grid; margin-block: var(--ds-size-1); }'],
   host: {
-    class: 'ds-search',
+    class: 'hvi-search',
   },
 })
 export class HviSearch {}
