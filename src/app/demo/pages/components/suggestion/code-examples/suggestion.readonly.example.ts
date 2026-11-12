@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HviSuggestion } from '@helsevestikt/hviktor-angular';
+import { HviSuggestion, HviSuggestionMultiple } from '@helsevestikt/hviktor-angular';
 
 @Component({
   selector: 'app-suggestion-readonly-example',
   standalone: true,
-  imports: [FormsModule, HviSuggestion],
+  imports: [FormsModule, HviSuggestion, HviSuggestionMultiple],
   template: `
     <hvi-suggestion
       label="Sykehus"
@@ -14,11 +14,10 @@ import { HviSuggestion } from '@helsevestikt/hviktor-angular';
       [(ngModel)]="readonlySykehus"
       [suggestions]="sykehus"
     />
-    <hvi-suggestion
+    <hvi-suggestion-multiple
       label="Sykehus"
       placeholder="Søk etter sykehus"
       [readOnly]="true"
-      [multiple]="true"
       [(ngModel)]="readonlySykehuser"
       [suggestions]="sykehus"
     />

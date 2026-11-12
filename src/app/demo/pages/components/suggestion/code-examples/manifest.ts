@@ -13,6 +13,12 @@ export const SuggestionExamplesManifest = [
     sourceExport: 'SuggestionFlervalgExampleSource',
   },
   {
+    slug: 'legg-til-nye-alternativer',
+    title: 'Legg til nye alternativer',
+    className: 'SuggestionLeggTilNyeAlternativerExampleComponent',
+    sourceExport: 'SuggestionLeggTilNyeAlternativerExampleSource',
+  },
+  {
     slug: 'sok-i-backend',
     title: 'Søk i backend',
     className: 'SuggestionSokIBackendExampleComponent',
@@ -41,6 +47,7 @@ export const SuggestionExamplesManifest = [
 export type SuggestionExampleSlug =
   | 'standard-suggestion'
   | 'flervalg'
+  | 'legg-til-nye-alternativer'
   | 'sok-i-backend'
   | 'lange-lister'
   | 'egen-mal-for-alternativene'
