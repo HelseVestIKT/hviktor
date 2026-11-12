@@ -4,6 +4,58 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.5.1] – 2026-11-12
+
+### @helsevestikt/hviktor-angular
+
+#### Added
+
+- Alert: Lagt til input size.
+
+- ToggleGroup: Støtter nå både `string` og `number` som verdi, f.eks. `[value]="0"`. Typen på `value`/`valueChange` utledes fra det du binder til `[value]`/`[(value)]`, så eksisterende bruk med strenger fungerer som før. Verdiene sammenlignes strengt, så `[value]="0"` matcher ikke `value="0"`.
+
+- SuggestionMultiple: Ny komponent `<hvi-suggestion-multiple>` for flervalg. Verdien er alltid en liste (`T[]`), og en tom liste når ingenting er valgt.
+
+- Suggestion: Viser «Ingen treff» når ingen alternativer matcher (`emptyText`), og «Søker …» mens `loading` er satt og det ikke finnes forslag (`loadingText`).
+
+- Suggestion: Åpne/lukk-knapp til høyre i feltet. Pila snus når lista er åpen, og knappen kan klikkes for å lukke lista. Når feltet har tekst, vises tøm-knappen i stedet.
+
+- Suggestion: `createOption` lager et nytt alternativ av teksten brukeren skriver når `creatable` er satt. Påkrevd når alternativene er objekter.
+
+- Suggestion: `createText` overstyrer teksten på «Legg til»-valget når `creatable` er satt.
+
+- Suggestion: Advarsel i konsollen i dev-modus når alternativene er objekter uten `optionLabel`, og når `creatable` brukes med objekter uten `createOption`.
+
+#### Changed
+
+- **Brekkende endring**: Suggestion er delt i to komponenter. `<hvi-suggestion>` er nå bare enkeltvalg med verdi `T | null`, og `multiple`-input er fjernet. Bytt `<hvi-suggestion [multiple]="true">` til `<hvi-suggestion-multiple>` og importer `HviSuggestionMultiple`. Tomt flervalg gir nå `[]` i stedet for `null`.
+
+- **Brekkende endring**: Suggestion bruker Designsystemets norske skjermlesertekster. `HVI_SUGGESTION_SR_TEXT` og `clearLabel` er fjernet. Bruk `srText.clear` i stedet for `clearLabel`. Tøm-knappen heter nå «Fjern tekst» som standard. `srText` overstyrer bare tekstene som settes, og støtter nå også `clear`, `toggle`, `plural` og `singular`.
+
+- Oppdatert `@digdir/designsystemet-css`, `-web` og `-types` til 1.24. Se [Designsystemets releasenotes](https://github.com/digdir/designsystemet/releases/tag/v1.24.0) for endringer i stil, blant annet at elementer med `data-color` nå får tekstfarge fra fargen, og mindre avrundede hjørner på Alert, Error summary og Table.
+
+- Suggestion: Designsystemet har fått engelske skjermlesertekster som standard. Norske tekster brukes når siden har `lang="no"`, `lang="nb"` eller `lang="nn"`, så sjekk at `<html>` har riktig `lang`.
+
+- Search: Designsystemet har faset ut Search og fjerner den i neste hovedversjon. `hvi-search` har nå egen stil og fungerer videre. Klassen er endret fra `ds-search` til `hvi-search`, så egen CSS som overstyrer `.ds-search` må oppdateres.
+
+- Search: Tømmeknappen vises bare når feltet har tekst. Legg til `placeholder=" "` på feltet for at dette skal virke. Eksemplene viser også `enterkeyhint="search"`, som gir søketast på mobil.
+
+- Dialog: Uten `title` får dialogen nå navn fra første overskrift (h2–h6) i innholdet, som i Designsystemet. «Dialogboks» brukes bare når det ikke finnes noen overskrift.
+
+- Dialog: Eget `aria-label` eller `aria-labelledby` på dialogen overstyrer nå `title` som tilgjengelig navn. Tidligere ble det overskrevet.
+
+#### Fixed
+
+- Suggestion: `completeMethod` ble sendt en ekstra gang med teksten fra `optionLabel` når et forslag ble valgt i enkeltvalg. Nå sendes den bare når brukeren skriver eller tømmer feltet. (#428)
+
+- Suggestion: Med `creatable` ble nye verdier strenger selv om alternativene var objekter. Bruk `createOption`.
+
+- Suggestion: Skjermlesertekster med «å» ble lest opp som «\e5» fordi Designsystemets CSS-variabler ikke ble gjort om.
+
+### @helsevestikt/hviktor-icons
+
+Ingen endringer i denne releasen.
+
 ## [0.5.0] – 2026-11-05
 
 ### @helsevestikt/hviktor-angular
