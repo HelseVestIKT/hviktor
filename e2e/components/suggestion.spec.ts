@@ -128,6 +128,21 @@ test.describe('Suggestion', () => {
     });
   });
 
+  test.describe('skjermlesertekster', () => {
+    test('bruker Designsystemets norske standardtekster', async ({ page }) => {
+      const s = section(page, 'Flervalg');
+      await expect(toggle(s)).toHaveAttribute('aria-label', 'Forslag');
+      await expect(chips(s).first()).toHaveAttribute('aria-label', /Trykk for å fjerne/);
+      await expect(input(s)).toHaveAttribute('aria-description', /for å finne 1 valgte/);
+
+      await type(s, 'Os');
+      await expect(s.locator('ds-suggestion button[type="reset"]')).toHaveAttribute(
+        'aria-label',
+        'Fjern tekst',
+      );
+    });
+  });
+
   test.describe('åpne/lukk-knapp', () => {
     test('åpner og lukker lista, og snur pila', async ({ page }) => {
       const s = section(page, 'Flervalg');
@@ -203,6 +218,16 @@ test.describe('Suggestion', () => {
 
       await option(s, 'Trondheim').click();
       await expect(valgt(s)).toHaveText('Valgt: Trondheim');
+    });
+
+    test('viser «Søker …» og deretter «Ingen treff» når søket ikke gir treff', async ({ page }) => {
+      const s = section(page, 'Søk i backend');
+      const tom = s.locator('u-option[data-empty]');
+      await type(s, 'Kopervik');
+      await expect(tom).toBeVisible();
+      await expect(tom).toHaveText('Søker …');
+      await expect(tom).toHaveText('Ingen treff');
+      await expect(tom).toBeVisible();
     });
 
     test('tøm-knappen nullstiller søket', async ({ page }) => {

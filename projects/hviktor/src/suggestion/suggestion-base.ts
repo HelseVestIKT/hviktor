@@ -29,29 +29,61 @@ export interface HviSuggestionCompleteEvent {
   query: string;
 }
 
-/** Skjermlesertekster brukt av `<u-combobox>`. */
+/**
+ * Skjermlesertekster brukt av `<u-combobox>`. Designsystemet har norske
+ * standardtekster for alle, så sett bare de du vil overstyre.
+ */
 export interface HviSuggestionSrText {
+  /** Når et alternativ legges til. Standard: «La til». */
   added: string;
-  removed: string;
-  remove: string;
+  /** Tøm-knappen. Standard: «Fjern tekst». */
+  clear: string;
+  /** Når ingenting er valgt. Standard: «Ingen valgte». */
   empty: string;
+  /** Hint om valgte chips. `%d` er antall. Standard: «Naviger til venstre for å finne %d valgte». */
   found: string;
+  /** Ugyldig verdi. Standard: «Ugyldig valg». */
   invalid: string;
-  of: string;
+  /** Lista med valgte. Standard: «Valgte». */
   items: string;
+  /** Posisjon, som i «2 av 5». Standard: «av». */
+  of: string;
+  /** Antall forslag, flertall. `%d` er antall. Standard: «%d forslag». */
+  plural: string;
+  /** Hint på en valgt chip. Standard: «Trykk for å fjerne». */
+  remove: string;
+  /** Når et alternativ fjernes. Standard: «Fjernet». */
+  removed: string;
+  /** Antall forslag, entall. `%d` er antall. Standard: «%d forslag». */
+  singular: string;
+  /** Åpne/lukk-knappen. Standard: «Forslag». */
+  toggle: string;
 }
 
-/** Norske standardtekster. u-combobox defaulter til engelsk. */
-export const HVI_SUGGESTION_SR_TEXT: HviSuggestionSrText = {
-  added: 'Lagt til',
-  removed: 'Fjernet',
-  remove: 'Trykk for å fjerne',
-  empty: 'Ingen valgte',
-  found: 'Naviger til venstre for å finne %d valgte',
-  invalid: 'Ugyldig verdi',
-  of: 'av',
-  items: 'Valgte',
-};
+/**
+ * Gjør om CSS-escapes (`\e5 ` → `å`). Designsystemets CSS er bygget med escapede
+ * tegn utenfor ASCII, og designsystemet-web leser CSS-variablene uten å gjøre dem
+ * om. Uten dette leser skjermleseren «Trykk for backslash e5 fjerne».
+ */
+const unescapeCss = (text: string): string =>
+  text.replace(/\\([0-9a-fA-F]{1,6})\s?/g, (_, hex: string) =>
+    String.fromCodePoint(parseInt(hex, 16)),
+  );
+
+const SR_KEYS: readonly (keyof HviSuggestionSrText)[] = [
+  'added',
+  'clear',
+  'empty',
+  'found',
+  'invalid',
+  'items',
+  'of',
+  'plural',
+  'remove',
+  'removed',
+  'singular',
+  'toggle',
+];
 
 /** Minimal beskrivelse av `<u-combobox>` sitt DOM-API. */
 interface ComboboxElement extends HTMLElement {
@@ -76,14 +108,6 @@ export const HVI_SUGGESTION_TEMPLATE = `
       (comboboxafterselect)="readFromDom()"
       [attr.data-multiple]="multiple ? '' : undefined"
       [attr.data-creatable]="creatable() ? '' : undefined"
-      [attr.data-sr-added]="sr().added"
-      [attr.data-sr-removed]="sr().removed"
-      [attr.data-sr-remove]="sr().remove"
-      [attr.data-sr-empty]="sr().empty"
-      [attr.data-sr-found]="sr().found"
-      [attr.data-sr-invalid]="sr().invalid"
-      [attr.data-sr-of]="sr().of"
-      [attr.data-sr-items]="sr().items"
     >
       <input
         class="ds-input"
@@ -100,8 +124,8 @@ export const HVI_SUGGESTION_TEMPLATE = `
         (focus)="onFocus($event)"
         (blur)="onTouched()"
       />
-      <button type="reset" [attr.aria-label]="clearLabel()"></button>
-      <!-- Åpne/lukk-knapp. u-combobox styrer aria-expanded, aria-label og når den vises. -->
+      <!-- u-combobox styrer aria-label, aria-expanded og når knappene vises. -->
+      <button type="reset"></button>
       <button type="button" aria-expanded="false"></button>
       <u-datalist data-nofilter>
         @for (option of visible(); track keyOf(option)) {
@@ -118,8 +142,10 @@ export const HVI_SUGGESTION_TEMPLATE = `
         }
         @if (creatable()) {
           <u-option [attr.data-empty]="createText() ?? ''"></u-option>
-        } @else if (!loading()) {
-          <u-option data-empty>{{ emptyText() }}</u-option>
+        } @else {
+          <!-- value="" fordi Designsystemet skjuler tom-valget til det har fått value.
+               Det settes bare ved input, ikke når forslagene kommer senere (backend-søk). -->
+          <u-option data-empty value="">{{ loading() ? loadingText() : emptyText() }}</u-option>
         }
         @if (hiddenCount(); as hidden) {
           <div data-suggestion-truncated aria-hidden="true">
@@ -213,6 +239,9 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
   /** Tekst som vises når ingen alternativer matcher. */
   readonly emptyText = input('Ingen treff');
 
+  /** Tekst som vises mens `loading` er satt og det ikke finnes forslag ennå. */
+  readonly loadingText = input('Søker …');
+
   /**
    * Tekst på valget for å legge til en ny verdi når `creatable` er satt.
    * `%s` erstattes med det brukeren har skrevet. Standard er Designsystemets tekst.
@@ -258,19 +287,11 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
    */
   readonly readOnly = input(false, { transform: booleanAttribute });
 
-  /** Aria-label på tøm-knappen. */
-  readonly clearLabel = input('Tøm');
-
-  /** Overstyr enkelte skjermlesertekster. */
+  /** Overstyr enkelte skjermlesertekster. Resten er Designsystemets norske standard. */
   readonly srText = input<Partial<HviSuggestionSrText>>({});
 
   /** Sendes når brukeren skriver, slik at `suggestions` kan oppdateres. */
   readonly completeMethod = output<HviSuggestionCompleteEvent>();
-
-  protected readonly sr = computed<HviSuggestionSrText>(() => ({
-    ...HVI_SUGGESTION_SR_TEXT,
-    ...this.srText(),
-  }));
 
   /** Teksten brukeren har skrevet. Styrer den interne filtreringen. */
   private readonly query = signal('');
@@ -305,10 +326,49 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
   constructor() {
     effect(() => {
       const selected = this.selected();
+      const texts = this.srText();
       this.optionLabel();
       this.dataKey();
-      if (this.isBrowser) this.writeToDom(selected);
+      if (!this.isBrowser) return;
+
+      // Tekstene først: u-combobox lager aria-label på chipsene når de settes inn.
+      this.writeSrText(texts);
+      this.writeToDom(selected);
     });
+  }
+
+  /** Skjermlesertekster som er overstyrt via `srText`. */
+  private overriddenSrText = new Set<keyof HviSuggestionSrText>();
+
+  /**
+   * Setter overstyrte skjermlesertekster som `data-sr-*` på `<ds-suggestion>`.
+   * Teksten tilbakestilles til Designsystemets standard (CSS-variabelen) når en
+   * overstyring fjernes. Attributtene fjernes aldri, ellers faller u-combobox
+   * tilbake til engelsk. Standardtekstene Designsystemet allerede har satt,
+   * renses for CSS-escapes.
+   */
+  private writeSrText(texts: Partial<HviSuggestionSrText>): void {
+    const combobox = this.comboboxRef()?.nativeElement;
+    if (!combobox) return;
+
+    const overridden = new Set<keyof HviSuggestionSrText>();
+    for (const key of SR_KEYS) {
+      const text = texts[key];
+      if (text != null) {
+        combobox.setAttribute(`data-sr-${key}`, text);
+        overridden.add(key);
+      } else if (this.overriddenSrText.has(key)) {
+        const standard = getComputedStyle(combobox)
+          .getPropertyValue(`--dsc-suggestion-sr-${key}`)
+          .trim()
+          .replace(/^["']|["']$/g, '');
+        combobox.setAttribute(`data-sr-${key}`, unescapeCss(standard));
+      } else {
+        const current = combobox.getAttribute(`data-sr-${key}`);
+        if (current?.includes('\\')) combobox.setAttribute(`data-sr-${key}`, unescapeCss(current));
+      }
+    }
+    this.overriddenSrText = overridden;
   }
 
   /** Flytter fokus til inputfeltet. */
