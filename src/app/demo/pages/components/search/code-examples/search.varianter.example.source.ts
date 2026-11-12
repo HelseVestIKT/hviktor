@@ -17,7 +17,7 @@ import {
       <!-- Kun med ikon -->
       <form role="search">
         <hvi-search class="max-w-md">
-          <input hviInput type="search" placeholder="" aria-label="Søk" />
+          <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
           <button hviSearchClear aria-label="Tøm"></button>
         </hvi-search>
       </form>
@@ -27,7 +27,7 @@ import {
       <!-- Med primær knapp -->
       <form role="search">
         <hvi-search class="max-w-md">
-          <input hviInput type="search" placeholder="" aria-label="Søk" />
+          <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
           <button hviSearchClear aria-label="Tøm"></button>
           <button hviButton variant="primary" type="submit">Søk</button>
         </hvi-search>
@@ -38,7 +38,7 @@ import {
       <!-- Med sekundær knapp -->
       <form role="search">
         <hvi-search class="max-w-md">
-          <input hviInput type="search" placeholder="" aria-label="Søk" />
+          <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
           <button hviSearchClear aria-label="Tøm"></button>
           <button hviButton variant="secondary" type="submit">Søk</button>
         </hvi-search>

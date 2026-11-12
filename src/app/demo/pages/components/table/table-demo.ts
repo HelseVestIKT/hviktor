@@ -280,6 +280,8 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               hviInput
               id="tabell-sok"
               type="search"
+              placeholder=" "
+              enterkeyhint="search"
               aria-describedby="tabell-sok-beskrivelse"
               (input)="searchTable.filterGlobal($any($event.target).value)"
             />
@@ -756,6 +758,8 @@ import { TableZebrastriperOgBorderExampleSource } from './code-examples/table.ze
               hviInput
               id="komplett-sok"
               type="search"
+              placeholder=" "
+              enterkeyhint="search"
               aria-describedby="komplett-sok-beskrivelse"
               (input)="fullTable.filterGlobal($any($event.target).value)"
             />

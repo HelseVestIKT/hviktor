@@ -45,6 +45,8 @@ import { HviIconChevronDown, HviIconChevronRight } from '@helsevestikt/hviktor-i
           hviInput
           id="komplett-sok"
           type="search"
+          placeholder=" "
+          enterkeyhint="search"
           aria-describedby="komplett-sok-beskrivelse"
           (input)="fullTable.filterGlobal($any($event.target).value)"
         />

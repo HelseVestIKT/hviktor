@@ -16,7 +16,8 @@
           <input
             hviInput
             type="search"
-            placeholder=""
+            placeholder=" "
+            enterkeyhint="search"
             aria-label="Søk etter ikon"
             [value]="query()"
             (input)="setQuery($any($event.target).value)"

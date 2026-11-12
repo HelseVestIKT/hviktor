@@ -19,7 +19,8 @@ import {
         <input
           hviInput
           type="search"
-          placeholder=""
+          placeholder=" "
+          enterkeyhint="search"
           name="cat-search"
           [value]="catSearchInput()"
           (input)="onCatSearchInput($event)"

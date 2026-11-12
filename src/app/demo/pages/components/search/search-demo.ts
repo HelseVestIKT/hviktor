@@ -47,7 +47,7 @@ import { SearchVarianterExampleSource } from './code-examples/search.varianter.e
       <app-demo-section title="Grunnleggende" [code]="grunnleggendeCode">
         <form role="search">
           <hvi-search class="max-w-md">
-            <input hviInput type="search" placeholder="" aria-label="Søk" />
+            <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
             <button hviSearchClear aria-label="Tøm"></button>
             <button hviButton variant="primary" type="submit">Søk</button>
           </hvi-search>
@@ -86,7 +86,13 @@ import { SearchVarianterExampleSource } from './code-examples/search.varianter.e
           <!-- Kun med ikon -->
           <form role="search">
             <hvi-search class="max-w-md">
-              <input hviInput type="search" placeholder="" aria-label="Søk" />
+              <input
+                hviInput
+                type="search"
+                placeholder=" "
+                enterkeyhint="search"
+                aria-label="Søk"
+              />
               <button hviSearchClear aria-label="Tøm"></button>
             </hvi-search>
           </form>
@@ -96,7 +102,13 @@ import { SearchVarianterExampleSource } from './code-examples/search.varianter.e
           <!-- Med primær knapp -->
           <form role="search">
             <hvi-search class="max-w-md">
-              <input hviInput type="search" placeholder="" aria-label="Søk" />
+              <input
+                hviInput
+                type="search"
+                placeholder=" "
+                enterkeyhint="search"
+                aria-label="Søk"
+              />
               <button hviSearchClear aria-label="Tøm"></button>
               <button hviButton variant="primary" type="submit">Søk</button>
             </hvi-search>
@@ -107,7 +119,13 @@ import { SearchVarianterExampleSource } from './code-examples/search.varianter.e
           <!-- Med sekundær knapp -->
           <form role="search">
             <hvi-search class="max-w-md">
-              <input hviInput type="search" placeholder="" aria-label="Søk" />
+              <input
+                hviInput
+                type="search"
+                placeholder=" "
+                enterkeyhint="search"
+                aria-label="Søk"
+              />
               <button hviSearchClear aria-label="Tøm"></button>
               <button hviButton variant="secondary" type="submit">Søk</button>
             </hvi-search>
@@ -138,7 +156,8 @@ import { SearchVarianterExampleSource } from './code-examples/search.varianter.e
             <input
               hviInput
               type="search"
-              placeholder=""
+              placeholder=" "
+              enterkeyhint="search"
               name="cat-search"
               [value]="catSearchInput()"
               (input)="onCatSearchInput($event)"

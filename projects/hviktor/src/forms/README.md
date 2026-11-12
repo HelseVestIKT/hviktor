@@ -396,11 +396,11 @@ Sammensatt komponent som bygger et komplett felt med label, input/textarea, desc
 
 **Selektor:** `<hvi-search>`
 
-Søkefelt-wrapper med `ds-search`. Kombiner med `hviInput`, `hviSearchClear` og `hviButton`.
+Søkefelt-wrapper med `hvi-search`. Kombiner med `hviInput`, `hviSearchClear` og `hviButton`.
 
 ```html
 <hvi-search>
-  <input hviInput type="search" placeholder="" aria-label="Søk" />
+  <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
   <button hviSearchClear type="reset" aria-label="Tøm"></button>
   <button hviButton variant="primary" type="submit">Søk</button>
 </hvi-search>
@@ -412,13 +412,13 @@ Med label i `<hvi-field>`:
 <hvi-field>
   <label hviLabel>Søk etter pasient</label>
   <hvi-search>
-    <input hviInput type="search" placeholder="" name="patient-search" />
+    <input hviInput type="search" placeholder=" " enterkeyhint="search" name="patient-search" />
     <button hviSearchClear type="reset" aria-label="Tøm"></button>
   </hvi-search>
 </hvi-field>
 ```
 
-> **Viktig:** Legg til tomt `placeholder=""` på input når du bruker clear-knapp, ellers vises clear-knappen alltid.
+> **Viktig:** Legg til `placeholder=" "` på input når du bruker clear-knapp, ellers vises clear-knappen alltid. Mellomrommet gir ingen synlig plassholdertekst. Legg gjerne til `enterkeyhint="search"`, så tastaturet på mobil viser en søketast.
 
 ---
 

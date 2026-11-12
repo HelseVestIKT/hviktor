@@ -8,7 +8,7 @@ import { HviButton, HviInput, HviSearch, HviSearchClear } from '@helsevestikt/hv
   template: `
     <form role="search">
       <hvi-search class="max-w-md">
-        <input hviInput type="search" placeholder="" aria-label="Søk" />
+        <input hviInput type="search" placeholder=" " enterkeyhint="search" aria-label="Søk" />
         <button hviSearchClear aria-label="Tøm"></button>
         <button hviButton variant="primary" type="submit">Søk</button>
       </hvi-search>

@@ -31,6 +31,8 @@ import {
           hviInput
           id="tabell-sok"
           type="search"
+          placeholder=" "
+          enterkeyhint="search"
           aria-describedby="tabell-sok-beskrivelse"
           (input)="searchTable.filterGlobal($any($event.target).value)"
         />
