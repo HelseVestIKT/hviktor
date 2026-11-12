@@ -195,8 +195,11 @@ export class HviDialog implements OnChanges, AfterViewInit {
 
   private readonly element = inject(ElementRef<HTMLDialogElement>).nativeElement;
   private pressStartedOnBackdrop = false;
-  /** Whether the current `aria-label` was set by this component, and may be replaced. */
-  private ownsAriaLabel = false;
+  /**
+   * The `aria-label` this component last wrote. Any other `aria-label` belongs to the
+   * consumer and is kept, also when it is added or changed after the dialog was created.
+   */
+  private generatedAriaLabel: string | null = null;
 
   ngOnChanges(): void {
     this.updateAccessibleName();
@@ -297,14 +300,16 @@ export class HviDialog implements OnChanges, AfterViewInit {
    */
   private updateAccessibleName(): void {
     const dialog = this.element;
+    const current = dialog.getAttribute('aria-label');
     const consumerNamed =
-      !this.ownsAriaLabel &&
-      (!!dialog.getAttribute('aria-label')?.trim() || dialog.hasAttribute('aria-labelledby'));
+      dialog.hasAttribute('aria-labelledby') ||
+      (!!current?.trim() && current !== this.generatedAriaLabel);
     if (consumerNamed) return;
 
     const heading = dialog.querySelector('h2, h3, h4, h5, h6')?.textContent?.trim();
-    dialog.setAttribute('aria-label', this.title || heading || 'Dialogboks');
-    this.ownsAriaLabel = true;
+    const name = this.title || heading || 'Dialogboks';
+    dialog.setAttribute('aria-label', name);
+    this.generatedAriaLabel = name;
   }
 
   private setOpen(shouldOpen: boolean): void {

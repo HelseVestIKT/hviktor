@@ -264,6 +264,17 @@ describe('HviDialog — Title and accessible name', () => {
     expect(dialog.getAttribute('aria-label')).toBe('Ny overskrift');
   });
 
+  it('should keep an aria-label the consumer sets after the dialog was created', () => {
+    const f = TestBed.createComponent(HeadingDialogHost);
+    f.detectChanges();
+    const dialog = f.nativeElement.querySelector('dialog') as HTMLDialogElement;
+    expect(dialog.getAttribute('aria-label')).toBe('Endre adresse');
+
+    dialog.setAttribute('aria-label', 'Satt senere');
+    dialog.dispatchEvent(Object.assign(new Event('toggle'), { newState: 'open' }));
+    expect(dialog.getAttribute('aria-label')).toBe('Satt senere');
+  });
+
   it("should keep the consumer's own aria-label", () => {
     const f = TestBed.createComponent(OwnAriaLabelDialogHost);
     f.detectChanges();
