@@ -12,8 +12,10 @@ import { ComponentPage } from '../fixtures/component-page';
 const section = (page: Page, title: string) => page.locator(`app-demo-section[title="${title}"]`);
 
 const input = (scope: Locator) => scope.locator('ds-suggestion input.ds-input').first();
-const option = (scope: Locator, label: string) => scope.locator(`u-option[label="${label}"]`);
-const options = (scope: Locator) => scope.locator('u-option:visible');
+// Designsystemet setter `label` på tom-valget til det brukeren skriver, så det må utelates.
+const option = (scope: Locator, label: string) =>
+  scope.locator(`u-option[label="${label}"]:not([data-empty])`);
+const options = (scope: Locator) => scope.locator('u-option:not([data-empty]):visible');
 const chips = (scope: Locator) => scope.locator('ds-suggestion > data');
 const valgt = (scope: Locator) => scope.locator('p', { hasText: 'Valgt:' }).first();
 
@@ -62,6 +64,14 @@ test.describe('Suggestion', () => {
       await input(s).press('ArrowDown');
       await page.keyboard.press('Enter');
       await expect(valgt(s)).toHaveText('Valgt: Trondheim');
+    });
+
+    test('viser «Ingen treff» når ingenting matcher', async ({ page }) => {
+      const s = section(page, 'Standard Suggestion');
+      await type(s, 'xyz');
+      await expect(options(s)).toHaveCount(0);
+      await expect(s.locator('u-option[data-empty]')).toBeVisible();
+      await expect(s.locator('u-option[data-empty]')).toHaveText('Ingen treff');
     });
 
     test('lukker forslagslista med Escape', async ({ page }) => {
@@ -117,6 +127,31 @@ test.describe('Suggestion', () => {
     });
   });
 
+  test.describe('legg til nye alternativer', () => {
+    test('viser valget for å legge til teksten brukeren skrev', async ({ page }) => {
+      const s = section(page, 'Legg til nye alternativer');
+      await type(s, 'Nyby');
+      await expect(s.locator('u-option[data-empty]')).toBeVisible();
+      await expect(s.locator('u-option[data-empty]')).toHaveAttribute('data-create', /Nyby/);
+    });
+
+    test('lager nytt objekt med createOption', async ({ page }) => {
+      const s = section(page, 'Legg til nye alternativer');
+      await type(s, 'Nyby');
+      await page.keyboard.press('Enter');
+      await expect(chips(s)).toHaveCount(1);
+      await expect(chips(s).first()).toHaveText('Nyby');
+      await expect(valgt(s)).toHaveText('Valgt: Nyby (ny)');
+    });
+
+    test('velger eksisterende objekt', async ({ page }) => {
+      const s = section(page, 'Legg til nye alternativer');
+      await type(s, 'Ber');
+      await option(s, 'Bergen').click();
+      await expect(valgt(s)).toHaveText('Valgt: Bergen');
+    });
+  });
+
   test.describe('søk i backend', () => {
     test('viser forhåndsvalgt verdi selv om forslagslista er tom', async ({ page }) => {
       const s = section(page, 'Søk i backend');
@@ -141,7 +176,7 @@ test.describe('Suggestion', () => {
       await expect(option(s, 'Trondheim')).toBeVisible();
 
       await s.locator('ds-suggestion button[type="reset"]').click();
-      await expect(s.locator('u-option')).toHaveCount(0);
+      await expect(s.locator('u-option:not([data-empty])')).toHaveCount(0);
     });
 
     // #428: u-combobox skriver valgt tekst inn i feltet med en syntetisk
@@ -180,7 +215,7 @@ test.describe('Suggestion', () => {
     }) => {
       const s = section(page, 'Lange lister');
       await input(s).click();
-      await expect(s.locator('u-option')).toHaveCount(50);
+      await expect(s.locator('u-option:not([data-empty])')).toHaveCount(50);
       await expect(s.locator('[data-suggestion-truncated]')).toContainText('2950');
     });
 

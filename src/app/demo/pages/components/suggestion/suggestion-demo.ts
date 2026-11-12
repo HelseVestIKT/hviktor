@@ -16,6 +16,7 @@ import { SuggestionStandardSuggestionExampleSource } from './code-examples/sugge
 
 import { SuggestionLangeListerExampleSource } from './code-examples';
 import { SuggestionEgenMalForAlternativeneExampleSource } from './code-examples/suggestion.egen-mal-for-alternativene.example.source';
+import { SuggestionLeggTilNyeAlternativerExampleSource } from './code-examples/suggestion.legg-til-nye-alternativer.example.source';
 import { SuggestionReadonlyExampleSource } from './code-examples/suggestion.readonly.example.source';
 import { SuggestionSokIBackendExampleSource } from './code-examples/suggestion.sok-i-backend.example.source';
 
@@ -80,6 +81,24 @@ export interface Sensor {
           [suggestions]="kommuner"
         />
         <p>Valgt: {{ valgteKommuner.join(', ') || 'ingen' }}</p>
+      </app-demo-section>
+
+      <app-demo-section
+        title="Legg til nye alternativer"
+        [code]="leggTilNyeAlternativerCode"
+        description="Med creatable kan brukeren legge til verdier som ikke finnes i lista. Når alternativene er objekter, lager createOption objektet av teksten brukeren skrev."
+      >
+        <hvi-suggestion-multiple
+          label="Velg eller legg til kommuner"
+          placeholder="Skriv for å søke eller legge til..."
+          optionLabel="navn"
+          dataKey="nummer"
+          [creatable]="true"
+          [createOption]="nyKommune"
+          [(ngModel)]="egneKommuner"
+          [suggestions]="kommuneObjekter"
+        />
+        <p>Valgt: {{ beskrivKommuner(egneKommuner) }}</p>
       </app-demo-section>
 
       <app-demo-section title="Søk i backend" [code]="backendSokCode">
@@ -163,8 +182,25 @@ export class SuggestionDemoComponent {
   readonly langeListerCode = SuggestionLangeListerExampleSource;
   readonly egenMalForAlternativeneCode = SuggestionEgenMalForAlternativeneExampleSource;
   readonly readonlyCode = SuggestionReadonlyExampleSource;
+  readonly leggTilNyeAlternativerCode = SuggestionLeggTilNyeAlternativerExampleSource;
 
   readonly kommuner = ['Sogndal', 'Bergen', 'Oslo', 'Stavanger', 'Trondheim'];
+
+  readonly kommuneObjekter: Kommune[] = [
+    { nummer: '4601', navn: 'Bergen' },
+    { nummer: '4640', navn: 'Sogndal' },
+    { nummer: '0301', navn: 'Oslo' },
+  ];
+
+  egneKommuner: Kommune[] = [];
+
+  /** Lager en ny kommune av teksten brukeren skrev. */
+  readonly nyKommune = (navn: string): Kommune => ({ nummer: `ny-${navn}`, navn });
+
+  beskrivKommuner(kommuner: Kommune[]): string {
+    const navn = kommuner.map((k) => (k.nummer.startsWith('ny-') ? `${k.navn} (ny)` : k.navn));
+    return navn.join(', ') || 'ingen';
+  }
 
   readonly sykehus = [
     'Haukeland universitetssjukehus',

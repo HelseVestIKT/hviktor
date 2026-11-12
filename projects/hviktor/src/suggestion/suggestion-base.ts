@@ -8,6 +8,7 @@ import {
   ElementRef,
   inject,
   input,
+  isDevMode,
   model,
   ModelSignal,
   numberAttribute,
@@ -113,6 +114,11 @@ export const HVI_SUGGESTION_TEMPLATE = `
             }
           </u-option>
         }
+        @if (creatable()) {
+          <u-option [attr.data-empty]="createText() ?? ''"></u-option>
+        } @else if (!loading()) {
+          <u-option data-empty>{{ emptyText() }}</u-option>
+        }
         @if (hiddenCount(); as hidden) {
           <div data-suggestion-truncated aria-hidden="true">
             {{ truncatedText().replace('%d', hidden.toString()) }}
@@ -190,6 +196,21 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
 
   /** Lar brukeren legge til verdier som ikke finnes i lista. */
   readonly creatable = input(false, { transform: booleanAttribute });
+
+  /**
+   * Lager et nytt alternativ av teksten brukeren har skrevet, når `creatable` er satt.
+   * Påkrevd når alternativene er objekter. Uten den blir ny verdi en streng.
+   */
+  readonly createOption = input<(text: string) => T>();
+
+  /** Tekst som vises når ingen alternativer matcher. */
+  readonly emptyText = input('Ingen treff');
+
+  /**
+   * Tekst på valget for å legge til en ny verdi når `creatable` er satt.
+   * `%s` erstattes med det brukeren har skrevet. Standard er Designsystemets tekst.
+   */
+  readonly createText = input<string>();
 
   /**
    * Filtrer `suggestions` på det brukeren skriver. Sett `false` når lista
@@ -299,7 +320,22 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     if (option == null) return '';
     if (typeof option !== 'object') return String(option);
     const property = this.optionLabel();
+    if (!property) {
+      this.warnOnce(
+        'missingLabel',
+        'Alternativene er objekter, men optionLabel er ikke satt. Visningsteksten blir "[object Object]".',
+      );
+    }
     return property ? String((option as Record<string, unknown>)[property] ?? '') : String(option);
+  }
+
+  private readonly warned = new Set<string>();
+
+  /** Advarer én gang per komponent, og bare i dev-modus. */
+  private warnOnce(key: string, message: string): void {
+    if (!isDevMode() || this.warned.has(key)) return;
+    this.warned.add(key);
+    console.warn(`[hvi-suggestion] ${message}`);
   }
 
   protected complete(event: Event): void {
@@ -356,7 +392,7 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
 
     const options = Array.from(combobox.items).map((data) => {
       const label = data.textContent?.trim() ?? '';
-      return this.resolve(data.value || label) ?? (label as T);
+      return this.resolve(data.value || label) ?? this.create(label);
     });
 
     const value = this.fromArray(options);
@@ -367,6 +403,20 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
 
     this.onChange(value);
     this.onTouched();
+  }
+
+  /** Lager et nytt alternativ av tekst brukeren har lagt til med `creatable`. */
+  private create(text: string): T {
+    const createOption = this.createOption();
+    if (createOption) return createOption(text);
+
+    if (this.optionLabel()) {
+      this.warnOnce(
+        'missingCreate',
+        'creatable er satt for objekter uten createOption. Nye verdier blir strenger.',
+      );
+    }
+    return text as T;
   }
 
   /** Finner opprinnelig alternativ ut fra nøkkel, så verdien beholder typen. */
