@@ -329,6 +329,13 @@ export class HviSuggestion<T = unknown> implements ControlValueAccessor {
   protected complete(event: Event): void {
     const query = (event.target as HTMLInputElement).value;
     this.query.set(query);
+
+    // u-combobox skriver selv valgt tekst i feltet med en syntetisk `input`-hendelse.
+    // Det er ikke et søk, og skal ikke sende `completeMethod` (#428). Tømming
+    // (tøm-knappen eller etter valg i flervalg) sendes fortsatt, slik at forslagene
+    // kan nullstilles.
+    if (event.type === 'input' && !event.isTrusted && query !== '') return;
+
     this.completeMethod.emit({ query });
   }
 
@@ -379,7 +386,7 @@ export class HviSuggestion<T = unknown> implements ControlValueAccessor {
     const value = this.multiple() ? options : (options[0] ?? null);
     this.value.set(value);
 
-    // u-combobox skriver selv i inputfeltet ved valg, uten å sende `input`.
+    // u-combobox skriver selv valgt tekst i feltet ved valg. Hold filtreringen i takt.
     this.query.set(combobox.control?.value ?? '');
 
     this.onChange(value);

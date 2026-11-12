@@ -135,11 +135,18 @@ test.describe('Suggestion', () => {
       await expect(valgt(s)).toHaveText('Valgt: Trondheim');
     });
 
-    // Issue #428: u-combobox skriver valgt tekst inn i feltet med en syntetisk
-    // `input`-hendelse, som sender `completeMethod` en ekstra gang.
-    // Fjern `test.fail` når feilen er rettet.
+    test('tøm-knappen nullstiller søket', async ({ page }) => {
+      const s = section(page, 'Søk i backend');
+      await type(s, 'Tr');
+      await expect(option(s, 'Trondheim')).toBeVisible();
+
+      await s.locator('ds-suggestion button[type="reset"]').click();
+      await expect(s.locator('u-option')).toHaveCount(0);
+    });
+
+    // #428: u-combobox skriver valgt tekst inn i feltet med en syntetisk
+    // `input`-hendelse, som tidligere sendte `completeMethod` en ekstra gang.
     test('starter ikke et nytt søk når et forslag velges', async ({ page }) => {
-      test.fail();
       const s = section(page, 'Søk i backend');
       const field = input(s);
 
