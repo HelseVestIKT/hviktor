@@ -59,7 +59,7 @@ let nextId = 0;
   },
 })
 export class HviToggleGroupItem implements OnInit, OnDestroy {
-  readonly group = inject(HviToggleGroup);
+  readonly group = inject<HviToggleGroup<HviToggleGroupValue>>(HviToggleGroup);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly renderer = inject(Renderer2);
 
