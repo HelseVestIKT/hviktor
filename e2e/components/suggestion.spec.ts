@@ -31,16 +31,22 @@ const type = async (scope: Locator, text: string) => {
   await field.pressSequentially(text);
 };
 
+/** Søker og velger et alternativ med mus. */
+const velg = async (scope: Locator, text: string, label: string) => {
+  await type(scope, text);
+  await option(scope, label).click();
+};
+
 test.describe('Suggestion', () => {
   test.beforeEach(async ({ page }) => {
     await new ComponentPage(page).goto('suggestion');
   });
 
   test.describe('enkeltvalg', () => {
-    test('viser forhåndsvalgt verdi i feltet', async ({ page }) => {
+    test('starter tomt', async ({ page }) => {
       const s = section(page, 'Standard Suggestion');
-      await expect(input(s)).toHaveValue('Bergen');
-      await expect(valgt(s)).toHaveText('Valgt: Bergen');
+      await expect(input(s)).toHaveValue('');
+      await expect(valgt(s)).toHaveText('Valgt: ingen');
     });
 
     test('filtrerer forslagene på det brukeren skriver', async ({ page }) => {
@@ -85,6 +91,9 @@ test.describe('Suggestion', () => {
 
     test('tøm-knappen nullstiller verdien', async ({ page }) => {
       const s = section(page, 'Standard Suggestion');
+      await velg(s, 'Os', 'Oslo');
+      await expect(valgt(s)).toHaveText('Valgt: Oslo');
+
       await s.locator('ds-suggestion button[type="reset"]').click();
       await expect(input(s)).toHaveValue('');
       await expect(valgt(s)).toHaveText('Valgt: ingen');
@@ -92,8 +101,15 @@ test.describe('Suggestion', () => {
   });
 
   test.describe('flervalg', () => {
-    test('viser forhåndsvalgt verdi som chip', async ({ page }) => {
+    test('starter uten valg', async ({ page }) => {
       const s = section(page, 'Flervalg');
+      await expect(chips(s)).toHaveCount(0);
+      await expect(valgt(s)).toHaveText('Valgt: ingen');
+    });
+
+    test('viser valgt alternativ som chip', async ({ page }) => {
+      const s = section(page, 'Flervalg');
+      await velg(s, 'Ber', 'Bergen');
       await expect(chips(s)).toHaveCount(1);
       await expect(chips(s).first()).toHaveText('Bergen');
       await expect(valgt(s)).toHaveText('Valgt: Bergen');
@@ -101,8 +117,8 @@ test.describe('Suggestion', () => {
 
     test('legger til valg uten å fjerne tidligere valg', async ({ page }) => {
       const s = section(page, 'Flervalg');
-      await type(s, 'Os');
-      await option(s, 'Oslo').click();
+      await velg(s, 'Ber', 'Bergen');
+      await velg(s, 'Os', 'Oslo');
       await expect(chips(s)).toHaveCount(2);
       await expect(valgt(s)).toHaveText('Valgt: Bergen, Oslo');
     });
@@ -112,8 +128,8 @@ test.describe('Suggestion', () => {
     // ds-suggestion ligger over chipsene for Playwrights treffsjekk.
     test('fjerner ett valg med tastatur uten å fjerne andre', async ({ page }) => {
       const s = section(page, 'Flervalg');
-      await type(s, 'Os');
-      await option(s, 'Oslo').click();
+      await velg(s, 'Ber', 'Bergen');
+      await velg(s, 'Os', 'Oslo');
       await expect(chips(s)).toHaveCount(2);
 
       const field = input(s);
@@ -132,6 +148,8 @@ test.describe('Suggestion', () => {
     test('bruker Designsystemets norske standardtekster', async ({ page }) => {
       const s = section(page, 'Flervalg');
       await expect(toggle(s)).toHaveAttribute('aria-label', 'Forslag');
+
+      await velg(s, 'Ber', 'Bergen');
       await expect(chips(s).first()).toHaveAttribute('aria-label', /Trykk for å fjerne/);
       await expect(input(s)).toHaveAttribute('aria-description', /for å finne 1 valgte/);
 
@@ -203,12 +221,6 @@ test.describe('Suggestion', () => {
   });
 
   test.describe('søk i backend', () => {
-    test('viser forhåndsvalgt verdi selv om forslagslista er tom', async ({ page }) => {
-      const s = section(page, 'Søk i backend');
-      await expect(input(s)).toHaveValue('Bergen');
-      await expect(valgt(s)).toHaveText('Valgt: Bergen');
-    });
-
     test('henter forslag og velger objekt', async ({ page }) => {
       const s = section(page, 'Søk i backend');
       await type(s, 'Tr');
@@ -304,6 +316,14 @@ test.describe('Suggestion', () => {
   });
 
   test.describe('readonly', () => {
+    test('viser forhåndsvalgte verdier', async ({ page }) => {
+      const s = section(page, 'ReadOnly');
+      await expect(s.locator('ds-suggestion input.ds-input').nth(0)).toHaveValue(
+        'Haukeland universitetssjukehus',
+      );
+      await expect(s.locator('ds-suggestion').nth(1).locator(':scope > data')).toHaveCount(2);
+    });
+
     test('feltene er skrivebeskyttet', async ({ page }) => {
       const s = section(page, 'ReadOnly');
       await expect(s.locator('ds-suggestion input.ds-input').nth(0)).toHaveAttribute('readonly');

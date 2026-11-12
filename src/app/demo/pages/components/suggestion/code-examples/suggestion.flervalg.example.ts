@@ -19,5 +19,5 @@ import { HviSuggestionMultiple } from '@helsevestikt/hviktor-angular';
 export class SuggestionFlervalgExampleComponent {
   readonly kommuner = ['Sogndal', 'Bergen', 'Oslo', 'Stavanger', 'Trondheim'];
 
-  valgteKommuner: string[] = ['Bergen'];
+  valgteKommuner: string[] = [];
 }

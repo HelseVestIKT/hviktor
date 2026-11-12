@@ -26,11 +26,7 @@ import { Kommune } from '../suggestion-demo';
   `,
 })
 export class SuggestionSokIBackendExampleComponent {
-  /**
-   * Forhåndsvalgt verdi selv om `apiTreff` er tom — komponenten trenger ikke
-   * at verdien finnes i forslagslista for å vise den.
-   */
-  valgtKommuneFraApi: Kommune | null = { nummer: '4601', navn: 'Bergen' };
+  valgtKommuneFraApi: Kommune | null = null;
 
   readonly apiTreff = signal<Kommune[]>([]);
   readonly laster = signal(false);
