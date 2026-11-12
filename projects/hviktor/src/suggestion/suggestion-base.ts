@@ -23,47 +23,47 @@ import '@digdir/designsystemet-web';
 import '@u-elements/u-combobox';
 import '@u-elements/u-datalist';
 
-/** Sendes når brukeren skriver og forslagslista skal oppdateres. */
+/** Emitted when the user types and the suggestions should be updated. */
 export interface HviSuggestionCompleteEvent {
-  /** Teksten brukeren har skrevet. Tom streng ved fokus og når feltet tømmes. */
+  /** The text the user has typed. Empty string on focus and when the field is cleared. */
   query: string;
 }
 
 /**
- * Skjermlesertekster brukt av `<u-combobox>`. Designsystemet har norske
- * standardtekster for alle, så sett bare de du vil overstyre.
+ * Screen reader texts used by `<u-combobox>`. Designsystemet provides Norwegian
+ * defaults for all of them, so only set the ones you want to override.
  */
 export interface HviSuggestionSrText {
-  /** Når et alternativ legges til. Standard: «La til». */
+  /** Announced when an option is added. Default: «La til». */
   added: string;
-  /** Tøm-knappen. Standard: «Fjern tekst». */
+  /** The clear button. Default: «Fjern tekst». */
   clear: string;
-  /** Når ingenting er valgt. Standard: «Ingen valgte». */
+  /** Announced when nothing is selected. Default: «Ingen valgte». */
   empty: string;
-  /** Hint om valgte chips. `%d` er antall. Standard: «Naviger til venstre for å finne %d valgte». */
+  /** Hint about selected chips. `%d` is the count. Default: «Naviger til venstre for å finne %d valgte». */
   found: string;
-  /** Ugyldig verdi. Standard: «Ugyldig valg». */
+  /** Invalid value. Default: «Ugyldig valg». */
   invalid: string;
-  /** Lista med valgte. Standard: «Valgte». */
+  /** The list of selected items. Default: «Valgte». */
   items: string;
-  /** Posisjon, som i «2 av 5». Standard: «av». */
+  /** Position, as in «2 av 5». Default: «av». */
   of: string;
-  /** Antall forslag, flertall. `%d` er antall. Standard: «%d forslag». */
+  /** Number of suggestions, plural. `%d` is the count. Default: «%d forslag». */
   plural: string;
-  /** Hint på en valgt chip. Standard: «Trykk for å fjerne». */
+  /** Hint on a selected chip. Default: «Trykk for å fjerne». */
   remove: string;
-  /** Når et alternativ fjernes. Standard: «Fjernet». */
+  /** Announced when an option is removed. Default: «Fjernet». */
   removed: string;
-  /** Antall forslag, entall. `%d` er antall. Standard: «%d forslag». */
+  /** Number of suggestions, singular. `%d` is the count. Default: «%d forslag». */
   singular: string;
-  /** Åpne/lukk-knappen. Standard: «Forslag». */
+  /** The open/close button. Default: «Forslag». */
   toggle: string;
 }
 
 /**
- * Gjør om CSS-escapes (`\e5 ` → `å`). Designsystemets CSS er bygget med escapede
- * tegn utenfor ASCII, og designsystemet-web leser CSS-variablene uten å gjøre dem
- * om. Uten dette leser skjermleseren «Trykk for backslash e5 fjerne».
+ * Decodes CSS escapes (`\e5 ` → `å`). Designsystemet's CSS is built with non-ASCII
+ * characters escaped, and designsystemet-web reads the CSS variables without
+ * decoding them. Without this, screen readers announce «Trykk for backslash e5 fjerne».
  */
 const unescapeCss = (text: string): string =>
   text.replace(/\\([0-9a-fA-F]{1,6})\s?/g, (_, hex: string) =>
@@ -85,7 +85,7 @@ const SR_KEYS: readonly (keyof HviSuggestionSrText)[] = [
   'toggle',
 ];
 
-/** Minimal beskrivelse av `<u-combobox>` sitt DOM-API. */
+/** Minimal description of the `<u-combobox>` DOM API. */
 interface ComboboxElement extends HTMLElement {
   readonly control: HTMLInputElement | null;
   readonly items: HTMLCollectionOf<HTMLDataElement>;
@@ -93,7 +93,7 @@ interface ComboboxElement extends HTMLElement {
 
 let nextId = 0;
 
-/** Felles mal for `HviSuggestion` og `HviSuggestionMultiple`. */
+/** Shared template for `HviSuggestion` and `HviSuggestionMultiple`. */
 export const HVI_SUGGESTION_TEMPLATE = `
   <ds-field class="ds-field">
     @if (label()) {
@@ -124,7 +124,7 @@ export const HVI_SUGGESTION_TEMPLATE = `
         (focus)="onFocus($event)"
         (blur)="onTouched()"
       />
-      <!-- u-combobox styrer aria-label, aria-expanded og når knappene vises. -->
+      <!-- u-combobox manages aria-label, aria-expanded and when the buttons are shown. -->
       <button type="reset"></button>
       <button type="button" aria-expanded="false"></button>
       <u-datalist data-nofilter>
@@ -143,8 +143,8 @@ export const HVI_SUGGESTION_TEMPLATE = `
         @if (creatable()) {
           <u-option [attr.data-empty]="createText() ?? ''"></u-option>
         } @else {
-          <!-- value="" fordi Designsystemet skjuler tom-valget til det har fått value.
-               Det settes bare ved input, ikke når forslagene kommer senere (backend-søk). -->
+          <!-- value="" because Designsystemet hides the empty option until it has a value.
+               It only sets one on input, not when suggestions arrive later (backend search). -->
           <u-option data-empty value="">{{ loading() ? loadingText() : emptyText() }}</u-option>
         }
         @if (hiddenCount(); as hidden) {
@@ -160,14 +160,14 @@ export const HVI_SUGGESTION_TEMPLATE = `
   </ds-field>
 `;
 
-/** Felles stiler for `HviSuggestion` og `HviSuggestionMultiple`. */
+/** Shared styles for `HviSuggestion` and `HviSuggestionMultiple`. */
 export const HVI_SUGGESTION_STYLES = `
   :host {
     display: block;
     margin-block-end: var(--ds-size-2);
   }
 
-  /* Designsystemet viser alltid en pil ned. Snu den når lista er åpen, som i en select. */
+  /* Designsystemet always shows a down arrow. Flip it when the list is open, like a select. */
   .ds-suggestion > button[aria-expanded='true']::before {
     rotate: 180deg;
   }
@@ -180,123 +180,123 @@ export const HVI_SUGGESTION_STYLES = `
 `;
 
 /**
- * Felles logikk for `HviSuggestion` (enkeltvalg) og `HviSuggestionMultiple` (flervalg).
+ * Shared logic for `HviSuggestion` (single select) and `HviSuggestionMultiple` (multi select).
  *
- * `T` er typen på alternativene. `V` er typen på verdien: `T | null` for enkeltvalg
- * og `T[]` for flervalg. Underklassene bestemmer bare verditypen og hvordan den
- * gjøres om til og fra en liste.
+ * `T` is the option type. `V` is the value type: `T | null` for single select and
+ * `T[]` for multi select. Subclasses only decide the value type and how it is
+ * converted to and from a list.
  */
 @Directive()
 export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
   private readonly comboboxRef = viewChild<ElementRef<ComboboxElement>>('combobox');
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
-  /** Om brukeren kan velge flere alternativer. Settes av underklassen. */
+  /** Whether the user can select multiple options. Set by the subclass. */
   protected abstract readonly multiple: boolean;
 
-  /** Valgt verdi. */
+  /** The selected value. */
   abstract readonly value: ModelSignal<V>;
 
-  /** Gjør verdien om til en flat liste. */
+  /** Converts the value to a flat list. */
   protected abstract toArray(value: V | null | undefined): readonly T[];
 
-  /** Gjør valgte alternativer om til verdien. */
+  /** Converts the selected options to the value. */
   protected abstract fromArray(options: T[]): V;
 
-  /** Valgfri mal per alternativ: `<ng-template let-item #item>`. */
+  /** Optional template per option: `<ng-template let-item #item>`. */
   readonly itemTemplate = contentChild<TemplateRef<{ $implicit: T }>>('item');
 
-  /** Ledetekst. Utelates den, bør `ariaLabel` settes. */
+  /** Visible label. If omitted, set `ariaLabel`. */
   readonly label = input<string>();
 
-  /** Alternativ til synlig label. Brukes kun når `label` ikke er satt. */
+  /** Accessible name used only when `label` is not set. */
   readonly ariaLabel = input<string>();
 
-  /** Utfyllende hjelpetekst under label. */
+  /** Helper text shown below the label. */
   readonly description = input<string>();
 
-  /** Feilmelding. Markerer samtidig feltet som ugyldig. */
+  /** Error message. Also marks the field as invalid. */
   readonly error = input<string>();
 
-  /** Alternativene som kan velges. */
+  /** The options that can be selected. */
   readonly suggestions = input<readonly T[]>([]);
 
-  /** Egenskapen som brukes som visningstekst når alternativene er objekter. */
+  /** Property used as display text when the options are objects. */
   readonly optionLabel = input<string>();
 
-  /** Egenskapen som identifiserer et alternativ. Faller tilbake til `optionLabel`. */
+  /** Property that identifies an option. Falls back to `optionLabel`. */
   readonly dataKey = input<string>();
 
-  /** Lar brukeren legge til verdier som ikke finnes i lista. */
+  /** Lets the user add values that are not in the list. */
   readonly creatable = input(false, { transform: booleanAttribute });
 
   /**
-   * Lager et nytt alternativ av teksten brukeren har skrevet, når `creatable` er satt.
-   * Påkrevd når alternativene er objekter. Uten den blir ny verdi en streng.
+   * Creates a new option from the text the user typed, when `creatable` is set.
+   * Required when the options are objects. Without it, new values are strings.
    */
   readonly createOption = input<(text: string) => T>();
 
-  /** Tekst som vises når ingen alternativer matcher. */
+  /** Text shown when no options match. */
   readonly emptyText = input('Ingen treff');
 
-  /** Tekst som vises mens `loading` er satt og det ikke finnes forslag ennå. */
+  /** Text shown while `loading` is set and there are no suggestions yet. */
   readonly loadingText = input('Søker …');
 
   /**
-   * Tekst på valget for å legge til en ny verdi når `creatable` er satt.
-   * `%s` erstattes med det brukeren har skrevet. Standard er Designsystemets tekst.
+   * Text on the option for adding a new value when `creatable` is set.
+   * `%s` is replaced with what the user typed. Defaults to Designsystemet's text.
    */
   readonly createText = input<string>();
 
   /**
-   * Filtrer `suggestions` på det brukeren skriver. Sett `false` når lista
-   * allerede er filtrert, for eksempel av et backend-søk i `completeMethod`.
+   * Filters `suggestions` by what the user types. Set to `false` when the list
+   * is already filtered, for example by a backend search in `completeMethod`.
    */
   readonly filter = input(true, { transform: booleanAttribute });
 
   /**
-   * Maks antall alternativer som rendres samtidig. Resten nås ved å skrive.
-   * Holder DOM liten selv når `suggestions` inneholder tusenvis av elementer.
+   * Maximum number of options rendered at once. The rest are reached by typing.
+   * Keeps the DOM small even when `suggestions` contains thousands of items.
    */
   readonly maxVisible = input(100, { transform: numberAttribute });
 
-  /** Tekst som vises når lista er avkortet. `%d` erstattes med antall skjulte. */
+  /** Text shown when the list is truncated. `%d` is replaced with the number hidden. */
   readonly truncatedText = input('Viser de første treffene. Skriv for å søke blant %d til.');
 
-  /** Send `completeMethod` allerede ved fokus, som Prime sin `dropdown`. */
+  /** Emits `completeMethod` on focus as well, like PrimeNG's `dropdown`. */
   readonly completeOnFocus = input(false, { transform: booleanAttribute });
 
-  /** Marker feltet som opptatt mens forslag hentes. */
+  /** Marks the field as busy while suggestions are loading. */
   readonly loading = input(false, { transform: booleanAttribute });
 
-  /** `id` på inputfeltet. Genereres automatisk. */
+  /** `id` of the input. Generated automatically. */
   readonly inputId = input(`hvi-suggestion-${nextId++}`);
 
-  /** `name` på inputfeltet. */
+  /** `name` of the input. */
   readonly name = input<string>();
 
-  /** Plassholdertekst. */
+  /** Placeholder text. */
   readonly placeholder = input<string>();
 
-  /** Deaktiverer feltet. Settes også av `formControlName`. */
+  /** Disables the field. Also set by `formControlName`. */
   readonly disabled = model(false);
 
   /**
-   * Viser valgt verdi uten at den kan endres. Feltet får samme
-   * readonly-stil som `hviSelect`, og valgte chips kan ikke fjernes.
+   * Shows the selected value without allowing changes. The field gets the same
+   * read-only style as `hviSelect`, and selected chips cannot be removed.
    */
   readonly readOnly = input(false, { transform: booleanAttribute });
 
-  /** Overstyr enkelte skjermlesertekster. Resten er Designsystemets norske standard. */
+  /** Overrides individual screen reader texts. The rest use Designsystemet's Norwegian defaults. */
   readonly srText = input<Partial<HviSuggestionSrText>>({});
 
-  /** Sendes når brukeren skriver, slik at `suggestions` kan oppdateres. */
+  /** Emitted when the user types or clears the field, so `suggestions` can be updated. Not emitted when an option is selected. */
   readonly completeMethod = output<HviSuggestionCompleteEvent>();
 
-  /** Teksten brukeren har skrevet. Styrer den interne filtreringen. */
+  /** The text the user has typed. Drives the internal filtering. */
   private readonly query = signal('');
 
-  /** Alternativene som matcher det brukeren har skrevet. */
+  /** The options matching what the user has typed. */
   private readonly matching = computed<readonly T[]>(() => {
     const options = this.suggestions();
     if (!this.filter()) return options;
@@ -307,17 +307,17 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     return options.filter((option) => this.labelOf(option).toLowerCase().includes(query));
   });
 
-  /** Alternativene som faktisk rendres. */
+  /** The options actually rendered. */
   protected readonly visible = computed<readonly T[]>(() =>
     this.matching().slice(0, this.maxVisible()),
   );
 
-  /** Antall treff som ikke rendres. */
+  /** Number of matches not rendered. */
   protected readonly hiddenCount = computed(() =>
     Math.max(0, this.matching().length - this.maxVisible()),
   );
 
-  /** Valgt verdi som flat liste. */
+  /** The selected value as a flat list. */
   private readonly selected = computed<readonly T[]>(() => this.toArray(this.value()));
 
   private onChange: (value: V) => void = () => undefined;
@@ -331,21 +331,20 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
       this.dataKey();
       if (!this.isBrowser) return;
 
-      // Tekstene først: u-combobox lager aria-label på chipsene når de settes inn.
+      // Texts first: u-combobox sets aria-label on the chips when they are inserted.
       this.writeSrText(texts);
       this.writeToDom(selected);
     });
   }
 
-  /** Skjermlesertekster som er overstyrt via `srText`. */
+  /** Screen reader texts overridden via `srText`. */
   private overriddenSrText = new Set<keyof HviSuggestionSrText>();
 
   /**
-   * Setter overstyrte skjermlesertekster som `data-sr-*` på `<ds-suggestion>`.
-   * Teksten tilbakestilles til Designsystemets standard (CSS-variabelen) når en
-   * overstyring fjernes. Attributtene fjernes aldri, ellers faller u-combobox
-   * tilbake til engelsk. Standardtekstene Designsystemet allerede har satt,
-   * renses for CSS-escapes.
+   * Sets overridden screen reader texts as `data-sr-*` on `<ds-suggestion>`.
+   * When an override is removed, the text is reset to Designsystemet's default
+   * (the CSS variable). The attributes are never removed, or u-combobox would fall
+   * back to English. Defaults already set by Designsystemet are decoded from CSS escapes.
    */
   private writeSrText(texts: Partial<HviSuggestionSrText>): void {
     const combobox = this.comboboxRef()?.nativeElement;
@@ -371,7 +370,7 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     this.overriddenSrText = overridden;
   }
 
-  /** Flytter fokus til inputfeltet. */
+  /** Moves focus to the input. */
   focus(): void {
     this.comboboxRef()?.nativeElement.control?.focus();
   }
@@ -398,7 +397,7 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
 
   private readonly warned = new Set<string>();
 
-  /** Advarer én gang per komponent, og bare i dev-modus. */
+  /** Warns once per component instance, and only in dev mode. */
   private warnOnce(key: string, message: string): void {
     if (!isDevMode() || this.warned.has(key)) return;
     this.warned.add(key);
@@ -409,10 +408,9 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     const query = (event.target as HTMLInputElement).value;
     this.query.set(query);
 
-    // u-combobox skriver selv valgt tekst i feltet med en syntetisk `input`-hendelse.
-    // Det er ikke et søk, og skal ikke sende `completeMethod` (#428). Tømming
-    // (tøm-knappen eller etter valg i flervalg) sendes fortsatt, slik at forslagene
-    // kan nullstilles.
+    // u-combobox writes the selected text into the field with a synthetic `input` event.
+    // That is not a search and must not emit `completeMethod` (#428). Clearing (the clear
+    // button, or after selecting in multi select) is still emitted, so suggestions can be reset.
     if (event.type === 'input' && !event.isTrusted && query !== '') return;
 
     this.completeMethod.emit({ query });
@@ -423,8 +421,8 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
   }
 
   /**
-   * Speiler valgt verdi inn i `<data>`-elementene som `<u-combobox>` bruker
-   * internt. Gjenbruker eksisterende noder, siden komponenten også eier dem.
+   * Mirrors the selected value into the `<data>` elements `<u-combobox>` uses
+   * internally. Reuses existing nodes, since the web component owns them too.
    */
   private writeToDom(selected: readonly T[]): void {
     const combobox = this.comboboxRef()?.nativeElement;
@@ -452,7 +450,7 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     }
   }
 
-  /** Leser `<data>`-elementene tilbake etter at brukeren har endret valget. */
+  /** Reads the `<data>` elements back after the user has changed the selection. */
   protected readFromDom(): void {
     const combobox = this.comboboxRef()?.nativeElement;
     if (!combobox) return;
@@ -465,14 +463,14 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     const value = this.fromArray(options);
     this.value.set(value);
 
-    // u-combobox skriver selv valgt tekst i feltet ved valg. Hold filtreringen i takt.
+    // u-combobox writes the selected text into the field on selection. Keep filtering in sync.
     this.query.set(combobox.control?.value ?? '');
 
     this.onChange(value);
     this.onTouched();
   }
 
-  /** Lager et nytt alternativ av tekst brukeren har lagt til med `creatable`. */
+  /** Creates a new option from text the user added with `creatable`. */
   private create(text: string): T {
     const createOption = this.createOption();
     if (createOption) return createOption(text);
@@ -486,7 +484,7 @@ export abstract class HviSuggestionBase<T, V> implements ControlValueAccessor {
     return text as T;
   }
 
-  /** Finner opprinnelig alternativ ut fra nøkkel, så verdien beholder typen. */
+  /** Finds the original option by key, so the value keeps its type. */
   private resolve(key: string): T | undefined {
     return (
       this.suggestions().find((option) => this.keyOf(option) === key) ??

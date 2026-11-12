@@ -9,21 +9,33 @@ import {
 
 /**
  * @summary
- * Søkbart inputfelt med forslagsliste der brukeren velger ett alternativ.
- * Verdien settes med `ngModel`, `formControlName` eller `[(value)]`, og lista
- * fylles via `suggestions`. Bruk `hvi-suggestion-multiple` for flervalg.
+ * Searchable input with a list of suggestions where the user selects one option.
+ * The value is set with `ngModel`, `formControlName` or `[(value)]`, and the list
+ * is filled via `suggestions`. Use `hvi-suggestion-multiple` for multi select.
  *
- * Bare de `maxVisible` første treffene rendres, slik at lange lister ikke
- * legger tusenvis av noder i DOM.
+ * Only the first `maxVisible` matches are rendered, so long lists do not put
+ * thousands of nodes in the DOM.
  *
- * @example
+ * @example Basic single selection
  * ```html
  * <hvi-suggestion
  *   label="Velg en kommune"
  *   [(ngModel)]="kommune"
- *   [suggestions]="treff"
- *   (completeMethod)="sok($event)"
+ *   [suggestions]="kommuner"
+ * />
+ * ```
+ *
+ * @example Backend search with objects
+ * ```html
+ * <hvi-suggestion
+ *   label="Søk etter kommune"
  *   optionLabel="navn"
+ *   dataKey="nummer"
+ *   [filter]="false"
+ *   [loading]="laster()"
+ *   [(ngModel)]="kommune"
+ *   [suggestions]="treff()"
+ *   (completeMethod)="sok($event.query)"
  * />
  * ```
  *
@@ -48,7 +60,7 @@ import {
 export class HviSuggestion<T = unknown> extends HviSuggestionBase<T, T | null> {
   protected readonly multiple = false;
 
-  /** Valgt verdi, eller `null` når ingenting er valgt. */
+  /** The selected option, or `null` when nothing is selected. */
   readonly value = model<T | null>(null);
 
   protected toArray(value: T | null | undefined): readonly T[] {

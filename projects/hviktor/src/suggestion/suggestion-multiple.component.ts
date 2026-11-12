@@ -9,17 +9,29 @@ import {
 
 /**
  * @summary
- * Søkbart inputfelt med forslagsliste der brukeren kan velge flere alternativer.
- * Valgte alternativer vises som chips. Verdien er alltid en liste, og en tom
- * liste når ingenting er valgt. Bruk `hvi-suggestion` for enkeltvalg.
+ * Searchable input with a list of suggestions where the user can select multiple
+ * options. Selected options are shown as chips. The value is always a list, and
+ * an empty list when nothing is selected. Use `hvi-suggestion` for single select.
  *
- * @example
+ * @example Basic multiple selection
  * ```html
  * <hvi-suggestion-multiple
  *   label="Velg kommuner"
- *   [(ngModel)]="kommuner"
- *   [suggestions]="treff"
+ *   [(ngModel)]="valgteKommuner"
+ *   [suggestions]="kommuner"
+ * />
+ * ```
+ *
+ * @example Letting the user add new objects
+ * ```html
+ * <hvi-suggestion-multiple
+ *   label="Velg eller legg til kommuner"
  *   optionLabel="navn"
+ *   dataKey="nummer"
+ *   creatable
+ *   [createOption]="nyKommune"
+ *   [(ngModel)]="valgteKommuner"
+ *   [suggestions]="kommuner"
  * />
  * ```
  *
@@ -44,7 +56,7 @@ import {
 export class HviSuggestionMultiple<T = unknown> extends HviSuggestionBase<T, T[]> {
   protected override readonly multiple = true;
 
-  /** Valgte alternativer. Tom liste når ingenting er valgt. */
+  /** The selected options. An empty list when nothing is selected. */
   override readonly value = model<T[]>([]);
 
   protected override toArray(value: T[] | null | undefined): readonly T[] {
