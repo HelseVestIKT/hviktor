@@ -83,6 +83,20 @@ class NoTitleDialogHost {}
 
 @Component({
   standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog><h2>Endre adresse</h2>Content</dialog>',
+})
+class HeadingDialogHost {}
+
+@Component({
+  standalone: true,
+  imports: [HviDialog],
+  template: '<dialog hviDialog aria-label="Egen tittel"><h2>Overskrift</h2>Content</dialog>',
+})
+class OwnAriaLabelDialogHost {}
+
+@Component({
+  standalone: true,
   selector: 'test-non-modal-dialog-host',
   imports: [HviDialog],
   template: '<dialog hviDialog [modal]="false">Content</dialog>',
@@ -198,7 +212,9 @@ describe('HviDialog — Placement', () => {
 
 describe('HviDialog — Title and accessible name', () => {
   beforeEach(async () => {
-    await setupTestBed({ imports: [TitleDialogHost, NoTitleDialogHost] });
+    await setupTestBed({
+      imports: [TitleDialogHost, NoTitleDialogHost, HeadingDialogHost, OwnAriaLabelDialogHost],
+    });
   });
 
   it('should render an h2 with the title when title is set', () => {
@@ -223,10 +239,35 @@ describe('HviDialog — Title and accessible name', () => {
     expect(f.nativeElement.querySelector('dialog h2')).toBeFalsy();
   });
 
-  it('should set aria-label to "Dialogboks" when no title is set', () => {
+  it('should set aria-label to "Dialogboks" when there is neither title nor heading', () => {
     const f = TestBed.createComponent(NoTitleDialogHost);
     f.detectChanges();
     expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe('Dialogboks');
+  });
+
+  it('should use the first heading as aria-label when no title is set', () => {
+    const f = TestBed.createComponent(HeadingDialogHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe(
+      'Endre adresse',
+    );
+  });
+
+  it('should read the heading again when the dialog opens', () => {
+    const f = TestBed.createComponent(HeadingDialogHost);
+    f.detectChanges();
+    const dialog = f.nativeElement.querySelector('dialog') as HTMLDialogElement;
+    mockDialogState(dialog);
+    dialog.querySelector('h2')!.textContent = 'Ny overskrift';
+
+    dialog.dispatchEvent(Object.assign(new Event('toggle'), { newState: 'open' }));
+    expect(dialog.getAttribute('aria-label')).toBe('Ny overskrift');
+  });
+
+  it("should keep the consumer's own aria-label", () => {
+    const f = TestBed.createComponent(OwnAriaLabelDialogHost);
+    f.detectChanges();
+    expect(f.nativeElement.querySelector('dialog').getAttribute('aria-label')).toBe('Egen tittel');
   });
 });
 
