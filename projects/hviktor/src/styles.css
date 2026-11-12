@@ -1,5 +1,5 @@
 @import '@digdir/designsystemet-css';
-/* Temaet må importeres etter designsystemet-css. Genereres av `npm run tokens:build`. */
+/* Temaet må importeres etter designsystemet-css. Genereres av `npm run tokens`. */
 @import './design-tokens-build/hvikt.css';
 /* Variabel woff2 som dekker alle vektene, slik at konsumenter ikke må laste fonten selv. */
 @import '@fontsource-variable/albert-sans';
