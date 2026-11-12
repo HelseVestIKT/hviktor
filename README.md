@@ -6,7 +6,7 @@
 [![npm version](https://img.shields.io/npm/v/@helsevestikt/hviktor-angular)](https://www.npmjs.com/package/@helsevestikt/hviktor-angular)
 [![PR Checks](https://github.com/HelseVestIKT/hviktor/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor/actions/workflows/pr-checks.yml)
 [![Publish to npm](https://github.com/HelseVestIKT/hviktor/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor/actions/workflows/publish-npm.yml)
-[![Angular](https://img.shields.io/badge/Angular-17--21-dd0031)](https://angular.dev/)
+[![Angular](https://img.shields.io/badge/Angular-17--22-dd0031)](https://angular.dev/)
 [![Demo](https://img.shields.io/badge/Demo-GitHub%20Pages-blue)](https://helsevestikt.github.io/hviktor/)
 
 <p>
@@ -29,7 +29,7 @@ Hviktor Angular inneholder Angular komponenter og direktiver som bygger på desi
 
 - Node.js 20.x
 - npm 10+
-- Angular 17–21
+- Angular 17–22
 
 ## Struktur
 
