@@ -359,6 +359,7 @@ export const DEMO_COMPONENTS: DemoComponent[] = [
     id: 'suggestion',
     name: 'Suggestion',
     description: 'Søkbar select med mulighet for å velge flere alternativer',
+    codeTested: true,
   },
   {
     id: 'required-tag',
