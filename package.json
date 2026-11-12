@@ -62,7 +62,7 @@
     "@types/node": "^25.5.0",
     "angular-eslint": "22.5.0",
     "copyfiles": "^2.4.1",
-    "esbuild": "^0.25.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
     "jsdom": "^27.1.0",
