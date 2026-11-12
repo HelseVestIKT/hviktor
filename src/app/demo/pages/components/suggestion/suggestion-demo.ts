@@ -6,6 +6,7 @@ import {
   HviLink,
   HviSuggestion,
   HviSuggestionCompleteEvent,
+  HviSuggestionMultiple,
 } from '@helsevestikt/hviktor-angular';
 import { debounceTime, delay, distinctUntilChanged, of, Subject, switchMap } from 'rxjs';
 import { DemoPageComponent, DemoSectionComponent } from '../../../shared';
@@ -37,7 +38,15 @@ export interface Sensor {
 @Component({
   selector: 'app-suggestion-demo',
   standalone: true,
-  imports: [DemoPageComponent, DemoSectionComponent, FormsModule, HviSuggestion, HviAlert, HviLink],
+  imports: [
+    DemoPageComponent,
+    DemoSectionComponent,
+    FormsModule,
+    HviSuggestion,
+    HviSuggestionMultiple,
+    HviAlert,
+    HviLink,
+  ],
   template: `
     <app-demo-page componentId="suggestion">
       <hvi-alert class="mb-4"
@@ -64,10 +73,9 @@ export interface Sensor {
       </app-demo-section>
 
       <app-demo-section title="Flervalg" [code]="flervalgCode">
-        <hvi-suggestion
+        <hvi-suggestion-multiple
           label="Velg kommuner"
           placeholder="Skriv for å søke..."
-          [multiple]="true"
           [(ngModel)]="valgteKommuner"
           [suggestions]="kommuner"
         />
@@ -91,13 +99,12 @@ export interface Sensor {
       </app-demo-section>
 
       <app-demo-section title="Lange lister" [code]="langeListerCode">
-        <hvi-suggestion
+        <hvi-suggestion-multiple
           label="Velg sensorer"
           description="Lista inneholder 3000 sensorer, men bare 50 rendres av gangen. Skriv for å snevre inn."
           placeholder="Skriv for å søke..."
           optionLabel="navn"
           dataKey="id"
-          [multiple]="true"
           [maxVisible]="50"
           [(ngModel)]="valgteSensorer"
           [suggestions]="sensorer"
@@ -138,11 +145,10 @@ export interface Sensor {
           [(ngModel)]="readonlySykehus"
           [suggestions]="sykehus"
         />
-        <hvi-suggestion
+        <hvi-suggestion-multiple
           label="Sykehus"
           placeholder="Søk etter sykehus"
           [readOnly]="true"
-          [multiple]="true"
           [(ngModel)]="readonlySykehuser"
           [suggestions]="sykehus"
         />

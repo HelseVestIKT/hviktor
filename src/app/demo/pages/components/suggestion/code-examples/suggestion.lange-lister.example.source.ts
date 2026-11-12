@@ -1,21 +1,20 @@
 // Auto-generated - do not edit manually
 export const SuggestionLangeListerExampleSource = `import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HviSuggestion } from '@helsevestikt/hviktor-angular';
+import { HviSuggestionMultiple } from '@helsevestikt/hviktor-angular';
 import { Sensor } from '../suggestion-demo';
 
 @Component({
   selector: 'app-suggestion-lange-lister-example',
   standalone: true,
-  imports: [FormsModule, HviSuggestion],
+  imports: [FormsModule, HviSuggestionMultiple],
   template: \`
-    <hvi-suggestion
+    <hvi-suggestion-multiple
       label="Velg sensorer"
       description="Lista inneholder 3000 sensorer, men bare 50 rendres av gangen. Skriv for å snevre inn."
       placeholder="Skriv for å søke..."
       optionLabel="navn"
       dataKey="id"
-      [multiple]="true"
       [maxVisible]="50"
       [(ngModel)]="valgteSensorer"
       [suggestions]="sensorer"
