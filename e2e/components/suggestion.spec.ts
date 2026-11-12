@@ -17,6 +17,7 @@ const option = (scope: Locator, label: string) =>
   scope.locator(`u-option[label="${label}"]:not([data-empty])`);
 const options = (scope: Locator) => scope.locator('u-option:not([data-empty]):visible');
 const chips = (scope: Locator) => scope.locator('ds-suggestion > data');
+const toggle = (scope: Locator) => scope.locator('ds-suggestion button[aria-expanded]').first();
 const valgt = (scope: Locator) => scope.locator('p', { hasText: 'Valgt:' }).first();
 
 /**
@@ -124,6 +125,40 @@ test.describe('Suggestion', () => {
       await page.keyboard.press('Enter');
       await expect(chips(s)).toHaveCount(1);
       await expect(valgt(s)).toHaveText('Valgt: Oslo');
+    });
+  });
+
+  test.describe('åpne/lukk-knapp', () => {
+    test('åpner og lukker lista, og snur pila', async ({ page }) => {
+      const s = section(page, 'Flervalg');
+      const knapp = toggle(s);
+      await expect(knapp).toBeVisible();
+      await expect(knapp).toHaveAttribute('aria-expanded', 'false');
+
+      await knapp.click();
+      await expect(s.locator('u-datalist')).toBeVisible();
+      await expect(knapp).toHaveAttribute('aria-expanded', 'true');
+      const rotasjon = await knapp.evaluate((el) => getComputedStyle(el, '::before').rotate);
+      expect(rotasjon).toBe('180deg');
+
+      await knapp.click();
+      await expect(s.locator('u-datalist')).toBeHidden();
+      await expect(knapp).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    test('byttes med tøm-knappen når feltet har tekst', async ({ page }) => {
+      const s = section(page, 'Flervalg');
+      await type(s, 'Os');
+      await expect(toggle(s)).toBeHidden();
+      await expect(s.locator('ds-suggestion button[type="reset"]')).toBeVisible();
+    });
+
+    test('vises ikke i readonly', async ({ page }) => {
+      const s = section(page, 'ReadOnly');
+      await expect(s.locator('ds-suggestion button[aria-expanded]')).toHaveCount(2);
+      for (const knapp of await s.locator('ds-suggestion button[aria-expanded]').all()) {
+        await expect(knapp).toBeHidden();
+      }
     });
   });
 

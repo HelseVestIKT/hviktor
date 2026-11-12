@@ -101,6 +101,8 @@ export const HVI_SUGGESTION_TEMPLATE = `
         (blur)="onTouched()"
       />
       <button type="reset" [attr.aria-label]="clearLabel()"></button>
+      <!-- Åpne/lukk-knapp. u-combobox styrer aria-expanded, aria-label og når den vises. -->
+      <button type="button" aria-expanded="false"></button>
       <u-datalist data-nofilter>
         @for (option of visible(); track keyOf(option)) {
           <u-option [attr.value]="keyOf(option)" [attr.label]="labelOf(option)">
@@ -137,6 +139,11 @@ export const HVI_SUGGESTION_STYLES = `
   :host {
     display: block;
     margin-block-end: var(--ds-size-2);
+  }
+
+  /* Designsystemet viser alltid en pil ned. Snu den når lista er åpen, som i en select. */
+  .ds-suggestion > button[aria-expanded='true']::before {
+    rotate: 180deg;
   }
 
   [data-suggestion-truncated] {
