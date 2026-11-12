@@ -33,7 +33,7 @@ export class ThemeService {
     return 'light';
   }
 
-  setColorScheme(value: string): void {
+  setColorScheme(value: string | number): void {
     if (value === 'light' || value === 'dark') {
       this.colorScheme.set(value);
     }
