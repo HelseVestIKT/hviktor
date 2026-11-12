@@ -10,6 +10,9 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HviToggleGroupItem } from './toggle-group-item.directive';
 
+/** Allowed value types for HviToggleGroup and HviToggleGroupItem */
+export type HviToggleGroupValue = string | number;
+
 let nextGroupId = 0;
 
 /**
@@ -32,6 +35,15 @@ let nextGroupId = 0;
  * <hvi-toggle-group formControlName="view" variant="secondary">
  *   <label hviToggleGroupItem value="list">Liste</label>
  *   <label hviToggleGroupItem value="grid">Rutenett</label>
+ * </hvi-toggle-group>
+ * ```
+ *
+ * @example
+ * Number values. The value type is inferred from what you bind to `[value]`/`[(value)]`:
+ * ```html
+ * <hvi-toggle-group [(value)]="selectedYear">
+ *   <label hviToggleGroupItem [value]="2025">2025</label>
+ *   <label hviToggleGroupItem [value]="2026">2026</label>
  * </hvi-toggle-group>
  * ```
  *
@@ -60,7 +72,9 @@ let nextGroupId = 0;
     },
   ],
 })
-export class HviToggleGroup implements ControlValueAccessor {
+export class HviToggleGroup<
+  T extends HviToggleGroupValue = string,
+> implements ControlValueAccessor {
   private readonly registeredItems: HviToggleGroupItem[] = [];
 
   /** Accessible label for the toggle group */
@@ -82,17 +96,17 @@ export class HviToggleGroup implements ControlValueAccessor {
   readonly _name = signal(`togglegroup-name-${++nextGroupId}`);
 
   /** The currently selected value */
-  private readonly _value = signal<string | undefined>(undefined);
+  private readonly _value = signal<T | undefined>(undefined);
 
   /** Event emitted when value changes */
-  @Output() valueChange = new EventEmitter<string>();
+  @Output() valueChange = new EventEmitter<T>();
 
   // ControlValueAccessor callbacks
-  private onChange: (value: string) => void = () => {};
+  private onChange: (value: T) => void = () => {};
   private onTouched: () => void = () => {};
 
   @Input()
-  set value(val: string | undefined) {
+  set value(val: T | undefined) {
     this._value.set(val);
     this.updateItemStates();
   }
@@ -151,11 +165,12 @@ export class HviToggleGroup implements ControlValueAccessor {
   /** Select an item and update all states */
   selectItem(item: HviToggleGroupItem): void {
     if (this._disabled()) return;
-    this._value.set(item.value);
+    const value = item.value as T;
+    this._value.set(value);
     this.updateItemStates();
     this.updateFocusableItem(item);
-    this.valueChange.emit(item.value);
-    this.onChange(item.value);
+    this.valueChange.emit(value);
+    this.onChange(value);
     this.onTouched();
   }
 
@@ -220,14 +235,14 @@ export class HviToggleGroup implements ControlValueAccessor {
   }
 
   // ControlValueAccessor implementation
-  writeValue(value: string): void {
+  writeValue(value: T | undefined): void {
     this._value.set(value);
     this.updateItemStates();
     const match = this.registeredItems.find((i) => i.value === value);
     if (match) this.updateFocusableItem(match);
   }
 
-  registerOnChange(fn: (value: string) => void): void {
+  registerOnChange(fn: (value: T) => void): void {
     this.onChange = fn;
   }
 
