@@ -79,6 +79,15 @@ form[hviForm] > * + * {
   display: none;
 }
 
+/*
+ * Tooltip: Når data-tooltip fjernes (f.eks. [hviTooltip]="vis ? 'Tekst' : ''"), legger
+ * Designsystemet tilbake data-tooltip="" og viser en tom boble ved hover, der bare pila
+ * («hjertet») synes. Skjul tooltipen når den ikke har innhold.
+ */
+.ds-tooltip:empty {
+  display: none;
+}
+
 /* adding styling to lists that tailwind has removed */
 ol.ds-list {
   list-style-type: decimal;
