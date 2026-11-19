@@ -47,8 +47,9 @@ const AFTER_CODE = `<div class="bg-background-tinted border-b border-border-subt
           <h2 hviHeading size="md" id="ng-add" class="mb-3 scroll-mt-24">Med ng add</h2>
           <p hviParagraph class="max-w-2xl">
             Velger du Tailwind når du kjører <code>ng add &#64;helsevestikt/hviktor-angular</code>,
-            settes alt opp for deg. Krever Tailwind CSS v4, som ng add installerer på Angular 18 og
-            nyere. Tar du i bruk Tailwind senere, kan du kjøre ng add på nytt.
+            settes alt opp for deg. På Angular 18 og nyere med en PostCSS-kompatibel builder installerer
+            ng add Tailwind CSS v4; ellers velges Tailwind v3. Tar du i bruk Tailwind senere, kan du
+            kjøre ng add på nytt.
           </p>
         </section>
 
