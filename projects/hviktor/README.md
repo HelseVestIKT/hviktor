@@ -139,7 +139,9 @@ Klasser uten fargenavn, som `bg-background-tinted`, følger nærmeste `data-colo
 
 Vil du ha en bestemt farge uansett `data-color`, tar du med fargenavnet: `bg-accent-background-tinted`.
 
-Avstander (`p-4`, `gap-2` osv.) bruker Tailwinds egen skala, ikke `--ds-size-*`. Trenger du en av Designsystemets avstander, skriver du variabelen direkte: `p-(--ds-size-4)`.
+Avstander (`p-4`, `gap-2`, `w-12` osv.) bruker Designsystemets avstander `--ds-size-*` for tallene 0–15, 18, 22, 26 og 30, så de blir større eller mindre med `data-size`. Andre tall, som `p-16`, bruker Tailwinds egen skala.
+
+Se alle klassene med eksempler på [hviktor.no/tailwind](https://hviktor.no/tailwind).
 
 Tailwind v3 kan brukes med de vanlige `@tailwind`-direktivene, men `tailwind.css`-temaet krever v4. Uten Tailwind kan du fortsatt bruke `var(--ds-…)` som før.
 
