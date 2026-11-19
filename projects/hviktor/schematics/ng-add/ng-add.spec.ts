@@ -118,6 +118,40 @@ describe('ng-add', () => {
       expect(pkg.devDependencies.tailwindcss).toMatch(/^\^3/);
     });
 
+    it('beholder eksisterende Tailwind v3 på Angular 19+ uten å legge til v4-oppsett', async () => {
+      const tree = await runNgAdd(
+        createWorkspace({
+          angularVersion: '^19.0.0',
+          stylesContent: `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n`,
+        }),
+      );
+      const pkg = JSON.parse(tree.readContent('/package.json'));
+      const styles = tree.readContent('/src/styles.css');
+
+      expect(pkg.devDependencies.tailwindcss).toMatch(/^\^3/);
+      expect(pkg.devDependencies['@tailwindcss/postcss']).toBeUndefined();
+      expect(tree.exists('/.postcssrc.json')).toBe(false);
+      expect(styles).not.toContain('hviktor-angular/tailwind.css');
+      expect(styles).not.toContain(`@import 'tailwindcss'`);
+    });
+
+    it('beholder Tailwind v3 fra package.json selv om styles ikke har direktivene', async () => {
+      const base = createWorkspace({ angularVersion: '^19.0.0' });
+      base.overwrite(
+        '/package.json',
+        JSON.stringify({
+          dependencies: { '@angular/core': '^19.0.0' },
+          devDependencies: { tailwindcss: '^3.4.17' },
+        }),
+      );
+      const tree = await runNgAdd(base);
+      const pkg = JSON.parse(tree.readContent('/package.json'));
+
+      expect(pkg.devDependencies.tailwindcss).toBe('^3.4.17');
+      expect(pkg.devDependencies['@tailwindcss/postcss']).toBeUndefined();
+      expect(tree.readContent('/src/styles.css')).toContain('@tailwind base');
+    });
+
     it('bruker prosjektets sourceRoot i tailwind.config.js', async () => {
       const tree = await runNgAdd(
         createWorkspace({ angularVersion: '^17.0.0', sourceRoot: 'apps/portal/src' }),
@@ -135,20 +169,34 @@ describe('ng-add', () => {
 
       expect(pkg.devDependencies?.tailwindcss).toBeUndefined();
       expect(styles).toContain('hviktor-angular/styles.css');
+      expect(styles).toContain(`/* @import '@helsevestikt/hviktor-angular/tailwind.css'; */`);
+      expect(styles).toContain(`/* @import 'tailwindcss'; */`);
+    });
+
+    it('legger ikke inn tailwind.css for Tailwind v3', async () => {
+      const tree = await runNgAdd(createWorkspace({ angularVersion: '^17.3.0' }));
+      const styles = tree.readContent('/src/styles.css');
+
+      expect(styles).not.toContain('hviktor-angular/tailwind.css');
+      expect(styles.indexOf('@tailwind utilities')).toBeLessThan(
+        styles.indexOf('hviktor-angular/styles.css'),
+      );
     });
   });
 
   describe('styles.css-håndtering', () => {
-    it('legger hviktor-importen etter Tailwind', async () => {
+    it('legger inn tailwind.css, styles.css og tailwindcss i riktig rekkefølge', async () => {
       const tree = await runNgAdd(createWorkspace({ angularVersion: '^19.0.0' }));
       const styles = tree.readContent('/src/styles.css');
 
-      expect(styles.indexOf(`@import 'tailwindcss'`)).toBeLessThan(
-        styles.indexOf('hviktor-angular/styles.css'),
+      expect(styles).toBe(
+        `@import '@helsevestikt/hviktor-angular/tailwind.css';\n` +
+          `@import '@helsevestikt/hviktor-angular/styles.css';\n` +
+          `@import 'tailwindcss';\n`,
       );
     });
 
-    it('setter hviktor-importen etter eksisterende Tailwind uten å duplisere', async () => {
+    it('setter hviktor-importene før eksisterende Tailwind uten å duplisere', async () => {
       const tree = await runNgAdd(
         createWorkspace({
           angularVersion: '^19.0.0',
@@ -157,10 +205,41 @@ describe('ng-add', () => {
       );
       const styles = tree.readContent('/src/styles.css');
 
-      expect(styles.indexOf(`@import 'tailwindcss'`)).toBeLessThan(
+      expect(styles.indexOf('hviktor-angular/tailwind.css')).toBeLessThan(
         styles.indexOf('hviktor-angular/styles.css'),
       );
+      expect(styles.indexOf('hviktor-angular/styles.css')).toBeLessThan(
+        styles.indexOf(`@import 'tailwindcss'`),
+      );
       expect(styles.match(/@import 'tailwindcss'/g)).toHaveLength(1);
+      expect(styles).toContain('body { margin: 0; }');
+    });
+
+    it('legger tailwind.css først når appen allerede har Tailwind og hviktor', async () => {
+      const tree = await runNgAdd(
+        createWorkspace({
+          angularVersion: '^19.0.0',
+          stylesContent: `@import '@helsevestikt/hviktor-angular/styles.css';\n@import 'tailwindcss';\n`,
+        }),
+      );
+      const styles = tree.readContent('/src/styles.css');
+
+      expect(styles.startsWith(`@import '@helsevestikt/hviktor-angular/tailwind.css';`)).toBe(true);
+      expect(styles.match(/hviktor-angular\/styles\.css/g)).toHaveLength(1);
+    });
+
+    it('tar i bruk de utkommenterte importene når Tailwind legges til senere', async () => {
+      const first = await runNgAdd(createWorkspace({ angularVersion: '^19.0.0' }), {
+        tailwind: false,
+      });
+      const second = await runNgAdd(first);
+      const styles = second.readContent('/src/styles.css');
+
+      expect(styles).toBe(
+        `@import '@helsevestikt/hviktor-angular/tailwind.css';\n` +
+          `@import '@helsevestikt/hviktor-angular/styles.css';\n` +
+          `@import 'tailwindcss';\n`,
+      );
     });
 
     it('er idempotent ved gjentatt kjøring', async () => {
@@ -169,7 +248,16 @@ describe('ng-add', () => {
       const styles = second.readContent('/src/styles.css');
 
       expect(styles.match(/hviktor-angular\/styles\.css/g)).toHaveLength(1);
+      expect(styles.match(/hviktor-angular\/tailwind\.css/g)).toHaveLength(1);
       expect(styles.match(/@import 'tailwindcss'/g)).toHaveLength(1);
+    });
+
+    it('er idempotent uten Tailwind', async () => {
+      const first = await runNgAdd(createWorkspace({ angularVersion: '^19.0.0' }), {
+        tailwind: false,
+      });
+      const second = await runNgAdd(first, { tailwind: false });
+      expect(second.readContent('/src/styles.css')).toBe(first.readContent('/src/styles.css'));
     });
   });
 

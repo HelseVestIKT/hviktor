@@ -1,5 +1,7 @@
-@import 'tailwindcss';
+/* Tailwind-temaet først: det setter lagrekkefølgen slik at Tailwind-klasser vinner over Designsystemet. */
+@import '@helsevestikt/hviktor-angular/tailwind.css';
 @import '@helsevestikt/hviktor-angular/styles.css';
+@import 'tailwindcss';
 @import 'highlight.js/styles/github-dark.css';
 
 code {

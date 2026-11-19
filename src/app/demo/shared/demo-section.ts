@@ -30,13 +30,15 @@ hljs.registerLanguage('typescript', typescript);
         <p hviParagraph class="max-w-3xl pt-2">{{ description() }}</p>
       }
 
-      <div class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-6">
+      <div
+        class="componentDisplay border-neutral-border-subtle mt-8 scroll-mt-24 rounded-t-lg border p-6"
+      >
         <ng-content />
       </div>
 
       @if (code()) {
         <div
-          class="mb-8 flex scroll-mt-24 justify-end rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300"
+          class="border-x-neutral-border-subtle border-b-neutral-border-subtle mb-8 flex scroll-mt-24 justify-end rounded-b-lg border border-t-0"
         >
           <button
             class="toggleButton ds-button"
@@ -57,11 +59,13 @@ hljs.registerLanguage('typescript', typescript);
 
     @if (showCode()) {
       <section aria-label="Vis kode" class="gap-4">
-        <div class="componentDisplay mt-8 scroll-mt-24 rounded-t-lg border border-neutral-300 p-4">
+        <div
+          class="componentDisplay border-neutral-border-subtle mt-8 scroll-mt-24 rounded-t-lg border p-4"
+        >
           <p hviParagraph>Angular</p>
         </div>
         <div
-          class="codeExample mb-8 rounded-b-lg border border-t-0 border-x-neutral-300 border-b-neutral-300 p-4"
+          class="codeExample border-x-neutral-border-subtle border-b-neutral-border-subtle mb-8 rounded-b-lg border border-t-0 p-4"
         >
           <pre><code #codeBlock class="language-typescript rounded" tabindex="0">{{ code() }}</code></pre>
         </div>
