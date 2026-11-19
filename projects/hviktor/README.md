@@ -87,6 +87,62 @@ Temaets CSS-variabler er også tilgjengelig alene, for eksempel hvis du bruker `
 @import '@helsevestikt/hviktor-angular/theme.css';
 ```
 
+## Tailwind CSS
+
+Pakken har en Tailwind v4-fil som gjør fargene, skyggene, radiusene og tekststørrelsene i temaet om til Tailwind-klasser. Da kan du skrive klasser i stedet for `var(--ds-…)`:
+
+```html
+<!-- Før -->
+<div
+  style="background-color: var(--ds-color-background-tinted); border-bottom: 1px solid var(--ds-color-border-subtle)"
+>
+  <!-- Etter -->
+  <div class="bg-background-tinted border-border-subtle border-b"></div>
+</div>
+```
+
+### Oppsett
+
+Krever Tailwind CSS v4. Har du kjørt `ng add` og svart ja til Tailwind, er Tailwind allerede installert. Da trenger du bare å endre importene i `src/styles.css` til denne rekkefølgen:
+
+```css
+@import '@helsevestikt/hviktor-angular/tailwind.css';
+@import '@helsevestikt/hviktor-angular/styles.css';
+@import 'tailwindcss';
+```
+
+Rekkefølgen betyr noe. `tailwind.css` må stå først, fordi den bestemmer rekkefølgen på CSS-lagene: Tailwinds reset kommer før Designsystemet, og Tailwind-klassene kommer etter. Da kan en Tailwind-klasse overstyre stilen til en komponent, for eksempel `class="mt-4"` på en `hviButton`.
+
+Installer utvidelsen [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) i VS Code. Den foreslår klassene mens du skriver, og viser fargen ved siden av.
+
+### Klassene
+
+Navnene er de samme som i CSS-variablene, uten `--ds-color-`:
+
+| CSS-variabel                              | Tailwind-klasse (eksempler)                          |
+| ----------------------------------------- | ---------------------------------------------------- |
+| `--ds-color-background-tinted`            | `bg-background-tinted`                               |
+| `--ds-color-border-subtle`                | `border-border-subtle`                               |
+| `--ds-color-text-subtle`                  | `text-text-subtle`                                   |
+| `--ds-color-neutral-surface-hover`        | `hover:bg-neutral-surface-hover`                     |
+| `--ds-color-brand1-base-default`          | `text-brand1-base-default`, `bg-brand1-base-default` |
+| `--ds-shadow-md`, `--ds-border-radius-md` | `shadow-md`, `rounded-md`                            |
+| `--ds-body-sm-font-size`                  | `text-sm` (også `text-md` og `text-lg`)              |
+
+Klasser uten fargenavn, som `bg-background-tinted`, følger nærmeste `data-color`. De bytter også farge med `data-color-scheme`, akkurat som variablene:
+
+```html
+<section data-color="brand1">
+  <div class="bg-background-tinted border-border-subtle border-b">Grønn bakgrunn</div>
+</section>
+```
+
+Vil du ha en bestemt farge uansett `data-color`, tar du med fargenavnet: `bg-accent-background-tinted`.
+
+Avstander (`p-4`, `gap-2` osv.) bruker Tailwinds egen skala, ikke `--ds-size-*`. Trenger du en av Designsystemets avstander, skriver du variabelen direkte: `p-(--ds-size-4)`.
+
+Tailwind v3 støttes ikke. Uten Tailwind kan du fortsatt bruke `var(--ds-…)` som før.
+
 ## Bruk
 
 Importer komponentene du trenger direkte i standalone-komponenter:
