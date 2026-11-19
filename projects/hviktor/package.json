@@ -54,6 +54,7 @@
   "exports": {
     "./styles.css": "./styles.css",
     "./theme.css": "./design-tokens-build/hvikt.css",
+    "./tailwind.css": "./design-tokens-build/hvikt.tailwind.css",
     "./theme-types": "./design-tokens-build/types.d.ts"
   },
   "files": [
