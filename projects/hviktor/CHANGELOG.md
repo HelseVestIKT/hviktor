@@ -4,6 +4,40 @@ Alle vesentlige endringer i `@helsevestikt/hviktor-angular` og `@helsevestikt/hv
 
 Formatet følger [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) og prosjektet bruker [Semantic Versioning](https://semver.org/).
 
+## [0.5.2] – 2026-11-19
+
+### @helsevestikt/hviktor-angular
+
+#### Added
+
+- Tailwind CSS: Ny fil `@helsevestikt/hviktor-angular/tailwind.css` som gjør temaets farger, skygger, radiuser og tekststørrelser om til Tailwind-klasser. Skriv `bg-background-tinted border-b border-border-subtle` i stedet for `var(--ds-color-background-tinted)` og `var(--ds-color-border-subtle)`. Klasser uten fargenavn følger nærmeste `data-color` og bytter med `data-color-scheme`. Krever Tailwind CSS v4. Importer fila først i `styles.css`:
+
+  ```css
+  @import '@helsevestikt/hviktor-angular/tailwind.css';
+  @import '@helsevestikt/hviktor-angular/styles.css';
+  @import 'tailwindcss';
+  ```
+
+  Med utvidelsen Tailwind CSS IntelliSense i VS Code får du forslag til klassene mens du skriver. Se README for alle klassene.
+
+#### Changed
+
+- ng add: Med Tailwind v4 legges `tailwind.css` inn sammen med `styles.css` og `tailwindcss`, i rekkefølgen over. Uten Tailwind legges Tailwind-importene inn utkommentert, med en forklaring om hvordan de tas i bruk. Kjører du `ng add` på nytt og svarer ja til Tailwind, fjernes kommentarene. Med Tailwind v3 legges ikke `tailwind.css` inn.
+
+- Tailwind CSS: Avstandsklasser som `p-4` og `gap-2` bruker Designsystemets avstander (`--ds-size-*`) for tallene 0–15, 18, 22, 26 og 30, og skalerer med `data-size`. Andre tall bruker Tailwinds egen skala. Alle klassene vises på hviktor.no/tailwind.
+
+- Chip: `<button hviChip>` får nå `type="button"` som standard, slik at chipen ikke sender inn et omsluttende skjema ved klikk. Ny input `type` (`'button' | 'submit' | 'reset'`). Bruker du chipen som innsendingsknapp, må du nå sette `type="submit"` eksplisitt. ([#433](https://github.com/HelseVestIKT/hviktor/issues/433))
+
+#### Fixed
+
+- ng add: Beholder Tailwind v3 når prosjektet allerede bruker det. Før kunne et Angular 19-prosjekt med Tailwind v3 få Tailwind v4 sitt PostCSS-oppsett i tillegg, slik at bygget feilet.
+
+- Tooltip: En tooltip som slås av igjen (f.eks. `[hviTooltip]="vis() ? 'Kopier' : ''"`) viser ikke lenger en tom boble med bare pila når du holder musa over. Elementet beholder også sin egen `aria-label`/`aria-description` når tooltipen er av. ([#432](https://github.com/HelseVestIKT/hviktor/issues/432))
+
+### @helsevestikt/hviktor-icons
+
+Ingen endringer i denne releasen.
+
 ## [0.5.1] – 2026-11-12
 
 ### @helsevestikt/hviktor-angular
