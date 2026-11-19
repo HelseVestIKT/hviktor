@@ -118,6 +118,40 @@ describe('ng-add', () => {
       expect(pkg.devDependencies.tailwindcss).toMatch(/^\^3/);
     });
 
+    it('beholder eksisterende Tailwind v3 på Angular 19+ uten å legge til v4-oppsett', async () => {
+      const tree = await runNgAdd(
+        createWorkspace({
+          angularVersion: '^19.0.0',
+          stylesContent: `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n`,
+        }),
+      );
+      const pkg = JSON.parse(tree.readContent('/package.json'));
+      const styles = tree.readContent('/src/styles.css');
+
+      expect(pkg.devDependencies.tailwindcss).toMatch(/^\^3/);
+      expect(pkg.devDependencies['@tailwindcss/postcss']).toBeUndefined();
+      expect(tree.exists('/.postcssrc.json')).toBe(false);
+      expect(styles).not.toContain('hviktor-angular/tailwind.css');
+      expect(styles).not.toContain(`@import 'tailwindcss'`);
+    });
+
+    it('beholder Tailwind v3 fra package.json selv om styles ikke har direktivene', async () => {
+      const base = createWorkspace({ angularVersion: '^19.0.0' });
+      base.overwrite(
+        '/package.json',
+        JSON.stringify({
+          dependencies: { '@angular/core': '^19.0.0' },
+          devDependencies: { tailwindcss: '^3.4.17' },
+        }),
+      );
+      const tree = await runNgAdd(base);
+      const pkg = JSON.parse(tree.readContent('/package.json'));
+
+      expect(pkg.devDependencies.tailwindcss).toBe('^3.4.17');
+      expect(pkg.devDependencies['@tailwindcss/postcss']).toBeUndefined();
+      expect(tree.readContent('/src/styles.css')).toContain('@tailwind base');
+    });
+
     it('bruker prosjektets sourceRoot i tailwind.config.js', async () => {
       const tree = await runNgAdd(
         createWorkspace({ angularVersion: '^17.0.0', sourceRoot: 'apps/portal/src' }),

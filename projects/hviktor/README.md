@@ -141,7 +141,7 @@ Vil du ha en bestemt farge uansett `data-color`, tar du med fargenavnet: `bg-acc
 
 Avstander (`p-4`, `gap-2` osv.) bruker Tailwinds egen skala, ikke `--ds-size-*`. Trenger du en av Designsystemets avstander, skriver du variabelen direkte: `p-(--ds-size-4)`.
 
-Tailwind v3 støttes ikke. Uten Tailwind kan du fortsatt bruke `var(--ds-…)` som før.
+Tailwind v3 kan brukes med de vanlige `@tailwind`-direktivene, men `tailwind.css`-temaet krever v4. Uten Tailwind kan du fortsatt bruke `var(--ds-…)` som før.
 
 ## Bruk
 

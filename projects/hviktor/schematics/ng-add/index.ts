@@ -71,6 +71,7 @@ function printBanner(context: SchematicContext): void {
 interface SummaryOptions {
   tailwind: boolean;
   tailwindMajor: 3 | 4 | null;
+  tailwindExisting: boolean;
   stylesSetup: 3 | 4 | null;
   icons: boolean;
   stylesPath: string;
@@ -100,8 +101,10 @@ function printSummary(context: SchematicContext, summary: SummaryOptions): void 
   if (summary.tailwind && summary.tailwindMajor === 3) {
     context.logger.info(`${check} Tailwind CSS v3 satt opp (tailwind.config.js)`);
     context.logger.info(
-      `  ${DIM}Angular-oppsettet ditt støtter ikke Tailwind v4 sitt PostCSS-oppsett,` +
-        ` så v3 ble valgt automatisk.${RESET}`,
+      summary.tailwindExisting
+        ? `  ${DIM}Prosjektet bruker allerede Tailwind v3, så det ble beholdt.${RESET}`
+        : `  ${DIM}Angular-oppsettet ditt støtter ikke Tailwind v4 sitt PostCSS-oppsett,` +
+            ` så v3 ble valgt automatisk.${RESET}`,
     );
   }
 
@@ -406,6 +409,34 @@ function applyImportsWithoutTailwind(content: string): string {
 }
 
 /**
+ * Finner Tailwind-versjonen prosjektet allerede bruker, fra importene i
+ * styles-fila eller fra tailwindcss i package.json. Returnerer null uten Tailwind.
+ * Må sjekkes før avhengigheter legges til, så et v3-prosjekt ikke får v4-oppsett i tillegg.
+ */
+function detectExistingTailwind(tree: Tree, stylesPath: string): 3 | 4 | null {
+  const styles = tree.read(stylesPath)?.toString('utf-8') ?? '';
+  if (hasActive(styles, IMPORT_PATTERNS.tailwindV4)) {
+    return 4;
+  }
+  if (hasActive(styles, IMPORT_PATTERNS.tailwindV3)) {
+    return 3;
+  }
+
+  const packageJson = tree.read('/package.json');
+  if (!packageJson) {
+    return null;
+  }
+  const json = JSON.parse(packageJson.toString('utf-8'));
+  const version: string | undefined =
+    json.devDependencies?.tailwindcss ?? json.dependencies?.tailwindcss;
+  const major = version?.match(/(\d+)/);
+  if (!major) {
+    return null;
+  }
+  return parseInt(major[1], 10) >= 4 ? 4 : 3;
+}
+
+/**
  * Oppdaterer styles-fila. Tailwind som allerede er satt opp i fila styrer
  * oppsettet, ellers versjonen vi installerer (null = uten Tailwind).
  * Returnerer oppsettet som ble brukt.
@@ -492,11 +523,14 @@ export function ngAdd(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     printBanner(context);
 
+    const stylesPath = getStylesPath(tree, options.project);
+    const existingTailwind = detectExistingTailwind(tree, stylesPath);
     let tailwindMajor: 3 | 4 | null = null;
 
-    // Betinget: sett opp Tailwind CSS i riktig versjon for prosjektet
+    // Betinget: sett opp Tailwind CSS i riktig versjon for prosjektet.
+    // Har prosjektet Tailwind fra før, beholdes den versjonen.
     if (options.tailwind) {
-      tailwindMajor = resolveTailwindMajor(tree, context, options.project);
+      tailwindMajor = existingTailwind ?? resolveTailwindMajor(tree, context, options.project);
 
       if (tailwindMajor === 4) {
         setupTailwindV4(tree);
@@ -512,7 +546,6 @@ export function ngAdd(options: Schema): Rule {
       addPackageJsonDependency(tree, ICONS_PACKAGE, ICONS_VERSION, false);
     }
 
-    const stylesPath = getStylesPath(tree, options.project);
     const stylesSetup = updateStylesCss(tree, stylesPath, tailwindMajor, context);
 
     // Planlegg npm install
@@ -521,6 +554,7 @@ export function ngAdd(options: Schema): Rule {
     printSummary(context, {
       tailwind: !!options.tailwind,
       tailwindMajor,
+      tailwindExisting: existingTailwind !== null,
       stylesSetup,
       icons: options.icons !== false,
       stylesPath,
