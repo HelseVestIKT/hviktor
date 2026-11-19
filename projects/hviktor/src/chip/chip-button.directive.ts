@@ -3,6 +3,8 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
 /**
  * @summary Button chip directive for interactive chip elements.
  * Supports a removable variant that adds a close icon via `data-removable`.
+ * Defaults to `type="button"` so the chip does not submit a surrounding form.
+ * Set `type="submit"` explicitly if that is the intended behaviour.
  *
  * @example Basic button chip
  * ```html
@@ -21,10 +23,14 @@ import { booleanAttribute, Directive, Input } from '@angular/core';
   standalone: true,
   host: {
     class: 'ds-chip',
+    '[attr.type]': 'type',
     '[attr.data-removable]': 'removable ? "true" : null',
   },
 })
 export class HviChipButton {
   /** Whether the chip is removable, adding a close icon. */
   @Input({ transform: booleanAttribute }) removable = false;
+
+  /** The type of button. Defaults to `button` to avoid accidental form submits. */
+  @Input() type: 'button' | 'submit' | 'reset' = 'button';
 }
