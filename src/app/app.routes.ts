@@ -15,6 +15,10 @@ export const routes: Routes = [
         loadComponent: () => import('./demo/pages/icons/icons-page').then((m) => m.IconsPage),
       },
       {
+        path: 'tema',
+        loadComponent: () => import('./demo/pages/theme/theme-page').then((m) => m.ThemePage),
+      },
+      {
         path: 'tailwind',
         loadComponent: () =>
           import('./demo/pages/tailwind/tailwind-page').then((m) => m.TailwindPage),
