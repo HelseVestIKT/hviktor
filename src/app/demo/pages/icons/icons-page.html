@@ -49,7 +49,7 @@
         <li>
           <button
             type="button"
-            class="flex aspect-square w-full items-center justify-center rounded border border-transparent transition-colors hover:bg-(--ds-color-neutral-surface-hover) aria-pressed:border-(--ds-color-neutral-border-strong) aria-pressed:bg-(--ds-color-neutral-surface-tinted)"
+            class="hover:bg-neutral-surface-hover aria-pressed:border-neutral-border-strong aria-pressed:bg-neutral-surface-tinted flex aspect-square w-full items-center justify-center rounded border border-transparent transition-colors"
             [attr.aria-label]="icon.name"
             [attr.aria-pressed]="selected()?.slug === icon.slug"
             [hviTooltip]="icon.name"
@@ -108,9 +108,7 @@
     @if (!inDialog) {
     <h2 id="ikon-panel-heading" hviHeading size="sm">{{ icon.name }}</h2>
     }
-    <div
-      class="flex h-24 items-center justify-center rounded border border-(--ds-color-neutral-border-subtle)"
-    >
+    <div class="border-neutral-border-subtle flex h-24 items-center justify-center rounded border">
       <ng-container
         [ngTemplateOutlet]="svg"
         [ngTemplateOutletContext]="{ path: icon.path, size: 48 }"
