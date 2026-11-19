@@ -18,7 +18,7 @@ ng add @helsevestikt/hviktor-angular
 Dette installerer pakken og setter opp prosjektet automatisk:
 
 - Legger til `@import '@helsevestikt/hviktor-angular/styles.css'` i stylesheet
-- Spør om du vil installere og konfigurere **Tailwind CSS**. (default: Yes). Anbefales for best mulig utvikleropplevelse. Alle demoene på [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) bruker Tailwind, så det kan være lurt å ha det installert for å følge eksemplene.
+- Spør om du vil installere og konfigurere **Tailwind CSS**. (default: Yes). Anbefales for best mulig utvikleropplevelse. Alle demoene på [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) bruker Tailwind, så det kan være lurt å ha det installert for å følge eksemplene. Med Tailwind v4 legges også `tailwind.css` inn, så temaets farger blir Tailwind-klasser (se [Tailwind CSS](#tailwind-css)). Svarer du nei, legges Tailwind-importene inn utkommentert, klare til bruk senere.
 - Spør om du vil installere **@helsevestikt/hviktor-icons** (default: Yes). Installerer ikonpakken i samme versjon som `hviktor-angular`. Ikonene importeres som Angular-komponenter der de brukes.
 
 ### Manuelt oppsett
@@ -103,7 +103,7 @@ Pakken har en Tailwind v4-fil som gjør fargene, skyggene, radiusene og tekstst�
 
 ### Oppsett
 
-Krever Tailwind CSS v4. Har du kjørt `ng add` og svart ja til Tailwind, er Tailwind allerede installert. Da trenger du bare å endre importene i `src/styles.css` til denne rekkefølgen:
+Krever Tailwind CSS v4. Kjører du `ng add` og svarer ja til Tailwind, settes alt opp for deg. Tar du i bruk Tailwind senere, kan du kjøre `ng add @helsevestikt/hviktor-angular` på nytt, eller endre importene i `src/styles.css` selv til denne rekkefølgen:
 
 ```css
 @import '@helsevestikt/hviktor-angular/tailwind.css';

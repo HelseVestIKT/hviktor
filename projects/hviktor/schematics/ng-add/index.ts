@@ -17,17 +17,30 @@ const TAILWIND_V3_IMPORT = `@tailwind base;
 @tailwind components;
 @tailwind utilities;`;
 
-/**
- * Kjennetegn på at Tailwind allerede er satt opp i en styles-fil,
- * uavhengig av versjon og fnutt-type.
- */
-const TAILWIND_MARKERS = [
-  `@import 'tailwindcss'`,
-  `@import "tailwindcss"`,
-  '@tailwind base',
-  '@tailwind components',
-  '@tailwind utilities',
-];
+const HVIKTOR_TAILWIND_IMPORT = `@import '${HVIKTOR_PACKAGE}/tailwind.css';`;
+
+/** Står over de utkommenterte Tailwind-importene når Tailwind ikke settes opp. */
+const TAILWIND_HINT =
+  '/* Bruker du Tailwind CSS v4? Fjern kommentarene rundt de to importene under, så blir ' +
+  'temaets farger Tailwind-klasser (f.eks. bg-background-tinted). Se README for ' +
+  `${HVIKTOR_PACKAGE}. */`;
+
+const IMPORT_PATTERNS = {
+  tailwindV4: /@import\s+['"]tailwindcss['"][^;\n]*;?/,
+  tailwindV3: /@tailwind\s+(?:base|components|utilities)\s*;?/,
+  tailwindAny:
+    /@import\s+['"]tailwindcss['"][^;\n]*;?|@tailwind\s+(?:base|components|utilities)\s*;?/,
+  hviktorStyles: new RegExp(
+    `@import\\s+['"]${escapeRegExp(HVIKTOR_PACKAGE)}/styles\\.css['"]\\s*;?`,
+  ),
+  hviktorTailwind: new RegExp(
+    `@import\\s+['"]${escapeRegExp(HVIKTOR_PACKAGE)}/tailwind\\.css['"]\\s*;?`,
+  ),
+};
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
 
 // ANSI-farger for terminal-output
 const RESET = '\x1b[0m';
@@ -58,6 +71,7 @@ function printBanner(context: SchematicContext): void {
 interface SummaryOptions {
   tailwind: boolean;
   tailwindMajor: 3 | 4 | null;
+  stylesSetup: 3 | 4 | null;
   icons: boolean;
   stylesPath: string;
 }
@@ -70,6 +84,17 @@ function printSummary(context: SchematicContext, summary: SummaryOptions): void 
   if (summary.tailwind && summary.tailwindMajor === 4) {
     context.logger.info(
       `${check} Tailwind CSS v4 satt opp (.postcssrc.json + @import 'tailwindcss')`,
+    );
+  }
+  if (summary.stylesSetup === 4) {
+    context.logger.info(
+      `${check} Temaets farger er Tailwind-klasser, f.eks. ${LIGHT_BLUE}bg-background-tinted${RESET}`,
+    );
+  }
+  if (summary.stylesSetup === null) {
+    context.logger.info(
+      `  ${DIM}Tailwind-importene ligger utkommentert i ${summary.stylesPath}.` +
+        ` Fjern kommentarene hvis du tar i bruk Tailwind CSS v4.${RESET}`,
     );
   }
   if (summary.tailwind && summary.tailwindMajor === 3) {
@@ -248,62 +273,176 @@ function addPackageJsonDependency(
 }
 
 /**
- * Finner posisjonen rett etter eksisterende Tailwind-oppsett i styles-filen,
- * slik at nye imports (spesielt Hviktor) alltid havner etter Tailwind.
- * Returnerer 0 hvis Tailwind ikke finnes fra før (prepend øverst).
+ * Bytter ut kommentarer med mellomrom, så vi bare finner importer som er i bruk,
+ * men beholder posisjonene i teksten.
  */
-function findInsertIndexAfterTailwind(content: string): number {
-  let index = 0;
-  for (const marker of TAILWIND_MARKERS) {
-    const pos = content.indexOf(marker);
-    if (pos === -1) {
-      continue;
-    }
-    const lineEnd = content.indexOf('\n', pos);
-    const end = lineEnd === -1 ? content.length : lineEnd + 1;
-    if (end > index) {
-      index = end;
-    }
-  }
-  return index;
+function maskComments(content: string): string {
+  return content.replace(/\/\*[\s\S]*?\*\//g, (comment) => comment.replace(/[^\n]/g, ' '));
 }
 
-function updateStylesCss(tree: Tree, stylesPath: string, imports: string[]): void {
+interface Match {
+  start: number;
+  end: number;
+}
+
+/** Finner alle importer som ikke står i en kommentar. */
+function findActive(content: string, pattern: RegExp): Match[] {
+  const masked = maskComments(content);
+  const global = new RegExp(pattern.source, 'g');
+  return [...masked.matchAll(global)].map((m) => ({ start: m.index, end: m.index + m[0].length }));
+}
+
+function hasActive(content: string, pattern: RegExp): boolean {
+  return findActive(content, pattern).length > 0;
+}
+
+function lineStart(content: string, index: number): number {
+  return content.lastIndexOf('\n', index - 1) + 1;
+}
+
+function lineEnd(content: string, index: number): number {
+  const newline = content.indexOf('\n', index);
+  return newline === -1 ? content.length : newline + 1;
+}
+
+/** Setter inn hele linjer på en linjegrense. */
+function insertLines(content: string, index: number, lines: string[]): string {
+  const needsNewline = index > 0 && index === content.length && !content.endsWith('\n');
+  const block = (needsNewline ? '\n' : '') + lines.join('\n') + '\n';
+  return content.slice(0, index) + block + content.slice(index);
+}
+
+/** Tar i bruk importene som ble lagt inn utkommentert ved en tidligere kjøring uten Tailwind. */
+function uncommentTailwindImports(content: string): string {
+  let result = content.replace(TAILWIND_HINT + '\n', '');
+  for (const imp of [HVIKTOR_TAILWIND_IMPORT, TAILWIND_V4_IMPORT]) {
+    result = result.replace(`/* ${imp} */`, imp);
+  }
+  return result;
+}
+
+/**
+ * Tailwind v4: tailwind.css først, så hviktor, så Tailwind. tailwind.css setter
+ * lagrekkefølgen slik at Tailwinds reset kommer før Designsystemet og
+ * Tailwind-klassene etter. Eksisterende linjer flyttes ikke.
+ */
+function applyTailwindV4Imports(content: string, context: SchematicContext): string {
+  let result = uncommentTailwindImports(content);
+  const { hviktorTailwind, hviktorStyles, tailwindV4 } = IMPORT_PATTERNS;
+
+  if (
+    !hasActive(result, hviktorTailwind) &&
+    !hasActive(result, hviktorStyles) &&
+    !hasActive(result, tailwindV4)
+  ) {
+    return insertLines(result, 0, [HVIKTOR_TAILWIND_IMPORT, HVIKTOR_IMPORT, TAILWIND_V4_IMPORT]);
+  }
+
+  if (!hasActive(result, hviktorStyles)) {
+    const [tailwind] = findActive(result, tailwindV4);
+    const [theme] = findActive(result, hviktorTailwind);
+    const index = tailwind ? lineStart(result, tailwind.start) : lineEnd(result, theme.end);
+    result = insertLines(result, index, [HVIKTOR_IMPORT]);
+  }
+
+  if (!hasActive(result, tailwindV4)) {
+    const [styles] = findActive(result, hviktorStyles);
+    result = insertLines(result, lineEnd(result, styles.end), [TAILWIND_V4_IMPORT]);
+  }
+
+  if (!hasActive(result, hviktorTailwind)) {
+    const first = Math.min(
+      findActive(result, hviktorStyles)[0].start,
+      findActive(result, tailwindV4)[0].start,
+    );
+    result = insertLines(result, lineStart(result, first), [HVIKTOR_TAILWIND_IMPORT]);
+  }
+
+  const [theme] = findActive(result, hviktorTailwind);
+  const [styles] = findActive(result, hviktorStyles);
+  const [tailwind] = findActive(result, tailwindV4);
+  if (!(theme.start < styles.start && styles.start < tailwind.start)) {
+    context.logger.warn(
+      `${YELLOW}Importene i styles står ikke i anbefalt rekkefølge. ` +
+        `For at Tailwind-klassene skal virke som forventet bør de stå slik:${RESET}\n` +
+        `  ${HVIKTOR_TAILWIND_IMPORT}\n  ${HVIKTOR_IMPORT}\n  ${TAILWIND_V4_IMPORT}`,
+    );
+  }
+
+  return result;
+}
+
+/** Tailwind v3: hviktor etter Tailwind-direktivene. tailwind.css krever v4 og legges ikke inn. */
+function applyTailwindV3Imports(content: string, addTailwind: boolean): string {
+  const lines: string[] = [];
+  if (addTailwind && !hasActive(content, IMPORT_PATTERNS.tailwindAny)) {
+    lines.push(TAILWIND_V3_IMPORT);
+  }
+  if (!hasActive(content, IMPORT_PATTERNS.hviktorStyles)) {
+    lines.push(HVIKTOR_IMPORT);
+  }
+  if (lines.length === 0) {
+    return content;
+  }
+
+  const tailwindMatches = findActive(content, IMPORT_PATTERNS.tailwindAny);
+  const index = tailwindMatches.length
+    ? lineEnd(content, Math.max(...tailwindMatches.map((m) => m.end)))
+    : 0;
+  return insertLines(content, index, lines);
+}
+
+/** Uten Tailwind: hviktor-importen, med Tailwind-importene klare til å kommenteres inn. */
+function applyImportsWithoutTailwind(content: string): string {
+  if (hasActive(content, IMPORT_PATTERNS.hviktorStyles)) {
+    return content;
+  }
+  return insertLines(content, 0, [
+    TAILWIND_HINT,
+    `/* ${HVIKTOR_TAILWIND_IMPORT} */`,
+    HVIKTOR_IMPORT,
+    `/* ${TAILWIND_V4_IMPORT} */`,
+  ]);
+}
+
+/**
+ * Oppdaterer styles-fila. Tailwind som allerede er satt opp i fila styrer
+ * oppsettet, ellers versjonen vi installerer (null = uten Tailwind).
+ * Returnerer oppsettet som ble brukt.
+ */
+function updateStylesCss(
+  tree: Tree,
+  stylesPath: string,
+  tailwindMajor: 3 | 4 | null,
+  context: SchematicContext,
+): 3 | 4 | null {
   const existing = tree.read(stylesPath);
   const content = existing ? existing.toString('utf-8') : '';
 
-  const hasTailwindAlready = TAILWIND_MARKERS.some((marker) => content.includes(marker));
-
-  const newImports = imports.filter((imp) => {
-    // Hopp over imports som allerede finnes ordrett
-    if (content.includes(imp)) {
-      return false;
-    }
-    // Hopp over Tailwind-import hvis filen allerede har Tailwind i en
-    // annen variant (f.eks. v3-direktiver når vi ville lagt til v4-import)
-    const isTailwindImport = imp === TAILWIND_V3_IMPORT || imp === TAILWIND_V4_IMPORT;
-    if (isTailwindImport && hasTailwindAlready) {
-      return false;
-    }
-    return true;
-  });
-
-  if (newImports.length === 0) {
-    return;
+  let setup = tailwindMajor;
+  if (hasActive(content, IMPORT_PATTERNS.tailwindV4)) {
+    setup = 4;
+  } else if (hasActive(content, IMPORT_PATTERNS.tailwindV3)) {
+    setup = 3;
   }
 
-  const block = newImports.join('\n') + '\n';
-  const insertIndex = findInsertIndexAfterTailwind(content);
   const updatedContent =
-    insertIndex === 0
-      ? block + content
-      : content.slice(0, insertIndex) + block + content.slice(insertIndex);
+    setup === 4
+      ? applyTailwindV4Imports(content, context)
+      : setup === 3
+        ? applyTailwindV3Imports(content, tailwindMajor === 3)
+        : applyImportsWithoutTailwind(content);
+
+  if (updatedContent === content) {
+    return setup;
+  }
 
   if (existing) {
     tree.overwrite(stylesPath, updatedContent);
   } else {
     tree.create(stylesPath, updatedContent);
   }
+  return setup;
 }
 
 function setupTailwindV4(tree: Tree): void {
@@ -353,7 +492,6 @@ export function ngAdd(options: Schema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     printBanner(context);
 
-    const styleImports: string[] = [];
     let tailwindMajor: 3 | 4 | null = null;
 
     // Betinget: sett opp Tailwind CSS i riktig versjon for prosjektet
@@ -362,10 +500,8 @@ export function ngAdd(options: Schema): Rule {
 
       if (tailwindMajor === 4) {
         setupTailwindV4(tree);
-        styleImports.push(TAILWIND_V4_IMPORT);
       } else {
         setupTailwindV3(tree, options.project);
-        styleImports.push(TAILWIND_V3_IMPORT);
       }
     }
 
@@ -376,10 +512,8 @@ export function ngAdd(options: Schema): Rule {
       addPackageJsonDependency(tree, ICONS_PACKAGE, ICONS_VERSION, false);
     }
 
-    // Hviktor-importen skal alltid komme etter Tailwind
-    styleImports.push(HVIKTOR_IMPORT);
     const stylesPath = getStylesPath(tree, options.project);
-    updateStylesCss(tree, stylesPath, styleImports);
+    const stylesSetup = updateStylesCss(tree, stylesPath, tailwindMajor, context);
 
     // Planlegg npm install
     context.addTask(new NodePackageInstallTask());
@@ -387,6 +521,7 @@ export function ngAdd(options: Schema): Rule {
     printSummary(context, {
       tailwind: !!options.tailwind,
       tailwindMajor,
+      stylesSetup,
       icons: options.icons !== false,
       stylesPath,
     });
