@@ -1,0 +1,304 @@
+<div class="xl:flex xl:gap-8">
+  <article class="min-w-0 flex-1">
+    <header class="mb-8">
+      <h1 hviHeading size="xl">Klasser</h1>
+      <p hviParagraph class="max-w-2xl">
+        Temaet kan brukes som Tailwind-klasser. Fargene, avstandene, hjørnene, skyggene og
+        tekststørrelsene peker på Designsystemets variabler, så de følger <code>data-color</code>,
+        <code>data-color-scheme</code> og <code>data-size</code> akkurat som komponentene. Se
+        <a hviLink routerLink="/tailwind/oppsett">Oppsett</a> for hvordan du tar dem i bruk.
+      </p>
+    </header>
+
+    <section class="mb-12" aria-labelledby="farger">
+      <h2 hviHeading size="md" id="farger" class="mb-3 scroll-mt-24">Farger</h2>
+      <p hviParagraph class="max-w-2xl">
+        Klassene består av en Tailwind-prefiks, eventuelt et fargenavn, og fargerollen. Uten
+        fargenavn, som <code>bg-surface-tinted</code>, følger fargen nærmeste
+        <code>data-color</code>. Med fargenavn, som <code>bg-brand1-surface-tinted</code>, er fargen
+        alltid den samme. Alle fargene virker med alle Tailwinds fargeklasser, for eksempel
+        <code>bg-</code>, <code>text-</code>, <code>border-</code>, <code>outline-</code>,
+        <code>ring-</code> og <code>fill-</code>.
+      </p>
+
+      <hvi-field class="my-6">
+        <label hviLabel for="tailwind-farge" weight="medium">Farge</label>
+        <select
+          hviSelect
+          id="tailwind-farge"
+          width="auto"
+          [value]="color()"
+          (change)="setColor($any($event.target).value)"
+        >
+          <option value="">Uten fargenavn (følger data-color)</option>
+          @for (c of colors; track c) {
+          <option [value]="c">{{ c }}</option>
+          }
+        </select>
+      </hvi-field>
+
+      @for (group of roleGroups; track group.title) {
+      <div class="mb-8">
+        <h3 hviHeading size="xs" class="mb-1">{{ group.title }}</h3>
+        <p hviParagraph class="mb-3 max-w-2xl">{{ group.description }}</p>
+        <ul class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-4 p-0">
+          @for (role of group.roles; track role.role) {
+          <li class="min-w-0">
+            @switch (role.usage) { @case ('border') {
+            <div
+              aria-hidden="true"
+              class="mb-2 h-16 rounded-md border-2"
+              [class]="swatchClass(role)"
+            ></div>
+            } @case ('bg') {
+            <div
+              aria-hidden="true"
+              class="border-neutral-border-subtle mb-2 h-16 rounded-md border"
+              [class]="swatchClass(role)"
+            ></div>
+            } @default {
+            <div
+              aria-hidden="true"
+              class="border-neutral-border-subtle mb-2 flex h-16 items-center justify-center rounded-md border text-lg font-semibold"
+              [class]="swatchClass(role)"
+            >
+              Aa
+            </div>
+            } }
+            <code class="block! text-sm break-all">{{ className(role) }}</code>
+            <span class="block text-sm">{{ role.description }}</span>
+          </li>
+          }
+        </ul>
+      </div>
+      }
+    </section>
+
+    <section class="mb-12" aria-labelledby="data-color">
+      <h2 hviHeading size="md" id="data-color" class="mb-3 scroll-mt-24">
+        Klasser som følger data-color
+      </h2>
+      <p hviParagraph class="max-w-2xl">
+        Her har alle boksene de samme klassene. Bare <code>data-color</code> er forskjellig.
+      </p>
+      <ul class="m-0 mb-4 grid list-none grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-4 p-0">
+        @for (c of colors; track c) {
+        <li
+          [attr.data-color]="c"
+          class="bg-background-tinted border-border-subtle rounded-md border p-4"
+        >
+          <p class="text-text-default m-0 font-semibold">{{ c }}</p>
+          <p class="text-text-subtle m-0 mb-3 text-sm">Samme klasser, ny farge</p>
+          <span
+            class="bg-base-default text-base-contrast-default inline-block rounded-sm px-3 py-1 text-sm"
+            >Base</span
+          >
+        </li>
+        }
+      </ul>
+      <pre
+        class="m-0 overflow-x-auto"
+      ><code class="hljs block whitespace-pre!" [innerHTML]="dataColorHtml"></code></pre>
+    </section>
+
+    <section class="mb-12" aria-labelledby="avstander">
+      <h2 hviHeading size="md" id="avstander" class="mb-3 scroll-mt-24">Avstander</h2>
+      <p hviParagraph class="max-w-2xl">
+        Tallene under er Designsystemets avstander (<code>--ds-size-*</code>). De gjelder alle
+        avstandsklasser, som <code>p-4</code>, <code>mt-2</code>, <code>gap-6</code> og
+        <code>w-12</code>, og blir større eller mindre med <code>data-size</code>. Andre tall, som
+        <code>p-16</code>, bruker Tailwinds egen skala.
+      </p>
+      <hvi-toggle-group
+        class="my-4 block"
+        [value]="size()"
+        (valueChange)="setSize($any($event))"
+        aria-label="Størrelse (data-size)"
+        size="sm"
+      >
+        <button hviToggleGroupItem value="sm">sm</button>
+        <button hviToggleGroupItem value="md">md</button>
+        <button hviToggleGroupItem value="lg">lg</button>
+      </hvi-toggle-group>
+      <div hviTableScroll [attr.data-size]="size()">
+        <table hviTable>
+          <caption class="sr-only">
+            Avstander
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Klasse</th>
+              <th scope="col">Variabel</th>
+              <th scope="col">Størrelse</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (n of spacing; track n) {
+            <tr>
+              <td><code class="whitespace-nowrap!">p-{{ n }}</code></td>
+              <td><code class="whitespace-nowrap!">--ds-size-{{ n }}</code></td>
+              <td class="w-full">
+                <div
+                  aria-hidden="true"
+                  class="bg-accent-base-default h-3 rounded-sm"
+                  [style.width]="'var(--ds-size-' + n + ')'"
+                ></div>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12" aria-labelledby="hjorner">
+      <h2 hviHeading size="md" id="hjorner" class="mb-3 scroll-mt-24">Hjørner</h2>
+      <ul class="m-0 flex list-none flex-wrap gap-6 p-0">
+        @for (radius of radii; track radius.className) {
+        <li>
+          <div
+            aria-hidden="true"
+            class="bg-neutral-surface-tinted border-neutral-border-default mb-2 size-24 border"
+            [class]="radius.className"
+          ></div>
+          <code class="block! text-sm">{{ radius.className }}</code>
+          <code class="mt-1 block! text-sm">{{ radius.token }}</code>
+        </li>
+        }
+      </ul>
+    </section>
+
+    <section class="mb-12" aria-labelledby="skygger">
+      <h2 hviHeading size="md" id="skygger" class="mb-3 scroll-mt-24">Skygger</h2>
+      <ul class="m-0 flex list-none flex-wrap gap-8 p-0">
+        @for (shadow of shadows; track shadow.className) {
+        <li>
+          <div
+            aria-hidden="true"
+            class="bg-neutral-surface-default mb-3 size-24 rounded-md"
+            [class]="shadow.className"
+          ></div>
+          <code class="block! text-sm">{{ shadow.className }}</code>
+          <code class="mt-1 block! text-sm">{{ shadow.token }}</code>
+        </li>
+        }
+      </ul>
+    </section>
+
+    <section class="mb-12" aria-labelledby="tekst">
+      <h2 hviHeading size="md" id="tekst" class="mb-3 scroll-mt-24">Tekst</h2>
+      <p hviParagraph class="max-w-2xl">
+        Tekststørrelsene er Designsystemets brødtekst. Tailwinds andre størrelser, som
+        <code>text-xs</code> og <code>text-xl</code>, finnes fortsatt, men følger ikke temaet.
+        <code>font-sans</code> er temaets font, Albert Sans.
+      </p>
+      <h3 hviHeading size="xs" class="mb-2">Størrelse</h3>
+      <ul class="m-0 mb-6 list-none p-0">
+        @for (text of textSizes; track text.className) {
+        <li
+          class="border-border-subtle flex flex-wrap items-baseline gap-x-6 gap-y-1 border-b py-3"
+        >
+          <span class="min-w-56" [class]="text.className">Tidligere, for mer enn ett år siden</span>
+          <code class="text-sm">{{ text.className }}</code>
+          <code class="text-sm">{{ text.token }}</code>
+        </li>
+        }
+      </ul>
+      <h3 hviHeading size="xs" class="mb-2">Vekt</h3>
+      <ul class="m-0 list-none p-0">
+        @for (weight of fontWeights; track weight.className) {
+        <li
+          class="border-border-subtle flex flex-wrap items-baseline gap-x-6 gap-y-1 border-b py-3"
+        >
+          <span class="min-w-56" [class]="weight.className"
+            >Tidligere, for mer enn ett år siden</span
+          >
+          <code class="text-sm">{{ weight.className }}</code>
+          <code class="text-sm">{{ weight.token }}</code>
+        </li>
+        }
+      </ul>
+    </section>
+
+    <section class="mb-12" aria-labelledby="gjennomsiktighet">
+      <h2 hviHeading size="md" id="gjennomsiktighet" class="mb-3 scroll-mt-24">Gjennomsiktighet</h2>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+        <span
+          aria-hidden="true"
+          class="bg-accent-base-default text-accent-base-contrast-default opacity-disabled rounded-md px-4 py-2"
+          >Deaktivert</span
+        >
+        <code class="text-sm">opacity-disabled</code>
+        <code class="text-sm">--ds-opacity-disabled</code>
+      </div>
+    </section>
+
+    <section class="mb-12" aria-labelledby="alle-klasser">
+      <h2 hviHeading size="md" id="alle-klasser" class="mb-3 scroll-mt-24">Alle klasser</h2>
+      <p hviParagraph class="max-w-2xl">
+        Alle klassene i <code>tailwind.css</code> og variabelen de peker på. Fargene vises med
+        <code>bg-</code>, <code>text-</code> eller <code>border-</code>, men virker med alle
+        fargeklasser. Avstandene vises med <code>p-</code>, men virker med alle avstandsklasser. Søk
+        gjerne med prefiksen du vil bruke, for eksempel <code>ring-border-strong</code> eller
+        <code>gap-4</code>.
+      </p>
+      <form role="search" class="my-4 grid gap-2" (submit)="$event.preventDefault()">
+        <label hviLabel weight="medium" for="klassesok">Søk etter klasse eller variabel</label>
+        <hvi-search>
+          <input
+            hviInput
+            id="klassesok"
+            type="search"
+            placeholder=" "
+            enterkeyhint="search"
+            [value]="classQuery()"
+            (input)="setClassQuery($any($event.target).value)"
+          />
+          <button hviSearchClear aria-label="Tøm søk"></button>
+        </hvi-search>
+      </form>
+      <p hviParagraph class="mb-2" aria-live="polite">
+        @if (classQuery()) { {{ filteredClasses().length }} treff på «{{ classQuery() }}» } @else {
+        {{ filteredClasses().length }} klasser }
+      </p>
+      @if (filteredClasses().length) {
+      <div hviTableScroll>
+        <table hviTable>
+          <caption class="sr-only">
+            Alle klasser
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Klasse</th>
+              <th scope="col">Variabel</th>
+              <th scope="col">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (entry of filteredClasses(); track entry.className) {
+            <tr>
+              <td>
+                <span class="flex items-center gap-2">
+                  @if (entry.isColor) {
+                  <span
+                    aria-hidden="true"
+                    class="border-neutral-border-subtle inline-block size-4 shrink-0 rounded-sm border"
+                    [style.background-color]="'var(' + entry.variable + ')'"
+                  ></span>
+                  }
+                  <code class="break-all">{{ entry.className }}</code>
+                </span>
+              </td>
+              <td><code class="break-all">{{ entry.variable }}</code></td>
+              <td class="whitespace-nowrap">{{ entry.type }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      }
+    </section>
+  </article>
+
+  <app-page-toc [items]="toc" />
+</div>
