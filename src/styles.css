@@ -4,6 +4,18 @@
 @import 'tailwindcss';
 @import 'highlight.js/styles/github-dark.css';
 
+/* Tailwind-siden i demoen setter sammen fargeklassene i koden. Tailwind finner bare klasser som
+   står ordrett i kildekoden, så de listes her. */
+@source inline(
+  'bg-{,accent-,brand1-,brand2-,brand3-,neutral-,info-,success-,warning-,danger-}{background-default,background-tinted,surface-default,surface-tinted,surface-hover,surface-active,base-default,base-hover,base-active}'
+);
+@source inline(
+  'border-{,accent-,brand1-,brand2-,brand3-,neutral-,info-,success-,warning-,danger-}{border-subtle,border-default,border-strong}'
+);
+@source inline(
+  'text-{,accent-,brand1-,brand2-,brand3-,neutral-,info-,success-,warning-,danger-}{text-default,text-subtle,base-contrast-default,base-contrast-subtle}'
+);
+
 code {
   padding: 2px 5px;
   font-size: 0.9em;

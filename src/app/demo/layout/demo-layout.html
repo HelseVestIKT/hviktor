@@ -59,6 +59,8 @@
     </div>
     <p class="mt-0 mb-2 font-medium">Ikoner</p>
     <ng-container [ngTemplateOutlet]="iconNav" />
+    <p class="mt-4 mb-2 font-medium">Tailwind</p>
+    <ng-container [ngTemplateOutlet]="tailwindNav" />
     <p class="mt-4 mb-2 font-medium">Komponenter</p>
     <ng-container [ngTemplateOutlet]="componentNav" />
   </nav>
@@ -70,6 +72,10 @@
       <p class="px-4 pt-4 font-medium">Ikoner</p>
       <div class="px-4">
         <ng-container [ngTemplateOutlet]="iconNav" />
+      </div>
+      <p class="px-4 pt-4 font-medium">Tailwind</p>
+      <div class="px-4">
+        <ng-container [ngTemplateOutlet]="tailwindNav" />
       </div>
       <p class="px-4 pt-4 font-medium">Komponenter</p>
       <div class="px-4 pb-8">
@@ -92,6 +98,32 @@
         class="hover:bg-neutral-surface-hover active:bg-neutral-surface-active flex items-center gap-1.5 rounded px-3 py-2 whitespace-nowrap transition-colors"
       >
         Ikoner
+      </a>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #tailwindNav>
+  <ul class="m-0 flex list-none flex-col gap-1 p-0">
+    <li>
+      <a
+        routerLink="/tailwind/oppsett"
+        routerLinkActive="font-semibold border-l-4 lg:border-l-6 bg-neutral-surface-tinted"
+        (click)="closeSideMenu()"
+        class="hover:bg-neutral-surface-hover active:bg-neutral-surface-active flex items-center gap-1.5 rounded px-3 py-2 whitespace-nowrap transition-colors"
+      >
+        Oppsett
+      </a>
+    </li>
+    <li>
+      <a
+        routerLink="/tailwind"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLinkActive="font-semibold border-l-4 lg:border-l-6 bg-neutral-surface-tinted"
+        (click)="closeSideMenu()"
+        class="hover:bg-neutral-surface-hover active:bg-neutral-surface-active flex items-center gap-1.5 rounded px-3 py-2 whitespace-nowrap transition-colors"
+      >
+        Klasser
       </a>
     </li>
   </ul>
