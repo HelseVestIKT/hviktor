@@ -7,7 +7,7 @@
 [![PR Checks](https://github.com/HelseVestIKT/hviktor/actions/workflows/pr-checks.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor/actions/workflows/pr-checks.yml)
 [![Publish to npm](https://github.com/HelseVestIKT/hviktor/actions/workflows/publish-npm.yml/badge.svg)](https://github.com/HelseVestIKT/hviktor/actions/workflows/publish-npm.yml)
 [![Angular](https://img.shields.io/badge/Angular-17--22-dd0031)](https://angular.dev/)
-[![Demo](https://img.shields.io/badge/Demo-GitHub%20Pages-blue)](https://helsevestikt.github.io/hviktor/)
+[![Demo](https://img.shields.io/badge/Demo-hviktor.no-blue)](https://hviktor.no/)
 
 <p>
   <a href="#formål">Formål</a> •
@@ -149,7 +149,9 @@ Alle script køyrast frå root.
 | `npm start`                 | Startar dev-server for demoappen (localhost:4200)               |
 | `npm run build`             | Byggjer demoappen til `dist/hviktor-demoapp`                    |
 | `npm run build:lib`         | Byggjer biblioteket til `dist/hviktor-lib`                      |
+| `npm run build:icons`       | Byggjer ikonpakken til `dist/hviktor-icons`                     |
 | `npm test`                  | Køyrer einingstestar (Vitest)                                   |
+| `npm run test:e2e`          | Køyrer ende-til-ende-testar (Playwright)                        |
 | `npm run lint`              | Køyrer ESLint                                                   |
 | `npm run format`            | Formaterer kode med Prettier                                    |
 | `npm run scaffold`          | Genererer ny bibliotek-komponent/direktiv                       |

@@ -4,6 +4,8 @@ En samling med 900+ Angular-ikoner basert på NAV Aksel.
 
 ## Installasjon
 
+Krever Angular `>=20.0.0 <23.0.0` (Angular 20–22). For Angular 17–19 kan `@helsevestikt/hviktor-angular` brukes uten ikonpakken.
+
 ```bash
 npm install @helsevestikt/hviktor-icons
 ```
@@ -61,6 +63,16 @@ export class AppComponent {}
 Merk: For produksjonskode med fokus på bundle-størrelse anbefales per-ikon imports
 fra `@helsevestikt/hviktor-icons` i stedet for `HVI_ALL_ICONS`.
 
+## Tilgjengelighet
+
+Ikonene er dekorative og skjules for hjelpemidler med `aria-hidden="true"`. Ikke bruk et ikon alene for å formidle informasjon. Bruk synlig tekst, eller gi det omsluttende interaktive elementet et tilgjengelig navn, for eksempel:
+
+```html
+<button type="button" aria-label="Lukk">
+  <hvi-icon-x-mark></hvi-icon-x-mark>
+</button>
+```
+
 ## Størrelse
 
 Tre forhåndsdefinerte størrelser er tilgjengelige via `size`-attributtet:
@@ -90,9 +102,7 @@ Eksempler:
 <hvi-icon-person size="lg"></hvi-icon-person>
 ```
 
-Se alle tilgjengelige ikoner på NAV Aksel:
-
-- https://aksel.nav.no/komponenter/ikoner
+Se ikonene som faktisk følger med Hviktor i [ikonoversikten](https://hviktor.no/ikoner). For NAV Aksels kildeikoner, se [Aksel-ikonene](https://aksel.nav.no/komponenter/ikoner).
 
 ## Krav
 
