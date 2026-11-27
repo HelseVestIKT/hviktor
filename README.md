@@ -27,13 +27,14 @@ Hviktor Angular inneholder Angular komponenter og direktiver som bygger på desi
 
 ## Krav
 
-- Node.js 20.x
+- Node.js `^22.22.3 || ^24.15.0 || >=26.0.0` for utvikling i dette repoet
 - npm 10+
-- Angular 17–22
+- Angular 17–22 for biblioteket; dette repoet bruker Angular 22
 
 ## Struktur
 
-- `projects/hviktor` – biblioteket der komponenter og direktiver utvikles. Blir bygget til `dist/hviktor-lib` og skal publiseres til npm.
+- `projects/hviktor` – `@helsevestikt/hviktor-angular`, biblioteket der komponenter og direktiver utvikles. Blir bygget til `dist/hviktor-lib` og publiseres til npm.
+- `projects/icons` – `@helsevestikt/hviktor-icons`, ikonpakken som bygges til `dist/hviktor-icons` og publiseres sammen med biblioteket.
 - `src` – demoapplikasjonen som viser biblioteket og bruker bygg fra `dist/hviktor-lib`. Her kan ein lett sjå komponenter i bruk og teste endringar lokalt.
 - `scripts` – hjelpescript for scaffolding og kodegenerering.
 
@@ -51,22 +52,22 @@ I denne mappen opprettes i hovedsak to filer:
 npm run scaffold -- <type> <name>
 ```
 
-Hvor `<type>` er enten `component` eller `directive`, og `<name>` er navnet på komponenten/direktivet (kebab-case). For eksempel, for å lage en komponent kalt `alert`, kjør:
+Hvor `<type>` er enten `component` eller `directive`, og `<name>` er navnet på komponenten/direktivet (kebab-case). Navnet må ikke allerede brukes. For eksempel, for å lage en ny komponent kalt `my-component`, kjør:
 
 ```bash
-npm run scaffold -- component alert
+npm run scaffold -- component my-component
 ```
 
 Ved to-ordet komponent, f.eks. `error-summary`, brukes bindestrek som skilletegn.
 
 Se eksempler i eksisterende komponenter/direktiver i `projects/hviktor/src/`.
 
-Etter at komponenten/direktivet er utviklet, må den legges til som export i `projects/hviktor/src/public-api.ts` for å gjøre den tilgjengelig i biblioteket.
+Scaffold-scriptet legger automatisk til export i `projects/hviktor/src/public-api.ts`. Komponenter/direktiver som opprettes manuelt, må eksporteres der selv for å bli tilgjengelige i biblioteket.
 
 ## Byggrutine
 
 1. Utvikle eller oppdater komponenter/direktiv i `projects/hviktor`.
-2. Kjør `npm run build:lib` for å generere pakken i `dist/hviktor-lib`.
+2. Kjør `npm run build:lib` for å generere pakken i `dist/hviktor-lib`, og `npm run build:icons` for å generere ikonpakken i `dist/hviktor-icons`.
 3. Start eller bygg demoappen (`npm start` / `npm run build`) for å verifisere endringene via den lokale pakke-referansen.
 
 ## Demo-applikasjonen
@@ -143,19 +144,19 @@ npm run generate:examples
 
 Alle script køyrast frå root.
 
-| Script                      | Skildring                                         |
-| --------------------------- | ------------------------------------------------- |
-| `npm start`                 | Startar dev-server for demoappen (localhost:4200) |
-| `npm run build`             | Byggjer demoappen til `dist/`                     |
-| `npm run build:lib`         | Byggjer biblioteket til `dist/hviktor-lib`        |
-| `npm test`                  | Køyrer einingstestar (Vitest)                     |
-| `npm run lint`              | Køyrer ESLint                                     |
-| `npm run format`            | Formaterer kode med Prettier                      |
-| `npm run scaffold`          | Genererer ny bibliotek-komponent/direktiv         |
-| `npm run scaffold:demo`     | Opprettar ny demoside                             |
-| `npm run generate:examples` | Genererer kodeeksempel frå demoseksjonar          |
-| `npm run release`           | Bumpar versjon, taggar og pushar til npm          |
-| `npm run version:check`     | Sjekkar siste versjon på npm                      |
+| Script                      | Skildring                                                       |
+| --------------------------- | --------------------------------------------------------------- |
+| `npm start`                 | Startar dev-server for demoappen (localhost:4200)               |
+| `npm run build`             | Byggjer demoappen til `dist/hviktor-demoapp`                    |
+| `npm run build:lib`         | Byggjer biblioteket til `dist/hviktor-lib`                      |
+| `npm test`                  | Køyrer einingstestar (Vitest)                                   |
+| `npm run lint`              | Køyrer ESLint                                                   |
+| `npm run format`            | Formaterer kode med Prettier                                    |
+| `npm run scaffold`          | Genererer ny bibliotek-komponent/direktiv                       |
+| `npm run scaffold:demo`     | Opprettar ny demoside                                           |
+| `npm run generate:examples` | Genererer kodeeksempel frå demoseksjonar                        |
+| `npm run release`           | Bumpar versjon, committer, tagger og pusher git; CI publiserer  |
+| `npm run version:check`     | Sjekkar siste versjon av `@helsevestikt/hviktor-angular` på npm |
 
 ## Kodekvalitetsverktøy
 
@@ -168,18 +169,14 @@ For å få full nytte av Prettier kan du følge denne oppskriften:
 
 Nå vil Prettier automatisk formatere koden din hver gang du lagrer en fil.
 
-For å få få Husky til å virke, må du gjennom noen steg første gang:
+For å få Husky til å virke, må du gjennom noen steg første gang:
 
-1. kjør `npm install` for å installere alle avhengigheter, inkludert Husky.
-2. kjør `npm --prefix hviktor ci` for å installere avhengigheter i root-prosjektet.
-   1. hvis du nå får en EPERM unlink feil, må du ringe en venn
-3. Verifiser at alt er riktig ved å kjøre `git config --get core.hooksPath`. Skal returnere noe ala `.husky/_`.
+1. Kjør `npm install` fra root for å installere alle avhengigheter og aktivere hooks med `prepare`.
+2. Verifiser at alt er riktig ved å kjøre `git config --get core.hooksPath`. Skal returnere noe ala `.husky/_`.
 
-- **Husky** kjører pre-commit-hooks og blokkerer commits som ikke passerer lint og format. Installer avhengigheter én gang med `npm install`, så trigges hookene automatisk ved `git commit`. Den sjekker kun filene i projects/hviktor.
-- **Prettier** formaterer alle prosjektfiler likt. Kjør manuelt med `npm run format` om du trenger å rydde opp før commit.
-- **ESLint** fanger opp vanlige feil og stilbrudd. Lokalt kan du sjekke med `npm run lint`. Husk at Husky kjører samme sjekk når du committer.
-
-Hver gang du gjør en commit formatteres koden automatisk, og hvis det er lint-feil vil commiten bli avvist med en feilmelding som forklarer hva som må fikses.
+- **Husky + lint-staged** kjører pre-commit på staged filer. TypeScript kjører Prettier og ESLint `--fix`; HTML, CSS, Markdown og JSON kjører Prettier. Commit blokkeres hvis formatering/fiksing feiler eller det fortsatt er lintfeil.
+- **Prettier** formaterer alle prosjektfiler likt. Kjør manuelt med `npm run format` om du trenger å rydde opp før commit. Pre-commit endrer automatisk staged filer, ikke nødvendigvis hele prosjektet.
+- **ESLint** fanger opp vanlige feil og stilbrudd. Lokalt kan du sjekke hele prosjektet med `npm run lint`. Pre-commit kjører ESLint med `--fix` på staged TypeScript, ikke samme sjekk som full `npm run lint`.
 
 ## Git-arbeidsflyt og CI/CD
 
@@ -215,7 +212,7 @@ Hver gang du gjør en commit formatteres koden automatisk, og hvis det er lint-f
 
 ### Publisere ny versjon til npm
 
-Kun kode som er merget til main kan publiseres. Bruk release-scriptet som håndterer versjonering, tagging og push i ett steg:
+Kun kode som er merget til main kan publiseres. Bruk release-scriptet som håndterer versjonering, tagging og git-push i ett steg:
 
 1. **Sørg for at main er oppdatert:**
 
@@ -234,11 +231,11 @@ Kun kode som er merget til main kan publiseres. Bruk release-scriptet som håndt
    npm run release 1.0.0   # Eksplisitt versjon
    ```
 
-   Scriptet oppdaterer `package.json`, committer, tagger og pusher automatisk.
+   Scriptet oppdaterer `package.json` i begge pakkene og changelog, committer, tagger og pusher automatisk. Publisering til npm skjer i CI etter godkjenning.
 
 3. **Godkjenn publisering:**
    - En reviewer i `npm-publish` environment må godkjenne
-   - Workflowen bygger og publiserer automatisk til npm
+   - Workflowen bygger og publiserer begge pakkene automatisk til npm
 
 Se [RELEASE.md](docs/RELEASE.md) for mer detaljer.
 

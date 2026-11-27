@@ -4,7 +4,7 @@ Takk for at du vil bidra til Hviktor! Denne guiden beskriver hvordan du kommer i
 
 ## Forutsetninger
 
-- Node.js 20+
+- Node.js `^22.22.3 || ^24.15.0 || >=26.0.0`
 - npm 10+
 - Angular CLI (`npm install -g @angular/cli`)
 
