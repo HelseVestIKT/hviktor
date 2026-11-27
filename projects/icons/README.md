@@ -1,8 +1,10 @@
 # Hviktor Icons
 
-En samling med 900+ Angular-ikoner basert pa NAV Aksel.
+En samling med 900+ Angular-ikoner basert på NAV Aksel.
 
 ## Installasjon
+
+Krever Angular `>=20.0.0 <23.0.0` (Angular 20–22). For Angular 17–19 kan `@helsevestikt/hviktor-angular` brukes uten ikonpakken.
 
 ```bash
 npm install @helsevestikt/hviktor-icons
@@ -21,7 +23,7 @@ npm install @helsevestikt/hviktor-icons
 
 ## Bruk
 
-Du kan importere enkelt-ikoner (anbefalt for produksjon), eller bruke all-icons entrypoint i demo/playground for rask utvikling. Ikonene følger automatisk tekstfargen på siden, sa de tilpasser seg for eksempel fargen i en knapp.
+Du kan importere enkelt-ikoner (anbefalt for produksjon), eller bruke all-icons entrypoint i demo/playground for rask utvikling. Ikonene følger automatisk tekstfargen på siden, så de tilpasser seg for eksempel fargen i en knapp.
 
 ### Angular
 
@@ -58,8 +60,18 @@ import { HVI_ALL_ICONS } from '@helsevestikt/hviktor-icons/all-icons';
 export class AppComponent {}
 ```
 
-Merk: For produksjonskode med fokus pa bundle-storrelse anbefales per-ikon imports
+Merk: For produksjonskode med fokus på bundle-størrelse anbefales per-ikon imports
 fra `@helsevestikt/hviktor-icons` i stedet for `HVI_ALL_ICONS`.
+
+## Tilgjengelighet
+
+Ikonene er dekorative og skjules for hjelpemidler med `aria-hidden="true"`. Ikke bruk et ikon alene for å formidle informasjon. Bruk synlig tekst, eller gi det omsluttende interaktive elementet et tilgjengelig navn, for eksempel:
+
+```html
+<button type="button" aria-label="Lukk">
+  <hvi-icon-x-mark></hvi-icon-x-mark>
+</button>
+```
 
 ## Størrelse
 
@@ -90,9 +102,12 @@ Eksempler:
 <hvi-icon-person size="lg"></hvi-icon-person>
 ```
 
-Se alle tilgjengelige ikoner på NAV Aksel:
+Se ikonene som faktisk følger med Hviktor i [ikonoversikten](https://hviktor.no/ikoner). For NAV Aksels kildeikoner, se [Aksel-ikonene](https://aksel.nav.no/komponenter/ikoner).
 
-- https://aksel.nav.no/komponenter/ikoner
+## Krav
+
+- `@angular/core >=20.0.0 <23.0.0`
+- Standalone Angular-komponenter
 
 ## Lisens
 
