@@ -21,6 +21,8 @@ Dette installerer pakken og setter opp prosjektet automatisk:
 - Spør om du vil installere og konfigurere **Tailwind CSS**. (default: Yes). Anbefales for best mulig utvikleropplevelse. Alle demoene på [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) bruker Tailwind, så det kan være lurt å ha det installert for å følge eksemplene. Med Tailwind v4 legges også `tailwind.css` inn, så temaets farger blir Tailwind-klasser (se [Tailwind CSS](#tailwind-css)). Svarer du nei, legges Tailwind-importene inn utkommentert, klare til bruk senere.
 - Spør om du vil installere **@helsevestikt/hviktor-icons** (default: Yes). Installerer ikonpakken i samme versjon som `hviktor-angular`. Ikonene importeres som Angular-komponenter der de brukes.
 
+**Angular 17–19:** `@helsevestikt/hviktor-icons` krever Angular 20–22. Bruk `ng add @helsevestikt/hviktor-angular --no-icons` for å hoppe over ikonpakken på disse versjonene. Hviktor Angular kan brukes uten ikonpakken.
+
 ### Manuelt oppsett
 
 ```bash
@@ -150,6 +152,7 @@ Tailwind v3 kan brukes med de vanlige `@tailwind`-direktivene, men `tailwind.css
 Importer komponentene du trenger direkte i standalone-komponenter:
 
 ```typescript
+import { Component } from '@angular/core';
 import { HviButton } from '@helsevestikt/hviktor-angular';
 
 @Component({
@@ -166,7 +169,7 @@ Se [helsevestikt.github.io/hviktor](https://helsevestikt.github.io/hviktor/) for
 ## Krav
 
 - Angular 17–22
-- Node.js 20+
+- Node.js-versjonen som kreves av den installerte Angular-versjonen; med Angular 22 kreves Node `^22.22.3 || ^24.15.0 || >=26.0.0`
 
 ## Endringslogg
 

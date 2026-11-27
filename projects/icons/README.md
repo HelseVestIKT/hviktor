@@ -1,6 +1,6 @@
 # Hviktor Icons
 
-En samling med 900+ Angular-ikoner basert pa NAV Aksel.
+En samling med 900+ Angular-ikoner basert på NAV Aksel.
 
 ## Installasjon
 
@@ -21,7 +21,7 @@ npm install @helsevestikt/hviktor-icons
 
 ## Bruk
 
-Du kan importere enkelt-ikoner (anbefalt for produksjon), eller bruke all-icons entrypoint i demo/playground for rask utvikling. Ikonene følger automatisk tekstfargen på siden, sa de tilpasser seg for eksempel fargen i en knapp.
+Du kan importere enkelt-ikoner (anbefalt for produksjon), eller bruke all-icons entrypoint i demo/playground for rask utvikling. Ikonene følger automatisk tekstfargen på siden, så de tilpasser seg for eksempel fargen i en knapp.
 
 ### Angular
 
@@ -58,7 +58,7 @@ import { HVI_ALL_ICONS } from '@helsevestikt/hviktor-icons/all-icons';
 export class AppComponent {}
 ```
 
-Merk: For produksjonskode med fokus pa bundle-storrelse anbefales per-ikon imports
+Merk: For produksjonskode med fokus på bundle-størrelse anbefales per-ikon imports
 fra `@helsevestikt/hviktor-icons` i stedet for `HVI_ALL_ICONS`.
 
 ## Størrelse
@@ -93,6 +93,11 @@ Eksempler:
 Se alle tilgjengelige ikoner på NAV Aksel:
 
 - https://aksel.nav.no/komponenter/ikoner
+
+## Krav
+
+- `@angular/core >=20.0.0 <23.0.0`
+- Standalone Angular-komponenter
 
 ## Lisens
 
